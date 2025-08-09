@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vahit Keskin | Android Developer</title>
+  <meta name="description" content="Android • Kotlin • Jetpack Compose | Vahit Keskin kişisel websitesi"/>
+  <style>
+    /* ======= Reset & Tokens ======= */
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --bg:#0b0d10; --bg2:#0f1318; --surface:#11161c; --surface2:#151b22;
+      --text:#e6ebf2; --muted:#9aa7b2; --brand:#6aa9ff; --brand2:#9b8cff;
+      --border:#1f2832; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25);
+      --container:1120px; --k: cubic-bezier(.2,.8,.2,1);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --bg2:#eef2f7; --surface:#ffffff; --surface2:#f8fafc; --text:#111827; --muted:#475569; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,6,23,.08); }
+    }
+
+    html,body{height:100%}
+    body{margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--text); background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+    a{color:inherit; text-decoration:none}
+    img{display:block; max-width:100%}
+
+    .container{max-width:var(--container); margin-inline:auto; padding-inline:1rem}
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(160%) blur(8px); background:color-mix(in oklab, var(--surface) 70%, transparent); border-bottom:1px solid var(--border)}
+    .nav{display:flex; justify-content:space-between; align-items:center; padding:.9rem 0}
+    .brand{font-weight:800; letter-spacing:.2px}
+    .navlinks{display:none; gap:1.2rem}
+    .actions{display:flex; gap:.6rem}
+
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.55rem .9rem; border-radius:12px; border:1px solid var(--border); background:var(--surface2); color:var(--text); box-shadow:var(--shadow); transition:transform .12s var(--k), background .2s var(--k), border-color .2s var(--k)}
+    .btn:hover{transform:translateY(-1px); border-color:color-mix(in oklab,var(--brand) 40%, var(--border))}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:white; border-color:transparent}
+    .btn-ghost{background:transparent; border-color:transparent; box-shadow:none}
+
+    /* ======= Sections ======= */
+    section{scroll-margin-top:88px}
+    .section-title{display:flex; gap:.75rem; align-items:center; font-size:1.6rem; font-weight:800; margin:2rem 0 1rem}
+    .grid{display:grid; gap:1rem}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+
+    .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card-h{padding:1rem 1rem .25rem; font-weight:700}
+    .card-b{padding:0 1rem 1rem; color:var(--muted)}
+
+    .badge{display:inline-flex; align-items:center; gap:.35rem; border:1px solid var(--border); padding:.25rem .55rem; border-radius:999px; font-size:.78rem; color:var(--muted); background:color-mix(in oklab, var(--surface) 90%, transparent)}
+    .muted{color:var(--muted)}
+
+    /* ======= Hero (GIF bg + overlay + parallax avatar) ======= */
+    .hero{position:relative; isolation:isolate; min-height:72vh; display:grid; align-items:center}
+    .hero::before{content:""; position:absolute; inset:0; z-index:-2; background:url('https://user-images.githubusercontent.com/36104238/228931294-728ecd08-f34b-40c2-8323-e40992c9ed19.gif') center/cover no-repeat fixed}
+    .hero::after{content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(60% 70% at 30% 20%, color-mix(in oklab, var(--brand) 20%, transparent), transparent 60%), linear-gradient(180deg, color-mix(in oklab, #000 50%, transparent), var(--bg) 60%)}
+
+    .hero-wrap{display:grid; grid-template-columns:1.2fr .8fr; gap:2rem}
+    .kicker{display:inline-flex; gap:.5rem; align-items:center; border:1px solid var(--border); padding:.3rem .6rem; border-radius:999px; font-size:.9rem; color:var(--muted); background:color-mix(in oklab, var(--surface) 80%, transparent)}
+    h1{font-size:clamp(2rem,4.5vw,3.4rem); line-height:1.1; margin:.5rem 0}
+    .subtitle{font-size:1.1rem; color:var(--muted)}
+    .tagline{color:var(--muted); max-width:60ch}
+
+    .avatar{width:220px; height:220px; border-radius:50%; object-fit:cover; border:3px solid color-mix(in oklab, var(--brand) 40%, #fff); box-shadow:0 18px 60px rgba(0,0,0,.28)}
+    .avatar-wrap{display:flex; justify-content:center}
+
+    /* ======= Fancy progress bars ======= */
+    .skill{padding:1rem}
+    .bar{height:10px; background:color-mix(in oklab, var(--surface2) 80%, transparent); border-radius:999px; overflow:hidden; border:1px solid var(--border)}
+    .bar>span{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),var(--brand2)); box-shadow:0 0 0 2px rgba(255,255,255,.04) inset; transition:width 1.2s var(--k)}
+
+    /* ======= Timeline ======= */
+    .timeline{position:relative; margin-left:.5rem}
+    .timeline::before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:color-mix(in oklab, var(--brand) 30%, var(--border))}
+    .tl-item{position:relative; padding-left:2.5rem; margin-bottom:1rem}
+    .tl-item::before{content:""; position:absolute; left:4px; top:.4rem; width:18px; height:18px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand2)); box-shadow:0 0 0 3px color-mix(in oklab, var(--surface) 70%, transparent)}
+
+    /* ======= Project cards hover tilt ======= */
+    .tilt{transform:perspective(800px) rotateX(0) rotateY(0); transition:transform .2s var(--k), box-shadow .2s var(--k)}
+    .tilt:hover{box-shadow:0 20px 60px rgba(0,0,0,.25)}
+
+    /* ======= On-scroll animations ======= */
+    [data-animate]{opacity:0; transform:translateY(10px); filter:saturate(.9); transition:opacity .6s var(--k), transform .6s var(--k), filter .6s var(--k)}
+    [data-animate].in{opacity:1; transform:none; filter:none}
+    .stagger>*{opacity:0; transform:translateY(12px)}
+    .stagger.in>*{animation: rise .6s var(--k) forwards;}
+    .stagger.in>*:nth-child(1){animation-delay:.05s}
+    .stagger.in>*:nth-child(2){animation-delay:.12s}
+    .stagger.in>*:nth-child(3){animation-delay:.19s}
+    .stagger.in>*:nth-child(4){animation-delay:.26s}
+    .stagger.in>*:nth-child(5){animation-delay:.33s}
+    @keyframes rise{to{opacity:1; transform:none}}
+
+    /* ======= Footer ======= */
+    footer{color:var(--muted); text-align:center; padding:3rem 0}
+
+    /* ======= Responsive ======= */
+    @media (max-width: 960px){ .hero-wrap{grid-template-columns:1fr; text-align:center} .avatar-wrap{order:-1} .navlinks{display:none} }
+    @media (min-width: 960px){ .navlinks{display:flex} }
+
+    /* ======= Reduce motion ======= */
+    @media (prefers-reduced-motion: reduce){
+      .tilt, [data-animate]{transition:none}
+      .stagger>*{animation:none; opacity:1; transform:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand">VK</a>
+      <nav class="navlinks">
+        <a href="#about">Hakkımda</a>
+        <a href="#skills">Yetenekler</a>
+        <a href="#experience">Deneyim</a>
+        <a href="#projects">Projeler</a>
+        <a href="#quotes">Sözler</a>
+        <a href="#contact">İletişim</a>
+      </nav>
+      <div class="actions">
+        <a class="btn" href="https://iamvahitkeskin.com" target="_blank" rel="noreferrer">🌐 Web</a>
+        <a class="btn btn-primary" href="#contact">Çalışalım</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section id="home" class="hero">
+    <div class="container hero-wrap" data-animate>
+      <div>
+        <span class="kicker">📱 Android • Kotlin • Compose</span>
+        <h1>Vahit Keskin</h1>
+        <div class="subtitle">Android Developer • Kotlin & Jetpack Compose</div>
+        <p class="tagline">Temiz mimari, ViewModel odaklı ekranlar ve ölçeklenebilir Android deneyimleri.</p>
+        <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem">
+          <a class="btn" href="#projects">Projeler</a>
+          <a class="btn" href="#skills">Yetenekler</a>
+          <a class="btn btn-primary" href="#contact">İletişime geç</a>
+        </div>
+      </div>
+      <div class="avatar-wrap">
+        <img class="avatar" src="image.jpg" alt="Vahit Keskin portre"/>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- ===== About ===== -->
+    <section id="about" data-animate>
+      <div class="section-title">✍️ Hakkımda</div>
+      <div class="grid grid-2">
+        <article class="card" style="grid-column: span 2 / auto;">
+          <div class="card-b">
+            <p>Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <strong>iş mantığı ViewModel'de</strong>, UI ise yalın ve tepkisel.</p>
+            <p>Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.</p>
+            <ul class="muted">
+              <li>Coroutines/Flow ile reaktif veri akışları ve offline-first yaklaşımlar</li>
+              <li>Test piramidi: Unit, Instrumentation ve UI test otomasyonu</li>
+              <li>Design system ve tema yönetimi (Compose + Views)</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Skills with GIF bg on cards ===== -->
+    <section id="skills" data-animate>
+      <div class="section-title">✨ Yetenekler</div>
+      <div class="grid grid-3" id="skillsGrid"></div>
+    </section>
+
+    <!-- ===== Experience Timeline ===== -->
+    <section id="experience" data-animate>
+      <div class="section-title">🧭 Deneyim</div>
+      <div class="timeline">
+        <div class="tl-item card">
+          <div class="card-b">
+            <strong>Android Developer</strong> — Freelance/Remote <span class="badge">2022–→</span>
+            <p class="muted">Kurumsal projelerde Compose geçiş planları, modüler mimari, CI/CD entegrasyonları.</p>
+          </div>
+        </div>
+        <div class="tl-item card">
+          <div class="card-b">
+            <strong>Android Engineer</strong> — Çeşitli Projeler <span class="badge">2018–2022</span>
+            <p class="muted">MVVM, Hilt, Room, Navigation, Clean Architecture ve test stratejileri.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects (tilt hover + reveal) ===== -->
+    <section id="projects" data-animate>
+      <div class="section-title">🔗 Projeler</div>
+      <div class="grid grid-3 stagger" id="projectsGrid"></div>
+    </section>
+
+    <!-- ===== Quotes ===== -->
+    <section id="quotes" data-animate>
+      <div class="section-title">🖊️ Yazılar & Sözler</div>
+      <div class="grid grid-2" id="quotesGrid"></div>
+      <div class="mt-4"><a class="btn btn-primary" href="#">Tüm yazılar</a></div>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section id="stats" data-animate>
+      <div class="section-title">📈 İstatistikler</div>
+      <div class="grid grid-4">
+        <div class="card"><div class="card-b"><div class="muted">Toplam Proje</div><h2><span class="count" data-to="24">0</span>+</h2></div></div>
+        <div class="card"><div class="card-b"><div class="muted">Yıl Deneyim</div><h2><span class="count" data-to="7">0</span></h2></div></div>
+        <div class="card"><div class="card-b"><div class="muted">Açık Kaynak Katkı</div><h2><span class="count" data-to="120">0</span>+</h2></div></div>
+        <div class="card"><div class="card-b"><div class="muted">Mutlu Ekip</div><h2><span class="count" data-to="12">0</span>+</h2></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" data-animate>
+      <div class="section-title">📬 İletişim</div>
+      <div class="card">
+        <div class="card-b" style="display:grid;gap:1rem;grid-template-columns:1fr;">
+          <div class="muted">Yeni bir proje mi var? Android tarafında destek arıyorsan konuşalım.</div>
+          <form class="grid" style="gap:.75rem;grid-template-columns:1fr;">
+            <div class="grid grid-2" style="gap:.75rem">
+              <input class="btn" style="box-shadow:none" placeholder="Ad" />
+              <input class="btn" style="box-shadow:none" placeholder="E‑posta" />
+            </div>
+            <input class="btn" style="box-shadow:none" placeholder="Konu" />
+            <textarea class="btn" style="box-shadow:none; min-height:120px" placeholder="Mesaj"></textarea>
+            <button type="button" class="btn btn-primary" id="sendBtn">Gönder</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+
+  <script>
+    // ------- Data -------
+    const PROFILE = {
+      skills: [
+        { name: 'Kotlin', level: 95 },
+        { name: 'Java', level: 90 },
+        { name: 'Jetpack Compose', level: 92 },
+        { name: 'Architecture Components', level: 90 },
+        { name: 'MVVM / Clean Architecture', level: 94 },
+        { name: 'Coroutines / Flow', level: 92 },
+        { name: 'Data Binding', level: 90 },
+        { name: 'Hilt / DI', level: 85 },
+        { name: 'REST / GraphQL', level: 80 },
+        { name: 'Unit & UI Testing', level: 82 },
+      ],
+      projects: [
+        { name: 'Turkuaz Aşım Stop / Kullanım Bilgilendirmesi', description: 'OverUsageStop ekranı için ViewModel merkezli mimari, LiveData ve data binding ile test edilebilir modüler yapı.', tags:['Kotlin','Compose','MVVM','LiveData','Hilt'], link:'#' },
+        { name: 'SaveYourTravels — Konum İzni Akışı', description: 'Sistem ayarlarına yönlendirme ve onResume sonrası kontrolle güvenli AddLocation geçişi.', tags:['Permissions','Navigation','Lifecycle'], link:'#' },
+        { name: 'UI Spacing Orchestrator', description: 'ConstraintLayout içinde görünürlüğe bağlı dinamik boşluk yönetimi (button_navigate ↔ highSpeedRemainingTime).', tags:['Android Views','ConstraintLayout','UI/UX'], link:'#' },
+      ],
+      quotes: [
+        { text: 'Basit olan çalışır; sürdürülebilir olan büyür.', context: 'Yazılım temalı sözler ile uyumlu tematik görseller yaklaşımı.' },
+        { text: 'Ekran, ViewModel\'in aynasıdır; iş mantığı UI\'da değil kalpte yaşar.', context: 'MVVM ve test edilebilirlik odağı.' },
+      ]
+    };
+
+    // ------- Shortcuts -------
+    const $ = (q,root=document)=>root.querySelector(q);
+    const $$ = (q,root=document)=>Array.from(root.querySelectorAll(q));
+    const yearEl = $('#year'); yearEl.textContent = new Date().getFullYear();
+    function el(tag, props={}, ...children){ const node = document.createElement(tag); Object.assign(node, props); children.flat().forEach(c=>{ if(typeof c==='string') node.appendChild(document.createTextNode(c)); else if(c) node.appendChild(c); }); return node; }
+
+    // ------- Skills (GIF background + avatar + animation) -------
+    const skillsGrid = document.getElementById('skillsGrid');
+    PROFILE.skills.forEach(s => {
+      const card = el('div', {className:'card', style:'position:relative;overflow:hidden;text-align:center'});
+      card.style.background = "url(https://user-images.githubusercontent.com/36104238/228931294-728ecd08-f34b-40c2-8323-e40992c9ed19.gif) center/cover no-repeat";
+      const overlay = el('div', {style:'position:absolute;inset:0;background:rgba(0,0,0,.45)'});
+      const body = el('div', {className:'card-b', style:'position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:1rem;'});
+      const img = el('img', {src:'/mnt/data/image.jpg', alt:s.name+' icon', style:'width:48px;height:48px;border-radius:50%;object-fit:cover;margin-bottom:0.5rem;border:2px solid #fff'});
+      const row = el('div', {style:'display:flex;gap:.5rem;justify-content:center;align-items:center;color:#fff'});
+      row.append(el('strong',{}, s.name));
+      row.append(el('span',{className:'badge',style:'background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.28)'}, s.level+'%'));
+      const bar = el('div',{className:'bar', style:'margin-top:.6rem;width:100%'});
+      const fill = el('span'); bar.appendChild(fill);
+      body.append(img,row,bar); card.append(overlay, body); skillsGrid.append(card);
+      card.dataset.progress = s.level;
+    });
+
+    // ------- Projects render (tilt) -------
+    const projectsGrid = $('#projectsGrid');
+    PROFILE.projects.forEach(p=>{
+      const card = el('div',{className:'card tilt', style:'will-change:transform'});
+      card.append(el('div',{className:'card-h'}, p.name));
+      const body = el('div',{className:'card-b'});
+      body.append(el('p',{}, p.description));
+      const tags = el('div',{style:'display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem'});
+      p.tags.forEach(t=> tags.append(el('span',{className:'badge'}, t)));
+      body.append(tags);
+      body.append(el('a',{href:p.link,className:'btn',style:'margin-top:.75rem'}, 'Detay'));
+      card.append(body); projectsGrid.append(card);
+      // tilt hover
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width - .5;
+        const y = (e.clientY - r.top)/r.height - .5;
+        card.style.transform = `perspective(800px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)');
+    });
+
+    // ------- Quotes render -------
+    const quotesGrid = $('#quotesGrid');
+    PROFILE.quotes.forEach(q=>{
+      const card = el('div',{className:'card'});
+      const body = el('div',{className:'card-b'});
+      body.append(el('blockquote',{}, '“'+q.text+'”'));
+      body.append(el('p',{className:'muted', style:'margin-top:.5rem'}, q.context));
+      card.append(body); quotesGrid.append(card);
+    });
+
+    // ------- On-Scroll Animations, Progress & Counters -------
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          // progress bars in any skill card
+          if(e.target.closest && e.target.closest('#skills')){
+            e.target.querySelectorAll('.bar>span').forEach((span)=>{
+              const p = e.target.closest('.card')?.dataset.progress || 0;
+              requestAnimationFrame(()=> span.style.width = p + '%');
+            });
+          }
+          // counters
+          if(e.target.matches('#stats')){
+            $$('#stats .count').forEach(node=> animateCount(node, +node.dataset.to, 900));
+          }
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:.2});
+
+    $$('[data-animate], #stats').forEach(n=>io.observe(n));
+
+    function animateCount(node, to, dur=1000){
+      const from = 0; const start = performance.now();
+      const step = (t)=>{ const p = Math.min(1, (t-start)/dur); node.textContent = Math.floor(from + (to-from)*p); if(p<1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }
+
+    // Parallax avatar subtle
+    const hero = document.querySelector('.hero');
+    const avatar = document.querySelector('.avatar');
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY; const h = hero.getBoundingClientRect().height;
+      if(y < h){ avatar.style.transform = `translateY(${y*0.08}px)`; }
+    }, {passive:true});
+
+    // Demo form
+    $('#sendBtn')?.addEventListener('click', ()=> alert('Teşekkürler! Mesajınız demo modunda iletildi varsayıldı.'));
+  </script>
+</body>
+</html>
