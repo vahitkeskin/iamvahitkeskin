@@ -103,7 +103,7 @@ const PROFILE = {
       link: 'https://play.google.com/store/apps/details?id=com.turktelekom.onlineislemler',
       company: 'İnnova Bilişim',
       period: 'Nis 2023 - Halen',
-      image: 'images/turktelecom_bg.jpeg'
+      image: 'images/turktelekom_bg.jpeg'
     },
     { 
       name: 'MetroOnline', 
