@@ -115,30 +115,6 @@ const PROFILE = {
       image: 'images/metromarket_bg.svg'
     },
     { 
-      name: 'Monitorink', 
-      description: 'Monitoring ve takip sistemi için geliştirilen Android uygulaması. Kurumsal çözümler ve performans optimizasyonu.', 
-      tags: ['Android', 'Kotlin', 'Mobile Applications', 'Product Requirements'], 
-      link: '#',
-      company: 'TEKROM Teknoloji AŞ.',
-      period: 'Eyl 2022 - Halen'
-    },
-    { 
-      name: 'Nildesk', 
-      description: 'Masaüstü ve mobil entegrasyonu ile çalışan kurumsal uygulama. Çok platformlu geliştirme deneyimi.', 
-      tags: ['Android', 'Kotlin', 'Cross-platform', 'Product Requirements'], 
-      link: '#',
-      company: 'TEKROM Teknoloji AŞ.',
-      period: 'Eyl 2022 - Halen'
-    },
-    { 
-      name: 'Tahsildar', 
-      description: 'Tahsilat ve ödeme sistemleri için geliştirilen mobil uygulama. Güvenli ödeme entegrasyonları.', 
-      tags: ['Android', 'Kotlin', 'JIRA', 'Payment Systems', 'Security'], 
-      link: '#',
-      company: 'TEKROM Teknoloji AŞ.',
-      period: 'Tem 2022 - Halen'
-    },
-    { 
       name: 'T-Soft Mobile - United Apps', 
       description: 'T-Soft e-ticaret platformu için geliştirilen mobil uygulama. E-ticaret ve alışveriş deneyimi.', 
       tags: ['Android', 'Kotlin', 'Java', 'JSON', 'Fastlane', 'E-commerce'], 
@@ -182,6 +158,30 @@ const PROFILE = {
       image: 'images/kanbagis_bg.jpg',
       company: 'Bilecik Üniversitesi',
       period: 'Eyl 2019 - Oca 2020'
+    },
+    { 
+      name: 'Monitorink', 
+      description: 'Monitoring ve takip sistemi için geliştirilen Android uygulaması. Kurumsal çözümler ve performans optimizasyonu.', 
+      tags: ['Android', 'Kotlin', 'Mobile Applications', 'Product Requirements'], 
+      link: '#',
+      company: 'TEKROM Teknoloji AŞ.',
+      period: 'Eyl 2022 - Halen'
+    },
+    { 
+      name: 'Nildesk', 
+      description: 'Masaüstü ve mobil entegrasyonu ile çalışan kurumsal uygulama. Çok platformlu geliştirme deneyimi.', 
+      tags: ['Android', 'Kotlin', 'Cross-platform', 'Product Requirements'], 
+      link: '#',
+      company: 'TEKROM Teknoloji AŞ.',
+      period: 'Eyl 2022 - Halen'
+    },
+    { 
+      name: 'Tahsildar', 
+      description: 'Tahsilat ve ödeme sistemleri için geliştirilen mobil uygulama. Güvenli ödeme entegrasyonları.', 
+      tags: ['Android', 'Kotlin', 'JIRA', 'Payment Systems', 'Security'], 
+      link: '#',
+      company: 'TEKROM Teknoloji AŞ.',
+      period: 'Tem 2022 - Halen'
     }
   ]
 };
