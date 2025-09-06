@@ -7,29 +7,39 @@ let userLocation = null;
 async function getUserLocationByIP() {
   try {
     // First try to get location from IP
-    const response = await fetch('https://ipapi.co/json/', {
-      timeout: 10000
-    });
+    const response = await fetch('https://ipapi.co/json/');
     const data = await response.json();
     
     if (data.latitude && data.longitude) {
+      // Get the most specific location available
+      let locationName = data.city || data.region || data.country_name || 'Bilinmeyen Konum';
+      
+      // If we have both city and region, combine them for better specificity
+      if (data.city && data.region && data.city !== data.region) {
+        locationName = `${data.city}, ${data.region}`;
+      }
+      
       userLocation = {
         lat: parseFloat(data.latitude),
         lon: parseFloat(data.longitude),
-        city: data.city || 'Bilinmeyen Şehir',
-        country: data.country_name || 'Bilinmeyen Ülke'
+        city: locationName,
+        country: data.country_name || 'Bilinmeyen Ülke',
+        region: data.region || '',
+        timezone: data.timezone || 'Europe/Istanbul'
       };
       localStorage.setItem('userLocation', JSON.stringify(userLocation));
+      
+      console.log('Location detected:', userLocation);
       
       // Update timezone based on user location
       updateTimeZone(userLocation.lat, userLocation.lon);
       
       // Get weather for user's location
-      getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
+      await getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
       return;
     }
   } catch (error) {
-    console.log('IP location failed, trying alternative method');
+    console.log('IP location failed, trying alternative method:', error);
   }
   
   // Fallback: Try alternative IP geolocation service
@@ -41,13 +51,25 @@ async function getUserLocationByIP() {
     const geoData = await geoResponse.json();
     
     if (geoData.latitude && geoData.longitude) {
+      // Get the most specific location available
+      let locationName = geoData.city || geoData.region || geoData.country_name || 'Bilinmeyen Konum';
+      
+      // If we have both city and region, combine them for better specificity
+      if (geoData.city && geoData.region && geoData.city !== geoData.region) {
+        locationName = `${geoData.city}, ${geoData.region}`;
+      }
+      
       userLocation = {
         lat: parseFloat(geoData.latitude),
         lon: parseFloat(geoData.longitude),
-        city: geoData.city || 'Bilinmeyen Şehir',
-        country: geoData.country_name || 'Bilinmeyen Ülke'
+        city: locationName,
+        country: geoData.country_name || 'Bilinmeyen Ülke',
+        region: geoData.region || '',
+        timezone: geoData.timezone || 'Europe/Istanbul'
       };
       localStorage.setItem('userLocation', JSON.stringify(userLocation));
+      
+      console.log('Location detected (fallback):', userLocation);
       
       updateTimeZone(userLocation.lat, userLocation.lon);
       getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
@@ -64,35 +86,56 @@ async function getUserLocationByIP() {
 
 async function getWeatherByCoords(lat, lon, cityName) {
   try {
-    // Use OpenWeatherMap free API (no key required for basic weather)
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8f8eccd8f8eccd8f8eccd8f8eccd8f8e&units=metric&lang=tr`, {
-      timeout: 10000
-    });
+    // Try wttr.in first (most reliable free API)
+    const response = await fetch(`https://wttr.in/${lat},${lon}?format=j1&lang=tr`);
     const data = await response.json();
     
-    if (data.main && data.weather && data.weather[0]) {
+    if (data.current_condition && data.current_condition[0]) {
+      const weather = data.current_condition[0];
       currentWeather = {
-        temp: Math.round(data.main.temp),
-        condition: data.weather[0].description,
-        icon: getWeatherIconFromCode(data.weather[0].icon),
-        city: data.name || cityName || 'Konum'
+        temp: weather.temp_C,
+        condition: weather.weatherDesc[0].value,
+        icon: getWeatherIconFromWttr(weather.weatherCode),
+        city: cityName || 'Konum'
       };
       updateWeatherDisplay(currentWeather.temp, currentWeather.condition, currentWeather.icon, currentWeather.city);
+      return;
     }
   } catch (error) {
-    console.error('OpenWeatherMap error:', error);
+    console.error('wttr.in error:', error);
+  }
+  
+  // Fallback: Try open-meteo.com
+  try {
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
+    const data = await response.json();
     
-    // Fallback: Try wttr.in with coordinates
-    try {
-      const response = await fetch(`https://wttr.in/${lat},${lon}?format=j1&lang=tr`);
-      const data = await response.json();
-      
-      if (data.current_condition && data.current_condition[0]) {
-        const weather = data.current_condition[0];
-        currentWeather = {
-          temp: weather.temp_C,
-          condition: weather.weatherDesc[0].value,
-          icon: getWeatherIconFromWttr(weather.weatherCode),
+    if (data.current_weather) {
+      const weather = data.current_weather;
+      currentWeather = {
+        temp: Math.round(weather.temperature),
+        condition: getWeatherDescriptionByCode(weather.weathercode),
+        icon: getWeatherIconByCode(weather.weathercode),
+        city: cityName || 'Konum'
+      };
+      updateWeatherDisplay(currentWeather.temp, currentWeather.condition, currentWeather.icon, currentWeather.city);
+      return;
+    }
+  } catch (error) {
+    console.error('open-meteo error:', error);
+  }
+  
+  // Final fallback: Try wttr.in with city name
+  try {
+    const response = await fetch(`https://wttr.in/${cityName}?format=j1&lang=tr`);
+    const data = await response.json();
+    
+    if (data.current_condition && data.current_condition[0]) {
+      const weather = data.current_condition[0];
+      currentWeather = {
+        temp: weather.temp_C,
+        condition: weather.weatherDesc[0].value,
+        icon: getWeatherIconFromWttr(weather.weatherCode),
           city: data.nearest_area[0].areaName[0].value || cityName || 'Konum'
         };
         updateWeatherDisplay(currentWeather.temp, currentWeather.condition, currentWeather.icon, currentWeather.city);
@@ -360,12 +403,21 @@ function updateWeatherDisplay(temp, condition, icon, city) {
   if (weatherIcon) weatherIcon.textContent = icon;
   if (weatherTemp) weatherTemp.textContent = `${temp}°C`;
   if (weatherDesc) weatherDesc.textContent = condition;
-  if (currentCity) currentCity.textContent = city;
+  if (currentCity) {
+    // Show the most specific location available
+    currentCity.textContent = city || 'Konum alınıyor...';
+  }
+  
+  console.log('Weather updated for:', city, `${temp}°C`, condition);
 }
 
 function setupWeather() {
   // Get user location by IP (no permission required)
-  getUserLocationByIP();
+  getUserLocationByIP().catch(error => {
+    console.error('Weather setup failed:', error);
+    // Fallback to default city
+    getWeather(selectedCity);
+  });
   
   // Update weather every 30 minutes
   setInterval(() => {

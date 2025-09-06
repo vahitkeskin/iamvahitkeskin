@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .favicon-preview {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-image: url('images/image.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            margin: 10px;
+            display: inline-block;
+        }
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h2>Yuvarlak Favicon Önizleme</h2>
+    <div class="favicon-preview"></div>
+    <div class="favicon-preview" style="width: 16px; height: 16px;"></div>
+    <div class="favicon-preview" style="width: 48px; height: 48px;"></div>
+    
+    <div class="instructions">
+        <h3>Yuvarlak Favicon Nasıl Oluşturulur:</h3>
+        <ol>
+            <li>Online favicon generator kullanın (örnek: <a href="https://favicon.io/favicon-generator/" target="_blank">favicon.io</a>)</li>
+            <li>image.jpg dosyanızı yükleyin</li>
+            <li>"Circular" veya "Round" seçeneğini seçin</li>
+            <li>Oluşturulan favicon.ico dosyasını proje klasörüne kopyalayın</li>
+            <li>HTML'de favicon linkini güncelleyin</li>
+        </ol>
+        
+        <h3>Alternatif Çözüm:</h3>
+        <p>CSS ile yuvarlak görünüm sağlamak için:</p>
+        <pre>
+link[rel="icon"] {
+    border-radius: 50%;
+    clip-path: circle(50%);
+}
+        </pre>
+    </div>
+</body>
+</html>

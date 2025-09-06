@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yuvarlak Favicon Oluşturucu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 2px solid #ddd;
+            margin: 10px;
+        }
+        .download-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .download-btn:hover {
+            background: #0056b3;
+        }
+        .preview {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Yuvarlak Favicon Oluşturucu</h1>
+        <p>Bu sayfa image.jpg dosyanızı kullanarak yuvarlak favicon oluşturur.</p>
+        
+        <div class="preview">
+            <div>
+                <h3>Önizleme:</h3>
+                <canvas id="faviconCanvas" width="32" height="32"></canvas>
+                <canvas id="faviconCanvas16" width="16" height="16"></canvas>
+                <canvas id="faviconCanvas48" width="48" height="48"></canvas>
+            </div>
+            <div>
+                <h3>İndirme:</h3>
+                <button class="download-btn" onclick="downloadFavicon(16)">16x16 İndir</button>
+                <button class="download-btn" onclick="downloadFavicon(32)">32x32 İndir</button>
+                <button class="download-btn" onclick="downloadFavicon(48)">48x48 İndir</button>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #e9ecef; border-radius: 5px;">
+            <h3>📋 Kullanım Talimatları:</h3>
+            <ol>
+                <li>Yukarıdaki butonlara tıklayarak favicon dosyalarını indirin</li>
+                <li>İndirilen dosyaları proje klasörüne kopyalayın</li>
+                <li>HTML'de favicon linklerini güncelleyin</li>
+                <li>Tarayıcı cache'ini temizleyin (Ctrl+F5)</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+            createFavicon(32, 'faviconCanvas');
+            createFavicon(16, 'faviconCanvas16');
+            createFavicon(48, 'faviconCanvas48');
+        };
+        img.src = 'images/image.jpg';
+
+        function createFavicon(size, canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Canvas'ı temizle
+            ctx.clearRect(0, 0, size, size);
+            
+            // Yuvarlak clipping path oluştur
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, 2 * Math.PI);
+            ctx.clip();
+            
+            // Resmi çiz
+            ctx.drawImage(img, 0, 0, size, size);
+        }
+
+        function downloadFavicon(size) {
+            const canvas = document.getElementById(size === 16 ? 'faviconCanvas16' : size === 48 ? 'faviconCanvas48' : 'faviconCanvas');
+            const link = document.createElement('a');
+            link.download = `favicon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

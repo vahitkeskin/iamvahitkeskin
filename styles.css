@@ -15,6 +15,8 @@
   --k: cubic-bezier(.2,.8,.2,1);
 }
 
+/* Favicon stilleri - tarayıcı tarafından kontrol edilir */
+
 @media (prefers-color-scheme: light) {
   :root {
     --bg: #f6f8fb;
