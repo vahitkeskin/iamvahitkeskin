@@ -308,9 +308,10 @@
           <div class="muted">Yeni bir proje mi var? Android tarafında destek arıyorsan konuşalım.</div>
             <form class="contact-form" id="contact-form">
             <div class="grid grid-2" style="gap:.75rem">
-                <input id="name" name="name" placeholder="Ad Soyad *" autocomplete="name" required />
-                <input id="email" name="email" type="email" placeholder="E‑posta *" inputmode="email" autocomplete="email" required />
+                <input id="first_name" name="first_name" placeholder="Ad *" autocomplete="given-name" required />
+                <input id="last_name" name="last_name" placeholder="Soyad *" autocomplete="family-name" required />
             </div>
+              <input id="email" name="email" type="email" placeholder="E‑posta *" inputmode="email" autocomplete="email" required />
               <input id="subject" name="subject" placeholder="Konu *" required />
               <textarea id="message" name="message" placeholder="Mesaj *" style="min-height:120px" required></textarea>
               <button type="submit" class="btn btn-primary" id="sendBtn" disabled>Gönder</button>

@@ -299,7 +299,8 @@ function setupContactForm() {
     console.warn('Contact form not found');
     return;
   }
-  const nameInput = $('#name');
+  const firstNameInput = $('#first_name');
+  const lastNameInput = $('#last_name');
   const emailInput = $('#email');
   const subjectInput = $('#subject');
   const messageInput = $('#message');
@@ -312,21 +313,17 @@ function setupContactForm() {
     return re.test(String(value).toLowerCase());
   }
 
-  function isFullNameValid(value) {
-    if (!value) return false;
-    const trimmed = value.trim().replace(/\s+/g, ' ');
-    // At least two words, each 2+ chars
-    const parts = trimmed.split(' ');
-    if (parts.length < 2) return false;
-    return parts.every(p => p.length >= 2);
+  function isNonEmpty(value) {
+    return !!(value && value.trim().length >= 2);
   }
 
   function validateForm() {
-    const nameOk = isFullNameValid(nameInput?.value.trim());
+    const firstOk = isNonEmpty(firstNameInput?.value);
+    const lastOk = isNonEmpty(lastNameInput?.value);
     const emailOk = isEmailValid(emailInput?.value.trim());
     const subjectOk = !!subjectInput?.value.trim();
     const messageOk = !!messageInput?.value.trim();
-    const allOk = nameOk && emailOk && subjectOk && messageOk;
+    const allOk = firstOk && lastOk && emailOk && subjectOk && messageOk;
     if (sendBtn) {
       sendBtn.disabled = !allOk;
       if (sendBtn.disabled) {
@@ -340,7 +337,7 @@ function setupContactForm() {
     return allOk;
   }
 
-  [nameInput, emailInput, subjectInput, messageInput].forEach(inp => {
+  [firstNameInput, lastNameInput, emailInput, subjectInput, messageInput].forEach(inp => {
     inp?.addEventListener('input', validateForm);
     inp?.addEventListener('blur', validateForm);
   });
@@ -353,13 +350,15 @@ function setupContactForm() {
     try {
       // Get form data
       const formData = new FormData(form);
-      const name = (formData.get('name') || $('#name')?.value || '').toString().trim();
+      const firstName = (formData.get('first_name') || firstNameInput?.value || '').toString().trim();
+      const lastName = (formData.get('last_name') || lastNameInput?.value || '').toString().trim();
+      const name = `${firstName} ${lastName}`.trim();
       const email = (formData.get('email') || $('#email')?.value || '').toString().trim();
       const subject = (formData.get('subject') || $('#subject')?.value || '').toString().trim();
       const message = (formData.get('message') || $('#message')?.value || '').toString().trim();
       
       // Basic validation
-      if (!name || !email || !subject || !message || !isEmailValid(email) || !isFullNameValid(name)) {
+      if (!firstName || !lastName || !email || !subject || !message || !isEmailValid(email)) {
         alert('Lütfen tüm alanları doldurun.');
         return;
       }
@@ -376,6 +375,8 @@ function setupContactForm() {
 
       const payload = {
         name,
+        first_name: firstName,
+        last_name: lastName,
         email,
         message,
         _subject: `[iamvahitkeskin.com] ${subject}`,
@@ -421,6 +422,8 @@ function setupContactForm() {
 
           const fields = {
             name,
+            first_name: firstName,
+            last_name: lastName,
             email,
             message,
             _subject: `[iamvahitkeskin.com] ${subject}`,
@@ -450,7 +453,7 @@ function setupContactForm() {
         // Final fallback: open default mail client
         const mailtoSubject = encodeURIComponent(`[iamvahitkeskin.com] ${subject}`);
         const mailtoBody = encodeURIComponent(
-          `Ad: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
+          `Ad: ${firstName}\nSoyad: ${lastName}\nE-posta: ${email}\n\nMesaj:\n${message}`
         );
         window.location.href = `mailto:vahitkeskin07@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
         sent = true;
