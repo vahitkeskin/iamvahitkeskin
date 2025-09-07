@@ -299,6 +299,53 @@ function setupContactForm() {
     console.warn('Contact form not found');
     return;
   }
+  const nameInput = $('#name');
+  const emailInput = $('#email');
+  const subjectInput = $('#subject');
+  const messageInput = $('#message');
+  const sendBtn = $('#sendBtn');
+
+  function isEmailValid(value) {
+    if (!value) return false;
+    // Simple RFC5322-ish email validation
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return re.test(String(value).toLowerCase());
+  }
+
+  function isFullNameValid(value) {
+    if (!value) return false;
+    const trimmed = value.trim().replace(/\s+/g, ' ');
+    // At least two words, each 2+ chars
+    const parts = trimmed.split(' ');
+    if (parts.length < 2) return false;
+    return parts.every(p => p.length >= 2);
+  }
+
+  function validateForm() {
+    const nameOk = isFullNameValid(nameInput?.value.trim());
+    const emailOk = isEmailValid(emailInput?.value.trim());
+    const subjectOk = !!subjectInput?.value.trim();
+    const messageOk = !!messageInput?.value.trim();
+    const allOk = nameOk && emailOk && subjectOk && messageOk;
+    if (sendBtn) {
+      sendBtn.disabled = !allOk;
+      if (sendBtn.disabled) {
+        sendBtn.style.opacity = '0.6';
+        sendBtn.style.cursor = 'not-allowed';
+      } else {
+        sendBtn.style.opacity = '1';
+        sendBtn.style.cursor = 'pointer';
+      }
+    }
+    return allOk;
+  }
+
+  [nameInput, emailInput, subjectInput, messageInput].forEach(inp => {
+    inp?.addEventListener('input', validateForm);
+    inp?.addEventListener('blur', validateForm);
+  });
+  // initial state
+  validateForm();
   
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -306,23 +353,143 @@ function setupContactForm() {
     try {
       // Get form data
       const formData = new FormData(form);
-      const name = formData.get('name') || $('#name')?.value;
-      const email = formData.get('email') || $('#email')?.value;
-      const subject = formData.get('subject') || $('#subject')?.value;
-      const message = formData.get('message') || $('#message')?.value;
+      const name = (formData.get('name') || $('#name')?.value || '').toString().trim();
+      const email = (formData.get('email') || $('#email')?.value || '').toString().trim();
+      const subject = (formData.get('subject') || $('#subject')?.value || '').toString().trim();
+      const message = (formData.get('message') || $('#message')?.value || '').toString().trim();
       
       // Basic validation
-      if (!name || !email || !subject || !message) {
+      if (!name || !email || !subject || !message || !isEmailValid(email) || !isFullNameValid(name)) {
         alert('Lütfen tüm alanları doldurun.');
         return;
       }
-      
-      // Simulate form submission
-      alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağım.');
-      form.reset();
+      // Disable button and show loading state
+      const originalBtnText = sendBtn ? sendBtn.textContent : '';
+      if (sendBtn) {
+        sendBtn.textContent = 'Gönderiliyor...';
+        sendBtn.disabled = true;
+      }
+
+      // Primary: send via FormSubmit
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+      const payload = {
+        name,
+        email,
+        message,
+        _subject: `[iamvahitkeskin.com] ${subject}`,
+        _captcha: 'false',
+        _template: 'table'
+      };
+
+      let sent = false;
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/vahitkeskin07@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+          const data = await res.json().catch(() => ({}));
+          if (data && (data.success || data.message)) {
+            sent = true;
+          } else {
+            // Some proxies return 200 without JSON body
+            sent = true;
+          }
+        } else {
+          throw new Error(`HTTP ${res.status}`);
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.warn('FormSubmit failed, will fallback to mailto:', err.message || err);
+      }
+
+      if (!sent) {
+        // Second fallback: Standard POST to FormSubmit (opens a new tab)
+        try {
+          const tempForm = document.createElement('form');
+          tempForm.action = 'https://formsubmit.co/vahitkeskin07@gmail.com';
+          tempForm.method = 'POST';
+          tempForm.target = '_blank';
+
+          const fields = {
+            name,
+            email,
+            message,
+            _subject: `[iamvahitkeskin.com] ${subject}`,
+            _captcha: 'false',
+            _template: 'table'
+          };
+
+          Object.entries(fields).forEach(([k, v]) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = k;
+            input.value = v;
+            tempForm.appendChild(input);
+          });
+
+          document.body.appendChild(tempForm);
+          tempForm.submit();
+          setTimeout(() => tempForm.remove(), 1000);
+          sent = true;
+          console.info('FormSubmit standard POST used. İlk kez kullanıyorsanız e-postayı doğrulamanız gerekir.');
+        } catch (e) {
+          console.warn('Standard POST fallback failed:', e);
+        }
+      }
+
+      if (!sent) {
+        // Final fallback: open default mail client
+        const mailtoSubject = encodeURIComponent(`[iamvahitkeskin.com] ${subject}`);
+        const mailtoBody = encodeURIComponent(
+          `Ad: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
+        );
+        window.location.href = `mailto:vahitkeskin07@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+        sent = true;
+      }
+
+      if (sent) {
+        // Success animation toast
+        try {
+          const toast = el('div', { 
+            style: 'position:fixed;inset:auto 0 20px 0;margin:auto;max-width:320px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);color:var(--text);display:flex;align-items:center;gap:8px;justify-content:center;z-index:9999;transform:translateY(20px);opacity:0;transition:transform .25s ease, opacity .25s ease;' 
+          }, '✅ Mesajınız gönderildi');
+          document.body.appendChild(toast);
+          requestAnimationFrame(() => {
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+          });
+          setTimeout(() => {
+            toast.style.transform = 'translateY(20px)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 250);
+          }, 2200);
+        } catch(_) {}
+
+        form.reset();
+        validateForm();
+      }
+
+      if (sendBtn) {
+        sendBtn.textContent = originalBtnText || 'Gönder';
+        sendBtn.disabled = false;
+      }
     } catch (error) {
       console.error('Contact form error:', error);
       alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+      const sendBtn = $('#sendBtn');
+      if (sendBtn) {
+        sendBtn.textContent = 'Gönder';
+        sendBtn.disabled = false;
+      }
     }
   });
 }
