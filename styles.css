@@ -69,6 +69,17 @@ html, body {
   line-height: 1.6;
 }
 
+/* Sticky footer layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -225,9 +236,10 @@ header {
 
 .nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0.9rem 0;
+  gap: 1rem;
 }
 
 .brand {
@@ -240,6 +252,7 @@ header {
   display: flex;
   gap: 1.2rem;
   align-items: center;
+  margin-left: auto;
 }
 
 .navlinks a {
@@ -250,6 +263,16 @@ header {
 
 .navlinks a:hover {
   background: var(--surface2);
+}
+
+/* Active nav item */
+.navlinks a[aria-current="page"] {
+  background: color-mix(in oklab, var(--brand) 18%, var(--surface2));
+  border: 1px solid color-mix(in oklab, var(--brand) 40%, var(--border));
+}
+
+.nav-drawer a[aria-current="page"] {
+  background: color-mix(in oklab, var(--brand) 14%, var(--surface2));
 }
 
 .actions {
@@ -387,7 +410,7 @@ section {
 /* Skills Grid */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
@@ -699,10 +722,77 @@ footer {
   background: color-mix(in oklab, var(--brand) 30%, var(--border));
 }
 
+/* Experience Progress/Steps */
+.xp-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.xp-progress {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: color-mix(in oklab, var(--border) 80%, transparent);
+  z-index: 0;
+}
+
+.xp-progress > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+}
+
+.xp-step {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: .35rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.xp-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  border: 3px solid color-mix(in oklab, var(--surface) 70%, transparent);
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+.xp-role {
+  font-weight: 700;
+  color: var(--text);
+  margin-top: .25rem;
+}
+
+.xp-period {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .xp-steps {
+    grid-template-columns: 1fr;
+  }
+  .xp-progress { display: none; }
+  .xp-step { justify-items: start; text-align: left; }
+}
+
 .tl-item {
   position: relative;
-  padding-left: 2.5rem;
+  padding: 1rem 1rem 1rem 2.5rem;
   margin-bottom: 1rem;
+  background: color-mix(in oklab, var(--surface2) 85%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: transform .2s var(--k), box-shadow .2s var(--k), border-color .2s var(--k);
 }
 
 .tl-item::before {
@@ -715,6 +805,42 @@ footer {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--brand), var(--brand2));
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--surface) 70%, transparent);
+}
+
+.tl-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  border-color: color-mix(in oklab, var(--brand) 35%, var(--border));
+}
+
+.tl-meta {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.tl-company {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.tl-tags {
+  display: flex;
+  gap: .35rem;
+  flex-wrap: wrap;
+  margin: .45rem 0 .35rem;
+}
+
+.tl-achievements {
+  margin: .35rem 0 0 0;
+  padding-left: 1rem;
+  color: var(--muted);
+}
+
+.tl-achievements li {
+  margin: .15rem 0;
 }
 
 /* Progress bars */
@@ -841,6 +967,19 @@ footer {
 @media (min-width: 960px) {
   .navlinks {
     display: flex;
+  }
+}
+
+/* Skills grid responsive columns */
+@media (min-width: 640px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

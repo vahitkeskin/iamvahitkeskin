@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deneyim • Vahit Keskin</title>
+  <meta name="description" content="Vahit Keskin deneyim" />
+  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="top-header">
+    <div class="container top-header-content">
+      <div class="datetime-weather">
+        <div class="datetime">
+          <i class="fas fa-clock"></i>
+          <span id="current-time">--:--:--</span>
+          <span id="current-date">--/--/----</span>
+          <span style="color: var(--muted);">(İstanbul)</span>
+        </div>
+        <div class="weather" id="weather-container">
+          <i class="fas fa-map-marker-alt"></i>
+          <span id="current-city">Konum alınıyor...</span>
+        </div>
+        <div class="weather" id="weather-info">
+          <span id="weather-icon">🌤️</span>
+          <span id="weather-temp">--°C</span>
+          <span id="weather-desc">Yükleniyor...</span>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="language-switcher" id="language-switcher">
+          <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag" id="language-flag">
+          <span id="language-name">Türkçe</span>
+          <i class="fas fa-chevron-down"></i>
+          <div class="language-dropdown" id="language-dropdown">
+            <div class="language-option" data-lang="tr" data-flag="https://flagcdn.com/tr.svg">
+              <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag">
+              <span>Türkçe</span>
+            </div>
+            <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/gb.svg">
+              <img src="https://flagcdn.com/gb.svg" alt="English" class="language-flag">
+              <span>English</span>
+            </div>
+            <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/de.svg">
+              <img src="https://flagcdn.com/de.svg" alt="Deutsch" class="language-flag">
+              <span>Deutsch</span>
+            </div>
+            <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/fr.svg">
+              <img src="https://flagcdn.com/fr.svg" alt="Français" class="language-flag">
+              <span>Français</span>
+            </div>
+          </div>
+        </div>
+        <div class="theme-switcher" id="theme-switcher">
+          <i class="fas fa-moon" id="theme-icon"></i>
+          <span id="theme-text">Karanlık</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="index.html#home" class="brand" aria-label="Anasayfa">VK</a>
+      <nav class="navlinks" aria-label="Birincil">
+        <a href="index.html#home">Ana Sayfa</a>
+        <a href="about.html">Hakkımda</a>
+        <a href="skills.html">Yetenekler</a>
+        <a href="experience.html" aria-current="page">Deneyim</a>
+        <a href="projects.html">Projeler</a>
+        <a href="contact.html">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="experience" data-animate>
+      <div class="section-title">💼 Deneyim</div>
+      <div class="xp-steps">
+        <div class="xp-progress"><span></span></div>
+        <div class="xp-step">
+          <div class="xp-dot"></div>
+          <div class="xp-role">Junior Android Developer</div>
+          <div class="xp-period">2020 - 2021</div>
+        </div>
+        <div class="xp-step">
+          <div class="xp-dot"></div>
+          <div class="xp-role">Android Developer</div>
+          <div class="xp-period">2021 - 2023</div>
+        </div>
+        <div class="xp-step">
+          <div class="xp-dot"></div>
+          <div class="xp-role">Senior Android Developer</div>
+          <div class="xp-period">2023 - Günümüz</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <strong>Senior Android Developer</strong>
+          <div class="tl-meta"><span class="tl-company">Kurumsal Proje</span> • <span class="muted">2023 - Günümüz</span></div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.35rem 0 .5rem">
+            <span class="badge">Kotlin</span>
+            <span class="badge">Jetpack Compose</span>
+            <span class="badge">MVVM</span>
+            <span class="badge">Clean Architecture</span>
+          </div>
+          <p>Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans optimizasyonu. Jetpack Compose ile modern UI geliştirme.</p>
+          <ul class="tl-achievements">
+            <li>Uygulama açılış süresi %28 iyileştirildi.</li>
+            <li>Compose dönüşümü için modüler mimari planlandı ve devreye alındı.</li>
+            <li>Crash-free rate %99.5 seviyesinde stabil tutuldu.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <strong>Android Developer</strong>
+          <div class="tl-meta"><span class="tl-company">Appcent</span> • <span class="muted">2021 - 2023</span></div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.35rem 0 .5rem">
+            <span class="badge">Kotlin</span>
+            <span class="badge">Coroutines</span>
+            <span class="badge">Hilt</span>
+          </div>
+          <p>MVVM mimarisi ile Android uygulamaları geliştirme. Kotlin, Coroutines ve modern Android kütüphaneleri kullanarak kullanıcı dostu uygulamalar.</p>
+          <ul class="tl-achievements">
+            <li>Yeni özellik geliştirme sürelerinde %15 kısalma.</li>
+            <li>Network katmanında retry/backoff stratejisi ile hata oranında düşüş.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <strong>Junior Android Developer</strong>
+          <div class="tl-meta"><span class="tl-company">Code And More</span> • <span class="muted">2020 - 2021</span></div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.35rem 0 .5rem">
+            <span class="badge">Java</span>
+            <span class="badge">Android SDK</span>
+          </div>
+          <p>Android ekosisteminde temel geliştirme deneyimi. Java ve Kotlin ile basit uygulamalar geliştirme ve öğrenme süreci.</p>
+          <ul class="tl-achievements">
+            <li>İlk prodüksiyon yayınında kritik hatalar olmadan teslim.</li>
+            <li>Firebase Crashlytics entegre edilerek hata takibi sağlandı.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+
+  <script src="language.js"></script>
+  <script src="weather.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+

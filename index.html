@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vahit Keskin | Android Developer</title>
+  <title>Vahit Keskin | Bilgisayar Mühendisi</title>
   <meta name="description" content="Android • Kotlin • Jetpack Compose | Vahit Keskin kişisel websitesi" />
   <meta name="theme-color" content="#0b0d10" />
   <link rel="icon" type="image/png" href="images/image_circle.png">
@@ -73,11 +73,12 @@
     <div class="container nav">
       <a href="#home" class="brand" aria-label="Anasayfa">VK</a>
       <nav class="navlinks" aria-label="Birincil">
-        <a href="#about">Hakkımda</a>
-        <a href="#skills">Yetenekler</a>
-        <a href="#experience">Deneyim</a>
-        <a href="#projects">Projeler</a>
-        <a href="#contact">İletişim</a>
+        <a href="index.html#home">Ana Sayfa</a>
+        <a href="about.html">Hakkımda</a>
+        <a href="skills.html">Yetenekler</a>
+        <a href="experience.html">Deneyim</a>
+        <a href="projects.html">Projeler</a>
+        <a href="contact.html">İletişim</a>
       </nav>
       <div class="actions">
         <a class="btn btn-primary" href="#contact">Çalışalım</a>
@@ -87,11 +88,11 @@
       </button>
     </div>
     <div id="navDrawer" class="nav-drawer container" role="dialog" aria-label="Mobil menü">
-      <a href="#about">Hakkımda</a>
-      <a href="#skills">Yetenekler</a>
-      <a href="#experience">Deneyim</a>
-      <a href="#projects">Projeler</a>
-      <a href="#contact">İletişim</a>
+      <a href="about.html">Hakkımda</a>
+      <a href="skills.html">Yetenekler</a>
+      <a href="experience.html">Deneyim</a>
+      <a href="projects.html">Projeler</a>
+      <a href="contact.html">İletişim</a>
     </div>
   </header>
 
@@ -134,9 +135,9 @@
           </a>
         </div>
         <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem">
-          <a class="btn" href="#projects">Projeler</a>
-          <a class="btn" href="#skills">Yetenekler</a>
-          <a class="btn btn-primary" href="#contact">İletişime geç</a>
+          <a class="btn" href="projects.html" target="_blank" rel="noreferrer noopener">Projeler</a>
+          <a class="btn" href="skills.html" target="_blank" rel="noreferrer noopener">Yetenekler</a>
+          <a class="btn btn-primary" href="contact.html" target="_blank" rel="noreferrer noopener">İletişime geç</a>
         </div>
       </div>
       <div class="avatar-wrap">
@@ -146,176 +147,43 @@
   </section>
 
   <main class="container">
-    <!-- About -->
-    <section id="about" data-animate>
-      <div class="section-title">✍️ Hakkımda</div>
-      <div class="about-container">
-        <div class="about-content">
-          <div class="about-intro">
-            <h2 class="about-heading">Android Geliştirici & Mimari Uzmanı</h2>
-            <p class="about-description">
-              Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. 
-              Temel prensibim: <span class="highlight">iş mantığı ViewModel'de</span>, UI ise yalın ve tepkisel.
-            </p>
-            <p class="about-description">
-              Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. 
-              Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.
-            </p>
-          </div>
-          
-          <div class="about-expertise">
-            <h3 class="expertise-title">Uzmanlık Alanlarım</h3>
-            <div class="expertise-grid">
-              <div class="expertise-item">
-                <div class="expertise-icon">⚡</div>
-                <div class="expertise-content">
-                  <h4>Reaktif Programlama</h4>
-                  <p>Coroutines/Flow ile reaktif veri akışları ve offline-first yaklaşımlar</p>
-                </div>
-              </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">🧪</div>
-                <div class="expertise-content">
-                  <h4>Test Otomasyonu</h4>
-                  <p>Unit, Instrumentation ve UI test piramidi ile kapsamlı test stratejileri</p>
-                </div>
-              </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">🎨</div>
-                <div class="expertise-content">
-                  <h4>Design System</h4>
-                  <p>Compose + Views ile tema yönetimi ve tutarlı UI komponentleri</p>
-                </div>
-              </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">🚀</div>
-                <div class="expertise-content">
-                  <h4>CI/CD & DevOps</h4>
-                  <p>Pipeline'lar ve release management ile sürekli entegrasyon</p>
-                </div>
-              </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">📊</div>
-                <div class="expertise-content">
-                  <h4>Performance Monitoring</h4>
-                  <p>Crash reporting ve performans analizi ile uygulama optimizasyonu</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CV Download Section -->
-    <section id="cv" data-animate>
-      <div class="section-title">📄 CV İndir</div>
-      <div class="cv-section">
-        <p>Profesyonel deneyimimi ve yeteneklerimi detaylı olarak incelemek için CV'mi indirebilirsiniz.</p>
-        <div class="cv-buttons">
-          <a href="files/vahitkeskin-androiddeveloper-TR.pdf" class="cv-btn" download>
-            <i class="fas fa-download"></i>
-            <span>CV Türkçe (PDF)</span>
-          </a>
-          <a href="files/vahitkeskin-androiddeveloper-EN.pdf" class="cv-btn" download>
-            <i class="fas fa-download"></i>
-            <span>CV English (PDF)</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" data-animate>
-      <div class="section-title">🛠️ Yetenekler</div>
-      <div class="skills-grid" id="skillsGrid">
-        <!-- Skills will be populated by JavaScript -->
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" data-animate>
-      <div class="section-title">💼 Deneyim</div>
-      <div class="timeline">
-        <div class="tl-item">
-          <strong>Senior Android Developer</strong>
-          <div class="muted">2023 - Günümüz</div>
-          <p>Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans optimizasyonu. Jetpack Compose ile modern UI geliştirme ve takım liderliği.</p>
-          </div>
-        <div class="tl-item">
-          <strong>Android Developer</strong>
-          <div class="muted">2021 - 2023</div>
-          <p>MVVM mimarisi ile Android uygulamaları geliştirme. Kotlin, Coroutines ve modern Android kütüphaneleri kullanarak kullanıcı dostu uygulamalar.</p>
-        </div>
-        <div class="tl-item">
-          <strong>Junior Android Developer</strong>
-          <div class="muted">2020 - 2021</div>
-          <p>Android ekosisteminde temel geliştirme deneyimi. Java ve Kotlin ile basit uygulamalar geliştirme ve öğrenme süreci.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" data-animate>
-      <div class="section-title">🚀 Projeler & Uygulamalar</div>
-      <div class="grid grid-3" id="projectsGrid">
-        <!-- Projects will be populated by JavaScript -->
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" data-animate>
-      <div class="section-title">📬 İletişim</div>
+    <section id="intro" data-animate>
+      <div class="section-title">🏛️ Ana Sayfa</div>
       <div class="grid grid-2">
-      <div class="card">
-          <div class="card-h">İletişim Bilgileri</div>
-          <div class="card-b">
-            <div class="socials">
-              <a class="btn" href="mailto:vahitkeskin07@gmail.com" aria-label="E-posta">
-                <i class="fas fa-envelope"></i>
-                <span>vahitkeskin07@gmail.com</span>
-              </a>
-              <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </a>
-              <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-              </a>
-              <a class="btn" href="https://x.com/iamvahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="X (Twitter)">
-                <i class="fab fa-x-twitter"></i>
-                <span>X</span>
-              </a>
-              <a class="btn" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-                <span>Instagram</span>
-              </a>
-              <a class="btn" href="https://stackoverflow.com/users/18201304/vahit-keskin" target="_blank" rel="noreferrer noopener" aria-label="Stack Overflow">
-                <i class="fab fa-stack-overflow"></i>
-                <span>Stack Overflow</span>
-              </a>
-              <a class="btn" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="Google Play Store">
-                <i class="fab fa-google-play"></i>
-                <span>Play Store</span>
-              </a>
+        <div class="card" style="overflow:hidden">
+          <div class="card-h">✍️ Hakkımda (Özet)</div>
+          <div class="card-b" style="display:grid;gap:.75rem">
+            <div class="muted">Android geliştiricisiyim. Temiz mimari, Jetpack Compose ve modern Android ekosistemiyle ölçeklenebilir deneyimler geliştiriyorum. İş mantığını ViewModel'de, UI'ı yalın ve tepkisel tutarım.</div>
+            <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:.5rem">
+              <div class="badge" title="Android">🤖 Android</div>
+              <div class="badge" title="Kotlin">🅺 Kotlin</div>
+              <div class="badge" title="Jetpack Compose">🎨 Compose</div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.25rem">
+              <a class="btn" href="#about">Hakkımda</a>
+              <a class="btn" href="#skills">Yetenekler</a>
+              <a class="btn" href="#experience">Deneyim</a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-h">Mesaj Gönder</div>
-        <div class="card-b" style="display:grid;gap:1rem;grid-template-columns:1fr;">
-          <div class="muted">Yeni bir proje mi var? Android tarafında destek arıyorsan konuşalım.</div>
-            <form class="contact-form" id="contact-form">
-            <div class="grid grid-2" style="gap:.75rem">
-                <input id="first_name" name="first_name" placeholder="Ad *" autocomplete="given-name" required />
-                <input id="last_name" name="last_name" placeholder="Soyad *" autocomplete="family-name" required />
+        <div class="card" style="overflow:hidden">
+          <div class="card-h">🎯 Öne Çıkanlar</div>
+          <div class="card-b" style="display:grid;gap:.75rem">
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <span class="badge">📱 Mobil Mimari</span>
+              <span class="badge">⚡ Coroutines/Flow</span>
+              <span class="badge">🧪 Test Otomasyonu</span>
+              <span class="badge">🚀 CI/CD</span>
             </div>
-              <input id="email" name="email" type="email" placeholder="E‑posta *" inputmode="email" autocomplete="email" required />
-              <input id="subject" name="subject" placeholder="Konu *" required />
-              <textarea id="message" name="message" placeholder="Mesaj *" style="min-height:120px" required></textarea>
-              <button type="submit" class="btn btn-primary" id="sendBtn" disabled>Gönder</button>
-          </form>
+            <div style="display:grid;gap:.5rem;grid-template-columns:repeat(3,1fr)">
+              <img src="images/ic-android.png" alt="Android" style="width:100%;height:80px;object-fit:contain;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.5rem">
+              <img src="images/bg.webp" alt="Project" style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
+              <img src="images/turktelekom_bg.jpeg" alt="Türk Telekom" style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.25rem">
+              <a class="btn" href="#projects">Projeler</a>
+              <a class="btn btn-primary" href="#contact">İletişime geç</a>
+            </div>
           </div>
         </div>
       </div>

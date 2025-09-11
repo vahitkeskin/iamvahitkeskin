@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>İletişim • Vahit Keskin</title>
+  <meta name="description" content="Vahit Keskin iletişim" />
+  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="top-header">
+    <div class="container top-header-content">
+      <div class="datetime-weather">
+        <div class="datetime">
+          <i class="fas fa-clock"></i>
+          <span id="current-time">--:--:--</span>
+          <span id="current-date">--/--/----</span>
+          <span style="color: var(--muted);">(İstanbul)</span>
+        </div>
+        <div class="weather" id="weather-container">
+          <i class="fas fa-map-marker-alt"></i>
+          <span id="current-city">Konum alınıyor...</span>
+        </div>
+        <div class="weather" id="weather-info">
+          <span id="weather-icon">🌤️</span>
+          <span id="weather-temp">--°C</span>
+          <span id="weather-desc">Yükleniyor...</span>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="language-switcher" id="language-switcher">
+          <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag" id="language-flag">
+          <span id="language-name">Türkçe</span>
+          <i class="fas fa-chevron-down"></i>
+          <div class="language-dropdown" id="language-dropdown">
+            <div class="language-option" data-lang="tr" data-flag="https://flagcdn.com/tr.svg">
+              <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag">
+              <span>Türkçe</span>
+            </div>
+            <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/gb.svg">
+              <img src="https://flagcdn.com/gb.svg" alt="English" class="language-flag">
+              <span>English</span>
+            </div>
+            <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/de.svg">
+              <img src="https://flagcdn.com/de.svg" alt="Deutsch" class="language-flag">
+              <span>Deutsch</span>
+            </div>
+            <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/fr.svg">
+              <img src="https://flagcdn.com/fr.svg" alt="Français" class="language-flag">
+              <span>Français</span>
+            </div>
+          </div>
+        </div>
+        <div class="theme-switcher" id="theme-switcher">
+          <i class="fas fa-moon" id="theme-icon"></i>
+          <span id="theme-text">Karanlık</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="index.html#home" class="brand" aria-label="Anasayfa">VK</a>
+      <nav class="navlinks" aria-label="Birincil">
+        <a href="index.html#home">Ana Sayfa</a>
+        <a href="about.html">Hakkımda</a>
+        <a href="skills.html">Yetenekler</a>
+        <a href="experience.html">Deneyim</a>
+        <a href="projects.html">Projeler</a>
+        <a href="contact.html" aria-current="page">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="contact" data-animate>
+      <div class="section-title">📬 İletişim</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-h">İletişim Bilgileri</div>
+          <div class="card-b">
+            <div class="socials">
+              <a class="btn" href="mailto:vahitkeskin07@gmail.com" aria-label="E-posta">
+                <i class="fas fa-envelope"></i>
+                <span>vahitkeskin07@gmail.com</span>
+              </a>
+              <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+              </a>
+              <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a class="btn" href="https://x.com/iamvahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="X (Twitter)">
+                <i class="fab fa-x-twitter"></i>
+                <span>X</span>
+              </a>
+              <a class="btn" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+              </a>
+              <a class="btn" href="https://stackoverflow.com/users/18201304/vahit-keskin" target="_blank" rel="noreferrer noopener" aria-label="Stack Overflow">
+                <i class="fab fa-stack-overflow"></i>
+                <span>Stack Overflow</span>
+              </a>
+              <a class="btn" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="Google Play Store">
+                <i class="fab fa-google-play"></i>
+                <span>Play Store</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h">Mesaj Gönder</div>
+          <div class="card-b" style="display:grid;gap:1rem;grid-template-columns:1fr;">
+            <div class="muted">Yeni bir proje mi var? Android tarafında destek arıyorsan konuşalım.</div>
+            <form class="contact-form" id="contact-form">
+              <div class="grid grid-2" style="gap:.75rem">
+                <input id="first_name" name="first_name" placeholder="Ad *" autocomplete="given-name" required />
+                <input id="last_name" name="last_name" placeholder="Soyad *" autocomplete="family-name" required />
+              </div>
+              <input id="email" name="email" type="email" placeholder="E‑posta *" inputmode="email" autocomplete="email" required />
+              <input id="subject" name="subject" placeholder="Konu *" required />
+              <textarea id="message" name="message" placeholder="Mesaj *" style="min-height:120px" required></textarea>
+              <button type="submit" class="btn btn-primary" id="sendBtn" disabled>Gönder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+
+  <script src="language.js"></script>
+  <script src="weather.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+

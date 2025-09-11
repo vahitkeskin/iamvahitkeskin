@@ -518,6 +518,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Language switcher setup error:', error);
     }
+
+    // Mark active nav link based on current path
+    try {
+      const path = location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.navlinks a, .nav-drawer a');
+      navLinks.forEach(a => {
+        const href = a.getAttribute('href');
+        if (href) {
+          const file = href.split('#')[0].split('/').pop();
+          if ((path === '' && file === 'index.html') || file === path) {
+            a.setAttribute('aria-current', 'page');
+          } else {
+            a.removeAttribute('aria-current');
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Active nav highlight error:', error);
+    }
     
     try {
       setupContactForm();
@@ -596,8 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const skillsGrid = $('#skillsGrid');
       if (!skillsGrid || !PROFILE || !PROFILE.skills) {
         console.warn('Skills grid or profile data not found');
-        return;
-      }
+      } else {
       
       const skillIconOf = (name) => {
         const n = (name || '').toLowerCase();
@@ -611,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'images/ic-android.png';
       };
 
-      PROFILE.skills.forEach(s => {
+      PROFILE?.skills?.forEach(s => {
         const card = el('div', {className:'skill-card'});
         
         const header = el('div', {className:'skill-header'});
@@ -648,6 +666,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.transform = 'translateY(20px)';
         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       });
+      }
     } catch (error) {
       console.error('Skills rendering error:', error);
     }
@@ -657,10 +676,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const projectsGrid = $('#projectsGrid');
       if (!projectsGrid || !PROFILE || !PROFILE.projects) {
         console.warn('Projects grid or profile data not found');
-        return;
-      }
+      } else {
       
-      PROFILE.projects.forEach(p => {
+      PROFILE?.projects?.forEach(p => {
     const card = el('div',{className:'card', style:'will-change:transform;overflow:hidden;position:relative'});
     
     // Featured project styling
@@ -734,6 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       });
+      }
     } catch (error) {
       console.error('Projects rendering error:', error);
     }
@@ -758,11 +777,22 @@ document.addEventListener('DOMContentLoaded', () => {
             io.unobserve(e.target);
           }
         });
-      }, {threshold:.2});
+      }, {threshold:0.01, rootMargin: '0px 0px -10% 0px'});
 
-      $$('[data-animate]').forEach(n => io.observe(n));
+      const animEls = $$('[data-animate]');
+      animEls.forEach(n => io.observe(n));
+
+      // Fallback: mark in-view elements immediately
+      animEls.forEach(n => {
+        const rect = n.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          n.classList.add('in');
+        }
+      });
     } catch (error) {
       console.error('Intersection Observer setup error:', error);
+      // Hard fallback if IO not supported
+      $$('[data-animate]').forEach(n => n.classList.add('in'));
     }
   } catch (error) {
     console.error('Main initialization error:', error);
