@@ -599,63 +599,54 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       
+      const skillIconOf = (name) => {
+        const n = (name || '').toLowerCase();
+        if (n.includes('android')) return 'images/ic-android.png';
+        if (n.includes('kotlin')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg';
+        if (n.includes('java')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg';
+        if (n.includes('compose')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetpackcompose/jetpackcompose-original.svg';
+        if (n.includes('git')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg';
+        if (n.includes('jira')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg';
+        if (n.includes('json')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/json/json-original.svg';
+        return 'images/ic-android.png';
+      };
+
       PROFILE.skills.forEach(s => {
-    const card = el('div', {className:'card', style:'position:relative;overflow:hidden;border-radius:12px;box-shadow:var(--shadow);transition:transform 0.2s ease'});
-    
-    const body = el('div', {className:'card-b', style:'padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem'});
-    
-    // Header with icon and name
-    const header = el('div', {style:'display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem'});
-    const img = el('img', {src:'images/ic-android.png', alt:s.name+' icon', style:'width:32px;height:32px;border-radius:6px;object-fit:cover'});
-    const title = el('h3', {style:'margin:0;font-size:1.1rem;font-weight:600;color:var(--text)'}, s.name);
-    header.append(img, title);
-    
-    // Context info
-    if (s.context) {
-      const context = el('div', {className:'muted', style:'font-size:0.9rem;margin-bottom:0.25rem'}, s.context);
-      body.append(context);
-    }
-    
-    // Experience and endorsements
-    const stats = el('div', {style:'display:flex;gap:1rem;font-size:0.85rem;color:var(--muted)'});
-    if (s.experiences > 0) {
-      stats.append(el('span', {}, `${s.experiences} deneyim`));
-    }
-    if (s.endorsements > 0) {
-      stats.append(el('span', {}, `${s.endorsements} onay`));
-    }
-    body.append(stats);
-    
-    // Companies
-    if (s.companies && s.companies.length > 0) {
-      const companies = el('div', {style:'display:flex;flex-wrap:wrap;gap:0.25rem;margin-top:0.5rem'});
-      s.companies.forEach(company => {
-        companies.append(el('span', {className:'badge', style:'font-size:0.75rem;padding:0.25rem 0.5rem'}, company));
-      });
-      body.append(companies);
-    }
-    
-    // University if exists
-    if (s.university) {
-      const uni = el('div', {className:'muted', style:'font-size:0.8rem;margin-top:0.25rem'}, s.university);
-      body.append(uni);
-    }
-    
-    card.append(body);
-    skillsGrid.append(card);
-    
-    // Initial animation state
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    
-    // Hover effect
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-2px)';
-    });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'translateY(0)';
-        });
+        const card = el('div', {className:'skill-card'});
+        
+        const header = el('div', {className:'skill-header'});
+        const iconWrap = el('div', {className:'skill-icon'});
+        iconWrap.append(el('img', {src: skillIconOf(s.name), alt:s.name + ' icon', style:'width:22px;height:22px;object-fit:contain;border-radius:4px;'}));
+        const title = el('div', {className:'skill-title'}, s.name);
+        header.append(iconWrap, title);
+        
+        const body = el('div', {className:'skill-body'});
+        if (s.context) {
+          body.append(el('div', {className:'skill-context'}, s.context));
+        }
+        
+        const meta = el('div', {className:'skill-meta'});
+        if (s.experiences > 0) meta.append(el('span', {}, `${s.experiences} deneyim`));
+        if (s.endorsements > 0) meta.append(el('span', {}, `${s.endorsements} onay`));
+        if (meta.children.length) body.append(meta);
+
+        if (s.companies && s.companies.length) {
+          const chips = el('div', {className:'skill-chips'});
+          s.companies.forEach(c => chips.append(el('span', {className:'skill-chip'}, c)));
+          body.append(chips);
+        }
+
+        if (s.university) {
+          body.append(el('div', {className:'muted', style:'font-size:.85rem;margin-top:.25rem;'}, s.university));
+        }
+
+        card.append(header, body);
+        skillsGrid.append(card);
+
+        // Initial animation state
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       });
     } catch (error) {
       console.error('Skills rendering error:', error);
@@ -756,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Skills animation
             if(e.target.closest('#skills')) {
-              e.target.querySelectorAll('.card').forEach((card, index) => {
+              e.target.querySelectorAll('.skill-card, .card').forEach((card, index) => {
                 setTimeout(() => {
                   card.style.opacity = '1';
                   card.style.transform = 'translateY(0)';

@@ -391,6 +391,80 @@ section {
   gap: 1.5rem;
 }
 
+/* Professional Skill Card */
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .2s var(--k), box-shadow .2s var(--k), border-color .2s var(--k);
+  overflow: hidden;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--brand) 35%, var(--border));
+  box-shadow: 0 14px 40px rgba(0,0,0,.18);
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1rem 1rem .5rem 1rem;
+}
+
+.skill-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--surface2) 80%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.skill-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.skill-body {
+  padding: .25rem 1rem 1rem 1rem;
+  display: grid;
+  gap: .5rem;
+}
+
+.skill-context {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.skill-meta {
+  display: flex;
+  gap: .75rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+
+.skill-chip {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface2) 85%, transparent);
+  color: var(--muted);
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  font-size: .75rem;
+}
+
 .section-title {
   display: flex;
   gap: 0.75rem;
