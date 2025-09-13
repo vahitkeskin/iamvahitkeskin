@@ -593,17 +593,57 @@ document.addEventListener('DOMContentLoaded', () => {
       const navDrawer = $('#navDrawer');
       
       if (menuBtn && navDrawer) {
+        // Restore menu state from localStorage
+        const savedMenuState = localStorage.getItem('mobileMenuOpen');
+        if (savedMenuState === 'true') {
+          navDrawer.style.display = 'block';
+          menuBtn.setAttribute('aria-expanded', 'true');
+        }
+        
         menuBtn.addEventListener('click', () => {
           const open = navDrawer.style.display === 'block';
           navDrawer.style.display = open ? 'none' : 'block';
           menuBtn.setAttribute('aria-expanded', String(!open));
+          
+          // Save menu state to localStorage
+          localStorage.setItem('mobileMenuOpen', String(!open));
         });
         
         navDrawer.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', () => {
+          a.addEventListener('click', (e) => {
+            // Close menu immediately for better UX
             navDrawer.style.display = 'none';
             menuBtn.setAttribute('aria-expanded', 'false');
+            // Save closed state to localStorage
+            localStorage.setItem('mobileMenuOpen', 'false');
+            
+            // Add visual feedback
+            menuBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              menuBtn.style.transform = 'scale(1)';
+            }, 150);
           });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (navDrawer.style.display === 'block' && 
+              !navDrawer.contains(e.target) && 
+              !menuBtn.contains(e.target)) {
+            navDrawer.style.display = 'none';
+            menuBtn.setAttribute('aria-expanded', 'false');
+            localStorage.setItem('mobileMenuOpen', 'false');
+          }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && navDrawer.style.display === 'block') {
+            navDrawer.style.display = 'none';
+            menuBtn.setAttribute('aria-expanded', 'false');
+            localStorage.setItem('mobileMenuOpen', 'false');
+            menuBtn.focus();
+          }
         });
       }
     } catch (error) {
