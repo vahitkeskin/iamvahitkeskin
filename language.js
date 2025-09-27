@@ -342,6 +342,92 @@ const TRANSLATIONS = {
     'theme.dark': 'Sombre',
     'theme.light': 'Clair',
     'theme.auto': 'Appareil'
+  },
+  
+  ru: {
+    // Navigation
+    'nav.about': 'Обо мне',
+    'nav.skills': 'Навыки',
+    'nav.experience': 'Опыт',
+    'nav.projects': 'Проекты',
+    'nav.contact': 'Контакты',
+    'nav.work': 'Давайте работать',
+    
+    // Hero section
+    'hero.kicker': '📱 Android • Kotlin • Compose',
+    'hero.name': 'Vahit Keskin',
+    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
+    'hero.tagline': 'Чистая архитектура, экраны с фокусом на ViewModel и масштабируемые Android-решения.',
+    'hero.playstore': '🎮 Play Store',
+    'hero.projects': 'Проекты',
+    'hero.skills': 'Навыки',
+    'hero.contact': 'Связаться',
+    
+    // About section
+    'about.title': '✍️ Обо мне',
+    'about.content1': 'Я разрабатываю производительные и устойчивые приложения в экосистеме Android. Мой основной принцип: <strong>бизнес-логика в ViewModel</strong>, UI чистый и реактивный.',
+    'about.content2': 'Я могу создавать мосты между Compose и классической системой View; проектировать стратегии постепенной трансформации в больших кодовых базах. Я создаю архитектурные шаблоны, генерирующие код скрипты и библиотеки компонентов для улучшения опыта разработчика в команде.',
+    'about.list1': 'Реактивные потоки данных и подходы offline-first с Coroutines/Flow',
+    'about.list2': 'Пирамида тестирования: автоматизация Unit, Instrumentation и UI тестов',
+    'about.list3': 'Система дизайна и управление темами (Compose + Views)',
+    'about.list4': 'CI/CD пайплайны и управление релизами',
+    'about.list5': 'Мониторинг производительности и отчеты о сбоях',
+    
+    // CV section
+    'cv.title': '📄 Скачать CV',
+    'cv.content': 'Вы можете скачать мое резюме, чтобы подробно изучить мой профессиональный опыт и навыки.',
+    'cv.turkish': 'CV Турецкий (PDF)',
+    'cv.english': 'CV Английский (PDF)',
+    
+    // Skills section
+    'skills.title': '🛠️ Навыки',
+    
+    // Experience section
+    'experience.title': '💼 Опыт',
+    'experience.senior.title': 'Senior Android Developer',
+    'experience.senior.period': '2023 - Настоящее время',
+    'experience.senior.desc': 'Архитектурное проектирование, качество кода и оптимизация производительности в крупномасштабных Android-приложениях. Современная разработка UI с Jetpack Compose и лидерство команды.',
+    'experience.mid.title': 'Android Developer',
+    'experience.mid.period': '2021 - 2023',
+    'experience.mid.desc': 'Разработка Android-приложений с архитектурой MVVM. Пользовательские приложения с использованием Kotlin, Coroutines и современных Android-библиотек.',
+    'experience.junior.title': 'Junior Android Developer',
+    'experience.junior.period': '2020 - 2021',
+    'experience.junior.desc': 'Базовый опыт разработки в экосистеме Android. Разработка простых приложений и процесс обучения с Java и Kotlin.',
+    
+    // Projects section
+    'projects.title': '🚀 Проекты и Приложения',
+    'projects.detail': 'Детали',
+    'projects.playstore': 'Play Store',
+    
+    // Contact section
+    'contact.title': '📬 Контакты',
+    'contact.info.title': 'Контактная информация',
+    'contact.form.title': 'Отправить сообщение',
+    'contact.form.desc': 'У вас есть новый проект? Если вы ищете поддержку Android, давайте поговорим.',
+    'contact.form.name': 'Имя',
+    'contact.form.email': 'Электронная почта',
+    'contact.form.subject': 'Тема',
+    'contact.form.message': 'Сообщение',
+    'contact.form.send': 'Отправить',
+    
+    // Footer
+    'footer.copyright': '© {year} Vahit Keskin. Все права защищены.',
+    
+    // Visitor counter
+    'visitor.title': 'Количество людей, посетивших эту страницу:',
+    'visitor.loading': 'Загрузка...',
+    'visitor.status': 'Подсчет в реальном времени',
+    'visitor.refresh': 'Обновить счетчик',
+    
+    // Weather
+    'weather.loading': 'Получение местоположения...',
+    'weather.loading_desc': 'Загрузка...',
+    'weather.istanbul': '(Стамбул)',
+    
+    // Theme
+    'theme.dark': 'Темная',
+    'theme.light': 'Светлая',
+    'theme.auto': 'Устройство'
   }
 };
 
@@ -360,16 +446,19 @@ function setupLanguageSwitcher() {
     return;
   }
   
+  // Initialize with current language
+  updatePageLanguage();
+  
   // Toggle dropdown
   languageSwitcher.addEventListener('click', (e) => {
     e.stopPropagation();
-    languageDropdown.classList.toggle('active');
+    languageDropdown.classList.toggle('show');
   });
   
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!languageSwitcher.contains(e.target)) {
-      languageDropdown.classList.remove('active');
+      languageDropdown.classList.remove('show');
     }
   });
   
@@ -380,26 +469,31 @@ function setupLanguageSwitcher() {
       e.stopPropagation();
       const lang = option.dataset.lang;
       const flag = option.dataset.flag;
+      const name = option.querySelector('span').textContent;
       
-      if (lang && flag) {
+      if (lang && flag && name) {
         currentLanguage = lang;
         localStorage.setItem('selectedLanguage', lang);
         
-        // Update UI
-        languageFlag.src = flag;
-        languageName.textContent = option.querySelector('span').textContent;
+        // Update UI with animation
+        languageFlag.style.transform = 'scale(0.8)';
+        languageName.style.opacity = '0.5';
+        
+        setTimeout(() => {
+          languageFlag.src = flag;
+          languageName.textContent = name;
+          languageFlag.style.transform = 'scale(1)';
+          languageName.style.opacity = '1';
+        }, 150);
         
         // Update page content
         updatePageLanguage();
         
         // Close dropdown
-        languageDropdown.classList.remove('active');
+        languageDropdown.classList.remove('show');
       }
     });
   });
-  
-  // Initialize with current language
-  updatePageLanguage();
 }
 
 // Update page content with current language
