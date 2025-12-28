@@ -434,63 +434,125 @@ const TRANSLATIONS = {
 // Current language
 let currentLanguage = localStorage.getItem('selectedLanguage') || 'tr';
 
+// Small metadata map for flag + display name used by the floating language button
+const LANGUAGE_META = {
+  tr: { name: 'Türkçe', flag: 'https://flagcdn.com/tr.svg' },
+  en: { name: 'English', flag: 'https://flagcdn.com/gb.svg' },
+  de: { name: 'Deutsch', flag: 'https://flagcdn.com/de.svg' },
+  fr: { name: 'Français', flag: 'https://flagcdn.com/fr.svg' },
+  ru: { name: 'Русский', flag: 'https://flagcdn.com/ru.svg' }
+};
+
 // Language switcher setup
 function setupLanguageSwitcher() {
-  const languageSwitcher = $('#language-switcher');
-  const languageDropdown = $('#language-dropdown');
-  const languageFlag = $('#language-flag');
-  const languageName = $('#language-name');
-  
-  if (!languageSwitcher || !languageDropdown || !languageFlag || !languageName) {
-    console.error('Language switcher elements not found');
+  // Use native DOM APIs to avoid ordering issues with other scripts
+  const languageSwitcher = document.getElementById('language-switcher');
+  const languageDropdown = document.getElementById('language-dropdown');
+  const languageFlag = document.getElementById('language-flag');
+  const languageName = document.getElementById('language-name');
+
+  if (!languageSwitcher) {
+    console.warn('Language switcher not found in DOM');
     return;
   }
-  
-  // Initialize with current language
+
+  // Ensure dropdown exists. If not, try to create one from LANGUAGE_META
+  if (!languageDropdown) {
+    const dd = document.createElement('div');
+    dd.id = 'language-dropdown';
+    dd.className = 'language-dropdown';
+    Object.keys(LANGUAGE_META).forEach(code => {
+      const m = LANGUAGE_META[code];
+      const opt = document.createElement('div');
+      opt.className = 'language-option';
+      opt.dataset.lang = code;
+      opt.dataset.flag = m.flag;
+      const img = document.createElement('img'); img.src = m.flag; img.className = 'language-flag'; img.alt = m.name;
+      const span = document.createElement('span'); span.textContent = m.name;
+      opt.appendChild(img); opt.appendChild(span);
+      dd.appendChild(opt);
+    });
+    languageSwitcher.appendChild(dd);
+  }
+
+  // Initialize visual state
   updatePageLanguage();
-  
-  // Toggle dropdown
+
+  // Toggle dropdown on click
   languageSwitcher.addEventListener('click', (e) => {
     e.stopPropagation();
-    languageDropdown.classList.toggle('show');
+    const dd = document.getElementById('language-dropdown');
+    if (dd) dd.classList.toggle('show');
   });
-  
+
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
-    if (!languageSwitcher.contains(e.target)) {
-      languageDropdown.classList.remove('show');
-    }
+    const dd = document.getElementById('language-dropdown');
+    if (dd && !languageSwitcher.contains(e.target)) dd.classList.remove('show');
   });
-  
-  // Handle language selection
-  const languageOptions = languageDropdown.querySelectorAll('.language-option');
-  languageOptions.forEach(option => {
-    option.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const lang = option.dataset.lang;
-      const flag = option.dataset.flag;
-      const name = option.querySelector('span').textContent;
-      
-      if (lang && flag && name) {
+
+  // Keep dropdown open while mouse moves between switcher and dropdown.
+  // Some browsers/platforms can trigger mouseleave during quick moves; use a short delay.
+  (function attachHoverHandlers() {
+    const dd = document.getElementById('language-dropdown');
+    if (!dd) return;
+    let leaveTimer = null;
+
+    const clearLeave = () => { if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; } };
+
+    const scheduleHide = () => {
+      clearLeave();
+      leaveTimer = setTimeout(() => {
+        dd.classList.remove('show');
+      }, 220); // small grace period to allow cursor to reach dropdown
+    };
+
+    // When entering either the switcher or the dropdown, ensure it's visible
+    languageSwitcher.addEventListener('mouseenter', () => {
+      clearLeave();
+      dd.classList.add('show');
+    });
+
+    dd.addEventListener('mouseenter', () => {
+      clearLeave();
+      dd.classList.add('show');
+    });
+
+    // When leaving either element, schedule hide with delay
+    languageSwitcher.addEventListener('mouseleave', scheduleHide);
+    dd.addEventListener('mouseleave', scheduleHide);
+  })();
+
+  // Attach handlers to options (supports existing markup or dynamically created)
+  const options = languageSwitcher.querySelectorAll('.language-option');
+  options.forEach(opt => {
+    opt.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const lang = opt.dataset.lang;
+      const flag = opt.dataset.flag;
+      const name = opt.querySelector('span')?.textContent || (LANGUAGE_META[lang] && LANGUAGE_META[lang].name) || lang;
+
+      if (lang) {
         currentLanguage = lang;
         localStorage.setItem('selectedLanguage', lang);
-        
-        // Update UI with animation
-        languageFlag.style.transform = 'scale(0.8)';
-        languageName.style.opacity = '0.5';
-        
-        setTimeout(() => {
-          languageFlag.src = flag;
-          languageName.textContent = name;
-          languageFlag.style.transform = 'scale(1)';
-          languageName.style.opacity = '1';
-        }, 150);
-        
-        // Update page content
+
+        // Update header flag/name if present
+        const hdrFlag = document.getElementById('language-flag');
+        const hdrName = document.getElementById('language-name');
+        if (hdrFlag && flag) {
+          hdrFlag.style.transform = 'scale(0.8)';
+          setTimeout(() => { hdrFlag.src = flag; hdrFlag.style.transform = 'scale(1)'; }, 120);
+        }
+        if (hdrName) {
+          hdrName.style.opacity = '0.5';
+          setTimeout(() => { hdrName.textContent = name; hdrName.style.opacity = '1'; }, 120);
+        }
+
         updatePageLanguage();
-        
+
         // Close dropdown
-        languageDropdown.classList.remove('show');
+        const dd = document.getElementById('language-dropdown');
+        if (dd) dd.classList.remove('show');
       }
     });
   });
@@ -540,9 +602,78 @@ function updatePageLanguage() {
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
+
+  // Update header language flag/name (if present)
+  try {
+    const hdrFlag = document.getElementById('language-flag');
+    const hdrName = document.getElementById('language-name');
+    const meta = LANGUAGE_META[currentLanguage] || { name: currentLanguage, flag: '' };
+    if (hdrFlag && meta.flag) hdrFlag.src = meta.flag;
+    if (hdrName) hdrName.textContent = meta.name || currentLanguage;
+  } catch (err) {}
+
+  // Update floating language button if present
+  try { updateLanguageButton(); } catch (err) {}
 }
 
 // Initialize language system
 document.addEventListener('DOMContentLoaded', () => {
   setupLanguageSwitcher();
+  // Create a floating language button that shows the current language's flag and name.
+  // This avoids editing every HTML page; it's injected at runtime and kept in sync
+  // with `currentLanguage`.
+  createLanguageFloatingButton();
 });
+
+
+// Floating language button: create / update helpers
+function createLanguageFloatingButton() {
+  if (document.getElementById('language-button')) return;
+
+  const wrapper = document.createElement('button');
+  wrapper.id = 'language-button';
+  wrapper.type = 'button';
+  wrapper.className = 'language-btn';
+  wrapper.setAttribute('aria-label', 'Dil seçimi');
+
+  const img = document.createElement('img');
+  img.id = 'language-button-flag';
+  img.alt = 'flag';
+  img.width = 20;
+  img.height = 14;
+
+  const span = document.createElement('span');
+  span.id = 'language-button-name';
+
+  wrapper.appendChild(img);
+  wrapper.appendChild(span);
+
+  wrapper.addEventListener('click', (e) => {
+    // Try to open the native language dropdown if present
+    const switcher = document.getElementById('language-switcher');
+    if (switcher) {
+      // Toggle the dropdown by simulating a click on the existing switcher
+      switcher.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    } else {
+      // As fallback, cycle languages (useful on pages without the header)
+      const codes = Object.keys(LANGUAGE_META);
+      const idx = codes.indexOf(currentLanguage);
+      const next = codes[(idx + 1) % codes.length];
+      currentLanguage = next;
+      localStorage.setItem('selectedLanguage', currentLanguage);
+      updatePageLanguage();
+    }
+  });
+
+  document.body.appendChild(wrapper);
+  // Populate initial values
+  updateLanguageButton();
+}
+
+function updateLanguageButton() {
+  const meta = LANGUAGE_META[currentLanguage] || { name: currentLanguage, flag: '' };
+  const img = document.getElementById('language-button-flag');
+  const name = document.getElementById('language-button-name');
+  if (img) img.src = meta.flag;
+  if (name) name.textContent = meta.name;
+}
