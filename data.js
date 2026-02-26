@@ -100,7 +100,7 @@ window.PROFILE = {
       link: 'https://play.google.com/store/apps/details?id=com.vahitkeskin.yolculukdefterim',
       company: 'Kişisel Proje',
       period: '2024 - Halen',
-      image: 'images/yolculuk_defterim_bg.png',
+      image: 'images/bg.webp',
       featured: true
     },
     {
