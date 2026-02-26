@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,9 +8,11 @@
   <meta name="description" content="Vahit Keskin iletişim" />
   <link rel="icon" type="image/png" href="images/image_circle.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="top-header">
     <div class="container top-header-content">
@@ -18,7 +21,6 @@
           <i class="fas fa-clock"></i>
           <span id="current-time">--:--:--</span>
           <span id="current-date">--/--/----</span>
-          <span style="color: var(--muted);">(İstanbul)</span>
         </div>
         <div class="weather" id="weather-container">
           <i class="fas fa-map-marker-alt"></i>
@@ -70,44 +72,49 @@
     <div class="container nav">
       <a href="index.html#home" class="brand" aria-label="Anasayfa">VK</a>
       <nav class="navlinks" aria-label="Birincil">
-        <a href="index.html#home">Ana Sayfa</a>
-        <a href="about.html">Hakkımda</a>
-        <a href="skills.html">Yetenekler</a>
-        <a href="experience.html">Deneyim</a>
-        <a href="projects.html">Projeler</a>
-        <a href="contact.html" aria-current="page">İletişim</a>
+        <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
+        <a href="about.html" data-translate="nav.about">Hakkımda</a>
+        <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
+        <a href="experience.html" data-translate="nav.experience">Deneyim</a>
+        <a href="projects.html" data-translate="nav.projects">Projeler</a>
+        <a href="contact.html" data-translate="nav.contact">İletişim</a>
       </nav>
       <div class="actions">
-        <a class="btn btn-primary" href="contact.html">Çalışalım</a>
+        <a class="btn btn-primary" href="contact.html" data-translate="nav.work">Çalışalım</a>
       </div>
-      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menüyü aç/kapat">
-        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer"
+        aria-label="Menüyü aç/kapat">
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
     </div>
     <div id="navDrawer" class="nav-drawer container" role="dialog" aria-label="Mobil menü">
-      <a href="index.html#home">Ana Sayfa</a>
-      <a href="about.html">Hakkımda</a>
-      <a href="skills.html">Yetenekler</a>
-      <a href="experience.html">Deneyim</a>
-      <a href="projects.html">Projeler</a>
-      <a href="contact.html" aria-current="page">İletişim</a>
+      <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
+      <a href="about.html" data-translate="nav.about">Hakkımda</a>
+      <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
+      <a href="experience.html" data-translate="nav.experience">Deneyim</a>
+      <a href="projects.html" data-translate="nav.projects">Projeler</a>
+      <a href="contact.html" data-translate="nav.contact">İletişim</a>
     </div>
   </header>
 
   <main class="container">
     <section id="contact" data-animate>
-      <div class="section-title">📬 İletişim</div>
-      
+      <div class="section-title" data-translate="contact.title">📬 İletişim</div>
+
       <!-- Hero Contact Section -->
       <div class="contact-hero">
         <div class="contact-hero-content">
           <div class="contact-intro">
             <h2 class="contact-title">Birlikte Harika Şeyler Yapalım! 🚀</h2>
-            <p class="contact-subtitle">Android projeleriniz için profesyonel destek arıyorsanız, benimle iletişime geçin. Temiz kod, modern mimari ve kullanıcı dostu deneyimler konusunda size yardımcı olabilirim.</p>
-            
+            <p class="contact-subtitle">Android projeleriniz için profesyonel destek arıyorsanız, benimle iletişime
+              geçin. Temiz kod, modern mimari ve kullanıcı dostu deneyimler konusunda size yardımcı olabilirim.</p>
+
             <!-- Animated Contact GIF -->
             <div class="contact-animation">
-              <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Contact Animation" class="contact-gif">
+              <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Contact Animation"
+                class="contact-gif">
             </div>
           </div>
         </div>
@@ -122,7 +129,7 @@
             <h3 class="card-title">İletişim Bilgileri</h3>
             <p class="card-description">Benimle iletişime geçmek için aşağıdaki kanalları kullanabilirsiniz</p>
           </div>
-          
+
           <div class="contact-methods">
             <div class="contact-method primary">
               <div class="method-icon">
@@ -136,27 +143,33 @@
             </div>
 
             <div class="social-links-grid">
-              <a class="social-link github" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener">
+              <a class="social-link github" href="https://github.com/vahitkeskin" target="_blank"
+                rel="noreferrer noopener">
                 <i class="fab fa-github"></i>
                 <span>GitHub</span>
               </a>
-              <a class="social-link linkedin" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener">
+              <a class="social-link linkedin" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank"
+                rel="noreferrer noopener">
                 <i class="fab fa-linkedin"></i>
                 <span>LinkedIn</span>
               </a>
-              <a class="social-link twitter" href="https://x.com/iamvahitkeskin" target="_blank" rel="noreferrer noopener">
+              <a class="social-link twitter" href="https://x.com/iamvahitkeskin" target="_blank"
+                rel="noreferrer noopener">
                 <i class="fab fa-x-twitter"></i>
                 <span>X</span>
               </a>
-              <a class="social-link instagram" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener">
+              <a class="social-link instagram" href="https://www.instagram.com/keskin.vahit/" target="_blank"
+                rel="noreferrer noopener">
                 <i class="fab fa-instagram"></i>
                 <span>Instagram</span>
               </a>
-              <a class="social-link stackoverflow" href="https://stackoverflow.com/users/18201304/vahit-keskin" target="_blank" rel="noreferrer noopener">
+              <a class="social-link stackoverflow" href="https://stackoverflow.com/users/18201304/vahit-keskin"
+                target="_blank" rel="noreferrer noopener">
                 <i class="fab fa-stack-overflow"></i>
                 <span>Stack Overflow</span>
               </a>
-              <a class="social-link playstore" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener">
+              <a class="social-link playstore" href="https://play.google.com/store/apps/developer?id=vahitkeskin"
+                target="_blank" rel="noreferrer noopener">
                 <i class="fab fa-google-play"></i>
                 <span>Play Store</span>
               </a>
@@ -171,7 +184,7 @@
             <h3 class="card-title">Mesaj Gönder</h3>
             <p class="card-description">Projeniz hakkında detaylı bilgi almak için formu doldurun</p>
           </div>
-          
+
           <div class="form-container">
             <form class="enhanced-contact-form" id="contact-form">
               <div class="form-row">
@@ -184,22 +197,24 @@
                   <input id="last_name" name="last_name" placeholder="Soyadınız" autocomplete="family-name" required />
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label for="email">E-posta *</label>
-                <input id="email" name="email" type="email" placeholder="ornek@email.com" inputmode="email" autocomplete="email" required />
+                <input id="email" name="email" type="email" placeholder="ornek@email.com" inputmode="email"
+                  autocomplete="email" required />
               </div>
-              
+
               <div class="form-group">
                 <label for="subject">Konu *</label>
                 <input id="subject" name="subject" placeholder="Proje konusu" required />
               </div>
-              
+
               <div class="form-group">
                 <label for="message">Mesaj *</label>
-                <textarea id="message" name="message" placeholder="Projeniz hakkında detaylı bilgi verin..." required></textarea>
+                <textarea id="message" name="message" placeholder="Projeniz hakkında detaylı bilgi verin..."
+                  required></textarea>
               </div>
-              
+
               <button type="submit" class="submit-btn" id="sendBtn" disabled>
                 <i class="fas fa-paper-plane"></i>
                 <span>Mesajı Gönder</span>
@@ -242,6 +257,5 @@
   <script src="weather.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
-
-

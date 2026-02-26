@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,9 +13,11 @@
   <meta name="msapplication-TileImage" content="images/image_circle.png">
   <meta name="msapplication-TileColor" content="#0b0d10">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Top Header -->
   <div class="top-header">
@@ -24,7 +27,6 @@
           <i class="fas fa-clock"></i>
           <span id="current-time">--:--:--</span>
           <span id="current-date">--/--/----</span>
-          <span style="color: var(--muted);">(İstanbul)</span>
         </div>
         <div class="weather" id="weather-container">
           <i class="fas fa-map-marker-alt"></i>
@@ -75,28 +77,32 @@
   <!-- Header -->
   <header>
     <div class="container nav">
-      <a href="#home" class="brand" aria-label="Anasayfa">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">VK</a>
       <nav class="navlinks" aria-label="Birincil">
-        <a href="index.html#home">Ana Sayfa</a>
-        <a href="about.html">Hakkımda</a>
-        <a href="skills.html">Yetenekler</a>
-        <a href="experience.html">Deneyim</a>
-        <a href="projects.html">Projeler</a>
-        <a href="contact.html">İletişim</a>
+        <a href="index.html#home" data-translate="nav.home" aria-label="VK Home">Ana Sayfa</a>
+        <a href="about.html" data-translate="nav.about" aria-label="About Me">Hakkımda</a>
+        <a href="index.html#skills" data-translate="nav.skills" aria-label="My Skills">Yetenekler</a>
+        <a href="experience.html" data-translate="nav.experience" aria-label="Work Experience">Deneyim</a>
+        <a href="projects.html" data-translate="nav.projects" aria-label="My Projects">Projeler</a>
+        <a href="index.html#contact" data-translate="nav.contact" aria-label="Contact Me">İletişim</a>
       </nav>
       <div class="actions">
-        <a class="btn btn-primary" href="#contact">Çalışalım</a>
+        <a class="btn btn-primary" href="contact.html" data-translate="nav.work">Çalışalım</a>
       </div>
-      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menüyü aç/kapat">
-        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer"
+        aria-label="Menüyü aç/kapat">
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
     </div>
     <div id="navDrawer" class="nav-drawer container" role="dialog" aria-label="Mobil menü">
-      <a href="about.html">Hakkımda</a>
-      <a href="skills.html">Yetenekler</a>
-      <a href="experience.html">Deneyim</a>
-      <a href="projects.html">Projeler</a>
-      <a href="contact.html">İletişim</a>
+      <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
+      <a href="about.html" data-translate="nav.about">Hakkımda</a>
+      <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
+      <a href="experience.html" data-translate="nav.experience">Deneyim</a>
+      <a href="projects.html" data-translate="nav.projects">Projeler</a>
+      <a href="contact.html" data-translate="nav.contact">İletişim</a>
     </div>
   </header>
 
@@ -104,45 +110,55 @@
   <section id="home" class="hero">
     <div class="container hero-wrap" data-animate>
       <div>
-        <span class="kicker">📱 Android • Kotlin • Compose</span>
-        <h1>Vahit Keskin</h1>
-        <div class="subtitle">Android Developer • Kotlin &amp; Jetpack Compose</div>
-        <p class="tagline">Temiz mimari, ViewModel odaklı ekranlar ve ölçeklenebilir Android deneyimleri.</p>
-        
-        <div class="socials" style="margin-top:1rem">
-          <a class="btn" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="Google Play Store" style="background:linear-gradient(135deg, #01875f, #00d4aa);color:white;border-color:transparent;font-weight:600;">
+        <div class="hero-kicker" data-translate="hero.kicker">📱 Android • Kotlin • Compose</div>
+        <h1 class="hero-name" data-translate="hero.name">Vahit Keskin</h1>
+        <div class="hero-title" data-translate="hero.title">Android Developer • Kotlin & Jetpack Compose</div>
+        <p class="hero-tagline" data-translate="hero.tagline">Temiz mimari, ViewModel odaklı ekranlar ve ölçeklenebilir
+          Android deneyimleri.</p>
+
+        <div class="socials">
+          <a class="btn btn-playstore" href="https://play.google.com/store/apps/developer?id=vahitkeskin"
+            target="_blank" rel="noreferrer noopener" aria-label="Google Play Store">
             <i class="fab fa-google-play"></i>
             <span>🎮 Play Store</span>
           </a>
-          <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+          <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener"
+            aria-label="GitHub">
             <i class="fab fa-github"></i>
             <span>GitHub</span>
           </a>
-          <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
+          <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener"
+            aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
             <span>LinkedIn</span>
           </a>
-          <a class="btn" href="https://x.com/iamvahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="X (Twitter)">
+          <a class="btn" href="https://x.com/iamvahitkeskin" target="_blank" rel="noreferrer noopener"
+            aria-label="X (Twitter)">
             <i class="fab fa-x-twitter"></i>
             <span>X</span>
           </a>
-          <a class="btn" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+          <a class="btn" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener"
+            aria-label="Instagram">
             <i class="fab fa-instagram"></i>
             <span>Instagram</span>
           </a>
-          <a class="btn" href="https://stackoverflow.com/users/18201304/vahit-keskin" target="_blank" rel="noreferrer noopener" aria-label="Stack Overflow">
+          <a class="btn" href="https://stackoverflow.com/users/18201304/vahit-keskin" target="_blank"
+            rel="noreferrer noopener" aria-label="Stack Overflow">
             <i class="fab fa-stack-overflow"></i>
             <span>Stack Overflow</span>
           </a>
         </div>
-        <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem">
-          <a class="btn" href="projects.html" target="_blank" rel="noreferrer noopener">Projeler</a>
-          <a class="btn" href="skills.html" target="_blank" rel="noreferrer noopener">Yetenekler</a>
-          <a class="btn btn-primary" href="contact.html" target="_blank" rel="noreferrer noopener">İletişime geç</a>
+        <div class="hero-actions">
+          <a class="btn" href="projects.html" target="_blank" rel="noreferrer noopener"
+            data-translate="hero.projects">Projeler</a>
+          <a class="btn" href="skills.html" target="_blank" rel="noreferrer noopener"
+            data-translate="hero.skills">Yetenekler</a>
+          <a class="btn btn-primary" href="contact.html" target="_blank" rel="noreferrer noopener"
+            data-translate="hero.contact">İletişime geç</a>
         </div>
       </div>
       <div class="avatar-wrap">
-        <img class="avatar" src="images/image.jpg" alt="Vahit Keskin portre"/>
+        <img class="avatar" src="images/image.jpg" alt="Vahit Keskin portre" />
       </div>
     </div>
   </section>
@@ -151,14 +167,16 @@
     <section id="intro" data-animate>
       <!-- Android GIF Animation -->
       <div class="android-gif-container">
-        <img src="https://developer.android.com/static/images/shared/pointing-1.gif" alt="Android Development" class="android-gif">
+        <img src="https://developer.android.com/static/images/shared/pointing-1.gif" alt="Android Development"
+          class="android-gif">
       </div>
-      <div class="section-title">🏛️ Ana Sayfa</div>
+      <div class="section-title" data-translate="about.title">✍️ Hakkımda</div>
       <div class="grid grid-2">
         <div class="card" style="overflow:hidden">
-          <div class="card-h">✍️ Hakkımda (Özet)</div>
+          <div class="card-h" data-translate="about.summary">✍️ Hakkımda (Özet)</div>
           <div class="card-b" style="display:grid;gap:.75rem">
-            <div class="muted">Android geliştiricisiyim. Temiz mimari, Jetpack Compose ve modern Android ekosistemiyle ölçeklenebilir deneyimler geliştiriyorum. İş mantığını ViewModel'de, UI'ı yalın ve tepkisel tutarım.</div>
+            <div class="muted">Android geliştiricisiyim. Temiz mimari, Jetpack Compose ve modern Android ekosistemiyle
+              ölçeklenebilir deneyimler geliştiriyorum. İş mantığını ViewModel'de, UI'ı yalın ve tepkisel tutarım.</div>
             <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:.5rem">
               <div class="badge" title="Android">🤖 Android</div>
               <div class="badge" title="Kotlin">🅺 Kotlin</div>
@@ -172,7 +190,7 @@
           </div>
         </div>
         <div class="card" style="overflow:hidden">
-          <div class="card-h">🎯 Öne Çıkanlar</div>
+          <div class="card-h" data-translate="about.expertise">🚀 Uzmanlık Alanlarım</div>
           <div class="card-b" style="display:grid;gap:.75rem">
             <div style="display:flex;gap:.5rem;flex-wrap:wrap">
               <span class="badge">📱 Mobil Mimari</span>
@@ -181,9 +199,12 @@
               <span class="badge">🚀 CI/CD</span>
             </div>
             <div style="display:grid;gap:.5rem;grid-template-columns:repeat(3,1fr)">
-              <img src="images/ic-android.png" alt="Android" style="width:100%;height:80px;object-fit:contain;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.5rem">
-              <img src="images/bg.webp" alt="Project" style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
-              <img src="images/turktelekom_bg.jpeg" alt="Türk Telekom" style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
+              <img src="images/ic-android.png" alt="Android"
+                style="width:100%;height:80px;object-fit:contain;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.5rem">
+              <img src="images/bg.webp" alt="Project"
+                style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
+              <img src="images/turktelekom_bg.jpeg" alt="Türk Telekom"
+                style="width:100%;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border)">
             </div>
             <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.25rem">
               <a class="btn" href="#projects">Projeler</a>
@@ -202,17 +223,19 @@
       <div class="counter-number" id="visitor-count">Yükleniyor...</div>
       <div style="font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem;">
         <span id="counter-status">Gerçek zamanlı sayım</span>
-        <button id="refresh-counter" style="margin-left: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); cursor: pointer;" title="Sayacı yenile">🔄</button>
+        <button id="refresh-counter"
+          style="margin-left: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); cursor: pointer;"
+          title="Sayacı yenile">🔄</button>
       </div>
     </div>
   </div>
 
-  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+  <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
 
   <!-- Scripts -->
   <script src="data.js"></script>
   <script src="language.js"></script>
-  <script src="weather.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

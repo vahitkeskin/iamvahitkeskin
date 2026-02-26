@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,9 +8,11 @@
   <meta name="description" content="Vahit Keskin hakkında" />
   <link rel="icon" type="image/png" href="images/image_circle.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="top-header">
     <div class="container top-header-content">
@@ -18,7 +21,6 @@
           <i class="fas fa-clock"></i>
           <span id="current-time">--:--:--</span>
           <span id="current-date">--/--/----</span>
-          <span style="color: var(--muted);">(İstanbul)</span>
         </div>
         <div class="weather" id="weather-container">
           <i class="fas fa-map-marker-alt"></i>
@@ -68,49 +70,75 @@
 
   <header>
     <div class="container nav">
-      <a href="index.html#home" class="brand" aria-label="Anasayfa">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">VK</a>
       <nav class="navlinks" aria-label="Birincil">
-        <a href="index.html#home">Ana Sayfa</a>
-        <a href="about.html" aria-current="page">Hakkımda</a>
-        <a href="skills.html">Yetenekler</a>
-        <a href="experience.html">Deneyim</a>
-        <a href="projects.html">Projeler</a>
-        <a href="contact.html">İletişim</a>
+        <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
+        <a href="about.html" data-translate="nav.about">Hakkımda</a>
+        <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
+        <a href="experience.html" data-translate="nav.experience">Deneyim</a>
+        <a href="projects.html" data-translate="nav.projects">Projeler</a>
+        <a href="contact.html" data-translate="nav.contact">İletişim</a>
       </nav>
       <div class="actions">
-        <a class="btn btn-primary" href="contact.html">Çalışalım</a>
+        <a class="btn btn-primary" href="contact.html" data-translate="nav.work">Çalışalım</a>
       </div>
-      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menüyü aç/kapat">
-        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer"
+        aria-label="Menüyü aç/kapat">
+        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
     </div>
     <div id="navDrawer" class="nav-drawer container" role="dialog" aria-label="Mobil menü">
-      <a href="index.html#home">Ana Sayfa</a>
-      <a href="about.html" aria-current="page">Hakkımda</a>
-      <a href="skills.html">Yetenekler</a>
-      <a href="experience.html">Deneyim</a>
-      <a href="projects.html">Projeler</a>
-      <a href="contact.html">İletişim</a>
+      <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
+      <a href="about.html" data-translate="nav.about">Hakkımda</a>
+      <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
+      <a href="experience.html" data-translate="nav.experience">Deneyim</a>
+      <a href="projects.html" data-translate="nav.projects">Projeler</a>
+      <a href="contact.html" data-translate="nav.contact">İletişim</a>
     </div>
   </header>
 
   <main class="container">
     <section id="about" data-animate>
-      <div class="section-title">✍️ Hakkımda</div>
+      <div class="section-title" data-translate="about.title">✍️ Hakkımda</div>
       <div class="about-container">
         <div class="about-content">
           <div class="about-intro">
-            <h2 class="about-heading">Android Geliştirici & Mimari Uzmanı</h2>
-            <p class="about-description">Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <span class="highlight">iş mantığı ViewModel'de</span>, UI ise yalın ve tepkisel.</p>
-            <p class="about-description">Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.</p>
+            <h2 class="about-heading" data-translate="about.heading">Android Geliştirici & Mimari Uzmanı</h2>
+            <p class="about-description" data-translate="about.content1">Android ekosisteminde performanslı ve
+              sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <span class="highlight">iş mantığı
+                ViewModel'de</span>, UI ise yalın ve tepkisel.</p>
+            <p class="about-description" data-translate="about.content2">Compose ve klasik View sistemi arasında köprü
+              kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici
+              deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.
+            </p>
           </div>
           <div class="about-expertise">
             <h3 class="expertise-title">Uzmanlık Alanlarım</h3>
             <div class="expertise-grid">
-              <div class="expertise-item"><div class="expertise-icon">⚡</div><div class="expertise-content"><h4>Reaktif Programlama</h4><p>Coroutines/Flow ile reaktif veri akışları ve offline-first</p></div></div>
-              <div class="expertise-item"><div class="expertise-icon">🧪</div><div class="expertise-content"><h4>Test Otomasyonu</h4><p>Unit, Instrumentation ve UI test piramidi</p></div></div>
-              <div class="expertise-item"><div class="expertise-icon">🎨</div><div class="expertise-content"><h4>Design System</h4><p>Compose + Views ile tema ve komponent kütüphaneleri</p></div></div>
-              <div class="expertise-item"><div class="expertise-icon">🚀</div><div class="expertise-content"><h4>CI/CD & DevOps</h4><p>Pipeline ve release yönetimi</p></div></div>
+              <div class="expertise-item">
+                <div class="expertise-icon">⚡</div>
+                <div class="expertise-content">
+                  <h4>Reaktif Programlama</h4>
+                  <li data-translate="about.list1">Coroutines/Flow ile reaktif veri akışları ve offline-first
+                    yaklaşımlar</li>
+                </div>
+              </div>
+              <div class="expertise-item">
+                <div class="expertise-icon">🧪</div>
+                <div class="expertise-content">
+                  <h4>Test Otomasyonu</h4>
+                  <li data-translate="about.list2">Test piramidi: Unit, Instrumentation ve UI test otomasyonu</li>
+                </div>
+              </div>
+              <div class="expertise-item">
+                <div class="expertise-icon">🎨</div>
+                <div class="expertise-content">
+                  <h4>Design System</h4>
+                  <li data-translate="about.list3">Design system ve tema yönetimi (Compose + Views)</li>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -118,13 +146,11 @@
     </section>
   </main>
 
-  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+  <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
 
   <script src="data.js"></script>
   <script src="language.js"></script>
-  <script src="weather.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
-
-

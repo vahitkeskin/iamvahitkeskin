@@ -2,13 +2,26 @@
 const TRANSLATIONS = {
   tr: {
     // Navigation
+    'nav.home': 'Ana Sayfa',
+    'nav.brand': 'VK Portfolyo',
     'nav.about': 'Hakkımda',
     'nav.skills': 'Yetenekler',
     'nav.experience': 'Deneyim',
     'nav.projects': 'Projeler',
     'nav.contact': 'İletişim',
     'nav.work': 'Çalışalım',
-    
+    'common.present': 'Halen',
+    'common.now': 'Günümüz',
+    'projects.personal': 'Kişisel Proje',
+    'about.summary': '✍️ Hakkımda (Özet)',
+    'about.expertise': '🚀 Uzmanlık Alanlarım',
+    'footer.rights': 'Tüm hakları saklıdır.',
+    'home.title': 'Anasayfa • Vahit Keskin',
+
+    'projects.title': '🚀 Projeler & Uygulamalar',
+    'projects.detail': 'Detay',
+    'projects.playstore': '🎮 Play Store',
+
     // Hero section
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
@@ -18,9 +31,10 @@ const TRANSLATIONS = {
     'hero.projects': 'Projeler',
     'hero.skills': 'Yetenekler',
     'hero.contact': 'İletişime geç',
-    
+
     // About section
     'about.title': '✍️ Hakkımda',
+    'about.heading': 'Android Geliştirici & Mimari Uzmanı',
     'about.content1': 'Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <strong>iş mantığı ViewModel\'de</strong>, UI ise yalın ve tepkisel.',
     'about.content2': 'Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.',
     'about.list1': 'Coroutines/Flow ile reaktif veri akışları ve offline-first yaklaşımlar',
@@ -28,16 +42,19 @@ const TRANSLATIONS = {
     'about.list3': 'Design system ve tema yönetimi (Compose + Views)',
     'about.list4': 'CI/CD pipeline\'ları ve release management',
     'about.list5': 'Performance monitoring ve crash reporting',
-    
+    'skills.title': '🧠 Yetenekler',
+    'experience.title': '💼 Deneyim',
+    'contact.title': '✉️ İletişim',
+
     // CV section
     'cv.title': '📄 CV İndir',
     'cv.content': 'Profesyonel deneyimimi ve yeteneklerimi detaylı olarak incelemek için CV\'mi indirebilirsiniz.',
     'cv.turkish': 'CV Türkçe (PDF)',
     'cv.english': 'CV English (PDF)',
-    
+
     // Skills section
     'skills.title': '🛠️ Yetenekler',
-    
+
     // Experience section
     'experience.title': '💼 Deneyim',
     'experience.senior.title': 'Senior Android Developer',
@@ -49,12 +66,12 @@ const TRANSLATIONS = {
     'experience.junior.title': 'Junior Android Developer',
     'experience.junior.period': '2020 - 2021',
     'experience.junior.desc': 'Android ekosisteminde temel geliştirme deneyimi. Java ve Kotlin ile basit uygulamalar geliştirme ve öğrenme süreci.',
-    
+
     // Projects section
     'projects.title': '🚀 Projeler & Uygulamalar',
     'projects.detail': 'Detay',
     'projects.playstore': 'Play Store',
-    
+
     // Contact section
     'contact.title': '📬 İletişim',
     'contact.info.title': 'İletişim Bilgileri',
@@ -65,36 +82,49 @@ const TRANSLATIONS = {
     'contact.form.subject': 'Konu',
     'contact.form.message': 'Mesaj',
     'contact.form.send': 'Gönder',
-    
+
     // Footer
     'footer.copyright': '© {year} Vahit Keskin. Tüm hakları saklıdır.',
-    
+
     // Visitor counter
     'visitor.title': 'Bu sayfayı ziyaret eden kişi sayısı:',
     'visitor.loading': 'Yükleniyor...',
     'visitor.status': 'Gerçek zamanlı sayım',
     'visitor.refresh': 'Sayacı yenile',
-    
+
     // Weather
     'weather.loading': 'Konum alınıyor...',
     'weather.loading_desc': 'Yükleniyor...',
     'weather.istanbul': '(İstanbul)',
-    
+
     // Theme
     'theme.dark': 'Karanlık',
     'theme.light': 'Aydınlık',
     'theme.auto': 'Cihaz'
   },
-  
+
   en: {
     // Navigation
+    'nav.home': 'Home',
+    'nav.brand': 'VK Portfolio',
     'nav.about': 'About',
     'nav.skills': 'Skills',
     'nav.experience': 'Experience',
     'nav.projects': 'Projects',
     'nav.contact': 'Contact',
     'nav.work': 'Let\'s Work',
-    
+    'common.present': 'Present',
+    'common.now': 'Now',
+    'projects.personal': 'Personal Project',
+    'about.summary': '✍️ About (Summary)',
+    'about.expertise': '🚀 Areas of Expertise',
+    'footer.rights': 'All rights reserved.',
+    'home.title': 'Home • Vahit Keskin',
+
+    'projects.title': '🚀 Projects & Applications',
+    'projects.detail': 'Detail',
+    'projects.playstore': '🎮 Play Store',
+
     // Hero section
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
@@ -104,9 +134,10 @@ const TRANSLATIONS = {
     'hero.projects': 'Projects',
     'hero.skills': 'Skills',
     'hero.contact': 'Get in touch',
-    
+
     // About section
     'about.title': '✍️ About',
+    'about.heading': 'Android Developer & Architecture Specialist',
     'about.content1': 'I develop performant and sustainable applications in the Android ecosystem. My core principle: <strong>business logic in ViewModel</strong>, UI is clean and reactive.',
     'about.content2': 'I can bridge between Compose and classic View system; design gradual transformation strategies in large codebases. I establish architectural templates, code-generating scripts and component libraries to improve developer experience within the team.',
     'about.list1': 'Reactive data flows and offline-first approaches with Coroutines/Flow',
@@ -114,16 +145,19 @@ const TRANSLATIONS = {
     'about.list3': 'Design system and theme management (Compose + Views)',
     'about.list4': 'CI/CD pipelines and release management',
     'about.list5': 'Performance monitoring and crash reporting',
-    
+    'skills.title': '🧠 Skills',
+    'experience.title': '💼 Experience',
+    'contact.title': '✉️ Contact',
+
     // CV section
     'cv.title': '📄 Download CV',
     'cv.content': 'You can download my CV to examine my professional experience and skills in detail.',
     'cv.turkish': 'CV Turkish (PDF)',
     'cv.english': 'CV English (PDF)',
-    
+
     // Skills section
     'skills.title': '🛠️ Skills',
-    
+
     // Experience section
     'experience.title': '💼 Experience',
     'experience.senior.title': 'Senior Android Developer',
@@ -135,12 +169,12 @@ const TRANSLATIONS = {
     'experience.junior.title': 'Junior Android Developer',
     'experience.junior.period': '2020 - 2021',
     'experience.junior.desc': 'Basic development experience in Android ecosystem. Simple application development and learning process with Java and Kotlin.',
-    
+
     // Projects section
     'projects.title': '🚀 Projects & Applications',
     'projects.detail': 'Detail',
     'projects.playstore': 'Play Store',
-    
+
     // Contact section
     'contact.title': '📬 Contact',
     'contact.info.title': 'Contact Information',
@@ -151,36 +185,43 @@ const TRANSLATIONS = {
     'contact.form.subject': 'Subject',
     'contact.form.message': 'Message',
     'contact.form.send': 'Send',
-    
+
     // Footer
     'footer.copyright': '© {year} Vahit Keskin. All rights reserved.',
-    
+
     // Visitor counter
     'visitor.title': 'Number of people who visited this page:',
     'visitor.loading': 'Loading...',
     'visitor.status': 'Real-time counting',
     'visitor.refresh': 'Refresh counter',
-    
+
     // Weather
     'weather.loading': 'Getting location...',
     'weather.loading_desc': 'Loading...',
     'weather.istanbul': '(Istanbul)',
-    
+
     // Theme
     'theme.dark': 'Dark',
     'theme.light': 'Light',
     'theme.auto': 'Device'
   },
-  
+
   de: {
     // Navigation
+    'nav.home': 'Startseite',
     'nav.about': 'Über mich',
     'nav.skills': 'Fähigkeiten',
     'nav.experience': 'Erfahrung',
     'nav.projects': 'Projekte',
     'nav.contact': 'Kontakt',
     'nav.work': 'Lass uns arbeiten',
-    
+    'footer.rights': 'Alle Rechte vorbehalten.',
+    'home.title': 'Startseite • Vahit Keskin',
+
+    'projects.title': '🚀 Projekte & Anwendungen',
+    'projects.detail': 'Details',
+    'projects.playstore': '🎮 Play Store',
+
     // Hero section
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
@@ -190,9 +231,10 @@ const TRANSLATIONS = {
     'hero.projects': 'Projekte',
     'hero.skills': 'Fähigkeiten',
     'hero.contact': 'Kontakt aufnehmen',
-    
+
     // About section
     'about.title': '✍️ Über mich',
+    'about.heading': 'Android-Entwickler & Architekturspezialist',
     'about.content1': 'Ich entwickle performante und nachhaltige Anwendungen im Android-Ökosystem. Mein Grundprinzip: <strong>Geschäftslogik im ViewModel</strong>, UI ist sauber und reaktiv.',
     'about.content2': 'Ich kann zwischen Compose und klassischem View-System vermitteln; schrittweise Transformationsstrategien in großen Codebasen entwerfen. Ich erstelle Architekturvorlagen, Code-generierende Skripte und Komponentenbibliotheken, um die Entwicklererfahrung im Team zu verbessern.',
     'about.list1': 'Reaktive Datenflüsse und Offline-First-Ansätze mit Coroutines/Flow',
@@ -200,16 +242,16 @@ const TRANSLATIONS = {
     'about.list3': 'Design-System und Theme-Management (Compose + Views)',
     'about.list4': 'CI/CD-Pipelines und Release-Management',
     'about.list5': 'Performance-Monitoring und Crash-Reporting',
-    
+
     // CV section
     'cv.title': '📄 CV herunterladen',
     'cv.content': 'Sie können meinen Lebenslauf herunterladen, um meine Berufserfahrung und Fähigkeiten im Detail zu prüfen.',
     'cv.turkish': 'CV Türkisch (PDF)',
     'cv.english': 'CV Englisch (PDF)',
-    
+
     // Skills section
     'skills.title': '🛠️ Fähigkeiten',
-    
+
     // Experience section
     'experience.title': '💼 Erfahrung',
     'experience.senior.title': 'Senior Android Developer',
@@ -221,12 +263,12 @@ const TRANSLATIONS = {
     'experience.junior.title': 'Junior Android Developer',
     'experience.junior.period': '2020 - 2021',
     'experience.junior.desc': 'Grundlegende Entwicklungserfahrung im Android-Ökosystem. Einfache Anwendungsentwicklung und Lernprozess mit Java und Kotlin.',
-    
+
     // Projects section
     'projects.title': '🚀 Projekte & Anwendungen',
     'projects.detail': 'Detail',
     'projects.playstore': 'Play Store',
-    
+
     // Contact section
     'contact.title': '📬 Kontakt',
     'contact.info.title': 'Kontaktinformationen',
@@ -237,36 +279,43 @@ const TRANSLATIONS = {
     'contact.form.subject': 'Betreff',
     'contact.form.message': 'Nachricht',
     'contact.form.send': 'Senden',
-    
+
     // Footer
     'footer.copyright': '© {year} Vahit Keskin. Alle Rechte vorbehalten.',
-    
+
     // Visitor counter
     'visitor.title': 'Anzahl der Personen, die diese Seite besucht haben:',
     'visitor.loading': 'Wird geladen...',
     'visitor.status': 'Echtzeit-Zählung',
     'visitor.refresh': 'Zähler aktualisieren',
-    
+
     // Weather
     'weather.loading': 'Standort wird ermittelt...',
     'weather.loading_desc': 'Wird geladen...',
     'weather.istanbul': '(Istanbul)',
-    
+
     // Theme
     'theme.dark': 'Dunkel',
     'theme.light': 'Hell',
     'theme.auto': 'Gerät'
   },
-  
+
   fr: {
     // Navigation
+    'nav.home': 'Accueil',
     'nav.about': 'À propos',
     'nav.skills': 'Compétences',
     'nav.experience': 'Expérience',
     'nav.projects': 'Projets',
     'nav.contact': 'Contact',
     'nav.work': 'Travaillons ensemble',
-    
+    'footer.rights': 'Tous droits réservés.',
+    'home.title': 'Accueil • Vahit Keskin',
+
+    'projects.title': '🚀 Projets & Applications',
+    'projects.detail': 'Détail',
+    'projects.playstore': '🎮 Play Store',
+
     // Hero section
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
@@ -276,9 +325,10 @@ const TRANSLATIONS = {
     'hero.projects': 'Projets',
     'hero.skills': 'Compétences',
     'hero.contact': 'Entrer en contact',
-    
+
     // About section
     'about.title': '✍️ À propos',
+    'about.heading': 'Développeur Android & Spécialiste Architecture',
     'about.content1': 'Je développe des applications performantes et durables dans l\'écosystème Android. Mon principe fondamental : <strong>logique métier dans ViewModel</strong>, l\'UI est propre et réactive.',
     'about.content2': 'Je peux faire le pont entre Compose et le système View classique ; concevoir des stratégies de transformation graduelle dans de grandes bases de code. J\'établis des modèles d\'architecture, des scripts générateurs de code et des bibliothèques de composants pour améliorer l\'expérience développeur au sein de l\'équipe.',
     'about.list1': 'Flux de données réactifs et approches offline-first avec Coroutines/Flow',
@@ -286,16 +336,16 @@ const TRANSLATIONS = {
     'about.list3': 'Système de design et gestion des thèmes (Compose + Views)',
     'about.list4': 'Pipelines CI/CD et gestion des versions',
     'about.list5': 'Surveillance des performances et rapport de crash',
-    
+
     // CV section
     'cv.title': '📄 Télécharger CV',
     'cv.content': 'Vous pouvez télécharger mon CV pour examiner mon expérience professionnelle et mes compétences en détail.',
     'cv.turkish': 'CV Turc (PDF)',
     'cv.english': 'CV Anglais (PDF)',
-    
+
     // Skills section
     'skills.title': '🛠️ Compétences',
-    
+
     // Experience section
     'experience.title': '💼 Expérience',
     'experience.senior.title': 'Senior Android Developer',
@@ -307,12 +357,12 @@ const TRANSLATIONS = {
     'experience.junior.title': 'Junior Android Developer',
     'experience.junior.period': '2020 - 2021',
     'experience.junior.desc': 'Expérience de développement de base dans l\'écosystème Android. Développement d\'applications simples et processus d\'apprentissage avec Java et Kotlin.',
-    
+
     // Projects section
     'projects.title': '🚀 Projets & Applications',
     'projects.detail': 'Détail',
     'projects.playstore': 'Play Store',
-    
+
     // Contact section
     'contact.title': '📬 Contact',
     'contact.info.title': 'Informations de contact',
@@ -323,36 +373,43 @@ const TRANSLATIONS = {
     'contact.form.subject': 'Sujet',
     'contact.form.message': 'Message',
     'contact.form.send': 'Envoyer',
-    
+
     // Footer
     'footer.copyright': '© {year} Vahit Keskin. Tous droits réservés.',
-    
+
     // Visitor counter
     'visitor.title': 'Nombre de personnes qui ont visité cette page :',
     'visitor.loading': 'Chargement...',
     'visitor.status': 'Comptage en temps réel',
     'visitor.refresh': 'Actualiser le compteur',
-    
+
     // Weather
     'weather.loading': 'Obtention de la localisation...',
     'weather.loading_desc': 'Chargement...',
     'weather.istanbul': '(Istanbul)',
-    
+
     // Theme
     'theme.dark': 'Sombre',
     'theme.light': 'Clair',
     'theme.auto': 'Appareil'
   },
-  
+
   ru: {
     // Navigation
+    'nav.home': 'Главная',
     'nav.about': 'Обо мне',
     'nav.skills': 'Навыки',
     'nav.experience': 'Опыт',
     'nav.projects': 'Проекты',
     'nav.contact': 'Контакты',
     'nav.work': 'Давайте работать',
-    
+    'footer.rights': 'Все права защищены.',
+    'home.title': 'Главная • Вахит Кескин',
+
+    'projects.title': '🚀 Проекты и приложения',
+    'projects.detail': 'Подробнее',
+    'projects.playstore': '🎮 Play Store',
+
     // Hero section
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
@@ -362,9 +419,10 @@ const TRANSLATIONS = {
     'hero.projects': 'Проекты',
     'hero.skills': 'Навыки',
     'hero.contact': 'Связаться',
-    
+
     // About section
     'about.title': '✍️ Обо мне',
+    'about.heading': 'Android-разработчик и специалист по архитектуре',
     'about.content1': 'Я разрабатываю производительные и устойчивые приложения в экосистеме Android. Мой основной принцип: <strong>бизнес-логика в ViewModel</strong>, UI чистый и реактивный.',
     'about.content2': 'Я могу создавать мосты между Compose и классической системой View; проектировать стратегии постепенной трансформации в больших кодовых базах. Я создаю архитектурные шаблоны, генерирующие код скрипты и библиотеки компонентов для улучшения опыта разработчика в команде.',
     'about.list1': 'Реактивные потоки данных и подходы offline-first с Coroutines/Flow',
@@ -372,16 +430,16 @@ const TRANSLATIONS = {
     'about.list3': 'Система дизайна и управление темами (Compose + Views)',
     'about.list4': 'CI/CD пайплайны и управление релизами',
     'about.list5': 'Мониторинг производительности и отчеты о сбоях',
-    
+
     // CV section
     'cv.title': '📄 Скачать CV',
     'cv.content': 'Вы можете скачать мое резюме, чтобы подробно изучить мой профессиональный опыт и навыки.',
     'cv.turkish': 'CV Турецкий (PDF)',
     'cv.english': 'CV Английский (PDF)',
-    
+
     // Skills section
     'skills.title': '🛠️ Навыки',
-    
+
     // Experience section
     'experience.title': '💼 Опыт',
     'experience.senior.title': 'Senior Android Developer',
@@ -393,12 +451,12 @@ const TRANSLATIONS = {
     'experience.junior.title': 'Junior Android Developer',
     'experience.junior.period': '2020 - 2021',
     'experience.junior.desc': 'Базовый опыт разработки в экосистеме Android. Разработка простых приложений и процесс обучения с Java и Kotlin.',
-    
+
     // Projects section
     'projects.title': '🚀 Проекты и Приложения',
     'projects.detail': 'Детали',
     'projects.playstore': 'Play Store',
-    
+
     // Contact section
     'contact.title': '📬 Контакты',
     'contact.info.title': 'Контактная информация',
@@ -409,21 +467,21 @@ const TRANSLATIONS = {
     'contact.form.subject': 'Тема',
     'contact.form.message': 'Сообщение',
     'contact.form.send': 'Отправить',
-    
+
     // Footer
     'footer.copyright': '© {year} Vahit Keskin. Все права защищены.',
-    
+
     // Visitor counter
     'visitor.title': 'Количество людей, посетивших эту страницу:',
     'visitor.loading': 'Загрузка...',
     'visitor.status': 'Подсчет в реальном времени',
     'visitor.refresh': 'Обновить счетчик',
-    
+
     // Weather
     'weather.loading': 'Получение местоположения...',
     'weather.loading_desc': 'Загрузка...',
     'weather.istanbul': '(Стамбул)',
-    
+
     // Theme
     'theme.dark': 'Темная',
     'theme.light': 'Светлая',
@@ -565,7 +623,7 @@ function updatePageLanguage() {
     console.error('Translations not found for language:', currentLanguage);
     return;
   }
-  
+
   // Update all elements with data-translate attribute
   const elements = document.querySelectorAll('[data-translate]');
   elements.forEach(element => {
@@ -579,7 +637,7 @@ function updatePageLanguage() {
       }
     }
   });
-  
+
   // Update specific elements by ID
   const updates = {
     'language-name': translations['theme.auto'] || 'Türkçe',
@@ -589,14 +647,14 @@ function updatePageLanguage() {
     'counter-status': translations['visitor.status'] || 'Gerçek zamanlı sayım',
     'refresh-counter': translations['visitor.refresh'] || 'Sayacı yenile'
   };
-  
+
   Object.entries(updates).forEach(([id, text]) => {
     const element = document.getElementById(id);
     if (element) {
       element.textContent = text;
     }
   });
-  
+
   // Update year in footer
   const yearElement = document.getElementById('year');
   if (yearElement) {
@@ -610,10 +668,15 @@ function updatePageLanguage() {
     const meta = LANGUAGE_META[currentLanguage] || { name: currentLanguage, flag: '' };
     if (hdrFlag && meta.flag) hdrFlag.src = meta.flag;
     if (hdrName) hdrName.textContent = meta.name || currentLanguage;
-  } catch (err) {}
+  } catch (err) { }
 
   // Update floating language button if present
-  try { updateLanguageButton(); } catch (err) {}
+  try { updateLanguageButton(); } catch (err) { }
+
+  // Refresh weather when language changes
+  if (typeof setupWeather === 'function') {
+    setupWeather();
+  }
 }
 
 // Initialize language system
