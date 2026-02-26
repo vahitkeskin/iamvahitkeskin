@@ -6,11 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projeler • Vahit Keskin</title>
   <meta name="description" content="Vahit Keskin projeler" />
-  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
 </head>
 
 <body>
@@ -70,7 +76,8 @@
 
   <header>
     <div class="container nav">
-      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
+          class="dot">.</span></a>
       <nav class="navlinks" aria-label="Birincil">
         <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
         <a href="about.html" data-translate="nav.about">Hakkımda</a>
@@ -99,10 +106,20 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="projects" data-animate>
-      <div class="section-title" data-translate="projects.title">🚀 Projeler & Uygulamalar</div>
-      <div class="grid grid-3" id="projectsGrid"></div>
+  <main>
+    <section id="projects" class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-rocket"></i>
+            <span data-translate="projects.title">Projeler & Uygulamalar</span>
+          </h2>
+          <p class="section-subtitle" data-translate="projects.subtitle">Gerçek dünya problemlerine modern çözümler.</p>
+        </div>
+        <div class="grid grid-3" id="projects-container">
+          <!-- Dynamically rendered by script.js -->
+        </div>
+      </div>
     </section>
   </main>
 

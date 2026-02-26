@@ -6,11 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hakkımda • Vahit Keskin</title>
   <meta name="description" content="Vahit Keskin hakkında" />
-  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
 </head>
 
 <body>
@@ -70,7 +76,8 @@
 
   <header>
     <div class="container nav">
-      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
+          class="dot">.</span></a>
       <nav class="navlinks" aria-label="Birincil">
         <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
         <a href="about.html" data-translate="nav.about">Hakkımda</a>
@@ -99,44 +106,65 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="about" data-animate>
-      <div class="section-title" data-translate="about.title">✍️ Hakkımda</div>
-      <div class="about-container">
-        <div class="about-content">
-          <div class="about-intro">
-            <h2 class="about-heading" data-translate="about.heading">Android Geliştirici & Mimari Uzmanı</h2>
-            <p class="about-description" data-translate="about.content1">Android ekosisteminde performanslı ve
-              sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <span class="highlight">iş mantığı
-                ViewModel'de</span>, UI ise yalın ve tepkisel.</p>
-            <p class="about-description" data-translate="about.content2">Compose ve klasik View sistemi arasında köprü
-              kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici
-              deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.
-            </p>
+  <main>
+    <section id="about" class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-terminal" style="color:var(--brand); font-size:0.8em;"></i>
+            <span data-translate="about.title">Hakkımda</span>
+          </h2>
+          <p class="section-subtitle" data-translate="about.heading">Senior Android Engineer & Architecture Specialist
+          </p>
+        </div>
+
+        <div class="grid grid-about">
+          <div class="glass-card about-main">
+            <div class="card-b">
+              <p class="lead" data-translate="about.content1">Android ekosisteminde performanslı ve sürdürülebilir
+                uygulamalar geliştiriyorum. Temel prensibim: <span class="text-highlight">iş mantığı
+                  ViewModel'de</span>, UI ise yalın ve tepkisel.</p>
+              <p class="text-muted" data-translate="about.content2">Compose ve klasik View sistemi arasında köprü
+                kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici
+                deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.
+              </p>
+
+              <div class="expertise-pills">
+                <span class="badge">Kotlin Multiplatform</span>
+                <span class="badge">Jetpack Compose</span>
+                <span class="badge">Clean Architecture</span>
+                <span class="badge">Unit Testing</span>
+                <span class="badge">MVI/MVVM</span>
+                <span class="badge">Hilt/Dagger</span>
+              </div>
+            </div>
           </div>
-          <div class="about-expertise">
-            <h3 class="expertise-title">Uzmanlık Alanlarım</h3>
-            <div class="expertise-grid">
-              <div class="expertise-item">
-                <div class="expertise-icon">⚡</div>
-                <div class="expertise-content">
-                  <h4>Reaktif Programlama</h4>
-                  <li data-translate="about.list1">Coroutines/Flow ile reaktif veri akışları ve offline-first
-                    yaklaşımlar</li>
+
+          <div class="expertise-cards">
+            <div class="glass-card expertise-mini">
+              <div class="card-mini-inner">
+                <div class="icon-box">⚡</div>
+                <div class="mini-content">
+                  <div class="h-mini">Reaktif Programlama</div>
+                  <div class="p-mini" data-translate="about.list1">Coroutines & Flow architecture</div>
                 </div>
               </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">🧪</div>
-                <div class="expertise-content">
-                  <h4>Test Otomasyonu</h4>
-                  <li data-translate="about.list2">Test piramidi: Unit, Instrumentation ve UI test otomasyonu</li>
+            </div>
+            <div class="glass-card expertise-mini">
+              <div class="card-mini-inner">
+                <div class="icon-box">🧪</div>
+                <div class="mini-content">
+                  <div class="h-mini">Test Otomasyonu</div>
+                  <div class="p-mini" data-translate="about.list2">Unit, Instrumentation & UI</div>
                 </div>
               </div>
-              <div class="expertise-item">
-                <div class="expertise-icon">🎨</div>
-                <div class="expertise-content">
-                  <h4>Design System</h4>
-                  <li data-translate="about.list3">Design system ve tema yönetimi (Compose + Views)</li>
+            </div>
+            <div class="glass-card expertise-mini">
+              <div class="card-mini-inner">
+                <div class="icon-box">🎨</div>
+                <div class="mini-content">
+                  <div class="h-mini">Design Systems</div>
+                  <div class="p-mini" data-translate="about.list3">Atomic design in Android</div>
                 </div>
               </div>
             </div>

@@ -6,11 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Deneyim • Vahit Keskin</title>
   <meta name="description" content="Vahit Keskin deneyim" />
-  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
 </head>
 
 <body>
@@ -70,7 +76,8 @@
 
   <header>
     <div class="container nav">
-      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
+          class="dot">.</span></a>
       <nav class="navlinks" aria-label="Birincil">
         <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
         <a href="about.html" data-translate="nav.about">Hakkımda</a>
@@ -99,75 +106,85 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="experience" data-animate>
-      <div class="section-title" data-translate="experience.title">💼 Deneyim</div>
-      <div class="xp-steps">
-        <div class="xp-progress"><span></span></div>
-        <div class="xp-step">
-          <div class="xp-dot"></div>
-          <div class="xp-role">Junior Android Developer</div>
-          <div class="xp-period">2020 - 2021</div>
+  <main>
+    <section id="experience" class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-briefcase"></i>
+            <span data-translate="experience.title">Deneyim</span>
+          </h2>
+          <p class="section-subtitle" data-translate="experience.subtitle">Profesyonel yolculuğum ve dönüm noktaları.
+          </p>
         </div>
-        <div class="xp-step">
-          <div class="xp-dot"></div>
-          <div class="xp-role">Android Developer</div>
-          <div class="xp-period">2021 - 2023</div>
-        </div>
-        <div class="xp-step">
-          <div class="xp-dot"></div>
-          <div class="xp-role">Senior Android Developer</div>
-          <div class="xp-period">2023 - Günümüz</div>
-        </div>
-      </div>
-      <div class="timeline">
-        <div class="tl-item">
-          <strong>Senior Android Developer</strong>
-          <div class="tl-meta"><span class="tl-company">Kurumsal Proje</span> • <span class="muted">2023 -
-              Günümüz</span></div>
-          <div class="badge-group">
-            <span class="badge">Kotlin</span>
-            <span class="badge">Jetpack Compose</span>
-            <span class="badge">MVVM</span>
-            <span class="badge">Clean Architecture</span>
+
+        <div class="grid-about">
+          <div class="glass-card">
+            <div class="card-h">
+              <div class="card-title-group">
+                <h3 class="card-title">Senior Android Developer</h3>
+                <div class="card-subtitle">Türk Telekom • 2023 - 2026</div>
+              </div>
+            </div>
+            <div class="card-b">
+              <div class="skill-chips">
+                <span class="badge">Kotlin</span>
+                <span class="badge">Jetpack Compose</span>
+                <span class="badge">MVVM</span>
+                <span class="badge">Clean Architecture</span>
+              </div>
+              <p class="text-muted">Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans
+                optimizasyonu. Jetpack Compose ile modern UI geliştirme.</p>
+              <ul class="experience-list">
+                <li>Uygulama açılış süresi %28 iyileştirildi.</li>
+                <li>Compose dönüşümü için modüler mimari planlandı ve devreye alındı.</li>
+                <li>Crash-free rate %99.5 seviyesinde stabil tutuldu.</li>
+              </ul>
+            </div>
           </div>
-          <p>Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans optimizasyonu. Jetpack
-            Compose ile modern UI geliştirme.</p>
-          <ul class="tl-achievements">
-            <li>Uygulama açılış süresi %28 iyileştirildi.</li>
-            <li>Compose dönüşümü için modüler mimari planlandı ve devreye alındı.</li>
-            <li>Crash-free rate %99.5 seviyesinde stabil tutuldu.</li>
-          </ul>
-        </div>
-        <div class="tl-item">
-          <strong>Android Developer</strong>
-          <div class="tl-meta"><span class="tl-company">Appcent</span> • <span class="muted">2021 - 2023</span></div>
-          <div class="badge-group">
-            <span class="badge">Kotlin</span>
-            <span class="badge">Coroutines</span>
-            <span class="badge">Hilt</span>
+
+          <div class="glass-card">
+            <div class="card-h">
+              <div class="card-title-group">
+                <h3 class="card-title">Android Developer</h3>
+                <div class="card-subtitle">Appcent • 2021 - 2023</div>
+              </div>
+            </div>
+            <div class="card-b">
+              <div class="skill-chips">
+                <span class="badge">Kotlin</span>
+                <span class="badge">Coroutines</span>
+                <span class="badge">Hilt</span>
+              </div>
+              <p class="text-muted">MVVM mimarisi ile Android uygulamaları geliştirme. Kotlin, Coroutines ve modern
+                Android kütüphaneleri kullanarak kullanıcı dostu uygulamalar.</p>
+              <ul class="experience-list">
+                <li>Yeni özellik geliştirme sürelerinde %15 kısalma.</li>
+                <li>Network katmanında retry/backoff stratejisi ile hata oranında düşüş.</li>
+              </ul>
+            </div>
           </div>
-          <p>MVVM mimarisi ile Android uygulamaları geliştirme. Kotlin, Coroutines ve modern Android kütüphaneleri
-            kullanarak kullanıcı dostu uygulamalar.</p>
-          <ul class="tl-achievements">
-            <li>Yeni özellik geliştirme sürelerinde %15 kısalma.</li>
-            <li>Network katmanında retry/backoff stratejisi ile hata oranında düşüş.</li>
-          </ul>
-        </div>
-        <div class="tl-item">
-          <strong>Junior Android Developer</strong>
-          <div class="tl-meta"><span class="tl-company">Code And More</span> • <span class="muted">2020 - 2021</span>
+
+          <div class="glass-card">
+            <div class="card-h">
+              <div class="card-title-group">
+                <h3 class="card-title">Junior Android Developer</h3>
+                <div class="card-subtitle">Code And More • 2020 - 2021</div>
+              </div>
+            </div>
+            <div class="card-b">
+              <div class="skill-chips">
+                <span class="badge">Java</span>
+                <span class="badge">Android SDK</span>
+              </div>
+              <p class="text-muted">Android ekosisteminde temel geliştirme deneyimi. Java ve Kotlin ile basit
+                uygulamalar geliştirme ve öğrenme süreci.</p>
+              <ul class="experience-list">
+                <li>İlk prodüksiyon yayınında kritik hatalar olmadan teslim.</li>
+                <li>Firebase Crashlytics entegre edilerek hata takibi sağlandı.</li>
+              </ul>
+            </div>
           </div>
-          <div class="badge-group">
-            <span class="badge">Java</span>
-            <span class="badge">Android SDK</span>
-          </div>
-          <p>Android ekosisteminde temel geliştirme deneyimi. Java ve Kotlin ile basit uygulamalar geliştirme ve öğrenme
-            süreci.</p>
-          <ul class="tl-achievements">
-            <li>İlk prodüksiyon yayınında kritik hatalar olmadan teslim.</li>
-            <li>Firebase Crashlytics entegre edilerek hata takibi sağlandı.</li>
-          </ul>
         </div>
       </div>
     </section>

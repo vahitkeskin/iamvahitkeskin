@@ -3,7 +3,7 @@ const TRANSLATIONS = {
   tr: {
     // Navigation
     'nav.home': 'Ana Sayfa',
-    'nav.brand': 'VK Portfolyo',
+    'nav.brand': 'Vahit Keskin.',
     'nav.about': 'Hakkımda',
     'nav.skills': 'Yetenekler',
     'nav.experience': 'Deneyim',
@@ -23,10 +23,11 @@ const TRANSLATIONS = {
     'projects.playstore': '🎮 Play Store',
 
     // Hero section
+    'hero.status': 'Yeni Fırsatlara Açık',
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
-    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
-    'hero.tagline': 'Temiz mimari, ViewModel odaklı ekranlar ve ölçeklenebilir Android deneyimleri.',
+    'hero.title': 'Senior Android Engineer | Open for New Opportunities',
+    'hero.tagline': 'Modern ve ölçeklenebilir Android uygulamaları geliştiren, temiz mimari ve kullanıcı deneyimi odaklı Senior Android Engineer. Şu an yeni fırsatlara açığım.',
     'hero.playstore': '🎮 Play Store',
     'hero.projects': 'Projeler',
     'hero.skills': 'Yetenekler',
@@ -34,7 +35,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': '✍️ Hakkımda',
-    'about.heading': 'Android Geliştirici & Mimari Uzmanı',
+    'about.heading': 'Senior Android Engineer & Mimari Uzmanı',
     'about.content1': 'Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <strong>iş mantığı ViewModel\'de</strong>, UI ise yalın ve tepkisel.',
     'about.content2': 'Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.',
     'about.list1': 'Coroutines/Flow ile reaktif veri akışları ve offline-first yaklaşımlar',
@@ -58,7 +59,7 @@ const TRANSLATIONS = {
     // Experience section
     'experience.title': '💼 Deneyim',
     'experience.senior.title': 'Senior Android Developer',
-    'experience.senior.period': '2023 - Günümüz',
+    'experience.senior.period': '2023 - 2026',
     'experience.senior.desc': 'Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans optimizasyonu. Jetpack Compose ile modern UI geliştirme ve takım liderliği.',
     'experience.mid.title': 'Android Developer',
     'experience.mid.period': '2021 - 2023',
@@ -95,7 +96,7 @@ const TRANSLATIONS = {
     // Weather
     'weather.loading': 'Konum alınıyor...',
     'weather.loading_desc': 'Yükleniyor...',
-    'weather.istanbul': '(İstanbul)',
+    'weather.istanbul': '(Konum)',
 
     // Theme
     'theme.dark': 'Karanlık',
@@ -106,7 +107,7 @@ const TRANSLATIONS = {
   en: {
     // Navigation
     'nav.home': 'Home',
-    'nav.brand': 'VK Portfolio',
+    'nav.brand': 'Vahit Keskin.',
     'nav.about': 'About',
     'nav.skills': 'Skills',
     'nav.experience': 'Experience',
@@ -126,10 +127,11 @@ const TRANSLATIONS = {
     'projects.playstore': '🎮 Play Store',
 
     // Hero section
+    'hero.status': 'Yeni Fırsatlara Açık',
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
-    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
-    'hero.tagline': 'Clean architecture, ViewModel-focused screens and scalable Android experiences.',
+    'hero.title': 'Senior Android Engineer | Open for New Opportunities',
+    'hero.tagline': 'Senior Android Engineer focused on Clean Architecture, scalability, and premium user experiences. Currently open to new professional opportunities.',
     'hero.playstore': '🎮 Play Store',
     'hero.projects': 'Projects',
     'hero.skills': 'Skills',
@@ -137,7 +139,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': '✍️ About',
-    'about.heading': 'Android Developer & Architecture Specialist',
+    'about.heading': 'Senior Android Engineer & Architecture Specialist',
     'about.content1': 'I develop performant and sustainable applications in the Android ecosystem. My core principle: <strong>business logic in ViewModel</strong>, UI is clean and reactive.',
     'about.content2': 'I can bridge between Compose and classic View system; design gradual transformation strategies in large codebases. I establish architectural templates, code-generating scripts and component libraries to improve developer experience within the team.',
     'about.list1': 'Reactive data flows and offline-first approaches with Coroutines/Flow',
@@ -161,7 +163,7 @@ const TRANSLATIONS = {
     // Experience section
     'experience.title': '💼 Experience',
     'experience.senior.title': 'Senior Android Developer',
-    'experience.senior.period': '2023 - Present',
+    'experience.senior.period': '2023 - 2026',
     'experience.senior.desc': 'Architectural design, code quality and performance optimization in large-scale Android applications. Modern UI development with Jetpack Compose and team leadership.',
     'experience.mid.title': 'Android Developer',
     'experience.mid.period': '2021 - 2023',
@@ -196,9 +198,9 @@ const TRANSLATIONS = {
     'visitor.refresh': 'Refresh counter',
 
     // Weather
-    'weather.loading': 'Getting location...',
+    'weather.loading': 'Detecting location...',
     'weather.loading_desc': 'Loading...',
-    'weather.istanbul': '(Istanbul)',
+    'weather.istanbul': '(Location)',
 
     // Theme
     'theme.dark': 'Dark',
@@ -209,6 +211,7 @@ const TRANSLATIONS = {
   de: {
     // Navigation
     'nav.home': 'Startseite',
+    'nav.brand': 'Vahit Keskin.',
     'nav.about': 'Über mich',
     'nav.skills': 'Fähigkeiten',
     'nav.experience': 'Erfahrung',
@@ -223,10 +226,11 @@ const TRANSLATIONS = {
     'projects.playstore': '🎮 Play Store',
 
     // Hero section
+    'hero.status': 'Yeni Fırsatlara Açık',
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
-    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
-    'hero.tagline': 'Saubere Architektur, ViewModel-fokussierte Bildschirme und skalierbare Android-Erfahrungen.',
+    'hero.title': 'Senior Android Engineer | Open for New Opportunities',
+    'hero.tagline': 'Senior Android Engineer at Türk Telekom. Skalierbare mobile Erlebnisse mit Clean Architecture & Jetpack Compose.',
     'hero.playstore': '🎮 Play Store',
     'hero.projects': 'Projekte',
     'hero.skills': 'Fähigkeiten',
@@ -234,7 +238,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': '✍️ Über mich',
-    'about.heading': 'Android-Entwickler & Architekturspezialist',
+    'about.heading': 'Senior Android-Entwickler & Architekturspezialist',
     'about.content1': 'Ich entwickle performante und nachhaltige Anwendungen im Android-Ökosystem. Mein Grundprinzip: <strong>Geschäftslogik im ViewModel</strong>, UI ist sauber und reaktiv.',
     'about.content2': 'Ich kann zwischen Compose und klassischem View-System vermitteln; schrittweise Transformationsstrategien in großen Codebasen entwerfen. Ich erstelle Architekturvorlagen, Code-generierende Skripte und Komponentenbibliotheken, um die Entwicklererfahrung im Team zu verbessern.',
     'about.list1': 'Reaktive Datenflüsse und Offline-First-Ansätze mit Coroutines/Flow',
@@ -303,6 +307,7 @@ const TRANSLATIONS = {
   fr: {
     // Navigation
     'nav.home': 'Accueil',
+    'nav.brand': 'Vahit Keskin.',
     'nav.about': 'À propos',
     'nav.skills': 'Compétences',
     'nav.experience': 'Expérience',
@@ -317,10 +322,11 @@ const TRANSLATIONS = {
     'projects.playstore': '🎮 Play Store',
 
     // Hero section
+    'hero.status': 'Yeni Fırsatlara Açık',
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
-    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
-    'hero.tagline': 'Architecture propre, écrans axés sur ViewModel et expériences Android évolutives.',
+    'hero.title': 'Senior Android Engineer | Open for New Opportunities',
+    'hero.tagline': 'Senior Android Engineer at Türk Telekom. Expériences mobiles évolutives avec Clean Architecture & Jetpack Compose.',
     'hero.playstore': '🎮 Play Store',
     'hero.projects': 'Projets',
     'hero.skills': 'Compétences',
@@ -328,7 +334,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': '✍️ À propos',
-    'about.heading': 'Développeur Android & Spécialiste Architecture',
+    'about.heading': 'Senior Android Developer & Spécialiste Architecture',
     'about.content1': 'Je développe des applications performantes et durables dans l\'écosystème Android. Mon principe fondamental : <strong>logique métier dans ViewModel</strong>, l\'UI est propre et réactive.',
     'about.content2': 'Je peux faire le pont entre Compose et le système View classique ; concevoir des stratégies de transformation graduelle dans de grandes bases de code. J\'établis des modèles d\'architecture, des scripts générateurs de code et des bibliothèques de composants pour améliorer l\'expérience développeur au sein de l\'équipe.',
     'about.list1': 'Flux de données réactifs et approches offline-first avec Coroutines/Flow',
@@ -397,6 +403,7 @@ const TRANSLATIONS = {
   ru: {
     // Navigation
     'nav.home': 'Главная',
+    'nav.brand': 'Vahit Keskin.',
     'nav.about': 'Обо мне',
     'nav.skills': 'Навыки',
     'nav.experience': 'Опыт',
@@ -411,10 +418,11 @@ const TRANSLATIONS = {
     'projects.playstore': '🎮 Play Store',
 
     // Hero section
+    'hero.status': 'Yeni Fırsatlara Açık',
     'hero.kicker': '📱 Android • Kotlin • Compose',
     'hero.name': 'Vahit Keskin',
-    'hero.title': 'Android Developer • Kotlin & Jetpack Compose',
-    'hero.tagline': 'Чистая архитектура, экраны с фокусом на ViewModel и масштабируемые Android-решения.',
+    'hero.title': 'Senior Android Engineer | Open for New Opportunities',
+    'hero.tagline': 'Senior Android Engineer at Türk Telekom. Масштабируемые мобильные решения с чистой архитектурой и Jetpack Compose.',
     'hero.playstore': '🎮 Play Store',
     'hero.projects': 'Проекты',
     'hero.skills': 'Навыки',
@@ -422,7 +430,7 @@ const TRANSLATIONS = {
 
     // About section
     'about.title': '✍️ Обо мне',
-    'about.heading': 'Android-разработчик и специалист по архитектуре',
+    'about.heading': 'Senior Android-разработчик и специалист по архитектуре',
     'about.content1': 'Я разрабатываю производительные и устойчивые приложения в экосистеме Android. Мой основной принцип: <strong>бизнес-логика в ViewModel</strong>, UI чистый и реактивный.',
     'about.content2': 'Я могу создавать мосты между Compose и классической системой View; проектировать стратегии постепенной трансформации в больших кодовых базах. Я создаю архитектурные шаблоны, генерирующие код скрипты и библиотеки компонентов для улучшения опыта разработчика в команде.',
     'about.list1': 'Реактивные потоки данных и подходы offline-first с Coroutines/Flow',
@@ -490,7 +498,7 @@ const TRANSLATIONS = {
 };
 
 // Current language
-let currentLanguage = localStorage.getItem('selectedLanguage') || 'tr';
+let currentLanguage = localStorage.getItem('language') || 'tr';
 
 // Small metadata map for flag + display name used by the floating language button
 const LANGUAGE_META = {
@@ -592,7 +600,7 @@ function setupLanguageSwitcher() {
 
       if (lang) {
         currentLanguage = lang;
-        localStorage.setItem('selectedLanguage', lang);
+        localStorage.setItem('language', lang);
 
         // Update header flag/name if present
         const hdrFlag = document.getElementById('language-flag');
@@ -640,7 +648,7 @@ function updatePageLanguage() {
 
   // Update specific elements by ID
   const updates = {
-    'language-name': translations['theme.auto'] || 'Türkçe',
+    'language-name': LANGUAGE_META[currentLanguage]?.name || 'Türkçe',
     'current-city': translations['weather.loading'] || 'Konum alınıyor...',
     'weather-desc': translations['weather.loading_desc'] || 'Yükleniyor...',
     'visitor-count': translations['visitor.loading'] || 'Yükleniyor...',
@@ -679,14 +687,9 @@ function updatePageLanguage() {
   }
 }
 
-// Initialize language system
-document.addEventListener('DOMContentLoaded', () => {
-  setupLanguageSwitcher();
-  // Create a floating language button that shows the current language's flag and name.
-  // This avoids editing every HTML page; it's injected at runtime and kept in sync
-  // with `currentLanguage`.
-  createLanguageFloatingButton();
-});
+// Initialize language system will now be called from script.js to ensure proper ordering
+// setupLanguageSwitcher();
+// createLanguageFloatingButton();
 
 
 // Floating language button: create / update helpers
@@ -723,7 +726,7 @@ function createLanguageFloatingButton() {
       const idx = codes.indexOf(currentLanguage);
       const next = codes[(idx + 1) % codes.length];
       currentLanguage = next;
-      localStorage.setItem('selectedLanguage', currentLanguage);
+      localStorage.setItem('language', currentLanguage);
       updatePageLanguage();
     }
   });

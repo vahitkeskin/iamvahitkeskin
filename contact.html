@@ -6,11 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>İletişim • Vahit Keskin</title>
   <meta name="description" content="Vahit Keskin iletişim" />
-  <link rel="icon" type="image/png" href="images/image_circle.png">
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
 </head>
 
 <body>
@@ -70,7 +76,8 @@
 
   <header>
     <div class="container nav">
-      <a href="index.html#home" class="brand" aria-label="Anasayfa">VK</a>
+      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
+          class="dot">.</span></a>
       <nav class="navlinks" aria-label="Birincil">
         <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
         <a href="about.html" data-translate="nav.about">Hakkımda</a>
@@ -99,162 +106,120 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="contact" data-animate>
-      <div class="section-title" data-translate="contact.title">📬 İletişim</div>
-
-      <!-- Hero Contact Section -->
-      <div class="contact-hero">
-        <div class="contact-hero-content">
-          <div class="contact-intro">
-            <h2 class="contact-title">Birlikte Harika Şeyler Yapalım! 🚀</h2>
-            <p class="contact-subtitle">Android projeleriniz için profesyonel destek arıyorsanız, benimle iletişime
-              geçin. Temiz kod, modern mimari ve kullanıcı dostu deneyimler konusunda size yardımcı olabilirim.</p>
-
-            <!-- Animated Contact GIF -->
-            <div class="contact-animation">
-              <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Contact Animation"
-                class="contact-gif">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact Cards Section -->
-      <div class="contact-cards-container">
-        <!-- İletişim Bilgileri Kartı -->
-        <div class="contact-info-card">
-          <div class="card-header">
-            <div class="card-icon">📞</div>
-            <h3 class="card-title">İletişim Bilgileri</h3>
-            <p class="card-description">Benimle iletişime geçmek için aşağıdaki kanalları kullanabilirsiniz</p>
-          </div>
-
-          <div class="contact-methods">
-            <div class="contact-method primary">
-              <div class="method-icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div class="method-content">
-                <h4>E-posta</h4>
-                <p>vahitkeskin07@gmail.com</p>
-                <a href="mailto:vahitkeskin07@gmail.com" class="method-link">Mesaj Gönder</a>
-              </div>
-            </div>
-
-            <div class="social-links-grid">
-              <a class="social-link github" href="https://github.com/vahitkeskin" target="_blank"
-                rel="noreferrer noopener">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </a>
-              <a class="social-link linkedin" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank"
-                rel="noreferrer noopener">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-              </a>
-              <a class="social-link twitter" href="https://x.com/iamvahitkeskin" target="_blank"
-                rel="noreferrer noopener">
-                <i class="fab fa-x-twitter"></i>
-                <span>X</span>
-              </a>
-              <a class="social-link instagram" href="https://www.instagram.com/keskin.vahit/" target="_blank"
-                rel="noreferrer noopener">
-                <i class="fab fa-instagram"></i>
-                <span>Instagram</span>
-              </a>
-              <a class="social-link stackoverflow" href="https://stackoverflow.com/users/18201304/vahit-keskin"
-                target="_blank" rel="noreferrer noopener">
-                <i class="fab fa-stack-overflow"></i>
-                <span>Stack Overflow</span>
-              </a>
-              <a class="social-link playstore" href="https://play.google.com/store/apps/developer?id=vahitkeskin"
-                target="_blank" rel="noreferrer noopener">
-                <i class="fab fa-google-play"></i>
-                <span>Play Store</span>
-              </a>
-            </div>
-          </div>
+  <main>
+    <section id="contact" class="section">
+      <div class="container" data-animate>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-paper-plane"></i>
+            <span data-translate="contact.title">İletişim</span>
+          </h2>
+          <p class="section-subtitle" data-translate="contact.subtitle">Birlikte Harika Şeyler Yapalım! 🚀</p>
         </div>
 
-        <!-- Mesaj Gönder Kartı -->
-        <div class="contact-form-card">
-          <div class="card-header">
-            <div class="card-icon">💬</div>
-            <h3 class="card-title">Mesaj Gönder</h3>
-            <p class="card-description">Projeniz hakkında detaylı bilgi almak için formu doldurun</p>
-          </div>
+        <div class="grid-about">
+          <!-- İletişim Bilgileri Kartı -->
+          <div class="glass-card">
+            <div class="card-h">
+              <h3 class="card-title" data-translate="contact.infoTitle">İletişim Bilgileri</h3>
+            </div>
+            <div class="card-b">
+              <p class="text-muted" style="margin-bottom: 1.5rem;">Android projeleriniz için profesyonel destek
+                arıyorsanız, benimle iletişime geçin. Temiz kod, modern mimari ve kullanıcı dostu deneyimler konusunda
+                size yardımcı olabilirim.</p>
 
-          <div class="form-container">
-            <form class="enhanced-contact-form" id="contact-form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="first_name">Ad *</label>
-                  <input id="first_name" name="first_name" placeholder="Adınız" autocomplete="given-name" required />
+              <div class="contact-methods">
+                <div class="contact-method">
+                  <div class="method-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div class="method-details">
+                    <div class="method-label">E-posta</div>
+                    <a href="mailto:vahitkeskin07@gmail.com" class="method-value">vahitkeskin07@gmail.com</a>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="last_name">Soyad *</label>
-                  <input id="last_name" name="last_name" placeholder="Soyadınız" autocomplete="family-name" required />
+
+                <div class="skill-chips" style="margin-top: 1rem;">
+                  <a class="badge" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener">
+                    <i class="fab fa-github"></i> GitHub
+                  </a>
+                  <a class="badge" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank"
+                    rel="noreferrer noopener">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                  <a class="badge" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank"
+                    rel="noreferrer noopener">
+                    <i class="fab fa-google-play"></i> Play Store
+                  </a>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div class="form-group">
-                <label for="email">E-posta *</label>
-                <input id="email" name="email" type="email" placeholder="ornek@email.com" inputmode="email"
-                  autocomplete="email" required />
-              </div>
+          <!-- Mesaj Gönder Kartı -->
+          <div class="glass-card">
+            <div class="card-h">
+              <h3 data-translate="contact.formTitle">Mesaj Gönder</h3>
+            </div>
+            <div class="card-b">
+              <form id="contact-form">
+                <div class="grid grid-2" style="gap: 1rem; margin-bottom: 1rem;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label for="first_name">Ad *</label>
+                    <input id="first_name" name="first_name" placeholder="Adınız" required />
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label for="last_name">Soyad *</label>
+                    <input id="last_name" name="last_name" placeholder="Soyadınız" required />
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label for="subject">Konu *</label>
-                <input id="subject" name="subject" placeholder="Proje konusu" required />
-              </div>
+                <div class="form-group">
+                  <label for="email">E-posta *</label>
+                  <input id="email" name="email" type="email" placeholder="ornek@email.com" required />
+                </div>
 
-              <div class="form-group">
-                <label for="message">Mesaj *</label>
-                <textarea id="message" name="message" placeholder="Projeniz hakkında detaylı bilgi verin..."
-                  required></textarea>
-              </div>
+                <div class="form-group">
+                  <label for="message">Mesaj *</label>
+                  <textarea id="message" name="message" placeholder="Projeniz hakkında detaylı bilgi verin..." required
+                    style="min-height: 120px;"></textarea>
+                </div>
 
-              <button type="submit" class="submit-btn" id="sendBtn" disabled>
-                <i class="fas fa-paper-plane"></i>
-                <span>Mesajı Gönder</span>
-              </button>
-            </form>
+                <button type="submit" class="btn btn-primary" id="sendBtn"
+                  style="width: 100%; justify-content: center;">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Mesajı Gönder</span>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Contact Stats -->
-      <div class="contact-stats">
-        <div class="stat-item">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-content">
-            <h4>Hızlı Yanıt</h4>
-            <p>24 saat içinde</p>
+        <!-- Contact Stats -->
+        <div class="grid grid-3" style="margin-top: 3rem;">
+          <div class="glass-card stat-card">
+            <div class="stat-icon">⚡</div>
+            <h4 class="stat-title">Hızlı Yanıt</h4>
+            <p class="text-muted">24 saat içinde</p>
           </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">🛠️</div>
-          <div class="stat-content">
-            <h4>Uzman Destek</h4>
-            <p>Android & Kotlin</p>
+          <div class="glass-card stat-card">
+            <div class="stat-icon">🛠️</div>
+            <h4 class="stat-title">Uzman Destek</h4>
+            <p class="text-muted">Android & Kotlin</p>
           </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">💼</div>
-          <div class="stat-content">
-            <h4>Profesyonel</h4>
-            <p>5+ yıl deneyim</p>
+          <div class="glass-card stat-card">
+            <div class="stat-icon">💼</div>
+            <h4 class="stat-title">Profesyonel</h4>
+            <p class="text-muted">5+ yıl deneyim</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+  <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
 
   <script src="language.js"></script>
-  <script src="weather.js"></script>
   <script src="script.js"></script>
 </body>
 
