@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iradix - Gizlilik Politikası</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #0d0d1a; /* Cyberpunk Koyu Arka Plan */
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #1a1a2e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+            border-top: 5px solid #00f2ff; /* Iradix Neon Cyan */
+            border-bottom: 2px solid #ff00ff; /* Iradix Neon Pink */
+        }
+        h1 {
+            text-align: center;
+            color: #00f2ff;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .date {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #ff00ff; /* Başlıklarda neon pembe */
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-size: 1.4em;
+        }
+        h3 {
+             color: #00f2ff;
+             margin-top: 25px;
+             font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #b0b0b0;
+        }
+        ul {
+            margin-left: 10px;
+            padding-left: 20px;
+            background-color: rgba(0, 242, 255, 0.03);
+            border-left: 3px solid #00f2ff;
+            padding: 15px 25px;
+            border-radius: 0 8px 8px 0;
+            list-style-type: square;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #00f2ff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 8px #ff00ff;
+        }
+        .highlight-box {
+            background-color: rgba(255, 0, 255, 0.05);
+            border: 1px solid #ff00ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IRADIX GİZLİLİK POLİTİKASI</h1>
+        <p class="date"><strong>Son Güncelleme: 02.04.2026</strong></p>
+
+        <p>
+            <strong>Iradix</strong> ("Uygulama"), dijital sağlığınızı optimize etmek ve ekran sürenizi yönetmenize yardımcı olmak amacıyla tasarlanmış bir ekosistemdir. 
+            Bu Gizlilik Politikası, verilerinizin gizliliğini nasıl koruduğumuzu ve yerel öncelikli veri politikamızı açıklamaktadır. 
+            Uygulamayı kullanarak bu şartları kabul etmiş olursunuz.
+        </p>
+
+        <h2>1. Yerel Veri (Local-First) Yaklaşımı</h2>
+        <p>
+            Iradix, gizliliği temel bir tasarım ilkesi olarak kabul eder. Uygulama içerisinde toplanan kullanım verileri şu prensiplerle işlenir:
+        </p>
+        <ul>
+            <li><strong>Bulut Aktarımı Yok:</strong> Uygulama kullanım istatistikleriniz, hangi uygulamada ne kadar vakit geçirdiğiniz veya cihaz bilgileriniz hiçbir harici sunucuya yüklenmez.</li>
+            <li><strong>Yerel Depolama:</strong> Verileriniz yalnızca cihazınızda, güvenli bir yerel veritabanında (Room KMP) ve şifrelenmiş tercihler dosyasında (DataStore) saklanır.</li>
+            <li><strong>Kontrol Sizde:</strong> Verileriniz cihazınızdan dışarı çıkmaz ve uygulamayı sildiğinizde tüm takip verileri kalıcı olarak yok edilir.</li>
+        </ul>
+
+        <h2>2. Özel İzinler ve Erişilebilirlik Servisi</h2>
+        <p>
+            Iradix'in "Evrensel Gri Tonlama" ve "Dijital Otomasyon" özelliklerini sunabilmesi için Android **Erişilebilirlik Servisi'ni (Accessibility Service)** kullanması gerekmektedir:
+        </p>
+        <ul>
+            <li><strong>Kullanım Amacı:</strong> Bu servis, yalnızca sistem ayarlarındaki gri tonlama (grayscale) modunu otomatize etmek ve belirlenen mola sürelerinde ekran etkileşimini yönetmek için kullanılır.</li>
+            <li><strong>Veri İzleme Yasağı:</strong> Erişilebilirlik servisi aracılığıyla yazdığınız mesajlar, parolalarınız, kredi kartı bilgileriniz veya herhangi bir kişisel içeriğiniz kesinlikle izlenmez, kaydedilmez ve paylaşılmaz.</li>
+            <li><strong>Tam Şeffaflık:</strong> Bu izin tamamen isteğe bağlıdır; reddedilmesi durumunda uygulama çalışmaya devam eder ancak gri tonlama otomasyonu gibi gelişmiş özellikler devre dışı kalır.</li>
+        </ul>
+
+        <h2>3. Toplanan Teknik Veriler</h2>
+        <p>
+            Uygulama, size "Sistem HUD" (Gösterge Paneli) sunabilmek için aşağıdaki donanım bilgilerine anlık olarak erişir:
+        </p>
+        <ul>
+            <li><strong>Cihaz Durumu:</strong> Batarya sağlığı, sıcaklığı, RAM kullanımı ve işlemci yükü.</li>
+            <li><strong>Uygulama Kullanımı:</strong> Hangi uygulamaların açıldığı ve aktif kalma süreleri (ekran süresi takibi için).</li>
+            <li>Bu veriler sadece görselleştirme ve yerel raporlama amacıyla kullanılır; anonim dahi olsa dışarı sızdırılmaz.</li>
+        </ul>
+
+        <h2>4. Üçüncü Taraf Hizmetler</h2>
+        <p>
+            Iradix, reklamsız ve takipsiz bir deneyim sunmayı taahhüt eder:
+        </p>
+        <ul>
+            <li><strong>Reklamlar:</strong> Uygulama içerisinde Google AdMob veya benzeri reklam ağları bulunmamaktadır.</li>
+            <li><strong>Analiz:</strong> Kullanıcı davranışlarını takip eden harici analiz araçları (Firebase Analytics vb.) kullanılmamaktadır.</li>
+            <li><strong>Bağlantılar:</strong> Uygulama içerisinden GitHub veya sosyal medya profillerine verilen bağlantılarda, ilgili platformun kendi gizlilik politikası geçerlidir.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h2 style="margin-top:0; border-bottom: none; color: #00f2ff;">5. Veri Silme ve "Danger Zone"</h2>
+            <p>
+                Kullanıcılarımıza verileri üzerinde mutlak kontrol sunuyoruz:
+            </p>
+            <ul>
+                <li>Uygulama içerisindeki ayarlar menüsünden tüm takip geçmişini ve kişisel tercihleri tek tıkla silebilirsiniz.</li>
+                <li>Uygulamanın kaldırılması durumunda, Android işletim sistemi tarafından korunan yerel veritabanı dosyaları otomatik olarak temizlenir.</li>
+            </ul>
+        </div>
+
+        <h2>6. Çocukların Gizliliği</h2>
+        <p>
+            Iradix, çocuklardan bilerek kişisel veri toplamaz. Uygulama yapısı gereği hiçbir kullanıcı verisini toplamadığı için her yaştan kullanıcı için güvenlidir.
+        </p>
+
+        <h2>7. Değişiklikler</h2>
+        <p>
+            Iradix'e yeni siber özellikler eklendikçe bu politika güncellenebilir. Güncellemeler uygulama üzerinden veya bu sayfa aracılığıyla duyurulur.
+        </p>
+
+        <h2>8. İletişim</h2>
+        <p>
+            Iradix ekosistemi veya gizlilik pratiklerimizle ilgili sorularınız için geliştiriciye ulaşabilirsiniz:
+        </p>
+        <p style="text-align: center; margin-top: 30px; border: 1px dashed #00f2ff; padding: 15px;">
+            <strong>Geliştirici:</strong> Vahit Keskin<br>
+            <strong>Web:</strong> <a href="https://github.com/vahitkeskin" target="_blank">github.com/vahitkeskin</a><br>
+            <strong>E-posta:</strong> <a href="mailto:vhtkskn63@gmail.com">vhtkskn63@gmail.com</a>
+        </p>
+
+        <div class="footer">
+            &copy; 2026 Iradix Digital Well-being HUD. Tüm Hakları Saklıdır.<br>
+            <em>"Take Your Time Back."</em>
+        </div>
+    </div>
+</body>
+</html>
