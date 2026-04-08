@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>scrcpy Rehberi • Vahit Keskin</title>
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="container nav" style="padding: 1rem 2rem;">
+      <a href="index.html#home" class="brand">Vahit Keskin<span class="dot">.</span></a>
+      <nav class="navlinks" aria-label="Birincil">
+        <a href="index.html#home">Ana Sayfa</a>
+        <a href="about.html">Hakkımda</a>
+        <a href="shares.html" aria-current="page">Paylaşımlar</a>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-secondary" href="shares.html"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section pt-0">
+      <div class="container" data-animate>
+        <div class="glass-card" style="margin-top: 2rem; padding: 3rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+            <div>
+              <h1 class="section-title" style="margin-bottom: 0.5rem;">📱 scrcpy (Screen Copy)</h1>
+              <p class="text-muted">Android cihazınızı USB veya TCP/IP üzerinden mirroring ve kontrol etme aracı.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+               <span class="badge" style="background: hsla(245, 82%, 67%, 0.1); color: var(--brand);">v2.4+</span>
+               <span class="badge" style="background: hsla(142, 70%, 50%, 0.1); color: #10b981;">Open Source</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 2.5rem; border-radius: var(--radius-md); overflow: hidden; border: var(--glass-border);">
+            <img src="images/scrcpy_showcase.png" alt="scrcpy guide" style="width: 100%; max-height: 500px; object-fit: cover;">
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
+            <a href="https://github.com/Genymobile/scrcpy" target="_blank" class="btn btn-primary">
+              <i class="fab fa-github"></i> GitHub Repository
+            </a>
+            <a href="https://github.com/Genymobile/scrcpy/releases" target="_blank" class="btn btn-secondary">
+              <i class="fas fa-download"></i> Latest Releases
+            </a>
+          </div>
+
+          <div class="content-block">
+            <h2 style="color: var(--text); margin-bottom: 1.5rem;">Genel Bakış</h2>
+            <p class="text-muted">scrcpy, Android cihazları bilgisayar üzerinden kontrol etmek için geliştirilmiş, yüksek performanslı ve düşük gecikmeli bir mirroring aracıdır. Root gerektirmez ve cihazın ekranını bilgisayarda gösterirken aynı zamanda fare ve klavye ile tam kontrol sağlar.</p>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Kurulum Komutları</h3>
+            <p class="text-muted">Her işletim sistemi için terminal üzerinden hızlı kurulum yapabilirsiniz:</p>
+
+            <div class="tech-grid">
+              <div class="code-block-wrapper">
+                <div class="code-header">
+                  <span>Windows (WinGet)</span>
+                  <button class="copy-btn" onclick="copyToClipboard('winget install Genymobile.scrcpy', this)">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="code-content">winget install Genymobile.scrcpy</div>
+              </div>
+
+              <div class="code-block-wrapper">
+                <div class="code-header">
+                  <span>macOS (Homebrew)</span>
+                  <button class="copy-btn" onclick="copyToClipboard('brew install scrcpy', this)">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="code-content">brew install scrcpy</div>
+              </div>
+
+              <div class="code-block-wrapper">
+                <div class="code-header">
+                  <span>Linux (Debian/Ubuntu)</span>
+                  <button class="copy-btn" onclick="copyToClipboard('sudo apt install scrcpy', this)">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="code-content">sudo apt install scrcpy</div>
+              </div>
+            </div>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Gelişmiş Kullanım Seçenekleri</h3>
+            <p class="text-muted">En sık kullanılan parametreler ve amaçları:</p>
+
+            <div class="code-block-wrapper">
+              <div class="code-header">
+                <span>Ekran Kaydı ve Optimizasyon</span>
+                <button class="copy-btn" onclick="copyToClipboard('scrcpy --record file.mp4 --max-size 1024 --bit-rate 8M --no-audio', this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+              <div class="code-content">scrcpy --record file.mp4 --max-size 1024 --bit-rate 8M --no-audio</div>
+            </div>
+            <ul class="text-muted" style="margin-left: 1.5rem; margin-bottom: 2rem;">
+              <li><code>--record</code>: Ekranı .mp4 formatında kaydeder.</li>
+              <li><code>--max-size</code>: Ekran genişliğini veya yüksekliğini sınırlar (FPS artışı sağlar).</li>
+              <li><code>--bit-rate</code>: Video akış kalitesini belirler (varsayılan 8M).</li>
+              <li><code>--no-audio</code>: Ses aktarımını kapatır (eski cihazlar için performans artırır).</li>
+            </ul>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Kısayollar (MOD = Sol Alt / Windows Tuşu)</h3>
+            <div class="tech-table-wrapper">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>İşlem</th>
+                    <th>Kısayol</th>
+                  </tr>
+                </thead>
+                <tbody class="text-muted">
+                  <tr>
+                    <td>Tam Ekran Modu</td>
+                    <td><kbd>MOD</kbd> + <kbd>F</kbd></td>
+                  </tr>
+                  <tr>
+                    <td>Ana Sayfa (Home)</td>
+                    <td><kbd>MOD</kbd> + <kbd>H</kbd></td>
+                  </tr>
+                  <tr>
+                    <td>Geri (Back)</td>
+                    <td><kbd>MOD</kbd> + <kbd>B</kbd></td>
+                  </tr>
+                  <tr>
+                    <td>Son Uygulamalar</td>
+                    <td><kbd>MOD</kbd> + <kbd>M</kbd></td>
+                  </tr>
+                  <tr>
+                    <td>Cihazın Ekranını Kapat (PC'de Aktif Tut)</td>
+                    <td><kbd>MOD</kbd> + <kbd>O</kbd></td>
+                  </tr>
+                  <tr>
+                    <td>Pano İçeriğini Yapıştır</td>
+                    <td><kbd>MOD</kbd> + <kbd>V</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Kablosuz Bağlantı Rehberi</h3>
+            <p class="text-muted">Cihazınızı kablodan kurtarmak için şu adımları izleyin:</p>
+            <div class="code-block-wrapper">
+              <div class="code-header">
+                <span>Wi-Fi TCP/IP Modu</span>
+                <button class="copy-btn" onclick="copyToClipboard('adb tcpip 5555 && adb connect [CİHAZ_IP]:5555 && scrcpy', this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+              <div class="code-content">
+                adb tcpip 5555<br>
+                adb connect [CİHAZ_IP]:5555<br>
+                scrcpy
+              </div>
+            </div>
+            <p class="text-muted">Not: Bu işlem için cihaz ve bilgisayar aynı Wi-Fi ağında olmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+    © <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.
+  </footer>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

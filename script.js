@@ -248,7 +248,31 @@ function setupContactForm() {
     return allOk;
   }
 
-  [firstNameInput, lastNameInput, emailInput, subjectInput, messageInput].forEach(inp => {
+  // Image upload preview
+  const imageInput = $('#image_upload');
+  const previewContainer = $('#image-preview-container');
+  const previewImg = $('#image_preview');
+  const removeBtn = $('#remove_image');
+
+  imageInput?.addEventListener('change', () => {
+    const file = imageInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewImg.src = e.target.result;
+        previewContainer.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  removeBtn?.addEventListener('click', () => {
+    imageInput.value = '';
+    previewContainer.style.display = 'none';
+    previewImg.src = '';
+  });
+
+  [firstNameInput, lastNameInput, emailInput, subjectInput, messageInput, imageInput].forEach(inp => {
     inp?.addEventListener('input', validateForm);
     inp?.addEventListener('blur', validateForm);
   });
@@ -282,28 +306,26 @@ function setupContactForm() {
 
       // Primary: send via FormSubmit
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 12000);
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-      const payload = {
-        name,
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        message,
-        _subject: `[iamvahitkeskin.com] ${subject}`,
-        _captcha: 'false',
-        _template: 'table'
-      };
+      const ajaxData = new FormData();
+      ajaxData.append('name', name);
+      ajaxData.append('email', email);
+      ajaxData.append('message', message);
+      ajaxData.append('_subject', `[iamvahitkeskin.com] ${subject}`);
+      ajaxData.append('_captcha', 'false');
+      ajaxData.append('_template', 'table');
+      
+      const file = imageInput?.files[0];
+      if (file) {
+        ajaxData.append('attachment', file);
+      }
 
       let sent = false;
       try {
         const res = await fetch('https://formsubmit.co/ajax/vahitkeskin07@gmail.com', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload),
+          body: ajaxData,
           signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -1123,3 +1145,19 @@ function setupWeather() {
 
 // Ensure it's global for script.js
 window.setupWeather = setupWeather;
+
+// Global function to copy text to clipboard with feedback
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i>';
+    btn.classList.add('copied');
+    
+    setTimeout(() => {
+      btn.innerHTML = originalContent;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(err => {
+    console.error('Copy failed:', err);
+  });
+}

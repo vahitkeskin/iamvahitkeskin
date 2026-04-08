@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gemini AI Rehberi • Vahit Keskin</title>
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="container nav" style="padding: 1rem 2rem;">
+      <a href="index.html#home" class="brand">Vahit Keskin<span class="dot">.</span></a>
+      <nav class="navlinks" aria-label="Birincil">
+        <a href="index.html#home">Ana Sayfa</a>
+        <a href="about.html">Hakkımda</a>
+        <a href="shares.html" aria-current="page">Paylaşımlar</a>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-secondary" href="shares.html"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section pt-0">
+      <div class="container" data-animate>
+        <div class="glass-card" style="margin-top: 2rem; padding: 3rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+            <div>
+              <h1 class="section-title" style="margin-bottom: 0.5rem;">✨ Gemini AI (Google AI)</h1>
+              <p class="text-muted">Google'ın en yetenekli çok modlu (multimodal) yapay zeka modeli ailesi.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+               <span class="badge" style="background: hsla(280, 82%, 67%, 0.1); color: #a855f7;">Gemini 1.5 Pro</span>
+               <span class="badge" style="background: hsla(189, 94%, 53%, 0.1); color: var(--accent);">Multimodal</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 2.5rem; border-radius: var(--radius-md); overflow: hidden; border: var(--glass-border);">
+            <img src="images/gemini_ai_abstract.png" alt="gemini ai guide" style="width: 100%; max-height: 500px; object-fit: cover;">
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
+            <a href="https://ai.google.dev/" target="_blank" class="btn btn-primary">
+              <i class="fas fa-code"></i> Developer Portal
+            </a>
+            <a href="https://aistudio.google.com/" target="_blank" class="btn btn-secondary">
+              <i class="fas fa-bolt"></i> Google AI Studio
+            </a>
+            <a href="https://github.com/google-gemini/cookbook" target="_blank" class="btn btn-secondary">
+              <i class="fab fa-github"></i> API Cookbook
+            </a>
+          </div>
+
+          <div class="content-block">
+            <h2 style="color: var(--text); margin-bottom: 1.5rem;">Yapay Zekada Yeni Dönem</h2>
+            <p class="text-muted">Gemini, Google tarafından sıfırdan "çok modlu" (natively multimodal) olarak eğitilmiş, metin, kod, ses, görüntü ve videoyu aynı anda anlayıp işleyebilen bir modeldir. 1 Milyon+ token kapasitesine sahip bağlam penceresi (context window) ile devasa veri setlerini tek seferde analiz edebilir.</p>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Geliştirici Araçları ve SDK Kurulumu</h3>
+            <p class="text-muted">Projelerinize Gemini API'yi dahil etmek için şu komutları kullanabilirsiniz:</p>
+
+            <div class="tech-grid">
+              <div class="code-block-wrapper">
+                <div class="code-header">
+                  <span>Python SDK</span>
+                  <button class="copy-btn" onclick="copyToClipboard('pip install -q -U google-generativeai', this)">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="code-content">pip install -q -U google-generativeai</div>
+              </div>
+
+              <div class="code-block-wrapper">
+                <div class="code-header">
+                  <span>Node.js SDK</span>
+                  <button class="copy-btn" onclick="copyToClipboard('npm install @google/generative-ai', this)">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="code-content">npm install @google/generative-ai</div>
+              </div>
+            </div>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Uygulama Örnekleri (Python & Android)</h3>
+            <p class="text-muted">Basit bir içerik oluşturma (content generation) örneği:</p>
+
+            <div class="code-block-wrapper">
+              <div class="code-header">
+                <span>Python API Kullanımı</span>
+                <button class="copy-btn" onclick="copyToClipboard('import google.generativeai as genai\n\ngenai.configure(api_key=\"YOUR_API_KEY\")\nmodel = genai.GenerativeModel(\"gemini-1.5-flash\")\n\nresponse = model.generate_content(\"Explain AI in 3 points.\")\nprint(response.text)', this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+              <div class="code-content" style="white-space: pre-wrap;">import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+response = model.generate_content("Explain AI in 3 points.")
+print(response.text)</div>
+            </div>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Temel Yetenekler</h3>
+            <div class="tech-table-wrapper">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Özellik</th>
+                    <th>Açıklama</th>
+                  </tr>
+                </thead>
+                <tbody class="text-muted">
+                  <tr>
+                    <td>Vision (Görüntü İşleme)</td>
+                    <td>Resimleri analiz ederek nesneleri tanımlar, metinleri okur veya betimler.</td>
+                  </tr>
+                  <tr>
+                    <td>Code Execution (Kod Çalıştırma)</td>
+                    <td>Yazdığı kodları izole bir ortamda çalıştırıp sonucunu dönebilir.</td>
+                  </tr>
+                  <tr>
+                    <td>Function Calling</td>
+                    <td>Kendi fonksiyonlarınızı API üzerinden çağırarak verilere bağlayabilirsiniz.</td>
+                  </tr>
+                  <tr>
+                    <td>Structured Output</td>
+                    <td>Yanıtları doğrudan JSON formatında alarak API entegrasyonu sağlar.</td>
+                  </tr>
+                  <tr>
+                    <td>Long Context</td>
+                    <td>1 saatlik video, 30.000 satırlık kod veya 700.000 kelimelik metni analiz eder.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Nasıl Başlanır?</h3>
+            <p class="text-muted">Geliştirme sürecinizi hızlandırmak için şu adımları izleyin:</p>
+            <ul class="text-muted" style="margin-left: 1.5rem; margin-bottom: 2rem;">
+              <li><strong>Google AI Studio:</strong> Tarayıcı üzerinden prompt mühendisliği yaparak modelleri test edin ve API anahtarınızı alın.</li>
+              <li><strong>Model Seçimi:</strong> Hızlı yanıtlar için "Gemini 1.5 Flash", derin analizler için "Gemini 1.5 Pro" kullanın.</li>
+              <li><strong>Prompting:</strong> Çok modlu yeteneklerden faydalanmak için resim ve metni bir arada gönderen promptlar hazırlayın.</li>
+            </ul>
+            
+            <div style="background: var(--surface-2); padding: 1.5rem; border-radius: 8px; border: var(--glass-border); border-left: 4px solid var(--accent);">
+              <h4 style="color: var(--text); margin-bottom: 0.5rem;"><i class="fas fa-lightbulb"></i> Uzman İpucu</h4>
+              <p class="text-muted" style="font-size: 0.95rem;">Android geliştirmede Gemini modelini Jetpack Compose ile entegre ederek, uygulama içinde gerçek zamanlı asistanlar veya akıllı görüntü analiz süreçleri oluşturabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+    © <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.
+  </footer>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

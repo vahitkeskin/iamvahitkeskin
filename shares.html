@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projeler • Vahit Keskin</title>
-  <meta name="description" content="Vahit Keskin projeler" />
+  <title>Paylaşımlar • Vahit Keskin</title>
+  <meta name="description" content="Vahit Keskin paylaşımları" />
   <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -109,18 +109,81 @@
   </header>
 
   <main>
-    <section id="projects" class="section">
+    <section id="shares" class="section">
       <div class="container" data-animate>
         <div class="section-header">
           <h2 class="section-title">
-            <i class="fas fa-rocket"></i>
-            <span data-translate="projects.title">Projeler & Uygulamalar</span>
+            <i class="fas fa-share-nodes"></i>
+            <span data-translate="shares.title">Paylaşımlar</span>
           </h2>
-          <p class="section-subtitle" data-translate="projects.subtitle">Gerçek dünya problemlerine modern çözümler.</p>
+          <p class="section-subtitle" data-translate="shares.subtitle">Faydalı araçlar, deneyimlerim ve incelemelerim.</p>
         </div>
-        <div class="grid grid-3" id="projects-container">
-          <!-- Dynamically rendered by script.js -->
+        
+        <div class="shares-list">
+          <!-- scrcpy card -->
+          <div class="share-card-container">
+            <a href="share_scrcpy.html" class="share-card link-card">
+              <div class="card-image-preview">
+                <img src="images/scrcpy_showcase.png" alt="scrcpy preview">
+              </div>
+              <div class="card-details">
+                <div class="link-card-header">
+                  <span data-translate="shares.scrcpy.title">📱 scrcpy</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="share-content">
+                  <p>Android cihazınızı herhangi bir root izni olmadan bilgisayarınıza yansıtın ve kontrol edin. Yüksek performanslı ekran paylaşımı için en iyi açık kaynaklı araç.</p>
+                  <div style="margin-top: 1rem;">
+                    <span class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Devamını Oku</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- gemini card -->
+          <div class="share-card-container">
+            <a href="share_gemini.html" class="share-card link-card">
+              <div class="card-image-preview">
+                <img src="images/gemini_ai_abstract.png" alt="gemini preview">
+              </div>
+              <div class="card-details">
+                <div class="link-card-header">
+                  <span data-translate="shares.gemini.title">✨ Gemini ile Yapılanlar</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="share-content">
+                  <p>Google Gemini AI ile yazılım geliştirme süreçlerini hızlandırma, kod analizi ve yaratıcı projeler geliştirme deneyimlerim.</p>
+                  <div style="margin-top: 1rem;">
+                    <span class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Devamını Oku</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- notion card -->
+          <div class="share-card-container">
+            <a href="share_notion.html" class="share-card link-card">
+              <div class="card-image-preview">
+                <img src="images/notion_workspace.png" alt="notion preview">
+              </div>
+              <div class="card-details">
+                <div class="link-card-header">
+                  <span data-translate="shares.notion.title">📝 Notion</span>
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="share-content">
+                  <p>Notion ile "İkinci Beyin" inşa etme, proje yönetimi ve bilgi organizasyonu için kullandığım profesyonel iş akışlarım.</p>
+                  <div style="margin-top: 1rem;">
+                    <span class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Devamını Oku</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
+        
       </div>
     </section>
   </main>
@@ -129,7 +192,12 @@
 
   <script src="data.js"></script>
   <script src="language.js"></script>
+  <script src="weather.js"></script>
   <script src="script.js"></script>
+  
+  <script>
+    // Cards no longer use details/summary
+  </script>
 </body>
 
 </html>
