@@ -16,25 +16,98 @@
   </script>
 </head>
 
-<body>
-  <header>
-    <div class="container nav" style="padding: 1rem 2rem;">
-      <a href="index.html#home" class="brand">Vahit Keskin<span class="dot">.</span></a>
-      <nav class="navlinks" aria-label="Birincil">
-        <a href="index.html#home">Ana Sayfa</a>
-        <a href="about.html">Hakkımda</a>
-        <a href="shares.html" aria-current="page">Paylaşımlar</a>
-      </nav>
-      <div class="actions">
-        <a class="btn btn-secondary" href="shares.html"><i class="fas fa-arrow-left"></i> Geri Dön</a>
-      </div>
+<body class="has-sidebar">
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <a href="index.html#home" class="sidebar-item">
+        <i class="fas fa-house"></i>
+        <span data-translate="nav.home">Ana Sayfa</span>
+      </a>
+      <a href="about.html" class="sidebar-item">
+        <i class="fas fa-user-tie"></i>
+        <span data-translate="nav.about">Hakkımda</span>
+      </a>
+      <a href="shares.html" class="sidebar-item active">
+        <i class="fas fa-bullhorn"></i>
+        <span data-translate="nav.shares">Paylaşımlar</span>
+      </a>
+      <a href="skills.html" class="sidebar-item">
+        <i class="fas fa-bolt"></i>
+        <span data-translate="nav.skills">Yetenekler</span>
+      </a>
+      <a href="experience.html" class="sidebar-item">
+        <i class="fas fa-briefcase"></i>
+        <span data-translate="nav.experience">Deneyim</span>
+      </a>
+      <a href="projects.html" class="sidebar-item">
+        <i class="fas fa-rocket"></i>
+        <span data-translate="nav.projects">Projeler</span>
+      </a>
+      <a href="contact.html" class="sidebar-item">
+        <i class="fas fa-paper-plane"></i>
+        <span data-translate="nav.contact">İletişim</span>
+      </a>
     </div>
-  </header>
+  </nav>
 
-  <main>
-    <section class="section pt-0">
-      <div class="container" data-animate>
-        <div class="glass-card" style="margin-top: 2rem; padding: 3rem;">
+  <div class="main-wrapper">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+      <div class="scroll-progress"></div>
+    </div>
+
+    <header>
+      <div class="container nav" style="padding: 1rem 2rem;">
+        <a href="index.html#home" class="brand">Vahit Keskin<span class="dot">.</span></a>
+        <div class="actions">
+          <a class="btn btn-secondary" href="shares.html"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Detail Section -->
+      <section class="hero-detail-section">
+        <div class="container" data-animate="fade">
+          <h1 class="hero-detail-title">✨ Gemini AI (Google AI)</h1>
+          <p class="hero-detail-subtitle">Google'ın en yetenekli çok modlu (multimodal) yapay zeka modeli ailesi. Metin, kod, ses, görüntü ve videoyu aynı anda anlayabilir.</p>
+          
+          <!-- Badges -->
+          <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+            <span class="badge" style="background: hsla(280, 82%, 67%, 0.1); color: #a855f7;">Gemini 1.5 Pro</span>
+            <span class="badge" style="background: hsla(189, 94%, 53%, 0.1); color: var(--accent);">Multimodal</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section pt-0">
+        <div class="container">
+          <!-- Quick Specs -->
+          <div class="quick-specs" data-animate="scale">
+            <div class="spec-item">
+              <i class="fas fa-brain"></i>
+              <div class="spec-label">Zeka</div>
+              <div class="spec-value">State-of-the-Art</div>
+            </div>
+            <div class="spec-item">
+              <i class="fas fa-infinity"></i>
+              <div class="spec-label">Bağlam (Context)</div>
+              <div class="spec-value">1M+ Token</div>
+            </div>
+            <div class="spec-item">
+              <i class="fas fa-code"></i>
+              <div class="spec-label">Kodlama</div>
+              <div class="spec-value">Advanced</div>
+            </div>
+            <div class="spec-item">
+              <i class="fas fa-language"></i>
+              <div class="spec-label">Dil Desteği</div>
+              <div class="spec-value">Global</div>
+            </div>
+          </div>
+
+          <div class="glass-card" style="margin-top: 2rem; padding: 3rem;" data-animate>
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
             <div>
               <h1 class="section-title" style="margin-bottom: 0.5rem;">✨ Gemini AI (Google AI)</h1>
@@ -63,8 +136,19 @@
           </div>
 
           <div class="content-block">
-            <h2 style="color: var(--text); margin-bottom: 1.5rem;">Yapay Zekada Yeni Dönem</h2>
-            <p class="text-muted">Gemini, Google tarafından sıfırdan "çok modlu" (natively multimodal) olarak eğitilmiş, metin, kod, ses, görüntü ve videoyu aynı anda anlayıp işleyebilen bir modeldir. 1 Milyon+ token kapasitesine sahip bağlam penceresi (context window) ile devasa veri setlerini tek seferde analiz edebilir.</p>
+            <div data-animate="slide-right">
+              <h2 style="color: var(--text); margin-bottom: 1.5rem;">Genel Bakış</h2>
+              <p class="text-muted" style="margin-bottom: 1.5rem;">Gemini, Google DeepMind tarafından sıfırdan <strong>yerel çok modlu (natively multimodal)</strong> olarak eğitilmiş en gelişmiş yapay zeka model ailesidir. Diğer modellerin aksine, görüntü veya sesi anlamak için ayrı yardımcı modeller kullanmak yerine, tüm bu veri türlerini tek bir nöral ağ üzerinde aynı anda işleyebilme yeteneğine sahiptir.</p>
+              
+              <div style="background: hsla(280, 82%, 67%, 0.05); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #a855f7; margin: 2rem 0;">
+                <h4 style="margin-bottom: 0.8rem; color: var(--text);"><i class="fas fa-brain"></i> Model Mimarisi ve Ekosistem</h4>
+                <ul class="text-muted" style="font-size: 0.95rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                  <li><strong>Bağlam Penceresi (Context Window):</strong> Gemini 1.5 Pro, 1 milyondan fazla tokenı işleyebilir. Bu, 1 saatlik videoyu veya 700.000 kelimelik bir dokümanı tek seferde analiz edebileceği anlamına gelir.</li>
+                  <li><strong>Karmaşık Akıl Yürütme:</strong> "Chain-of-thought" ve mantıksal çıkarım yetenekleri, özellikle matematiksel problemler ve karmaşık kod mimarilerinde hata ayıklama süreçlerinde üstünlük sağlar.</li>
+                  <li><strong>Geliştirici Araçları:</strong> Vertex AI ve Google AI Studio üzerinden API erişimi sunarak, özel `system_instruction` parametreleri ile modele spesifik kimlikler ve görev tanımları atanabilir.</li>
+                </ul>
+              </div>
+            </div>
 
             <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Geliştirici Araçları ve SDK Kurulumu</h3>
             <p class="text-muted">Projelerinize Gemini API'yi dahil etmek için şu komutları kullanabilirsiniz:</p>
@@ -97,7 +181,7 @@
             <div class="code-block-wrapper">
               <div class="code-header">
                 <span>Python API Kullanımı</span>
-                <button class="copy-btn" onclick="copyToClipboard('import google.generativeai as genai\n\ngenai.configure(api_key=\"YOUR_API_KEY\")\nmodel = genai.GenerativeModel(\"gemini-1.5-flash\")\n\nresponse = model.generate_content(\"Explain AI in 3 points.\")\nprint(response.text)', this)">
+                <button class="copy-btn" onclick="copyToClipboard('import google.generativeai as genai\n\ngenai.configure(api_key=\'YOUR_API_KEY\')\nmodel = genai.GenerativeModel(\'gemini-1.5-flash\')\n\nresponse = model.generate_content(\'Explain AI in 3 points.\')\nprint(response.text)', this)">
                   <i class="fas fa-copy"></i>
                 </button>
               </div>
@@ -144,27 +228,41 @@ print(response.text)</div>
               </table>
             </div>
 
-            <h3 style="color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem;">Nasıl Başlanır?</h3>
-            <p class="text-muted">Geliştirme sürecinizi hızlandırmak için şu adımları izleyin:</p>
-            <ul class="text-muted" style="margin-left: 1.5rem; margin-bottom: 2rem;">
-              <li><strong>Google AI Studio:</strong> Tarayıcı üzerinden prompt mühendisliği yaparak modelleri test edin ve API anahtarınızı alın.</li>
-              <li><strong>Model Seçimi:</strong> Hızlı yanıtlar için "Gemini 1.5 Flash", derin analizler için "Gemini 1.5 Pro" kullanın.</li>
-              <li><strong>Prompting:</strong> Çok modlu yeteneklerden faydalanmak için resim ve metni bir arada gönderen promptlar hazırlayın.</li>
-            </ul>
-            
-            <div style="background: var(--surface-2); padding: 1.5rem; border-radius: 8px; border: var(--glass-border); border-left: 4px solid var(--accent);">
-              <h4 style="color: var(--text); margin-bottom: 0.5rem;"><i class="fas fa-lightbulb"></i> Uzman İpucu</h4>
-              <p class="text-muted" style="font-size: 0.95rem;">Android geliştirmede Gemini modelini Jetpack Compose ile entegre ederek, uygulama içinde gerçek zamanlı asistanlar veya akıllı görüntü analiz süreçleri oluşturabilirsiniz.</p>
+            <!-- YouTube Spotlight -->
+            <div class="youtube-spotlight" data-animate="fade">
+              <img src="images/youtube_channel_banner_mockup_1775639736869.png" class="youtube-banner-image" alt="Dörtten Bire YouTube">
+              <div class="youtube-content">
+                <div class="youtube-badge"><i class="fab fa-youtube"></i> Featured Content</div>
+                <h2 class="youtube-channel-name" data-translate="youtube.title">🎬 Dörtten Bire: Teknoloji ve Gelişim</h2>
+                <p class="youtube-channel-desc" data-translate="youtube.description">Yazılım dünyasındaki yenilikler, modern Android geliştirme teknikleri ve profesyonel gelişim üzerine derinlemesine rehberler.</p>
+                <a href="https://www.youtube.com/@dorttenbireteknolojivegelisim" target="_blank" class="btn btn-primary" style="align-self: flex-start; background: #ff0000; box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);">
+                  <i class="fab fa-youtube"></i> <span data-translate="youtube.button">Kanalı Ziyaret Et</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Next share navigation -->
+            <div class="share-navigation" data-animate>
+              <a href="share_scrcpy.html" class="nav-share-card">
+                <div class="nav-share-label">Eski Paylaşım</div>
+                <div class="nav-share-title">📱 scrcpy Rehberi</div>
+              </a>
+              <a href="share_notion.html" class="nav-share-card" style="text-align: right;">
+                <div class="nav-share-label">Sıradaki Paylaşım</div>
+                <div class="nav-share-title">📝 Notion Rehberi</div>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
   <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
     © <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.
   </footer>
+  </div> <!-- Close main-wrapper -->
+  <script src="language.js"></script>
+  <script src="weather.js"></script>
   <script src="script.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>

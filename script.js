@@ -1161,3 +1161,62 @@ function copyToClipboard(text, btn) {
     console.error('Copy failed:', err);
   });
 }
+
+// Sidebar Active Link Highlight
+function updateSidebarActive() {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const sidebarLinks = document.querySelectorAll('.sidebar-item');
+  
+  sidebarLinks.forEach(link => {
+    const linkPath = link.getAttribute('href').split('/').pop().split('#')[0];
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+// Ensure it runs on load
+document.addEventListener('DOMContentLoaded', updateSidebarActive);
+
+// Scroll Progress Bar
+function updateScrollProgress() {
+  const progressBar = document.querySelector('.scroll-progress');
+  if (!progressBar) return;
+  
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  progressBar.style.width = scrolled + "%";
+}
+
+// Global Animation Observer
+function setupScrollAnimations() {
+  const options = {
+    root: null,
+    threshold: 0.1,
+    rootMargin: "0px"
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-active');
+        // Once animated, no need to observe again
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    el.classList.add('animate-init');
+    observer.observe(el);
+  });
+}
+
+// Initialize Extras
+document.addEventListener('DOMContentLoaded', () => {
+  setupScrollAnimations();
+  window.addEventListener('scroll', updateScrollProgress);
+});

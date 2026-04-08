@@ -107,7 +107,10 @@ const TRANSLATIONS = {
     // Theme
     'theme.dark': 'Karanlık',
     'theme.light': 'Aydınlık',
-    'theme.auto': 'Cihaz'
+    'theme.auto': 'Cihaz',
+    'youtube.title': '🎬 Dörtten Bire: Teknoloji ve Gelişim',
+    'youtube.description': 'Yazılım dünyasındaki yenilikler, modern Android geliştirme teknikleri ve profesyonel gelişim üzerine derinlemesine rehberler.',
+    'youtube.button': 'Kanalı Ziyaret Et'
   },
 
   en: {
@@ -217,7 +220,10 @@ const TRANSLATIONS = {
     // Theme
     'theme.dark': 'Dark',
     'theme.light': 'Light',
-    'theme.auto': 'Device'
+    'theme.auto': 'Device',
+    'youtube.title': '🎬 Dörtten Bire: Tech & Growth',
+    'youtube.description': 'In-depth guides on software engineering, modern Android development, and professional self-improvement.',
+    'youtube.button': 'Visit Channel'
   },
 
   de: {

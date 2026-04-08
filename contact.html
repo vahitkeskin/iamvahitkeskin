@@ -19,7 +19,43 @@
   </script>
 </head>
 
-<body>
+<body class="has-sidebar">
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <a href="index.html#home" class="sidebar-item">
+        <i class="fas fa-house"></i>
+        <span data-translate="nav.home">Ana Sayfa</span>
+      </a>
+      <a href="about.html" class="sidebar-item">
+        <i class="fas fa-user-tie"></i>
+        <span data-translate="nav.about">Hakkımda</span>
+      </a>
+      <a href="shares.html" class="sidebar-item">
+        <i class="fas fa-bullhorn"></i>
+        <span data-translate="nav.shares">Paylaşımlar</span>
+      </a>
+      <a href="skills.html" class="sidebar-item">
+        <i class="fas fa-bolt"></i>
+        <span data-translate="nav.skills">Yetenekler</span>
+      </a>
+      <a href="experience.html" class="sidebar-item">
+        <i class="fas fa-briefcase"></i>
+        <span data-translate="nav.experience">Deneyim</span>
+      </a>
+      <a href="projects.html" class="sidebar-item">
+        <i class="fas fa-rocket"></i>
+        <span data-translate="nav.projects">Projeler</span>
+      </a>
+      <a href="contact.html" class="sidebar-item active">
+        <i class="fas fa-paper-plane"></i>
+        <span data-translate="nav.contact">İletişim</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="main-wrapper">
+
   <div class="top-header">
     <div class="container top-header-content">
       <div class="datetime-weather">
@@ -78,33 +114,9 @@
     <div class="container nav">
       <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
           class="dot">.</span></a>
-      <nav class="navlinks" aria-label="Birincil">
-        <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
-        <a href="about.html" data-translate="nav.about">Hakkımda</a>
-        <a href="shares.html" data-translate="nav.shares">Paylaşımlar</a>
-        <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
-        <a href="experience.html" data-translate="nav.experience">Deneyim</a>
-        <a href="projects.html" data-translate="nav.projects">Projeler</a>
-        <a href="contact.html" data-translate="nav.contact">İletişim</a>
-      </nav>
       <div class="actions">
         <a class="btn btn-primary" href="contact.html" data-translate="nav.work">Çalışalım</a>
       </div>
-      <button id="menuBtn" class="menu-toggle" aria-expanded="false" aria-controls="navDrawer"
-        aria-label="Menüyü aç/kapat">
-        <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-    <div id="navDrawer" class="nav-drawer container" role="dialog" aria-label="Mobil menü">
-      <a href="index.html#home" data-translate="nav.home">Ana Sayfa</a>
-      <a href="about.html" data-translate="nav.about">Hakkımda</a>
-      <a href="shares.html" data-translate="nav.shares">Paylaşımlar</a>
-      <a href="skills.html" data-translate="nav.skills">Yetenekler</a>
-      <a href="experience.html" data-translate="nav.experience">Deneyim</a>
-      <a href="projects.html" data-translate="nav.projects">Projeler</a>
-      <a href="contact.html" data-translate="nav.contact">İletişim</a>
     </div>
   </header>
 
@@ -234,6 +246,7 @@
 
   <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
 
+  </div> <!-- Close main-wrapper -->
   <script src="language.js"></script>
   <script src="script.js"></script>
 </body>
