@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BluMesh - Merkeziyetsiz Mesh İletişim Okyanusu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #0d0d1a; /* Cyberpunk Koyu Arka Plan */
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #1a1a2e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+            border-top: 5px solid #00f2ff; /* Iradix/BluMesh Neon Cyan */
+            border-bottom: 2px solid #ff00ff; /* Neon Pink */
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+        .hero-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        h1 {
+            text-align: center;
+            color: #00f2ff;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.8em;
+        }
+        h2 {
+            color: #ff00ff;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-size: 1.4em;
+        }
+        h3 {
+             color: #00f2ff;
+             margin-top: 25px;
+             font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #b0b0b0;
+        }
+        ul {
+            margin-left: 10px;
+            padding-left: 20px;
+            background-color: rgba(0, 242, 255, 0.03);
+            border-left: 3px solid #00f2ff;
+            padding: 15px 25px;
+            border-radius: 0 8px 8px 0;
+            list-style-type: square;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #00f2ff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 8px #ff00ff;
+        }
+        .highlight-box {
+            background-color: rgba(255, 0, 255, 0.05);
+            border: 1px solid #ff00ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            background-color: rgba(0, 242, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+        th {
+            background-color: rgba(0, 242, 255, 0.1);
+            color: #ff00ff;
+            font-weight: bold;
+        }
+        td:first-child {
+            color: #00f2ff;
+            font-weight: bold;
+            width: 30%;
+        }
+        pre {
+            background-color: #0a0a14;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            border-left: 3px solid #ff00ff;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        code {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00f2ff;
+            font-size: 0.9em;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="logo-container">
+            <img src="composeApp/src/androidMain/res/mipmap-xhdpi/ic_launcher_round.png" width="100" alt="BluMesh Logo" />
+        </div>
+
+        <h1>🌀 BLUMESH (ECHOMESH) <br> <span style="font-size: 0.6em; color: #888;">Merkeziyetsiz Mesh İletişim Okyanusu</span></h1>
+        
+        <img class="hero-image" src="composeApp/src/commonMain/composeResources/drawable/nebula_showcase.png" alt="Nebula Showcase" onerror="this.style.display='none'">
+
+        <p>
+            <strong>BluMesh</strong>, internet veya hücresel veri bağlantısı gerektirmeyen, tamamen <strong>merkeziyetsiz P2P (Peer-to-Peer)</strong> teknolojileri üzerine inşa edilmiş modern, güvenli ve yüksek estetik değerlere sahip bir iletişim platformudur.
+        </p>
+        <p>
+            <strong>Kotlin Multiplatform (KMP)</strong> ve <strong>Compose Multiplatform</strong> ekosisteminin en son yeteneklerini kullanan bu uygulama, çevrimdışı dünyada iletişimi yeniden tanımlar.
+        </p>
+
+        <h2>🆘 Kullanım Senaryoları: BluMesh Nerelerde Hayat Kurtarır?</h2>
+        <p>BluMesh, sadece bir mesajlaşma uygulaması değil, altyapının olmadığı durumlarda kritik bir iletişim köprüsüdür:</p>
+        <ul>
+            <li><strong>🌍 Doğal Afetler (Deprem, Sel vb.):</strong> Operatör altyapılarının çöktüğü veya baz istasyonlarının devre dışı kaldığı durumlarda, BluMesh cihazlar arasında bağımsız bir bağlantı kurar. Mahsur kalan kişilerin yakındaki diğer kullanıcılar üzerinden yardım çağırmasına veya ağa "hayattayım" bilgisini yaymasına olanak tanır.</li>
+            <li><strong>🏢 Apartman ve Ev İçi Haberleşme:</strong> İnternet bağlantınızın olmadığı durumlarda; alt-üst kat komşularınızla, yan oda veya yan binadaki aile bireylerinizle tamamen ücretsiz ve bağımsız şekilde haberleşebilirsiniz. Duvarların ötesindeki bağlantı gücüyle "Mesh" ağı üzerinden veri aktarabilirsiniz.</li>
+            <li><strong>🔇 Altyapı Sorunları ve Kısıtlı Alanlar:</strong> Metrolar, bodrum katları, asansörler veya kırsal bölgeler gibi hücresel verinin çekmediği noktalarda kesintisiz iletişim sağlar.</li>
+            <li><strong>🔐 Tam Gizlilik ve Yerel İletişim:</strong> Verilerin hiçbir zaman internete çıkmamasını istediğiniz, tamamen lokal ve izole kalması gereken hassas görüşmeler için fiziksel bir koruma kalkanı görevi görür.</li>
+        </ul>
+
+        <h2>🚀 Temel Özellikler & Yetenekler</h2>
+        
+        <h3>📶 1. Gelişmiş Mesh Network (Ağ Örgüsü)</h3>
+        <p>BluMesh, cihazlar arasında dinamik bir ağ kurar. Google Nearby Connections (Android) ve Multipeer Connectivity (iOS) köprülerini kullanarak:</p>
+        <ul>
+            <li><strong>Otomatik Keşif:</strong> Yakındaki cihazları Bluetooth Low Energy (BLE), Klasik Bluetooth ve Wi-Fi Direct üzerinden anında bulur.</li>
+            <li><strong>Çoklu Sıçrama (Multi-Hop):</strong> Mesajlar, hedef cihaza ulaşmak için aradaki diğer BluMesh kullanıcılarını "röle" olarak kullanabilir.</li>
+            <li><strong>Dinamik Yönlendirme:</strong> Ağdan ayrılan veya katılan cihazlara göre rota anında güncellenir.</li>
+        </ul>
+
+        <h3>🖼️ 2. Yüksek Kaliteli Medya Transferi</h3>
+        <ul>
+            <li><strong>Görsel Paylaşımı:</strong> Görüntüler 100% orijinal kalitede, binary-safe protokoller üzerinden mesh ağına yayılır.</li>
+            <li><strong>Akıllı Shimmer & Preview:</strong> Görseller yüklenirken veya transfer edilirken şık skeleton ekranlar ve mikro animasyonlar eşlik eder.</li>
+        </ul>
+
+        <h3>📍 3. Konum Odaklı Etkileşim</h3>
+        <ul>
+            <li><strong>Konum Paylaşımı:</strong> GPS tabanlı hassas konum verileri ağ üzerinde paylaşılabilir.</li>
+            <li><strong>Mesafe ve Yön:</strong> Keşfedilen peer'ların sinyal gücüne (RSSI) göre yaklaşık mesafe ve yön bilgisi hesaplanır.</li>
+        </ul>
+
+        <h3>📡 4. Sonar Radar Sistemi</h3>
+        <ul>
+            <li><strong>Etkileşimli Radar:</strong> Yakındaki cihazlar, profesyonel bir sonar arayüzü üzerinde görselleştirilir.</li>
+            <li><strong>İşitsel ve Titreşimli Geri Bildirim:</strong> Cihazlara yaklaştıkça frekansı değişen tonlar (<code>ToneGenerator</code>) ve haptik titreşimlerle fiziksel bir keşif deneyimi sunulur.</li>
+            <li><strong>Pinch-to-Zoom:</strong> Radar alanı 0.5x ile 5.0x arasında dinamik olarak ölçeklenebilir.</li>
+        </ul>
+
+        <h2>🎨 Tasarım Estetiği: Nebula Design System</h2>
+        <p>BluMesh, standart UI bileşenlerinin ötesine geçerek <strong>Glassmorphism</strong> ve <strong>Vibrant Dark Mode</strong> prensiplerini benimser:</p>
+        <ul>
+            <li><strong>Buzlu Cam Efektleri:</strong> Arka plan bulanıklaştırma ve yarı şeffaf katmanlarla derinlik hissi.</li>
+            <li><strong>Mikro Animasyonlar:</strong> Yazıyor göstergeleri, scribble progress çubukları ve ripple efektleri ile canlı bir deneyim.</li>
+            <li><strong>Dinamik Degradeler:</strong> Neon Violet, Electric Cyan ve Cyber Pink renk paletiyle modernize edilmiş görsel dil.</li>
+        </ul>
+
+        <h2>🛠️ Teknoloji Yığını (Tech Stack)</h2>
+        <p>BluMesh, modern yazılım dünyasının en sağlam araçlarıyla inşa edilmiştir:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Teknolojiler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dil</td>
+                    <td>Kotlin 2.1.0+ (100% Shared Logic)</td>
+                </tr>
+                <tr>
+                    <td>UI Framework</td>
+                    <td>Compose Multiplatform (Android, iOS)</td>
+                </tr>
+                <tr>
+                    <td>Bağlantı Katmanı</td>
+                    <td>Google Nearby Connections API, Multipeer Connectivity</td>
+                </tr>
+                <tr>
+                    <td>Durum Yönetimi</td>
+                    <td>MVI (Model-View-Intent) Architecture</td>
+                </tr>
+                <tr>
+                    <td>Veritabanı</td>
+                    <td>SQLDelight (KMP Persistence)</td>
+                </tr>
+                <tr>
+                    <td>Dependency Injection</td>
+                    <td>Koin v4.0.0</td>
+                </tr>
+                <tr>
+                    <td>Asenkron Yapı</td>
+                    <td>Kotlin Coroutines & Flow</td>
+                </tr>
+                <tr>
+                    <td>Yerel Depolama</td>
+                    <td>AppDataStore (Preference Management)</td>
+                </tr>
+                <tr>
+                    <td>Görüntüleme</td>
+                    <td>SKIE (Swift-Kotlin Interface Enabler)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h2 style="margin-top:0; border-bottom: none; color: #00f2ff;">🏛️ Mimari ve Tercihler: Neden Bu Teknolojiler?</h2>
+            <p>BluMesh projesi, sadece bir uygulama değil, aynı zamanda modern yazılım mimarilerinin bir sergisidir. Bu projeyi hiç bilmeyen birisi için temel taşlarımızı açıklayalım:</p>
+
+            <h3 style="color: #ff00ff;">🚀 1. Kotlin Multiplatform (KMP) Nedir ve Neden?</h3>
+            <p>KMP, "bir kere yaz, her yerde çalıştır" mantığının en modern halidir. Hibrit frameworklerin aksine, KMP her şeyi ortaklaştırmaz; sadece <strong>iş mantığını (business logic)</strong> ortaklaştırır.</p>
+            <ul>
+                <li><strong>Neden Seçildi?:</strong> Mesh ağının çalışma mantığı, handshake protokolleri, mesajların şifrelenmesi ve veritabanı işlemleri oldukça karmaşıktır. KMP ile tek bir yerden (commonMain) yönetiyoruz.</li>
+                <li><strong>Sonuç:</strong> Hatalar bir kez düzeltilir, özellikler her iki platforma aynı anda gelir, ancak her iki platformda da UI 100% native performansıyla çalışır.</li>
+            </ul>
+
+            <h3 style="color: #ff00ff;">🏛️ 2. ViewModel ve MVI Mimarisi</h3>
+            <p>Uygulamanın beyni olan <strong>ViewModel</strong>, kullanıcı arayüzü (UI) ile veriler arasındaki köprüdür.</p>
+            <ul>
+                <li><strong>ViewModel Rolü:</strong> Telefonunuzu yan çevirdiğinizde veya ekran kapandığında verilerin kaybolmamasını sağlar.</li>
+                <li><strong>MVI (Model-View-Intent):</strong> BluMesh bir "durum makinesi" gibi çalışır. Intent -> State -> UI döngüsünü izler.</li>
+                <li><strong>Neden MVI?:</strong> Mesh ağlarında mesajlar anlık olarak gelip gidebilir. MVI sayesinde UI her zaman "tek bir gerçeklik kaynağına" bakar, tutarsızlıkları önler.</li>
+            </ul>
+
+            <h3 style="color: #ff00ff;">💾 3. Veri Kalıcılığı: Neden SQLDelight (.sq)?</h3>
+            <p>Verilerin telefonda saklanması için genellikle <code>Room</code> kullanılır, ancak biz <strong>SQLDelight</strong> tercih ettik.</p>
+            <ul>
+                <li><strong>SQL-First:</strong> <code>.sq</code> dosyalarına saf SQL yazarsınız. Bu dosyalardan otomatik olarak Kotlin kodu üretilir.</li>
+                <li><strong>Neden Seçildi?:</strong> Karmaşık SQL sorgularında derleme zamanında (compile-time) hata kontrolü sağlar ve Android/iOS arasında %100 uyumludur.</li>
+            </ul>
+
+            <h3 style="color: #ff00ff;">🎛️ 4. Mesh ve 3-Way Handshake Protokolü</h3>
+            <p>İki cihazın birbirine güvenmesi için kullandığımız <strong>Handshake</strong> protokolü, TCP'nin temel mantığını baz alır:</p>
+            <ul>
+                <li><strong>SYN:</strong> "Merhaba, seninle konuşmak istiyorum (Benim adım: Vahit)"</li>
+                <li><strong>SYN-ACK:</strong> "Merhaba, isteğini aldım, ben de konuşmak istiyorum (Benim adım: Peer)"</li>
+                <li><strong>ACK:</strong> "Tamam, her şey net, iletişime geçebiliriz!"</li>
+            </ul>
+        </div>
+
+        <h2>🧩 Proje Mimarisi (MVI)</h2>
+        <p>Uygulama, öngörülebilir durum yönetimi (Predictable State Management) için <strong>MVI</strong> mimarisini kullanır:</p>
+        <ul>
+            <li><strong>Model (State):</strong> UI'ın herhangi bir andaki tek gerçeklik kaynağı (<code>ChatState</code>, <code>HomeState</code>).</li>
+            <li><strong>View (Intent):</strong> Kullanıcı eylemlerinin (mesaj gönderme, radar zoom vb.) intent olarak tetiklenmesi.</li>
+            <li><strong>Intent (Effect/Action):</strong> Yan etkilerin (toast, navigasyon) yönetildiği akış.</li>
+        </ul>
+        
+        <h3>Klasör Yapısı (Package Structure)</h3>
+<pre><code>com.vahitkeskin.blumesh
+├── data                  # Veri erişim katmanı
+│   ├── local             # Room (SQLDelight) ve DataStore tanımları
+│   └── repository        # Domain-Data köprüsü (Repo Implementations)
+├── di                    # Koin Modülleri (AppModule, ViewModelModule)
+├── domain                # İş mantığı (Pure Kotlin)
+│   ├── connectivity      # Mesh, Handshake ve Flood Routing protokolleri
+│   ├── model             # Data classlar ve Enumlar (LogicEnums, AppConstants)
+│   └── repository        # Interface tanımları
+├── presentation          # UI ve State yönetimi
+│   ├── components        # Yeniden kullanılabilir Nebula bileşenleri
+│   ├── navigation        # Ekranlar arası geçiş mantığı
+│   ├── screens           # Feature-based ekran klasörleri (Home, Chat, Radar)
+│   └── theme             # Renk paleti, Tipografi ve Dil desteği
+└── util                  # Yardımcı araçlar (MediaHandler, SoundManager)</code></pre>
+
+        <h2>📱 Ekranların Görevleri</h2>
+        
+        <h3>1. 🌈 Splash & Onboarding</h3>
+        <p>Uygulamanın ruhunu yansıtan etkileyici bir giriş. Kullanıcıya merkeziyetsiz iletişimin temel prensiplerini anlatan interaktif bir rehberlik sunar.</p>
+
+        <h3>2. 🏠 Home (Discovery)</h3>
+        <p>Ağın kalbi. Yakındaki tüm BluMesh düğümlerini (nodes) listeler, sinyal güçlerini gösterir ve handshake durumu tamamlanan cihazlarla hızlı bağlantı kurar.</p>
+
+        <h3>3. 💬 Chat & Messages</h3>
+        <p>Yüksek performanslı mesajlaşma ekranı.</p>
+        <ul>
+            <li><strong>Teslim Edildi/Okundu:</strong> Mesh ağı üzerinden anlık geri bildirim.</li>
+            <li><strong>Hızlı Dönüşümler:</strong> Mesajları ROT13 veya Mors alfabesine anında çevirme.</li>
+            <li><strong>Medya:</strong> Fotoğraflar orijinal kalitede ve optimize edilmiş önizleme ile görüntülenir.</li>
+        </ul>
+
+        <h3>4. 📡 Sonar Radar</h3>
+        <p>Cihazları fiziksel mesafe ve yön bazlı keşfetmek için kullanılan deneysel ekran. Harita veya liste görünümünden sıkılanlar için "proximity-based" bir deneyim sağlar.</p>
+
+        <h3>5. ⚙️ Settings</h3>
+        <p>Uygulamanın kişiselleştirildiği alan. 8 farklı dilde anlık dil değişimi, profil isminin güncellenmesi ve tema ayarları burada yönetilir.</p>
+
+        <h2>🌍 Dil Desteği (Multi-Language)</h2>
+        <p>BluMesh, kapsayıcılık ilkesi gereği aşağıdaki dilleri tam kapsamlı destekler:</p>
+        <p style="text-align: center; font-size: 1.2em; letter-spacing: 2px;">
+            🇹🇷 TR | 🇺🇸 EN | 🇩🇪 DE | 🇫🇷 FR | 🇷🇺 RU | 🇯🇵 JA | 🇦🇪 AR | 🇮🇹 IT
+        </p>
+
+        <h2>🚀 Başlangıç ve Kurulum</h2>
+        <p><strong>Gereksinimler:</strong> Android Studio Ladybug+ / Xcode 15+ | Kotlin 2.1.0+ | JDK 17+</p>
+        <h3>Çalıştırma Komutları</h3>
+<pre><code># Unit testleri çalıştır
+./gradlew allTests
+
+# Android uygulamayı kur ve başlat
+./gradlew :composeApp:installDebug
+
+# iOS için pod install (KMP köprüsü)
+cd iosApp && pod install</code></pre>
+
+        <h2>📝 Geliştirici Notları & Kurallar</h2>
+        <ul>
+            <li><strong>Magic Strings:</strong> Kod içerisinde kesinlikle ham metin kullanılmaz. Tüm teknik lojik <code>LogicEnums.kt</code>, tüm UI metinleri <code>BluMeshStrings</code> üzerinden yönetilir.</li>
+            <li><strong>Commit Politikası:</strong> Her değişiklik atomik ve açıklayıcı olmalıdır.</li>
+            <li><strong>Binary Safety:</strong> Mesh üzerinden gönderilen tüm veriler (Görsel/Konum) binary-safe <code>ByteArray</code> formunda paketlenir.</li>
+        </ul>
+
+        <div class="footer">
+            🌊 <strong>BluMesh</strong> - İnternetin olmadığı yerde, ağ sensin!<br>
+            <span style="display:inline-block; margin-top: 10px; color: #00f2ff;">Geliştirici: Vahit Keskin</span>
+        </div>
+    </div>
+</body>
+</html>
