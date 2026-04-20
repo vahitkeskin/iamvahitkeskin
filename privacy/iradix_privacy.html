@@ -10,7 +10,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-            background-color: #0d0d1a; /* Cyberpunk Koyu Arka Plan */
+            background-color: #0d0d1a;
             color: #e0e0e0;
         }
         .container {
@@ -20,8 +20,8 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
-            border-top: 5px solid #00f2ff; /* Iradix Neon Cyan */
-            border-bottom: 2px solid #ff00ff; /* Iradix Neon Pink */
+            border-top: 5px solid #00f2ff;
+            border-bottom: 2px solid #ff00ff;
         }
         h1 {
             text-align: center;
@@ -38,20 +38,11 @@
             margin-bottom: 40px;
         }
         h2 {
-            color: #ff00ff; /* Başlıklarda neon pembe */
+            color: #ff00ff;
             border-bottom: 1px solid #333;
             padding-bottom: 8px;
             margin-top: 35px;
             font-size: 1.4em;
-        }
-        h3 {
-             color: #00f2ff;
-             margin-top: 25px;
-             font-size: 1.1em;
-        }
-        p {
-            margin-bottom: 15px;
-            color: #b0b0b0;
         }
         ul {
             margin-left: 10px;
@@ -64,15 +55,6 @@
         }
         li {
             margin-bottom: 10px;
-        }
-        a {
-            color: #00f2ff;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        a:hover {
-            color: #ff00ff;
-            text-shadow: 0 0 8px #ff00ff;
         }
         .highlight-box {
             background-color: rgba(255, 0, 255, 0.05);
@@ -89,93 +71,74 @@
             border-top: 1px solid #333;
             padding-top: 20px;
         }
+        .important-note {
+            color: #00f2ff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>IRADIX GİZLİLİK POLİTİKASI</h1>
-        <p class="date"><strong>Son Güncelleme: 02.04.2026</strong></p>
+        <p class="date"><strong>Son Güncelleme: 20.04.2026</strong></p>
 
         <p>
-            <strong>Iradix</strong> ("Uygulama"), dijital sağlığınızı optimize etmek ve ekran sürenizi yönetmenize yardımcı olmak amacıyla tasarlanmış bir ekosistemdir. 
-            Bu Gizlilik Politikası, verilerinizin gizliliğini nasıl koruduğumuzu ve yerel öncelikli veri politikamızı açıklamaktadır. 
-            Uygulamayı kullanarak bu şartları kabul etmiş olursunuz.
+            <strong>Iradix</strong>, dijital sağlığınızı optimize etmek ve uygulama kullanım alışkanlıklarınızı yönetmenize yardımcı olmak amacıyla geliştirilmiş bir dijital refah (well-being) uygulamasıdır. 
+            Bu politika, Erişilebilirlik Hizmetleri dahil olmak üzere verilerinizin nasıl işlendiğini şeffaf bir şekilde açıklar.
         </p>
 
         <h2>1. Yerel Veri (Local-First) Yaklaşımı</h2>
         <p>
-            Iradix, gizliliği temel bir tasarım ilkesi olarak kabul eder. Uygulama içerisinde toplanan kullanım verileri şu prensiplerle işlenir:
+            Iradix, gizliliği temel bir tasarım ilkesi olarak kabul eder. Uygulama içerisinde toplanan tüm kullanım verileri şu prensiplerle işlenir:
         </p>
         <ul>
-            <li><strong>Bulut Aktarımı Yok:</strong> Uygulama kullanım istatistikleriniz, hangi uygulamada ne kadar vakit geçirdiğiniz veya cihaz bilgileriniz hiçbir harici sunucuya yüklenmez.</li>
-            <li><strong>Yerel Depolama:</strong> Verileriniz yalnızca cihazınızda, güvenli bir yerel veritabanında (Room KMP) ve şifrelenmiş tercihler dosyasında (DataStore) saklanır.</li>
-            <li><strong>Kontrol Sizde:</strong> Verileriniz cihazınızdan dışarı çıkmaz ve uygulamayı sildiğinizde tüm takip verileri kalıcı olarak yok edilir.</li>
+            <li><strong>Bulut Aktarımı Yok:</strong> Uygulama kullanım istatistikleriniz hiçbir harici sunucuya yüklenmez.</li>
+            <li><strong>Yerel Depolama:</strong> Verileriniz yalnızca cihazınızda, güvenli bir yerel veritabanında (Room KMP) saklanır.</li>
+            <li><strong>Tam Kontrol:</strong> Uygulamayı sildiğinizde cihazınızdaki tüm veriler kalıcı olarak yok edilir.</li>
         </ul>
 
-        <h2>2. Özel İzinler ve Erişilebilirlik Servisi</h2>
+        <h2>2. Erişilebilirlik Hizmeti (AccessibilityService API) Kullanımı</h2>
         <p>
-            Iradix'in "Evrensel Gri Tonlama" ve "Dijital Otomasyon" özelliklerini sunabilmesi için Android **Erişilebilirlik Servisi'ni (Accessibility Service)** kullanması gerekmektedir:
+            Iradix, temel özelliklerini sunabilmek için Android'in <strong>AccessibilityService API</strong>'sini kullanır. Bu hizmetin kullanımı, uygulamanın dijital sağlık hedeflerini gerçekleştirebilmesi için kritiktir:
         </p>
         <ul>
-            <li><strong>Kullanım Amacı:</strong> Bu servis, yalnızca sistem ayarlarındaki gri tonlama (grayscale) modunu otomatize etmek ve belirlenen mola sürelerinde ekran etkileşimini yönetmek için kullanılır.</li>
-            <li><strong>Veri İzleme Yasağı:</strong> Erişilebilirlik servisi aracılığıyla yazdığınız mesajlar, parolalarınız, kredi kartı bilgileriniz veya herhangi bir kişisel içeriğiniz kesinlikle izlenmez, kaydedilmez ve paylaşılmaz.</li>
-            <li><strong>Tam Şeffaflık:</strong> Bu izin tamamen isteğe bağlıdır; reddedilmesi durumunda uygulama çalışmaya devam eder ancak gri tonlama otomasyonu gibi gelişmiş özellikler devre dışı kalır.</li>
+            <li><strong>Uygulama Takibi ve İzleme:</strong> Hangi uygulamanın o an ön planda olduğunu tespit ederek günlük kullanım limitlerinizi hesaplamak.</li>
+            <li><strong>Uygulama Engelleme:</strong> Belirlediğiniz kullanım süreleri dolduğunda veya "Odaklanma Modu" aktifken seçili uygulamalara erişimi kısıtlamak.</li>
+            <li><strong>Görsel Otomasyon:</strong> Sistem ayarlarındaki "Gri Tonlama" (Grayscale) modunu otomatik olarak yöneterek ekran bağımlılığını azaltmak.</li>
         </ul>
+        <p class="highlight-box">
+            <span class="important-note">ÖNEMLİ GİZLİLİK TAAHHÜDÜ:</span> Iradix, AccessibilityService API aracılığıyla yazdığınız mesajları, parolaları, kredi kartı bilgilerini veya ekran içeriğini <strong>kesinlikle izlemez, toplamaz, kaydetmez ve üçüncü taraflarla paylaşmaz.</strong> Bu hizmet sadece uygulamanın işlevsel mantığını yürütmek için anlık olarak kullanılır.
+        </p>
 
         <h2>3. Toplanan Teknik Veriler</h2>
         <p>
-            Uygulama, size "Sistem HUD" (Gösterge Paneli) sunabilmek için aşağıdaki donanım bilgilerine anlık olarak erişir:
+            Size gerçek zamanlı bir "Sistem HUD" paneli sunabilmek için aşağıdaki donanım bilgilerine yerel olarak erişilir:
         </p>
         <ul>
-            <li><strong>Cihaz Durumu:</strong> Batarya sağlığı, sıcaklığı, RAM kullanımı ve işlemci yükü.</li>
-            <li><strong>Uygulama Kullanımı:</strong> Hangi uygulamaların açıldığı ve aktif kalma süreleri (ekran süresi takibi için).</li>
-            <li>Bu veriler sadece görselleştirme ve yerel raporlama amacıyla kullanılır; anonim dahi olsa dışarı sızdırılmaz.</li>
+            <li><strong>Cihaz Durumu:</strong> Batarya sağlığı, sıcaklığı, RAM kullanımı ve işlemci yükü (Sadece anlık gösterim için).</li>
+            <li><strong>Paket Bilgileri:</strong> Cihazda yüklü uygulamaların listesi (Kısıtlama listesi oluşturabilmeniz için).</li>
         </ul>
 
-        <h2>4. Üçüncü Taraf Hizmetler</h2>
-        <p>
-            Iradix, reklamsız ve takipsiz bir deneyim sunmayı taahhüt eder:
-        </p>
+        <h2>4. Üçüncü Taraf Hizmetler ve Reklamlar</h2>
         <ul>
-            <li><strong>Reklamlar:</strong> Uygulama içerisinde Google AdMob veya benzeri reklam ağları bulunmamaktadır.</li>
-            <li><strong>Analiz:</strong> Kullanıcı davranışlarını takip eden harici analiz araçları (Firebase Analytics vb.) kullanılmamaktadır.</li>
-            <li><strong>Bağlantılar:</strong> Uygulama içerisinden GitHub veya sosyal medya profillerine verilen bağlantılarda, ilgili platformun kendi gizlilik politikası geçerlidir.</li>
+            <li><strong>Reklam Yok:</strong> Iradix içerisinde herhangi bir reklam ağı (AdMob vb.) bulunmaz.</li>
+            <li><strong>Takipçi Yok:</strong> Kullanıcı davranışlarını analiz eden harici araçlar (Firebase Analytics vb.) kullanılmamaktadır.</li>
         </ul>
 
-        <div class="highlight-box">
-            <h2 style="margin-top:0; border-bottom: none; color: #00f2ff;">5. Veri Silme ve "Danger Zone"</h2>
-            <p>
-                Kullanıcılarımıza verileri üzerinde mutlak kontrol sunuyoruz:
-            </p>
-            <ul>
-                <li>Uygulama içerisindeki ayarlar menüsünden tüm takip geçmişini ve kişisel tercihleri tek tıkla silebilirsiniz.</li>
-                <li>Uygulamanın kaldırılması durumunda, Android işletim sistemi tarafından korunan yerel veritabanı dosyaları otomatik olarak temizlenir.</li>
-            </ul>
-        </div>
-
-        <h2>6. Çocukların Gizliliği</h2>
+        <h2>5. Veri Silme ve Kullanıcı Hakları</h2>
         <p>
-            Iradix, çocuklardan bilerek kişisel veri toplamaz. Uygulama yapısı gereği hiçbir kullanıcı verisini toplamadığı için her yaştan kullanıcı için güvenlidir.
+            Ayarlar menüsündeki "Verileri Temizle" seçeneği ile tüm geçmişinizi silebilirsiniz. Iradix, kullanıcılarına verileri üzerinde mutlak kontrol sunmayı taahhüt eder.
         </p>
 
-        <h2>7. Değişiklikler</h2>
-        <p>
-            Iradix'e yeni siber özellikler eklendikçe bu politika güncellenebilir. Güncellemeler uygulama üzerinden veya bu sayfa aracılığıyla duyurulur.
-        </p>
-
-        <h2>8. İletişim</h2>
-        <p>
-            Iradix ekosistemi veya gizlilik pratiklerimizle ilgili sorularınız için geliştiriciye ulaşabilirsiniz:
-        </p>
-        <p style="text-align: center; margin-top: 30px; border: 1px dashed #00f2ff; padding: 15px;">
+        <h2>6. İletişim</h2>
+        <p style="text-align: center; border: 1px dashed #00f2ff; padding: 15px;">
             <strong>Geliştirici:</strong> Vahit Keskin<br>
-            <strong>Web:</strong> <a href="https://github.com/vahitkeskin" target="_blank">github.com/vahitkeskin</a><br>
             <strong>E-posta:</strong> <a href="mailto:vhtkskn63@gmail.com">vhtkskn63@gmail.com</a>
         </p>
 
         <div class="footer">
-            &copy; 2026 Iradix Digital Well-being HUD. Tüm Hakları Saklıdır.<br>
-            <em>"Take Your Time Back."</em>
+            &copy; 2026 Iradix Digital Well-being HUD. Tüm Hakları Saklıdır.
         </div>
     </div>
 </body>
