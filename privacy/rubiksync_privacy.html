@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RubikSync - AI Matrix Gizlilik Politikası</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            line-height: 1.6;
+            background-color: #0f172a; /* KMP/Modern Karanlık Tema Arka Planı */
+            color: #cbd5e1;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #1e293b; /* Kart Arka Planı */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            border-top: 5px solid #38bdf8; /* RubikSync Matrix Mavisi */
+        }
+        h1 {
+            text-align: center;
+            color: #f8fafc;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .date {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        h2 {
+            color: #38bdf8; /* Başlıklarda tema rengi */
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            font-size: 1.3em;
+        }
+        h3 {
+             color: #e2e8f0;
+             margin-top: 25px;
+             font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #cbd5e1;
+        }
+        ul {
+            margin-left: 20px;
+            padding-left: 20px;
+            background-color: #1e293b;
+            border-left: 4px solid #38bdf8;
+            padding: 15px 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #7dd3fc;
+        }
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+        }
+        .policy-alert {
+            background-color: #1e1b4b; /* Derin İndigo / Güvenlik Alanı */
+            border: 1px solid #4f46e5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .tech-note {
+            font-size: 0.9em;
+            background-color: #0f172a;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #10b981;
+            font-family: monospace;
+            color: #34d399;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RubikSync - AI Matrix Gizlilik Politikası</h1>
+        <p class="date"><strong>Son Güncelleme: 12.06.2026</strong></p>
+
+        <p>
+            <strong>RubikSync - AI Matrix</strong> uygulamasını ("Uygulama") indirerek, yükleyerek veya kullanarak bu Gizlilik Politikası’nda yer alan şartları tamamen kabul etmiş olursunuz. 
+            Bu politika, ileri düzey görüntü işleme ve matematiksel modelleme kullanan uygulamamızın verilerinizi nasıl işlediği, cihaz izinlerini hangi amaçlarla kullandığı ve kullanıcı gizliliğini nasıl en üst düzeyde koruduğu konusunda şeffaf bir bilgilendirme sağlamak amacıyla hazırlanmıştır.
+        </p>
+
+        <h2>1. Veri Sorumlusu ve Temel İlke</h2>
+        <p>
+            Geliştirici olarak kullanıcı gizliliğine, veri minimizasyonu ilkelerine ve şeffaflığa en üst düzeyde önem veriyoruz. Uygulama, mimari olarak <strong>"Privacy by Design" (Tasarım Gereği Gizlilik)</strong> esasına göre inşa edilmiştir. Temel işlevlerin tamamı cihazınızın yerel donanım mekanizmaları kullanılarak yürütülmektedir.
+        </p>
+
+        <h2>2. Toplanan ve İşlenen Veriler</h2>
+        <p>
+            RubikSync - AI Matrix, harici bulut sistemlerine veya uzak sunuculara bağımlı kalmaksızın çalışabilen gelişmiş bir yerel optimizasyon motorudur:
+        </p>
+        <ul>
+            <li><strong>Kişisel Tanımlanabilir Bilgiler (PII):</strong> Uygulama; adınız, soyadınız, kimlik numaranız, e-posta adresiniz, telefon numaranız, rehberiniz veya hassas konum verileriniz gibi hiçbir kişisel tanımlanabilir veriyi <u>toplamaz, kaydetmez ve harici sunuculara aktarmaz</u>.</li>
+            <li><strong>Görüntü ve Kamera Verileri:</strong> Fiziksel Rubik Küpünün durumunu tespit etmek amacıyla kamera (CameraX / AVFoundation) veya galeri aracılığıyla işlenen fotoğraflar, anlık olarak sRGB'den CIE L*a*b* uzayına dönüştürülür ve Kuhn-Munkres (Hungarian) renk optimizasyon algoritmasından geçirilerek anlamlandırılır. <strong>Bu görüntü verileri hiçbir uzak sunucuya gönderilmez, tamamen cihaz belleğinde (RAM) geçici olarak işlenir ve işlem bittiğinde imha edilir.</strong></li>
+            <li><strong>Performans ve İstatistik Verileri:</strong> Çözüm süreçlerinize ait en iyi süreler (Best Times) ve hamle sayıları gibi oyun içi istatistikler, tamamen cihazınızın yerel veritabanında (Room DB) saklanır.</li>
+        </ul>
+
+        <h2>3. Gerekli Cihaz İzinleri ve Kullanım Amaçları</h2>
+        <p>
+            Uygulamanın zenginleştirilmiş 3D simülasyon ve tarayıcı sihirbazı işlevlerini yerine getirebilmesi için işletim sistemi düzeyinde yalnızca aşağıdaki minimum izinlere gereksinim duyulur:
+        </p>
+        <ul>
+            <li><strong>Kamera Erişimi (Camera Access):</strong> Fiziksel zeka küpünün yüzeylerini canlı akış üzerinden tarayabilmek, 3x3 kare hizalama ızgarasıyla örnekleme dots'larını yakalayabilmek amacıyla Android ve iOS yerel kamera API'leri üzerinden bu izin istenir. Kamera akışı yalnızca anlık renk analizi için kullanılır.</li>
+            <li><strong>Depolama / Galeri Erişimi (Storage / Media Library):</strong> Kullanıcının önceden çekilmiş küp fotoğraflarını galeri üzerinden uygulamaya aktararak renk kalibrasyon sihirbazında işleyebilmesi ve yerel uygulama ayarlarını kalıcılaştırmak için (DataStore) kullanılır.</li>
+            <li><strong>Hız Ölçer / Sensör Erişimi (Accelerometer):</strong> "Sallayarak Karıştırma" (Shake to Scramble) özelliğinin çalışabilmesi için cihazın fiziksel hareket hareketliliğini algılayan donanım sensörlerine erişim sağlanır.</li>
+        </ul>
+
+        <div class="tech-note">
+            // Teknik Mimari Notu:<br>
+            Uygulama; 54-renk haritasını tamamen çevrimdışı (offline) çalışan Kociemba İki Fazlı (Two-Phase) Arama Algoritması ile çözer. Çözüm adımları harici internet bağlantısına ihtiyaç duyulmadan cihaz içinde milisaniyeler içinde üretilir.
+        </div>
+
+        <h2>4. Çerezler ve Üçüncü Taraf Takip Araçları</h2>
+        <p>
+            Uygulama, kullanıcıların dijital davranışlarını izlemek, reklam hedeflemesi yapmak veya profilleme oluşturmak amacıyla çerezler (cookies), tanımlayıcılar (advertising IDs) veya harici izleme pikselleri kullanmamaktadır. Uygulama içerisinde Google AdMob, Firebase Analytics veya benzeri harici üçüncü taraf analiz ve reklam yazılım geliştirme kitleri (SDK) <u>bulunmamaktadır</u>. tamamen reklamsız ve bağımsız bir deneyim sunulmaktadır.
+        </p>
+
+        <div class="policy-alert">
+            <h2 style="margin-top:0; border-bottom: none; color: #38bdf8;">5. Çocuk Güvenliği ve Uygunsuz İçerik Politikası</h2>
+            <p>
+                RubikSync - AI Matrix, global Google Play Geliştirici Program Politikaları'na ve çocukların çevrimiçi gizliliğini koruma yasalarına (COPPA, GDPR) tam uyumlu olarak tasarlanmıştır. Platformumuzda çocukların korunması ve güvenliği en hassas önceliğimizdir:
+            </p>
+            <ul>
+                <li><strong>Sıfır Tolerans Politikası:</strong> Uygulamamız çok dilli, tamamen matematiksel, algoritmik ve 3D simülasyon odaklı bir araçtır. İçerisinde çocukların cinsel istismarı materyalleri (CSAM), çıplaklık, şiddet, nefret söylemi, küfür veya çocuk güvenliğini tehlikeye atacak herhangi bir unsur barındırmaz ve bu tür içeriklere karşı <strong>kesinlikle sıfır tolerans</strong> uygulanır.</li>
+                <li><strong>Kullanıcı Tarafından Oluşturulan İçerik (UGC):</strong> Uygulama, kullanıcıların birbirleriyle canlı etkileşime girebileceği, kontrolsüz metin yazabileceği veya harici görsel paylaşabileceği bir sosyal ağ altyapısı içermediğinden, çocukların uygunsuz içeriklere maruz kalma riski teknik olarak engellenmiştir.</li>
+                <li><strong>Yasal Bildirim:</strong> Çocuk istismarı veya güvenliğini tehdit eden herhangi bir siber risk senaryosu tespit edildiğinde, durum derhal Ulusal Kayıp ve İstismara Uğramış Çocuklar Merkezi (NCMEC) başta olmak üzere ilgili yerel ve uluslararası kolluk kuvvetlerine resmi olarak bildirilir.</li>
+            </ul>
+        </div>
+
+        <h2>6. Veri Güvenliği ve Sildirme Hakkı</h2>
+        <p>
+            Uygulamaya ait tüm veriler (renk şemaları, ayarlar, en iyi süreler) tamamen sizin kontrolünüzdeki fiziksel cihazda lokal olarak barındırılır. Veri güvenliğiniz doğrudan cihazınızın işletim sistemi güvenliği ile korunmaktadır. Uygulamayı cihazınızdan kaldırdığınızda veya "Uygulama Verilerini Temizle" seçeneğini kullandığınızda, RubikSync'e ait tüm yerel veritabanı kayıtları <u>geri döndürülemeyecek şekilde kalıcı olarak silinir</u>. Uzak sunucuda tutulan bir veri olmadığından, ek bir veri sildirme talebinde bulunmanıza gerek yoktur.
+        </p>
+
+        <h2>7. Politika Değişiklikleri</h2>
+        <p>
+            Bu Gizlilik Politikası, yeni platform özelliklerinin eklenmesi, KMP bağımlılıklarının güncellenmesi veya yasal mevzuattaki değişiklikler doğrultusunda zaman zaman revize edilebilir. Yapılan tüm güncellenmeler bu sayfa üzerinden yayınlanacak ve üst kısımdaki "Son Güncelleme" tarihi güncellenecektir.
+        </p>
+
+        <h2>8. İletişim</h2>
+        <p>
+            RubikSync - AI Matrix uygulaması, kullanılan algoritmik matematiksel modeller veya gizlilik politikamız hakkında her türlü soru, öneri, telif hakkı bildirimi ve teknik görüşleriniz için geliştiriciyle doğrudan e-posta yoluyla iletişime geçebilirsiniz:
+        </p>
+        <p style="text-align: center; margin-top: 30px;">
+            <strong>Geliştirici:</strong> Vahit Keskin<br>
+            <strong>E-posta:</strong> <a href="mailto:vhtkskn63@gmail.com">vhtkskn63@gmail.com</a>
+        </p>
+
+        <div class="footer">
+            &copy; 2026 RubikSync. Tüm Hakları Saklıdır.
+        </div>
+    </div>
+</body>
+</html>
