@@ -1,4 +1,8 @@
-// Utility functions
+// ============================================================
+//  VAHIT KESKIN — World-Class Portfolio Script
+// ============================================================
+
+// ── Utility Functions ────────────────────────────────────────
 const $ = (q, root = document) => root.querySelector(q);
 const $$ = (q, root = document) => root.querySelectorAll(q);
 
@@ -12,10 +16,7 @@ function el(tag, props = {}, ...children) {
   return node;
 }
 
-// Language Initialization
-// currentLanguage is declared in language.js
-
-// Time and date
+// ── Date/Time ────────────────────────────────────────────────
 let userTimeZone = 'Europe/Istanbul';
 
 function updateDateTime() {
@@ -36,10 +37,8 @@ function updateDateTime() {
       month: '2-digit',
       year: 'numeric'
     });
-
     const timeElement = $('#current-time');
     const dateElement = $('#current-date');
-
     if (timeElement) timeElement.textContent = timeString;
     if (dateElement) dateElement.textContent = dateString;
   } catch (error) {
@@ -48,69 +47,51 @@ function updateDateTime() {
 }
 
 function updateTimeZone(lat, lon) {
-  // Simple timezone estimation based on longitude
-  // This is a basic approximation - for production, use a proper timezone API
   const timezoneOffset = Math.round(lon / 15);
   const timezoneNames = [
-    'UTC-12', 'UTC-11', 'UTC-10', 'UTC-9', 'UTC-8', 'UTC-7', 'UTC-6', 'UTC-5', 'UTC-4', 'UTC-3', 'UTC-2', 'UTC-1',
-    'UTC', 'UTC+1', 'UTC+2', 'UTC+3', 'UTC+4', 'UTC+5', 'UTC+6', 'UTC+7', 'UTC+8', 'UTC+9', 'UTC+10', 'UTC+11', 'UTC+12'
+    'UTC-12','UTC-11','UTC-10','UTC-9','UTC-8','UTC-7','UTC-6','UTC-5','UTC-4','UTC-3','UTC-2','UTC-1',
+    'UTC','UTC+1','UTC+2','UTC+3','UTC+4','UTC+5','UTC+6','UTC+7','UTC+8','UTC+9','UTC+10','UTC+11','UTC+12'
   ];
-
-  const timezoneIndex = timezoneOffset + 12;
-  if (timezoneIndex >= 0 && timezoneIndex < timezoneNames.length) {
-    userTimeZone = timezoneNames[timezoneIndex];
-  }
+  const idx = timezoneOffset + 12;
+  if (idx >= 0 && idx < timezoneNames.length) userTimeZone = timezoneNames[idx];
 }
 
-// Update time every second
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
-// Theme switcher with smooth transition
+// ── Theme Switcher ───────────────────────────────────────────
 function setupThemeSwitcher() {
   const themeSwitcher = $('#theme-switcher');
   const themeIcon = $('#theme-icon');
   const themeText = $('#theme-text');
-
-  if (!themeSwitcher || !themeIcon || !themeText) return;
+  if (!themeSwitcher || !themeIcon) return;
 
   if (typeof updatePageLanguage === 'function') updatePageLanguage();
   let currentTheme = localStorage.getItem('theme') || 'auto';
 
   function updateTheme() {
     const root = document.documentElement;
-
-    // Add transition class
-    root.classList.add('theme-transitioning');
-
     root.classList.remove('dark', 'light');
-
     if (currentTheme === 'dark') {
       root.classList.add('dark');
       themeIcon.className = 'fas fa-moon';
-      themeText.textContent = TRANSLATIONS[currentLanguage]['theme.dark'];
+      if (themeText && typeof TRANSLATIONS !== 'undefined') themeText.textContent = TRANSLATIONS[currentLanguage]?.['theme.dark'] || 'Dark';
     } else if (currentTheme === 'light') {
       root.classList.add('light');
       themeIcon.className = 'fas fa-sun';
-      themeText.textContent = TRANSLATIONS[currentLanguage]['theme.light'];
+      if (themeText && typeof TRANSLATIONS !== 'undefined') themeText.textContent = TRANSLATIONS[currentLanguage]?.['theme.light'] || 'Light';
     } else {
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       root.classList.add(isDark ? 'dark' : 'light');
       themeIcon.className = 'fas fa-adjust';
-      themeText.textContent = TRANSLATIONS[currentLanguage]['theme.auto'];
+      if (themeText && typeof TRANSLATIONS !== 'undefined') themeText.textContent = TRANSLATIONS[currentLanguage]?.['theme.auto'] || 'Auto';
     }
-
-    // Remove transition class after a short delay
-    setTimeout(() => {
-      root.classList.remove('theme-transitioning');
-    }, 400);
   }
 
   themeSwitcher.addEventListener('click', () => {
     if (currentTheme === 'auto') currentTheme = 'light';
     else if (currentTheme === 'light') currentTheme = 'dark';
     else currentTheme = 'auto';
-
     localStorage.setItem('theme', currentTheme);
     updateTheme();
   });
@@ -122,23 +103,18 @@ function setupThemeSwitcher() {
   updateTheme();
 }
 
-// Clean and Stable Visitor Counter
+// ── Visitor Counter ──────────────────────────────────────────
 class VisitorCounter {
   constructor() {
     this.count = 0;
     this.isInitialized = false;
-    this.sessionId = this.generateSessionId();
+    this.sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     this.element = $('#visitor-count');
-  }
-
-  generateSessionId() {
-    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
 
   async init() {
     if (this.isInitialized || !this.element) return;
     this.element.textContent = '...';
-
     try {
       await this.updateCount();
       this.isInitialized = true;
@@ -152,29 +128,23 @@ class VisitorCounter {
     const existingSession = sessionStorage.getItem('visitorSessionId');
     const isNewSession = !existingSession;
     if (isNewSession) sessionStorage.setItem('visitorSessionId', this.sessionId);
-
-    // Using counterapi.dev - More stable than countapi.xyz
     const namespace = 'vahitkeskin.com';
     const key = 'visits';
     const url = `https://api.counterapi.dev/v1/${namespace}/${key}${isNewSession ? '/up' : ''}`;
-
     try {
       const response = await fetch(url);
       const data = await response.json();
       if (data && typeof data.count === 'number') {
         this.count = data.count;
         this.updateDisplay();
-      } else {
-        throw new Error('Invalid data format');
-      }
+      } else throw new Error('Invalid data');
     } catch (error) {
-      console.warn('Counter API failed, using fallback:', error);
       this.useLocalStorageFallback(isNewSession);
     }
   }
 
   useLocalStorageFallback(isNewSession) {
-    let storedCount = parseInt(localStorage.getItem('visitorCount') || '1250'); // Start with a realistic base
+    let storedCount = parseInt(localStorage.getItem('visitorCount') || '1250');
     if (isNewSession) {
       storedCount += 1;
       localStorage.setItem('visitorCount', storedCount.toString());
@@ -184,32 +154,23 @@ class VisitorCounter {
   }
 
   updateDisplay() {
-    if (this.element) {
-      this.element.textContent = this.count.toLocaleString('tr-TR');
-    }
+    if (this.element) this.element.textContent = this.count.toLocaleString('tr-TR');
   }
 
-  async refresh() {
-    await this.updateCount();
-  }
+  async refresh() { await this.updateCount(); }
 }
 
-// Create global instance
 const visitorCounter = new VisitorCounter();
 
-// Track unique page views
 function trackPageView() {
-  const pageViews = localStorage.getItem('pageViews') || 0;
-  localStorage.setItem('pageViews', parseInt(pageViews) + 1);
+  const pv = localStorage.getItem('pageViews') || 0;
+  localStorage.setItem('pageViews', parseInt(pv) + 1);
 }
 
-// Contact form
+// ── Contact Form ─────────────────────────────────────────────
 function setupContactForm() {
   const form = $('#contact-form');
-  if (!form) {
-    console.warn('Contact form not found');
-    return;
-  }
+  if (!form) return;
   const firstNameInput = $('#first_name');
   const lastNameInput = $('#last_name');
   const emailInput = $('#email');
@@ -217,33 +178,16 @@ function setupContactForm() {
   const messageInput = $('#message');
   const sendBtn = $('#sendBtn');
 
-  function isEmailValid(value) {
-    if (!value) return false;
-    // Simple RFC5322-ish email validation
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    return re.test(String(value).toLowerCase());
-  }
-
-  function isNonEmpty(value) {
-    return !!(value && value.trim().length >= 2);
-  }
+  function isEmailValid(v) { return v && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v).toLowerCase()); }
+  function isNonEmpty(v) { return !!(v && v.trim().length >= 2); }
 
   function validateForm() {
-    const firstOk = isNonEmpty(firstNameInput?.value);
-    const lastOk = isNonEmpty(lastNameInput?.value);
-    const emailOk = isEmailValid(emailInput?.value.trim());
-    const subjectOk = !!subjectInput?.value.trim();
-    const messageOk = !!messageInput?.value.trim();
-    const allOk = firstOk && lastOk && emailOk && subjectOk && messageOk;
+    const allOk = isNonEmpty(firstNameInput?.value) && isNonEmpty(lastNameInput?.value)
+      && isEmailValid(emailInput?.value?.trim()) && !!subjectInput?.value?.trim() && !!messageInput?.value?.trim();
     if (sendBtn) {
       sendBtn.disabled = !allOk;
-      if (sendBtn.disabled) {
-        sendBtn.style.opacity = '0.6';
-        sendBtn.style.cursor = 'not-allowed';
-      } else {
-        sendBtn.style.opacity = '1';
-        sendBtn.style.cursor = 'pointer';
-      }
+      sendBtn.style.opacity = allOk ? '1' : '0.6';
+      sendBtn.style.cursor = allOk ? 'pointer' : 'not-allowed';
     }
     return allOk;
   }
@@ -258,56 +202,40 @@ function setupContactForm() {
     const file = imageInput.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        previewImg.src = e.target.result;
-        previewContainer.style.display = 'block';
-      };
+      reader.onload = (e) => { previewImg.src = e.target.result; previewContainer.style.display = 'block'; };
       reader.readAsDataURL(file);
     }
   });
 
-  removeBtn?.addEventListener('click', () => {
-    imageInput.value = '';
-    previewContainer.style.display = 'none';
-    previewImg.src = '';
-  });
+  removeBtn?.addEventListener('click', () => { imageInput.value = ''; previewContainer.style.display = 'none'; previewImg.src = ''; });
 
   [firstNameInput, lastNameInput, emailInput, subjectInput, messageInput, imageInput].forEach(inp => {
     inp?.addEventListener('input', validateForm);
     inp?.addEventListener('blur', validateForm);
   });
-  // initial state
   validateForm();
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     try {
-      // Get form data
       const formData = new FormData(form);
       const firstName = (formData.get('first_name') || firstNameInput?.value || '').toString().trim();
       const lastName = (formData.get('last_name') || lastNameInput?.value || '').toString().trim();
       const name = `${firstName} ${lastName}`.trim();
-      const email = (formData.get('email') || $('#email')?.value || '').toString().trim();
-      const subject = (formData.get('subject') || $('#subject')?.value || '').toString().trim();
-      const message = (formData.get('message') || $('#message')?.value || '').toString().trim();
+      const email = (formData.get('email') || emailInput?.value || '').toString().trim();
+      const subject = (formData.get('subject') || subjectInput?.value || '').toString().trim();
+      const message = (formData.get('message') || messageInput?.value || '').toString().trim();
 
-      // Basic validation
       if (!firstName || !lastName || !email || !subject || !message || !isEmailValid(email)) {
         alert('Lütfen tüm alanları doldurun.');
         return;
       }
-      // Disable button and show loading state
-      const originalBtnText = sendBtn ? sendBtn.textContent : '';
-      if (sendBtn) {
-        sendBtn.textContent = 'Gönderiliyor...';
-        sendBtn.disabled = true;
-      }
 
-      // Primary: send via FormSubmit
+      const originalBtnText = sendBtn ? sendBtn.innerHTML : '';
+      if (sendBtn) { sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...'; sendBtn.disabled = true; }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000);
-
       const ajaxData = new FormData();
       ajaxData.append('name', name);
       ajaxData.append('email', email);
@@ -315,908 +243,550 @@ function setupContactForm() {
       ajaxData.append('_subject', `[iamvahitkeskin.com] ${subject}`);
       ajaxData.append('_captcha', 'false');
       ajaxData.append('_template', 'table');
-      
       const file = imageInput?.files[0];
-      if (file) {
-        ajaxData.append('attachment', file);
-      }
+      if (file) ajaxData.append('attachment', file);
 
       let sent = false;
       try {
         const res = await fetch('https://formsubmit.co/ajax/vahitkeskin07@gmail.com', {
-          method: 'POST',
-          body: ajaxData,
-          signal: controller.signal
+          method: 'POST', body: ajaxData, signal: controller.signal
         });
         clearTimeout(timeoutId);
-        if (res.ok) {
-          const data = await res.json().catch(() => ({}));
-          if (data && (data.success || data.message)) {
-            sent = true;
-          } else {
-            // Some proxies return 200 without JSON body
-            sent = true;
-          }
-        } else {
-          throw new Error(`HTTP ${res.status}`);
-        }
+        if (res.ok) sent = true;
+        else throw new Error(`HTTP ${res.status}`);
       } catch (err) {
         clearTimeout(timeoutId);
-        console.warn('FormSubmit failed, will fallback to mailto:', err.message || err);
+        console.warn('FormSubmit failed:', err.message || err);
       }
 
       if (!sent) {
-        // Second fallback: Standard POST to FormSubmit (opens a new tab)
         try {
           const tempForm = document.createElement('form');
           tempForm.action = 'https://formsubmit.co/vahitkeskin07@gmail.com';
           tempForm.method = 'POST';
           tempForm.target = '_blank';
-
-          const fields = {
-            name,
-            first_name: firstName,
-            last_name: lastName,
-            email,
-            message,
-            _subject: `[iamvahitkeskin.com] ${subject}`,
-            _captcha: 'false',
-            _template: 'table'
-          };
-
+          const fields = { name, first_name: firstName, last_name: lastName, email, message, _subject: `[iamvahitkeskin.com] ${subject}`, _captcha: 'false', _template: 'table' };
           Object.entries(fields).forEach(([k, v]) => {
             const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = k;
-            input.value = v;
+            input.type = 'hidden'; input.name = k; input.value = v;
             tempForm.appendChild(input);
           });
-
           document.body.appendChild(tempForm);
           tempForm.submit();
           setTimeout(() => tempForm.remove(), 1000);
           sent = true;
-          console.info('FormSubmit standard POST used. İlk kez kullanıyorsanız e-postayı doğrulamanız gerekir.');
-        } catch (e) {
-          console.warn('Standard POST fallback failed:', e);
-        }
+        } catch (e) { console.warn('Standard POST fallback failed:', e); }
       }
 
       if (!sent) {
-        // Final fallback: open default mail client
         const mailtoSubject = encodeURIComponent(`[iamvahitkeskin.com] ${subject}`);
-        const mailtoBody = encodeURIComponent(
-          `Ad: ${firstName}\nSoyad: ${lastName}\nE-posta: ${email}\n\nMesaj:\n${message}`
-        );
+        const mailtoBody = encodeURIComponent(`Ad: ${firstName}\nSoyad: ${lastName}\nE-posta: ${email}\n\nMesaj:\n${message}`);
         window.location.href = `mailto:vahitkeskin07@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
         sent = true;
       }
 
       if (sent) {
-        // Success animation toast
-        try {
-          const toast = el('div', {
-            style: 'position:fixed;inset:auto 0 20px 0;margin:auto;max-width:320px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);color:var(--text);display:flex;align-items:center;gap:8px;justify-content:center;z-index:9999;transform:translateY(20px);opacity:0;transition:transform .25s ease, opacity .25s ease;'
-          }, '✅ Mesajınız gönderildi');
-          document.body.appendChild(toast);
-          requestAnimationFrame(() => {
-            toast.style.transform = 'translateY(0)';
-            toast.style.opacity = '1';
-          });
-          setTimeout(() => {
-            toast.style.transform = 'translateY(20px)';
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 250);
-          }, 2200);
-        } catch (_) { }
-
+        const toast = el('div', {
+          style: 'position:fixed;inset:auto 0 30px 0;margin:auto;max-width:340px;padding:14px 20px;background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lg);color:var(--text);display:flex;align-items:center;gap:10px;justify-content:center;z-index:9999;transform:translateY(20px);opacity:0;transition:all .35s cubic-bezier(.4,0,.2,1);'
+        }, '✅ Mesajınız gönderildi!');
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => { toast.style.transform = 'translateY(0)'; toast.style.opacity = '1'; });
+        setTimeout(() => { toast.style.transform = 'translateY(20px)'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 350); }, 2500);
         form.reset();
+        if (previewContainer) previewContainer.style.display = 'none';
         validateForm();
       }
 
-      if (sendBtn) {
-        sendBtn.textContent = originalBtnText || 'Gönder';
-        sendBtn.disabled = false;
-      }
+      if (sendBtn) { sendBtn.innerHTML = originalBtnText; sendBtn.disabled = false; }
     } catch (error) {
       console.error('Contact form error:', error);
       alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-      const sendBtn = $('#sendBtn');
-      if (sendBtn) {
-        sendBtn.textContent = 'Gönder';
-        sendBtn.disabled = false;
-      }
+      if (sendBtn) { sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Mesajı Gönder'; sendBtn.disabled = false; }
     }
   });
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    // Set year
-    const yearElement = $('#year');
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
+// ============================================================
+//  NEW ANIMATION ENGINE
+// ============================================================
 
-    // Setup features with error handling
-    try {
-      setupThemeSwitcher();
-    } catch (error) {
-      console.error('Theme switcher setup error:', error);
-    }
-
-    try {
-      setupLanguageSwitcher();
-    } catch (error) {
-      console.error('Language switcher setup error:', error);
-    }
-
-    // Mark active nav link based on current path
-    try {
-      const path = location.pathname.split('/').pop() || 'index.html';
-      const navLinks = document.querySelectorAll('.navlinks a, .nav-drawer a');
-      navLinks.forEach(a => {
-        const href = a.getAttribute('href');
-        if (href) {
-          const file = href.split('#')[0].split('/').pop();
-          if ((path === '' && file === 'index.html') || file === path) {
-            a.setAttribute('aria-current', 'page');
-          } else {
-            a.removeAttribute('aria-current');
-          }
-        }
-      });
-    } catch (error) {
-      console.error('Active nav highlight error:', error);
-    }
-
-    try {
-      setupContactForm();
-    } catch (error) {
-      console.error('Contact form setup error:', error);
-    }
-
-    try {
-      setupWeather();
-    } catch (error) {
-      console.error('Weather setup error:', error);
-    }
-
-    try {
-      visitorCounter.init().catch(error => {
-        console.error('Visitor counter init error:', error);
-      });
-
-      // Setup refresh button
-      const refreshBtn = $('#refresh-counter');
-      const statusElement = $('#counter-status');
-
-      if (refreshBtn && statusElement) {
-        refreshBtn.addEventListener('click', async () => {
-          refreshBtn.textContent = '⏳';
-          refreshBtn.disabled = true;
-          statusElement.textContent = 'Yenileniyor...';
-
-          try {
-            await visitorCounter.refresh();
-            statusElement.textContent = 'Gerçek zamanlı sayım';
-          } catch (error) {
-            console.error('Counter refresh failed:', error);
-            statusElement.textContent = 'Yenileme hatası';
-          } finally {
-            refreshBtn.textContent = '🔄';
-            refreshBtn.disabled = false;
-          }
-        });
-      }
-    } catch (error) {
-      console.error('Visitor count setup error:', error);
-    }
-
-    try {
-      trackPageView();
-    } catch (error) {
-      console.error('Page view tracking error:', error);
-    }
-
-    // Setup mobile navigation
-    try {
-      const menuBtn = $('#menuBtn');
-      const navDrawer = $('#navDrawer');
-
-      if (menuBtn && navDrawer) {
-        // Restore menu state from localStorage
-        const savedMenuState = localStorage.getItem('mobileMenuOpen');
-        if (savedMenuState === 'true') {
-          navDrawer.style.display = 'block';
-          menuBtn.setAttribute('aria-expanded', 'true');
-        }
-
-        menuBtn.addEventListener('click', () => {
-          const open = navDrawer.style.display === 'block';
-          navDrawer.style.display = open ? 'none' : 'block';
-          menuBtn.setAttribute('aria-expanded', String(!open));
-
-          // Save menu state to localStorage
-          localStorage.setItem('mobileMenuOpen', String(!open));
-        });
-
-        navDrawer.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', (e) => {
-            // Close menu immediately for better UX
-            navDrawer.style.display = 'none';
-            menuBtn.setAttribute('aria-expanded', 'false');
-            // Save closed state to localStorage
-            localStorage.setItem('mobileMenuOpen', 'false');
-
-            // Add visual feedback
-            menuBtn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-              menuBtn.style.transform = 'scale(1)';
-            }, 150);
-          });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-          if (navDrawer.style.display === 'block' &&
-            !navDrawer.contains(e.target) &&
-            !menuBtn.contains(e.target)) {
-            navDrawer.style.display = 'none';
-            menuBtn.setAttribute('aria-expanded', 'false');
-            localStorage.setItem('mobileMenuOpen', 'false');
-          }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && navDrawer.style.display === 'block') {
-            navDrawer.style.display = 'none';
-            menuBtn.setAttribute('aria-expanded', 'false');
-            localStorage.setItem('mobileMenuOpen', 'false');
-            menuBtn.focus();
-          }
-        });
-      }
-    } catch (error) {
-      console.error('Mobile navigation setup error:', error);
-    }
-
-    // Render skills
-    try {
-      const skillsContainer = $('#skills-container');
-      if (!skillsContainer || !PROFILE || !PROFILE.skills) {
-        console.warn('Skills container or profile data not found');
-      } else {
-        skillsContainer.innerHTML = ''; // Clear loading state
-
-        const skillIconOf = (name) => {
-          const n = (name || '').toLowerCase();
-          if (n.includes('android')) return 'images/ic-android.png';
-          if (n.includes('kotlin')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg';
-          if (n.includes('java')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg';
-          if (n.includes('compose')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetpackcompose/jetpackcompose-original.svg';
-          if (n.includes('flutter')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg';
-          if (n.includes('git')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg';
-          if (n.includes('jira')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg';
-          return 'images/ic-android.png';
-        };
-
-        PROFILE.skills.forEach(s => {
-          const card = el('div', { className: 'skill-card' });
-
-          const header = el('div', { className: 'skill-header' });
-          const iconWrap = el('div', { className: 'skill-icon' });
-          iconWrap.append(el('img', {
-            src: skillIconOf(s.name),
-            alt: s.name,
-            style: 'width:24px;height:24px;object-fit:contain;'
-          }));
-          header.append(iconWrap, el('div', { className: 'skill-title' }, s.name));
-
-          const body = el('div', { className: 'skill-body' });
-          if (s.context) {
-            body.append(el('div', { className: 'skill-context' }, s.context));
-          }
-
-          if (s.companies && s.companies.length) {
-            const chips = el('div', { className: 'skill-chips' });
-            s.companies.forEach(c => chips.append(el('span', { className: 'skill-chip' }, c)));
-            body.append(chips);
-          }
-
-          card.append(header, body);
-          skillsContainer.append(card);
-        });
-      }
-    } catch (error) {
-      console.error('Skills rendering error:', error);
-    }
-
-    // Render projects
-    try {
-      const projectsContainer = $('#projects-container');
-      if (!projectsContainer || !PROFILE || !PROFILE.projects) {
-        console.warn('Projects container or profile data not found');
-      } else {
-        projectsContainer.innerHTML = ''; // Clear loading state
-
-        PROFILE.projects.forEach(p => {
-          const card = el('div', { className: 'glass-card' });
-
-          const header = el('div', { className: 'card-h' });
-          const titleWrap = el('div', { style: 'display:flex;justify-content:space-between;align-items:center;' });
-          titleWrap.append(el('h3', { style: 'margin:0;' }, p.name));
-
-          if (p.featured) {
-            const badgeText = (TRANSLATIONS[currentLanguage] && TRANSLATIONS[currentLanguage]['projects.featured']) || 'Featured';
-            titleWrap.append(el('span', { className: 'badge', style: 'background:var(--brand);color:#fff;' }, badgeText));
-          }
-          header.append(titleWrap);
-
-          if (p.company) {
-            const companyText = (TRANSLATIONS[currentLanguage] && TRANSLATIONS[currentLanguage]['projects.personal'] && p.company === 'Kişisel Proje')
-              ? TRANSLATIONS[currentLanguage]['projects.personal']
-              : p.company;
-            header.append(el('div', { className: 'text-muted', style: 'font-size:0.9rem;margin-top:0.25rem;font-weight:600;' }, companyText));
-          }
-
-          const body = el('div', { className: 'card-b' });
-
-          if (p.image) {
-            const imageContainer = el('div', { style: 'margin-bottom:1.5rem;border-radius:12px;overflow:hidden;border:var(--glass-border);' });
-            imageContainer.append(el('img', {
-              src: p.image,
-              alt: p.name,
-              style: 'width:100%;height:180px;object-fit:cover;'
-            }));
-            body.append(imageContainer);
-          }
-
-          const descriptionText = p['description_' + currentLanguage] || p.description;
-          body.append(el('p', { className: 'text-muted', style: 'margin-bottom:1.5rem;' }, descriptionText));
-
-          const tags = el('div', { className: 'skill-chips', style: 'margin-bottom:1.5rem;' });
-          p.tags.forEach(t => tags.append(el('span', { className: 'badge' }, t)));
-          body.append(tags);
-
-          const actions = el('div', { className: 'hero-actions' });
-          if (p.link && p.link !== '#') {
-            const detailText = (TRANSLATIONS[currentLanguage] && TRANSLATIONS[currentLanguage]['projects.detail']) || 'Detay';
-            const detailBtn = el('a', { href: p.link, className: 'btn btn-secondary', style: 'flex:1;justify-content:center;' }, detailText);
-            actions.append(detailBtn);
-          }
-
-          if (p.featured && p.link && p.link.includes('play.google.com')) {
-            const playText = (TRANSLATIONS[currentLanguage] && TRANSLATIONS[currentLanguage]['projects.playstore']) || 'Play Store';
-            const playBtn = el('a', {
-              href: p.link,
-              className: 'btn btn-primary',
-              style: 'flex:1;justify-content:center;'
-            });
-            playBtn.append(el('i', { className: 'fab fa-google-play' }), el('span', {}, playText));
-            actions.append(playBtn);
-          }
-
-          if (actions.children.length > 0) {
-            body.append(actions);
-          }
-
-          card.append(header, body);
-          projectsContainer.append(card);
-        });
-      }
-    } catch (error) {
-      console.error('Projects rendering error:', error);
-    }
-
-    // Intersection Observer for staggered entry animations
-    try {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-      // Only add to elements that need animation
-      $$('[data-animate]').forEach(n => {
-        // Initial setup for JS animation
-        n.classList.add('js-hide');
-        io.observe(n);
-      });
-
-      // Secondary check for elements already in viewport on load
-      setTimeout(() => {
-        $$('[data-animate]').forEach(n => {
-          const rect = n.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            n.classList.add('in');
-          }
-        });
-      }, 100);
-
-      // Fallback
-      setTimeout(() => {
-        $$('[data-animate]').forEach(n => n.classList.add('in'));
-      }, 1000);
-    } catch (error) {
-      console.error('Animation setup error:', error);
-      $$('[data-animate]').forEach(n => n.classList.add('in'));
-    }
-  } catch (error) {
-    console.error('Main initialization error:', error);
-  }
-});
-
-
-// Initialize everything
-function initializeSite() {
-  setupThemeSwitcher();
-  if (typeof window.setupWeather === 'function') {
-    window.setupWeather();
-  }
+// ── Scroll Progress Bar ──────────────────────────────────────
+function updateScrollProgress() {
+  const bar = $('#scroll-progress');
+  if (!bar) return;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  bar.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeSite);
-} else {
-  initializeSite();
+// ── Scroll Reveal System ─────────────────────────────────────
+function setupScrollReveal() {
+  const revealElements = $$('[data-reveal]');
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+
+  // Fallback: reveal elements already in viewport
+  setTimeout(() => {
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('revealed');
+      }
+    });
+  }, 200);
+
+  // Safety net: reveal everything after 2 seconds
+  setTimeout(() => {
+    revealElements.forEach(el => el.classList.add('revealed'));
+  }, 2500);
 }
-// Weather API
-let selectedCity = 'Istanbul'; // More generic default
+
+// ── Legacy data-animate support ──────────────────────────────
+function setupLegacyAnimations() {
+  const animateEls = $$('[data-animate]');
+  if (!animateEls.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in', 'animate-active', 'revealed');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  animateEls.forEach(n => { n.classList.add('js-hide'); io.observe(n); });
+
+  setTimeout(() => {
+    animateEls.forEach(n => {
+      const rect = n.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) n.classList.add('in', 'animate-active', 'revealed');
+    });
+  }, 100);
+
+  setTimeout(() => animateEls.forEach(n => n.classList.add('in', 'animate-active', 'revealed')), 1500);
+}
+
+// ── Number Counter Animation ─────────────────────────────────
+function setupCounters() {
+  const counters = $$('[data-count]');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const end = parseInt(target.dataset.count);
+        const suffix = target.dataset.suffix || '+';
+        animateNumber(target, 0, end, 1800, suffix);
+        observer.unobserve(target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counters.forEach(c => observer.observe(c));
+}
+
+function animateNumber(element, start, end, duration, suffix) {
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out expo
+    const eased = 1 - Math.pow(1 - progress, 4);
+    const current = Math.round(start + (end - start) * eased);
+    element.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ── Typewriter Effect ────────────────────────────────────────
+function setupTypewriter() {
+  const titleEl = $('#hero-title');
+  if (!titleEl) return;
+
+  const titles = [
+    'Senior Android Engineer',
+    'Kotlin Expert',
+    'Jetpack Compose Developer',
+    'Clean Architecture Advocate',
+    'Mobile App Specialist'
+  ];
+
+  let titleIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let isPaused = false;
+
+  function type() {
+    const current = titles[titleIdx];
+    if (isPaused) {
+      isPaused = false;
+      isDeleting = true;
+      setTimeout(type, 80);
+      return;
+    }
+
+    if (!isDeleting) {
+      titleEl.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        isPaused = true;
+        setTimeout(type, 2500);
+        return;
+      }
+      setTimeout(type, 60 + Math.random() * 40);
+    } else {
+      titleEl.textContent = current.substring(0, charIdx);
+      charIdx--;
+      if (charIdx < 0) {
+        isDeleting = false;
+        charIdx = 0;
+        titleIdx = (titleIdx + 1) % titles.length;
+        setTimeout(type, 400);
+        return;
+      }
+      setTimeout(type, 30);
+    }
+  }
+
+  // Start after hero animation
+  setTimeout(type, 2000);
+}
+
+// ── Active Section Highlight (Sidebar) ───────────────────────
+function setupSidebarHighlight() {
+  const sections = $$('section[id]');
+  const navItems = $$('.sidebar-item[data-section]');
+  if (!sections.length || !navItems.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          if (item.dataset.section === id) item.classList.add('active');
+          else item.classList.remove('active');
+        });
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '-10% 0px -60% 0px'
+  });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+// ── Magnetic Button Effect ───────────────────────────────────
+function setupMagneticButtons() {
+  const buttons = $$('.btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+      btn.style.setProperty('--mx', x + '%');
+      btn.style.setProperty('--my', y + '%');
+    });
+  });
+}
+
+// ── Smooth Header Scroll ─────────────────────────────────────
+function setupHeaderScroll() {
+  const header = $('header');
+  if (!header) return;
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 80) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+    lastScroll = scrollY;
+  }, { passive: true });
+}
+
+// ============================================================
+//  RENDER FUNCTIONS (Skills & Projects)
+// ============================================================
+
+function renderSkills() {
+  const skillsContainer = $('#skills-container');
+  if (!skillsContainer || !window.PROFILE || !PROFILE.skills) return;
+  skillsContainer.innerHTML = '';
+
+  const skillIconOf = (name) => {
+    const n = (name || '').toLowerCase();
+    if (n.includes('android')) return 'images/ic-android.png';
+    if (n.includes('kotlin')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg';
+    if (n.includes('java')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg';
+    if (n.includes('compose')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetpackcompose/jetpackcompose-original.svg';
+    if (n.includes('flutter')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg';
+    if (n.includes('git')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg';
+    if (n.includes('jira')) return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg';
+    return 'images/ic-android.png';
+  };
+
+  PROFILE.skills.forEach((s, i) => {
+    const card = el('div', { className: 'skill-card' });
+    card.setAttribute('data-reveal', 'up');
+    card.style.transitionDelay = `${0.05 * i}s`;
+
+    const header = el('div', { className: 'skill-header' });
+    const iconWrap = el('div', { className: 'skill-icon' });
+    iconWrap.append(el('img', { src: skillIconOf(s.name), alt: s.name, style: 'width:24px;height:24px;object-fit:contain;' }));
+    header.append(iconWrap, el('div', { className: 'skill-title' }, s.name));
+
+    const body = el('div', { className: 'skill-body' });
+    if (s.context) body.append(el('div', { className: 'skill-context' }, s.context));
+    if (s.companies && s.companies.length) {
+      const chips = el('div', { className: 'skill-chips' });
+      s.companies.forEach(c => chips.append(el('span', { className: 'skill-chip' }, c)));
+      body.append(chips);
+    }
+
+    card.append(header, body);
+    skillsContainer.append(card);
+  });
+}
+
+function renderProjects() {
+  const projectsContainer = $('#projects-container');
+  if (!projectsContainer || !window.PROFILE || !PROFILE.projects) return;
+  projectsContainer.innerHTML = '';
+
+  PROFILE.projects.forEach((p, i) => {
+    const card = el('div', { className: `glass-card project-card${p.featured ? ' featured' : ''}` });
+    card.setAttribute('data-reveal', 'up');
+    card.style.transitionDelay = `${0.08 * i}s`;
+
+    // Image
+    if (p.image) {
+      const imgWrap = el('div', { className: 'card-image-wrap' });
+      imgWrap.append(el('img', { src: p.image, alt: p.name, className: 'card-image' }));
+      card.append(imgWrap);
+    }
+
+    // Header
+    const header = el('div', { className: 'card-h' });
+    const titleWrap = el('div', { style: 'display:flex;justify-content:space-between;align-items:center;' });
+    titleWrap.append(el('h3', { style: 'margin:0;' }, p.name));
+    if (p.featured) {
+      const lang = typeof currentLanguage !== 'undefined' ? currentLanguage : 'tr';
+      const badgeText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]?.['projects.featured']) || 'Featured';
+      titleWrap.append(el('span', { className: 'badge', style: 'background:var(--brand);color:#fff;font-size:0.65rem;' }, badgeText));
+    }
+    header.append(titleWrap);
+    if (p.company) {
+      const lang = typeof currentLanguage !== 'undefined' ? currentLanguage : 'tr';
+      const companyText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]?.['projects.personal'] && p.company === 'Kişisel Proje')
+        ? TRANSLATIONS[lang]['projects.personal'] : p.company;
+      header.append(el('div', { className: 'text-muted', style: 'font-size:0.85rem;margin-top:0.2rem;font-weight:600;' }, companyText));
+    }
+
+    // Body
+    const body = el('div', { className: 'card-b' });
+    const lang = typeof currentLanguage !== 'undefined' ? currentLanguage : 'tr';
+    const descriptionText = p['description_' + lang] || p.description;
+    body.append(el('p', {}, descriptionText));
+
+    const tags = el('div', { className: 'skill-chips', style: 'margin-bottom:1rem;' });
+    p.tags.forEach(t => tags.append(el('span', { className: 'badge' }, t)));
+    body.append(tags);
+
+    const actions = el('div', { className: 'hero-actions' });
+    if (p.link && p.link !== '#') {
+      const detailText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]?.['projects.detail']) || 'Detay';
+      const detailBtn = el('a', { href: p.link, className: 'btn btn-secondary', target: '_blank', rel: 'noreferrer noopener', style: 'flex:1;justify-content:center;' }, detailText);
+      actions.append(detailBtn);
+    }
+    if (p.featured && p.link && p.link.includes('play.google.com')) {
+      const playText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]?.['projects.playstore']) || 'Play Store';
+      const playBtn = el('a', { href: p.link, className: 'btn btn-primary', target: '_blank', rel: 'noreferrer noopener', style: 'flex:1;justify-content:center;' });
+      playBtn.append(el('i', { className: 'fab fa-google-play' }), el('span', {}, ' ' + playText));
+      actions.append(playBtn);
+    }
+    if (actions.children.length > 0) body.append(actions);
+
+    card.append(header, body);
+    projectsContainer.append(card);
+  });
+}
+
+// ============================================================
+//  WEATHER (preserved from original)
+// ============================================================
+let selectedCity = 'Istanbul';
 let currentWeather = null;
 let userLocation = null;
 
-// Get user's location by IP (no permission required)
 async function getUserLocationByIP() {
   try {
-    // First try to get location from IP
     const response = await fetch('https://ipapi.co/json/');
     const data = await response.json();
-
     if (data.latitude && data.longitude) {
-      // Get the most specific location available
       let locationName = data.city || data.region || data.country_name || 'Bilinmeyen Konum';
-
-      // If we have both city and region, combine them for better specificity
-      if (data.city && data.region && data.city !== data.region) {
-        locationName = `${data.city}, ${data.region}`;
-      }
-
-      userLocation = {
-        lat: parseFloat(data.latitude),
-        lon: parseFloat(data.longitude),
-        city: locationName,
-        country: data.country_name || 'Bilinmeyen Ülke',
-        region: data.region || '',
-        timezone: data.timezone || 'Europe/Istanbul'
-      };
+      if (data.city && data.region && data.city !== data.region) locationName = `${data.city}, ${data.region}`;
+      userLocation = { lat: parseFloat(data.latitude), lon: parseFloat(data.longitude), city: locationName, country: data.country_name || '', region: data.region || '', timezone: data.timezone || 'Europe/Istanbul' };
       localStorage.setItem('userLocation', JSON.stringify(userLocation));
-
-      console.log('Location detected:', userLocation);
-
-      // Update timezone based on user location
       updateTimeZone(userLocation.lat, userLocation.lon);
-
-      // Get weather for user's location
       await getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
       return;
     }
-  } catch (error) {
-    console.log('IP location failed, trying alternative method:', error);
-  }
-
-  // Fallback: Try alternative IP geolocation service
+  } catch (error) { console.log('IP location failed:', error); }
   try {
     const response = await fetch('https://api.ipify.org?format=json');
     const ipData = await response.json();
-
     const geoResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
     const geoData = await geoResponse.json();
-
     if (geoData.latitude && geoData.longitude) {
-      // Get the most specific location available
       let locationName = geoData.city || geoData.region || geoData.country_name || 'Bilinmeyen Konum';
-
-      // If we have both city and region, combine them for better specificity
-      if (geoData.city && geoData.region && geoData.city !== geoData.region) {
-        locationName = `${geoData.city}, ${geoData.region}`;
-      }
-
-      userLocation = {
-        lat: parseFloat(geoData.latitude),
-        lon: parseFloat(geoData.longitude),
-        city: locationName,
-        country: geoData.country_name || 'Bilinmeyen Ülke',
-        region: geoData.region || '',
-        timezone: geoData.timezone || 'Europe/Istanbul'
-      };
+      if (geoData.city && geoData.region && geoData.city !== geoData.region) locationName = `${geoData.city}, ${geoData.region}`;
+      userLocation = { lat: parseFloat(geoData.latitude), lon: parseFloat(geoData.longitude), city: locationName, country: geoData.country_name || '', region: geoData.region || '', timezone: geoData.timezone || 'Europe/Istanbul' };
       localStorage.setItem('userLocation', JSON.stringify(userLocation));
-
-      console.log('Location detected (fallback):', userLocation);
-
       updateTimeZone(userLocation.lat, userLocation.lon);
       getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
       return;
     }
-  } catch (error) {
-    console.log('Alternative IP location failed');
-  }
-
-  // Final fallback: Use default city
-  console.log('Using default city');
+  } catch (error) { console.log('Alternative IP location failed'); }
   getWeather(selectedCity);
 }
 
 async function getWeatherByCoords(lat, lon, cityName) {
   try {
-    // Open-Meteo is very stable
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`);
     const data = await response.json();
-
     if (data.current) {
-      currentWeather = {
-        temp: Math.round(data.current.temperature_2m),
-        condition: getWeatherDescriptionByCode(data.current.weather_code),
-        icon: getWeatherIconByCode(data.current.weather_code),
-        city: cityName || 'Konum'
-      };
+      currentWeather = { temp: Math.round(data.current.temperature_2m), condition: getWeatherDescriptionByCode(data.current.weather_code), icon: getWeatherIconByCode(data.current.weather_code), city: cityName || 'Konum' };
       updateWeatherDisplay(currentWeather.temp, currentWeather.condition, currentWeather.icon, currentWeather.city);
       return;
     }
-  } catch (error) {
-    console.error('Weather error:', error);
-    // Fallback to wttr.in
-    getWeather(cityName || selectedCity);
-  }
+  } catch (error) { getWeather(cityName || selectedCity); }
 }
 
 async function getWeather(city) {
   try {
-    // Use free weather API for city
     const response = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1&lang=${currentLanguage || 'tr'}`);
     const data = await response.json();
-
     if (data.current_condition && data.current_condition[0]) {
-      const weather = data.current_condition[0];
-      currentWeather = {
-        temp: weather.temp_C,
-        condition: weather.weatherDesc[0].value,
-        icon: getWeatherIconFromWttr(weather.weatherCode),
-        city: data.nearest_area[0].areaName[0].value || city
-      };
+      const w = data.current_condition[0];
+      currentWeather = { temp: w.temp_C, condition: w.weatherDesc[0].value, icon: getWeatherIconFromWttr(w.weatherCode), city: data.nearest_area[0].areaName[0].value || city };
       updateWeatherDisplay(currentWeather.temp, currentWeather.condition, currentWeather.icon, currentWeather.city);
     }
-  } catch (error) {
-    console.error('Weather fetch error:', error);
-    updateWeatherDisplay('N/A', 'Hava durumu alınamadı', '❓', city);
-  }
-}
-
-function getWeatherDescription(weatherText) {
-  const descriptions = {
-    'Sunny': 'Güneşli',
-    'Partly cloudy': 'Parçalı bulutlu',
-    'Cloudy': 'Bulutlu',
-    'Overcast': 'Kapalı',
-    'Mist': 'Sisli',
-    'Patchy rain possible': 'Yağmur ihtimali',
-    'Patchy snow possible': 'Kar ihtimali',
-    'Patchy sleet possible': 'Karla karışık yağmur',
-    'Patchy freezing drizzle possible': 'Donan yağmur',
-    'Thundery outbreaks possible': 'Gök gürültülü',
-    'Blowing snow': 'Tipi',
-    'Blizzard': 'Kar fırtınası',
-    'Fog': 'Sis',
-    'Freezing fog': 'Donan sis',
-    'Patchy light drizzle': 'Hafif çisenti',
-    'Light drizzle': 'Çisenti',
-    'Freezing drizzle': 'Donan çisenti',
-    'Heavy freezing drizzle': 'Şiddetli donan çisenti',
-    'Patchy light rain': 'Hafif yağmur',
-    'Light rain': 'Yağmur',
-    'Moderate rain at times': 'Orta şiddetli yağmur',
-    'Moderate rain': 'Orta şiddetli yağmur',
-    'Heavy rain at times': 'Şiddetli yağmur',
-    'Heavy rain': 'Şiddetli yağmur',
-    'Light freezing rain': 'Hafif donan yağmur',
-    'Moderate or heavy freezing rain': 'Donan yağmur',
-    'Light sleet': 'Karla karışık yağmur',
-    'Moderate or heavy sleet': 'Şiddetli karla karışık yağmur',
-    'Patchy light snow': 'Hafif kar',
-    'Light snow': 'Kar',
-    'Patchy moderate snow': 'Orta şiddetli kar',
-    'Moderate snow': 'Orta şiddetli kar',
-    'Patchy heavy snow': 'Şiddetli kar',
-    'Heavy snow': 'Şiddetli kar',
-    'Ice pellets': 'Dolu',
-    'Light rain shower': 'Hafif sağanak',
-    'Moderate or heavy rain shower': 'Sağanak',
-    'Torrential rain shower': 'Şiddetli sağanak',
-    'Light sleet showers': 'Karla karışık sağanak',
-    'Moderate or heavy sleet showers': 'Şiddetli karla karışık sağanak',
-    'Light snow showers': 'Kar sağanağı',
-    'Moderate or heavy snow showers': 'Şiddetli kar sağanağı',
-    'Light showers of ice pellets': 'Dolu sağanağı',
-    'Moderate or heavy showers of ice pellets': 'Şiddetli dolu sağanağı',
-    'Patchy light rain with thunder': 'Gök gürültülü hafif yağmur',
-    'Moderate or heavy rain with thunder': 'Gök gürültülü yağmur',
-    'Patchy light snow with thunder': 'Gök gürültülü hafif kar',
-    'Moderate or heavy snow with thunder': 'Gök gürültülü kar'
-  };
-
-  return descriptions[weatherText] || weatherText;
-}
-
-function getWeatherIconFromCode(iconCode) {
-  // OpenWeatherMap icon codes
-  const iconMap = {
-    '01d': '☀️', // clear sky day
-    '01n': '🌙', // clear sky night
-    '02d': '⛅', // few clouds day
-    '02n': '☁️', // few clouds night
-    '03d': '☁️', // scattered clouds
-    '03n': '☁️', // scattered clouds
-    '04d': '☁️', // broken clouds
-    '04n': '☁️', // broken clouds
-    '09d': '🌧️', // shower rain
-    '09n': '🌧️', // shower rain
-    '10d': '🌦️', // rain day
-    '10n': '🌧️', // rain night
-    '11d': '⛈️', // thunderstorm
-    '11n': '⛈️', // thunderstorm
-    '13d': '🌨️', // snow
-    '13n': '🌨️', // snow
-    '50d': '🌫️', // mist
-    '50n': '🌫️'  // mist
-  };
-
-  return iconMap[iconCode] || '🌤️';
-}
-
-function getWeatherIconFromWttr(weatherCode) {
-  // Wttr.in weather codes
-  const iconMap = {
-    '113': '☀️', // Sunny
-    '116': '⛅', // Partly cloudy
-    '119': '☁️', // Cloudy
-    '122': '☁️', // Overcast
-    '143': '🌫️', // Mist
-    '176': '🌧️', // Patchy rain
-    '179': '🌨️', // Patchy snow
-    '182': '🌨️', // Patchy sleet
-    '185': '🌨️', // Patchy freezing drizzle
-    '200': '⛈️', // Thundery outbreaks
-    '227': '🌨️', // Blowing snow
-    '230': '🌨️', // Blizzard
-    '248': '🌫️', // Fog
-    '260': '🌫️', // Freezing fog
-    '263': '🌧️', // Patchy light drizzle
-    '266': '🌧️', // Light drizzle
-    '281': '🌨️', // Freezing drizzle
-    '284': '🌨️', // Heavy freezing drizzle
-    '293': '🌧️', // Patchy light rain
-    '296': '🌧️', // Light rain
-    '299': '🌧️', // Moderate rain at times
-    '302': '🌧️', // Moderate rain
-    '305': '🌧️', // Heavy rain at times
-    '308': '🌧️', // Heavy rain
-    '311': '🌨️', // Light freezing rain
-    '314': '🌨️', // Moderate or heavy freezing rain
-    '317': '🌨️', // Light sleet
-    '320': '🌨️', // Moderate or heavy sleet
-    '323': '🌨️', // Patchy light snow
-    '326': '🌨️', // Light snow
-    '329': '🌨️', // Patchy moderate snow
-    '332': '🌨️', // Moderate snow
-    '335': '🌨️', // Patchy heavy snow
-    '338': '🌨️', // Heavy snow
-    '350': '🌨️', // Ice pellets
-    '353': '🌧️', // Light rain shower
-    '356': '🌧️', // Moderate or heavy rain shower
-    '359': '🌧️', // Torrential rain shower
-    '362': '🌨️', // Light sleet showers
-    '365': '🌨️', // Moderate or heavy sleet showers
-    '368': '🌨️', // Light snow showers
-    '371': '🌨️', // Moderate or heavy snow showers
-    '374': '🌨️', // Light showers of ice pellets
-    '377': '🌨️', // Moderate or heavy showers of ice pellets
-    '386': '⛈️', // Patchy light rain with thunder
-    '389': '⛈️', // Moderate or heavy rain with thunder
-    '392': '⛈️', // Patchy light snow with thunder
-    '395': '⛈️'  // Moderate or heavy snow with thunder
-  };
-
-  return iconMap[weatherCode] || '🌤️';
+  } catch (error) { updateWeatherDisplay('N/A', 'Hava durumu alınamadı', '❓', city); }
 }
 
 function getWeatherDescriptionByCode(code) {
-  const descriptions = {
-    0: 'Açık',
-    1: 'Az bulutlu',
-    2: 'Parçalı bulutlu',
-    3: 'Kapalı',
-    45: 'Sisli',
-    48: 'Donan sisli',
-    51: 'Hafif çisenti',
-    53: 'Çisenti',
-    55: 'Şiddetli çisenti',
-    56: 'Donan hafif çisenti',
-    57: 'Donan şiddetli çisenti',
-    61: 'Hafif yağmur',
-    63: 'Yağmur',
-    65: 'Şiddetli yağmur',
-    66: 'Donan hafif yağmur',
-    67: 'Donan şiddetli yağmur',
-    71: 'Hafif kar',
-    73: 'Kar',
-    75: 'Şiddetli kar',
-    77: 'Kar taneleri',
-    80: 'Hafif sağanak',
-    81: 'Sağanak',
-    82: 'Şiddetli sağanak',
-    85: 'Hafif kar sağanağı',
-    86: 'Şiddetli kar sağanağı',
-    95: 'Gök gürültülü',
-    96: 'Gök gürültülü dolu',
-    99: 'Şiddetli gök gürültülü dolu'
-  };
-
-  return descriptions[code] || 'Bilinmeyen';
+  const d = { 0:'Açık',1:'Az bulutlu',2:'Parçalı bulutlu',3:'Kapalı',45:'Sisli',48:'Donan sisli',51:'Hafif çisenti',53:'Çisenti',55:'Şiddetli çisenti',61:'Hafif yağmur',63:'Yağmur',65:'Şiddetli yağmur',71:'Hafif kar',73:'Kar',75:'Şiddetli kar',80:'Hafif sağanak',81:'Sağanak',82:'Şiddetli sağanak',95:'Gök gürültülü',96:'Gök gürültülü dolu',99:'Şiddetli gök gürültülü dolu' };
+  return d[code] || 'Bilinmeyen';
 }
 
 function getWeatherIconByCode(code) {
-  const icons = {
-    0: '☀️', // Açık
-    1: '🌤️', // Az bulutlu
-    2: '⛅', // Parçalı bulutlu
-    3: '☁️', // Kapalı
-    45: '🌫️', // Sisli
-    48: '🌫️', // Donan sisli
-    51: '🌧️', // Hafif çisenti
-    53: '🌧️', // Çisenti
-    55: '🌧️', // Şiddetli çisenti
-    56: '🌨️', // Donan hafif çisenti
-    57: '🌨️', // Donan şiddetli çisenti
-    61: '🌧️', // Hafif yağmur
-    63: '🌧️', // Yağmur
-    65: '🌧️', // Şiddetli yağmur
-    66: '🌨️', // Donan hafif yağmur
-    67: '🌨️', // Donan şiddetli yağmur
-    71: '🌨️', // Hafif kar
-    73: '🌨️', // Kar
-    75: '🌨️', // Şiddetli kar
-    77: '🌨️', // Kar taneleri
-    80: '🌧️', // Hafif sağanak
-    81: '🌧️', // Sağanak
-    82: '🌧️', // Şiddetli sağanak
-    85: '🌨️', // Hafif kar sağanağı
-    86: '🌨️', // Şiddetli kar sağanağı
-    95: '⛈️', // Gök gürültülü
-    96: '⛈️', // Gök gürültülü dolu
-    99: '⛈️'  // Şiddetli gök gürültülü dolu
-  };
+  const i = { 0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌧️',53:'🌧️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌧️',81:'🌧️',82:'🌧️',95:'⛈️',96:'⛈️',99:'⛈️' };
+  return i[code] || '🌤️';
+}
 
-  return icons[code] || '🌤️';
+function getWeatherIconFromWttr(weatherCode) {
+  const m = {'113':'☀️','116':'⛅','119':'☁️','122':'☁️','143':'🌫️','176':'🌧️','179':'🌨️','200':'⛈️','227':'🌨️','230':'🌨️','248':'🌫️','260':'🌫️','263':'🌧️','266':'🌧️','293':'🌧️','296':'🌧️','299':'🌧️','302':'🌧️','305':'🌧️','308':'🌧️','323':'🌨️','326':'🌨️','329':'🌨️','332':'🌨️','335':'🌨️','338':'🌨️','353':'🌧️','356':'🌧️','359':'🌧️','386':'⛈️','389':'⛈️','392':'⛈️','395':'⛈️'};
+  return m[weatherCode] || '🌤️';
 }
 
 function updateWeatherDisplay(temp, condition, icon, city) {
-  const weatherIcon = $('#weather-icon');
-  const weatherTemp = $('#weather-temp');
-  const weatherDesc = $('#weather-desc');
-  const currentCity = $('#current-city');
-
-  if (weatherIcon) weatherIcon.textContent = icon;
-  if (weatherTemp) weatherTemp.textContent = `${temp}°C`;
-  if (weatherDesc) weatherDesc.textContent = condition;
-  if (currentCity) {
-    // Show the most specific location available
-    currentCity.textContent = city || 'Konum alınıyor...';
-  }
-
-  console.log('Weather updated for:', city, `${temp}°C`, condition);
+  const wIcon = $('#weather-icon');
+  const wTemp = $('#weather-temp');
+  const wDesc = $('#weather-desc');
+  const wCity = $('#current-city');
+  if (wIcon) wIcon.textContent = icon;
+  if (wTemp) wTemp.textContent = `${temp}°C`;
+  if (wDesc) wDesc.textContent = condition;
+  if (wCity) wCity.textContent = city || 'Konum alınıyor...';
 }
 
 let isWeatherSetup = false;
 function setupWeather() {
   if (isWeatherSetup) return;
   isWeatherSetup = true;
-
-  // Get user location by IP (no permission required)
-  getUserLocationByIP().catch(error => {
-    console.error('Weather setup failed:', error);
-    // Fallback to default city
-    getWeather(selectedCity);
-  });
-
-  // Update weather every 30 minutes
+  getUserLocationByIP().catch(() => getWeather(selectedCity));
   setInterval(() => {
-    if (userLocation) {
-      getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
-    } else {
-      getWeather(selectedCity);
-    }
+    if (userLocation) getWeatherByCoords(userLocation.lat, userLocation.lon, userLocation.city);
+    else getWeather(selectedCity);
   }, 30 * 60 * 1000);
 }
-
-// Ensure it's global for script.js
 window.setupWeather = setupWeather;
 
-// Global function to copy text to clipboard with feedback
+// ── Copy to clipboard ────────────────────────────────────────
 function copyToClipboard(text, btn) {
   navigator.clipboard.writeText(text).then(() => {
-    const originalContent = btn.innerHTML;
+    const orig = btn.innerHTML;
     btn.innerHTML = '<i class="fas fa-check"></i>';
     btn.classList.add('copied');
-    
-    setTimeout(() => {
-      btn.innerHTML = originalContent;
-      btn.classList.remove('copied');
-    }, 2000);
-  }).catch(err => {
-    console.error('Copy failed:', err);
-  });
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+  }).catch(err => console.error('Copy failed:', err));
 }
 
-// Sidebar Active Link Highlight
-function updateSidebarActive() {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  const sidebarLinks = document.querySelectorAll('.sidebar-item');
-  
-  sidebarLinks.forEach(link => {
-    const linkPath = link.getAttribute('href').split('/').pop().split('#')[0];
-    if (linkPath === currentPath) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-
-// Ensure it runs on load
-document.addEventListener('DOMContentLoaded', updateSidebarActive);
-
-// Scroll Progress Bar
-function updateScrollProgress() {
-  const progressBar = document.querySelector('.scroll-progress');
-  if (!progressBar) return;
-  
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-  progressBar.style.width = scrolled + "%";
-}
-
-// Global Animation Observer
-function setupScrollAnimations() {
-  const options = {
-    root: null,
-    threshold: 0.1,
-    rootMargin: "0px"
-  };
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-active');
-        // Once animated, no need to observe again
-        observer.unobserve(entry.target);
-      }
-    });
-  }, options);
-
-  document.querySelectorAll('[data-animate]').forEach(el => {
-    el.classList.add('animate-init');
-    observer.observe(el);
-  });
-}
-
-// Initialize Extras
+// ============================================================
+//  MAIN INITIALIZATION
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  setupScrollAnimations();
-  window.addEventListener('scroll', updateScrollProgress);
+  try {
+    // Year
+    const yearEl = $('#year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Core features
+    try { setupThemeSwitcher(); } catch (e) { console.error('Theme:', e); }
+    try { if (typeof setupLanguageSwitcher === 'function') setupLanguageSwitcher(); } catch (e) { console.error('Language:', e); }
+    try { setupContactForm(); } catch (e) { console.error('Contact form:', e); }
+    try { setupWeather(); } catch (e) { console.error('Weather:', e); }
+
+    // Visitor counter
+    try {
+      visitorCounter.init().catch(e => console.error('Counter:', e));
+      const refreshBtn = $('#refresh-counter');
+      const statusEl = $('#counter-status');
+      if (refreshBtn && statusEl) {
+        refreshBtn.addEventListener('click', async () => {
+          refreshBtn.textContent = '⏳'; refreshBtn.disabled = true; statusEl.textContent = 'Yenileniyor...';
+          try { await visitorCounter.refresh(); statusEl.textContent = 'Gerçek zamanlı sayım'; }
+          catch (e) { statusEl.textContent = 'Yenileme hatası'; }
+          finally { refreshBtn.textContent = '🔄'; refreshBtn.disabled = false; }
+        });
+      }
+    } catch (e) { console.error('Counter:', e); }
+
+    try { trackPageView(); } catch (e) {}
+
+    // Render dynamic content
+    try { renderSkills(); } catch (e) { console.error('Skills:', e); }
+    try { renderProjects(); } catch (e) { console.error('Projects:', e); }
+
+    // NEW: Animation engine
+    try { setupScrollReveal(); } catch (e) { console.error('Scroll reveal:', e); }
+    try { setupLegacyAnimations(); } catch (e) { console.error('Legacy anims:', e); }
+    try { setupCounters(); } catch (e) { console.error('Counters:', e); }
+    try { setupTypewriter(); } catch (e) { console.error('Typewriter:', e); }
+    try { setupSidebarHighlight(); } catch (e) { console.error('Sidebar highlight:', e); }
+    try { setupMagneticButtons(); } catch (e) { console.error('Magnetic:', e); }
+    try { setupHeaderScroll(); } catch (e) { console.error('Header scroll:', e); }
+
+    // Scroll progress
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+  } catch (error) {
+    console.error('Main init error:', error);
+  }
 });

@@ -4,17 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vahit Keskin | Bilgisayar Mühendisi</title>
-  <meta name="description" content="Android • Kotlin • Jetpack Compose | Vahit Keskin kişisel websitesi" />
-  <meta name="theme-color" content="#0b0d10" />
+  <title>Vahit Keskin | Senior Android Engineer</title>
+  <meta name="description" content="Senior Android Engineer — Kotlin, Jetpack Compose, Clean Architecture. Modern ve ölçeklenebilir Android uygulamaları geliştiren profesyonel portfolyo." />
+  <meta name="theme-color" content="#0b0d14" />
+  <meta name="author" content="Vahit Keskin" />
+  <meta property="og:title" content="Vahit Keskin | Senior Android Engineer" />
+  <meta property="og:description" content="Kotlin • Jetpack Compose • Clean Architecture" />
+  <meta property="og:type" content="website" />
   <link rel="icon" type="image/jpeg" href="images/image.jpg">
   <link rel="shortcut icon" type="image/jpeg" href="images/image.jpg">
   <link rel="apple-touch-icon" href="images/image.jpg">
-  <meta name="msapplication-TileImage" content="images/image.jpg">
-  <meta name="msapplication-TileColor" content="#0b0d10">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     (function () {
@@ -24,35 +25,41 @@
   </script>
 </head>
 
-<body class="has-sidebar">
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
   <!-- Sidebar Navigation -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-inner">
-      <a href="index.html#home" class="sidebar-item active">
+      <a href="#home" class="sidebar-item active" data-section="home">
         <i class="fas fa-house"></i>
         <span data-translate="nav.home">Ana Sayfa</span>
       </a>
-      <a href="about.html" class="sidebar-item">
+      <a href="#about" class="sidebar-item" data-section="about">
         <i class="fas fa-user-tie"></i>
         <span data-translate="nav.about">Hakkımda</span>
       </a>
-      <a href="shares.html" class="sidebar-item">
-        <i class="fas fa-bullhorn"></i>
-        <span data-translate="nav.shares">Paylaşımlar</span>
-      </a>
-      <a href="skills.html" class="sidebar-item">
+      <a href="#skills" class="sidebar-item" data-section="skills">
         <i class="fas fa-bolt"></i>
         <span data-translate="nav.skills">Yetenekler</span>
       </a>
-      <a href="experience.html" class="sidebar-item">
+      <a href="#experience" class="sidebar-item" data-section="experience">
         <i class="fas fa-briefcase"></i>
         <span data-translate="nav.experience">Deneyim</span>
       </a>
-      <a href="projects.html" class="sidebar-item">
+      <a href="#projects" class="sidebar-item" data-section="projects">
         <i class="fas fa-rocket"></i>
         <span data-translate="nav.projects">Projeler</span>
       </a>
-      <a href="contact.html" class="sidebar-item">
+      <a href="#contact" class="sidebar-item" data-section="contact">
         <i class="fas fa-paper-plane"></i>
         <span data-translate="nav.contact">İletişim</span>
       </a>
@@ -61,199 +68,478 @@
 
   <div class="main-wrapper">
 
-  <!-- Top Header -->
-  <div class="top-header">
-    <div class="container top-header-content">
-      <div class="datetime-weather">
-        <div class="datetime">
-          <i class="fas fa-clock"></i>
-          <span id="current-time">--:--:--</span>
-          <span id="current-date">--/--/----</span>
-        </div>
-        <div class="weather" id="weather-container">
-          <i class="fas fa-map-marker-alt"></i>
-          <span id="current-city">Konum alınıyor...</span>
-        </div>
-        <div class="weather" id="weather-info">
-          <span id="weather-icon">🌤️</span>
-          <span id="weather-temp">--°C</span>
-          <span id="weather-desc">Yükleniyor...</span>
-        </div>
-      </div>
-      <div class="controls">
-        <div class="language-switcher" id="language-switcher">
-          <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag" id="language-flag">
-          <span id="language-name">Türkçe</span>
-          <i class="fas fa-chevron-down"></i>
-          <div class="language-dropdown" id="language-dropdown">
-            <div class="language-option" data-lang="tr" data-flag="https://flagcdn.com/tr.svg">
-              <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag">
-              <span>Türkçe</span>
-            </div>
-            <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/gb.svg">
-              <img src="https://flagcdn.com/gb.svg" alt="English" class="language-flag">
-              <span>English</span>
-            </div>
-            <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/de.svg">
-              <img src="https://flagcdn.com/de.svg" alt="Deutsch" class="language-flag">
-              <span>Deutsch</span>
-            </div>
-            <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/fr.svg">
-              <img src="https://flagcdn.com/fr.svg" alt="Français" class="language-flag">
-              <span>Français</span>
-            </div>
-            <div class="language-option" data-lang="ru" data-flag="https://flagcdn.com/ru.svg">
-              <img src="https://flagcdn.com/ru.svg" alt="Русский" class="language-flag">
-              <span>Русский</span>
-            </div>
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="container top-header-content">
+        <div class="datetime-weather">
+          <div class="datetime">
+            <i class="fas fa-clock"></i>
+            <span id="current-time">--:--:--</span>
+            <span id="current-date">--/--/----</span>
+          </div>
+          <div class="weather" id="weather-container">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="current-city">Konum alınıyor...</span>
+          </div>
+          <div class="weather" id="weather-info">
+            <span id="weather-icon">🌤️</span>
+            <span id="weather-temp">--°C</span>
+            <span id="weather-desc">Yükleniyor...</span>
           </div>
         </div>
-        <div class="theme-switcher" id="theme-switcher">
-          <i class="fas fa-moon" id="theme-icon"></i>
-          <span id="theme-text">Karanlık</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a href="index.html#home" class="brand" data-translate="nav.brand" aria-label="VK Portfolio">Vahit Keskin<span
-          class="dot">.</span></a>
-      <div class="actions">
-        <a class="btn btn-primary" href="contact.html" data-translate="nav.work">Çalışalım</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-wrap container" data-animate>
-      <div class="hero-content">
-        <div class="hero-status">
-          <span class="status-dot"></span>
-          <span data-translate="hero.status">Yeni Fırsatlara Açık</span>
-        </div>
-        <div class="hero-kicker" data-translate="hero.kicker">📱 Android • Kotlin • Compose</div>
-        <h1 class="hero-name" data-translate="hero.name">Vahit Keskin</h1>
-        <div class="hero-title" data-translate="hero.title">Senior Android Engineer | Open for New Opportunities</div>
-        <p class="hero-tagline" data-translate="hero.tagline">Modern ve ölçeklenebilir Android uygulamaları geliştiren,
-          temiz mimari ve kullanıcı deneyimi odaklı Senior Android Engineer. Şu an yeni fırsatlara açığım.</p>
-
-        <div class="socials">
-          <a class="btn" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank"
-            rel="noreferrer noopener" aria-label="Google Play Store">
-            <i class="fab fa-google-play"></i>
-            <span>🎮 Play Store</span>
-          </a>
-          <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener"
-            aria-label="GitHub">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-          <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener"
-            aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-            <span>LinkedIn</span>
-          </a>
-        </div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="projects.html" data-translate="hero.projects">Projeler</a>
-          <a class="btn btn-secondary" href="contact.html" data-translate="hero.contact">İletişime geç</a>
-        </div>
-      </div>
-      <div class="avatar-wrap">
-        <img class="avatar" src="images/image.jpg" alt="Vahit Keskin portre" />
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section id="about" class="section">
-      <div class="container" data-animate>
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="fas fa-user"></i>
-            <span data-translate="about.title">Hakkımda</span>
-          </h2>
-          <p class="section-subtitle" data-translate="about.subtitle">Ben Kimim ve Neler Yapıyorum?</p>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="glass-card">
-            <div class="card-h">
-              <h3 data-translate="about.summary">Hakkımda (Özet)</h3>
-            </div>
-            <div class="card-b">
-              <p class="text-muted">Senior Android Engineer @ Türk Telekom. Temiz mimari, Jetpack Compose ve modern
-                Android ekosistemiyle ölçeklenebilir deneyimler geliştiriyorum. İzmir'de yaşıyorum ve Home Office
-                çalışıyorum.</p>
-              <div class="skill-chips" style="margin-top: 1rem;">
-                <span class="badge">🤖 Android</span>
-                <span class="badge">🅺 Kotlin</span>
-                <span class="badge">🎨 Compose</span>
+        <div class="controls">
+          <div class="language-switcher" id="language-switcher">
+            <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag" id="language-flag">
+            <span id="language-name">Türkçe</span>
+            <i class="fas fa-chevron-down"></i>
+            <div class="language-dropdown" id="language-dropdown">
+              <div class="language-option" data-lang="tr" data-flag="https://flagcdn.com/tr.svg">
+                <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag">
+                <span>Türkçe</span>
+              </div>
+              <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/gb.svg">
+                <img src="https://flagcdn.com/gb.svg" alt="English" class="language-flag">
+                <span>English</span>
+              </div>
+              <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/de.svg">
+                <img src="https://flagcdn.com/de.svg" alt="Deutsch" class="language-flag">
+                <span>Deutsch</span>
+              </div>
+              <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/fr.svg">
+                <img src="https://flagcdn.com/fr.svg" alt="Français" class="language-flag">
+                <span>Français</span>
+              </div>
+              <div class="language-option" data-lang="ru" data-flag="https://flagcdn.com/ru.svg">
+                <img src="https://flagcdn.com/ru.svg" alt="Русский" class="language-flag">
+                <span>Русский</span>
               </div>
             </div>
           </div>
-
-          <div class="glass-card">
-            <div class="card-h">
-              <h3 data-translate="about.expertise">🚀 Uzmanlık Alanlarım</h3>
-            </div>
-            <div class="card-b">
-              <div class="skill-chips">
-                <span class="badge">📱 Mobil Mimari</span>
-                <span class="badge">⚡ Coroutines/Flow</span>
-                <span class="badge">🧪 Test Otomasyonu</span>
-                <span class="badge">🚀 CI/CD & DevOps</span>
-                <span class="badge">🔗 MVI/MVVM</span>
-              </div>
-              <div class="hero-actions" style="margin-top: 1.5rem;">
-                <a class="btn btn-secondary" href="projects.html" data-translate="hero.projects">Projeler</a>
-                <a class="btn btn-primary" href="contact.html" data-translate="hero.contact">İletişime geç</a>
-              </div>
-            </div>
+          <div class="theme-switcher" id="theme-switcher">
+            <i class="fas fa-moon" id="theme-icon"></i>
+            <span id="theme-text" style="display:none;">Karanlık</span>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container nav">
+        <a href="#home" class="brand" aria-label="VK Portfolio">Vahit Keskin<span class="dot">.</span></a>
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact" data-translate="nav.work">Çalışalım</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================== HERO ============================== -->
+    <section id="home" class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-content">
+          <div class="hero-status">
+            <span class="status-dot"></span>
+            <span data-translate="hero.status">Yeni Fırsatlara Açık</span>
+          </div>
+          <div class="hero-kicker" data-translate="hero.kicker">📱 Android • Kotlin • Compose</div>
+          <h1 class="hero-name" id="hero-name">Vahit Keskin</h1>
+          <div class="hero-title" id="hero-title" data-translate="hero.title">Senior Android Engineer</div>
+          <p class="hero-tagline" data-translate="hero.tagline">Modern ve ölçeklenebilir Android uygulamaları geliştiren, temiz mimari ve kullanıcı deneyimi odaklı Senior Android Engineer. Şu an yeni fırsatlara açığım.</p>
+
+          <div class="socials">
+            <a class="btn" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a class="btn" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a class="btn" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a class="btn" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener" aria-label="Google Play Store">
+              <i class="fab fa-google-play"></i>
+              <span>Play Store</span>
+            </a>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects" data-translate="hero.projects">Projeler</a>
+            <a class="btn btn-secondary" href="#contact" data-translate="hero.contact">İletişime Geç</a>
+          </div>
+        </div>
+        <div class="avatar-wrap">
+          <img class="avatar" src="images/image.jpg" alt="Vahit Keskin portre" />
         </div>
       </div>
     </section>
 
-    <section id="skills" class="section">
-      <div class="container" data-animate>
-        <div class="section-header">
-          <h2 class="section-title">
-            <i class="fas fa-tools"></i>
-            <span data-translate="skills.title">Yetenekler</span>
-          </h2>
-          <p class="section-subtitle" data-translate="skills.subtitle">Modern teknolojilerle güçlendirilmiş çözüm odaklı
-            yaklaşımım.</p>
+    <!-- Stats Row -->
+    <div class="container" data-reveal="up">
+      <div class="stats-row">
+        <div class="stat-card" data-reveal="scale">
+          <div class="stat-number" data-count="5">0</div>
+          <div class="stat-label" data-translate="stats.experience">Yıl Deneyim</div>
         </div>
-        <div class="skills-grid" id="skills-container">
-          <!-- Dynamically rendered by script.js -->
+        <div class="stat-card" data-reveal="scale">
+          <div class="stat-number" data-count="10">0</div>
+          <div class="stat-label" data-translate="stats.projects">Tamamlanan Proje</div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Visitor Counter -->
-  <div class="visitor-counter">
-    <div class="container">
-      <p>Bu sayfayı ziyaret eden kişi sayısı:</p>
-      <div class="counter-number" id="visitor-count">Yükleniyor...</div>
-      <div style="font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem;">
-        <span id="counter-status">Gerçek zamanlı sayım</span>
-        <button id="refresh-counter"
-          style="margin-left: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); cursor: pointer;"
-          title="Sayacı yenile">🔄</button>
+        <div class="stat-card" data-reveal="scale">
+          <div class="stat-number" data-count="11">0</div>
+          <div class="stat-label" data-translate="stats.skills">Teknoloji Yetkinliği</div>
+        </div>
+        <div class="stat-card" data-reveal="scale">
+          <div class="stat-number" data-count="4">0</div>
+          <div class="stat-label" data-translate="stats.companies">Şirket Deneyimi</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+    <main>
+      <!-- ============================== ABOUT ============================== -->
+      <section id="about">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-terminal"></i> Hakkımda</div>
+            <h2 class="section-title" data-translate="about.title">Merhaba, Ben Vahit 👋</h2>
+            <p class="section-subtitle" data-translate="about.heading">Senior Android Engineer & Architecture Specialist</p>
+          </div>
+
+          <div class="about-grid">
+            <div class="glass-card about-main" data-reveal="left">
+              <div class="card-b">
+                <p class="lead" data-translate="about.content1">Android ekosisteminde performanslı ve sürdürülebilir uygulamalar geliştiriyorum. Temel prensibim: <span class="text-highlight">iş mantığı ViewModel'de</span>, UI ise yalın ve tepkisel.</p>
+                <p class="text-muted" data-translate="about.content2">Compose ve klasik View sistemi arasında köprü kurabilir; büyük kod tabanlarında kademeli dönüşüm stratejileri tasarlarım. Takım içi geliştirici deneyimini iyileştirmek için mimari şablonlar, kod üreten scriptler ve komponent kütüphaneleri kurarım.</p>
+                <div class="expertise-pills" data-stagger>
+                  <span class="badge">Kotlin Multiplatform</span>
+                  <span class="badge">Jetpack Compose</span>
+                  <span class="badge">Clean Architecture</span>
+                  <span class="badge">Unit Testing</span>
+                  <span class="badge">MVI/MVVM</span>
+                  <span class="badge">Hilt/Dagger</span>
+                  <span class="badge">Coroutines & Flow</span>
+                  <span class="badge">CI/CD</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="expertise-cards" data-stagger>
+              <div class="glass-card expertise-mini" data-reveal="right">
+                <div class="card-mini-inner">
+                  <div class="icon-box">⚡</div>
+                  <div>
+                    <div class="h-mini">Reaktif Programlama</div>
+                    <div class="p-mini" data-translate="about.list1">Coroutines & Flow architecture</div>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card expertise-mini" data-reveal="right">
+                <div class="card-mini-inner">
+                  <div class="icon-box">🧪</div>
+                  <div>
+                    <div class="h-mini">Test Otomasyonu</div>
+                    <div class="p-mini" data-translate="about.list2">Unit, Instrumentation & UI</div>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card expertise-mini" data-reveal="right">
+                <div class="card-mini-inner">
+                  <div class="icon-box">🎨</div>
+                  <div>
+                    <div class="h-mini">Design Systems</div>
+                    <div class="p-mini" data-translate="about.list3">Atomic design in Android</div>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card expertise-mini" data-reveal="right">
+                <div class="card-mini-inner">
+                  <div class="icon-box">🏗️</div>
+                  <div>
+                    <div class="h-mini">Mimari Tasarım</div>
+                    <div class="p-mini">Clean Architecture & Modüler Yapı</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== SKILLS ============================== -->
+      <section id="skills">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-bolt"></i> Yetenekler</div>
+            <h2 class="section-title" data-translate="skills.title">Teknoloji Yetkinliklerim</h2>
+            <p class="section-subtitle" data-translate="skills.subtitle">Modern teknolojilerle güçlendirilmiş çözüm odaklı yaklaşımım.</p>
+          </div>
+          <div class="skills-grid" id="skills-container" data-stagger>
+            <!-- Dynamically rendered by script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== EXPERIENCE ============================== -->
+      <section id="experience">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-briefcase"></i> Deneyim</div>
+            <h2 class="section-title" data-translate="experience.title">Profesyonel Yolculuğum</h2>
+            <p class="section-subtitle" data-translate="experience.subtitle">Profesyonel yolculuğum ve dönüm noktaları.</p>
+          </div>
+
+          <div class="timeline" data-stagger>
+            <div class="timeline-item" data-reveal="left">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Senior Android Developer</div>
+                  <div class="timeline-company">Türk Telekom</div>
+                </div>
+                <span class="timeline-period">Nis 2023 — Oca 2026</span>
+              </div>
+              <div class="skill-chips" style="margin-bottom: 1rem;">
+                <span class="badge">Kotlin</span>
+                <span class="badge">Jetpack Compose</span>
+                <span class="badge">MVVM</span>
+                <span class="badge">Clean Architecture</span>
+                <span class="badge">Hilt</span>
+              </div>
+              <p class="timeline-desc">Büyük ölçekli Android uygulamalarında mimari tasarım, kod kalitesi ve performans optimizasyonu. Jetpack Compose ile modern UI geliştirme.</p>
+              <ul class="timeline-achievements">
+                <li>Uygulama açılış süresi %28 iyileştirildi.</li>
+                <li>Compose dönüşümü için modüler mimari planlandı ve devreye alındı.</li>
+                <li>Crash-free rate %99.5 seviyesinde stabil tutuldu.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item" data-reveal="left">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Android Developer</div>
+                  <div class="timeline-company">Appcent (Metro Market)</div>
+                </div>
+                <span class="timeline-period">Kas 2022 — Nis 2023</span>
+              </div>
+              <div class="skill-chips" style="margin-bottom: 1rem;">
+                <span class="badge">Kotlin</span>
+                <span class="badge">Coroutines</span>
+                <span class="badge">Hilt</span>
+                <span class="badge">MVI</span>
+              </div>
+              <p class="timeline-desc">MVVM mimarisi ile Android uygulamaları geliştirme. Kotlin, Coroutines ve modern Android kütüphaneleri kullanarak kullanıcı dostu uygulamalar.</p>
+              <ul class="timeline-achievements">
+                <li>Yeni özellik geliştirme sürelerinde %15 kısalma.</li>
+                <li>Network katmanında retry/backoff stratejisi ile hata oranında düşüş.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item" data-reveal="left">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Android Developer</div>
+                  <div class="timeline-company">TEKROM Teknoloji AŞ.</div>
+                </div>
+                <span class="timeline-period">Haz 2021 — Kas 2022</span>
+              </div>
+              <div class="skill-chips" style="margin-bottom: 1rem;">
+                <span class="badge">Android</span>
+                <span class="badge">Kotlin</span>
+                <span class="badge">Java</span>
+                <span class="badge">Fastlane</span>
+              </div>
+              <p class="timeline-desc">T-Soft e-ticaret platformu için mobil uygulama geliştirme. E-ticaret deneyimi ve alışveriş akışları.</p>
+              <ul class="timeline-achievements">
+                <li>Multi-brand uygulama yapısı kuruldu.</li>
+                <li>Fastlane ile CI/CD pipeline oluşturuldu.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item" data-reveal="left">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Junior Android Developer</div>
+                  <div class="timeline-company">Code And More (Staj)</div>
+                </div>
+                <span class="timeline-period">Tem 2020 — Eyl 2020</span>
+              </div>
+              <div class="skill-chips" style="margin-bottom: 1rem;">
+                <span class="badge">Java</span>
+                <span class="badge">Android SDK</span>
+                <span class="badge">Firebase</span>
+              </div>
+              <p class="timeline-desc">Android ekosisteminde temel geliştirme deneyimi. Java ile uygulama geliştirme ve öğrenme süreci.</p>
+              <ul class="timeline-achievements">
+                <li>İlk prodüksiyon yayınında kritik hatalar olmadan teslim.</li>
+                <li>Firebase Crashlytics entegre edilerek hata takibi sağlandı.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== PROJECTS ============================== -->
+      <section id="projects">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-rocket"></i> Projeler</div>
+            <h2 class="section-title" data-translate="projects.title">Projeler & Uygulamalar</h2>
+            <p class="section-subtitle" data-translate="projects.subtitle">Gerçek dünya problemlerine modern çözümler.</p>
+          </div>
+          <div class="grid grid-3" id="projects-container" data-stagger>
+            <!-- Dynamically rendered by script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== CONTACT ============================== -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-paper-plane"></i> İletişim</div>
+            <h2 class="section-title" data-translate="contact.title">Birlikte Çalışalım 🚀</h2>
+            <p class="section-subtitle" data-translate="contact.subtitle">Android projeleriniz için profesyonel destek arıyorsanız, benimle iletişime geçin.</p>
+          </div>
+
+          <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="glass-card" data-reveal="left">
+              <div class="card-b">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;" data-translate="contact.infoTitle">İletişim Bilgileri</h3>
+
+                <div class="contact-methods">
+                  <div class="contact-method">
+                    <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                      <div class="method-label">E-posta</div>
+                      <a href="mailto:vahitkeskin07@gmail.com" class="method-value">vahitkeskin07@gmail.com</a>
+                    </div>
+                  </div>
+                  <div class="contact-method">
+                    <div class="method-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                      <div class="method-label">Konum</div>
+                      <span class="method-value">İzmir, Türkiye (Remote)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="social-grid">
+                  <a class="social-link linkedin" href="https://www.linkedin.com/in/vahit-keskin/" target="_blank" rel="noreferrer noopener">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                  <a class="social-link github" href="https://github.com/vahitkeskin" target="_blank" rel="noreferrer noopener">
+                    <i class="fab fa-github"></i> GitHub
+                  </a>
+                  <a class="social-link instagram" href="https://www.instagram.com/keskin.vahit/" target="_blank" rel="noreferrer noopener">
+                    <i class="fab fa-instagram"></i> Instagram
+                  </a>
+                  <a class="social-link playstore" href="https://play.google.com/store/apps/developer?id=vahitkeskin" target="_blank" rel="noreferrer noopener">
+                    <i class="fab fa-google-play"></i> Play Store
+                  </a>
+                  <a class="social-link email" href="mailto:vahitkeskin07@gmail.com">
+                    <i class="fas fa-envelope"></i> E-posta
+                  </a>
+                  <a class="social-link playstore" href="https://play.google.com/store/apps/details?id=com.vahitkeskin.iradix" target="_blank" rel="noreferrer noopener">
+                    <i class="fas fa-mobile-alt"></i> iRadix
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-card" data-reveal="right">
+              <div class="card-b">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;" data-translate="contact.formTitle">Mesaj Gönder</h3>
+                <form id="contact-form">
+                  <div class="grid grid-2" style="gap: 0.75rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="first_name">Ad *</label>
+                      <input id="first_name" name="first_name" placeholder="Adınız" required />
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="last_name">Soyad *</label>
+                      <input id="last_name" name="last_name" placeholder="Soyadınız" required />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">E-posta *</label>
+                    <input id="email" name="email" type="email" placeholder="ornek@email.com" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="subject">Konu *</label>
+                    <input id="subject" name="subject" placeholder="Konu" required />
+                  </div>
+
+                  <div class="image-upload-wrapper">
+                    <label>Görsel Ekle (Opsiyonel)</label>
+                    <label for="image_upload" class="file-input-label">
+                      <i class="fas fa-image"></i>
+                      <span>Tıkla veya Sürükle (PNG, JPG)</span>
+                    </label>
+                    <input type="file" id="image_upload" name="attachment" accept="image/*" style="display:none;" />
+                    <div id="image-preview-container">
+                      <img id="image_preview" src="" alt="Preview">
+                      <button type="button" class="remove-image-btn" id="remove_image">&times;</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message">Mesaj *</label>
+                    <textarea id="message" name="message" placeholder="Projeniz hakkında detaylı bilgi verin..." required></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" id="sendBtn" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Mesajı Gönder</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-3" style="margin-top: 2.5rem;" data-stagger>
+            <div class="glass-card stat-card-mini" data-reveal="up">
+              <div class="stat-icon">⚡</div>
+              <h4 class="stat-title">Hızlı Yanıt</h4>
+              <p class="text-muted">24 saat içinde</p>
+            </div>
+            <div class="glass-card stat-card-mini" data-reveal="up">
+              <div class="stat-icon">🛠️</div>
+              <h4 class="stat-title">Uzman Destek</h4>
+              <p class="text-muted">Android & Kotlin</p>
+            </div>
+            <div class="glass-card stat-card-mini" data-reveal="up">
+              <div class="stat-icon">💼</div>
+              <h4 class="stat-title">Profesyonel</h4>
+              <p class="text-muted">5+ yıl deneyim</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+      <div class="container">
+        <p>Bu sayfayı ziyaret eden kişi sayısı:</p>
+        <div class="counter-number" id="visitor-count">Yükleniyor...</div>
+        <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">
+          <span id="counter-status">Gerçek zamanlı sayım</span>
+          <button id="refresh-counter" title="Sayacı yenile">🔄</button>
+        </div>
+      </div>
+    </div>
+
+    <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+
+  </div> <!-- Close main-wrapper -->
 
   <!-- Scripts -->
-  </div> <!-- Close main-wrapper -->
   <script src="data.js"></script>
   <script src="language.js"></script>
   <script src="script.js"></script>
