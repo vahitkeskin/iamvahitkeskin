@@ -414,6 +414,23 @@ function animateNumber(element, start, end, duration, suffix) {
   requestAnimationFrame(update);
 }
 
+// ── Featured App Carousel ────────────────────────────────────
+function setupFeaturedCarousel() {
+  const container = $('#featured-carousel');
+  if (!container) return;
+
+  const images = container.querySelectorAll('.carousel-img');
+  if (images.length <= 1) return;
+
+  let currentIdx = 0;
+
+  setInterval(() => {
+    images[currentIdx].classList.remove('active');
+    currentIdx = (currentIdx + 1) % images.length;
+    images[currentIdx].classList.add('active');
+  }, 3500); // changes every 3.5 seconds
+}
+
 // ── Typewriter Effect ────────────────────────────────────────
 function setupTypewriter() {
   const titleEl = $('#hero-title');
@@ -778,6 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { setupLegacyAnimations(); } catch (e) { console.error('Legacy anims:', e); }
     try { setupCounters(); } catch (e) { console.error('Counters:', e); }
     try { setupTypewriter(); } catch (e) { console.error('Typewriter:', e); }
+    try { setupFeaturedCarousel(); } catch (e) { console.error('Featured Carousel:', e); }
     try { setupSidebarHighlight(); } catch (e) { console.error('Sidebar highlight:', e); }
     try { setupMagneticButtons(); } catch (e) { console.error('Magnetic:', e); }
     try { setupHeaderScroll(); } catch (e) { console.error('Header scroll:', e); }

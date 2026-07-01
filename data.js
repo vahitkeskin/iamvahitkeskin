@@ -81,6 +81,27 @@ window.PROFILE = {
   ],
   projects: [
     {
+      name: 'Musixy: Müzik Çalar',
+      description: 'Gelişmiş ekolayzer, özel widget\'lar ve yüzen pencere ile müzik keyfini katlayın!',
+      description_en: 'Enhance your music experience with an advanced equalizer, custom widgets, and a floating window!',
+      tags: ['Android', 'Kotlin', 'Jetpack Compose', 'Music Player', 'Equalizer', 'Material 3'],
+      link: 'https://play.google.com/store/apps/details?id=com.vahitkeskin.musixy',
+      company: 'Kişisel Proje',
+      period: '2025 - Halen',
+      image: 'https://play-lh.googleusercontent.com/Oszg8bsOzDSbhv422K5zkAIl_fmLQvWDcpDO_x8Y8AUli0lnf6VxT7xayGVCmjhzWQwQEoWdihXQIl7CbOVttZA=s180-rw',
+      featured: true
+    },
+    {
+      name: 'RubikSync - AI Matrix',
+      description: '3D etkileşimli animasyonlarla Rubik Küpünü tarayın, çözün ve öğrenin.',
+      description_en: 'Scan, solve, and learn Rubik\'s Cube with 3D interactive animations.',
+      tags: ['Android', 'Kotlin', 'Jetpack Compose', '3D Simulation', 'AI Solver', 'Material 3'],
+      link: 'https://play.google.com/store/apps/details?id=com.vahitkeskin.rubiksync',
+      company: 'Kişisel Proje',
+      period: '2025 - Halen',
+      image: 'https://play-lh.googleusercontent.com/1YNdXVHN8i1KMjEypoOAQX6UVFU_5SgIP-kPokc6aUVeseEqTirH3EZ6q-9pP4q2_bkHRskdaY310qZa8jXF_g=s180-rw'
+    },
+    {
       name: 'Iradix: Dijital İrade Takibi',
       description: 'Dijital odağını geri kazan. Ekran süresi takibi ve akıllı detoks araçları.',
       description_en: 'Regain your digital focus. Screen time tracking and smart detox tools.',

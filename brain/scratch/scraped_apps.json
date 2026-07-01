@@ -1,0 +1,65 @@
+[
+  {
+    "id": "com.vahitkeskin.hatirlaticim",
+    "title": "Hatırlatıcım - Akıllı Bildirim",
+    "icon": "https://play-lh.googleusercontent.com/crXSPKNO-rUknWendSPU9eXZLuyLMZp6MTHWabkomUnzTKIdXjJplVM5JQAoPLfNE3_0qPA28Spb_uqlHi3a=s180-rw",
+    "description": "Zamanınızı ve mekanınızı akıllı bildirimlerle kontrol altına alın.",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.hatirlaticim"
+  },
+  {
+    "id": "com.vahitkeskin.blumesh",
+    "title": "BluMesh: Offline P2P Chat",
+    "icon": "https://play-lh.googleusercontent.com/gDCp-bZ9Qmic-yTQYx2o1w4ZvEe4QQeGWCuKjtKQyQFRywDWLZjyh7L8rid5uR5DjIFQFTkgUVu6B9ALcQ3CAg=s180-rw",
+    "description": "İnternet veya hat çekmeyen yerlerde, yakınınızdaki kişilerle güvenle mesajlaşın.",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.blumesh"
+  },
+  {
+    "id": "com.vahitkeskin.equatix",
+    "title": "Equatix",
+    "icon": "https://play-lh.googleusercontent.com/oJPMw4z1he-bhIvje7sTh7JC5bap7vbOCwv9zRVr5hXjdaljzym8zprPk5mSjZA0ac-6cD7b70oK4TI7GnVwsQ=s180-rw",
+    "description": "Zihnini zorlayan matematik matrislerini çöz ve IQ'nu geliştir! 🧠",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.equatix"
+  },
+  {
+    "id": "org.vahitkeskin.activenote",
+    "title": "ActiveNote",
+    "icon": "https://play-lh.googleusercontent.com/9zZh7XqRftgf3gVv1wfAjYEY0GXXtvyDyPkKD7CUPpSZumS7iC69CnmkGCCk0LrvkbvKKEwtk_LXcXASm__KFD8=s180-rw",
+    "description": "Notlar, rutinler, odak modu ve sınav sayacı ile hayatınızı tek yerden planlayın.",
+    "url": "https://play.google.com/store/apps/details?id=org.vahitkeskin.activenote"
+  },
+  {
+    "id": "com.vahitkeskin.iradix",
+    "title": "Iradix: Dijital İrade Takibi",
+    "icon": "https://play-lh.googleusercontent.com/s0r-zecoTXJ-7q7Gqcg4G8Vpc2ZBcmyJIoVzf6-a0z_-PoFiJaET2fKw6Bz0AET4pC_QJnSxEiZz1KVa4D6DLcI=s180-rw",
+    "description": "Dijital odağını geri kazan. Ekran süresi takibi ve akıllı detoks araçları.",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.iradix"
+  },
+  {
+    "id": "com.vahitkeskin.golgemeclisi",
+    "title": "Gölge Meclisi - Vampir Köylü",
+    "icon": "https://play-lh.googleusercontent.com/WjA1yhYHzQmsx0ebGxbq6ep8V2S0MJJr17eG_MjrZxUO2DI4lzEP62-hv1xz1kFWqcwLxGta2ikY04JmXRKzPg=s180-rw",
+    "description": "Gölge Meclisi: Karanlık çöktüğünde stratejini kur. Vampir mi yoksa köylü mü?",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.golgemeclisi"
+  },
+  {
+    "id": "com.vahitkeskin.letswapp",
+    "title": "LetSwApp - Kitap Takas",
+    "icon": "https://play-lh.googleusercontent.com/Yel0YqcqAd33fw5y9Xh0HDeZhOnRkAm_tWVIDoCkk0C9rDgFAhX3rrWPZPSbpFvkvMD2gWV0x59qpNnFFRyqeg=s180-rw",
+    "description": "Kitap Takas/Hediye Uygulaması",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.letswapp"
+  },
+  {
+    "id": "com.vahitkeskin.yolculukdefterim",
+    "title": "Yolculuk Defterim",
+    "icon": "https://play-lh.googleusercontent.com/BJ7d-Y-FgFRpSRa4xMWSfyZxDJH2BQw_sFz6KHAULAo-J3nLZZD2pcBbFCChbo2tfw5_f2axLAQuvtF7GodOPQ=s180-rw",
+    "description": "Yolculuk Defterim, seyahat anılarınızı kaydetmenizi sağlayan lokal bir uygulama.",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.yolculukdefterim"
+  },
+  {
+    "id": "com.vahitkeskin.fencecalculator",
+    "title": "Tel Çit Hesaplama",
+    "icon": "https://play-lh.googleusercontent.com/e8_19x1ZaLAb-K045HrLS5sB3uf3vi70Z4OB3QgwglmOoB6Uo5wjr6k0d8xy8M_EE0efc68BWcqBlSelrpLyWQ=s180-rw",
+    "description": "Profesyonel tel çit metraj, maliyet analizi ve PDF raporlama aracı",
+    "url": "https://play.google.com/store/apps/details?id=com.vahitkeskin.fencecalculator"
+  }
+]

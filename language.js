@@ -110,7 +110,21 @@ const TRANSLATIONS = {
     'theme.auto': 'Cihaz',
     'youtube.title': '🎬 Dörtten Bire: Teknoloji ve Gelişim',
     'youtube.description': 'Yazılım dünyasındaki yenilikler, modern Android geliştirme teknikleri ve profesyonel gelişim üzerine derinlemesine rehberler.',
-    'youtube.button': 'Kanalı Ziyaret Et'
+    'youtube.button': 'Kanalı Ziyaret Et',
+
+    // Stats
+    'stats.experience': 'Yıl Deneyim',
+    'stats.projects': 'Play Store Uygulaması',
+    'stats.skills': 'Teknoloji Yetkinliği',
+    'stats.companies': 'Şirket Deneyimi',
+
+    // Featured App
+    'featured.badge': 'ÖNE ÇIKAN UYGULAMA',
+    'featured.title': 'Müzik Çalar',
+    'featured.developer': 'Vahit Keskin',
+    'featured.category': 'Müzik ve Ses',
+    'featured.desc': 'Gelişmiş ekolayzer, özel widget\'lar ve yüzen pencere ile müzik keyfini katlayın! Cihazınızdaki yerel müzik kütüphanenizi yönetmenin, organize etmenin ve dinlemenin en şık yolu.',
+    'featured.button': 'Play Store\'da Keşfet'
   },
 
   en: {
@@ -223,7 +237,21 @@ const TRANSLATIONS = {
     'theme.auto': 'Device',
     'youtube.title': '🎬 Dörtten Bire: Tech & Growth',
     'youtube.description': 'In-depth guides on software engineering, modern Android development, and professional self-improvement.',
-    'youtube.button': 'Visit Channel'
+    'youtube.button': 'Visit Channel',
+
+    // Stats
+    'stats.experience': 'Years of Experience',
+    'stats.projects': 'Play Store Apps',
+    'stats.skills': 'Skills & Technologies',
+    'stats.companies': 'Company Experience',
+
+    // Featured App
+    'featured.badge': 'FEATURED APP',
+    'featured.title': 'Music Player',
+    'featured.developer': 'Vahit Keskin',
+    'featured.category': 'Music & Audio',
+    'featured.desc': 'Enhance your music experience with an advanced equalizer, custom widgets, and a floating window! The most elegant way to manage, organize, and listen to your local music library.',
+    'featured.button': 'Discover on Play Store'
   },
 
   de: {
@@ -325,7 +353,21 @@ const TRANSLATIONS = {
     // Theme
     'theme.dark': 'Dunkel',
     'theme.light': 'Hell',
-    'theme.auto': 'Gerät'
+    'theme.auto': 'Gerät',
+
+    // Stats
+    'stats.experience': 'Jahre Erfahrung',
+    'stats.projects': 'Play Store Apps',
+    'stats.skills': 'Technologiekompetenz',
+    'stats.companies': 'Unternehmenserfahrung',
+
+    // Featured App
+    'featured.badge': 'AUSGEWÄHLTE APP',
+    'featured.title': 'Musik-Player',
+    'featured.developer': 'Vahit Keskin',
+    'featured.category': 'Musik & Audio',
+    'featured.desc': 'Verbessern Sie Ihr Musikerlebnis mit einem fortschrittlichen Equalizer, benutzerdefinierten Widgets und einem schwebenden Fenster! Der eleganteste Weg, Ihre lokale Musikbibliothek zu verwalten, zu organisieren und anzuhören.',
+    'featured.button': 'Im Play Store ansehen'
   },
 
   fr: {
@@ -427,7 +469,21 @@ const TRANSLATIONS = {
     // Theme
     'theme.dark': 'Sombre',
     'theme.light': 'Clair',
-    'theme.auto': 'Appareil'
+    'theme.auto': 'Appareil',
+
+    // Stats
+    'stats.experience': 'Années d\'Expérience',
+    'stats.projects': 'Applications Play Store',
+    'stats.skills': 'Compétences Techniques',
+    'stats.companies': 'Expérience en Entreprise',
+
+    // Featured App
+    'featured.badge': 'APPLICATION EN VEDETTE',
+    'featured.title': 'Lecteur de Musique',
+    'featured.developer': 'Vahit Keskin',
+    'featured.category': 'Musique et Audio',
+    'featured.desc': 'Améliorez votre expérience musicale avec un égaliseur avancé, des widgets personnalisés et une fenêtre flottante ! La façon la plus élégante de gérer, d\'organiser et d\'écouter votre bibliothèque musicale locale.',
+    'featured.button': 'Voir sur Play Store'
   },
 
   ru: {
@@ -529,7 +585,21 @@ const TRANSLATIONS = {
     // Theme
     'theme.dark': 'Темная',
     'theme.light': 'Светлая',
-    'theme.auto': 'Устройство'
+    'theme.auto': 'Устройство',
+
+    // Stats
+    'stats.experience': 'Лет Опыта',
+    'stats.projects': 'Приложения в Play Store',
+    'stats.skills': 'Технические Навыки',
+    'stats.companies': 'Опыт Работы в Компаниях',
+
+    // Featured App
+    'featured.badge': 'РЕКОМЕНДУЕМОЕ ПРИЛОЖЕНИЕ',
+    'featured.title': 'Музыкальный плеер',
+    'featured.developer': 'Vahit Keskin',
+    'featured.category': 'Музыка и Аудио',
+    'featured.desc': 'Улучшите свой музыкальный опыт с помощью продвинутого эквалайзера, настраиваемых виджетов и плавающего окна! Самый элегантный способ управлять, организовывать и слушать вашу локальную музыкальную библиотеку.',
+    'featured.button': 'Посмотреть в Play Store'
   }
 };
 
