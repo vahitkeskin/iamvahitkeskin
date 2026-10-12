@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Uğur Okulları Viranşehir Kampüsü | Bilişim Teknolojileri Müfredatı</title>
+  <meta name="description"
+    content="Uğur Okulları Viranşehir Kampüsü Bilişim Teknolojileri K12 Akademik Müfredatı. Ana sınıfından 12. sınıfa kadar algoritmik düşünce, Scratch, 3D modelleme, Arduino, Python ve Yapay Zeka serüveni.">
+  <meta name="keywords"
+    content="Uğur Okulları, Viranşehir Kampüsü, Bilişim Teknolojileri, Kodlama, Robotik, Arduino, Python, Yapay Zeka, Scratch, Tinkercad, STEM">
+  <meta name="author" content="Uğur Okulları Viranşehir Kampüsü">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Uğur Okulları Viranşehir Kampüsü | Bilişim Teknolojileri Müfredatı">
+  <meta property="og:description"
+    content="Geleceğin teknolojilerini bugünden inşa eden Uğur Okulları Viranşehir Kampüsü Bilişim Teknolojileri K12 platformu.">
+  <meta property="og:image" content="assets/schoolfullimage.webp">
+
+  <!-- Favicon (ugurokullariviransehirkampusu.jpg) -->
+  <link rel="icon" type="image/jpeg" href="assets/ugurokullariviransehirkampusu.jpg">
+  <link rel="apple-touch-icon" href="assets/ugurokullariviransehirkampusu.jpg">
+
+  <!-- Bootstrap 4.3.1 & Libraries (Matching Begendigim Sayfa) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+  <!-- Color Scheme Meta & Instant Theme Init (Açık, Kapalı, Sistem - Zero FOUC) -->
+  <meta name="color-scheme" content="dark light">
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('ugur_theme_mode') || 'system';
+        var isDark = false;
+        if (mode === 'dark') {
+          isDark = true;
+        } else if (mode === 'light') {
+          isDark = false;
+        } else {
+          isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme-mode', mode);
+
+        /* Language & Direction pre-init (Zero FOUC) */
+        var supported = ['tr', 'en', 'ar'];
+        var rtl = ['ar'];
+        var lang = 'tr';
+        try {
+          var search = window.location.search;
+          if (search) {
+            var m = search.match(/[?&]lang=([a-zA-Z]+)/);
+            if (m && supported.indexOf(m[1].toLowerCase()) !== -1) {
+              lang = m[1].toLowerCase();
+              localStorage.setItem('ugur_site_lang', lang);
+            }
+          }
+        } catch (e) { }
+        if (lang === 'tr') {
+          var storedLang = localStorage.getItem('ugur_site_lang');
+          if (storedLang && supported.indexOf(storedLang) !== -1) {
+            lang = storedLang;
+          } else {
+            var bl = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            for (var i = 0; i < supported.length; i++) {
+              if (bl === supported[i] || bl.indexOf(supported[i] + '-') === 0) { lang = supported[i]; break; }
+            }
+          }
+        }
+        var dir = rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr';
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', dir);
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Custom Golden OnePage & Glassmorphism Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div class="scroll-progress-track" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+  </div>
+
+  <!-- ====================================================================
+       1. HERO / COVER SECTION (#cover)
+       Matches Begendigim Sayfa Golden cover, schoolfullimage.webp backdrop
+       with background-position: center bottom so the bottom of the campus
+       and the wall/ground are 100% visible!
+       ==================================================================== -->
+  <section id="cover">
+    <!-- Navbar (Fixed-top with smooth transition to .change-fixed-top) -->
+    <nav class="navbar navbar-expand-xl fixed-top navbar-dark" id="main-nav">
+      <div class="container">
+        <a class="navbar-brand" href="#cover" data-i18n-aria="nav.brand.label" aria-label="Uğur Okulları Viranşehir Kampüsü">
+          <img src="assets/ugurokullariviransehirkampusu.jpg" alt="Viranşehir Kampüsü Logosu" data-i18n-alt="brand.logo.alt"
+            class="brand-campus-logo-img">
+          <div class="brand-text-col">
+            <span class="brand-name" data-i18n="nav.brand.name">UĞUR OKULLARI</span>
+            <span class="brand-campus-sub" data-i18n="nav.brand.campus">Viranşehir Kampüsü</span>
+          </div>
+        </a>
+
+        <div class="d-flex align-items-center d-xl-none">
+          <button type="button" class="mobile-search-toggle-btn" id="mobile-search-toggle-btn"
+            aria-label="Arama" title="Sitede Ara">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" data-i18n-aria="nav.toggler.label" aria-label="Gezinti Menüsünü Aç/Kapat">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="#cover" data-i18n="nav.home">ANA SAYFA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services" data-i18n="nav.services">HİZMETLER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#portfolio" data-i18n="nav.curriculum">MÜFREDAT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutUs" data-i18n="nav.story">HİKAYEMİZ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#team" data-i18n="nav.team">KADRO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact" data-i18n="nav.contact">İLETİŞİM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#location" data-i18n="nav.location">KONUM</a>
+            </li>
+
+            <!-- Desktop Global Search Trigger Pill (Title Bar) -->
+            <li class="nav-item ml-xl-2 d-none d-xl-flex align-items-center">
+              <button type="button" class="nav-search-pill-btn" id="nav-search-trigger-btn" aria-label="Sitede Ara" data-i18n-title="search.aria" title="Sitede Ara (⌘K)">
+                <i class="fas fa-search search-pill-icon"></i>
+                <span class="search-pill-text" data-i18n="search.trigger">Ara...</span>
+                <kbd class="search-pill-kbd">⌘K</kbd>
+              </button>
+            </li>
+
+            <li class="nav-item ml-xl-2 d-none d-xl-block">
+              <div class="nav-actions-group">
+                <!-- Theme Mode Dropdown (Icon Only on Bar, Compact & Space-Saving) -->
+                <div class="theme-dropdown-wrapper" id="theme-dropdown-wrapper">
+                  <button type="button" class="nav-icon-action theme-menu-btn" id="theme-menu-btn"
+                    aria-label="Görünüm Modu Seçimi" aria-haspopup="true" aria-expanded="false" title="Görünüm Modu (Açık / Kapalı / Sistem)" data-i18n-title="theme.button.title">
+                    <i class="fas fa-desktop" id="theme-current-icon"></i>
+                  </button>
+                  <div class="theme-dropdown-menu" id="theme-dropdown-menu" role="menu" aria-label="Görünüm Modu Menüsü" data-i18n-aria="theme.menu.aria">
+                    <div class="theme-dropdown-header" data-i18n="theme.title">GÖRÜNÜM MODU</div>
+                    <button type="button" class="theme-dropdown-item" data-theme-choice="light" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-sun theme-icon-sun"></i>
+                        <span data-i18n="theme.light">Açık</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                    <button type="button" class="theme-dropdown-item" data-theme-choice="dark" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-moon theme-icon-moon"></i>
+                        <span data-i18n="theme.dark">Kapalı</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                    <button type="button" class="theme-dropdown-item active" data-theme-choice="system" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-desktop theme-icon-system"></i>
+                        <span data-i18n="theme.system">Sistem</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Language Switcher Dropdown (Flag Icons) -->
+                <div class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
+                  <button type="button" class="nav-icon-action lang-menu-btn" id="lang-menu-btn"
+                    aria-label="Dil Seçimi" aria-haspopup="true" aria-expanded="false" title="Dil Değiştir" data-i18n-title="lang.button.title">
+                    <span class="lang-flag-icon" id="lang-current-flag">🇹🇷</span>
+                  </button>
+                  <div class="lang-dropdown-menu" id="lang-dropdown-menu" role="menu" aria-label="Dil Menüsü" data-i18n-aria="lang.menu.aria">
+                    <div class="lang-dropdown-header" data-i18n="lang.label">DİL</div>
+                    <button type="button" class="lang-dropdown-item active" data-lang-choice="tr" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                    <button type="button" class="lang-dropdown-item" data-lang-choice="en" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇬🇧</span>
+                        <span>English</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                    <button type="button" class="lang-dropdown-item" data-lang-choice="ar" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇸🇦</span>
+                        <span>العربية</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="button" class="nav-icon-action" id="share-page-btn" aria-label="Sayfayı Paylaş" data-i18n-aria="nav.share.aria"
+                  title="Bağlantıyı Paylaş" data-i18n-title="nav.share.title">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Mobile Menu Search Box (inside drawer) -->
+          <div class="mobile-search-section d-xl-none">
+            <div class="global-search-box mobile-search-box">
+              <i class="fas fa-search global-search-icon"></i>
+              <input type="text" class="global-search-input" id="global-search-mobile-input"
+                placeholder="Müfredat, Arduino, konu ara..." data-i18n="search.placeholder" autocomplete="off" spellcheck="false"
+                aria-label="Proje Geneli Arama" data-i18n-aria="search.aria">
+              <button type="button" class="global-search-clear-btn" id="global-search-mobile-clear" aria-label="Temizle" data-i18n-aria="search.clear" style="display:none;">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="global-search-dropdown mobile-search-dropdown" id="mobile-search-dropdown" role="listbox"></div>
+          </div>
+
+          <!-- Mobile Menu Divider -->
+          <div class="mobile-menu-divider d-xl-none"></div>
+
+          <!-- Mobile Theme Switcher Bar (Quick Access) -->
+          <div class="mobile-theme-bar d-xl-none">
+            <span class="mobile-theme-label" data-i18n="theme.title">GÖRÜNÜM MODU</span>
+            <div class="theme-segmented-control">
+              <button type="button" class="theme-segment-btn" data-theme-choice="light">
+                <i class="fas fa-sun mr-1"></i> <span data-i18n="theme.light">Açık</span>
+              </button>
+              <button type="button" class="theme-segment-btn" data-theme-choice="dark">
+                <i class="fas fa-moon mr-1"></i> <span data-i18n="theme.dark">Kapalı</span>
+              </button>
+              <button type="button" class="theme-segment-btn active" data-theme-choice="system">
+                <i class="fas fa-desktop mr-1"></i> <span data-i18n="theme.system">Sistem</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Language Switcher Bar -->
+          <div class="mobile-lang-bar d-xl-none">
+            <span class="mobile-lang-label" data-i18n="lang.label">DİL</span>
+            <div class="lang-segmented-control">
+              <button type="button" class="lang-segment-btn active" data-lang-choice="tr">
+                <span class="lang-segment-flag">🇹🇷</span> Türkçe
+              </button>
+              <button type="button" class="lang-segment-btn" data-lang-choice="en">
+                <span class="lang-segment-flag">🇬🇧</span> English
+              </button>
+              <button type="button" class="lang-segment-btn" data-lang-choice="ar">
+                <span class="lang-segment-flag">🇸🇦</span> العربية
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Share Bar -->
+          <div class="mobile-share-bar d-xl-none">
+            <button type="button" class="mobile-share-btn" id="mobile-share-page-btn" aria-label="Sayfayı Paylaş">
+              <i class="fas fa-share-alt mr-2"></i>
+              <span data-i18n="nav.share">Sayfayı Paylaş</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topbar Slide-Down Search Flyout (Opens below topbar on click / shortcut) -->
+      <div class="topbar-search-flyout" id="topbar-search-flyout" aria-hidden="true">
+        <div class="topbar-search-container">
+          <div class="topbar-search-inner">
+            <div class="topbar-search-input-box">
+              <i class="fas fa-search topbar-search-icon"></i>
+              <input type="text" class="topbar-search-input" id="global-search-flyout-input"
+                placeholder="Müfredat, Arduino, sınıf veya konu ara..." data-i18n="search.placeholder" autocomplete="off" spellcheck="false"
+                aria-label="Proje Geneli Arama" data-i18n-aria="search.aria">
+              <button type="button" class="topbar-search-clear-btn" id="global-search-flyout-clear" aria-label="Temizle" data-i18n-aria="search.clear" style="display:none;">
+                <i class="fas fa-times"></i>
+              </button>
+              <button type="button" class="topbar-search-close-btn" id="global-search-flyout-close" aria-label="Kapat" data-i18n-aria="search.close">
+                <kbd class="flyout-close-kbd">ESC</kbd>
+                <span class="flyout-close-text" data-i18n="search.cancel">Vazgeç</span>
+              </button>
+            </div>
+            <!-- Scrollable Search Results Dropdown (Top 3 visible, scroll for rest) -->
+            <div class="global-search-dropdown flyout-search-dropdown" id="flyout-search-dropdown" role="listbox"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Topbar Search Backdrop Overlay -->
+    <div class="topbar-search-backdrop" id="topbar-search-backdrop"></div>
+
+    <!-- Center Hero Typography (Golden Style) -->
+    <div class="container cover-container">
+      <div class="row text-center justify-content-center">
+        <div class="col-12">
+          <h1><span data-i18n="hero.title.line1">Uğur Okulları</span> <br class="d-block d-md-none"><span data-i18n="hero.title.line2">Viranşehir Kampüsü</span></h1>
+        </div>
+        <div class="col-12">
+          <div class="typewriter-headline-wrapper">
+            <div class="typewriter-headline-card" id="dynamic-headline-container">
+              <span class="typewriter-badge badge-left" id="headline-icon-left" aria-hidden="true">
+                <svg class="cute-robot-icon" viewBox="0 0 36 36" width="28" height="28" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <g class="cute-bot-inner">
+                    <path d="M18 4V8" stroke="#8F489C" stroke-width="2.2" stroke-linecap="round" />
+                    <circle cx="18" cy="3.5" r="2.5" fill="#8F489C" />
+                    <rect x="5.5" y="8" width="25" height="21" rx="6.5" fill="#111827" stroke="#8F489C"
+                      stroke-width="2" />
+                    <rect x="2.5" y="14" width="3" height="8" rx="1.5" fill="#8F489C" />
+                    <rect x="30.5" y="14" width="3" height="8" rx="1.5" fill="#8F489C" />
+                    <rect x="8.5" y="11" width="19" height="15" rx="4" fill="#030712" />
+                    <ellipse cx="13.5" cy="16.5" rx="2.8" ry="3.2" fill="#00e5ff" />
+                    <circle cx="14.3" cy="15.2" r="1.1" fill="#ffffff" />
+                    <ellipse cx="22.5" cy="16.5" rx="2.8" ry="3.2" fill="#00e5ff" />
+                    <circle cx="23.3" cy="15.2" r="1.1" fill="#ffffff" />
+                    <circle cx="11" cy="21.5" r="1.5" fill="#ff7675" opacity="0.85" />
+                    <circle cx="25" cy="21.5" r="1.5" fill="#ff7675" opacity="0.85" />
+                    <path d="M15.5 21.5 Q 18 24.5 20.5 21.5" stroke="#8F489C" stroke-width="2" stroke-linecap="round"
+                      fill="none" />
+                  </g>
+                </svg>
+              </span>
+              <h2 class="typewriter-text-wrapper" id="typewriter-text-wrapper"><span class="typewriter-content-inner"><span class="typewriter-text" id="headline-text-middle">Yapay Zeka ve Geleceği Kodluyoruz</span><span class="typewriter-cursor" id="typewriter-cursor" aria-hidden="true">|</span></span></h2>
+              <span class="typewriter-badge badge-right" id="headline-icon-right" aria-hidden="true">
+                <i class="fas fa-brain" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <p class="cover-subtitle" data-i18n="hero.subtitle" data-i18n-html="true">
+            Ana sınıfından 12. sınıfa kadar algoritmik düşünce, Scratch, 3D modelleme, Arduino robotik, Python ve yapay
+            zeka ile <strong>kesintisiz K12 bilişim serüveni</strong>.
+          </p>
+          <div class="campus-levels-banner">
+            <span class="level-item" data-i18n="location.stages.text">• Okul Öncesi • İlkokul • Ortaokul • Anadolu Lisesi • Fen Lisesi</span>
+          </div>
+          <div class="my-3">
+            <a href="tel:05449694919" class="hero-phone-badge mr-2">
+              <i class="fas fa-phone"></i> <span>0544 969 49 19</span>
+            </a>
+            <a href="#location" class="hero-phone-badge">
+              <i class="fas fa-map-marker-alt"></i> <span data-i18n="location.map.name">Uğur Okulları Viranşehir Kampüsü</span>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 mt-2">
+          <a href="#portfolio" class="btn btn-primary btn-lg">
+            <span data-i18n="hero.cta.curriculum">MÜFREDATI KEŞFET</span>
+            <i class="fas fa-arrow-down ml-2"></i>
+          </a>
+          <a href="#campus-modal" class="btn btn-outline-golden btn-lg ml-md-3 mt-3 mt-md-0" id="hero-campus-photo-btn">
+            <i class="fas fa-camera mr-2"></i>
+            <span data-i18n="hero.cta.campus">KAMPÜS FOTOĞRAFI</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Scenic Campus Pill (Does not obscure image) -->
+    <div class="campus-scenic-pill" id="scenic-pill-click">
+      <span class="pulse-dot"></span>
+      <span data-i18n="hero.scenic">📍 Viranşehir Kampüsü • Yerleşke Detayları</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. SERVICES SECTION (#services)
+       Matches Begendigim Sayfa 3 iconic circles with golden hover
+       ==================================================================== -->
+  <section id="services">
+    <div class="container">
+      <div class="services-top text-center">
+        <h3 data-i18n="services.title">HİZMETLERİMİZ & BİLİŞİM VİZYONUMUZ</h3>
+        <p data-i18n="services.subtitle">21. Yüzyıl Yetkinlikleri ve Teknoloji Odaklı Eğitim Anlayışımız</p>
+      </div>
+
+      <div class="services-content text-center">
+        <div class="row">
+          <!-- Pillar 1 -->
+          <div class="col-md-4 mb-5 mb-md-0">
+            <div class="item-circle">
+              <i class="fas fa-code fa-3x"></i>
+            </div>
+            <h4 data-i18n="services.pillar1.title">Kodlama & Algoritmik Düşünme</h4>
+            <p data-i18n="services.pillar1.desc">
+              Erken yaşta blok tabanlı kodlama (Scratch) ile başlayan mantıksal problem çözme becerileri, ortaokul ve
+              lisede Python ve nesne yönelimli programlama temellerine dönüşür.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="col-md-4 mb-5 mb-md-0">
+            <div class="item-circle">
+              <i class="fas fa-robot fa-3x"></i>
+            </div>
+            <h4 data-i18n="services.pillar2.title">Robotik & Fiziksel Bilişim</h4>
+            <p data-i18n="services.pillar2.desc">
+              Arduino, mikrodenetleyiciler, sensör devreleri, Tinkercad ile 3D modelleme ve maker projeleriyle
+              öğrencilerimiz teorik bilgiyi somut inovasyon ürünlerine dönüştürür.
+            </p>
+            <div class="mt-3">
+              <a href="#robotics-showcase" class="pillar-showcase-badge" aria-label="Atölye Vitrinini İzle" data-i18n-aria="services.pillar2.watch">
+                <i class="fas fa-play-circle mr-1"></i> <span data-i18n="services.pillar2.watch">Atölye Vitrinini İzle</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="col-md-4">
+            <div class="item-circle">
+              <i class="fas fa-shield-alt fa-3x"></i>
+            </div>
+            <h4 data-i18n="services.pillar3.title">Yapay Zeka & Siber Güvenlik</h4>
+            <p data-i18n="services.pillar3.desc">
+              Üretken yapay zeka (GenAI) okuryazarlığı, makine öğrenmesi modelleri, veri etiği, dijital ayak izi
+              yönetimi ve güvenli internet ekosistemi bilinci kazandırılır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2.5. ROBOTICS & PHYSICAL COMPUTING SHOWCASE SECTION (#robotics-showcase)
+       Interactive 9:16 Video Showcase of Arduino Ventuno Lab & Edge Robotics
+       Seamlessly looped, muted, high-tech glassmorphism device frame
+       ==================================================================== -->
+  <section id="robotics-showcase" class="robotics-showcase-section">
+    <div class="container">
+      <div class="showcase-top text-center">
+        <div class="showcase-eyebrow-wrapper">
+          <span class="showcase-eyebrow-badge">
+            <span class="pulse-dot-cyan"></span>
+            <span data-i18n="showcase.eyebrow">✦ İNOVASYON & FİZİKSEL BİLİŞİM LAB</span>
+          </span>
+        </div>
+        <h3 data-i18n="showcase.title">ROBOTİK & İLERİ DÜZEY DONANIM ATÖLYEMİZ</h3>
+        <p data-i18n="showcase.subtitle">Arduino & Yapay Zeka Destekli Otonom Sistemler ile Teori Gerçeğe Dönüşüyor</p>
+      </div>
+
+      <div class="row align-items-center justify-content-between">
+        <!-- Sol Kolon: Metinler, İnovasyon Kartları, Kazanımlar ve Butonlar -->
+        <div class="col-lg-7 mb-5 mb-lg-0">
+          <div class="showcase-content-box">
+            <div class="showcase-status-pill mb-3">
+              <span class="status-indicator-live"></span>
+              <span data-i18n="showcase.card.badge">CANLI ATÖLYE • VİTRİN</span>
+            </div>
+
+            <h4 class="showcase-main-heading" data-i18n="showcase.heading">
+              Kodlar Ekranda Kalmaz, Fiziksel Dünyada Hayat Bulur
+            </h4>
+
+            <p class="showcase-main-desc" data-i18n="showcase.desc">
+              Viranşehir Kampüsü Bilişim Laboratuvarımızda öğrencilerimiz; Arduino Ventuno mimarisi, sensör füzyonu, bilgisayarlı görü ve robotik kollar ile endüstri standardı fiziksel bilişim projeleri geliştirir. Hataları simülasyonda değil, çalışan gerçek donanım üzerinde çözmeyi öğrenir.
+            </p>
+
+            <!-- 3 Glassmorphism Feature Highlight Cards -->
+            <div class="showcase-features-list">
+              <div class="showcase-feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <div class="feature-item-body">
+                  <h5 data-i18n="showcase.f1.title">Otonom Robotik & Kinematik</h5>
+                  <p data-i18n="showcase.f1.desc">
+                    Robotik kollar, servo sürücüler, PID motor kontrolü ve engellerden kaçan akıllı mobil platformlar.
+                  </p>
+                </div>
+              </div>
+
+              <div class="showcase-feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <div class="feature-item-body">
+                  <h5 data-i18n="showcase.f2.title">Gömülü Yapay Zeka & Bilgisayarlı Görü</h5>
+                  <p data-i18n="showcase.f2.desc">
+                    Kamera sensörleri, 3D uzamsal nokta bulutu haritalama, nesne tanıma ve otonom karar mekanizmaları.
+                  </p>
+                </div>
+              </div>
+
+              <div class="showcase-feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-microchip"></i>
+                </div>
+                <div class="feature-item-body">
+                  <h5 data-i18n="showcase.f3.title">Fiziksel Bilişim & Endüstriyel Standartlar</h5>
+                  <p data-i18n="showcase.f3.desc">
+                    Python, ROS (Robot İşletim Sistemi) temelleri, mikro-denetleyici mimarisi ve telemetri.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spec & Mode Badges -->
+            <div class="showcase-spec-pills mt-4">
+              <span class="spec-pill"><i class="fas fa-sync-alt mr-1"></i> <span data-i18n="showcase.stat.loop">40 Sn Kesintisiz Döngü</span></span>
+              <span class="spec-pill"><i class="fas fa-volume-mute mr-1"></i> <span data-i18n="showcase.stat.silent">Sessiz Oynatma</span></span>
+              <span class="spec-pill"><i class="fas fa-mobile-alt mr-1"></i> <span data-i18n="showcase.stat.ratio">9:16 Dikey Vitrin</span></span>
+              <span class="spec-pill"><i class="fas fa-certificate mr-1"></i> <span data-i18n="showcase.stat.board">Arduino Ventuno</span></span>
+            </div>
+
+            <!-- Call to Actions -->
+            <div class="showcase-actions mt-4 pt-2">
+              <a href="#portfolio" class="btn btn-primary btn-lg mr-3">
+                <i class="fas fa-graduation-cap mr-2"></i>
+                <span data-i18n="showcase.cta.curriculum">Robotik Müfredatını İncele</span>
+              </a>
+              <button type="button" class="btn btn-outline-golden btn-lg mt-3 mt-sm-0" id="showcase-expand-btn">
+                <i class="fas fa-expand-arrows-alt mr-2"></i>
+                <span data-i18n="showcase.cta.modal">Büyük Ekranda İncele</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sağ Kolon: 9:16 Video Totem Showcase Device -->
+        <div class="col-lg-5 col-xl-5 text-center d-flex justify-content-center">
+          <div class="video-showcase-device-wrapper">
+            <!-- Glowing ambient background backdrop -->
+            <div class="device-ambient-glow" aria-hidden="true"></div>
+
+            <!-- Floating Accent Chips -->
+            <div class="floating-tech-chip chip-top-left" aria-hidden="true">
+              <span class="chip-pulse-dot"></span>
+              <span data-i18n="showcase.chip1">⚡ Edge AI • 40s Döngü</span>
+            </div>
+            <div class="floating-tech-chip chip-bottom-right" aria-hidden="true">
+              <i class="fas fa-microchip text-warning mr-1"></i>
+              <span data-i18n="showcase.chip2">🤖 ROS & Fiziksel Kodlama</span>
+            </div>
+
+            <!-- Device Outer Frame -->
+            <div class="video-device-frame" id="video-device-frame">
+              <!-- Top Hardware Punch/Speaker Bar & Badges -->
+              <div class="device-hardware-bar">
+                <div class="device-live-badge">
+                  <span class="live-blink-circle"></span>
+                  <span data-i18n="showcase.badge.live">CANLI VİTRİN • DÖNGÜ</span>
+                </div>
+                <div class="device-hardware-speaker"></div>
+                <div class="device-model-badge">
+                  <span>VENTUNO</span>
+                </div>
+              </div>
+
+              <!-- HTML5 9:16 Video Player (Sonsuz Döngü & Sessiz) -->
+              <video
+                id="ventuno-video"
+                class="ventuno-showcase-video"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                poster="assets/ventuno-poster.jpg"
+                width="1080"
+                height="1920"
+                aria-label="Arduino Ventuno Robotik ve Fiziksel Bilişim Laboratuvarı Tanıtım Videosu"
+              >
+                <source src="assets/ventuno-9-16_commercial.webm" type="video/webm">
+                <source src="https://content.arduino.cc/assets/ventuno-9-16_commercial.webm" type="video/webm">
+                Tarayıcınız video etiketini desteklemiyor.
+              </video>
+
+              <!-- Video Glass Interactive Overlay Controller -->
+              <div class="video-glass-controller" id="video-glass-controller">
+                <!-- Play/Pause Button -->
+                <button type="button" class="video-ctrl-btn" id="video-toggle-play" aria-label="Videoyu Duraklat/Oynat" title="Duraklat / Oynat">
+                  <i class="fas fa-pause" id="video-play-icon"></i>
+                </button>
+
+                <!-- Progress Bar Slider -->
+                <div class="video-progress-container" id="video-progress-container" title="Döngü İlerlemesi" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="video-progress-bar" id="video-progress-bar"></div>
+                </div>
+
+                <!-- Time Indicator -->
+                <span class="video-time-display" id="video-time-display">00:00 / 00:40</span>
+
+                <!-- Mute / Unmute Button -->
+                <button type="button" class="video-ctrl-btn" id="video-toggle-mute" aria-label="Sesi Aç/Kapat" title="Sessiz Mod">
+                  <i class="fas fa-volume-mute" id="video-mute-icon"></i>
+                </button>
+
+                <!-- Fullscreen / Expand Button -->
+                <button type="button" class="video-ctrl-btn" id="video-fullscreen-btn" aria-label="Büyük Ekranda İncele" title="Büyük Ekranda İncele">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       3. PORTFOLIO SECTION (#portfolio)
+       K12 Curriculum with 6 Stages, responsive video embeds & modal triggers
+       ==================================================================== -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="portfolio-top text-center">
+        <h3 data-i18n="portfolio.title">MÜFREDAT VE KADEMELERİMİZ</h3>
+        <p data-i18n="portfolio.subtitle">Ana Sınıfından Liseye Adım Adım Bilişim Serüveni ve İnteraktif Video Dersleri</p>
+        <div class="mt-2 mb-3">
+          <a href="mufredat.html" class="btn btn-outline-golden" style="font-weight: 700; border-radius: 30px; padding: 8px 24px; font-size: 13.5px;">
+            <i class="fas fa-graduation-cap mr-2"></i> <span data-i18n="portfolio.k12.cta">2026 MEB K12 Müfredatını Tam Sayfa İncele (Ana Sınıfı - 12. Sınıf)</span> <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kademe Filtreleme Butonları -->
+      <div class="portfolio-filters text-center">
+        <button type="button" class="filter-btn active" data-filter="all" data-i18n="portfolio.filter.all">Tüm Sınıflar (13)</button>
+        <button type="button" class="filter-btn" data-filter="okuloncesi" data-i18n="portfolio.filter.preschool">Okul Öncesi</button>
+        <button type="button" class="filter-btn" data-filter="ilkokul" data-i18n="portfolio.filter.primary">İlkokul (1-4)</button>
+        <button type="button" class="filter-btn" data-filter="ortaokul" data-i18n="portfolio.filter.middle">Ortaokul (5-8)</button>
+        <button type="button" class="filter-btn" data-filter="lise" data-i18n="portfolio.filter.high">Lise (9-12)</button>
+      </div>
+
+      <!-- K12 Curriculum Cards Grid (13 Seviye Tek Tek Kart Olarak) -->
+      <div class="portfolio-content">
+        <div class="row" id="curriculum-cards-container">
+
+          <!-- 1. KADEME: Ana Sınıfı -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="okuloncesi">
+            <div class="curriculum-card" data-grade="anasinifi" role="button" tabindex="0" aria-label="Ana Sınıfı Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/anasinifi.jpg" alt="Ana Sınıfı Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.anasinifi.badge">Okul Öncesi • 4-5 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #EC4899;">
+                  <i class="fas fa-shapes"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(236, 72, 153, 0.15); color: #EC4899; border-color: rgba(236, 72, 153, 0.4);">
+                  <i class="fas fa-shapes mr-1"></i> <span data-i18n="grade.anasinifi.badge">Okul Öncesi • 4-5 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.anasinifi.title">Ana Sınıfı</h4>
+                <p class="card-subtitle" data-i18n="grade.anasinifi.subtitle">Bilgisayarsız Kodlama & Bilişsel Temeller</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.anasinifi.project">Bee-Bot ile Çiçek Bahçesi Labirenti</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.anasinifi.tag1">Bee-Bot Robotu</span>
+                  <span class="competency-tag" data-i18n="grade.anasinifi.tag2">Unplugged Kodlama</span>
+                  <span class="competency-tag" data-i18n="grade.anasinifi.tag3">Yön Algoritmaları</span>
+                </div>
+                <a href="mufredat.html?sinif=anasinifi" class="card-btn-action open-details-btn" data-grade="anasinifi">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. KADEME: 1. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ilkokul">
+            <div class="curriculum-card" data-grade="sinif1" role="button" tabindex="0" aria-label="1. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif1.jpg" alt="1. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif1.badge">İlkokul • 6-7 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #3B82F6;">
+                  <i class="fas fa-laptop"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(59, 130, 246, 0.15); color: #3B82F6; border-color: rgba(59, 130, 246, 0.4);">
+                  <i class="fas fa-laptop mr-1"></i> <span data-i18n="grade.sinif1.badge">İlkokul • 6-7 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif1.title">1. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif1.subtitle">Dijital Okuryazarlık & Temel Bilişim Becerileri</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif1.project">İlk Dijital Hikâye & Resim Albümüm</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif1.tag1">Fare & Klavye</span>
+                  <span class="competency-tag" data-i18n="grade.sinif1.tag2">Tux Paint</span>
+                  <span class="competency-tag" data-i18n="grade.sinif1.tag3">Dijital Güvenlik</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif1" class="card-btn-action open-details-btn" data-grade="sinif1">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. KADEME: 2. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ilkokul">
+            <div class="curriculum-card" data-grade="sinif2" role="button" tabindex="0" aria-label="2. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif2.jpg" alt="2. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif2.badge">İlkokul • 7-8 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #06B6D4;">
+                  <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(6, 182, 212, 0.15); color: #06B6D4; border-color: rgba(6, 182, 212, 0.4);">
+                  <i class="fas fa-puzzle-piece mr-1"></i> <span data-i18n="grade.sinif2.badge">İlkokul • 7-8 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif2.title">2. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif2.subtitle">ScratchJr ile Görsel Blok Tabanlı Kodlama</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif2.project">ScratchJr Hayvanlar Âlemi Canlandırması</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif2.tag1">ScratchJr</span>
+                  <span class="competency-tag" data-i18n="grade.sinif2.tag2">Karakter Hareketi</span>
+                  <span class="competency-tag" data-i18n="grade.sinif2.tag3">Sıralı Olaylar</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif2" class="card-btn-action open-details-btn" data-grade="sinif2">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. KADEME: 3. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ilkokul">
+            <div class="curriculum-card" data-grade="sinif3" role="button" tabindex="0" aria-label="3. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif3.jpg" alt="3. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif3.badge">İlkokul • 8-9 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #10B981;">
+                  <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border-color: rgba(16, 185, 129, 0.4);">
+                  <i class="fas fa-gamepad mr-1"></i> <span data-i18n="grade.sinif3.badge">İlkokul • 8-9 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif3.title">3. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif3.subtitle">Scratch 3.0 ile 2D Oyun Tasarımı Temelleri</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif3.project">Uzay Görevi 2D Arcade Oyunu (Scratch)</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif3.tag1">Scratch 3.0</span>
+                  <span class="competency-tag" data-i18n="grade.sinif3.tag2">Döngüler</span>
+                  <span class="competency-tag" data-i18n="grade.sinif3.tag3">Puan & Skor</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif3" class="card-btn-action open-details-btn" data-grade="sinif3">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. KADEME: 4. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ilkokul">
+            <div class="curriculum-card" data-grade="sinif4" role="button" tabindex="0" aria-label="4. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif4.jpg" alt="4. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif4.badge">İlkokul • 9-10 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #84CC16;">
+                  <i class="fas fa-code-branch"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(132, 204, 22, 0.15); color: #84CC16; border-color: rgba(132, 204, 22, 0.4);">
+                  <i class="fas fa-code-branch mr-1"></i> <span data-i18n="grade.sinif4.badge">İlkokul • 9-10 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif4.title">4. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif4.subtitle">Algoritmik Problem Çözme & İleri Scratch</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif4.project">Neon Labirent Koşucusu & Zamanlayıcı</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif4.tag1">Değişkenler</span>
+                  <span class="competency-tag" data-i18n="grade.sinif4.tag2">Şart Blokları</span>
+                  <span class="competency-tag" data-i18n="grade.sinif4.tag3">Çoklu Karakter</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif4" class="card-btn-action open-details-btn" data-grade="sinif4">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. KADEME: 5. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ortaokul">
+            <div class="curriculum-card" data-grade="sinif5" role="button" tabindex="0" aria-label="5. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif5.jpg" alt="5. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif5.badge">Ortaokul • 10-11 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #F59E0B;">
+                  <i class="fas fa-desktop"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border-color: rgba(245, 158, 11, 0.4);">
+                  <i class="fas fa-desktop mr-1"></i> <span data-i18n="grade.sinif5.badge">Ortaokul • 10-11 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif5.title">5. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif5.subtitle">Bilişim Donanımı & Dijital Vatandaşlık</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif5.project">Güvenli İnternet & Donanım Keşif Dergisi</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif5.tag1">Donanım Mimarisi</span>
+                  <span class="competency-tag" data-i18n="grade.sinif5.tag2">Siber Güvenlik</span>
+                  <span class="competency-tag" data-i18n="grade.sinif5.tag3">Google Workspace</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif5" class="card-btn-action open-details-btn" data-grade="sinif5">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. KADEME: 6. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ortaokul">
+            <div class="curriculum-card" data-grade="sinif6" role="button" tabindex="0" aria-label="6. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif6.jpg" alt="6. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif6.badge">Ortaokul • 11-12 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #F97316;">
+                  <i class="fas fa-cube"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(249, 115, 22, 0.15); color: #F97316; border-color: rgba(249, 115, 22, 0.4);">
+                  <i class="fas fa-cube mr-1"></i> <span data-i18n="grade.sinif6.badge">Ortaokul • 11-12 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif6.title">6. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif6.subtitle">3D Modelleme (Tinkercad) & Akış Şemaları</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif6.project">3D Akıllı Şehir & Rüzgâr Türbini Tasarımı</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif6.tag1">Tinkercad 3D</span>
+                  <span class="competency-tag" data-i18n="grade.sinif6.tag2">3D Yazıcı Üretimi</span>
+                  <span class="competency-tag" data-i18n="grade.sinif6.tag3">Akış Şemaları</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif6" class="card-btn-action open-details-btn" data-grade="sinif6">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. KADEME: 7. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ortaokul">
+            <div class="curriculum-card" data-grade="sinif7" role="button" tabindex="0" aria-label="7. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif7.jpg" alt="7. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif7.badge">Ortaokul • 12-13 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #EF4444;">
+                  <i class="fas fa-bolt"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.4);">
+                  <i class="fas fa-bolt mr-1"></i> <span data-i18n="grade.sinif7.badge">Ortaokul • 12-13 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif7.title">7. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif7.subtitle">Fiziksel Bilişim & Temel Arduino Devreleri</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif7.project">Otomatik Gece Lambası & Alarm Simülasyonu</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif7.tag1">Arduino UNO</span>
+                  <span class="competency-tag" data-i18n="grade.sinif7.tag2">Tinkercad Circuits</span>
+                  <span class="competency-tag" data-i18n="grade.sinif7.tag3">LDR Sensör & LED</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif7" class="card-btn-action open-details-btn" data-grade="sinif7">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. KADEME: 8. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="ortaokul">
+            <div class="curriculum-card" data-grade="sinif8" role="button" tabindex="0" aria-label="8. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif8.jpg" alt="8. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif8.badge">Ortaokul • 13-14 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #DC2626;">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(220, 38, 38, 0.15); color: #DC2626; border-color: rgba(220, 38, 38, 0.4);">
+                  <i class="fas fa-robot mr-1"></i> <span data-i18n="grade.sinif8.badge">Ortaokul • 13-14 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif8.title">8. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif8.subtitle">Robotik Sistemler & LGS Bilişimsel Düşünce</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif8.project">4WD Otonom Engel Tanıyan Robot (Arduino)</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif8.tag1">Ultrasonik Sensör</span>
+                  <span class="competency-tag" data-i18n="grade.sinif8.tag2">Motor Sürücü L298N</span>
+                  <span class="competency-tag" data-i18n="grade.sinif8.tag3">Otonom Robot</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif8" class="card-btn-action open-details-btn" data-grade="sinif8">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. KADEME: 9. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="lise">
+            <div class="curriculum-card" data-grade="sinif9" role="button" tabindex="0" aria-label="9. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif9.jpg" alt="9. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif9.badge">Lise • 14-15 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #8B5CF6;">
+                  <i class="fab fa-python"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(139, 92, 246, 0.15); color: #8B5CF6; border-color: rgba(139, 92, 246, 0.4);">
+                  <i class="fab fa-python mr-1"></i> <span data-i18n="grade.sinif9.badge">Lise • 14-15 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif9.title">9. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif9.subtitle">Metin Tabanlı Kodlama: Python Temelleri</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif9.project">Python Not Takip ve İstatistik Sistemi</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif9.tag1">Python 3 Sözdizimi</span>
+                  <span class="competency-tag" data-i18n="grade.sinif9.tag2">Döngüler & Şartlar</span>
+                  <span class="competency-tag" data-i18n="grade.sinif9.tag3">VS Code Ortamı</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif9" class="card-btn-action open-details-btn" data-grade="sinif9">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. KADEME: 10. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="lise">
+            <div class="curriculum-card" data-grade="sinif10" role="button" tabindex="0" aria-label="10. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif10.jpg" alt="10. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif10.badge">Lise • 15-16 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #7C3AED;">
+                  <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(124, 58, 237, 0.15); color: #7C3AED; border-color: rgba(124, 58, 237, 0.4);">
+                  <i class="fas fa-project-diagram mr-1"></i> <span data-i18n="grade.sinif10.badge">Lise • 15-16 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif10.title">10. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif10.subtitle">Nesne Yönelimli Programlama (OOP) & Modüller</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif10.project">OOP Banka Hesap Yönetim Simülatörü</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif10.tag1">OOP & Sınıflar</span>
+                  <span class="competency-tag" data-i18n="grade.sinif10.tag2">Listeler & Sözlükler</span>
+                  <span class="competency-tag" data-i18n="grade.sinif10.tag3">Hata Yakalama</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif10" class="card-btn-action open-details-btn" data-grade="sinif10">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. KADEME: 11. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="lise">
+            <div class="curriculum-card" data-grade="sinif11" role="button" tabindex="0" aria-label="11. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif11.jpg" alt="11. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif11.badge">Lise • 16-17 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #6366F1;">
+                  <i class="fas fa-code"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(99, 102, 241, 0.15); color: #6366F1; border-color: rgba(99, 102, 241, 0.4);">
+                  <i class="fas fa-code mr-1"></i> <span data-i18n="grade.sinif11.badge">Lise • 16-17 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif11.title">11. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif11.subtitle">Web Geliştirme (HTML/CSS/JS) & Veritabanı</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif11.project">Uğur Kampüs Portalı & SQLite Veritabanı</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif11.tag1">HTML5 & CSS3</span>
+                  <span class="competency-tag" data-i18n="grade.sinif11.tag2">JavaScript DOM</span>
+                  <span class="competency-tag" data-i18n="grade.sinif11.tag3">SQLite / SQL</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif11" class="card-btn-action open-details-btn" data-grade="sinif11">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. KADEME: 12. Sınıf -->
+          <div class="col-md-6 col-lg-4 curriculum-card-wrapper" data-category="lise">
+            <div class="curriculum-card" data-grade="sinif12" role="button" tabindex="0" aria-label="12. Sınıf Müfredat Detayları">
+              <div class="card-preview-cover">
+                <img src="assets/projects/sinif12.jpg" alt="12. Sınıf Projesi" class="card-preview-img" loading="lazy">
+                <span class="card-preview-grade-badge" data-i18n="grade.sinif12.badge">Lise • 17-18 Yaş</span>
+                <div class="card-preview-icon-floating" style="background: #0EA5E9;">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <div class="card-preview-overlay">
+                  <span class="card-preview-cta">
+                    <i class="fas fa-book-open"></i>
+                    <span data-i18n="portfolio.card.preview">Müfredat & Proje Detayları</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="card-grade-badge" style="background: rgba(14, 165, 233, 0.15); color: #0EA5E9; border-color: rgba(14, 165, 233, 0.4);">
+                  <i class="fas fa-brain mr-1"></i> <span data-i18n="grade.sinif12.badge">Lise • 17-18 Yaş
+                </span></span>
+                <h4 class="card-title" data-i18n="grade.sinif12.title">12. Sınıf</h4>
+                <p class="card-subtitle" data-i18n="grade.sinif12.subtitle">Yapay Zekâ (AI), Nesnelerin İnterneti & Güvenlik</p>
+                <div class="card-project-badge">
+                  <i class="fas fa-trophy mr-1 text-warning"></i>
+                  <span data-i18n="grade.sinif12.project">Yapay Zekâ Nesne Tanıma & IoT İstasyonu</span>
+                </div>
+                <div class="card-competencies-list">
+                  <span class="competency-tag" data-i18n="grade.sinif12.tag1">OpenCV & AI</span>
+                  <span class="competency-tag" data-i18n="grade.sinif12.tag2">ESP32 IoT Bulut</span>
+                  <span class="competency-tag" data-i18n="grade.sinif12.tag3">Siber Savunma Etiği</span>
+                </div>
+                <a href="mufredat.html?sinif=sinif12" class="card-btn-action open-details-btn" data-grade="sinif12">
+                  <span data-i18n="portfolio.card.action">Müfredatı & Projeyi İncele</span>
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4. ABOUT US / TIMELINE SECTION (#aboutUs)
+       The iconic Golden alternating timeline with center yellow circle
+       ==================================================================== -->
+  <section id="aboutUs">
+    <div class="container">
+      <div class="aboutUs-top text-center">
+        <h3 data-i18n="about.title">EĞİTİM YOLCULUĞUMUZ</h3>
+        <p data-i18n="about.subtitle">Ana Sınıfından Üniversite Kapısına Uzanan Teknoloji Basamakları</p>
+      </div>
+
+      <div class="aboutUs-content">
+        <!-- Milestone 1 -->
+        <div class="row">
+          <div class="col-lg-4 text-lg-right text-center">
+            <h4 data-i18n="about.m1.title">Okul Öncesi (4-6 Yaş)</h4>
+            <h4 class="subheading" data-i18n="about.m1.subtitle">Temellerin Atıldığı İlk Adım</h4>
+            <p data-i18n="about.m1.desc">
+              Bilgisayarsız kodlama (Unplugged Coding) oyunları, algoritma mantığı, yön kavramları ve güvenli dijital
+              alışkanlıklarla teknolojiyi tüketen değil üreten birey olma yolunda ilk tohumlar atılır.
+            </p>
+          </div>
+          <div class="col-lg-4 text-center my-3 my-lg-0">
+            <div class="timeline-image-circle">
+              <i class="fas fa-shapes fa-3x"></i>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block"></div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="row">
+          <div class="col-lg-4 d-none d-lg-block"></div>
+          <div class="col-lg-4 text-center my-3 my-lg-0">
+            <div class="timeline-image-circle">
+              <i class="fas fa-puzzle-piece fa-3x"></i>
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-left text-center">
+            <h4 data-i18n="about.m2.title">İlkokul (1-4. Sınıf)</h4>
+            <h4 class="subheading" data-i18n="about.m2.subtitle">Yaratıcılığın Kodlanması</h4>
+            <p data-i18n="about.m2.desc">
+              Scratch ile kendi hikayelerini ve 2D oyunlarını kodlayan öğrencilerimiz, Tinkercad ile 3D modelleme
+              yaparak hayal ettikleri nesneleri üretmenin ve somutlaştırmanın heyecanını yaşarlar.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="row">
+          <div class="col-lg-4 text-lg-right text-center">
+            <h4 data-i18n="about.m3.title">Ortaokul (5-8. Sınıf)</h4>
+            <h4 class="subheading" data-i18n="about.m3.subtitle">Robotik ve Mühendislik</h4>
+            <p data-i18n="about.m3.desc">
+              Elektronik devreler, sensörler, micro:bit ve Arduino ile fiziksel bilişim projeleri geliştirilir; blok
+              tabanlı mantıktan metin tabanlı Python dünyasına ilk profesyonel adım atılır.
+            </p>
+          </div>
+          <div class="col-lg-4 text-center my-3 my-lg-0">
+            <div class="timeline-image-circle">
+              <i class="fas fa-microchip fa-3x"></i>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block"></div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="row">
+          <div class="col-lg-4 d-none d-lg-block"></div>
+          <div class="col-lg-4 text-center my-3 my-lg-0">
+            <div class="timeline-image-circle">
+              <i class="fas fa-laptop-code fa-3x"></i>
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-left text-center">
+            <h4 data-i18n="about.m4.title">Lise (9-12. Sınıf)</h4>
+            <h4 class="subheading" data-i18n="about.m4.subtitle">Geleceğin Yazılım Mühendisleri</h4>
+            <p data-i18n="about.m4.desc">
+              Nesne yönelimli programlama, web teknolojileri (HTML/CSS/JS), yapay zeka algoritmaları ve veri analitiği
+              ile üniversite ve uluslararası teknoloji kariyerine tam donanımlı hazırlık sağlanır.
+            </p>
+          </div>
+        </div>
+
+        <!-- Big Center Yellow Circle -->
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="about-circle">
+              <p class="yellow-text">
+                <span data-i18n="about.circle.line1">GELECEK</span> <br>
+                <span data-i18n="about.circle.line2">BURADA</span> <br>
+                <span data-i18n="about.circle.line3">KODLANIYOR</span> <br>
+                ...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5. TEAM SECTION (#team)
+       Viranşehir Kampüsü Bilişim & İnovasyon Kadrosu
+       ==================================================================== -->
+  <section id="team">
+    <div class="container">
+      <div class="team-top text-center">
+        <h3 data-i18n="team.title">BİLİŞİM & İNOVASYON KADROMUZ</h3>
+        <p data-i18n="team.subtitle">Geleceğin Teknolojisine Yön Veren ve Öğrencilerini İlhamla Büyüten Dinamik Kadromuz</p>
+      </div>
+
+      <div class="team-content">
+        <div class="row">
+          <!-- Member 1 -->
+          <div class="col-md-4 text-center mb-5 mb-md-0">
+            <div class="team-circle">
+              <i class="fas fa-chalkboard-teacher fa-4x"></i>
+            </div>
+            <h4 data-i18n="team.member1.title">Bilişim Teknolojileri Zümresi</h4>
+            <h5 data-i18n="team.member1.role">K12 Müfredat & Kodlama Koordinatörlüğü</h5>
+            <ul class="social-icons">
+              <li class="social-icon"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+
+          <!-- Member 2 -->
+          <div class="col-md-4 text-center mb-5 mb-md-0">
+            <div class="team-circle">
+              <i class="fas fa-robot fa-4x"></i>
+            </div>
+            <h4 data-i18n="team.member2.title">Robotik & STEM Mentorluğu</h4>
+            <h5 data-i18n="team.member2.role">Fiziksel Bilişim, Sensörler & Maker Lab</h5>
+            <ul class="social-icons">
+              <li class="social-icon"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+
+          <!-- Member 3 -->
+          <div class="col-md-4 text-center">
+            <div class="team-circle">
+              <i class="fas fa-brain fa-4x"></i>
+            </div>
+            <h4 data-i18n="team.member3.title">Yapay Zeka & İnovasyon Ekibi</h4>
+            <h5 data-i18n="team.member3.role">TEKNOFEST, Yarışmalar & Proje Yönetimi</h5>
+            <ul class="social-icons">
+              <li class="social-icon"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="social-icon"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-12">
+            <p class="team-summary-text" data-i18n="team.summary">
+              Uğur Okulları Viranşehir Kampüsü olarak; öğrencilerimize sadece teknoloji tüketicisi olmayı değil,
+              algoritmik düşünen, problem çözen, etik değerlerle donanmış ve geleceğin dijital dünyasını inşa eden
+              liderler olma vizyonunu kazandırıyoruz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6. PARTNER SECTION (#partner)
+       Teknolojiler & Platformlar
+       ==================================================================== -->
+  <section id="partner">
+    <div class="container">
+      <div class="row text-center justify-content-center align-items-center">
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fab fa-python fa-2x text-warning mr-2"></i> Python</span>
+        </div>
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fas fa-cat fa-2x text-warning mr-2"></i> Scratch</span>
+        </div>
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fas fa-microchip fa-2x text-warning mr-2"></i> Arduino</span>
+        </div>
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fas fa-cube fa-2x text-warning mr-2"></i> Tinkercad</span>
+        </div>
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fab fa-raspberry-pi fa-2x text-warning mr-2"></i> Raspberry Pi</span>
+        </div>
+        <div class="col-6 col-md-2 mb-3">
+          <span class="partner-badge"><i class="fas fa-robot fa-2x text-warning mr-2"></i> OpenAI / AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7. CONTACT SECTION (#contact)
+       Golden Contact Form & Viranşehir Kampüsü İletişim Bilgileri
+       ==================================================================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-top text-center">
+        <h3 data-i18n="contact.title">BİZE ULAŞIN</h3>
+        <p data-i18n="contact.subtitle">Uğur Okulları Viranşehir Kampüsü Bilişim Teknolojileri Bölümü İletişim Formu</p>
+      </div>
+
+      <div class="contact-content">
+        <form class="golden-form" id="contact-form" role="form"
+          onsubmit="event.preventDefault(); alert(window.I18N ? window.I18N.t('contact.form.success') : 'Mesajınız başarıyla iletildi! En kısa sürede sizinle iletişime geçeceğiz.');">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-element mb-4">
+                <input type="text" class="golden-form-element" id="name" name="name" data-i18n="contact.form.name" placeholder="ADINIZ SOYADINIZ *"
+                  required>
+              </div>
+              <div class="form-element mb-4">
+                <input type="email" class="golden-form-element" id="email" name="email"
+                  data-i18n="contact.form.email" placeholder="E-POSTA ADRESİNİZ *" required>
+              </div>
+              <div class="form-element mb-4">
+                <input type="text" class="golden-form-element" id="subject" name="subject"
+                  data-i18n="contact.form.subject" placeholder="KONU (Örn: Müfredat Bilgisi, Robotik Kulübü) *" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-element">
+                <textarea class="golden-form-element" id="message" name="message" data-i18n="contact.form.message" placeholder="MESAJINIZ *"
+                  required></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mt-4 text-center">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-lg" id="submit" data-i18n="contact.form.submit">MESAJ GÖNDER</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Kampüs İletişim Detayları -->
+        <div class="row mt-5 pt-4 text-center align-items-stretch">
+          <div class="col-lg-3 col-md-6 mb-4 d-flex">
+            <div class="contact-info-card">
+              <div class="contact-info-icon-box">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h5 data-i18n="contact.stages.title">Eğitim Kademelerimiz</h5>
+              <div class="contact-card-content">
+                <p class="mb-0 contact-stages-text" data-i18n="contact.stages.desc" data-i18n-html>
+                  • Okul Öncesi • İlkokul<br>• Ortaokul • Anadolu Lisesi<br>• Fen Lisesi
+                </p>
+              </div>
+              <span class="contact-card-hint" data-i18n="contact.stages.badge">K-12 Eğitimi</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 d-flex">
+            <div class="contact-info-card">
+              <div class="contact-info-icon-box">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h5 data-i18n="contact.phone.title">İletişim & Danışma</h5>
+              <div class="contact-card-content">
+                <a href="tel:05449694919" class="contact-card-link phone-link">
+                  0544 969 49 19
+                </a>
+              </div>
+              <span class="contact-card-hint" data-i18n="contact.phone.badge">Danışma Hattı</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 d-flex">
+            <div class="contact-info-card">
+              <div class="contact-info-icon-box">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h5 data-i18n="contact.email.title">E-Posta</h5>
+              <div class="contact-card-content">
+                <a href="mailto:bilisim@viransehir.ugurokullari.k12.tr" class="contact-card-link email-link">
+                  bilisim@viransehir.ugurokullari.k12.tr
+                </a>
+              </div>
+              <span class="contact-card-hint" data-i18n="contact.email.badge">Kurumsal İletişim</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 d-flex">
+            <div class="contact-info-card">
+              <div class="contact-info-icon-box">
+                <i class="fas fa-map-marked-alt"></i>
+              </div>
+              <h5 data-i18n="contact.address.title">Kampüs Konumu</h5>
+              <div class="contact-card-content">
+                <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer" class="contact-card-link location-link">
+                  Uğur Okulları Viranşehir Kampüsü
+                </a>
+              </div>
+              <span class="contact-card-hint" data-i18n="contact.address.badge">Haritada Aç ↗</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7.5. LOCATION & GOOGLE MAPS SECTION (#location)
+       Sayfanın En Altında Konum, Harita, Kademeler ve İletişim Bilgileri
+       ==================================================================== -->
+  <section id="location">
+    <div class="container">
+      <div class="location-top text-center">
+        <h3 data-i18n="location.title">KAMPÜS KONUMU & ULAŞIM</h3>
+        <p data-i18n="location.subtitle">Uğur Okulları Viranşehir Kampüsü Yerleşkesi</p>
+      </div>
+
+      <div class="row align-items-stretch">
+        <!-- Sol Kolon: Kurumsal Detaylar, Kademeler ve Telefon -->
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="location-info-card">
+            <div>
+              <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer" class="location-name-link" title="Google Haritalar'da Aç">
+                <i class="fas fa-map-marker-alt" style="color: var(--primary-gold); font-size: 24px;"></i>
+                <span data-i18n="location.map.name">Uğur Okulları Viranşehir Kampüsü</span>
+              </a>
+              <div class="location-address-sub">
+                <i class="fas fa-compass" style="color: var(--primary-gold);"></i>
+                <span data-i18n="location.campus.city">Viranşehir / Şanlıurfa Yerleşkesi</span>
+              </div>
+
+              <!-- Eğitim Kademelerimiz -->
+              <div style="margin-bottom: 8px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.stages.title">Eğitim Kademelerimiz:</span>
+              </div>
+              <div class="location-stages-pills">
+                <span class="location-stage-pill" data-i18n="location.stage.preschool">• Okul Öncesi</span>
+                <span class="location-stage-pill" data-i18n="location.stage.primary">• İlkokul</span>
+                <span class="location-stage-pill" data-i18n="location.stage.middle">• Ortaokul</span>
+                <span class="location-stage-pill" data-i18n="location.stage.anatolian">• Anadolu Lisesi</span>
+                <span class="location-stage-pill" data-i18n="location.stage.science">• Fen Lisesi</span>
+              </div>
+
+              <!-- Telefon Kutusu -->
+              <div class="location-phone-box">
+                <span class="location-phone-label" data-i18n="contact.phone.title">📞 İletişim / Danışma Hattı:</span>
+                <a href="tel:05449694919" class="location-phone-link" aria-label="Kampüsü Ara" data-i18n-aria="location.call.aria">
+                  <i class="fas fa-phone"></i> 0544 969 49 19
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block py-3" style="font-weight: 800; font-size: 14px; letter-spacing: 0.5px; border-radius: 8px;">
+                <i class="fas fa-directions mr-2"></i>
+                <span data-i18n="location.directions.btn">Google Haritalar'da Yol Tarifi Al</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sağ Kolon: İnteraktif Harita Çerçevesi -->
+        <div class="col-lg-7">
+          <div class="location-map-wrapper">
+            <iframe class="location-map-iframe"
+              src="https://maps.google.com/maps?q=37.2188711,39.7809496+(U%C4%9Fur+Okullar%C4%B1+Viran%C5%9Fehir+Kamp%C3%BCs%C3%BC)&t=k&z=16&ie=UTF8&iwloc=B&output=embed"
+              title="Uğur Okulları Viranşehir Kampüsü Google Haritalar Konumu" data-i18n-title="location.map.iframe"
+              allowfullscreen="" loading="lazy"></iframe>
+            <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer" class="location-map-floating-badge" title="Google Haritalar'da Yol Tarifi Al">
+              <i class="fas fa-directions"></i>
+              <span data-i18n="location.directions.badge">Yol Tarifi</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       8. FOOTER SECTION (#footer)
+       ==================================================================== -->
+  <section id="footer">
+    <div class="container">
+      <div class="row align-items-center mb-3">
+        <div class="col-12 text-center">
+          <div class="footer-stages-row" data-i18n="location.stages.text">
+            • Okul Öncesi • İlkokul • Ortaokul • Anadolu Lisesi • Fen Lisesi
+          </div>
+          <div class="footer-contact-details">
+            <a href="tel:05449694919" class="mr-3">📞 0544 969 49 19</a>
+            <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-map-marker-alt mr-1"></i> <span data-i18n="location.map.name">Uğur Okulları Viranşehir Kampüsü</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center text-md-left">
+          <p>&copy; <span id="current-year"></span> <span data-i18n="footer.copyright">Uğur Okulları Viranşehir Kampüsü</span></p>
+        </div>
+        <div class="col-md-4 text-center my-3 my-md-0">
+          <ul class="company-social-icons">
+            <li class="company-social-icon"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li class="company-social-icon"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="company-social-icon"><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li class="company-social-icon"><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+            <li class="company-social-icon"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4 text-center text-md-right">
+          <p data-i18n="footer.dept">Bilişim Teknolojileri ve İnovasyon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       MODAL 1: K12 CURRICULUM DETAILS MODAL DIALOG
+       ==================================================================== -->
+  <div class="modal-backdrop-custom" id="curriculum-modal" role="dialog" aria-modal="true"
+    aria-labelledby="modal-title">
+    <div class="modal-card-custom">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Kapat" data-i18n-aria="modal.close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Quick Stage Switcher Bar -->
+      <div class="modal-stage-nav-bar">
+        <div class="modal-stage-indicators" id="modal-stage-indicators">
+          <button type="button" class="modal-stage-dot-btn active" data-stage-jump="1" data-i18n="modal.stage.1">1. Aşama</button>
+          <button type="button" class="modal-stage-dot-btn" data-stage-jump="2" data-i18n="modal.stage.2">2. Aşama</button>
+          <button type="button" class="modal-stage-dot-btn" data-stage-jump="3" data-i18n="modal.stage.3">3. Aşama</button>
+          <button type="button" class="modal-stage-dot-btn" data-stage-jump="4" data-i18n="modal.stage.4">4. Aşama</button>
+          <button type="button" class="modal-stage-dot-btn" data-stage-jump="5" data-i18n="modal.stage.5">5. Aşama</button>
+          <button type="button" class="modal-stage-dot-btn" data-stage-jump="6" data-i18n="modal.stage.6">6. Aşama</button>
+        </div>
+        <span class="card-grade-badge" id="modal-stage-pill">1. Aşama • 5-8 Yaş</span>
+      </div>
+
+      <h3 id="modal-title"
+        style="font-family: var(--font-heading); font-weight: 800; font-size: 24px; margin-bottom: 6px;">
+        Müfredat Başlığı
+      </h3>
+      <p id="modal-age"
+        style="font-family: var(--font-serif); font-style: italic; color: var(--primary-gold); font-size: 15px; margin-bottom: 16px;">
+        Yaş Grubu
+      </p>
+
+      <!-- Sınıf Sekmeleri (Ana Sınıfından 12. Sınıfa Kadar Her Sınıf İçin) -->
+      <div class="modal-grade-tabs" id="modal-grade-tabs"></div>
+
+      <!-- Sınıf Seviye / Haftalık Saat Rozeti -->
+      <div id="modal-grade-scope" style="margin-bottom: 14px;"></div>
+
+      <p id="modal-desc" style="color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+        Detaylı açıklama...
+      </p>
+
+      <!-- 1. ve 2. Dönem Üniteleri (Haftalık & Ünite Bazlı Somut Konular) -->
+      <div style="margin-bottom: 24px;">
+        <h5
+          style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-gold); font-size: 16px; margin-bottom: 12px;">
+          <span data-i18n="modal.units.title">📚 Akademik Dönem Üniteleri ve Konu Başlıkları</span>
+        </h5>
+        <div class="modal-terms-grid" id="modal-terms-container"></div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h5
+          style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-gold); font-size: 16px; margin-bottom: 12px;">
+          <span data-i18n="modal.outcomes.title">✦ Temel Öğrenme Kazanımları</span>
+        </h5>
+        <div id="modal-outcomes-list"></div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h5
+          style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-gold); font-size: 16px; margin-bottom: 12px;">
+          <span data-i18n="modal.tools.title">⚡ Kullanılan Yazılım ve Araçlar</span>
+        </h5>
+        <div id="modal-tools-list"></div>
+      </div>
+
+      <div>
+        <h5
+          style="font-family: var(--font-heading); font-weight: 700; color: var(--primary-gold); font-size: 16px; margin-bottom: 8px;">
+          <span data-i18n="modal.project.title">🏆 Dönem Sonu Projesi</span>
+        </h5>
+        <div id="modal-project"
+          style="background: var(--primary-brand-subtle); border: 1px solid var(--border-gold); padding: 14px 18px; border-radius: 8px; font-weight: 600; color: var(--text-heading);">
+          Proje Bilgisi
+        </div>
+      </div>
+
+      <!-- Uygulamalı Arduino Donanım Projesi Önizleme -->
+      <div id="modal-arduino-container" style="margin-top: 16px; display: none;">
+        <h5 style="font-family: var(--font-heading); font-weight: 700; color: #00979D; font-size: 16px; margin-bottom: 8px;">
+          <i class="fas fa-microchip mr-1"></i> <span data-i18n="modal.arduino.title">🤖 Uygulamalı Arduino &amp; Donanım Projesi</span>
+        </h5>
+        <div id="modal-arduino-content" style="background: rgba(0, 151, 157, 0.08); border: 1px solid rgba(0, 151, 157, 0.3); padding: 14px 18px; border-radius: 8px;">
+          <!-- Dynamically populated by main.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 2: 100% FULL-RES CAMPUS PHOTO LIGHTBOX (schoolfullimage.webp)
+       Shows the ENTIRE uncropped photo: building, sky, entrance, ground and wall!
+       ==================================================================== -->
+  <div class="modal-backdrop-custom" id="campus-modal" role="dialog" aria-modal="true"
+    aria-labelledby="campus-modal-title">
+    <div class="modal-card-custom campus-modal-card">
+      <button type="button" class="modal-close-btn" id="campus-modal-close-btn" aria-label="Kapat" data-i18n-aria="modal.close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="campus-modal-header">
+        <h3 id="campus-modal-title" class="campus-modal-title">
+          <span data-i18n="campus.modal.title">Uğur Okulları Viranşehir Kampüsü Yerleşkesi</span>
+        </h3>
+        <p class="campus-modal-subtitle" data-i18n="campus.modal.subtitle">
+          Bilişim Teknolojileri, İnovasyon & Robotik Laboratuvarı Eğitim Binası (Tam Görünüm)
+        </p>
+      </div>
+
+      <!-- 14-Slide Interactive ViewPager with Overlaid Dynamic Dots Indicator -->
+      <div class="campus-viewpager" id="campus-viewpager" role="region" aria-label="Uğur Okulları Viranşehir Kampüsü Yerleşke ve Sınıflar Galerisi" data-i18n-aria="campus.gallery.aria">
+        <!-- ViewPager Track Container -->
+        <div class="campus-vp-track-container" id="campus-vp-track-container" title="Görseller arasında kaydırmak için sürükleyin" data-i18n-title="campus.modal.drag">
+          <div class="campus-vp-track" id="campus-vp-track">
+            <!-- Slide 0: Kampüs Yerleşkesi (Mevcut Görsel) -->
+            <div class="campus-vp-slide" data-index="0" data-stage="campus">
+              <img src="assets/schoolfullimagehd.jpg" alt="Uğur Okulları Viranşehir Kampüsü Tam Görünüm"
+                class="campus-vp-img" loading="eager" width="3480" height="1867">
+            </div>
+            <!-- Slide 1: Ana Sınıfı -->
+            <div class="campus-vp-slide" data-index="1" data-stage="anasinifi">
+              <img src="assets/projects/anasinifi.jpg" alt="Ana Sınıfı Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 2: 1. Sınıf -->
+            <div class="campus-vp-slide" data-index="2" data-stage="sinif1">
+              <img src="assets/projects/sinif1.jpg" alt="1. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 3: 2. Sınıf -->
+            <div class="campus-vp-slide" data-index="3" data-stage="sinif2">
+              <img src="assets/projects/sinif2.jpg" alt="2. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 4: 3. Sınıf -->
+            <div class="campus-vp-slide" data-index="4" data-stage="sinif3">
+              <img src="assets/projects/sinif3.jpg" alt="3. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 5: 4. Sınıf -->
+            <div class="campus-vp-slide" data-index="5" data-stage="sinif4">
+              <img src="assets/projects/sinif4.jpg" alt="4. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 6: 5. Sınıf -->
+            <div class="campus-vp-slide" data-index="6" data-stage="sinif5">
+              <img src="assets/projects/sinif5.jpg" alt="5. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 7: 6. Sınıf -->
+            <div class="campus-vp-slide" data-index="7" data-stage="sinif6">
+              <img src="assets/projects/sinif6.jpg" alt="6. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 8: 7. Sınıf -->
+            <div class="campus-vp-slide" data-index="8" data-stage="sinif7">
+              <img src="assets/projects/sinif7.jpg" alt="7. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 9: 8. Sınıf -->
+            <div class="campus-vp-slide" data-index="9" data-stage="sinif8">
+              <img src="assets/projects/sinif8.jpg" alt="8. Sınıf Bilişim ve Kodlama Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 10: 9. Sınıf -->
+            <div class="campus-vp-slide" data-index="10" data-stage="sinif9">
+              <img src="assets/projects/sinif9.jpg" alt="9. Sınıf Bilgisayar Bilimi Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 11: 10. Sınıf -->
+            <div class="campus-vp-slide" data-index="11" data-stage="sinif10">
+              <img src="assets/projects/sinif10.jpg" alt="10. Sınıf Bilgisayar Bilimi Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 12: 11. Sınıf -->
+            <div class="campus-vp-slide" data-index="12" data-stage="sinif11">
+              <img src="assets/projects/sinif11.jpg" alt="11. Sınıf Bilgisayar Bilimi Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+            <!-- Slide 13: 12. Sınıf -->
+            <div class="campus-vp-slide" data-index="13" data-stage="sinif12">
+              <img src="assets/projects/sinif12.jpg" alt="12. Sınıf Bilgisayar Bilimi Laboratuvarı"
+                class="campus-vp-img" loading="lazy" width="1376" height="768">
+            </div>
+          </div>
+        </div>
+
+        <!-- Glass Badge Tag Overlay (Top-Left) -->
+        <div class="campus-vp-badge-tag" id="campus-vp-badge-tag" aria-hidden="true">
+          <span class="vp-tag-dot"></span>
+          <span id="campus-vp-badge-text">📍 Viranşehir Kampüsü • Ana Yerleşke</span>
+        </div>
+
+        <!-- Slide Counter Overlay (Top-Right) -->
+        <div class="campus-vp-counter" id="campus-vp-counter" aria-hidden="true">
+          <strong id="campus-vp-current-num">1</strong> / <span id="campus-vp-total-num">14</span>
+        </div>
+
+        <!-- Navigation Arrows (Left & Right) -->
+        <button type="button" class="campus-vp-nav-btn campus-vp-prev-btn" id="campus-vp-prev-btn" aria-label="Önceki Görsel" data-i18n-aria="campus.modal.prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button type="button" class="campus-vp-nav-btn campus-vp-next-btn" id="campus-vp-next-btn" aria-label="Sonraki Görsel" data-i18n-aria="campus.modal.next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Instagram-Style Dynamic Dots Sliding Window (dotexampel.gif referansı) -->
+        <!-- "ama görseli üstünde ama altta ve ortada olsun" -->
+        <div class="campus-vp-dots-container" id="campus-vp-dots-container" aria-label="Görsel Geçiş Göstergesi" data-i18n-aria="campus.modal.dots">
+          <div class="campus-vp-dots-window">
+            <div class="campus-vp-dots-track" id="campus-vp-dots-track">
+              <!-- Dynamically populated 14 dots with sliding window -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="campus-modal-footer">
+        <a href="mufredat.html" class="campus-modal-curriculum-btn" id="campus-modal-curriculum-link" style="display: none;">
+          <i class="fas fa-graduation-cap"></i>
+          <span class="curriculum-link-text">Müfredatı İncele</span>
+          <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+        <span class="campus-modal-location-badge">
+          <span id="campus-modal-location-text">📍 Şanlıurfa / Viranşehir • K12 Tüm Kademeler</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 3: ARDUINO VENTUNO ROBOTICS VIDEO LIGHTBOX MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop-custom" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
+    <div class="modal-card-custom video-modal-card">
+      <button type="button" class="modal-close-btn" id="video-modal-close-btn" aria-label="Kapat" data-i18n-aria="modal.close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="video-modal-header text-center mb-3">
+        <span class="card-grade-badge mb-2" style="background: rgba(143, 72, 156, 0.15); color: var(--primary-gold); border-color: rgba(143, 72, 156, 0.4);">
+          <i class="fas fa-microchip mr-1"></i> Arduino Ventuno • Fiziksel Bilişim Vitrini
+        </span>
+        <h3 id="video-modal-title" class="video-modal-title" data-i18n="showcase.modal.title">
+          Robotik & Fiziksel Bilişim Laboratuvarı Tanıtımı
+        </h3>
+        <p class="video-modal-subtitle" data-i18n="showcase.modal.subtitle">
+          Sonsuz döngü ve sessiz oynatma ile yeni nesil Arduino Ventuno mimarisi ve robotik atölyesi
+        </p>
+      </div>
+
+      <div class="video-modal-player-wrapper">
+        <video
+          id="modal-ventuno-video"
+          class="modal-ventuno-video"
+          loop
+          muted
+          playsinline
+          controls
+          poster="assets/ventuno-poster.jpg"
+          width="1080"
+          height="1920"
+          aria-label="Arduino Ventuno Tanıtım Videosu Tam Ekran"
+        >
+          <source src="assets/ventuno-9-16_commercial.webm" type="video/webm">
+          <source src="https://content.arduino.cc/assets/ventuno-9-16_commercial.webm" type="video/webm">
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: jQuery, Popper, Bootstrap (matching Begendigim Sayfa) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- i18n Translations System -->
+  <script src="js/i18n.js"></script>
+
+  <!-- 2026 MEB K12 Curriculum Dataset -->
+  <script src="js/curriculum-data.js"></script>
+
+  <!-- K-12 Arduino Projeleri & Donanım Veritabanı -->
+  <script src="js/arduino-curriculum-data.js"></script>
+
+  <!-- Campus ViewPager & Dynamic Dots Controller -->
+  <script src="js/campus-viewpager.js"></script>
+
+  <!-- Custom Main Controller -->
+  <script src="js/main.js"></script>
+
+  <!-- Global Site-Wide Search Controller -->
+  <script src="js/global-search.js"></script>
+
+  <!-- Golden Scroll & Modal Wire-up Script -->
+  <script>
+    $(document).ready(function () {
+      // Sticky navbar on scroll
+      $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 100) {
+          $(".fixed-top").addClass("change-fixed-top");
+        } else {
+          $(".fixed-top").removeClass("change-fixed-top");
+        }
+      });
+
+      // Smooth scroll for nav anchors
+      $('a.nav-link, a.btn-primary[href^="#"], a.btn-outline-golden[href^="#"]').on('click', function (event) {
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+          event.preventDefault();
+          $('html, body').stop().animate({
+            scrollTop: target.offset().top - 80
+          }, 800);
+          $('.navbar-collapse').collapse('hide');
+        }
+      });
+
+      // Campus Lightbox Modal Triggers
+      $('#hero-campus-photo-btn, #scenic-pill-click').on('click', function (e) {
+        e.preventDefault();
+        $('#campus-modal').addClass('open');
+        $('body').css('overflow', 'hidden');
+      });
+
+      if (window.location.search.indexOf('open_modal=1') !== -1) {
+        $('#campus-modal').addClass('open');
+        $('body').css('overflow', 'hidden');
+        const urlParams = new URLSearchParams(window.location.search);
+        const slideParam = urlParams.get('slide');
+        if (slideParam !== null && window.campusViewPager) {
+          window.campusViewPager.goToSlide(parseInt(slideParam, 10));
+        }
+      }
+
+      $('#campus-modal-close-btn, #campus-modal').on('click', function (e) {
+        if (e.target === this || $(e.target).closest('#campus-modal-close-btn').length) {
+          $('#campus-modal').removeClass('open');
+          $('body').css('overflow', '');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

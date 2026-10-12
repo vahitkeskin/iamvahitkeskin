@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rehberlik Planı & Excel Tablo PDF Oluşturucu</title>
+  <meta name="description"
+    content="Tüm başlıkları, sütunları ve hücre verilerini özelleştirebileceğiniz, anlık canlı PDF önizleme ve indirme desteği sunan profesyonel plan hazırlama uygulaması.">
+  <link rel="icon" type="image/jpeg" href="assets/ugurokullariviransehirkampusu.jpg">
+  <link rel="apple-touch-icon" href="assets/ugurokullariviransehirkampusu.jpg">
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- html2pdf bundle (local with CDN fallback) -->
+  <script src="libs/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+  <!-- Header / Nav -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <img src="assets/ugurokullariviransehirkampusu.jpg" alt="Uğur Logo" class="brand-img" onerror="this.style.display='none'">
+        <div class="brand-text">
+          <span class="brand-title">Rehberlik Planı & Tablo Oluşturucu</span>
+          <span class="brand-subtitle">Excel Stili Tablo Girişi & Canlı PDF Çıktısı</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button id="btn-load-sample" class="btn btn-secondary" title="ornekexcel.jpg şablonunu ve verilerini yükler">
+        <i class="fa-solid fa-file-excel text-excel"></i>
+        <span>Örnek Şablonu Yükle</span>
+      </button>
+
+      <button id="btn-reset-all" class="btn btn-outline text-danger" title="Tüm verileri ve ayarları fabrika varsayılanına sıfırlar">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span>Her Şeyi Sıfırla</span>
+      </button>
+
+      <button id="btn-paste-excel" class="btn btn-secondary"
+        title="Excel veya Google E-Tablolar'dan kopyalanan satırları yapıştır">
+        <i class="fa-solid fa-paste"></i>
+        <span>Excel'den Yapıştır</span>
+      </button>
+
+      <button id="btn-toggle-settings" class="btn btn-secondary" title="Sayfa, stil ve görünüm ayarları">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Ayarlar</span>
+      </button>
+
+      <button id="btn-print" class="btn btn-outline" title="Tarayıcı yazdırma penceresini açar (A4 olarak kaydet)">
+        <i class="fa-solid fa-print"></i>
+        <span>Yazdır</span>
+      </button>
+
+      <button id="btn-download-pdf" class="btn btn-primary" title="PDF dosyasını anında oluşturup bilgisayara indirir">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>PDF İndir</span>
+      </button>
+
+      <button id="btn-theme-toggle" class="btn btn-icon" title="Karanlık / Aydınlık Mod">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-workspace">
+    <!-- LEFT PANEL: Editor & Data Input -->
+    <aside class="panel editor-panel" id="editor-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <i class="fa-solid fa-pen-to-square text-accent"></i>
+          <h2>Tablo ve Başlık Giriş Alanı</h2>
+        </div>
+        <div class="panel-toolbar">
+          <button id="btn-add-row" class="btn btn-sm btn-accent">
+            <i class="fa-solid fa-plus"></i> Satır Ekle
+          </button>
+          <button id="btn-clear-table" class="btn btn-sm btn-ghost text-danger" title="Tüm satırları temizle">
+            <i class="fa-solid fa-trash-can"></i> Temizle
+          </button>
+        </div>
+      </div>
+
+      <div class="editor-scrollable">
+        <!-- Section: Title & Header Customization -->
+        <details class="editor-section-card" open id="section-titles">
+          <summary class="section-card-summary">
+            <span class="summary-left">
+              <i class="fa-solid fa-heading"></i>
+              <strong>Belge ve Tablo Başlıkları</strong>
+            </span>
+            <span class="badge-tag">Tüm Başlıklar Değiştirilebilir</span>
+          </summary>
+          <div class="section-card-content">
+            <div class="form-grid">
+              <div class="form-group col-12">
+                <label for="input-institution">Kurum / Okul Üst Başlığı (İsteğe Bağlı)</label>
+                <input type="text" id="input-institution" class="form-control"
+                  placeholder="Örn: VİRANŞEHİR ÖZEL UĞUR ORTA OKULU" value="VİRANŞEHİR ÖZEL UĞUR ORTA OKULU">
+              </div>
+
+              <div class="form-group col-12">
+                <label for="input-service">Alt Birim / Servis Başlığı (İsteğe Bağlı)</label>
+                <input type="text" id="input-service" class="form-control"
+                  placeholder="Örn: REHBERLİK VE PSİKOLOJİK DANIŞMA SERVİSİ"
+                  value="">
+              </div>
+
+              <div class="form-group col-4">
+                <label for="input-icon-text">Başlık Sembolü / İkon</label>
+                <input type="text" id="input-icon-text" class="form-control" placeholder="Örn: ✚ veya ◈" value="✚">
+              </div>
+
+              <div class="form-group col-8">
+                <label for="input-main-title">Ana Tablo Başlığı (Örn: Ay / Plan Adı)</label>
+                <input type="text" id="input-main-title" class="form-control font-weight-bold"
+                  placeholder="Örn: HAZİRAN" value="HAZİRAN">
+              </div>
+
+              <div class="form-group col-12">
+                <label for="input-subtitle">Eğitim Öğretim Yılı / Açıklama</label>
+                <input type="text" id="input-subtitle" class="form-control"
+                  placeholder="Örn: 2026-2027 EĞİTİM ÖĞRETİM YILI REHBERLİK FAALİYET PLANI"
+                  value="2026-2027 EĞİTİM ÖĞRETİM YILI REHBERLİK FAALİYET PLANI">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Column Names Customization -->
+        <details class="editor-section-card" id="section-columns">
+          <summary class="section-card-summary">
+            <span class="summary-left">
+              <i class="fa-solid fa-table-columns"></i>
+              <strong>Sütun Başlıkları Düzenleyici</strong>
+            </span>
+            <span class="badge-tag" id="column-count-badge">6 Sütun</span>
+          </summary>
+          <div class="section-card-content">
+            <p class="section-hint">Tablodaki sütun isimlerini dilediğiniz gibi güncelleyebilirsiniz:</p>
+            <div class="columns-grid" id="columns-inputs-container">
+              <!-- Dynamically rendered or static inputs -->
+            </div>
+            <div class="columns-toolbar">
+              <button id="btn-add-custom-column" class="btn btn-sm btn-secondary">
+                <i class="fa-solid fa-plus"></i> Yeni Sütun Ekle
+              </button>
+              <button id="btn-reset-default-columns" class="btn btn-sm btn-ghost">
+                <i class="fa-solid fa-rotate-left"></i> Varsayılan Sütunlara Dön
+              </button>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Rows Editor Table -->
+        <div class="editor-section-card rows-section" id="section-rows">
+          <div class="rows-header-bar">
+            <div class="rows-counter">
+              <strong>Satır Verileri</strong>
+              <span class="badge-count" id="rows-count-badge">4 Dolu Satır</span>
+            </div>
+            <div class="rows-actions-right">
+              <button id="btn-delete-row" class="btn btn-xs btn-outline text-danger"
+                title="Son satırı tablodan siler">
+                <i class="fa-solid fa-minus"></i> Satır Sil
+              </button>
+              <button id="btn-add-row-top" class="btn btn-xs btn-primary">
+                <i class="fa-solid fa-plus"></i> Yeni Satır
+              </button>
+            </div>
+          </div>
+
+          <div class="table-input-scroll" id="table-input-wrapper">
+            <table class="editor-table" id="editor-table">
+              <thead id="editor-table-head">
+                <!-- Sütun başlıkları js ile render edilir -->
+              </thead>
+              <tbody id="editor-table-body">
+                <!-- Satırlar js ile render edilir -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section: Signatures & Notes -->
+        <details class="editor-section-card" id="section-signatures">
+          <summary class="section-card-summary">
+            <span class="summary-left">
+              <i class="fa-solid fa-signature"></i>
+              <strong>İmza ve Onay Alanları (Alt Bilgi)</strong>
+            </span>
+            <span class="badge-tag">İsteğe Bağlı</span>
+          </summary>
+          <div class="section-card-content">
+            <div class="form-grid">
+              <div class="form-group col-12">
+                <label class="toggle-control">
+                  <input type="checkbox" id="check-show-signatures" checked>
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Belgenin altında İmza / Onay Bloğunu Göster</span>
+                </label>
+              </div>
+
+              <div class="form-group col-6">
+                <label for="input-sig-left-title">Sol İmza Unvanı</label>
+                <input type="text" id="input-sig-left-title" class="form-control" value="Hazırlayan">
+                <input type="text" id="input-sig-left-name" class="form-control mt-1" placeholder="Ad Soyad / Unvan"
+                  value="Rehber Öğretmen / Psikolojik Danışman">
+              </div>
+
+              <div class="form-group col-6">
+                <label for="input-sig-right-title">Sağ İmza Unvanı</label>
+                <input type="text" id="input-sig-right-title" class="form-control" value="Uygundur / Tasdik Olunur">
+                <input type="text" id="input-sig-right-name" class="form-control mt-1" placeholder="Ad Soyad / Unvan"
+                  value="Okul Müdürü">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Data Export / Import JSON -->
+        <details class="editor-section-card" id="section-backup">
+          <summary class="section-card-summary">
+            <span class="summary-left">
+              <i class="fa-solid fa-database"></i>
+              <strong>Yedekleme ve Veri Aktarımı</strong>
+            </span>
+          </summary>
+          <div class="section-card-content">
+            <p class="section-hint">Tüm girdiğiniz verileri daha sonra tekrar kullanmak için bilgisayarınıza
+              kaydedebilir veya yükleyebilirsiniz.</p>
+            <div class="d-flex gap-2">
+              <button id="btn-export-json" class="btn btn-sm btn-secondary">
+                <i class="fa-solid fa-download"></i> Verileri JSON Olarak Kaydet
+              </button>
+              <label class="btn btn-sm btn-outline mb-0 cursor-pointer">
+                <i class="fa-solid fa-upload"></i> JSON Dosyası Yükle
+                <input type="file" id="file-import-json" accept=".json" style="display:none">
+              </label>
+            </div>
+          </div>
+        </details>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL: Live Document & Instant PDF Viewer -->
+    <main class="panel preview-panel" id="preview-panel">
+      <div class="panel-header preview-header">
+        <div class="preview-tabs" role="tablist">
+          <button id="tab-btn-doc" class="tab-btn active" role="tab" aria-selected="true"
+            title="Her harf yazıldığında anında güncellenen canlı A4 görünümü">
+            <i class="fa-solid fa-display"></i>
+            <span>⚡ Canlı Belge Önizleme</span>
+          </button>
+          <button id="tab-btn-pdf" class="tab-btn" role="tab" aria-selected="false"
+            title="Vektörel gerçek PDF dosyası çıktısı (iframe görüntüleyici)">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>📄 Gerçek PDF Dosyası (Canlı)</span>
+          </button>
+        </div>
+
+        <div class="preview-controls">
+          <div class="sync-status" id="sync-status" title="Senkronizasyon durumu">
+            <span class="status-indicator live"></span>
+            <span class="status-text" id="status-text">Canlı Senkronize</span>
+          </div>
+
+          <button id="btn-refresh-pdf" class="btn btn-xs btn-secondary"
+            title="Gerçek PDF dosyasını yeniden oluştur ve yenile">
+            <i class="fa-solid fa-arrows-rotate"></i> PDF'i Yenile
+          </button>
+
+          <div class="zoom-controls">
+            <button id="btn-zoom-out" class="btn btn-icon btn-xs" title="Uzaklaştır"><i
+                class="fa-solid fa-magnifying-glass-minus"></i></button>
+            <span id="zoom-level-text" class="zoom-text">100%</span>
+            <button id="btn-zoom-in" class="btn btn-icon btn-xs" title="Yakınlaştır"><i
+                class="fa-solid fa-magnifying-glass-plus"></i></button>
+            <button id="btn-zoom-reset" class="btn btn-icon btn-xs" title="Tüm Kağıdı Ekrana Sığdır (Varsayılan)"><i
+                class="fa-solid fa-expand"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Stage Container -->
+      <div class="preview-viewport" id="preview-viewport">
+        <!-- VIEW 1: Live Interactive Document (A4 sheet) -->
+        <div class="doc-view-wrapper active" id="doc-view-wrapper">
+          <div class="a4-sheet-container" id="a4-sheet-container">
+            <!-- Printable / Renderable Container -->
+            <div class="print-document landscape" id="printable-document">
+              <!-- Document Header -->
+              <div class="doc-header" id="doc-header">
+                <div class="doc-header-top">
+                  <div class="doc-logo-box" id="doc-logo-box">
+                    <img src="assets/ugurokullariviransehirkampusu.jpg" alt="Logo" class="doc-logo" onerror="this.style.display='none'">
+                  </div>
+                  <div class="doc-institution-titles">
+                    <h1 class="doc-inst-name" id="preview-institution">VİRANŞEHİR ÖZEL UĞUR ORTA OKULU</h1>
+                    <h2 class="doc-service-name" id="preview-service" style="display: none;"></h2>
+                    <h3 class="doc-subtitle-name" id="preview-subtitle">2026-2027 EĞİTİM ÖĞRETİM YILI REHBERLİK FAALİYET
+                      PLANI</h3>
+                  </div>
+                  <div class="doc-header-spacer"></div>
+                </div>
+
+                <!-- Main Month / Excel Banner -->
+                <div class="doc-main-banner" id="doc-main-banner">
+                  <span class="banner-icon" id="preview-icon">✚</span>
+                  <span class="banner-title" id="preview-main-title">HAZİRAN</span>
+                </div>
+              </div>
+
+              <!-- Main Table -->
+              <div class="doc-table-wrapper">
+                <table class="doc-table" id="preview-table">
+                  <thead id="preview-table-head">
+                    <!-- Dinamik sütunlar -->
+                  </thead>
+                  <tbody id="preview-table-body">
+                    <!-- Dinamik satırlar -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Document Footer: Signatures -->
+              <div class="doc-footer" id="preview-signatures-block">
+                <div class="sig-col sig-left">
+                  <div class="sig-title" id="preview-sig-left-title">Hazırlayan</div>
+                  <div class="sig-line"></div>
+                  <div class="sig-name" id="preview-sig-left-name">Rehber Öğretmen / Psikolojik Danışman</div>
+                </div>
+                <div class="sig-col sig-right">
+                  <div class="sig-title" id="preview-sig-right-title">Uygundur / Tasdik Olunur</div>
+                  <div class="sig-line"></div>
+                  <div class="sig-name" id="preview-sig-right-name">Okul Müdürü</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 2: Real PDF Blob Iframe View -->
+        <div class="pdf-iframe-wrapper" id="pdf-iframe-wrapper">
+          <div class="pdf-loading-overlay" id="pdf-loading-overlay">
+            <div class="spinner"></div>
+            <span>Vektörel PDF Oluşturuluyor...</span>
+          </div>
+          <iframe id="pdf-preview-iframe" class="pdf-iframe" title="PDF Önizleme Dosyası" src="about:blank"></iframe>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Settings Drawer Modal -->
+  <aside class="settings-drawer" id="settings-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i class="fa-solid fa-sliders text-accent"></i>
+        <span>Sayfa & Belge Ayarları</span>
+      </div>
+      <button id="btn-close-settings" class="btn btn-icon btn-sm" title="Kapat">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Setting: Page Orientation -->
+      <div class="setting-group">
+        <label class="setting-label">Sayfa Yönü (A4)</label>
+        <div class="segmented-control">
+          <button type="button" class="segment-btn active" data-orientation="landscape" id="btn-orient-landscape">
+            <i class="fa-solid fa-file-powerpoint"></i> Yatay (Örnekteki Gibi)
+          </button>
+          <button type="button" class="segment-btn" data-orientation="portrait" id="btn-orient-portrait">
+            <i class="fa-solid fa-file"></i> Dikey
+          </button>
+        </div>
+      </div>
+
+      <!-- Setting: Theme Style -->
+      <div class="setting-group">
+        <label class="setting-label">Tablo ve Başlık Tasarım Stili</label>
+        <select id="select-table-theme" class="form-control">
+          <option value="theme-excel" selected>Excel Klasik (ornekexcel.jpg stili Mavi/Izgara)</option>
+          <option value="theme-ugur-navy">Uğur Okulları Kurumsal (Lacivert / Kırmızı Vurgu)</option>
+          <option value="theme-meb-formal">Resmi Belge (Siyah-Beyaz / Çerçeveli)</option>
+          <option value="theme-emerald">Modern Zümrüt Yeşili</option>
+        </select>
+      </div>
+
+      <!-- Setting: Grid Style -->
+      <div class="setting-group">
+        <label class="setting-label">Hücre Çizgi Stili</label>
+        <select id="select-grid-style" class="form-control">
+          <option value="grid-dotted" selected>Noktalı Kılavuz (Excel Orijinal)</option>
+          <option value="grid-solid">Düz İnce Çizgi</option>
+          <option value="grid-bold">Belirgin Çerçeveli</option>
+        </select>
+      </div>
+
+      <!-- Setting: Font Size -->
+      <div class="setting-group">
+        <label class="setting-label">Tablo Yazı Boyutu</label>
+        <select id="select-table-font-size" class="form-control">
+          <option value="font-sm">Kompakt (Küçük)</option>
+          <option value="font-md" selected>Standart (Orta)</option>
+          <option value="font-lg">Geniş (Büyük)</option>
+        </select>
+      </div>
+
+      <!-- Setting: Logo Visibility -->
+      <div class="setting-group">
+        <label class="toggle-control">
+          <input type="checkbox" id="check-show-logo" checked>
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Belge Başlığında Okul Logosunu Göster</span>
+        </label>
+      </div>
+
+      <!-- Setting: Empty Fill Rows -->
+      <div class="setting-group">
+        <label class="setting-label" for="input-empty-rows-count">Alt Boş Satır Sayısı (Excel Izgara Görünümü
+          İçin)</label>
+        <div class="d-flex align-items-center gap-2">
+          <input type="range" id="input-empty-rows-count" min="0" max="25" value="1" class="form-range">
+          <span id="label-empty-rows-count" class="badge-count">1 Satır</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Excel Paste Modal -->
+  <dialog class="app-dialog" id="dialog-paste-excel">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div class="dialog-title">
+          <i class="fa-solid fa-file-excel text-excel"></i>
+          <span>Excel veya E-Tablo'dan Veri Yapıştır</span>
+        </div>
+        <button id="btn-close-paste-modal" class="btn btn-icon btn-sm" title="Kapat">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p class="dialog-desc">
+          Excel, Google Sheets veya Word tablosundan kopyaladığınız satırları aşağıdaki kutuya yapıştırın (Ctrl+V /
+          Cmd+V). Sistem sekmelerle ayrılmış sütunları otomatik algılayıp tabloya dönüştürecektir.
+        </p>
+        <textarea id="textarea-excel-paste" class="form-control code-font" rows="8" placeholder="Örnek:
+1	Bilinçli Teknoloji Kullanımı	01-04/06/2027		Faaliyet türü:Seminer\nhedef kitle: Öğrenci	Tüm Sınıflar
+2	Değerler Eğitimi Çalışmaları	07-11/06/2027		Faaliyet türü:Pano	Tüm Sınıflar"></textarea>
+
+        <div class="dialog-options mt-2">
+          <label class="toggle-control">
+            <input type="checkbox" id="check-paste-replace" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">Mevcut satırların üzerine yaz (Temizleyip yeni yapıştır)</span>
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button id="btn-cancel-paste" class="btn btn-secondary">İptal</button>
+        <button id="btn-confirm-paste" class="btn btn-primary">
+          <i class="fa-solid fa-check"></i> Tabloya Aktar
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- App Logic -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>

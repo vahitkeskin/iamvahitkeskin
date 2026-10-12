@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keskin Erkek Kuaförü | Lüks Erkek Bakım & Stil Lounge</title>
+  <meta name="description" content="Keskin Erkek Kuaförü - Geleneksel berber sanatını fütüristik lüks, modern saç-sakal tasarımı ve VIP bakım standartlarıyla buluşturan ayrıcalıklı erkek kuaförü. Online randevu alın.">
+  <meta name="keywords" content="erkek kuaförü, berber, saç kesimi, sakal tasarımı, lüks kuaför, vip berber, nişantaşı kuaför, fade kesim, online randevu">
+  <meta name="author" content="Keskin Erkek Kuaförü">
+  
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Keskin Erkek Kuaförü | Lüks Erkek Bakım & Stil Lounge">
+  <meta property="og:description" content="Kusursuz Kesim, Benzersiz Duruş. Fütüristik lüks ve ustalıkla tasarlanmış erkek bakım deneyimi.">
+  <meta property="og:image" content="assets/images/hero.jpg">
+  <meta property="og:url" content="https://keskinkuafor.com">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Schema.org LocalBusiness JSON-LD for Barbershop SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Keskin Erkek Kuaförü",
+    "image": "assets/images/hero.jpg",
+    "telephone": "+905550123456",
+    "url": "https://keskinkuafor.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Abdi İpekçi Cad. No:42, Nişantaşı",
+      "addressLocality": "Şişli",
+      "addressRegion": "İstanbul",
+      "postalCode": "34367",
+      "addressCountry": "TR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "21:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "10:00",
+        "closes": "19:00"
+      }
+    ],
+    "priceRange": "₺₺₺"
+  }
+  </script>
+</head>
+<body class="dark-theme">
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Background Ambient Glow & Mesh -->
+  <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom-right" aria-hidden="true"></div>
+  <div class="ambient-grid-overlay" aria-hidden="true"></div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="navbar-wrapper" id="main-header">
+    <div class="navbar-container">
+      <a href="#hero" class="brand-logo" id="brand-logo-link" aria-label="Keskin Erkek Kuaförü Ana Sayfa">
+        <div class="logo-circle">
+          <img src="assets/images/logo.jpg" alt="Keskin Kuaför Logo" class="brand-img">
+          <span class="neon-ring"></span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">KESKİN</span>
+          <span class="brand-tag">ERKEK KUAFÖRÜ</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" id="primary-navigation" aria-label="Ana Menü">
+        <ul class="nav-list">
+          <li><a href="#hakkimizda" class="nav-link" data-i18n="nav.about">Hakkımızda</a></li>
+          <li><a href="#hizmetler" class="nav-link" data-i18n="nav.services">Hizmetler</a></li>
+          <li><a href="#fiyatlar" class="nav-link" data-i18n="nav.pricing">Fiyat Listesi</a></li>
+          <li><a href="#ekip" class="nav-link" data-i18n="nav.team">Usta Berberler</a></li>
+          <li><a href="#galeri" class="nav-link" data-i18n="nav.gallery">Galeri</a></li>
+          <li><a href="#yorumlar" class="nav-link" data-i18n="nav.reviews">Yorumlar</a></li>
+          <li><a href="#iletisim" class="nav-link" data-i18n="nav.contact">İletişim</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Status, Language, Sound, CTA) -->
+      <div class="nav-actions">
+        <!-- Live Open/Closed Status Badge -->
+        <div class="status-indicator" id="salon-status" title="Çalışma Durumu">
+          <span class="pulse-dot"></span>
+          <span class="status-text" id="status-label">Şu An Açık</span>
+        </div>
+
+        <!-- Language Switcher Toggle -->
+        <button type="button" class="lang-btn" id="lang-toggle-btn" aria-label="Dil Değiştir / Switch Language">
+          <span class="lang-text" id="current-lang">TR</span>
+        </button>
+
+        <!-- Sound FX Toggle -->
+        <button type="button" class="icon-toggle-btn" id="sound-toggle-btn" aria-label="Ses Efektlerini Aç/Kapat" title="Ses Efekti">
+          <svg class="icon-sound-on" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg class="icon-sound-off hidden" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+            <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4.5l-5 4.5M2 9v6h4l5 4.5v-7.17"></path>
+          </svg>
+        </button>
+
+        <!-- Header Booking CTA -->
+        <button type="button" class="btn btn-neon-header open-booking-trigger" id="header-randevu-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span data-i18n="cta.book">Randevu Al</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="hamburger-btn" id="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menüyü Aç">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">
+      <ul class="mobile-nav-list">
+        <li><a href="#hakkimizda" class="mobile-link" data-i18n="nav.about">Hakkımızda</a></li>
+        <li><a href="#hizmetler" class="mobile-link" data-i18n="nav.services">Hizmetler</a></li>
+        <li><a href="#fiyatlar" class="mobile-link" data-i18n="nav.pricing">Fiyat Listesi</a></li>
+        <li><a href="#ekip" class="mobile-link" data-i18n="nav.team">Usta Berberler</a></li>
+        <li><a href="#galeri" class="mobile-link" data-i18n="nav.gallery">Galeri</a></li>
+        <li><a href="#yorumlar" class="mobile-link" data-i18n="nav.reviews">Yorumlar</a></li>
+        <li><a href="#iletisim" class="mobile-link" data-i18n="nav.contact">İletişim</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <button type="button" class="btn btn-neon-glow w-100 open-booking-trigger" id="mobile-randevu-btn">
+          <span data-i18n="cta.book_now">Hemen Randevu Al</span>
+        </button>
+        <a href="https://wa.me/905550123456?text=Merhaba,%20Keskin%20Erkek%20Kuaförü'nden%20randevu%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-subtle w-100">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+          </svg>
+          <span>WhatsApp Randevu</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-backdrop" aria-hidden="true">
+        <img src="assets/images/hero.jpg" alt="Keskin Erkek Kuaförü Lüks Salon Ambiyansı" class="hero-bg-img" fetchpriority="high">
+        <div class="hero-vignette"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-badge-wrapper">
+          <div class="hero-pill-badge">
+            <span class="badge-sparkle">✦</span>
+            <span data-i18n="hero.badge">İSTANBUL'UN EN SEÇKİN ERKEK KUAFÖRÜ & GROOMING SALONU</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="text-white" data-i18n="hero.title1">Kusursuz Kesim,</span><br>
+          <span class="text-neon-glow" data-i18n="hero.title2">Benzersiz Duruş.</span>
+        </h1>
+
+        <p class="hero-description" data-i18n="hero.desc">
+          Geleneksel berber ustalığını fütüristik lüks, modern saç-sakal tasarımı ve kişiye özel VIP bakım protokolleriyle yeniden tanımlıyoruz. Sizin için tasarlanmış birinci sınıf erkek kuaför deneyimi.
+        </p>
+
+        <!-- Hero Actions -->
+        <div class="hero-actions">
+          <button type="button" class="btn btn-hero-primary open-booking-trigger" id="hero-randevu-btn">
+            <span class="btn-glow-layer"></span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span data-i18n="hero.cta_book">Hemen Randevu Al</span>
+          </button>
+
+          <a href="#hizmetler" class="btn btn-hero-secondary" id="hero-explore-btn">
+            <span data-i18n="hero.cta_explore">Hizmetleri Keşfet</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+
+          <a href="https://wa.me/905550123456?text=Merhaba,%20Keskin%20Erkek%20Kuaförü%20hakkında%20bilgi%20ve%20randevu%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn btn-hero-whatsapp" id="hero-wa-btn" aria-label="WhatsApp İletişim">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+            </svg>
+            <span data-i18n="hero.cta_wa">Hızlı WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Trust Stats Counter Grid -->
+        <div class="hero-stats-grid">
+          <div class="stat-card glass-panel">
+            <div class="stat-number"><span class="counter" data-target="15">15</span><span class="stat-symbol">+</span></div>
+            <div class="stat-label" data-i18n="stats.exp">Yıllık Ustalık & Deneyim</div>
+          </div>
+          <div class="stat-card glass-panel">
+            <div class="stat-number"><span class="counter" data-target="25">25</span><span class="stat-symbol">K+</span></div>
+            <div class="stat-label" data-i18n="stats.clients">Memnun Beyefendi</div>
+          </div>
+          <div class="stat-card glass-panel">
+            <div class="stat-number">4.9<span class="stat-symbol">★</span></div>
+            <div class="stat-label" data-i18n="stats.rating">Google Puanı (500+ Yorum)</div>
+          </div>
+          <div class="stat-card glass-panel">
+            <div class="stat-number">%100</div>
+            <div class="stat-label" data-i18n="stats.hygiene">Steril & VIP Protokolü</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & VIP HIGHLIGHTS -->
+    <section class="section-padding about-section" id="hakkimizda">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle" data-i18n="about.tag">FÜTÜRİSTİK LÜKS & USTALIK</span>
+          <h2 class="section-title" data-i18n="about.title">Neden Keskin Erkek Kuaförü?</h2>
+          <p class="section-desc" data-i18n="about.desc">
+            Sıradan bir berber ziyaretinden çok daha fazlası; stilinizi keskinleştiren, sizi dinlendiren ve özel hissettiren fütüristik bir konfor alanı.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card glass-panel">
+            <div class="feature-icon-box">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title" data-i18n="features.f1_title">Sıfır Bekleme & VIP Randevu</h3>
+            <p class="feature-desc" data-i18n="features.f1_desc">Zamanınız değerlidir. Randevu saatinizde koltuğunuz hazır bekler, gereksiz sıralar tarih olur.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card glass-panel">
+            <div class="feature-icon-box">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title" data-i18n="features.f2_title">Yüz Analizi & Kişiye Özel Stil</h3>
+            <p class="feature-desc" data-i18n="features.f2_desc">Kafa kemik yapınız, yüz hatlarınız ve sakal yönünüze göre bilimsel ve sanatsal kesim planlaması.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card glass-panel">
+            <div class="feature-icon-box">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title" data-i18n="features.f3_title">Hastane Standartlarında Hijyen</h3>
+            <p class="feature-desc" data-i18n="features.f3_desc">Her misafir için tek kullanımlık havlu-pelerin, UV-C ve tıbbi otoklav sterilizasyonlu ekipmanlar.</p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-card glass-panel">
+            <div class="feature-icon-box">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                <line x1="6" y1="1" x2="6" y2="4"></line>
+                <line x1="10" y1="1" x2="10" y2="4"></line>
+                <line x1="14" y1="1" x2="14" y2="4"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title" data-i18n="features.f4_title">Premium Lounge & İkram Barı</h3>
+            <p class="feature-desc" data-i18n="features.f4_desc">Özel single-origin kahveler, soğuk detoks içecekleri ve dinlendirici akustik müzik eşliğinde konfor.</p>
+          </div>
+        </div>
+
+        <!-- Highlight Banner with Generated Image -->
+        <div class="about-highlight-box glass-panel">
+          <div class="highlight-image-col">
+            <img src="assets/images/styling.jpg" alt="Keskin Kuaför Usta Kesim Modeli" class="highlight-img" loading="lazy">
+            <div class="neon-badge-corner" data-i18n="about.artisan">Elit İşçilik</div>
+          </div>
+          <div class="highlight-text-col">
+            <span class="highlight-tag" data-i18n="about.story_tag">HİKAYEMİZ</span>
+            <h3 class="highlight-heading" data-i18n="about.story_title">Erkek Bakımında Keskin Bir Dönüm Noktası</h3>
+            <p class="highlight-desc" data-i18n="about.story_p1">
+              Keskin Erkek Kuaförü, berberliği yalnızca bir saç kısaltma rutini değil; bir erkeğin kendine gösterdiği saygının ve özgüveninin en somut ifadesi olarak görür.
+            </p>
+            <p class="highlight-desc" data-i18n="about.story_p2">
+              Sektördeki 15 yılı aşkın ustalık geleneğimizi, fütüristik salon mimarimiz, ergonomik İtalyan koltuklarımız ve modern stil tekniklerimizle harmanladık. Kapımızdan girdiğiniz andan itibaren kendinizi lüks bir kulübün ayrıcalıklı bir üyesi gibi hissedeceksiniz.
+            </p>
+            <div class="highlight-action">
+              <button type="button" class="btn btn-neon-glow open-booking-trigger" id="about-randevu-trigger">
+                <span data-i18n="cta.book_chair">Koltuğunuzu Ayırtın</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES & PRICING SECTION -->
+    <section class="section-padding services-section" id="hizmetler">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle" data-i18n="services.tag">AYRICALIKLI HİZMETLERİMİZ</span>
+          <h2 class="section-title" id="fiyatlar" data-i18n="services.title">Hizmet & Fiyat Listesi</h2>
+          <p class="section-desc" data-i18n="services.desc">
+            Şeffaf fiyatlandırma, üstün ustalık ve en kaliteli organik bakım ürünleriyle sunulan ayrıcalıklar.
+          </p>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="service-tabs" role="tablist" aria-label="Hizmet Kategorileri">
+          <button type="button" class="service-tab-btn active" data-category="all" role="tab" aria-selected="true" data-i18n="tabs.all">Tüm Hizmetler</button>
+          <button type="button" class="service-tab-btn" data-category="hair" role="tab" aria-selected="false" data-i18n="tabs.hair">Saç Tasarımı</button>
+          <button type="button" class="service-tab-btn" data-category="beard" role="tab" aria-selected="false" data-i18n="tabs.beard">Sakal & Ustura</button>
+          <button type="button" class="service-tab-btn" data-category="vip" role="tab" aria-selected="false" data-i18n="tabs.vip">VIP Bakım Paketleri</button>
+          <button type="button" class="service-tab-btn" data-category="care" role="tab" aria-selected="false" data-i18n="tabs.care">Cilt & Spa</button>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid" id="services-grid-container">
+          <!-- Card 1 -->
+          <article class="service-card glass-panel" data-category="hair" data-id="hair-cut" data-name="Keskin Signature Saç Kesimi" data-price="550" data-duration="45 dk">
+            <div class="service-card-top">
+              <span class="service-badge-popular" data-i18n="badge.popular">Çok Tercih Edilen</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>45 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s1_title">Keskin Signature Saç Kesimi</h3>
+            <p class="service-desc" data-i18n="srv.s1_desc">Kişiye özel yüz formu analizi, saç tipi değerlendirmesi, yıkama, ferahlatıcı kafa derisi masajı ve fütüristik styling.</p>
+            <div class="service-features-list">
+              <span>✓ Yıkama & Masaj</span>
+              <span>✓ Hassas Makas & Fade</span>
+              <span>✓ Premium Mat Wax Styling</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">550</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="hair-cut" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="service-card glass-panel" data-category="beard" data-id="beard-sculpt" data-name="Usta Sakal Tasarımı & Sıcak Havlu" data-price="400" data-duration="35 dk">
+            <div class="service-card-top">
+              <span class="service-category-tag" data-i18n="badge.classic">Geleneksel Ustalık</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>35 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s2_title">Usta Sakal Tasarımı & Sıcak Havlu</h3>
+            <p class="service-desc" data-i18n="srv.s2_desc">Okaliptüslü buhar banyosu, sıcak havlu kompresi, tek kullanımlık jiletli ustura ile keskin hatlar ve sakal serumu.</p>
+            <div class="service-features-list">
+              <span>✓ Buharlı Sıcak Havlu</span>
+              <span>✓ Jilet Ustura Hat Çizimi</span>
+              <span>✓ Besleyici Sakal Yağı</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">400</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="beard-sculpt" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="service-card glass-panel" data-category="hair" data-id="combo-cut-beard" data-name="Keskin Kombo: Saç + Sakal Tasarımı" data-price="850" data-duration="65 dk">
+            <div class="service-card-top">
+              <span class="service-badge-popular" data-i18n="badge.best_value">En Avantajlı</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>65 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s3_title">Keskin Kombo: Saç + Sakal Tasarımı</h3>
+            <p class="service-desc" data-i18n="srv.s3_desc">Komple stil yenileme. İkili yıkama, saç analizi, sakal formu şekillendirme, sıcak havlu ritüeli ve tonik bakımı.</p>
+            <div class="service-features-list">
+              <span>✓ Komple Saç & Sakal Uyumu</span>
+              <span>✓ Çift Yıkama & Masaj</span>
+              <span>✓ Sıcak Havlu & Tonik</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">850</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="combo-cut-beard" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 4 (VIP) -->
+          <article class="service-card glass-panel featured-vip-card" data-category="vip" data-id="vip-black-gold" data-name="VIP Keskin Gold Executive Bakım" data-price="1500" data-duration="90 dk">
+            <div class="service-card-top">
+              <span class="service-badge-vip" data-i18n="badge.vip">VIP ÖZEL</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>90 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s4_title">VIP Keskin Gold Executive Bakım</h3>
+            <p class="service-desc" data-i18n="srv.s4_desc">Baştan aşağı krallara layık bir dönüşüm. Saç & sakal, kolajen yüz maskesi, kulak/burun ağda, omuz & boyun masajı.</p>
+            <div class="service-features-list">
+              <span>✓ Saç & Sakal Tasarımı</span>
+              <span>✓ Detoks Cilt & Kil Maskesi</span>
+              <span>✓ Boyun & Omuz Terapisi</span>
+              <span>✓ Özel İkram & Kahve Eşliğinde</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">1.500</span>
+              </div>
+              <button type="button" class="btn btn-service-select btn-vip-select select-service-trigger" data-service-id="vip-black-gold" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="service-card glass-panel" data-category="care" data-id="skin-detox" data-name="Detoks Cilt Bakımı & Gözenek Maskesi" data-price="450" data-duration="30 dk">
+            <div class="service-card-top">
+              <span class="service-category-tag" data-i18n="badge.spa">Medikal Spa</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>30 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s5_title">Detoks Cilt Bakımı & Gözenek Maskesi</h3>
+            <p class="service-desc" data-i18n="srv.s5_desc">Ozon buharı ile gözenek açma, siyah nokta arındırma, doğal volkanik kil maskesi ve canlandırıcı hyaluronik serum.</p>
+            <div class="service-features-list">
+              <span>✓ Ozon Buharı & Temizlik</span>
+              <span>✓ Siyah Nokta Arındırma</span>
+              <span>✓ Nemlendirici Masaj</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">450</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="skin-detox" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="service-card glass-panel" data-category="hair" data-id="keratin-care" data-name="Keratin Düzleştirme & Saç Botoksu" data-price="1800" data-duration="80 dk">
+            <div class="service-card-top">
+              <span class="service-category-tag" data-i18n="badge.treatment">Yoğun Bakım</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>80 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s6_title">Keratin Düzleştirme & Saç Botoksu</h3>
+            <p class="service-desc" data-i18n="srv.s6_desc">Kıvırcık, yıpranmış veya elektriklenen saçlara 3-4 ay kalıcı düzlük ve pürüzsüz parlaklık kazandıran nano keratin infüzyonu.</p>
+            <div class="service-features-list">
+              <span>✓ Formaldehitsiz Güvenli Formül</span>
+              <span>✓ 3-4 Ay Kalıcı Pürüzsüzlük</span>
+              <span>✓ Derinlemesine Saç Onarımı</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">1.800</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="keratin-care" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 7 -->
+          <article class="service-card glass-panel" data-category="beard" data-id="camo-color" data-name="Beyaz Kapatıcı Kamuflaj (Saç / Sakal)" data-price="650" data-duration="40 dk">
+            <div class="service-card-top">
+              <span class="service-category-tag" data-i18n="badge.color">Doğal Renk</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>40 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s7_title">Beyaz Kapatıcı Kamuflaj (Saç & Sakal)</h3>
+            <p class="service-desc" data-i18n="srv.s7_desc">Yapay durmayan, doğal gri-kır dengesi sağlayan, amonyaksız hızlı erkek tonlama formülü ile 10 yaş genç bir görünüm.</p>
+            <div class="service-features-list">
+              <span>✓ Doğal & Fark Edilmez Ton</span>
+              <span>✓ Amonyaksız Saç Dostu</span>
+              <span>✓ 10-15 Dakika Hızlı İşlem</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">650</span>
+              </div>
+              <button type="button" class="btn btn-service-select select-service-trigger" data-service-id="camo-color" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+
+          <!-- Card 8 (VIP Groom) -->
+          <article class="service-card glass-panel featured-vip-card" data-category="vip" data-id="groom-vip" data-name="Damat Tıraşı & Özel Gün VIP Protokolü" data-price="3500" data-duration="120 dk">
+            <div class="service-card-top">
+              <span class="service-badge-vip" data-i18n="badge.groom">DAMAT ÖZEL</span>
+              <div class="service-duration">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>120 dk</span>
+              </div>
+            </div>
+            <h3 class="service-title" data-i18n="srv.s8_title">Damat Tıraşı & Özel Gün VIP Protokolü</h3>
+            <p class="service-desc" data-i18n="srv.s8_desc">Hayatınızın en özel gününde sıfır kusur. Baş berber eşliğinde saç, sakal, spa cilt terapisi, manikür, kaş dizimi ve şampanya ikramı.</p>
+            <div class="service-features-list">
+              <span>✓ Baş Berber ile Birebir Seans</span>
+              <span>✓ Fotojenik Cilt & Saç Tasarımı</span>
+              <span>✓ El Bakımı & Özel Masaj</span>
+              <span>✓ Sağdıç / Arkadaş Alanı Dahil</span>
+            </div>
+            <div class="service-footer">
+              <div class="service-price">
+                <span class="currency">₺</span>
+                <span class="amount">3.500</span>
+              </div>
+              <button type="button" class="btn btn-service-select btn-vip-select select-service-trigger" data-service-id="groom-vip" data-i18n="cta.add_service">Randevuya Ekle</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MASTER BARBERS / TEAM SECTION -->
+    <section class="section-padding team-section" id="ekip">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle" data-i18n="team.tag">SANATÇILARIMIZ</span>
+          <h2 class="section-title" data-i18n="team.title">Usta Berber Ekibimiz</h2>
+          <p class="section-desc" data-i18n="team.desc">
+            Uluslararası akademilerde eğitim almış, makas ustalığını vizyoner trendlerle birleştiren uzman eller.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <!-- Barber 1: Vahit Keskin -->
+          <div class="team-card glass-panel" data-barber-id="vahit-keskin" data-barber-name="Vahit Keskin">
+            <div class="team-img-wrapper">
+              <img src="assets/images/barber1.jpg" alt="Vahit Keskin - Baş Berber & Kurucu" class="team-img" loading="lazy">
+              <span class="team-badge" data-i18n="team.b1_badge">Kurucu & Baş Berber</span>
+            </div>
+            <div class="team-body">
+              <h3 class="team-name">Vahit Keskin</h3>
+              <p class="team-role" data-i18n="team.b1_role">Master Stylist & Tasarım Direktörü</p>
+              <p class="team-bio" data-i18n="team.b1_bio">15 yılı aşkın ustalık geçmişiyle klasik İtalyan kesim ekolünü ve fütüristik erkek stillerini harmanlıyor.</p>
+              <div class="team-skills">
+                <span>Klasik Kesim</span>
+                <span>Yüz Analizi</span>
+                <span>VIP Protokol</span>
+              </div>
+              <button type="button" class="btn btn-team-book select-barber-trigger" data-barber-id="vahit-keskin" data-barber-name="Vahit Keskin" data-i18n="cta.book_with">Vahit Usta'dan Randevu Al</button>
+            </div>
+          </div>
+
+          <!-- Barber 2: Murat Kaya -->
+          <div class="team-card glass-panel" data-barber-id="murat-kaya" data-barber-name="Murat Kaya">
+            <div class="team-img-wrapper">
+              <img src="assets/images/barber2.jpg" alt="Murat Kaya - Fade & Sakal Uzmanı" class="team-img" loading="lazy">
+              <span class="team-badge" data-i18n="team.b2_badge">Kıdemli Berber</span>
+            </div>
+            <div class="team-body">
+              <h3 class="team-name">Murat Kaya</h3>
+              <p class="team-role" data-i18n="team.b2_role">Skin Fade & Sakal Mimarı</p>
+              <p class="team-bio" data-i18n="team.b2_bio">Sıfır geçişli kusursuz skin fade kesimleri ve milimetrik sakal hatlarındaki cerrahi hassasiyetiyle tanınır.</p>
+              <div class="team-skills">
+                <span>Skin Fade</span>
+                <span>Sakal Dizimi</span>
+                <span>Modern Street</span>
+              </div>
+              <button type="button" class="btn btn-team-book select-barber-trigger" data-barber-id="murat-kaya" data-barber-name="Murat Kaya" data-i18n="cta.book_with">Murat Usta'dan Randevu Al</button>
+            </div>
+          </div>
+
+          <!-- Barber 3: Can Demir -->
+          <div class="team-card glass-panel" data-barber-id="can-demir" data-barber-name="Can Demir">
+            <div class="team-img-wrapper">
+              <img src="assets/images/barber3.jpg" alt="Can Demir - Klasik & Bakım Uzmanı" class="team-img" loading="lazy">
+              <span class="team-badge" data-i18n="team.b3_badge">Usta Berber</span>
+            </div>
+            <div class="team-body">
+              <h3 class="team-name">Can Demir</h3>
+              <p class="team-role" data-i18n="team.b3_role">Geleneksel Ustura & Spa Uzmanı</p>
+              <p class="team-bio" data-i18n="team.b3_bio">Sıcak havlu ritüelleri, kafa derisi masajları ve klasik berber mirasındaki ustalığıyla eşsiz rahatlama sunar.</p>
+              <div class="team-skills">
+                <span>Sıcak Havlu</span>
+                <span>Ustura Tıraşı</span>
+                <span>Cilt Terapisi</span>
+              </div>
+              <button type="button" class="btn btn-team-book select-barber-trigger" data-barber-id="can-demir" data-barber-name="Can Demir" data-i18n="cta.book_with">Can Usta'dan Randevu Al</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY / SHOWCASE SECTION -->
+    <section class="section-padding gallery-section" id="galeri">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle" data-i18n="gallery.tag">STİL KATALOĞUMUZ</span>
+          <h2 class="section-title" data-i18n="gallery.title">İmza Çalışmalarımız & Salonumuz</h2>
+          <p class="section-desc" data-i18n="gallery.desc">
+            Her saç telinde hassasiyet, her dokunuşta fütüristik mükemmeliyet.
+          </p>
+        </div>
+
+        <div class="gallery-filter-bar">
+          <button type="button" class="gallery-filter-btn active" data-filter="all" data-i18n="gallery.filter_all">Tümü</button>
+          <button type="button" class="gallery-filter-btn" data-filter="haircut" data-i18n="gallery.filter_hair">Kesim & Stil</button>
+          <button type="button" class="gallery-filter-btn" data-filter="salon" data-i18n="gallery.filter_salon">Salon Atmosferi</button>
+          <button type="button" class="gallery-filter-btn" data-filter="tools" data-i18n="gallery.filter_tools">Ekipman & Sanat</button>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Item 1: Salon -->
+          <div class="gallery-item glass-panel" data-cat="salon" data-src="assets/images/hero.jpg" data-caption="Fütüristik Lüks Salon Ambiyansı - Keskin Kuaför">
+            <img src="assets/images/hero.jpg" alt="Lüks Salon Ambiyansı" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">Salon Ambiyansı</span>
+            </div>
+          </div>
+
+          <!-- Item 2: Styling -->
+          <div class="gallery-item glass-panel" data-cat="haircut" data-src="assets/images/styling.jpg" data-caption="Modern Skin Fade & Sakal Tasarımı">
+            <img src="assets/images/styling.jpg" alt="Modern Skin Fade Kesim" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">Skin Fade & Sakal</span>
+            </div>
+          </div>
+
+          <!-- Item 3: Tools -->
+          <div class="gallery-item glass-panel" data-cat="tools" data-src="assets/images/tools.jpg" data-caption="Bespoke Altın & Mat Titanyum Ekipmanlar">
+            <img src="assets/images/tools.jpg" alt="Özel Berber Makasları ve Sakal Yağları" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">Bespoke Ekipmanlar</span>
+            </div>
+          </div>
+
+          <!-- Item 4: Barber in action -->
+          <div class="gallery-item glass-panel" data-cat="haircut" data-src="assets/images/barber3.jpg" data-caption="Klasik Kesim ve Usta Makas Teknikleri">
+            <img src="assets/images/barber3.jpg" alt="Makasla Saç Kesimi" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">Usta Makas Kesimi</span>
+            </div>
+          </div>
+
+          <!-- Item 5: Barber Murat -->
+          <div class="gallery-item glass-panel" data-cat="salon" data-src="assets/images/barber2.jpg" data-caption="Neon Işıklar Eşliğinde Stil Danışmanlığı">
+            <img src="assets/images/barber2.jpg" alt="Neon Kuaför Salonu" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">Neon Lounge</span>
+            </div>
+          </div>
+
+          <!-- Item 6: Barber Vahit -->
+          <div class="gallery-item glass-panel" data-cat="haircut" data-src="assets/images/barber1.jpg" data-caption="Vahit Keskin Özel Danışmanlık Seansı">
+            <img src="assets/images/barber1.jpg" alt="Vahit Keskin Kuaförlük" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-icon">🔍</span>
+              <span class="gallery-tag-text">VIP Stil Seansı</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS / REVIEWS SECTION -->
+    <section class="section-padding reviews-section" id="yorumlar">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle" data-i18n="reviews.tag">MÜŞTERİ DENEYİMLERİ</span>
+          <h2 class="section-title" data-i18n="reviews.title">Misafirlerimizin Yorumları</h2>
+          <div class="google-rating-pill">
+            <span class="google-icon">G</span>
+            <span class="stars">★★★★★</span>
+            <span class="score">4.9 / 5.0</span>
+            <span class="count">(500+ Doğrulanmış Google Yorumu)</span>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <div class="review-card glass-panel">
+            <div class="review-top">
+              <div class="reviewer-avatar">EK</div>
+              <div class="reviewer-meta">
+                <h4 class="reviewer-name">Emre Keskin</h4>
+                <span class="reviewer-status">Doğrulanmış Misafir • 2 hafta önce</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <p class="review-text">
+              "Hayatımda aldığım en profesyonel saç kesimiydi. Vahit Usta kafa şeklime göre nasıl bir model yakışacağını ilk bakışta anlattı ve sonuç mükemmel oldu. Sıcak havlu masajı ise günün tüm stresini sildi."
+            </p>
+            <div class="review-service-badge">Hizmet: Keskin Signature Kesim + Sakal</div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card glass-panel">
+            <div class="review-top">
+              <div class="reviewer-avatar">TB</div>
+              <div class="reviewer-meta">
+                <h4 class="reviewer-name">Tolga Berk</h4>
+                <span class="reviewer-status">VIP Misafir • 1 ay önce</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <p class="review-text">
+              "Düğünüm için VIP Damat paketini aldım. Salonun fütüristik ambiyansı, ikram edilen espresso ve sıfır bekleme kuralı gerçekten üst düzey. Fotoğraflarda saçım ve sakalım kusursuz çıktı."
+            </p>
+            <div class="review-service-badge">Hizmet: Damat Tıraşı VIP Protokolü</div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card glass-panel">
+            <div class="review-top">
+              <div class="reviewer-avatar">AD</div>
+              <div class="reviewer-meta">
+                <h4 class="reviewer-name">Arda Demirkan</h4>
+                <span class="reviewer-status">Doğrulanmış Misafir • 3 gün önce</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <p class="review-text">
+              "Murat Usta'nın skin fade geçişi gerçek anlamda bir sanat eseri. Çizgiler o kadar simetrik ve net ki sokakta herkes nerede tıraş olduğumu soruyor. Kesinlikle İstanbul'un 1 numarası."
+            </p>
+            <div class="review-service-badge">Hizmet: Fade Kesim & Sakal Dizimi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section-padding faq-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">MERAK EDİLENLER</span>
+          <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+        </div>
+
+        <div class="faq-container">
+          <details class="faq-item glass-panel">
+            <summary class="faq-question">
+              <span>Randevusuz gelebilir miyim?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Misafirlerimize kusursuz ve beklemesiz bir hizmet sunabilmek için öncelikli olarak randevu ile çalışmaktayız. Ancak salonda anlık uygunluk olması durumunda randevusuz misafirlerimizi de ağırlamaktan memnuniyet duyarız. Vaktinizi korumak adına online randevu sistemimizden saat seçmenizi tavsiye ederiz.</p>
+            </div>
+          </details>
+
+          <details class="faq-item glass-panel">
+            <summary class="faq-question">
+              <span>Otopark veya vale hizmetiniz var mı?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Evet, salonumuzun önünde misafirlerimize özel ücretsiz vale park hizmetimiz mevcuttur. Aracınızı güvenle teslim edip rahatça bakımınıza odaklanabilirsiniz.</p>
+            </div>
+          </details>
+
+          <details class="faq-item glass-panel">
+            <summary class="faq-question">
+              <span>Hangi ödeme yöntemlerini kabul ediyorsunuz?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Tüm yerli ve yabancı kredi kartları, banka kartları, temassız mobil ödemeler (Apple Pay, Google Pay) ve nakit ödeme yöntemleri geçerlidir.</p>
+            </div>
+          </details>
+
+          <details class="faq-item glass-panel">
+            <summary class="faq-question">
+              <span>Randevumu iptal edebilir veya saatini değiştirebilir miyim?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Elbette. Randevu saatinden en az 2 saat öncesinde bize WhatsApp veya telefon üzerinden bildirmeniz durumunda randevunuzu dilediğiniz başka bir güne kolayca erteleyebiliriz.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION & CONTACT SECTION -->
+    <section class="section-padding contact-section" id="iletisim">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Info Column -->
+          <div class="contact-info-col glass-panel">
+            <span class="section-subtitle" data-i18n="contact.tag">BİZE ULAŞIN</span>
+            <h2 class="section-title" data-i18n="contact.title">İletişim & Lokasyon</h2>
+            <p class="contact-lead" data-i18n="contact.desc">
+              İstanbul'un kalbinde, modern ve lüks atmosferimizde sizi ağırlamaktan onur duyarız.
+            </p>
+
+            <div class="contact-items-list">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-label" data-i18n="contact.addr_label">Adres</h4>
+                  <p class="contact-val">Abdi İpekçi Caddesi No: 42/B, Nişantaşı, Şişli / İstanbul</p>
+                  <a href="https://maps.google.com/?q=Nisantasi+Istanbul" target="_blank" rel="noopener noreferrer" class="link-neon" data-i18n="contact.maps_link">Google Haritalarda Aç ↗</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-label" data-i18n="contact.phone_label">Telefon & Rezervasyon</h4>
+                  <a href="tel:+905550123456" class="contact-val hover-neon">+90 (555) 012 34 56</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-label">WhatsApp Hızlı İletişim</h4>
+                  <a href="https://wa.me/905550123456?text=Merhaba,%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="contact-val hover-neon">+90 (555) 012 34 56 (Anında Yanıt)</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-label" data-i18n="contact.hours_label">Çalışma Saatleri</h4>
+                  <p class="contact-val">Pazartesi – Cumartesi: 09:00 – 21:00</p>
+                  <p class="contact-val">Pazar: 10:00 – 19:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Map / Location Preview -->
+          <div class="contact-map-col glass-panel">
+            <div class="map-container">
+              <iframe 
+                title="Keskin Kuaför Konum Haritası"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.973495818968!2d28.9912759!3d41.0504781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7776f8b9dfd%3A0xc3457a412850937a!2sAbdi%20%C4%B0pek%C3%A7i%20Cd.%2C%20%C5%9Ei%C5%9Fli%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str" 
+                width="100%" 
+                height="100%" 
+                style="border:0; filter: invert(90%) hue-rotate(180deg) contrast(1.1) brightness(0.8);" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+              <div class="map-floating-overlay glass-panel">
+                <span class="map-badge">📍 Keskin Lounge</span>
+                <span class="map-sub">Nişantaşı, İstanbul</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-wrapper">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-circle">
+            <img src="assets/images/logo.jpg" alt="Keskin Logo" class="brand-img">
+            <span class="neon-ring"></span>
+          </div>
+          <span class="brand-name">KESKİN</span>
+          <span class="brand-sub">Lüks Erkek Kuaförü & Grooming Lounge</span>
+          <p class="footer-tagline">Sanat, hassasiyet ve fütüristik zarafetin buluşma noktası.</p>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-col-title">Hızlı Bağlantılar</h4>
+          <ul>
+            <li><a href="#hero">Ana Sayfa</a></li>
+            <li><a href="#hizmetler">Hizmetlerimiz</a></li>
+            <li><a href="#fiyatlar">Fiyat Listesi</a></li>
+            <li><a href="#ekip">Usta Berberler</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-col-title">Özel Hizmetler</h4>
+          <ul>
+            <li><a href="#hizmetler">Damat Tıraşı Protokolü</a></li>
+            <li><a href="#hizmetler">Keratin & Saç Botoksu</a></li>
+            <li><a href="#hizmetler">Buharlı Sakal Spa</a></li>
+            <li><a href="#hizmetler">Yüz Formu Analizi</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-group">
+          <h4 class="footer-col-title">Sosyal Medya & İletişim</h4>
+          <div class="social-icons-row">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://wa.me/905550123456" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+              </svg>
+            </a>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Harita">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </a>
+          </div>
+          <button type="button" class="btn btn-footer-book open-booking-trigger">
+            <span>Online Randevu Al</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year">2026</span> Keskin Erkek Kuaförü. Tüm Hakları Saklıdır.</p>
+        <p class="footer-credit">Designed with Futuristic Glassmorphism & Neon Precision.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK-ACTION BUTTONS -->
+  <div class="floating-actions-container" aria-label="Hızlı İşlemler">
+    <!-- WhatsApp Floating Action -->
+    <a href="https://wa.me/905550123456?text=Merhaba,%20Keskin%20Erkek%20Kuaförü'nden%20randevu%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="floating-btn floating-whatsapp" aria-label="WhatsApp Canlı Destek">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+      </svg>
+      <span class="floating-tooltip">WhatsApp İle Yaz</span>
+    </a>
+
+    <!-- Floating Quick Booking -->
+    <button type="button" class="floating-btn floating-booking open-booking-trigger" aria-label="Hızlı Randevu">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span class="floating-tooltip">Hızlı Randevu</span>
+    </button>
+
+    <!-- Back to top button -->
+    <button type="button" class="floating-btn floating-top" id="back-to-top-btn" aria-label="Yukarı Çık">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- INTERACTIVE BOOKING MODAL (DIALOG) -->
+  <dialog id="booking-modal" class="booking-dialog glass-panel" aria-labelledby="modal-title">
+    <div class="dialog-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div class="modal-pill-tag">KESKİN ONLİNE RANDEVU</div>
+          <h2 id="modal-title" class="modal-title">Koltuğunuzu Ayırtın</h2>
+        </div>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Kapat">
+          ✕
+        </button>
+      </div>
+
+      <!-- Step Indicator -->
+      <div class="modal-steps-indicator">
+        <div class="step-node active" data-step="1">
+          <span class="step-num">1</span>
+          <span class="step-name">Hizmet</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node" data-step="2">
+          <span class="step-num">2</span>
+          <span class="step-name">Berber</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node" data-step="3">
+          <span class="step-num">3</span>
+          <span class="step-name">Zaman</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node" data-step="4">
+          <span class="step-num">4</span>
+          <span class="step-name">Bilgiler</span>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <form id="appointment-form" novalidate>
+        <!-- STEP 1: SERVICE SELECTION -->
+        <div class="form-step step-1 active" id="step-1-content">
+          <h3 class="step-heading">Hizmet Seçimi (Birden fazla seçebilirsiniz)</h3>
+          <div class="booking-services-list" id="booking-services-list">
+            <!-- Dynamically populated or static selectable cards -->
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="hair-cut" data-name="Keskin Signature Saç Kesimi" data-price="550" data-duration="45 dk" checked>
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">Keskin Signature Saç Kesimi</span>
+                <span class="service-item-meta">45 dk • Yıkama & Styling Dahil</span>
+              </div>
+              <span class="service-item-price">₺ 550</span>
+            </label>
+
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="beard-sculpt" data-name="Usta Sakal Tasarımı & Sıcak Havlu" data-price="400" data-duration="35 dk">
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">Usta Sakal Tasarımı & Sıcak Havlu</span>
+                <span class="service-item-meta">35 dk • Buhar & Ustura Hat Çizimi</span>
+              </div>
+              <span class="service-item-price">₺ 400</span>
+            </label>
+
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="combo-cut-beard" data-name="Keskin Kombo: Saç + Sakal Tasarımı" data-price="850" data-duration="65 dk">
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">Keskin Kombo (Saç + Sakal Tasarımı)</span>
+                <span class="service-item-meta">65 dk • Tam Stil Paketi</span>
+              </div>
+              <span class="service-item-price">₺ 850</span>
+            </label>
+
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="vip-black-gold" data-name="VIP Keskin Gold Executive Bakım" data-price="1500" data-duration="90 dk">
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">VIP Keskin Gold Executive Bakım</span>
+                <span class="service-item-meta">90 dk • Saç + Sakal + Cilt Maskesi + Masaj</span>
+              </div>
+              <span class="service-item-price">₺ 1.500</span>
+            </label>
+
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="skin-detox" data-name="Detoks Cilt Bakımı & Gözenek Maskesi" data-price="450" data-duration="30 dk">
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">Detoks Cilt Bakımı & Gözenek Maskesi</span>
+                <span class="service-item-meta">30 dk • Ozon Buharı & Kil Maskesi</span>
+              </div>
+              <span class="service-item-price">₺ 450</span>
+            </label>
+
+            <label class="booking-service-item">
+              <input type="checkbox" name="services" value="groom-vip" data-name="Damat Tıraşı & Özel Gün VIP Protokolü" data-price="3500" data-duration="120 dk">
+              <div class="service-check-box"></div>
+              <div class="service-item-info">
+                <span class="service-item-title">Damat Tıraşı & Özel Gün VIP Protokolü</span>
+                <span class="service-item-meta">120 dk • Baş Berber & Komple VIP Bakım</span>
+              </div>
+              <span class="service-item-price">₺ 3.500</span>
+            </label>
+          </div>
+
+          <!-- Total Preview -->
+          <div class="booking-summary-bar">
+            <div>
+              <span class="summary-label">Seçilen Hizmetler:</span>
+              <span class="summary-count" id="selected-services-count">1 Hizmet</span>
+            </div>
+            <div class="summary-right">
+              <span class="summary-label">Toplam Tutar:</span>
+              <span class="summary-total-price" id="selected-services-total">₺ 550</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: BARBER SELECTION -->
+        <div class="form-step step-2" id="step-2-content">
+          <h3 class="step-heading">Usta Berberinizi Seçin</h3>
+          <div class="booking-barbers-list">
+            <label class="booking-barber-card">
+              <input type="radio" name="barber" value="any" checked>
+              <div class="barber-radio-box"></div>
+              <div class="barber-avatar-thumb default-avatar">⚡</div>
+              <div class="barber-info">
+                <span class="barber-card-name">Fark Etmez / İlk Müsait Usta</span>
+                <span class="barber-card-role">En hızlı randevu için önerilir</span>
+              </div>
+            </label>
+
+            <label class="booking-barber-card">
+              <input type="radio" name="barber" value="vahit-keskin">
+              <div class="barber-radio-box"></div>
+              <img src="assets/images/barber1.jpg" alt="Vahit Keskin" class="barber-avatar-thumb">
+              <div class="barber-info">
+                <span class="barber-card-name">Vahit Keskin</span>
+                <span class="barber-card-role">Kurucu & Baş Berber (15+ Yıl Ustalık)</span>
+              </div>
+            </label>
+
+            <label class="booking-barber-card">
+              <input type="radio" name="barber" value="murat-kaya">
+              <div class="barber-radio-box"></div>
+              <img src="assets/images/barber2.jpg" alt="Murat Kaya" class="barber-avatar-thumb">
+              <div class="barber-info">
+                <span class="barber-card-name">Murat Kaya</span>
+                <span class="barber-card-role">Kıdemli Berber & Fade Uzmanı</span>
+              </div>
+            </label>
+
+            <label class="booking-barber-card">
+              <input type="radio" name="barber" value="can-demir">
+              <div class="barber-radio-box"></div>
+              <img src="assets/images/barber3.jpg" alt="Can Demir" class="barber-avatar-thumb">
+              <div class="barber-info">
+                <span class="barber-card-name">Can Demir</span>
+                <span class="barber-card-role">Usta Berber & Spa / Cilt Terapisi</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 3: DATE & TIME -->
+        <div class="form-step step-3" id="step-3-content">
+          <h3 class="step-heading">Tarih & Saat Seçimi</h3>
+          
+          <!-- Date Slider / Selection -->
+          <div class="dates-selector-carousel" id="dates-selector-carousel">
+            <!-- Populated via JS for next 7 days -->
+          </div>
+
+          <h4 class="time-slots-heading">Müsait Saat Dilimleri</h4>
+          <div class="time-slots-grid" id="time-slots-grid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- STEP 4: CUSTOMER DETAILS -->
+        <div class="form-step step-4" id="step-4-content">
+          <h3 class="step-heading">İletişim Bilgileriniz</h3>
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="client-name">Adınız Soyadınız *</label>
+              <input type="text" id="client-name" name="client_name" placeholder="Örn: Ahmet Yılmaz" required autocomplete="name">
+              <span class="error-msg" id="name-error">Lütfen adınızı ve soyadınızı girin.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="client-phone">Telefon Numaranız *</label>
+              <input type="tel" id="client-phone" name="client_phone" placeholder="Örn: 0555 123 45 67" required autocomplete="tel">
+              <span class="error-msg" id="phone-error">Lütfen geçerli bir telefon numarası girin.</span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="client-notes">Özel İstek / Not (Opsiyonel)</label>
+              <textarea id="client-notes" name="client_notes" rows="3" placeholder="Örn: Kahve ikramı sade olsun, saçımın üst kısmı uzun kalsın vb."></textarea>
+            </div>
+          </div>
+
+          <!-- Final Review Card -->
+          <div class="appointment-review-card glass-panel" id="appointment-review-box">
+            <h4 class="review-heading">Randevu Özeti</h4>
+            <div class="review-row">
+              <span class="review-label">Hizmet(ler):</span>
+              <span class="review-val" id="review-services">Keskin Signature Saç Kesimi</span>
+            </div>
+            <div class="review-row">
+              <span class="review-label">Usta:</span>
+              <span class="review-val" id="review-barber">İlk Müsait Usta</span>
+            </div>
+            <div class="review-row">
+              <span class="review-label">Tarih & Saat:</span>
+              <span class="review-val" id="review-datetime">Seçilmedi</span>
+            </div>
+            <div class="review-row total-highlight">
+              <span class="review-label">Tahmini Tutar:</span>
+              <span class="review-val text-neon" id="review-price">₺ 550</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: SUCCESS / CONFIRMATION -->
+        <div class="form-step step-5" id="step-5-content">
+          <div class="success-box text-center">
+            <div class="success-icon-animated">✓</div>
+            <h3 class="success-title">Randevunuz Başarıyla Oluşturuldu!</h3>
+            <p class="success-desc">
+              Talebiniz sistemimize kaydedildi. Randevu detaylarınız aşağıdadır. Koltuğunuz sizin için rezerve edilmiştir.
+            </p>
+
+            <div class="confirmed-card glass-panel" id="confirmed-details-card">
+              <!-- Dynamically rendered -->
+            </div>
+
+            <div class="success-actions">
+              <a href="#" id="wa-confirm-btn" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-confirm w-100">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+                </svg>
+                <span>WhatsApp ile Kuaföre Onay Gönder</span>
+              </a>
+
+              <button type="button" class="btn btn-secondary w-100" id="reset-modal-btn">
+                <span>Yeni Randevu Al / Kapat</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer Navigation Buttons -->
+        <div class="modal-footer" id="modal-nav-footer">
+          <button type="button" class="btn btn-modal-back" id="step-back-btn" disabled>
+            ← Geri
+          </button>
+          <button type="button" class="btn btn-neon-glow" id="step-next-btn">
+            İleri →
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- LIGHTBOX IMAGE MODAL -->
+  <dialog id="lightbox-modal" class="lightbox-dialog" aria-label="Görsel Büyütme">
+    <div class="lightbox-wrapper">
+      <button type="button" class="lightbox-close" id="lightbox-close-btn" aria-label="Kapat">✕</button>
+      <img src="" alt="" id="lightbox-img" class="lightbox-full-img">
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </dialog>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

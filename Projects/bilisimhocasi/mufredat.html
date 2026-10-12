@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>2026 MEB Bilişim Teknolojileri & Bilgisayar Bilimi Müfredatı | Uğur Okulları Viranşehir Kampüsü</title>
+  <meta name="description"
+    content="Uğur Okulları Viranşehir Kampüsü 2026 MEB K12 Bilişim Teknolojileri ve Bilgisayar Bilimi Akademik Müfredatı. Ana sınıfından 12. sınıfa kadar 13 seviye tam kapsamlı eğitim programı.">
+  <meta name="keywords"
+    content="MEB Bilişim Müfredatı 2026, Bilgisayar Bilimi, Uğur Okulları Viranşehir, Kodlama, Robotik, Python, Scratch, Tinkercad, Yapay Zeka, Arduino, K12 Bilişim">
+  <meta name="author" content="Uğur Okulları Viranşehir Kampüsü">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="2026 MEB Bilişim Teknolojileri Müfredatı | Uğur Okulları Viranşehir">
+  <meta property="og:description"
+    content="Ana sınıfından 12. sınıfa kadar 13 seviyeli %100 MEB uyumlu Bilişim ve Bilgisayar Bilimi akademik programı.">
+  <meta property="og:image" content="assets/ugurokullariviransehirkampusu.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/ugurokullariviransehirkampusu.jpg">
+  <link rel="apple-touch-icon" href="assets/ugurokullariviransehirkampusu.jpg">
+
+  <!-- Bootstrap 4.3.1 & FontAwesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+  <!-- Color Scheme Meta & Instant Theme Init (Zero FOUC) -->
+  <meta name="color-scheme" content="dark light">
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('ugur_theme_mode') || 'system';
+        var isDark = false;
+        if (mode === 'dark') {
+          isDark = true;
+        } else if (mode === 'light') {
+          isDark = false;
+        } else {
+          isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme-mode', mode);
+
+        /* Language & Direction pre-init (Zero FOUC) */
+        var supported = ['tr', 'en', 'ar'];
+        var rtl = ['ar'];
+        var lang = 'tr';
+        try {
+          var search = window.location.search;
+          if (search) {
+            var m = search.match(/[?&]lang=([a-zA-Z]+)/);
+            if (m && supported.indexOf(m[1].toLowerCase()) !== -1) {
+              lang = m[1].toLowerCase();
+              localStorage.setItem('ugur_site_lang', lang);
+            }
+          }
+        } catch (e) { }
+        if (lang === 'tr') {
+          var storedLang = localStorage.getItem('ugur_site_lang');
+          if (storedLang && supported.indexOf(storedLang) !== -1) {
+            lang = storedLang;
+          } else {
+            var bl = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            for (var i = 0; i < supported.length; i++) {
+              if (bl === supported[i] || bl.indexOf(supported[i] + '-') === 0) { lang = supported[i]; break; }
+            }
+          }
+        }
+        var dir = rtl.indexOf(lang) !== -1 ? 'rtl' : 'ltr';
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', dir);
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="mufredat-body">
+
+  <!-- Top Scroll Progress Indicator -->
+  <div class="scroll-progress-track" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+  </div>
+
+  <!-- ====================================================================
+       TOP NAVIGATION BAR
+       Header visible on every page with logo, brand, nav links, theme toggle,
+       and language flag. Solid glassmorphism background from the very start.
+       NO hero photo underneath!
+       ==================================================================== -->
+  <nav class="navbar navbar-expand-xl fixed-top navbar-dark change-fixed-top mufredat-navbar" id="main-nav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html#cover" data-i18n-aria="nav.brand.label" aria-label="Uğur Okulları Viranşehir Kampüsü">
+        <img src="assets/ugurokullariviransehirkampusu.jpg" alt="Viranşehir Kampüsü Logosu" data-i18n-alt="brand.logo.alt"
+          class="brand-campus-logo-img">
+        <div class="brand-text-col">
+          <span class="brand-name" data-i18n="nav.brand.name">UĞUR OKULLARI</span>
+          <span class="brand-campus-sub" data-i18n="nav.brand.campus">Viranşehir Kampüsü</span>
+        </div>
+      </a>
+
+        <div class="d-flex align-items-center d-xl-none">
+          <button type="button" class="mobile-search-toggle-btn" id="mobile-search-toggle-btn"
+            aria-label="Arama" title="Sitede Ara">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" data-i18n-aria="nav.toggler.label" aria-label="Gezinti Menüsünü Aç/Kapat">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#cover" data-i18n="nav.home">ANA SAYFA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#services" data-i18n="nav.services">HİZMETLER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="mufredat.html" data-i18n="nav.curriculum">MÜFREDAT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#aboutUs" data-i18n="nav.story">HİKAYEMİZ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#team" data-i18n="nav.team">KADRO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact" data-i18n="nav.contact">İLETİŞİM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#location" data-i18n="nav.location">KONUM</a>
+            </li>
+
+            <!-- Desktop Global Search Trigger Pill (Title Bar) -->
+            <li class="nav-item ml-xl-2 d-none d-xl-flex align-items-center">
+              <button type="button" class="nav-search-pill-btn" id="nav-search-trigger-btn" aria-label="Sitede Ara" data-i18n-title="search.aria" title="Sitede Ara (⌘K)">
+                <i class="fas fa-search search-pill-icon"></i>
+                <span class="search-pill-text" data-i18n="search.trigger">Ara...</span>
+                <kbd class="search-pill-kbd">⌘K</kbd>
+              </button>
+            </li>
+
+            <li class="nav-item ml-xl-2 d-none d-xl-block">
+              <div class="nav-actions-group">
+                <!-- Theme Mode Dropdown -->
+                <div class="theme-dropdown-wrapper" id="theme-dropdown-wrapper">
+                  <button type="button" class="nav-icon-action theme-menu-btn" id="theme-menu-btn"
+                    aria-label="Görünüm Modu Seçimi" aria-haspopup="true" aria-expanded="false" title="Görünüm Modu (Açık / Kapalı / Sistem)" data-i18n-title="theme.button.title">
+                    <i class="fas fa-desktop" id="theme-current-icon"></i>
+                  </button>
+                  <div class="theme-dropdown-menu" id="theme-dropdown-menu" role="menu" aria-label="Görünüm Modu Menüsü" data-i18n-aria="theme.menu.aria">
+                    <div class="theme-dropdown-header" data-i18n="theme.title">GÖRÜNÜM MODU</div>
+                    <button type="button" class="theme-dropdown-item" data-theme-choice="light" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-sun theme-icon-sun"></i>
+                        <span data-i18n="theme.light">Açık</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                    <button type="button" class="theme-dropdown-item" data-theme-choice="dark" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-moon theme-icon-moon"></i>
+                        <span data-i18n="theme.dark">Kapalı</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                    <button type="button" class="theme-dropdown-item active" data-theme-choice="system" role="menuitem">
+                      <span class="theme-item-left">
+                        <i class="fas fa-desktop theme-icon-system"></i>
+                        <span data-i18n="theme.system">Sistem</span>
+                      </span>
+                      <i class="fas fa-check theme-check-icon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Language Switcher Dropdown (Flag Icons) -->
+                <div class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
+                  <button type="button" class="nav-icon-action lang-menu-btn" id="lang-menu-btn"
+                    aria-label="Dil Seçimi" aria-haspopup="true" aria-expanded="false" title="Dil Değiştir" data-i18n-title="lang.button.title">
+                    <span class="lang-flag-icon" id="lang-current-flag">🇹🇷</span>
+                  </button>
+                  <div class="lang-dropdown-menu" id="lang-dropdown-menu" role="menu" aria-label="Dil Menüsü" data-i18n-aria="lang.menu.aria">
+                    <div class="lang-dropdown-header" data-i18n="lang.label">DİL</div>
+                    <button type="button" class="lang-dropdown-item active" data-lang-choice="tr" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                    <button type="button" class="lang-dropdown-item" data-lang-choice="en" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇬🇧</span>
+                        <span>English</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                    <button type="button" class="lang-dropdown-item" data-lang-choice="ar" role="menuitem">
+                      <span class="lang-item-left">
+                        <span class="lang-item-flag">🇸🇦</span>
+                        <span>العربية</span>
+                      </span>
+                      <i class="fas fa-check lang-check-icon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Share Page Button -->
+                <button type="button" class="nav-icon-action" id="share-page-btn" aria-label="Sayfayı Paylaş" data-i18n-aria="nav.share.aria"
+                  title="Müfredat Sayfasını Paylaş" data-i18n-title="nav.share.title">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Mobile Menu Search Box (inside drawer) -->
+          <div class="mobile-search-section d-xl-none">
+            <div class="global-search-box mobile-search-box">
+              <i class="fas fa-search global-search-icon"></i>
+              <input type="text" class="global-search-input" id="global-search-mobile-input"
+                placeholder="Müfredat, Arduino, konu ara..." data-i18n="search.placeholder" autocomplete="off" spellcheck="false"
+                aria-label="Proje Geneli Arama" data-i18n-aria="search.aria">
+              <button type="button" class="global-search-clear-btn" id="global-search-mobile-clear" aria-label="Temizle" data-i18n-aria="search.clear" style="display:none;">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="global-search-dropdown mobile-search-dropdown" id="mobile-search-dropdown" role="listbox"></div>
+          </div>
+
+          <!-- Mobile Menu Divider -->
+          <div class="mobile-menu-divider d-xl-none"></div>
+
+        <!-- Mobile Theme Switcher Bar (Quick Access) -->
+        <div class="mobile-theme-bar d-xl-none">
+          <span class="mobile-theme-label" data-i18n="theme.title">GÖRÜNÜM MODU</span>
+          <div class="theme-segmented-control">
+            <button type="button" class="theme-segment-btn" data-theme-choice="light">
+              <i class="fas fa-sun mr-1"></i> <span data-i18n="theme.light">Açık</span>
+            </button>
+            <button type="button" class="theme-segment-btn" data-theme-choice="dark">
+              <i class="fas fa-moon mr-1"></i> <span data-i18n="theme.dark">Kapalı</span>
+            </button>
+            <button type="button" class="theme-segment-btn active" data-theme-choice="system">
+              <i class="fas fa-desktop mr-1"></i> <span data-i18n="theme.system">Sistem</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Language Switcher Bar -->
+        <div class="mobile-lang-bar d-xl-none">
+          <span class="mobile-lang-label" data-i18n="lang.label">DİL</span>
+          <div class="lang-segmented-control">
+            <button type="button" class="lang-segment-btn active" data-lang-choice="tr">
+              <span class="lang-segment-flag">🇹🇷</span> Türkçe
+            </button>
+            <button type="button" class="lang-segment-btn" data-lang-choice="en">
+              <span class="lang-segment-flag">🇬🇧</span> English
+            </button>
+            <button type="button" class="lang-segment-btn" data-lang-choice="ar">
+              <span class="lang-segment-flag">🇸🇦</span> العربية
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Share Bar -->
+        <div class="mobile-share-bar d-xl-none">
+          <button type="button" class="mobile-share-btn" id="mobile-share-page-btn" aria-label="Sayfayı Paylaş">
+            <i class="fas fa-share-alt mr-2"></i>
+            <span data-i18n="nav.share">Sayfayı Paylaş</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <!-- Topbar Slide-Down Search Flyout (Opens below topbar on click / shortcut) -->
+      <div class="topbar-search-flyout" id="topbar-search-flyout" aria-hidden="true">
+        <div class="topbar-search-container">
+          <div class="topbar-search-inner">
+            <div class="topbar-search-input-box">
+              <i class="fas fa-search topbar-search-icon"></i>
+              <input type="text" class="topbar-search-input" id="global-search-flyout-input"
+                placeholder="Müfredat, Arduino, sınıf veya konu ara..." data-i18n="search.placeholder" autocomplete="off" spellcheck="false"
+                aria-label="Proje Geneli Arama" data-i18n-aria="search.aria">
+              <button type="button" class="topbar-search-clear-btn" id="global-search-flyout-clear" aria-label="Temizle" data-i18n-aria="search.clear" style="display:none;">
+                <i class="fas fa-times"></i>
+              </button>
+              <button type="button" class="topbar-search-close-btn" id="global-search-flyout-close" aria-label="Kapat" data-i18n-aria="search.close">
+                <kbd class="flyout-close-kbd">ESC</kbd>
+                <span class="flyout-close-text" data-i18n="search.cancel">Vazgeç</span>
+              </button>
+            </div>
+            <!-- Scrollable Search Results Dropdown (Top 3 visible, scroll for rest) -->
+            <div class="global-search-dropdown flyout-search-dropdown" id="flyout-search-dropdown" role="listbox"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Topbar Search Backdrop Overlay -->
+    <div class="topbar-search-backdrop" id="topbar-search-backdrop"></div>
+
+  <!-- ====================================================================
+       PAGE HERO / HEADER SECTION (PURE GLASSMORPHISM, NO COVER PHOTO)
+       ==================================================================== -->
+  <header class="mufredat-hero-section">
+    <div class="container">
+      <div class="mufredat-hero-card">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Sayfa Yolu" data-i18n-aria="mufredat.breadcrumb.aria" class="mufredat-breadcrumb">
+          <a href="index.html#cover"><i class="fas fa-home mr-1"></i> <span data-i18n="mufredat.breadcrumb.home">Ana Sayfa</span></a>
+          <span class="separator">/</span>
+          <a href="index.html#portfolio" data-i18n="mufredat.breadcrumb.stages">Müfredat ve Kademelerimiz</a>
+          <span class="separator">/</span>
+          <span id="breadcrumb-category">K12</span>
+          <span class="separator">/</span>
+          <span id="breadcrumb-grade" style="color: var(--primary-gold); font-weight: 700;">Ana Sınıfı</span>
+        </nav>
+
+        <!-- Official MEB Badge -->
+        <div>
+          <span class="mufredat-meb-badge">
+            <i class="fas fa-award mr-1"></i> <span data-i18n="mufredat.badge.meb">T.C. Millî Eğitim Bakanlığı 2026 Müfredatı ile %100 Uyumlu</span>
+          </span>
+        </div>
+
+        <h1 class="mufredat-page-title" data-i18n="mufredat.title">
+          K12 Bilişim Teknolojileri ve Bilgisayar Bilimi Müfredatı
+        </h1>
+
+        <p class="mufredat-page-subtitle" data-i18n="mufredat.subtitle">
+          Ana sınıfından 12. sınıfa kadar her yaş grubuna ve pedagojik bilişsel gelişim düzeyine özel hazırlanmış 13 kademeli tam kapsamlı eğitim yolculuğu.
+        </p>
+
+        <!-- Stats Chips Bar -->
+        <div class="mufredat-stats-bar">
+          <span class="mufredat-stat-pill">
+            <i class="fas fa-graduation-cap mr-1"></i> <span data-i18n="mufredat.stat.levels">13 Ayrı Sınıf Düzeyi (K12)</span>
+          </span>
+          <span class="mufredat-stat-pill">
+            <i class="fas fa-layer-group mr-1"></i> <span data-i18n="mufredat.stat.stages">4 Temel Eğitim Kademesi</span>
+          </span>
+          <span class="mufredat-stat-pill">
+            <i class="fas fa-check-circle mr-1"></i> <span data-i18n="mufredat.stat.standards">%100 MEB Kazanım Standartları</span>
+          </span>
+          <span class="mufredat-stat-pill">
+            <i class="fas fa-laptop-code mr-1"></i> <span data-i18n="mufredat.stat.projects">Uygulamalı Atölye & Proje Odaklı</span>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       STAGE TABS & GRADE QUICK SELECTOR
+       ==================================================================== -->
+  <section class="container">
+    
+    <!-- Stage Filter Tabs (Okul Öncesi, İlkokul, Ortaokul, Lise) -->
+    <div class="mufredat-stages-nav">
+      <div class="stage-tab-buttons" role="tablist">
+        <button type="button" class="stage-tab-btn active" data-filter="all" role="tab">
+          <i class="fas fa-th-large mr-1"></i> <span data-i18n="mufredat.filter.all">Tüm Sınıflar (13)</span>
+        </button>
+        <button type="button" class="stage-tab-btn" data-filter="okuloncesi" role="tab">
+          <i class="fas fa-shapes mr-1"></i> <span data-i18n="mufredat.filter.preschool">Okul Öncesi (4-5 Yaş)</span>
+        </button>
+        <button type="button" class="stage-tab-btn" data-filter="ilkokul" role="tab">
+          <i class="fas fa-cubes mr-1"></i> <span data-i18n="mufredat.filter.primary">İlkokul (1 - 4. Sınıf)</span>
+        </button>
+        <button type="button" class="stage-tab-btn" data-filter="ortaokul" role="tab">
+          <i class="fas fa-robot mr-1"></i> <span data-i18n="mufredat.filter.middle">Ortaokul (5 - 8. Sınıf)</span>
+        </button>
+        <button type="button" class="stage-tab-btn" data-filter="lise" role="tab">
+          <i class="fas fa-code mr-1"></i> <span data-i18n="mufredat.filter.high">Lise (9 - 12. Sınıf)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 13 Grade Pills Selector -->
+    <div class="grade-pills-container">
+      <div class="grade-pills-label-row">
+        <span><i class="fas fa-mouse-pointer mr-1"></i> <span data-i18n="mufredat.quickselect.label">Sınıf Seçin (Hızlı Geçiş & Özel Görünüm):</span></span>
+        <span data-i18n="mufredat.quickselect.count">13 Seviye</span>
+      </div>
+      <div class="grade-pills-list" id="grade-pills-list">
+        <!-- Rendered dynamically by js/mufredat.js -->
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================
+       ACTIVE GRADE SHOWCASE (DYNAMICALLY RENDERED FOR EACH GRADE)
+       ==================================================================== -->
+  <main class="container" id="active-grade-container">
+    <!-- Rendered dynamically by js/mufredat.js -->
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only" data-i18n="mufredat.loading">Müfredat yükleniyor...</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       ALL 13 GRADES CONTINUUM OVERVIEW GRID
+       ==================================================================== -->
+  <section class="all-grades-overview-section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h3 data-i18n="mufredat.overview.title" style="font-family: var(--font-heading); font-weight: 800; color: var(--text-heading); font-size: 1.6rem;">
+          Ana Sınıfından Liseye Bilişim Merdiveni
+        </h3>
+        <p data-i18n="mufredat.overview.desc" style="font-family: var(--font-serif); font-style: italic; color: var(--text-muted); font-size: 14.5px;">
+          Tüm kademelerimizi ve yaş gruplarımızı tek bakışta inceleyin, istediğiniz sınıfa anında geçin.
+        </p>
+      </div>
+
+      <div class="overview-grades-grid" id="overview-grades-grid">
+        <!-- Rendered dynamically by js/mufredat.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       CAMPUS STAGES & LOCATION CONTACT STRIP
+       ==================================================================== -->
+  <div class="container my-4">
+    <div class="p-4" style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; text-align: center;">
+      <div class="footer-stages-row mb-2" data-i18n="mufredat.stages.strip" style="font-size: 14px; font-weight: 800; color: var(--primary-gold);">
+        • Okul Öncesi • İlkokul • Ortaokul • Anadolu Lisesi • Fen Lisesi
+      </div>
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+        <a href="tel:05449694919" class="btn btn-outline-golden mr-3" style="font-size: 13px; font-weight: 700; border-radius: 20px; padding: 6px 18px;">
+          <i class="fas fa-phone-alt mr-1"></i> 0544 969 49 19
+        </a>
+        <a href="https://maps.app.goo.gl/Jp2G4GuSFVjhdQAs8" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 13px; font-weight: 700; border-radius: 20px; padding: 6px 18px;">
+          <i class="fas fa-map-marker-alt mr-1"></i> <span data-i18n="mufredat.maps.link">Uğur Okulları Viranşehir Kampüsü (Google Haritalar)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       FOOTER SECTION
+       ==================================================================== -->
+  <footer id="footer" style="background: var(--footer-bg); padding: 30px 0; border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center text-md-left">
+          <p style="color: var(--text-muted); font-size: 13px; margin: 0;">
+            &copy; <span id="current-year-mufredat"></span> <span data-i18n="footer.copyright">Uğur Okulları Viranşehir Kampüsü</span>
+          </p>
+        </div>
+        <div class="col-md-4 text-center my-2 my-md-0">
+          <span data-i18n="mufredat.footer.lab" style="font-family: var(--font-heading); font-size: 12.5px; font-weight: 700; color: var(--primary-gold);">
+            Bilişim Teknolojileri ve İnovasyon Laboratuvarı
+          </span>
+        </div>
+        <div class="col-md-4 text-center text-md-right">
+          <a href="index.html#cover" style="color: var(--text-muted); font-size: 13px; text-decoration: none;">
+            <i class="fas fa-arrow-up mr-1"></i> <span data-i18n="mufredat.footer.backtotop">Başa Dön</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       PROJECT LIGHTBOX MODAL
+       Full-resolution viewing of student capstone projects
+       ==================================================================== -->
+  <div class="project-modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <div class="project-modal-card">
+      <button type="button" class="modal-close-btn" id="project-modal-close-btn" data-i18n-aria="mufredat.modal.close" aria-label="Kapat">
+        <i class="fas fa-times"></i>
+      </button>
+      <img src="" alt="" class="project-modal-img" id="project-modal-img">
+      <h3 class="project-modal-title" id="project-modal-title" data-i18n="mufredat.modal.title">Proje Başlığı</h3>
+      <p class="project-modal-desc" id="project-modal-desc" data-i18n="mufredat.modal.desc">Proje Açıklaması</p>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       FRITZING CIRCUIT LIGHTBOX MODAL
+       High-resolution full-screen diagram inspection
+       ==================================================================== -->
+  <div class="circuit-lightbox-modal" id="circuit-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fritzing Devre Şeması Tam Ekran">
+    <div class="circuit-lightbox-content">
+      <button type="button" class="circuit-lightbox-close" id="circuit-lightbox-close-btn" aria-label="Kapat">
+        <i class="fas fa-times"></i>
+      </button>
+      <img src="" alt="Fritzing Devre Şeması" class="circuit-lightbox-img" id="circuit-lightbox-img">
+    </div>
+  </div>
+
+  <!-- Scripts: jQuery, Popper, Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- i18n Translations System -->
+  <script src="js/i18n.js"></script>
+
+  <!-- 2026 MEB K12 Curriculum Dataset -->
+  <script src="js/curriculum-data.js"></script>
+
+  <!-- K-12 Arduino Projeleri & Donanım Veritabanı -->
+  <script src="js/arduino-curriculum-data.js"></script>
+
+  <!-- Dedicated Full-Page Curriculum Controller -->
+  <script src="js/mufredat.js"></script>
+
+  <!-- Global Site-Wide Search Controller -->
+  <script src="js/global-search.js"></script>
+
+  <!-- Theme & Language Controller Sync -->
+  <script>
+    (function () {
+      // Theme Controller sync for mufredat.html
+      class ThemeController {
+        constructor() {
+          this.STORAGE_KEY = 'ugur_theme_mode';
+          this.currentMode = localStorage.getItem(this.STORAGE_KEY) || 'system';
+          this.mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+          this.menuBtn = document.getElementById('theme-menu-btn');
+          this.dropdown = document.getElementById('theme-dropdown-menu');
+          this.activeIcon = document.getElementById('theme-current-icon');
+          this.choiceButtons = document.querySelectorAll('[data-theme-choice]');
+          this.init();
+        }
+
+        init() {
+          this.applyTheme(this.currentMode);
+          if (this.mediaQuery && this.mediaQuery.addEventListener) {
+            this.mediaQuery.addEventListener('change', () => {
+              if (this.currentMode === 'system') this.applyTheme('system');
+            });
+          }
+          if (this.menuBtn && this.dropdown) {
+            this.menuBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const isOpen = this.dropdown.classList.contains('show');
+              this.toggleDropdown(!isOpen);
+            });
+            document.addEventListener('click', (e) => {
+              if (this.dropdown && !this.dropdown.contains(e.target) && e.target !== this.menuBtn) {
+                this.toggleDropdown(false);
+              }
+            });
+            document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape') this.toggleDropdown(false);
+            });
+          }
+          this.choiceButtons.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const choice = btn.getAttribute('data-theme-choice');
+              if (choice) {
+                this.setTheme(choice);
+                this.toggleDropdown(false);
+              }
+            });
+          });
+        }
+
+        toggleDropdown(show) {
+          if (!this.dropdown) return;
+          if (show) {
+            this.dropdown.classList.add('show');
+            if (this.menuBtn) this.menuBtn.setAttribute('aria-expanded', 'true');
+          } else {
+            this.dropdown.classList.remove('show');
+            if (this.menuBtn) this.menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        setTheme(mode) {
+          this.currentMode = mode;
+          localStorage.setItem(this.STORAGE_KEY, mode);
+          this.applyTheme(mode);
+        }
+
+        applyTheme(mode) {
+          let isDark = false;
+          if (mode === 'dark') isDark = true;
+          else if (mode === 'light') isDark = false;
+          else isDark = this.mediaQuery ? this.mediaQuery.matches : false;
+
+          document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme-mode', mode);
+
+          if (this.activeIcon) {
+            if (mode === 'light') {
+              this.activeIcon.className = 'fas fa-sun';
+              if (this.menuBtn) this.menuBtn.title = 'Tema: Açık Mod';
+            } else if (mode === 'dark') {
+              this.activeIcon.className = 'fas fa-moon';
+              if (this.menuBtn) this.menuBtn.title = 'Tema: Kapalı Mod';
+            } else {
+              this.activeIcon.className = 'fas fa-desktop';
+              if (this.menuBtn) this.menuBtn.title = 'Tema: Sistem Modu (Otomatik)';
+            }
+          }
+
+          this.choiceButtons.forEach((btn) => {
+            if (btn.getAttribute('data-theme-choice') === mode) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      new ThemeController();
+
+      // Share page button
+      const shareBtn = document.getElementById('share-page-btn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+          const shareText = (window.I18N && typeof window.I18N.t === 'function')
+            ? window.I18N.t('mufredat.meta.description')
+            : 'Uğur Okulları Viranşehir Kampüsü K12 Bilişim Teknolojileri ve Bilgisayar Bilimi Müfredatı';
+          const shareData = {
+            title: document.title,
+            text: shareText,
+            url: window.location.href
+          };
+          if (navigator.share) {
+            try { await navigator.share(shareData); } catch (e) { }
+          } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+              const old = shareBtn.innerHTML;
+              shareBtn.innerHTML = '<i class="fas fa-check text-success"></i>';
+              setTimeout(() => { shareBtn.innerHTML = old; }, 2000);
+            });
+          }
+        });
+      }
+      // Dynamic Year for Copyright
+      const yearSpan = document.getElementById('current-year-mufredat');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    })();
+  </script>
+</body>
+
+</html>
