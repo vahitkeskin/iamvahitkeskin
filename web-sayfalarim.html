@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Sayfalarım • Vahit Keskin</title>
+  <meta name="description" content="Vahit Keskin tarafından geliştirilen web sayfaları ve projeleri" />
+  <link rel="icon" type="image/jpeg" href="images/image.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+  <style>
+    /* ── Web Pages Card Styles ─────────────────────────────── */
+    .web-card {
+      background: var(--bg-glass);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+      position: relative;
+    }
+    .web-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      border-color: var(--brand);
+    }
+
+    /* Iframe Preview Container */
+    .web-card-preview {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border);
+    }
+    .web-card-preview::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      background: linear-gradient(180deg, hsla(228, 28%, 6%, 0.8) 0%, transparent 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    /* Browser-like top bar */
+    .preview-browser-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 6px;
+      z-index: 4;
+      background: hsla(228, 28%, 10%, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .light .preview-browser-bar {
+      background: hsla(220, 20%, 96%, 0.9);
+    }
+    .browser-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .browser-dot.red { background: #ff5f57; }
+    .browser-dot.yellow { background: #febc2e; }
+    .browser-dot.green { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      margin-left: 12px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: hsla(220, 20%, 20%, 0.4);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-family: 'Inter', monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .light .browser-url {
+      background: hsla(220, 20%, 88%, 0.6);
+    }
+
+    .web-card-preview iframe {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+      position: absolute;
+      top: 36px;
+      left: 0;
+    }
+
+    /* Overlay shimmer on preview */
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      transition: background 0.35s var(--ease);
+    }
+    .preview-overlay:hover {
+      background: hsla(250, 82%, 60%, 0.08);
+    }
+    .preview-overlay .preview-expand-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--r-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--brand);
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease-spring);
+      box-shadow: 0 4px 20px var(--brand-glow);
+    }
+    .preview-overlay:hover .preview-expand-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Card Body */
+    .web-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .web-card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .web-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: white;
+      box-shadow: 0 4px 16px var(--brand-glow);
+    }
+    .web-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .web-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .web-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .web-card-tag {
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--r-full);
+      font-size: 0.72rem;
+      font-weight: 500;
+      background: var(--surface);
+      color: var(--brand-light);
+      border: 1px solid var(--border);
+    }
+    .web-card-actions {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+    .web-card-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+    }
+
+    /* Fullscreen preview modal */
+    .preview-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: hsla(228, 28%, 3%, 0.92);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s var(--ease), visibility 0.4s;
+    }
+    .preview-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .preview-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: hsla(228, 28%, 8%, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
+    .preview-modal-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .preview-modal-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .preview-modal-btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: inherit;
+    }
+    .preview-modal-btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--brand);
+    }
+    .preview-modal-btn.close-btn {
+      background: hsla(0, 70%, 55%, 0.15);
+      border-color: hsla(0, 70%, 55%, 0.3);
+      color: hsl(0, 70%, 65%);
+    }
+    .preview-modal-btn.close-btn:hover {
+      background: hsla(0, 70%, 55%, 0.25);
+    }
+    .preview-modal-body {
+      flex: 1;
+      padding: 1rem;
+      overflow: hidden;
+    }
+    .preview-modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: var(--r-md);
+      background: white;
+    }
+
+    /* Responsive for grid */
+    @media (max-width: 768px) {
+      .web-card-preview {
+        height: 220px;
+      }
+      .web-card-actions {
+        flex-direction: column;
+      }
+      .preview-modal-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+    }
+
+    /* Animation for cards */
+    .web-card {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: webCardFadeIn 0.6s var(--ease) forwards;
+    }
+    .web-card:nth-child(1) { animation-delay: 0.1s; }
+    .web-card:nth-child(2) { animation-delay: 0.25s; }
+    .web-card:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes webCardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Number badge on card */
+    .web-card-number {
+      position: absolute;
+      top: 46px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      z-index: 5;
+      box-shadow: 0 2px 10px var(--brand-glow);
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <a href="index.html#home" class="sidebar-item">
+        <i class="fas fa-house"></i>
+        <span data-translate="nav.home">Ana Sayfa</span>
+      </a>
+      <a href="index.html#about" class="sidebar-item">
+        <i class="fas fa-user-tie"></i>
+        <span data-translate="nav.about">Hakkımda</span>
+      </a>
+      <a href="shares.html" class="sidebar-item">
+        <i class="fas fa-bullhorn"></i>
+        <span data-translate="nav.shares">Paylaşımlar</span>
+      </a>
+      <a href="web-sayfalarim.html" class="sidebar-item active">
+        <i class="fas fa-globe"></i>
+        <span data-translate="nav.webpages">Web Sayfalarım</span>
+      </a>
+      <a href="index.html#skills" class="sidebar-item">
+        <i class="fas fa-bolt"></i>
+        <span data-translate="nav.skills">Yetenekler</span>
+      </a>
+      <a href="index.html#experience" class="sidebar-item">
+        <i class="fas fa-briefcase"></i>
+        <span data-translate="nav.experience">Deneyim</span>
+      </a>
+      <a href="index.html#projects" class="sidebar-item">
+        <i class="fas fa-rocket"></i>
+        <span data-translate="nav.projects">Projeler</span>
+      </a>
+      <a href="index.html#contact" class="sidebar-item">
+        <i class="fas fa-paper-plane"></i>
+        <span data-translate="nav.contact">İletişim</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="main-wrapper">
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="container top-header-content">
+        <div class="datetime-weather">
+          <div class="datetime">
+            <i class="fas fa-clock"></i>
+            <span id="current-time">--:--:--</span>
+            <span id="current-date">--/--/----</span>
+          </div>
+          <div class="weather" id="weather-container">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="current-city">Konum alınıyor...</span>
+          </div>
+          <div class="weather" id="weather-info">
+            <span id="weather-icon">🌤️</span>
+            <span id="weather-temp">--°C</span>
+            <span id="weather-desc">Yükleniyor...</span>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="language-switcher" id="language-switcher">
+            <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag" id="language-flag">
+            <span id="language-name">Türkçe</span>
+            <i class="fas fa-chevron-down"></i>
+            <div class="language-dropdown" id="language-dropdown">
+              <div class="language-option" data-lang="tr" data-flag="https://flagcdn.com/tr.svg">
+                <img src="https://flagcdn.com/tr.svg" alt="Türkçe" class="language-flag">
+                <span>Türkçe</span>
+              </div>
+              <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/gb.svg">
+                <img src="https://flagcdn.com/gb.svg" alt="English" class="language-flag">
+                <span>English</span>
+              </div>
+              <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/de.svg">
+                <img src="https://flagcdn.com/de.svg" alt="Deutsch" class="language-flag">
+                <span>Deutsch</span>
+              </div>
+              <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/fr.svg">
+                <img src="https://flagcdn.com/fr.svg" alt="Français" class="language-flag">
+                <span>Français</span>
+              </div>
+              <div class="language-option" data-lang="ru" data-flag="https://flagcdn.com/ru.svg">
+                <img src="https://flagcdn.com/ru.svg" alt="Русский" class="language-flag">
+                <span>Русский</span>
+              </div>
+            </div>
+          </div>
+          <div class="theme-switcher" id="theme-switcher">
+            <i class="fas fa-moon" id="theme-icon"></i>
+            <span id="theme-text" style="display:none;">Karanlık</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container nav">
+        <a href="index.html#home" class="brand">Vahit Keskin<span class="dot">.</span></a>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html#contact" data-translate="nav.work">Çalışalım</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="web-pages" class="section">
+        <div class="container">
+          <div class="section-header" data-reveal="up">
+            <div class="section-badge"><i class="fas fa-globe"></i> <span data-translate="webpages.badge">Web Sayfalarım</span></div>
+            <h2 class="section-title" data-translate="webpages.title">Web Projelerim 🌐</h2>
+            <p class="section-subtitle" data-translate="webpages.subtitle">Geliştirdiğim web sayfalarını canlı önizleyin ve ziyaret edin.</p>
+          </div>
+
+          <div class="grid grid-3" data-stagger>
+
+            <!-- 1. ErkekKuafor -->
+            <div class="web-card" data-reveal="up">
+              <div class="web-card-preview">
+                <div class="preview-browser-bar">
+                  <span class="browser-dot red"></span>
+                  <span class="browser-dot yellow"></span>
+                  <span class="browser-dot green"></span>
+                  <span class="browser-url">Projects/ErkekKuafor/index.html</span>
+                </div>
+                <div class="web-card-number">1</div>
+                <iframe src="Projects/ErkekKuafor/index.html" loading="lazy" title="Erkek Kuaför Preview" sandbox="allow-same-origin"></iframe>
+                <div class="preview-overlay" onclick="openPreviewModal('Keskin Erkek Kuaförü', 'Projects/ErkekKuafor/index.html')">
+                  <div class="preview-expand-icon"><i class="fas fa-expand"></i></div>
+                </div>
+              </div>
+              <div class="web-card-body">
+                <div class="web-card-title-row">
+                  <div class="web-card-icon">✂️</div>
+                  <div>
+                    <div class="web-card-title">Keskin Erkek Kuaförü</div>
+                  </div>
+                </div>
+                <p class="web-card-desc">Lüks erkek bakım ve stil lounge web sitesi. Fütüristik tasarım, online randevu sistemi ve VIP hizmetler.</p>
+                <div class="web-card-tags">
+                  <span class="web-card-tag">HTML</span>
+                  <span class="web-card-tag">CSS</span>
+                  <span class="web-card-tag">JavaScript</span>
+                  <span class="web-card-tag">Responsive</span>
+                </div>
+                <div class="web-card-actions">
+                  <a href="Projects/ErkekKuafor/index.html" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> <span data-translate="webpages.visit">Siteyi Aç</span>
+                  </a>
+                  <button class="btn btn-secondary" onclick="openPreviewModal('Keskin Erkek Kuaförü', 'Projects/ErkekKuafor/index.html')">
+                    <i class="fas fa-eye"></i> <span data-translate="webpages.preview">Önizle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. bilisimhocasi -->
+            <div class="web-card" data-reveal="up">
+              <div class="web-card-preview">
+                <div class="preview-browser-bar">
+                  <span class="browser-dot red"></span>
+                  <span class="browser-dot yellow"></span>
+                  <span class="browser-dot green"></span>
+                  <span class="browser-url">Projects/bilisimhocasi/index.html</span>
+                </div>
+                <div class="web-card-number">2</div>
+                <iframe src="Projects/bilisimhocasi/index.html" loading="lazy" title="Bilişim Hocası Preview" sandbox="allow-same-origin"></iframe>
+                <div class="preview-overlay" onclick="openPreviewModal('Bilişim Teknolojileri Müfredatı', 'Projects/bilisimhocasi/index.html')">
+                  <div class="preview-expand-icon"><i class="fas fa-expand"></i></div>
+                </div>
+              </div>
+              <div class="web-card-body">
+                <div class="web-card-title-row">
+                  <div class="web-card-icon">💻</div>
+                  <div>
+                    <div class="web-card-title">Bilişim Teknolojileri Müfredatı</div>
+                  </div>
+                </div>
+                <p class="web-card-desc">Uğur Okulları Viranşehir Kampüsü K12 Bilişim Teknolojileri platformu. Scratch, Arduino, Python ve AI serüveni.</p>
+                <div class="web-card-tags">
+                  <span class="web-card-tag">HTML</span>
+                  <span class="web-card-tag">CSS</span>
+                  <span class="web-card-tag">JavaScript</span>
+                  <span class="web-card-tag">Eğitim</span>
+                </div>
+                <div class="web-card-actions">
+                  <a href="Projects/bilisimhocasi/index.html" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> <span data-translate="webpages.visit">Siteyi Aç</span>
+                  </a>
+                  <button class="btn btn-secondary" onclick="openPreviewModal('Bilişim Teknolojileri Müfredatı', 'Projects/bilisimhocasi/index.html')">
+                    <i class="fas fa-eye"></i> <span data-translate="webpages.preview">Önizle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. UgurRehber -->
+            <div class="web-card" data-reveal="up">
+              <div class="web-card-preview">
+                <div class="preview-browser-bar">
+                  <span class="browser-dot red"></span>
+                  <span class="browser-dot yellow"></span>
+                  <span class="browser-dot green"></span>
+                  <span class="browser-url">Projects/UgurRehber/index.html</span>
+                </div>
+                <div class="web-card-number">3</div>
+                <iframe src="Projects/UgurRehber/index.html" loading="lazy" title="Uğur Rehber Preview" sandbox="allow-same-origin"></iframe>
+                <div class="preview-overlay" onclick="openPreviewModal('Rehberlik Planı & PDF Oluşturucu', 'Projects/UgurRehber/index.html')">
+                  <div class="preview-expand-icon"><i class="fas fa-expand"></i></div>
+                </div>
+              </div>
+              <div class="web-card-body">
+                <div class="web-card-title-row">
+                  <div class="web-card-icon">📋</div>
+                  <div>
+                    <div class="web-card-title">Rehberlik Planı & PDF Oluşturucu</div>
+                  </div>
+                </div>
+                <p class="web-card-desc">Profesyonel plan hazırlama uygulaması. Özelleştirilebilir tablolar, anlık canlı PDF önizleme ve indirme desteği.</p>
+                <div class="web-card-tags">
+                  <span class="web-card-tag">HTML</span>
+                  <span class="web-card-tag">CSS</span>
+                  <span class="web-card-tag">JavaScript</span>
+                  <span class="web-card-tag">PDF</span>
+                </div>
+                <div class="web-card-actions">
+                  <a href="Projects/UgurRehber/index.html" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> <span data-translate="webpages.visit">Siteyi Aç</span>
+                  </a>
+                  <button class="btn btn-secondary" onclick="openPreviewModal('Rehberlik Planı & PDF Oluşturucu', 'Projects/UgurRehber/index.html')">
+                    <i class="fas fa-eye"></i> <span data-translate="webpages.preview">Önizle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer data-translate="footer.rights">© <span id="year"></span> Vahit Keskin. Tüm hakları saklıdır.</footer>
+  </div>
+
+  <!-- Fullscreen Preview Modal -->
+  <div class="preview-modal" id="previewModal">
+    <div class="preview-modal-header">
+      <div class="preview-modal-title" id="previewModalTitle">Site Önizleme</div>
+      <div class="preview-modal-actions">
+        <a id="previewOpenBtn" href="#" target="_blank" class="preview-modal-btn">
+          <i class="fas fa-external-link-alt"></i> Yeni Sekmede Aç
+        </a>
+        <button class="preview-modal-btn close-btn" onclick="closePreviewModal()">
+          <i class="fas fa-times"></i> Kapat
+        </button>
+      </div>
+    </div>
+    <div class="preview-modal-body">
+      <iframe id="previewModalIframe" src="" title="Fullscreen Preview"></iframe>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="language.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Preview Modal Logic
+    function openPreviewModal(title, url) {
+      const modal = document.getElementById('previewModal');
+      const iframe = document.getElementById('previewModalIframe');
+      const titleEl = document.getElementById('previewModalTitle');
+      const openBtn = document.getElementById('previewOpenBtn');
+
+      titleEl.textContent = title;
+      iframe.src = url;
+      openBtn.href = url;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('previewModal');
+      const iframe = document.getElementById('previewModalIframe');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      // Clear iframe after animation
+      setTimeout(() => { iframe.src = ''; }, 400);
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreviewModal();
+    });
+
+    // Close modal when clicking backdrop
+    document.getElementById('previewModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closePreviewModal();
+    });
+  </script>
+</body>
+</html>
