@@ -1,0 +1,802 @@
+/* ==========================================================================
+   6. SINIF BİLİŞİM TEKNOLOJİLERİ - AKILLI TAHTA SUNUM SİSTEMİ
+   Modern, Sade, Yüksek Okunabilirlik ve Zengin Görsel Tasarım Sistemi
+   ========================================================================== */
+
+:root {
+  /* Renk Paleti - Temel */
+  --bg-main: #0f172a;
+  --bg-slide: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  
+  /* Tema Renkleri */
+  --primary: #2563eb;
+  --primary-light: #dbeafe;
+  --primary-dark: #1d4ed8;
+  --secondary: #0d9488;
+  --secondary-light: #ccfbf1;
+  --accent: #f59e0b;
+  --accent-light: #fef3c7;
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --purple: #8b5cf6;
+  --purple-light: #ede9fe;
+  
+  /* Tipografi */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Gölgeler & Yuvarlatmalar */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+/* Ünite Bazlı Tematik Renk Varyantları */
+body[data-unit="unite-1"] { --primary: #0284c7; --primary-light: #e0f2fe; } /* Bilişim & Hayat */
+body[data-unit="unite-2"] { --primary: #059669; --primary-light: #d1fae5; } /* Tablolama & Ürün Tasarım */
+body[data-unit="unite-2-ses"] { --primary: #d97706; --primary-light: #fef3c7; } /* Ses Düzenleme */
+body[data-unit="unite-2-video"] { --primary: #ea580c; --primary-light: #ffedd5; } /* Video Düzenleme */
+body[data-unit="unite-3"] { --primary: #0284c7; --primary-light: #e0f2fe; } /* Ağlar & İletişim */
+body[data-unit="unite-4"] { --primary: #e11d48; --primary-light: #ffe4e6; } /* Siber Güvenlik & Etik */
+body[data-unit="unite-5"] { --primary: #7c3aed; --primary-light: #ede9fe; } /* Yapay Zekâ */
+body[data-unit="unite-6"] { --primary: #2563eb; --primary-light: #dbeafe; } /* Blok Tabanlı Kodlama */
+
+/* Temel Sıfırlama */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Slayt Sahnesi - 16:9 En-Boy Oranı */
+.deck-container {
+  position: relative;
+  width: 96vw;
+  max-width: 1400px;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-slide);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slayt Yapısı */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2.2rem 3rem 4rem 3rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  background: var(--bg-slide);
+  overflow: hidden;
+}
+
+.slide.active {
+  display: flex;
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+/* Slayt Üst Başlık Bölümü (Header) */
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.8rem;
+}
+
+.header-badges {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.badge-unit {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.badge-week {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid var(--border-color);
+}
+
+.badge-code {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.slide-title-box h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.slide-title-box p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.header-meta {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* Slayt İçerik Alanı */
+.slide-body {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+/* Düzen Varyantları */
+.layout-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.2rem;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.layout-equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.layout-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+}
+
+.layout-cards-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+}
+
+.layout-cards-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+}
+
+/* Kart Tasarımları */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--border-subtle);
+}
+
+.card-primary-border {
+  border-top: 4px solid var(--primary);
+}
+
+.card-accent-border {
+  border-top: 4px solid var(--accent);
+}
+
+.card-success-border {
+  border-top: 4px solid var(--success);
+}
+
+.card-purple-border {
+  border-top: 4px solid var(--purple);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card-title .icon {
+  font-size: 1.3rem;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* Liste Maddeleri */
+.clean-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.clean-list li {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.clean-list li .bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.clean-list li strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+/* Görsel & Diyagram Kutuları */
+.visual-box {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  position: relative;
+}
+
+.visual-box svg {
+  max-width: 100%;
+  max-height: 320px;
+  width: 100%;
+  height: auto;
+}
+
+.visual-caption {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+/* Kapak Slaytı Tasarımı */
+.slide-cover {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 3rem 4rem;
+}
+
+.slide-cover .cover-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  max-width: 850px;
+}
+
+.slide-cover .cover-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  color: #38bdf8;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.slide-cover h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.slide-cover .cover-sub {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin-bottom: 2rem;
+}
+
+.slide-cover .cover-meta {
+  display: flex;
+  gap: 2rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+}
+
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cover-meta-item .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.cover-meta-item .val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+/* Adım Adım Akış (Process Flow) */
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.step-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.step-num {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: var(--primary);
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.step-card h4 {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.step-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Bilgi / İpucu Kutusu (Tip Box) */
+.tip-box {
+  background: #f0fdf4;
+  border-left: 5px solid var(--success);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.tip-box.warning {
+  background: #fffbeb;
+  border-left-color: var(--accent);
+}
+
+.tip-box.danger {
+  background: #fef2f2;
+  border-left-color: var(--danger);
+}
+
+.tip-box .tip-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.tip-box .tip-content {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+/* İnteraktif Mini Sınav / Test */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.quiz-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-q {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-opt {
+  background: #f8fafc;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.quiz-opt:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.quiz-opt.correct {
+  background: #d1fae5 !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+}
+
+.quiz-opt.incorrect {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #991b1b !important;
+}
+
+.quiz-answer {
+  background: #ecfdf5;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  color: #065f46;
+  font-weight: 600;
+  display: none;
+}
+
+.quiz-answer.show {
+  display: block;
+}
+
+/* Alt Gezinme Çubuğu (Navigation HUD) */
+.deck-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 10;
+}
+
+.hud-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hud-home-btn {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: #f1f5f9;
+  transition: all 0.2s;
+}
+
+.hud-home-btn:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
+}
+
+.hud-slide-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-btn {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.hud-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.hud-btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.hud-btn-primary:hover {
+  background: var(--primary-dark);
+  color: #ffffff;
+}
+
+/* Slayt Genel Görünüm Modalı (Slide Overview Grid) */
+.overview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.overview-modal.open {
+  display: flex;
+}
+
+.overview-content {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.overview-thumb {
+  background: #f8fafc;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+}
+
+.overview-thumb:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.overview-thumb.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.thumb-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+.thumb-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Yazdırma & PDF Dışa Aktarma Kuralları (@media print)
+   ========================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+  }
+  
+  .deck-container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  
+  .slide {
+    position: relative !important;
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    height: 100vh !important;
+    padding: 2.5rem 3rem !important;
+    box-sizing: border-box !important;
+  }
+  
+  .deck-hud, .overview-modal {
+    display: none !important;
+  }
+}
