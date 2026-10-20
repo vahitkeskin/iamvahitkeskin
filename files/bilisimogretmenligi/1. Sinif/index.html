@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1. Sınıf Serbest Etkinlikler - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <link rel="stylesheet" href="presentation-styles.css">
+  <style>
+    body {
+      background: #090d16;
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-y: auto;
+      padding: 2.5rem 1.5rem;
+      user-select: auto;
+      display: block;
+      font-family: 'Comfortaa', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .portal-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Portal Hero Header */
+    .portal-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 2px solid rgba(244, 114, 182, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-header::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      background: rgba(244, 114, 182, 0.15);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-badge-teacher {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .hero-badge-fatih {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .portal-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.5px;
+    }
+
+    .portal-desc {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 950px;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    /* Stats Grid */
+    .portal-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .stat-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .stat-val {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #f472b6;
+      line-height: 1;
+    }
+
+    .stat-val.gold { color: #f59e0b; }
+    .stat-val.cyan { color: #38bdf8; }
+    .stat-val.green { color: #10b981; }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    /* Controls Bar */
+    .portal-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      color: #ffffff;
+      outline: none;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      border-color: #f472b6;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.3);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 0.65rem 1.1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .filter-tab:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .filter-tab.active {
+      background: #f472b6;
+      color: #0f172a;
+      border-color: #f472b6;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Week Cards Grid */
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .week-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .week-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(244, 114, 182, 0.5);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(244, 114, 182, 0.15);
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .week-badge {
+      background: rgba(244, 114, 182, 0.15);
+      color: #f472b6;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid rgba(244, 114, 182, 0.35);
+    }
+
+    .week-date {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    .card-subtitle {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-unit {
+      font-size: 0.8rem;
+      color: #fbbf24;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-btn {
+      margin-top: auto;
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(244, 114, 182, 0.05));
+      border: 1px solid rgba(244, 114, 182, 0.3);
+      color: #f472b6;
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .week-card:hover .card-btn {
+      background: #f472b6;
+      color: #0f172a;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Board Keyboard Guide */
+    .fatih-guide {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .guide-keys {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-key-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+
+    .fatih-badge-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="portal-container">
+    <!-- Header -->
+    <header class="portal-header">
+      <div class="hero-badge-row">
+        <span class="hero-badge">⭐ 1. SINIF SERBEST ETKİNLİKLER</span>
+        <span class="hero-badge hero-badge-teacher">👨‍🏫 VAHİT KESKİN</span>
+        <span class="hero-badge hero-badge-fatih">📺 FATİH AKILLI TAHTA UYUMLU</span>
+      </div>
+
+      <h1 class="portal-title">1. Sınıf Serbest Etkinlikler Yıllık İnteraktif Ders Sunumları</h1>
+      <p class="portal-desc">
+        T.C. Millî Eğitim Bakanlığı Türkiye Yüzyılı Maarif Modeli (2026-2027) 1. Sınıf Serbest Etkinlikler dersi yıllık planının 41 haftalık eksiksiz, çocuk dostu görsel illüstrasyonlu, oyunlu ve interaktif slayt kütüphanesi.
+      </p>
+
+      <div class="portal-stats">
+        <div class="stat-card">
+          <span class="stat-val">41</span>
+          <span class="stat-label">Eğitim Haftası</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val gold">164</span>
+          <span class="stat-label">Toplam Ders Saati (4 Saat/Hafta)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val cyan">328</span>
+          <span class="stat-label">İnteraktif Slayt & Atölye</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val green">%100</span>
+          <span class="stat-label">MEB Maarif Modeli Uyumu</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="portal-controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Hafta, etkinlik, oyun veya konu ara (örn: Nasreddin Hoca, Fış Fış Kayıkçı, 23 Nisan)...">
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">Tümü (41 Hafta)</button>
+        <button class="filter-tab" data-filter="term1">1. Dönem (1-19)</button>
+        <button class="filter-tab" data-filter="term2">2. Dönem (20-41)</button>
+        <button class="filter-tab" data-filter="tema-1">Uyum & Oyun</button>
+        <button class="filter-tab" data-filter="tema-2">Estetik & Değerler</button>
+        <button class="filter-tab" data-filter="tema-3">İletişim & Nezaket</button>
+        <button class="filter-tab" data-filter="tema-4">Masal & Mantık</button>
+        <button class="filter-tab" data-filter="tema-5">Milli Bayramlar & Şenlik</button>
+      </div>
+    </div>
+
+    <!-- Weeks Grid -->
+    <div class="weeks-grid" id="weeksGrid"></div>
+
+    <!-- Fatih Guide Footer -->
+    <div class="fatih-guide">
+      <div class="guide-title">
+        <span>💡 Fatih Akıllı Tahta Kısayol Tuşları:</span>
+      </div>
+      <div class="guide-keys">
+        <div class="guide-key-item"><kbd>→</kbd> / <kbd>Space</kbd> Sonraki Slayt</div>
+        <div class="guide-key-item"><kbd>←</kbd> Önceki Slayt</div>
+        <div class="guide-key-item"><kbd>F</kbd> Tam Ekran Modu</div>
+        <div class="guide-key-item"><kbd>O</kbd> Slayt Haritası / Genel Bakış</div>
+        <div class="guide-key-item"><kbd>P</kbd> Yazdır / PDF İndir</div>
+      </div>
+      <div class="fatih-badge-row">
+        <span class="badge badge-accent">📱 Dokunmatik & Kaydırma (Swipe) Destekli</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="curriculum-term1.js"></script>
+  <script src="curriculum-term1-part2.js"></script>
+  <script src="curriculum-term2-part1.js"></script>
+  <script src="curriculum-term2-part2.js"></script>
+  <script src="curriculum-data.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const weeksGrid = document.getElementById('weeksGrid');
+      const searchInput = document.getElementById('searchInput');
+      const filterTabs = document.querySelectorAll('.filter-tab');
+
+      const weeks = window.CURRICULUM_DATA_1 || window.CURRICULUM_DATA || [];
+
+      function renderWeeks(list) {
+        if (!list || list.length === 0) {
+          weeksGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: #94a3b8;">
+              <h3>Aradığınız kriterlere uygun hafta bulunamadı.</h3>
+              <p>Lütfen arama terimini değiştirin veya filtreyi sıfırlayın.</p>
+            </div>
+          `;
+          return;
+        }
+
+        weeksGrid.innerHTML = list.map(w => {
+          const weekPadded = String(w.week).padStart(2, '0');
+          const fileName = `Hafta_${weekPadded}.html`;
+          return `
+            <a href="${fileName}" class="week-card" data-week="${w.week}" data-theme="${w.unitTheme}">
+              <div class="card-top-row">
+                <span class="week-badge">${w.week}. Hafta</span>
+                <span class="week-date">${w.date} (${w.hours})</span>
+              </div>
+              <div class="card-unit">🏷️ ${w.unitBadge}</div>
+              <h3 class="card-title">${w.title}</h3>
+              <p class="card-subtitle">${w.subtitle}</p>
+              <div class="card-btn">
+                <span>Sunumu Başlat</span>
+                <span>➔</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+      }
+
+      renderWeeks(weeks);
+
+      // Search Handler
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filterTabs.forEach(t => t.classList.remove('active'));
+        filterTabs[0].classList.add('active');
+
+        if (!query) {
+          renderWeeks(weeks);
+          return;
+        }
+
+        const filtered = weeks.filter(w => {
+          const matchTitle = (w.title || '').toLowerCase().includes(query);
+          const matchSub = (w.subtitle || '').toLowerCase().includes(query);
+          const matchUnit = (w.unit || '').toLowerCase().includes(query);
+          const matchSkills = (w.targetSkill || '').toLowerCase().includes(query);
+          const matchWeek = String(w.week) === query || `${w.week}. hafta`.includes(query);
+          return matchTitle || matchSub || matchUnit || matchSkills || matchWeek;
+        });
+
+        renderWeeks(filtered);
+      });
+
+      // Filter Handler
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          searchInput.value = '';
+
+          const filter = tab.dataset.filter;
+          if (filter === 'all') {
+            renderWeeks(weeks);
+          } else if (filter === 'term1') {
+            renderWeeks(weeks.filter(w => w.week >= 1 && w.week <= 19));
+          } else if (filter === 'term2') {
+            renderWeeks(weeks.filter(w => w.week >= 20 && w.week <= 41));
+          } else {
+            renderWeeks(weeks.filter(w => w.unitTheme === filter));
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
