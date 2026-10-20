@@ -1,0 +1,246 @@
+/**
+ * 5. Sınıf Bilişim Teknolojileri ve Yazılım - Sunum Motoru (Engine)
+ * Fatih Akıllı Tahta & Dokunmatik Ekran Desteği
+ */
+
+class PresentationDeck {
+  constructor() {
+    this.slides = [];
+    this.currentIndex = 0;
+    this.totalSlides = 0;
+    this.isOverviewOpen = false;
+
+    this.init();
+  }
+
+  init() {
+    this.slides = Array.from(document.querySelectorAll('.slide'));
+    this.totalSlides = this.slides.length;
+
+    if (this.totalSlides === 0) return;
+
+    this.progressBar = document.querySelector('.hud-progress-bar');
+    this.counterEl = document.querySelector('.hud-slide-count');
+    this.prevBtn = document.querySelector('.btn-prev');
+    this.nextBtn = document.querySelector('.btn-next');
+    this.overviewModal = document.querySelector('.overview-modal');
+    this.overviewGrid = document.querySelector('.overview-grid');
+    this.overviewBtn = document.querySelector('.btn-overview');
+    this.closeOverviewBtn = document.querySelector('.btn-close-overview');
+    this.fullscreenBtn = document.querySelector('.btn-fullscreen');
+    this.printBtn = document.querySelector('.btn-print');
+
+    this.bindEvents();
+    this.buildOverviewThumbnails();
+    this.goToSlide(0);
+
+    // Otomatik yazdırma URL kontrolü
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('print') === 'true') {
+      setTimeout(() => window.print(), 800);
+    }
+  }
+
+  bindEvents() {
+    // Klavye Kısayolları
+    document.addEventListener('keydown', (e) => {
+      if (this.isOverviewOpen && e.key === 'Escape') {
+        this.toggleOverview();
+        return;
+      }
+
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ': // Space
+          e.preventDefault();
+          this.nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          this.prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          this.goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          this.goToSlide(this.totalSlides - 1);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          this.toggleFullscreen();
+          break;
+        case 'o':
+        case 'O':
+          e.preventDefault();
+          this.toggleOverview();
+          break;
+        case 'p':
+        case 'P':
+          e.preventDefault();
+          window.print();
+          break;
+      }
+    });
+
+    // Buton Dinleyicileri
+    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prevSlide());
+    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.nextSlide());
+    if (this.overviewBtn) this.overviewBtn.addEventListener('click', () => this.toggleOverview());
+    if (this.closeOverviewBtn) this.closeOverviewBtn.addEventListener('click', () => this.toggleOverview());
+    if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+    if (this.printBtn) this.printBtn.addEventListener('click', () => window.print());
+
+    // Dokunmatik & Akıllı Tahta Swipe
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const deckEl = document.querySelector('.deck-container');
+
+    if (deckEl) {
+      deckEl.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      deckEl.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        // Yatay kaydırma eşiği
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            this.nextSlide();
+          } else {
+            this.prevSlide();
+          }
+        }
+      }, { passive: true });
+    }
+  }
+
+  goToSlide(index) {
+    if (index < 0 || index >= this.totalSlides) return;
+
+    this.slides.forEach((slide, idx) => {
+      slide.classList.remove('active', 'prev-slide');
+      if (idx === index) {
+        slide.classList.add('active');
+      } else if (idx < index) {
+        slide.classList.add('prev-slide');
+      }
+    });
+
+    this.currentIndex = index;
+    this.updateHUD();
+  }
+
+  nextSlide() {
+    if (this.currentIndex < this.totalSlides - 1) {
+      this.goToSlide(this.currentIndex + 1);
+    }
+  }
+
+  prevSlide() {
+    if (this.currentIndex > 0) {
+      this.goToSlide(this.currentIndex - 1);
+    }
+  }
+
+  updateHUD() {
+    if (this.counterEl) {
+      this.counterEl.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
+    }
+
+    if (this.progressBar) {
+      const progress = ((this.currentIndex + 1) / this.totalSlides) * 100;
+      this.progressBar.style.width = `${progress}%`;
+    }
+
+    if (this.prevBtn) {
+      this.prevBtn.disabled = this.currentIndex === 0;
+      this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.4' : '1';
+    }
+
+    if (this.nextBtn) {
+      if (this.currentIndex === this.totalSlides - 1) {
+        this.nextBtn.innerHTML = `Tamamlandı 🎉`;
+        this.nextBtn.classList.remove('hud-btn-primary');
+      } else {
+        this.nextBtn.innerHTML = `Sonraki ▶`;
+        this.nextBtn.classList.add('hud-btn-primary');
+      }
+    }
+
+    // Genel bakıştaki aktif küçük resmi güncelle
+    if (this.overviewGrid) {
+      const thumbs = this.overviewGrid.querySelectorAll('.overview-thumb');
+      thumbs.forEach((thumb, idx) => {
+        if (idx === this.currentIndex) {
+          thumb.classList.add('active');
+        } else {
+          thumb.classList.remove('active');
+        }
+      });
+    }
+  }
+
+  toggleOverview() {
+    this.isOverviewOpen = !this.isOverviewOpen;
+    if (this.overviewModal) {
+      if (this.isOverviewOpen) {
+        this.overviewModal.classList.add('show');
+      } else {
+        this.overviewModal.classList.remove('show');
+      }
+    }
+  }
+
+  buildOverviewThumbnails() {
+    if (!this.overviewGrid) return;
+    this.overviewGrid.innerHTML = '';
+
+    this.slides.forEach((slide, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'overview-thumb';
+      
+      let title = `Slayt ${idx + 1}`;
+      const titleEl = slide.querySelector('.slide-title') || slide.querySelector('.cover-title');
+      if (titleEl) {
+        title = titleEl.textContent;
+      }
+
+      thumb.innerHTML = `
+        <span class="overview-thumb-num">Slayt ${idx + 1}</span>
+        <span class="overview-thumb-title">${title}</span>
+      `;
+
+      thumb.addEventListener('click', () => {
+        this.goToSlide(idx);
+        this.toggleOverview();
+      });
+
+      this.overviewGrid.appendChild(thumb);
+    });
+  }
+
+  toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+}
+
+// Sayfa yüklendiğinde başlat
+window.addEventListener('DOMContentLoaded', () => {
+  window.deck = new PresentationDeck();
+});
