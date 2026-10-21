@@ -880,6 +880,223 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================================================
+   Açık Mod (Light Mode) & Sistem Teması Entegrasyonu
+   ========================================================================== */
+:root[data-theme="light"],
+html[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --accent-cyan: #0284c7;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-accent: rgba(2, 132, 199, 0.3);
+  --shadow-lg: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.15);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-primary: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --bg-card: rgba(255, 255, 255, 0.92);
+    --bg-glass: rgba(255, 255, 255, 0.85);
+    --accent-cyan: #0284c7;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #64748b;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-accent: rgba(2, 132, 199, 0.3);
+    --shadow-lg: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.15);
+    color-scheme: light;
+  }
+
+  :root:not([data-theme="dark"]) body::before,
+  :root:not([data-theme="dark"]) .deck-container::before {
+    opacity: 0.25;
+  }
+
+  :root:not([data-theme="dark"]) .slide {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08);
+  }
+
+  :root:not([data-theme="dark"]) .hud-bar {
+    background: rgba(255, 255, 255, 0.94);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn {
+    background: rgba(15, 23, 42, 0.05);
+    color: #1e293b;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn:hover {
+    background: rgba(15, 23, 42, 0.1);
+    color: #0f172a;
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn-primary {
+    background: #0284c7 !important;
+    color: #ffffff !important;
+    border: none !important;
+  }
+
+  :root:not([data-theme="dark"]) .slide-title,
+  :root:not([data-theme="dark"]) .cover-title,
+  :root:not([data-theme="dark"]) .roadmap-title,
+  :root:not([data-theme="dark"]) .overview-thumb-title,
+  :root:not([data-theme="dark"]) .info-card-highlight h3,
+  :root:not([data-theme="dark"]) .info-card-concept h3 {
+    color: #0f172a !important;
+  }
+
+  :root:not([data-theme="dark"]) .cover-subtitle,
+  :root:not([data-theme="dark"]) .slide-subtitle,
+  :root:not([data-theme="dark"]) .roadmap-desc,
+  :root:not([data-theme="dark"]) .meta-label {
+    color: #475569 !important;
+  }
+
+  :root:not([data-theme="dark"]) .card-roadmap,
+  :root:not([data-theme="dark"]) .info-card-highlight,
+  :root:not([data-theme="dark"]) .info-card-concept,
+  :root:not([data-theme="dark"]) .next-week-card {
+    background: #f8fafc;
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  :root:not([data-theme="dark"]) .overview-modal {
+    background: rgba(248, 250, 252, 0.95);
+  }
+
+  :root:not([data-theme="dark"]) .overview-header h3 {
+    color: #0f172a !important;
+  }
+
+  :root:not([data-theme="dark"]) .overview-thumb {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.1);
+  }
+}
+
+[data-theme="light"] body::before,
+[data-theme="light"] .deck-container::before {
+  opacity: 0.25;
+}
+
+[data-theme="light"] .slide {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hud-bar {
+  background: rgba(255, 255, 255, 0.94);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .hud-btn {
+  background: rgba(15, 23, 42, 0.05);
+  color: #1e293b;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .hud-btn:hover {
+  background: rgba(15, 23, 42, 0.1);
+  color: #0f172a;
+}
+
+[data-theme="light"] .hud-btn-primary {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+[data-theme="light"] .slide-title,
+[data-theme="light"] .cover-title,
+[data-theme="light"] .roadmap-title,
+[data-theme="light"] .overview-thumb-title,
+[data-theme="light"] .info-card-highlight h3,
+[data-theme="light"] .info-card-concept h3 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .cover-subtitle,
+[data-theme="light"] .slide-subtitle,
+[data-theme="light"] .roadmap-desc,
+[data-theme="light"] .meta-label {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .card-roadmap,
+[data-theme="light"] .info-card-highlight,
+[data-theme="light"] .info-card-concept,
+[data-theme="light"] .next-week-card {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .overview-modal {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+[data-theme="light"] .overview-header h3 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .overview-thumb {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+/* Toast Bildirimi */
+.theme-toast {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-25px);
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 0.65rem 1.3rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="light"] .theme-toast {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(2, 132, 199, 0.15);
+}
+
 /* Yazdırma ve PDF Çıktı Optimizasyonu */
 @media print {
   html, body {

@@ -765,6 +765,184 @@ body {
 }
 
 /* ==========================================================================
+   Açık / Kapalı (Dark) Mod & Sistem Teması Entegrasyonu
+   ========================================================================== */
+:root[data-theme="light"],
+html[data-theme="light"] {
+  --bg-main: #f1f5f9;
+  --bg-slide: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  color-scheme: light;
+}
+
+[data-theme="light"] .deck-container {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="dark"],
+html[data-theme="dark"] {
+  --bg-main: #060b13;
+  --bg-slide: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-card-hover: rgba(51, 65, 85, 0.85);
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-light: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.18);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .deck-container {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .deck-hud {
+  background: #0f172a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .hud-btn {
+  background: rgba(30, 41, 59, 0.8);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .hud-btn:hover {
+  background: rgba(51, 65, 85, 0.9);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .hud-btn-primary {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .overview-content {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .overview-header h3 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .overview-thumb {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .thumb-title {
+  color: #f8fafc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-main: #060b13;
+    --bg-slide: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --bg-card-hover: rgba(51, 65, 85, 0.85);
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --text-light: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.18);
+    color-scheme: dark;
+  }
+
+  :root:not([data-theme="light"]) .deck-container {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  :root:not([data-theme="light"]) .deck-hud {
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  :root:not([data-theme="light"]) .hud-btn {
+    background: rgba(30, 41, 59, 0.8);
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  :root:not([data-theme="light"]) .hud-btn:hover {
+    background: rgba(51, 65, 85, 0.9);
+    color: #ffffff;
+  }
+
+  :root:not([data-theme="light"]) .hud-btn-primary {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+  }
+
+  :root:not([data-theme="light"]) .overview-content {
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  :root:not([data-theme="light"]) .overview-header h3 {
+    color: #f8fafc;
+  }
+
+  :root:not([data-theme="light"]) .overview-thumb {
+    background: rgba(30, 41, 59, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :root:not([data-theme="light"]) .thumb-title {
+    color: #f8fafc;
+  }
+}
+
+/* Toast Bildirimi */
+.theme-toast {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-25px);
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 0.65rem 1.3rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(37, 99, 235, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="light"] .theme-toast {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(37, 99, 235, 0.15);
+}
+
+/* ==========================================================================
    Yazdırma & PDF Dışa Aktarma Kuralları (@media print)
    ========================================================================== */
 @media print {

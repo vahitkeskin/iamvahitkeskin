@@ -288,6 +288,10 @@ function buildPresentation(weekNum) {
         <button class="hud-btn btn-prev">◀ Önceki</button>
         <button class="hud-btn hud-btn-primary btn-next">Sonraki ▶</button>
         <button class="hud-btn btn-overview" title="Slayt Listesi (O)">⊞ Genel Bakış</button>
+        <button class="hud-btn btn-theme" id="btnThemeToggle" title="Tema Değiştir (Açık/Koyu/Sistem) [T]">
+          <span class="theme-btn-icon">🖥️</span>
+          <span class="theme-btn-text">Sistem</span>
+        </button>
         <button class="hud-btn btn-fullscreen" title="Tam Ekran (F)">⛶ Tam Ekran</button>
         <button class="hud-btn btn-print" title="Yazdır / PDF Olarak Kaydet (P)">🖨️ PDF</button>
       </div>
@@ -304,6 +308,10 @@ function buildPresentation(weekNum) {
       </div>
     </div>
   `;
+
+  if (window.ThemeManager) {
+    window.ThemeManager.update();
+  }
 }
 
 function getDefaultSvg(title) {
