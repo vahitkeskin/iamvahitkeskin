@@ -977,6 +977,249 @@ body::after {
 }
 
 /* @media print (Yazdırma ve PDF Desteği) */
+/* ==========================================================================
+   AÇIK VE KAPALI MOD (LIGHT & DARK THEMES)
+   Varsayılan Sistem Modu (prefers-color-scheme) & Manuel Geçiş Desteği
+   ========================================================================== */
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-dark: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-hover: rgba(255, 255, 255, 0.98);
+    --text-main: #0f172a;
+    --text-title: #0f172a;
+    --text-muted: #475569;
+    --text-sub: #334155;
+    --border-glass: rgba(15, 23, 42, 0.08);
+    --border-focus: rgba(99, 102, 241, 0.5);
+    --shadow-main: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
+    --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.12);
+    color-scheme: light;
+  }
+
+  :root:not([data-theme="dark"]) body::before {
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  }
+
+  :root:not([data-theme="dark"]) body::after {
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.06) 0%, transparent 70%);
+  }
+
+  :root:not([data-theme="dark"]) .cover-title,
+  :root:not([data-theme="dark"]) .slide-title,
+  :root:not([data-theme="dark"]) .roadmap-card h3,
+  :root:not([data-theme="dark"]) .info-card-title,
+  :root:not([data-theme="dark"]) .card-item-title,
+  :root:not([data-theme="dark"]) .workshop-step-content h4,
+  :root:not([data-theme="dark"]) .summary-card-title,
+  :root:not([data-theme="dark"]) .match-box h4,
+  :root:not([data-theme="dark"]) .meta-value,
+  :root:not([data-theme="dark"]) .overview-title,
+  :root:not([data-theme="dark"]) .quiz-btn,
+  :root:not([data-theme="dark"]) .hud-slide-count {
+    color: #0f172a !important;
+  }
+
+  :root:not([data-theme="dark"]) .cover-curiosity-box {
+    background: rgba(245, 158, 11, 0.12);
+    color: #92400e;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  :root:not([data-theme="dark"]) .homework-box {
+    background: rgba(99, 102, 241, 0.08);
+    color: #1e1b4b !important;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+  }
+
+  :root:not([data-theme="dark"]) .deck-hud {
+    background: rgba(255, 255, 255, 0.92);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn {
+    background: rgba(15, 23, 42, 0.05);
+    color: #1e293b;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn:hover {
+    background: rgba(15, 23, 42, 0.1);
+    color: #0f172a;
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent-coral) 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+  }
+
+  :root:not([data-theme="dark"]) .hud-home-btn {
+    background: rgba(15, 23, 42, 0.05);
+    color: #1e293b;
+  }
+
+  :root:not([data-theme="dark"]) .quiz-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  :root:not([data-theme="dark"]) .overview-content {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  :root:not([data-theme="dark"]) .overview-thumb {
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  :root:not([data-theme="dark"]) .overview-thumb-title {
+    color: #0f172a;
+  }
+}
+
+:root[data-theme="light"],
+html[data-theme="light"] {
+  --bg-dark: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --text-main: #0f172a;
+  --text-title: #0f172a;
+  --text-muted: #475569;
+  --text-sub: #334155;
+  --border-glass: rgba(15, 23, 42, 0.08);
+  --border-focus: rgba(99, 102, 241, 0.5);
+  --shadow-main: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.12);
+  color-scheme: light;
+}
+
+[data-theme="light"] body::before {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="light"] body::after {
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.06) 0%, transparent 70%);
+}
+
+[data-theme="light"] .cover-title,
+[data-theme="light"] .slide-title,
+[data-theme="light"] .roadmap-card h3,
+[data-theme="light"] .info-card-title,
+[data-theme="light"] .card-item-title,
+[data-theme="light"] .workshop-step-content h4,
+[data-theme="light"] .summary-card-title,
+[data-theme="light"] .match-box h4,
+[data-theme="light"] .meta-value,
+[data-theme="light"] .overview-title,
+[data-theme="light"] .quiz-btn,
+[data-theme="light"] .hud-slide-count {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .cover-curiosity-box {
+  background: rgba(245, 158, 11, 0.12);
+  color: #92400e;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="light"] .homework-box {
+  background: rgba(99, 102, 241, 0.08);
+  color: #1e1b4b !important;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="light"] .deck-hud {
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .hud-btn {
+  background: rgba(15, 23, 42, 0.05);
+  color: #1e293b;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .hud-btn:hover {
+  background: rgba(15, 23, 42, 0.1);
+  color: #0f172a;
+}
+
+[data-theme="light"] .hud-btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-coral) 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+[data-theme="light"] .hud-home-btn {
+  background: rgba(15, 23, 42, 0.05);
+  color: #1e293b;
+}
+
+[data-theme="light"] .quiz-btn {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .overview-content {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .overview-thumb {
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .overview-thumb-title {
+  color: #0f172a;
+}
+
+/* Toast Bildirimi */
+.theme-toast {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-25px);
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 0.65rem 1.3rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="light"] .theme-toast {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
 @media print {
   html, body {
     width: 100% !important;
@@ -986,7 +1229,7 @@ body::after {
     color: #000000 !important;
   }
 
-  body::before, body::after, .deck-hud, .overview-modal {
+  body::before, body::after, .deck-hud, .overview-modal, .theme-toast {
     display: none !important;
   }
 
