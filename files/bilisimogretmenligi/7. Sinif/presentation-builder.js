@@ -76,7 +76,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -123,7 +123,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -168,7 +168,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -222,7 +222,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -275,7 +275,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -321,7 +321,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
         </div>
       </div>
@@ -374,7 +374,7 @@ function buildPresentation(weekData) {
         <div class="hud-controls">
           <button class="hud-btn btn-prev">← Geri</button>
           <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+          <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
           <button class="hud-btn hud-btn-primary btn-next" style="display: none;">İleri →</button>
         </div>
       </div>
