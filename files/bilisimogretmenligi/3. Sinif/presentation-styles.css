@@ -1677,8 +1677,6 @@ html[data-theme="light"] {
   border-color: #f59e0b !important;
 }
 
-
-
 /* ==============================================================================
    PROJE GENELİ AÇIK MOD (LIGHT MODE) METİN KONTRAST & GÖRÜNÜRLÜK ENHANCEMENT
    ============================================================================== */
@@ -1687,14 +1685,23 @@ html[data-theme="light"],
 body[data-theme="light"],
 :root[data-theme="light"] {
   --bg-deep: #f8fafc;
+  --bg-primary: #f8fafc;
+  --bg-dark: #f8fafc;
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f1f5f9;
   --bg-card: #ffffff;
   --bg-card-hover: #f1f5f9;
   --bg-glass: rgba(15, 23, 42, 0.04);
   --border-glass: rgba(15, 23, 42, 0.12);
   --border-glass-hover: rgba(2, 132, 199, 0.5);
+  --border-subtle: #e2e8f0;
+  --border-accent: rgba(2, 132, 199, 0.4);
+  --border-highlight: rgba(245, 158, 11, 0.4);
   --text-main: #0f172a;
   --text-muted: #334155;
   --text-dim: #64748b;
+  --text-sub: #475569;
   --text-accent: #0284c7;
   color-scheme: light;
 }
@@ -1704,6 +1711,7 @@ body[data-theme="light"],
 [data-theme="light"] .deck-container,
 [data-theme="light"] .slide {
   color: #0f172a !important;
+  background: #f8fafc !important;
 }
 
 [data-theme="light"] .slide-title,
@@ -1765,6 +1773,24 @@ body[data-theme="light"],
 }
 
 /* 2. Kapak Slaytı & Merak Sorusu */
+[data-theme="light"] .cover-wrapper {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+  color: #0f172a !important;
+}
+[data-theme="light"] .cover-wrapper::before,
+[data-theme="light"] .cover-wrapper::after {
+  display: none !important;
+}
+
+[data-theme="light"] .cover-tag {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 1.5px solid #a7f3d0 !important;
+  font-weight: 800 !important;
+}
+
 [data-theme="light"] .cover-curiosity-box {
   background: #fef3c7 !important;
   border-left: 4px solid #d97706 !important;
@@ -1781,7 +1807,7 @@ body[data-theme="light"],
 }
 
 [data-theme="light"] .cover-meta-item {
-  background: #ffffff !important;
+  background: #f8fafc !important;
   border: 1.5px solid #e2e8f0 !important;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
@@ -1789,17 +1815,63 @@ body[data-theme="light"],
   color: #475569 !important;
   font-weight: 700 !important;
 }
+[data-theme="light"] .meta-value {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
 
-/* 3. Kartlar ve Paneller */
+/* 3. Tüm Kartlar ve Paneller (Açık Modda Beyaz Kart Yüzeyleri) */
 [data-theme="light"] .feature-card,
 [data-theme="light"] .step-card,
 [data-theme="light"] .summary-card,
 [data-theme="light"] .visual-panel,
-[data-theme="light"] .card {
+[data-theme="light"] .visual-box,
+[data-theme="light"] .visual-container,
+[data-theme="light"] .card,
+[data-theme="light"] .card-item,
+[data-theme="light"] .content-card,
+[data-theme="light"] .info-card,
+[data-theme="light"] .info-card-container,
+[data-theme="light"] .roadmap-card,
+[data-theme="light"] .next-week-card,
+[data-theme="light"] .safety-box,
+[data-theme="light"] .myths-box,
+[data-theme="light"] .tips-box,
+[data-theme="light"] .tip-box,
+[data-theme="light"] .workshop-step-card,
+[data-theme="light"] .workshop-container,
+[data-theme="light"] .workshop-wrapper,
+[data-theme="light"] .workshop-step-item,
+[data-theme="light"] .workshop-box,
+[data-theme="light"] .split-layout > div,
+[data-theme="light"] .visual-split-layout > div {
   background: #ffffff !important;
   border: 1.5px solid #e2e8f0 !important;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
   color: #1e293b !important;
+}
+
+[data-theme="light"] .visual-caption {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* SVG İnfografik Şemaları için Açık Mod Renklendirme */
+[data-theme="light"] .visual-box svg rect[fill="#1e293b"],
+[data-theme="light"] .visual-box svg rect[fill="#0f172a"],
+[data-theme="light"] .visual-box svg rect[fill="#065f46"],
+[data-theme="light"] .visual-box svg rect[fill="#070b14"],
+[data-theme="light"] .visual-box svg rect[fill="#0e1526"],
+[data-theme="light"] .visual-box svg rect[fill="#162038"] {
+  fill: #f8fafc !important;
+  stroke: #cbd5e1 !important;
+}
+[data-theme="light"] .visual-box svg text {
+  fill: #0f172a !important;
+}
+[data-theme="light"] .visual-box svg text[fill="#94a3b8"],
+[data-theme="light"] .visual-box svg text[fill="#64748b"] {
+  fill: #475569 !important;
 }
 
 [data-theme="light"] .step-number {
@@ -1828,6 +1900,10 @@ body[data-theme="light"],
 }
 
 /* 5. Rehber ve Doğru Bilinen Yanlışlar */
+[data-theme="light"] .myth-item {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
 [data-theme="light"] .myth-wrong-item,
 [data-theme="light"] [class*="myth-wrong"],
 [data-theme="light"] div[style*="fecdd3"],
@@ -2105,4 +2181,3 @@ body[data-theme="light"],
 [data-theme="light"] .empty-desc {
   color: #475569 !important;
 }
-
