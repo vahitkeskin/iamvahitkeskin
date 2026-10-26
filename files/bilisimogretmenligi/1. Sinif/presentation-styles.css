@@ -758,15 +758,25 @@ html[data-theme="light"] {
   --bg-primary: #f8fafc;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.96);
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-sub: #334155;
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-highlight: rgba(245, 158, 11, 0.45);
+  --text-muted: #334155;
+  --text-sub: #1e293b;
+  --border-subtle: #e2e8f0;
+  --border-highlight: rgba(219, 39, 119, 0.45);
   --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
-  --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.15);
+  --shadow-glow: 0 0 20px rgba(219, 39, 119, 0.15);
   color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .deck-container {
+  background: radial-gradient(circle at 50% 20%, #fdf2f8 0%, #f8fafc 100%) !important;
 }
 
 [data-theme="light"] .slide-title,
@@ -774,38 +784,98 @@ html[data-theme="light"] {
 [data-theme="light"] .step-title,
 [data-theme="light"] .info-card h3,
 [data-theme="light"] .meta-value,
-[data-theme="light"] .quiz-btn,
 [data-theme="light"] .hud-slide-count {
   color: #0f172a !important;
 }
 
+[data-theme="light"] .slide-subtitle,
+[data-theme="light"] .cover-subtitle,
+[data-theme="light"] .step-desc,
+[data-theme="light"] .info-card p,
+[data-theme="light"] .concept-bullets li {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .badge,
+[data-theme="light"] .badge-unit {
+  background: #fce7f3 !important;
+  color: #be185d !important;
+  border: 1.5px solid #fbcfe8 !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .badge-week {
+  background: #ede9fe !important;
+  color: #5b21b6 !important;
+  border: 1.5px solid #ddd6fe !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .info-card,
+[data-theme="light"] .step-card,
+[data-theme="light"] .cover-meta-item,
+[data-theme="light"] .visual-panel {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
 [data-theme="light"] .hud-bar {
-  background: rgba(255, 255, 255, 0.94);
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
 }
 
 [data-theme="light"] .hud-btn {
-  background: rgba(15, 23, 42, 0.05);
-  color: #1e293b;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .hud-btn:hover {
-  background: rgba(15, 23, 42, 0.1);
-  color: #0f172a;
+  background: #e2e8f0 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
 }
 
 [data-theme="light"] .hud-btn-primary {
-  background: var(--primary) !important;
+  background: #db2777 !important;
+  border-color: #be185d !important;
   color: #ffffff !important;
-  border: none !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-btn-primary:hover {
+  background: #be185d !important;
 }
 
 [data-theme="light"] .quiz-btn {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .quiz-btn:hover:not(:disabled) {
+  background: #f1f5f9 !important;
+  border-color: #db2777 !important;
+  color: #be185d !important;
+}
+
+[data-theme="light"] .quiz-btn.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .quiz-btn.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+  font-weight: 700 !important;
 }
 
 /* Toast Bildirimi */

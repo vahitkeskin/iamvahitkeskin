@@ -769,21 +769,154 @@ body {
    ========================================================================== */
 :root[data-theme="light"],
 html[data-theme="light"] {
-  --bg-main: #f1f5f9;
+  --bg-main: #f8fafc;
   --bg-slide: #ffffff;
-  --bg-card: #f8fafc;
+  --bg-card: #ffffff;
   --bg-card-hover: #f1f5f9;
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-light: #64748b;
+  --text-muted: #334155;
+  --text-light: #475569;
   --border-color: #e2e8f0;
   --border-subtle: #cbd5e1;
   color-scheme: light;
 }
 
+[data-theme="light"] body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
 [data-theme="light"] .deck-container {
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1) !important;
+  border: 1.5px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .slide-title,
+[data-theme="light"] .cover-title,
+[data-theme="light"] .card-title,
+[data-theme="light"] .step-title,
+[data-theme="light"] .meta-value,
+[data-theme="light"] .overview-title,
+[data-theme="light"] .thumb-title {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .cover-subtitle,
+[data-theme="light"] .slide-subtitle,
+[data-theme="light"] .card-desc,
+[data-theme="light"] .step-desc,
+[data-theme="light"] .concept-bullets li {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="light"] .meta-label {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .badge,
+[data-theme="light"] .badge-unit {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+  border: 1.5px solid #bfdbfe !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .badge-week {
+  background: #ede9fe !important;
+  color: #5b21b6 !important;
+  border: 1.5px solid #ddd6fe !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .card,
+[data-theme="light"] .step-card,
+[data-theme="light"] .cover-meta-item,
+[data-theme="light"] .visual-panel {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .deck-hud {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .hud-slide-count {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .hud-btn {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-btn:hover {
+  background: #e2e8f0 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .hud-btn-primary {
+  background: #2563eb !important;
+  border-color: #1d4ed8 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-btn-primary:hover {
+  background: #1d4ed8 !important;
+}
+
+[data-theme="light"] .overview-content {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .overview-thumb {
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .overview-thumb:hover {
+  border-color: #2563eb !important;
+}
+
+[data-theme="light"] .quiz-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .quiz-btn:hover:not(:disabled) {
+  background: #f1f5f9 !important;
+  border-color: #2563eb !important;
+  color: #1d4ed8 !important;
+}
+
+[data-theme="light"] .quiz-btn.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .quiz-btn.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+  font-weight: 700 !important;
 }
 
 :root[data-theme="dark"],

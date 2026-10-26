@@ -1410,22 +1410,32 @@ html, body {{
   background: var(--accent-cyan);
 }}
 
-/* Açık Mod Uyumluluğu (Light Mode Overrides) */
+/* Açık Mod Uyumluluğu (Light Mode Overrides - Yüksek Kontrast & Net Okunabilirlik) */
 [data-theme="light"] {{
   --bg-primary: #f8fafc;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --bg-glass: rgba(255, 255, 255, 0.9);
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.96);
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-dim: #64748b;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-accent: rgba({primary_rgb}, 0.5);
+  --text-muted: #334155;
+  --text-dim: #475569;
+  --border-subtle: #e2e8f0;
+  --border-accent: rgba({primary_rgb}, 0.6);
+  color-scheme: light;
+}}
+
+[data-theme="light"] body {{
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}}
+
+[data-theme="light"] .deck-container {{
+  background: radial-gradient(circle at 50% 20%, #eff6ff 0%, #f8fafc 100%) !important;
 }}
 
 [data-theme="light"] .slide-cover {{
-  background: radial-gradient(circle at 50% 30%, #eff6ff 0%, #ffffff 100%);
+  background: radial-gradient(circle at 50% 30%, #f0f9ff 0%, #ffffff 100%) !important;
 }}
 
 [data-theme="light"] .cover-title,
@@ -1450,42 +1460,237 @@ html, body {{
   color: #334155 !important;
 }}
 
+[data-theme="light"] .concept-bullets li strong {{
+  color: #0f172a !important;
+}}
+
+[data-theme="light"] .badge-unit,
+[data-theme="light"] .cover-tag {{
+  background: #ede9fe !important;
+  color: #5b21b6 !important;
+  border: 1.5px solid #c4b5fd !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .badge-week {{
+  background: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1.5px solid #d8b4fe !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .badge-code {{
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1.5px solid #fde68a !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .cover-curiosity-box {{
+  background: #fffbeb !important;
+  color: #92400e !important;
+  border: 1.5px solid #fcd34d !important;
+  font-weight: 600 !important;
+}}
+
+[data-theme="light"] .cover-meta-item {{
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}}
+
+[data-theme="light"] .meta-label {{
+  color: #475569 !important;
+  font-weight: 700 !important;
+}}
+
 [data-theme="light"] .card-roadmap,
 [data-theme="light"] .feature-card,
-[data-theme="light"] .cover-meta-item,
 [data-theme="light"] .info-card-highlight,
 [data-theme="light"] .workshop-step-card,
 [data-theme="light"] .tips-box,
 [data-theme="light"] .summary-card,
 [data-theme="light"] .visual-panel {{
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}}
+
+[data-theme="light"] .roadmap-step {{
+  background: #ede9fe !important;
+  color: #4338ca !important;
+  border: 1px solid #c7d2fe !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .workshop-success-box {{
+  background: #ecfdf5 !important;
+  border: 1.5px solid #a7f3d0 !important;
+}}
+
+[data-theme="light"] .workshop-success-box h3 {{
+  color: #065f46 !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .workshop-success-box p,
+[data-theme="light"] .workshop-success-box li {{
+  color: #047857 !important;
+  font-weight: 500 !important;
+}}
+
+[data-theme="light"] .tips-box.rules {{
+  background: #f0fdf4 !important;
+  border: 1.5px solid #bbf7d0 !important;
+  border-left: 5px solid #10b981 !important;
+}}
+
+[data-theme="light"] .tips-box.rules h3 {{
+  color: #065f46 !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .tips-box.rules li {{
+  color: #166534 !important;
+  font-weight: 500 !important;
+}}
+
+[data-theme="light"] .tips-box.mistakes {{
+  background: #fff1f2 !important;
+  border: 1.5px solid #fecdd3 !important;
+  border-left: 5px solid #ef4444 !important;
+}}
+
+[data-theme="light"] .tips-box.mistakes h3 {{
+  color: #9f1239 !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .tips-box.mistakes li {{
+  color: #881337 !important;
+  font-weight: 500 !important;
 }}
 
 [data-theme="light"] .quiz-btn {{
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.15);
-  color: #0f172a;
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
 }}
 
 [data-theme="light"] .quiz-btn:hover:not(:disabled) {{
-  background: rgba({primary_rgb}, 0.1);
+  background: #f1f5f9 !important;
+  border-color: #4f46e5 !important;
+  color: #4338ca !important;
+}}
+
+[data-theme="light"] .quiz-btn.correct {{
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+  font-weight: 700 !important;
+}}
+
+[data-theme="light"] .quiz-btn.wrong {{
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+  font-weight: 700 !important;
+}}
+
+[data-theme="light"] .quiz-explanation {{
+  background: #eff6ff !important;
+  border: 1.5px solid #bfdbfe !important;
+  color: #1e40af !important;
 }}
 
 [data-theme="light"] .quiz-question-box {{
-  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
+  border: 1.5px solid #cbd5e1 !important;
 }}
 
 [data-theme="light"] .hud-bar {{
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+}}
+
+[data-theme="light"] .hud-slide-count {{
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }}
 
 [data-theme="light"] .hud-btn {{
-  background: #f1f5f9;
-  border-color: rgba(0, 0, 0, 0.12);
-  color: #0f172a;
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}}
+
+[data-theme="light"] .hud-btn:hover {{
+  background: #e2e8f0 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}}
+
+[data-theme="light"] .hud-btn-primary {{
+  background: #4f46e5 !important;
+  border-color: #4338ca !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}}
+
+[data-theme="light"] .hud-btn-primary:hover {{
+  background: #4338ca !important;
+}}
+
+[data-theme="light"] .overview-modal {{
+  background: rgba(248, 250, 252, 0.96) !important;
+}}
+
+[data-theme="light"] .overview-header h3 {{
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .overview-thumb {{
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+}}
+
+[data-theme="light"] .overview-thumb:hover {{
+  border-color: #4f46e5 !important;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15) !important;
+}}
+
+[data-theme="light"] .overview-thumb.active {{
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3) !important;
+}}
+
+[data-theme="light"] .thumb-title {{
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}}
+
+[data-theme="light"] .thumb-num {{
+  color: #4338ca !important;
+  font-weight: 800 !important;
+}}
+
+[data-theme="light"] .btn-close-overview {{
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}}
+
+[data-theme="light"] .theme-toast {{
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12) !important;
 }}
 
 /* Yazdırma Modu */
@@ -2402,76 +2607,228 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }}
 
-    /* Light Mode Overrides for Portal */
+    /* Light Mode Overrides for Portal - Yüksek Kontrast & Net Okunabilirlik */
     [data-theme="light"] body {{
-      background: #f8fafc;
-      color: #0f172a;
+      background: #f8fafc !important;
+      color: #0f172a !important;
     }}
 
     [data-theme="light"] .portal-header {{
-      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
-      border-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05) !important;
+    }}
+
+    [data-theme="light"] .hero-badge {{
+      background: #ede9fe !important;
+      color: #5b21b6 !important;
+      border: 1.5px solid #c4b5fd !important;
+      font-weight: 800 !important;
+    }}
+
+    [data-theme="light"] .hero-badge-teacher {{
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border: 1.5px solid #fde68a !important;
+      font-weight: 800 !important;
+    }}
+
+    [data-theme="light"] .hero-badge-fatih {{
+      background: #e0e7ff !important;
+      color: #3730a3 !important;
+      border: 1.5px solid #c7d2fe !important;
+      font-weight: 800 !important;
     }}
 
     [data-theme="light"] .portal-title {{
-      color: #0f172a;
+      color: #0f172a !important;
+      font-weight: 900 !important;
     }}
 
     [data-theme="light"] .portal-desc {{
-      color: #475569;
+      color: #334155 !important;
+      font-weight: 500 !important;
     }}
 
-    [data-theme="light"] .stat-card,
-    [data-theme="light"] .controls-panel,
-    [data-theme="light"] .week-card,
-    [data-theme="light"] .guide-box {{
-      background: #ffffff;
-      border-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    [data-theme="light"] .stat-card {{
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }}
+
+    [data-theme="light"] .stat-val {{
+      color: #4338ca !important;
+      font-weight: 900 !important;
+    }}
+
+    [data-theme="light"] .stat-lbl {{
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }}
+
+    [data-theme="light"] .controls-panel {{
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
     }}
 
     [data-theme="light"] .search-input {{
-      background: #f8fafc;
-      border-color: rgba(0, 0, 0, 0.12);
-      color: #0f172a;
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }}
+
+    [data-theme="light"] .search-input::placeholder {{
+      color: #64748b !important;
+    }}
+
+    [data-theme="light"] .search-input-box svg {{
+      color: #475569 !important;
+    }}
+
+    [data-theme="light"] .search-input:focus {{
+      border-color: #4f46e5 !important;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
     }}
 
     [data-theme="light"] .filter-tab {{
-      background: #f8fafc;
-      border-color: rgba(0, 0, 0, 0.1);
-      color: #475569;
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }}
+
+    [data-theme="light"] .filter-tab:hover {{
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }}
+
+    [data-theme="light"] .filter-tab.active {{
+      background: #4f46e5 !important;
+      border-color: #4338ca !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25) !important;
+    }}
+
+    [data-theme="light"] .week-card {{
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+    }}
+
+    [data-theme="light"] .week-card:hover {{
+      border-color: #6366f1 !important;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.12) !important;
+    }}
+
+    [data-theme="light"] .week-badge {{
+      background: #ede9fe !important;
+      color: #5b21b6 !important;
+      border: 1px solid #ddd6fe !important;
+      font-weight: 800 !important;
+    }}
+
+    [data-theme="light"] .card-date {{
+      color: #475569 !important;
+      font-weight: 600 !important;
+    }}
+
+    [data-theme="light"] .card-unit {{
+      color: #4338ca !important;
+      font-weight: 800 !important;
     }}
 
     [data-theme="light"] .card-title {{
-      color: #0f172a;
+      color: #0f172a !important;
+      font-weight: 800 !important;
     }}
 
     [data-theme="light"] .card-subtitle {{
-      color: #475569;
+      color: #334155 !important;
+      font-weight: 500 !important;
     }}
 
     [data-theme="light"] .card-tag {{
-      background: #f1f5f9;
-      color: #334155;
-      border-color: rgba(0, 0, 0, 0.08);
+      background: #f1f5f9 !important;
+      color: #1e293b !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }}
+
+    [data-theme="light"] .card-tag-code {{
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border: 1px solid #fde68a !important;
+      font-weight: 800 !important;
+    }}
+
+    [data-theme="light"] .card-actions {{
+      border-top: 1.5px solid #e2e8f0 !important;
+    }}
+
+    [data-theme="light"] .btn-launch {{
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25) !important;
+    }}
+
+    [data-theme="light"] .btn-launch:hover {{
+      background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%) !important;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35) !important;
+    }}
+
+    [data-theme="light"] .btn-print-card {{
+      background: #f8fafc !important;
+      color: #1e293b !important;
+      border: 1.5px solid #cbd5e1 !important;
+      font-weight: 700 !important;
+    }}
+
+    [data-theme="light"] .btn-print-card:hover {{
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }}
+
+    [data-theme="light"] .guide-box {{
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }}
+
+    [data-theme="light"] .guide-desc {{
+      color: #334155 !important;
+      font-weight: 500 !important;
     }}
 
     [data-theme="light"] .key-badge {{
-      background: #f1f5f9;
-      border-color: rgba(0, 0, 0, 0.1);
-      color: #0284c7;
+      background: #f1f5f9 !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #4338ca !important;
+      font-weight: 800 !important;
     }}
 
     [data-theme="light"] .theme-segmented-control {{
-      background: #f1f5f9;
-      border-color: rgba(0, 0, 0, 0.1);
+      background: #e2e8f0 !important;
+      border: 1.5px solid #cbd5e1 !important;
+    }}
+
+    [data-theme="light"] .theme-pill-btn {{
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }}
+
+    [data-theme="light"] .theme-pill-btn:hover {{
+      color: #0f172a !important;
     }}
 
     [data-theme="light"] .theme-pill-btn.active {{
-      background: #ffffff;
-      color: #0284c7;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      background: #ffffff !important;
+      color: #4338ca !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
     }}
   </style>
 </head>

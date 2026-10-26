@@ -888,17 +888,202 @@ html[data-theme="light"] {
   --bg-primary: #f8fafc;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.96);
   --accent-cyan: #0284c7;
   --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-dim: #64748b;
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-accent: rgba(2, 132, 199, 0.3);
+  --text-muted: #334155;
+  --text-dim: #475569;
+  --border-subtle: #cbd5e1;
+  --border-accent: #0284c7;
   --shadow-lg: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
   --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.15);
   color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .deck-container {
+  background: #ffffff !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1) !important;
+  border: 1.5px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .slide {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .slide-title,
+[data-theme="light"] .cover-title,
+[data-theme="light"] .roadmap-title,
+[data-theme="light"] .feature-title,
+[data-theme="light"] .step-info h4,
+[data-theme="light"] .next-week-title,
+[data-theme="light"] .overview-header h3,
+[data-theme="light"] .overview-thumb-title,
+[data-theme="light"] .info-card-highlight h3,
+[data-theme="light"] .info-card-concept h3 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .cover-subtitle,
+[data-theme="light"] .slide-subtitle,
+[data-theme="light"] .roadmap-desc,
+[data-theme="light"] .feature-desc,
+[data-theme="light"] .step-info p,
+[data-theme="light"] .next-week-desc,
+[data-theme="light"] .concept-bullets li,
+[data-theme="light"] .info-card-highlight p,
+[data-theme="light"] .info-card-concept p {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="light"] .meta-label {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .meta-value {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .badge,
+[data-theme="light"] .badge-unit {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1.5px solid #bae6fd !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .badge-week {
+  background: #ede9fe !important;
+  color: #5b21b6 !important;
+  border: 1.5px solid #ddd6fe !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .badge-code,
+[data-theme="light"] .cover-tag {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .cover-curiosity-box {
+  background: #fffbeb !important;
+  border: 1.5px solid #fde68a !important;
+  color: #92400e !important;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08) !important;
+}
+
+[data-theme="light"] .cover-curiosity-box p,
+[data-theme="light"] .cover-curiosity-box span {
+  color: #78350f !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .card-roadmap,
+[data-theme="light"] .info-card-highlight,
+[data-theme="light"] .info-card-concept,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .workshop-step-card,
+[data-theme="light"] .next-week-card,
+[data-theme="light"] .cover-meta-item,
+[data-theme="light"] .visual-panel {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .hud-bar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .hud-slide-count {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .hud-btn {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-btn:hover {
+  background: #e2e8f0 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .hud-btn-primary {
+  background: #0284c7 !important;
+  border: 1.5px solid #0369a1 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-btn-primary:hover {
+  background: #0369a1 !important;
+}
+
+[data-theme="light"] .overview-modal {
+  background: rgba(248, 250, 252, 0.98) !important;
+}
+
+[data-theme="light"] .overview-thumb {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .overview-thumb:hover {
+  border-color: #0284c7 !important;
+}
+
+[data-theme="light"] .quiz-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .quiz-btn:hover:not(:disabled) {
+  background: #f1f5f9 !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+}
+
+[data-theme="light"] .quiz-btn.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .quiz-btn.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .code-window {
+  background: #0f172a !important;
+  border: 1.5px solid #334155 !important;
+  color: #f8fafc !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -906,158 +1091,140 @@ html[data-theme="light"] {
     --bg-primary: #f8fafc;
     --bg-surface: #ffffff;
     --bg-surface-elevated: #f1f5f9;
-    --bg-card: rgba(255, 255, 255, 0.92);
-    --bg-glass: rgba(255, 255, 255, 0.85);
+    --bg-card: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.96);
     --accent-cyan: #0284c7;
     --text-main: #0f172a;
-    --text-muted: #475569;
-    --text-dim: #64748b;
-    --border-subtle: rgba(15, 23, 42, 0.08);
-    --border-accent: rgba(2, 132, 199, 0.3);
+    --text-muted: #334155;
+    --text-dim: #475569;
+    --border-subtle: #cbd5e1;
+    --border-accent: #0284c7;
     --shadow-lg: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
     --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.15);
     color-scheme: light;
   }
 
-  :root:not([data-theme="dark"]) body::before,
-  :root:not([data-theme="dark"]) .deck-container::before {
-    opacity: 0.25;
+  :root:not([data-theme="dark"]) body {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  :root:not([data-theme="dark"]) .deck-container {
+    background: #ffffff !important;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1) !important;
+    border: 1.5px solid #e2e8f0 !important;
   }
 
   :root:not([data-theme="dark"]) .slide {
-    background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08);
-  }
-
-  :root:not([data-theme="dark"]) .hud-bar {
-    background: rgba(255, 255, 255, 0.94);
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-  }
-
-  :root:not([data-theme="dark"]) .hud-btn {
-    background: rgba(15, 23, 42, 0.05);
-    color: #1e293b;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-  }
-
-  :root:not([data-theme="dark"]) .hud-btn:hover {
-    background: rgba(15, 23, 42, 0.1);
-    color: #0f172a;
-  }
-
-  :root:not([data-theme="dark"]) .hud-btn-primary {
-    background: #0284c7 !important;
-    color: #ffffff !important;
-    border: none !important;
+    background: #ffffff !important;
+    border: 1.5px solid #e2e8f0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
   }
 
   :root:not([data-theme="dark"]) .slide-title,
   :root:not([data-theme="dark"]) .cover-title,
   :root:not([data-theme="dark"]) .roadmap-title,
+  :root:not([data-theme="dark"]) .feature-title,
+  :root:not([data-theme="dark"]) .step-info h4,
+  :root:not([data-theme="dark"]) .next-week-title,
+  :root:not([data-theme="dark"]) .overview-header h3,
   :root:not([data-theme="dark"]) .overview-thumb-title,
   :root:not([data-theme="dark"]) .info-card-highlight h3,
   :root:not([data-theme="dark"]) .info-card-concept h3 {
     color: #0f172a !important;
+    font-weight: 800 !important;
   }
 
   :root:not([data-theme="dark"]) .cover-subtitle,
   :root:not([data-theme="dark"]) .slide-subtitle,
   :root:not([data-theme="dark"]) .roadmap-desc,
+  :root:not([data-theme="dark"]) .feature-desc,
+  :root:not([data-theme="dark"]) .step-info p,
+  :root:not([data-theme="dark"]) .next-week-desc,
+  :root:not([data-theme="dark"]) .concept-bullets li,
+  :root:not([data-theme="dark"]) .info-card-highlight p,
+  :root:not([data-theme="dark"]) .info-card-concept p {
+    color: #334155 !important;
+    font-weight: 500 !important;
+  }
+
   :root:not([data-theme="dark"]) .meta-label {
     color: #475569 !important;
+    font-weight: 700 !important;
+  }
+
+  :root:not([data-theme="dark"]) .meta-value {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+  }
+
+  :root:not([data-theme="dark"]) .badge,
+  :root:not([data-theme="dark"]) .badge-unit {
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1.5px solid #bae6fd !important;
+    font-weight: 800 !important;
+  }
+
+  :root:not([data-theme="dark"]) .badge-week {
+    background: #ede9fe !important;
+    color: #5b21b6 !important;
+    border: 1.5px solid #ddd6fe !important;
+    font-weight: 800 !important;
+  }
+
+  :root:not([data-theme="dark"]) .badge-code,
+  :root:not([data-theme="dark"]) .cover-tag {
+    background: #f1f5f9 !important;
+    color: #1e293b !important;
+    border: 1.5px solid #cbd5e1 !important;
+    font-weight: 800 !important;
+  }
+
+  :root:not([data-theme="dark"]) .cover-curiosity-box {
+    background: #fffbeb !important;
+    border: 1.5px solid #fde68a !important;
+    color: #92400e !important;
   }
 
   :root:not([data-theme="dark"]) .card-roadmap,
   :root:not([data-theme="dark"]) .info-card-highlight,
   :root:not([data-theme="dark"]) .info-card-concept,
-  :root:not([data-theme="dark"]) .next-week-card {
-    background: #f8fafc;
-    border-color: rgba(15, 23, 42, 0.08);
+  :root:not([data-theme="dark"]) .feature-card,
+  :root:not([data-theme="dark"]) .workshop-step-card,
+  :root:not([data-theme="dark"]) .next-week-card,
+  :root:not([data-theme="dark"]) .cover-meta-item,
+  :root:not([data-theme="dark"]) .visual-panel {
+    background: #ffffff !important;
+    border: 1.5px solid #e2e8f0 !important;
+  }
+
+  :root:not([data-theme="dark"]) .hud-bar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-top: 1.5px solid #e2e8f0 !important;
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    font-weight: 700 !important;
+  }
+
+  :root:not([data-theme="dark"]) .hud-btn-primary {
+    background: #0284c7 !important;
+    border: 1.5px solid #0369a1 !important;
+    color: #ffffff !important;
   }
 
   :root:not([data-theme="dark"]) .overview-modal {
-    background: rgba(248, 250, 252, 0.95);
-  }
-
-  :root:not([data-theme="dark"]) .overview-header h3 {
-    color: #0f172a !important;
+    background: rgba(248, 250, 252, 0.98) !important;
   }
 
   :root:not([data-theme="dark"]) .overview-thumb {
-    background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.1);
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
   }
-}
-
-[data-theme="light"] body::before,
-[data-theme="light"] .deck-container::before {
-  opacity: 0.25;
-}
-
-[data-theme="light"] .slide {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.08);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .hud-bar {
-  background: rgba(255, 255, 255, 0.94);
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-[data-theme="light"] .hud-btn {
-  background: rgba(15, 23, 42, 0.05);
-  color: #1e293b;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-}
-
-[data-theme="light"] .hud-btn:hover {
-  background: rgba(15, 23, 42, 0.1);
-  color: #0f172a;
-}
-
-[data-theme="light"] .hud-btn-primary {
-  background: #0284c7 !important;
-  color: #ffffff !important;
-  border: none !important;
-}
-
-[data-theme="light"] .slide-title,
-[data-theme="light"] .cover-title,
-[data-theme="light"] .roadmap-title,
-[data-theme="light"] .overview-thumb-title,
-[data-theme="light"] .info-card-highlight h3,
-[data-theme="light"] .info-card-concept h3 {
-  color: #0f172a !important;
-}
-
-[data-theme="light"] .cover-subtitle,
-[data-theme="light"] .slide-subtitle,
-[data-theme="light"] .roadmap-desc,
-[data-theme="light"] .meta-label {
-  color: #475569 !important;
-}
-
-[data-theme="light"] .card-roadmap,
-[data-theme="light"] .info-card-highlight,
-[data-theme="light"] .info-card-concept,
-[data-theme="light"] .next-week-card {
-  background: #f8fafc;
-  border-color: rgba(15, 23, 42, 0.08);
-}
-
-[data-theme="light"] .overview-modal {
-  background: rgba(248, 250, 252, 0.95);
-}
-
-[data-theme="light"] .overview-header h3 {
-  color: #0f172a !important;
-}
-
-[data-theme="light"] .overview-thumb {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.1);
 }
 
 /* Toast Bildirimi */
