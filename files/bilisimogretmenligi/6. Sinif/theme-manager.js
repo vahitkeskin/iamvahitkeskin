@@ -14,9 +14,9 @@
 
   function getSavedTheme() {
     try {
-      return localStorage.getItem(STORAGE_KEY) || 'system';
+      return localStorage.getItem(STORAGE_KEY) || 'light';
     } catch (e) {
-      return 'system';
+      return 'light';
     }
   }
 
@@ -63,10 +63,10 @@
 
   function cycleTheme() {
     const current = getSavedTheme();
-    let next = 'system';
-    if (current === 'system') next = 'light';
-    else if (current === 'light') next = 'dark';
+    let next = 'light';
+    if (current === 'light') next = 'dark';
     else if (current === 'dark') next = 'system';
+    else if (current === 'system') next = 'light';
     setTheme(next);
   }
 
@@ -90,16 +90,16 @@
 
       if (setting === 'system') {
         if (iconEl) iconEl.textContent = '🖥️';
-        if (textEl) textEl.textContent = resolved === 'dark' ? 'Sistem (Koyu)' : 'Sistem (Açık)';
-        btn.title = `Tema: Sistem Modu (Şu an: ${resolved === 'dark' ? 'Koyu' : 'Açık'}) [Kısayol: T]`;
+        if (textEl) textEl.textContent = resolved === 'dark' ? 'Sistem (Kapalı)' : 'Sistem (Açık)';
+        btn.title = `Tema: Sistem Modu (Şu an: ${resolved === 'dark' ? 'Kapalı' : 'Açık'}) [Kısayol: T]`;
       } else if (setting === 'light') {
         if (iconEl) iconEl.textContent = '☀️';
         if (textEl) textEl.textContent = 'Açık';
-        btn.title = 'Tema: Açık Mod [Kısayol: T]';
+        btn.title = 'Tema: Açık Mod (Varsayılan) [Kısayol: T]';
       } else {
         if (iconEl) iconEl.textContent = '🌙';
-        if (textEl) textEl.textContent = 'Koyu';
-        btn.title = 'Tema: Koyu Mod [Kısayol: T]';
+        if (textEl) textEl.textContent = 'Kapalı';
+        btn.title = 'Tema: Kapalı Mod [Kısayol: T]';
       }
     });
   }
@@ -115,11 +115,11 @@
 
     let msg = '';
     if (setting === 'system') {
-      msg = `🖥️ Sistem Modu (${resolved === 'dark' ? 'Koyu' : 'Açık'}) Aktif`;
+      msg = `🖥️ Sistem Modu (${resolved === 'dark' ? 'Kapalı' : 'Açık'}) Aktif`;
     } else if (setting === 'light') {
       msg = '☀️ Açık Mod Aktif';
     } else {
-      msg = '🌙 Koyu Mod Aktif';
+      msg = '🌙 Kapalı Mod Aktif';
     }
 
     toast.innerHTML = `<span class="toast-dot"></span><span>${msg}</span>`;

@@ -24,9 +24,9 @@ def create_theme_manager(grade_title):
 
   function getSavedTheme() {{
     try {{
-      return localStorage.getItem(STORAGE_KEY) || 'system';
+      return localStorage.getItem(STORAGE_KEY) || 'light';
     }} catch (e) {{
-      return 'system';
+      return 'light';
     }}
   }}
 
@@ -73,10 +73,10 @@ def create_theme_manager(grade_title):
 
   function cycleTheme() {{
     const current = getSavedTheme();
-    let next = 'system';
-    if (current === 'system') next = 'light';
-    else if (current === 'light') next = 'dark';
+    let next = 'light';
+    if (current === 'light') next = 'dark';
     else if (current === 'dark') next = 'system';
+    else if (current === 'system') next = 'light';
     setTheme(next);
   }}
 
@@ -100,16 +100,16 @@ def create_theme_manager(grade_title):
 
       if (setting === 'system') {{
         if (iconEl) iconEl.textContent = '🖥️';
-        if (textEl) textEl.textContent = resolved === 'dark' ? 'Sistem (Koyu)' : 'Sistem (Açık)';
-        btn.title = `Tema: Sistem Modu (Şu an: ${{resolved === 'dark' ? 'Koyu' : 'Açık'}}) [Kısayol: T]`;
+        if (textEl) textEl.textContent = resolved === 'dark' ? 'Sistem (Kapalı)' : 'Sistem (Açık)';
+        btn.title = `Tema: Sistem Modu (Şu an: ${{resolved === 'dark' ? 'Kapalı' : 'Açık'}}) [Kısayol: T]`;
       }} else if (setting === 'light') {{
         if (iconEl) iconEl.textContent = '☀️';
         if (textEl) textEl.textContent = 'Açık';
-        btn.title = 'Tema: Açık Mod [Kısayol: T]';
+        btn.title = 'Tema: Açık Mod (Varsayılan) [Kısayol: T]';
       }} else {{
         if (iconEl) iconEl.textContent = '🌙';
-        if (textEl) textEl.textContent = 'Koyu';
-        btn.title = 'Tema: Koyu Mod [Kısayol: T]';
+        if (textEl) textEl.textContent = 'Kapalı';
+        btn.title = 'Tema: Kapalı Mod [Kısayol: T]';
       }}
     }});
   }}
@@ -125,11 +125,11 @@ def create_theme_manager(grade_title):
 
     let msg = '';
     if (setting === 'system') {{
-      msg = `🖥️ Sistem Modu (${{resolved === 'dark' ? 'Koyu' : 'Açık'}}) Aktif`;
+      msg = `🖥️ Sistem Modu (${{resolved === 'dark' ? 'Kapalı' : 'Açık'}}) Aktif`;
     }} else if (setting === 'light') {{
       msg = '☀️ Açık Mod Aktif';
     }} else {{
-      msg = '🌙 Koyu Mod Aktif';
+      msg = '🌙 Kapalı Mod Aktif';
     }}
 
     toast.innerHTML = `<span class="toast-dot"></span><span>${{msg}}</span>`;
@@ -453,11 +453,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 """
 
-def create_presentation_styles(is_grade_10=False):
-    grade_name = "10. Sınıf" if is_grade_10 else "9. Sınıf"
-    course_name = "Bilgisayar Bilimi (Kur 2)" if is_grade_10 else "Bilgisayar Bilimi (Kur 1)"
-    primary_color = "#f59e0b" if is_grade_10 else "#00f0ff"
-    primary_rgb = "245, 158, 11" if is_grade_10 else "0, 240, 255"
+def create_presentation_styles(grade_name=None, course_name=None, primary_color=None, primary_rgb=None, is_grade_10=False):
+    if is_grade_10:
+        grade_name = grade_name or "10. Sınıf"
+        course_name = course_name or "Bilgisayar Bilimi (Kur 2)"
+        primary_color = primary_color or "#f59e0b"
+        primary_rgb = primary_rgb or "245, 158, 11"
+    else:
+        grade_name = grade_name or "9. Sınıf"
+        course_name = course_name or "Bilgisayar Bilimi (Kur 1)"
+        primary_color = primary_color or "#00f0ff"
+        primary_rgb = primary_rgb or "0, 240, 255"
 
     return f"""/* ==========================================================================
    MEB {grade_name} {course_name} - Yıllık Ders Sunumları Tasarım Sistemi
@@ -1864,7 +1870,7 @@ function buildPresentation(weekNum) {{
       <div class="hud-controls">
         <button class="hud-btn btn-prev">← Geri</button>
         <button class="hud-btn btn-overview">☰ Genel Bakış</button>
-        <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Koyu/Sistem) [T]"><span class="theme-btn-icon">🖥️</span> <span class="theme-btn-text">Sistem</span></button>
+        <button class="hud-btn btn-theme" title="Tema Değiştir (Açık/Kapalı/Sistem) [T]"><span class="theme-btn-icon">☀️</span> <span class="theme-btn-text">Açık</span></button>
         <button class="hud-btn btn-fullscreen" title="Tam Ekran [F]">⛶ Tam Ekran</button>
         <button class="hud-btn btn-print" title="Yazdır / PDF [P]">🖨️ PDF</button>
         <button class="hud-btn hud-btn-primary btn-next">İleri →</button>
@@ -1909,14 +1915,14 @@ document.addEventListener('DOMContentLoaded', () => {{
 }});
 """
 
-def create_single_week_html(grade_name, week_num, topic_title):
+def create_single_week_html(grade_name, week_num, topic_title, course_name="Bilişim Teknolojileri ve Yazılım"):
     padded = f"{week_num:02d}"
     return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{padded}. Hafta: {topic_title} - {grade_name} Bilgisayar Bilimi</title>
+  <title>{padded}. Hafta: {topic_title} - {grade_name} {course_name}</title>
   <link rel="stylesheet" href="presentation-styles.css">
 </head>
 <body data-unit="unite-1" data-week="{week_num}">
@@ -1934,15 +1940,28 @@ def create_single_week_html(grade_name, week_num, topic_title):
 </html>
 """
 
-def create_portal_index_html(grade_name, course_name, units_list, is_grade_10=False):
+def create_portal_index_html(grade_name, course_name, units_list, accent_color=None, accent_rgb=None, is_grade_10=False):
     unit_tabs = "".join([f'<button class="filter-tab" data-filter="{u["id"]}">{u["title"]}</button>\n' for u in units_list])
     
-    accent_color = "#f59e0b" if is_grade_10 else "#00f0ff"
-    accent_rgb = "245, 158, 11" if is_grade_10 else "0, 240, 255"
-    hero_accent = "radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.1) 50%, transparent 70%)" if is_grade_10 else "radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%)"
-    card_stripe = "linear-gradient(90deg, #f59e0b, #ef4444)" if is_grade_10 else "linear-gradient(90deg, #00f0ff, #6366f1)"
-    btn_launch_bg = "linear-gradient(135deg, #d97706 0%, #b45309 100%)" if is_grade_10 else "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)"
-    btn_launch_hover = "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)" if is_grade_10 else "linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%)"
+    if accent_color and accent_rgb:
+        hero_accent = f"radial-gradient(circle, rgba({accent_rgb}, 0.22) 0%, rgba({accent_rgb}, 0.08) 50%, transparent 70%)"
+        card_stripe = f"linear-gradient(90deg, {accent_color}, #3b82f6)"
+        btn_launch_bg = f"linear-gradient(135deg, {accent_color} 0%, rgba({accent_rgb}, 0.8) 100%)"
+        btn_launch_hover = f"linear-gradient(135deg, {accent_color} 0%, #ffffff 100%)"
+    elif is_grade_10:
+        accent_color = "#f59e0b"
+        accent_rgb = "245, 158, 11"
+        hero_accent = "radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.1) 50%, transparent 70%)"
+        card_stripe = "linear-gradient(90deg, #f59e0b, #ef4444)"
+        btn_launch_bg = "linear-gradient(135deg, #d97706 0%, #b45309 100%)"
+        btn_launch_hover = "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)"
+    else:
+        accent_color = "#00f0ff"
+        accent_rgb = "0, 240, 255"
+        hero_accent = "radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%)"
+        card_stripe = "linear-gradient(90deg, #00f0ff, #6366f1)"
+        btn_launch_bg = "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)"
+        btn_launch_hover = "linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%)"
     
     return f"""<!DOCTYPE html>
 <html lang="tr">
@@ -1954,7 +1973,7 @@ def create_portal_index_html(grade_name, course_name, units_list, is_grade_10=Fa
   <script>
     (function() {{
       try {{
-        const saved = localStorage.getItem('meb_theme_mode') || 'system';
+        const saved = localStorage.getItem('meb_theme_mode') || 'light';
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const resolved = saved === 'system' ? (prefersDark ? 'dark' : 'light') : saved;
         document.documentElement.setAttribute('data-theme', resolved);
@@ -2469,16 +2488,21 @@ def create_portal_index_html(grade_name, course_name, units_list, is_grade_10=Fa
           <span class="hero-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.35);">📅 2026 - 2027 EĞİTİM YILI</span>
         </div>
 
-        <div class="theme-segmented-control">
-          <button type="button" class="theme-pill-btn" data-theme-val="system" title="Sistem Varsayılanı">
-            <span>🖥️ Sistem</span>
-          </button>
-          <button type="button" class="theme-pill-btn" data-theme-val="light" title="Açık Mod">
-            <span>☀️ Açık</span>
-          </button>
-          <button type="button" class="theme-pill-btn" data-theme-val="dark" title="Koyu Mod">
-            <span>🌙 Koyu</span>
-          </button>
+        <div class="theme-switch-wrapper">
+          <div class="theme-segmented-control" role="radiogroup" aria-label="Görünüm Teması">
+            <button type="button" class="theme-pill-btn active" data-theme-val="light" title="Açık Mod (Varsayılan)" aria-checked="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <span>Açık</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="dark" title="Kapalı Mod" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span>Kapalı</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="system" title="Sistem Modu" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Sistem</span>
+            </button>
+          </div>
         </div>
       </div>
 

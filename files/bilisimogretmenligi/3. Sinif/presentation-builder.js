@@ -330,9 +330,9 @@ function buildPresentation(weekData) {
         <button class="hud-btn btn-overview" title="Genel Bakış (O)">⊞ Genel Bakış</button>
         <button class="hud-btn btn-fullscreen" title="Tam Ekran (F)">⛶ Tam Ekran</button>
         <button class="hud-btn btn-print" title="PDF Olarak Yazdır (P)">🖨️ PDF</button>
-        <button class="hud-btn btn-theme" id="btnThemeToggle" title="Tema: Sistem / Açık / Koyu [T]" aria-label="Görünüm Teması">
-          <span class="theme-btn-icon">🖥️</span>
-          <span class="theme-btn-text">Sistem</span>
+        <button class="hud-btn btn-theme" id="btnThemeToggle" title="Tema: Açık / Kapalı / Sistem [T]" aria-label="Görünüm Teması">
+          <span class="theme-btn-icon">☀️</span>
+          <span class="theme-btn-text">Açık</span>
         </button>
       </div>
     </div>
