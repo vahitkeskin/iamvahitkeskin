@@ -518,11 +518,29 @@ def create_presentation_styles(grade_name=None, course_name=None, primary_color=
   --shadow-glow: 0 0 25px rgba({primary_rgb}, 0.25);
 }}
 
-/* Sıfırlama */
+/* Sıfırlama ve Tipografi Ölçeği */
 *, *::before, *::after {{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}}
+
+html {{
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}}
+
+@media (min-width: 1400px) {{
+  html {{
+    font-size: 19px;
+  }}
+}}
+
+@media (min-width: 1800px) {{
+  html {{
+    font-size: 20px;
+  }}
 }}
 
 html, body {{
@@ -533,8 +551,10 @@ html, body {{
   color: var(--text-main);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   user-select: none;
 }}
+
 
 /* Slayt Konteyneri - 16:9 En-Boy Oranı */
 .deck-container {{
@@ -2203,6 +2223,21 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
   </script>
   <link rel="stylesheet" href="presentation-styles.css">
   <style>
+    html {{
+      font-size: 17.5px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }}
+    @media (min-width: 1400px) {{
+      html {{
+        font-size: 18.5px;
+      }}
+    }}
+    @media (min-width: 1800px) {{
+      html {{
+        font-size: 19.5px;
+      }}
+    }}
     body {{
       background: #070b14;
       color: #f8fafc;
@@ -2212,6 +2247,7 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
       user-select: auto;
       display: block;
       font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
     }}
 
     .portal-container {{

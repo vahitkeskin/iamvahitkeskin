@@ -51,11 +51,29 @@
   --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.25);
 }
 
-/* Sıfırlama */
+/* Sıfırlama ve Tipografi Ölçeği */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 1400px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 20px;
+  }
 }
 
 html, body {
@@ -66,8 +84,10 @@ html, body {
   color: var(--text-main);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   user-select: none;
 }
+
 
 /* Slayt Konteyneri - 16:9 En-Boy Oranı */
 .deck-container {
