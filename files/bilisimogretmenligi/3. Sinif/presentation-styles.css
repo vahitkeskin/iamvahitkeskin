@@ -1019,6 +1019,7 @@ body::after {
   :root:not([data-theme="dark"]) .quiz-btn,
   :root:not([data-theme="dark"]) .hud-slide-count {
     color: #0f172a !important;
+    text-shadow: none !important;
   }
 
   :root:not([data-theme="dark"]) .cover-curiosity-box {
@@ -1129,6 +1130,7 @@ html[data-theme="light"] {
 [data-theme="light"] .hud-slide-count {
   color: #0f172a !important;
   font-weight: 800 !important;
+  text-shadow: none !important;
 }
 
 [data-theme="light"] .cover-subtitle,

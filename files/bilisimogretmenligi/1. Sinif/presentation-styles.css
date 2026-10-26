@@ -786,6 +786,7 @@ html[data-theme="light"] {
 [data-theme="light"] .meta-value,
 [data-theme="light"] .hud-slide-count {
   color: #0f172a !important;
+  text-shadow: none !important;
 }
 
 [data-theme="light"] .slide-subtitle,

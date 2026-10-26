@@ -1447,8 +1447,10 @@ html, body {{
 [data-theme="light"] .step-info h4,
 [data-theme="light"] .tips-title,
 [data-theme="light"] .summary-title,
-[data-theme="light"] .quiz-question-box {{
+[data-theme="light"] .quiz-question-box,
+[data-theme="light"] .next-week-topic {{
   color: #0f172a !important;
+  text-shadow: none !important;
 }}
 
 [data-theme="light"] .cover-subtitle,
@@ -1456,7 +1458,8 @@ html, body {{
 [data-theme="light"] .concept-bullets li,
 [data-theme="light"] .roadmap-desc,
 [data-theme="light"] .feature-desc,
-[data-theme="light"] .step-info p {{
+[data-theme="light"] .step-info p,
+[data-theme="light"] .next-week-homework {{
   color: #334155 !important;
 }}
 
@@ -1750,6 +1753,18 @@ function buildPresentation(weekNum) {{
   // Body data-unit
   document.body.setAttribute('data-unit', weekData.unitTheme || 'unite-1');
 
+  const summaryKeyPoints = (weekData.summary && weekData.summary.keyPoints)
+    ? weekData.summary.keyPoints
+    : (weekData.summaryRules
+        ? weekData.summaryRules.map(r => `<strong>${{r.bold}}:</strong> ${{r.text}}`)
+        : []);
+  const summaryNextWeek = (weekData.summary && weekData.summary.nextWeek)
+    ? weekData.summary.nextWeek
+    : (weekData.nextWeekPreview || 'Gelecek haftanın heyecan verici konusu');
+  const summaryHomework = (weekData.summary && weekData.summary.homework)
+    ? weekData.summary.homework
+    : (weekData.homework || 'Konuyu pekiştirici mini araştırma ve uygulama görevi.');
+
   container.innerHTML = `
     <!-- SLAYT 1: KAPAK -->
     <section class="slide slide-cover active">
@@ -2041,7 +2056,7 @@ function buildPresentation(weekNum) {{
         <div class="summary-card">
           <h3 class="summary-title"><span>📌</span> Haftanın Kilit Çıkarımları</h3>
           <ul class="concept-bullets">
-            ${{weekData.summary.keyPoints.map(pt => `
+            ${{summaryKeyPoints.map(pt => `
               <li>
                 <span class="bullet-dot"></span>
                 <div>${{pt}}</div>
@@ -2055,11 +2070,11 @@ function buildPresentation(weekNum) {{
           <div style="display: flex; flex-direction: column; gap: 1rem;">
             <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 1rem;">
               <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-amber); font-weight: 700;">Gelecek Haftanın Konusu</span>
-              <p style="font-size: 1.05rem; color: #ffffff; font-weight: 700; margin-top: 0.3rem;">${{weekData.summary.nextWeek}}</p>
+              <p class="next-week-topic" style="font-size: 1.05rem; font-weight: 700; margin-top: 0.3rem;">${{summaryNextWeek}}</p>
             </div>
             <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-sm); padding: 1rem;">
               <span style="font-size: 0.8rem; text-transform: uppercase; color: #93c5fd; font-weight: 700;">Bireysel Araştırma / Kod Görevi</span>
-              <p style="font-size: 0.95rem; color: #cbd5e1; margin-top: 0.3rem;">${{weekData.summary.homework}}</p>
+              <p class="next-week-homework" style="font-size: 0.95rem; margin-top: 0.3rem;">${{summaryHomework}}</p>
             </div>
           </div>
         </div>

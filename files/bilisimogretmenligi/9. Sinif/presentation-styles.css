@@ -980,8 +980,10 @@ html, body {
 [data-theme="light"] .step-info h4,
 [data-theme="light"] .tips-title,
 [data-theme="light"] .summary-title,
-[data-theme="light"] .quiz-question-box {
+[data-theme="light"] .quiz-question-box,
+[data-theme="light"] .next-week-topic {
   color: #0f172a !important;
+  text-shadow: none !important;
 }
 
 [data-theme="light"] .cover-subtitle,
@@ -989,7 +991,8 @@ html, body {
 [data-theme="light"] .concept-bullets li,
 [data-theme="light"] .roadmap-desc,
 [data-theme="light"] .feature-desc,
-[data-theme="light"] .step-info p {
+[data-theme="light"] .step-info p,
+[data-theme="light"] .next-week-homework {
   color: #334155 !important;
 }
 

@@ -845,6 +845,7 @@ html[data-theme="light"] {
   :root:not([data-theme="dark"]) .overview-title,
   :root:not([data-theme="dark"]) .overview-thumb-title {
     color: #0f172a !important;
+    text-shadow: none !important;
   }
 
   :root:not([data-theme="dark"]) .cover-subtitle,
@@ -925,6 +926,7 @@ html[data-theme="light"] {
 [data-theme="light"] .overview-thumb-title {
   color: #0f172a !important;
   font-weight: 800 !important;
+  text-shadow: none !important;
 }
 
 [data-theme="light"] .cover-subtitle,
