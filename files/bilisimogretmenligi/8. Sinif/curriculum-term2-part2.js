@@ -6,7 +6,7 @@
 const CURRICULUM_TERM_2_PART2 = [
   {
     "week": 32,
-    "date": "03 - 09 Mayıs",
+    "date": "19 - 25 Nisan",
     "hours": "2 Ders Saati",
     "unit": "5. Ünite: İleri Projeler & Kültürel Bilişim",
     "unitBadge": "23 Nisan Özel",
@@ -147,7 +147,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 33,
-    "date": "10 - 16 Mayıs",
+    "date": "26 Nisan - 02 Mayıs",
     "hours": "2 Ders Saati",
     "unit": "5. Ünite: İleri Projeler & Oyun Mimarisi",
     "unitBadge": "Metin Macera",
@@ -292,7 +292,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 34,
-    "date": "17 - 23 Mayıs",
+    "date": "03 - 09 Mayıs",
     "hours": "2 Ders Saati",
     "unit": "5. Ünite: İleri Projeler & Veri Kalıcılığı",
     "unitBadge": "Dosya İşlemleri",
@@ -437,7 +437,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 35,
-    "date": "24 - 30 Mayıs",
+    "date": "10 - 16 Mayıs",
     "hours": "2 Ders Saati",
     "unit": "5. Ünite: Sosyal Sorumluluk & Sesli Sistemler",
     "unitBadge": "Erişilebilirlik",
@@ -446,7 +446,7 @@ const CURRICULUM_TERM_2_PART2 = [
     "subtitle": "Metinden Sese (TTS) Teknolojileri ve Engelsiz Yazılım Mimarisi",
     "outcomeCode": "BTY.8.5.4",
     "targetSkill": "Erişilebilirlik (Accessibility) & Sesli Sentezleme",
-    "curiosityQuestion": "Görme engelli bir insan ekranı göremediği halde bilgisayarı nasıl rahatça kullanabilir?",
+    "curiosityQuestion": "Gözleri hiç görmeyen bir yazılımcı, ekrana hiç bakmadan sadece kulaklığına gelen saniyede 500 kelimelik ekran okuyucu sesleriyle devasa yapay zekâ kodlarını nasıl yazıp dünyaca ünlü bir mühendis olabilir?",
     "roadmap": [
       {
         "title": "Engelsiz Bilişim",
@@ -582,7 +582,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 36,
-    "date": "31 Mayıs - 06 Haziran",
+    "date": "17 - 23 Mayıs",
     "hours": "2 Ders Saati",
     "unit": "5. Ünite: Gençlik & Hızlı Prototipleme",
     "unitBadge": "19 Mayıs Özel",
@@ -724,7 +724,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 37,
-    "date": "07 - 13 Haziran",
+    "date": "24 - 30 Mayıs",
     "hours": "2 Ders Saati",
     "unit": "6. Ünite: Yapay Zeka & Bilgisayarlı Görü",
     "unitBadge": "Yapay Zeka & Görüntü",
@@ -866,7 +866,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 38,
-    "date": "14 - 20 Haziran",
+    "date": "31 Mayıs - 06 Haziran",
     "hours": "2 Ders Saati",
     "unit": "6. Ünite: Yazılım Mühendisliği & SDLC",
     "unitBadge": "Yazılım Mühendisliği",
@@ -1019,7 +1019,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 39,
-    "date": "21 - 27 Haziran",
+    "date": "07 - 13 Haziran",
     "hours": "2 Ders Saati",
     "unit": "6. Ünite: Büyük Sınav & Lise Hazırlık",
     "unitBadge": "Büyük Sınav Tekrarı",
@@ -1165,7 +1165,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 40,
-    "date": "28 Haziran - 04 Temmuz",
+    "date": "14 - 20 Haziran",
     "hours": "2 Ders Saati",
     "unit": "6. Ünite: Capstone & Mezuniyet",
     "unitBadge": "Mezuniyet Projesi",
@@ -1311,7 +1311,7 @@ const CURRICULUM_TERM_2_PART2 = [
   },
   {
     "week": 41,
-    "date": "05 - 11 Temmuz",
+    "date": "21 - 25 Haziran",
     "hours": "2 Ders Saati",
     "unit": "6. Ünite: Mezuniyet & Gelecek Vizyonu",
     "unitBadge": "Ortaokul Mezuniyeti",

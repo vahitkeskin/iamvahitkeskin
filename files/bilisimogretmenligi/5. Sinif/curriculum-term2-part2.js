@@ -7,14 +7,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 32. HAFTA
   {
     week: 32,
-    date: "20 - 24 Nisan",
+    date: "19 - 25 Nisan",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 13",
     unitTheme: "tema-5",
     title: "23 Nisan & Scratch'te Değişkenler (Variables)",
     subtitle: "Bilgisayarın Hafızasında Bilgi Saklama: Skor, Süre ve Can Sayaçları",
-    outcomeCode: "BT.5.5.3",
+    outcomeCode: "BTY.5.6.1",
     targetSkill: "Veri Saklama & Değişken Yönetimi",
     curiosityQuestion: "Bilgisayar oyunu oynarken skorunuzun 10'dan 20'ye çıktığını bilgisayar aklında nasıl tutar?",
     roadmap: [
@@ -137,14 +137,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 33. HAFTA
   {
     week: 33,
-    date: "27 Nisan - 01 Mayıs",
+    date: "26 Nisan - 02 Mayıs",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 14",
     unitTheme: "tema-5",
     title: "Skorlu ve Süreli Meyve Toplama Oyunu",
     subtitle: "Rastgele Konum (Random Position), Geri Sayım Sayacı ve Oyun Bitti Şartı",
-    outcomeCode: "BT.5.5.4",
+    outcomeCode: "BTY.5.6.2",
     targetSkill: "Oyun Mekaniği Tasarımı & Süre Yönetimi",
     curiosityQuestion: "Gökten elmaların düştüğü bir oyunda elmanın hep aynı yerden değil de rastgele bir yerden düşmesini nasıl sağlarız?",
     roadmap: [
@@ -275,14 +275,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 34. HAFTA
   {
     week: 34,
-    date: "04 - 08 Mayıs",
+    date: "03 - 09 Mayıs",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 15",
     unitTheme: "tema-5",
     title: "Karakterler Arası İletişim: Haber Salma (Broadcast)",
     subtitle: "Olay Tabanlı Tetikleyiciler: 'Haberini Sal' ve 'Haberi Aldığımda' Mekanizması",
-    outcomeCode: "BT.5.5.5",
+    outcomeCode: "BTY.5.6.3",
     targetSkill: "Olay Tabanlı Programlama & Karakterler Arası İletişim",
     curiosityQuestion: "Bir kukla bir hedefe ulaştığında, sahnenin diğer ucundaki başka bir kukla bunu nereden anlar ve harekete geçer?",
     roadmap: [
@@ -409,14 +409,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 35. HAFTA
   {
     week: 35,
-    date: "11 - 15 Mayıs",
+    date: "10 - 16 Mayıs",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 16",
     unitTheme: "tema-5",
     title: "Engelliler Haftası & Sesli Asistan Projesi",
     subtitle: "Scratch Eklentileri (Extensions): Metinden Sese (Text-to-Speech) ve Engelsiz Bilişim",
-    outcomeCode: "BT.5.5.6",
+    outcomeCode: "BTY.5.6.3",
     targetSkill: "Eklenti Entegrasyonu & Sosyal Fayda Odaklı Tasarım",
     curiosityQuestion: "Görme engelli bir bireyin bilgisayardaki yazıları okuyabilmesi için bilgisayarlar nasıl bir ses teknolojisi kullanır?",
     roadmap: [
@@ -540,14 +540,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 36. HAFTA
   {
     week: 36,
-    date: "18 - 22 Mayıs",
+    date: "17 - 23 Mayıs",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 17",
     unitTheme: "tema-5",
     title: "19 Mayıs & Mikrofon/Ses Algılama ile Spor Oyunu",
     subtitle: "Bilgisayarın Sensörlerini Kullanma: Ses Yüksekliği (Loudness) ile Karakter Kontrolü",
-    outcomeCode: "BT.5.5.7",
+    outcomeCode: "BTY.5.6.3",
     targetSkill: "Sensör Verisi İşleme & Etkileşimli Arayüz",
     curiosityQuestion: "Klavyeye ya da fareye hiç dokunmadan, sadece 'Zıpla!' diye bağırarak bir oyunu yönetebilir misiniz?",
     roadmap: [
@@ -681,14 +681,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 37. HAFTA
   {
     week: 37,
-    date: "25 - 29 Mayıs",
+    date: "24 - 30 Mayıs",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 18",
     unitTheme: "tema-5",
     title: "Sıfır Atık & Akıllı Geri Dönüşüm Kutusu Projesi",
     subtitle: "Toplumsal ve Çevresel Problemlere Bilişimle Çözüm: Nesne Ayrıştırma Algoritması",
-    outcomeCode: "BT.5.5.8",
+    outcomeCode: "BTY.5.6.4",
     targetSkill: "Algoritmik Sınıflandırma & Çevre Bilinci",
     curiosityQuestion: "Geri dönüşüm tesislerinde pet şişeler, piller ve kâğıtlar insan eli değmeden sensörlerle nasıl ayrıştırılır?",
     roadmap: [
@@ -822,14 +822,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 38. HAFTA
   {
     week: 38,
-    date: "01 - 05 Haziran",
+    date: "31 Mayıs - 06 Haziran",
     hours: "2 Ders Saati",
     unit: "TEMA 5: Algoritmik Düşünme ve Blok Tabanlı Kodlama",
     unitBadge: "Tema 5: Hafta 19",
     unitTheme: "tema-5",
     title: "Proje Geliştirme, Hata Ayıklama (Debugging) ve Tasarım",
     subtitle: "Yazılımdaki Hataları (Bug) Bulma, Kod İyileştirme ve Kullanıcı Deneyimi (UI/UX)",
-    outcomeCode: "BT.5.5.9",
+    outcomeCode: "BTY.5.6.4",
     targetSkill: "Hata Ayıklama (Debugging) & Tasarım Estetiği",
     curiosityQuestion: "Yazılımcılar bilgisayardaki hatalara neden 'Böcek' (Bug), hatayı temizlemeye de 'Böcek Ayıklama' (Debugging) derler?",
     roadmap: [
@@ -956,14 +956,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 39. HAFTA
   {
     week: 39,
-    date: "08 - 12 Haziran",
+    date: "07 - 13 Haziran",
     hours: "2 Ders Saati",
     unit: "TEMA 1 - TEMA 5: Yıl Sonu Genel Tekrarı",
     unitBadge: "Sınav Haftası",
     unitTheme: "tema-6",
     title: "2. Dönem 2. Yazılı Sınavı & Büyük Yıl Sonu Tekrarı",
     subtitle: "Algoritmalar, Akış Şemaları, Şartlar, Döngüler ve Scratch Mekanikleri Özeti",
-    outcomeCode: "BT.5.1 - BT.5.5",
+    outcomeCode: "BTY.5.6.4",
     targetSkill: "Kazanım Pekiştirme & Sınav Başarısı",
     curiosityQuestion: "5. sınıfın başından bugüne kadar bilişim teknolojilerinde neleri başardık ve geleceğe hangi dijital becerilerle adım atıyoruz?",
     roadmap: [
@@ -1105,14 +1105,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 40. HAFTA
   {
     week: 40,
-    date: "15 - 19 Haziran",
+    date: "14 - 20 Haziran",
     hours: "2 Ders Saati",
     unit: "TEMA 6: Bilişimle Üretim, Paylaşım ve Dijital Portfolyo",
     unitBadge: "Tema 6: Hafta 1",
     unitTheme: "tema-6",
     title: "Dijital Portfolyo & Bilişim Projelerini Sunma (Pitching)",
     subtitle: "Yıl Boyunca Yapılan Ürünleri Kataloglama, Ekran Kaydı Alma ve Topluluk Önünde Sunum",
-    outcomeCode: "BT.5.6.1",
+    outcomeCode: "BTY.5.6.4",
     targetSkill: "Portfolyo Yönetimi & Etkili Sunum / İletişim",
     curiosityQuestion: "Harika bir oyun veya yazılım yapsanız ama bunu kimseye anlatamazsanız insanlar projenizi nasıl keşfeder?",
     roadmap: [
@@ -1234,14 +1234,14 @@ const CURRICULUM_TERM_2_PART2_GRADE5 = [
   // 41. HAFTA
   {
     week: 41,
-    date: "22 - 26 Haziran",
+    date: "21 - 25 Haziran",
     hours: "2 Ders Saati",
     unit: "TEMA 6: Bilişimle Üretim, Paylaşım ve Dijital Portfolyo",
     unitBadge: "Festival Haftası",
     unitTheme: "tema-6",
     title: "Yıl Sonu Bilişim & Kodlama Şenliği",
     subtitle: "Turnuvalar, Oyun Deneme İstasyonları, Başarı Belgeleri ve 6. Sınıfa Uğurlama",
-    outcomeCode: "BT.5.6.2",
+    outcomeCode: "BTY.5.6.4",
     targetSkill: "İş Birlikli Öğrenme & Bilişim Özgüveni",
     curiosityQuestion: "Bu yıl sadece bilgisayar kullanmayı değil, bilgisayara ne yapması gerektiğini emretmeyi öğrendiniz; peki sırada ne var?",
     roadmap: [

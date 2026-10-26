@@ -6,11 +6,11 @@
 const CURRICULUM_TERM_2_PART1 = [
   {
     "week": 20,
-    "date": "08 - 14 Şubat",
-    "hours": "2 Ders Saati",
-    "unit": "3. Ünite: Bilişimsel Mantık Muhakeme & LGS Kampı",
-    "unitBadge": "2. Dönem Başlangıcı",
-    "unitTheme": "unite-3",
+    "date": "25 - 31 Ocak",
+    "hours": "Tatil / LGS Kampı",
+    "unit": "Sömestr: LGS Sayısal Mantık & Muhakeme Kampı",
+    "unitBadge": "Sömestr 1. Hafta Kampı",
+    "unitTheme": "unite-somestr",
     "title": "Bilişimsel Mantık Muhakeme ve LGS Sayısal Mantık",
     "subtitle": "Algoritmik Zeka ile Sınavlarda ve Kodlamada Fark Yaratma",
     "outcomeCode": "BTY.8.3.1",
@@ -152,10 +152,10 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 21,
-    "date": "15 - 21 Şubat",
-    "hours": "2 Ders Saati",
-    "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
-    "unitBadge": "Python'a Giriş",
+    "date": "01 - 07 Şubat",
+    "hours": "Tatil / Kodlama Kampı",
+    "unit": "Sömestr: Python ile Kodlama Kış Kampı",
+    "unitBadge": "Sömestr 2. Hafta Kampı",
     "unitTheme": "unite-4",
     "title": "Python Geliştirme Ortamı ve Temel Sözdizimi",
     "subtitle": "Blokların Ötesi: Dünyanın En Popüler Yazılım Diline Adım Atıyoruz",
@@ -301,10 +301,10 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 22,
-    "date": "22 - 28 Şubat",
+    "date": "08 - 14 Şubat",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
-    "unitBadge": "Veri Tipleri",
+    "unitBadge": "2. Dönem Başlangıcı",
     "unitTheme": "unite-4",
     "title": "Python Değişkenleri, Veri Tipleri ve input()",
     "subtitle": "Bellekte Veri Saklama ve Kullanıcı ile İnteraktif İletişim",
@@ -454,7 +454,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 23,
-    "date": "01 - 07 Mart",
+    "date": "15 - 21 Şubat",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "Operatörler",
@@ -599,7 +599,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 24,
-    "date": "08 - 14 Mart",
+    "date": "22 - 28 Şubat",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "Karar Yapıları",
@@ -748,7 +748,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 25,
-    "date": "15 - 21 Mart",
+    "date": "01 - 07 Mart",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "Döngüler",
@@ -757,7 +757,7 @@ const CURRICULUM_TERM_2_PART1 = [
     "subtitle": "Binlerce İşi Göz Açıp Kapayıncaya Kadar Tekrarlatmanın Sırrı",
     "outcomeCode": "BTY.8.4.4",
     "targetSkill": "Otomasyon & Tekrarlı Algoritmalar",
-    "curiosityQuestion": "1 Milyon veriyi tek tek elle incelemek mi yoksa 3 satırlık bir döngü yazmak mı?",
+    "curiosityQuestion": "Bir süper bilgisayar Dünya ile Mars arasındaki yörüngeyi hesaplamak için aynı formülü saniyede 1 milyar kez döngüye sokarken neden hiç yorulmaz? İnsan zihniyle döngü algoritmalarının bu yarışında süper güç nerede gizlidir?",
     "roadmap": [
       {
         "title": "for Döngüsü",
@@ -897,7 +897,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 26,
-    "date": "22 - 28 Mart",
+    "date": "08 - 14 Mart",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "12 Mart Özel",
@@ -1046,7 +1046,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 27,
-    "date": "29 Mart - 04 Nisan",
+    "date": "15 - 21 Mart",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "18 Mart Özel",
@@ -1191,7 +1191,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 28,
-    "date": "05 - 11 Nisan",
+    "date": "22 - 28 Mart",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "Görsel Kodlama",
@@ -1344,7 +1344,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 29,
-    "date": "12 - 18 Nisan",
+    "date": "29 Mart - 04 Nisan",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "1. Yazılı & Debug",
@@ -1486,7 +1486,7 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 30,
-    "date": "19 - 25 Nisan",
+    "date": "05 - 11 Nisan",
     "hours": "2 Ders Saati",
     "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
     "unitBadge": "Oyun Geliştirme",
@@ -1495,7 +1495,7 @@ const CURRICULUM_TERM_2_PART1 = [
     "subtitle": "random Modülü, Oyun Döngüleri ve Konsol Yapay Zekası",
     "outcomeCode": "BTY.8.4.9",
     "targetSkill": "Oyun Mimarisi & Rastgelelik Algoritmaları",
-    "curiosityQuestion": "Bilgisayar kendi aklından nasıl gizli bir sayı tutar veya Taş-Kâğıt-Makas seçimi yapar?",
+    "curiosityQuestion": "Bilgisayarlar aslında asla 'zar atamaz' veya şans nedir bilmez; peki Taş-Kâğıt-Makas oyununda bilgisayarın aklından tuttuğu gizli sayı bir rastlantı mıdır, yoksa saatin nanosaniyelerine dayanan gizli bir matematik formülü müdür?",
     "roadmap": [
       {
         "title": "random Modülü",
@@ -1631,10 +1631,10 @@ const CURRICULUM_TERM_2_PART1 = [
   },
   {
     "week": 31,
-    "date": "26 Nisan - 02 Mayıs",
-    "hours": "2 Ders Saati",
-    "unit": "4. Ünite: Metin Tabanlı Programlama (Python)",
-    "unitBadge": "2. Ara Tatil",
+    "date": "12 - 18 Nisan",
+    "hours": "2. Ara Tatil",
+    "unit": "2. Dönem Ara Tatil: Python Mini Projeler Atölyesi",
+    "unitBadge": "2. Dönem Ara Tatil",
     "unitTheme": "unite-4",
     "title": "2. Dönem Ara Tatil: Python Mini Projeler Atölyesi",
     "subtitle": "Kırılamaz Şifre Üreteci, Gelişmiş Hesap Makinesi ve Sağlık Takipçisi",

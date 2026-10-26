@@ -20,6 +20,7 @@
   // Global erişim
   if (typeof window !== 'undefined') {
     window.CURRICULUM_DATA_5 = allWeeks;
+    window.CURRICULUM_DATA = allWeeks;
     window.getWeekData = function (weekNum) {
       return allWeeks.find(w => w.week === parseInt(weekNum, 10));
     };
@@ -28,7 +29,13 @@
     };
   }
 
+  if (typeof globalThis !== 'undefined') {
+    globalThis.CURRICULUM_DATA_5 = allWeeks;
+    globalThis.CURRICULUM_DATA = allWeeks;
+  }
+
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { CURRICULUM_DATA_5: allWeeks };
+    module.exports = { CURRICULUM_DATA_5: allWeeks, CURRICULUM_DATA: allWeeks };
   }
 })();
+
