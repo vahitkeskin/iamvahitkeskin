@@ -218,7 +218,7 @@ function buildPresentation(weekData) {
 
         <div class="workshop-success-box">
           <h3><span>🎯</span> Başarı Kriterleri (Rubrik)</h3>
-          <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5;">Görevinizi tamamlarken öğretmeninizin ve akranlarınızın değerlendireceği temel standartlar:</p>
+          <p class="criteria-note" style="font-size: 0.95rem; line-height: 1.5;">Görevinizi tamamlarken öğretmeninizin ve akranlarınızın değerlendireceği temel standartlar:</p>
           <ul class="concept-bullets">
             ${weekData.workshop.criteria.map(crit => `
               <li>
@@ -312,7 +312,7 @@ function buildPresentation(weekData) {
 
       <div class="summary-grid">
         <div class="summary-box">
-          <h3 style="color: #ffffff; font-size: 1.3rem;">📌 Bu Haftanın 3 Altın Kuralı</h3>
+          <h3 class="overview-modal-title" style="font-size: 1.3rem;">📌 Bu Haftanın 3 Altın Kuralı</h3>
           <ul class="concept-bullets">
             ${weekData.summaryRules.map(sr => `
               <li>
@@ -329,7 +329,7 @@ function buildPresentation(weekData) {
         <div class="next-week-card">
           <h4>Gelecek Hafta Bizi Ne Bekliyor?</h4>
           <h3>${weekData.nextWeekPreview}</h3>
-          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">Atölyemizdeki bir sonraki heyecan verici tasarıma hazır olun! Fikirlerinizi getirmeyi unutmayın.</p>
+          <p class="preview-desc" style="font-size: 0.95rem; line-height: 1.5;">Atölyemizdeki bir sonraki heyecan verici tasarıma hazır olun! Fikirlerinizi getirmeyi unutmayın.</p>
           <div style="margin-top: 1rem;">
             <button class="hud-btn btn-print" style="width: 100%; justify-content: center;">📄 Bu Sunumu PDF Olarak Kaydet (P)</button>
           </div>
@@ -466,7 +466,7 @@ function buildPresentation(weekData) {
     <div class="overview-modal">
       <div class="overview-content">
         <div class="overview-header">
-          <h3 style="color: #ffffff; font-size: 1.25rem;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
+          <h3 class="overview-modal-title" style="font-size: 1.25rem;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
           <button class="hud-btn btn-close-overview">✕ Kapat</button>
         </div>
         <div class="overview-grid"></div>

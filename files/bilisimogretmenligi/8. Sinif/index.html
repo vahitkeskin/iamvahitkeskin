@@ -676,6 +676,25 @@
       color: #4338ca !important;
       box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
     }
+  
+    /* Açık Mod Rehber ve Arama Görünürlüğü */
+    [data-theme="light"] .guide-title,
+    [data-theme="light"] .guide-box h4,
+    [data-theme="light"] .guide-card h4,
+    [data-theme="light"] .empty-title {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .guide-desc,
+    [data-theme="light"] .guide-box p,
+    [data-theme="light"] .guide-card p,
+    [data-theme="light"] .empty-desc {
+      color: #334155 !important;
+    }
+    [data-theme="light"] .shortcut-pill,
+    [data-theme="light"] .guide-keys div {
+      color: #1e293b !important;
+    }
+
   </style>
 </head>
 <body>
@@ -762,7 +781,7 @@
     <!-- KULLANIM KILAVUZU -->
     <div class="guide-box">
       <div>
-        <h4 style="color: #ffffff; font-size: 1.1rem; margin-bottom: 0.3rem;">Akıllı Tahta & Klavye Kısayolları Kılavuzu</h4>
+        <h4 class="guide-title" style="font-size: 1.1rem; margin-bottom: 0.3rem;">Akıllı Tahta & Klavye Kısayolları Kılavuzu</h4>
         <p class="guide-desc">Sınıfta ders işlerken ekrana dokunarak veya klavyenizden sunumu saniyeler içinde yönetebilirsiniz.</p>
       </div>
       <div class="guide-keys">
@@ -820,8 +839,8 @@
         if (filtered.length === 0) {
           grid.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-              <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #ffffff;">Aramanızla Eşleşen Hafta Bulunamadı</h3>
-              <p style="color: #94a3b8;">"${searchQuery}" için farklı bir arama terimi deneyin veya filtreleri temizleyin.</p>
+              <h3 class="empty-title" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Aramanızla Eşleşen Hafta Bulunamadı</h3>
+              <p class="empty-desc">"${searchQuery}" için farklı bir arama terimi deneyin veya filtreleri temizleyin.</p>
             </div>
           `;
           return;

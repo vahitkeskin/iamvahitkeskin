@@ -734,629 +734,76 @@ html, body {
 
 .quiz-answer-box.show {
 
-/* ==========================================================================
-   10 SORULUK HAFTALIK KONU DEĞERLENDİRME TESTİ & SONUÇ KARNESİ
-   ========================================================================== */
-.slide-quiz-question {
-  display: flex;
-  flex-direction: column;
-}
 
-.quiz-pills-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0.4rem 0 0.9rem;
-  flex-wrap: wrap;
-}
 
-.quiz-nav-pill {
-  min-width: 38px;
-  height: 38px;
-  padding: 0 0.65rem;
-  border-radius: 9999px;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: #94a3b8;
-  font-weight: 700;
-  font-size: 0.92rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
-}
 
-.quiz-nav-pill:hover {
-  border-color: var(--accent-cyan, #00f0ff);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
 
-.quiz-nav-pill.current {
-  background: var(--primary, #3b82f6);
-  border-color: #ffffff;
-  color: #ffffff;
-  box-shadow: 0 0 14px rgba(59, 130, 246, 0.6);
-  transform: scale(1.08);
-}
-
-.quiz-nav-pill.answered-correct {
-  background: rgba(16, 185, 129, 0.25) !important;
-  border-color: #10b981 !important;
-  color: #34d399 !important;
-}
-
-.quiz-nav-pill.answered-wrong {
-  background: rgba(239, 68, 68, 0.25) !important;
-  border-color: #ef4444 !important;
-  color: #f87171 !important;
-}
-
-.quiz-nav-pill.pill-hard {
-  border-color: #f59e0b;
-  color: #fbbf24;
-  background: rgba(245, 158, 11, 0.15);
-  font-weight: 800;
-}
-
-.quiz-nav-pill.pill-hard.current {
-  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !important;
-  color: #ffffff !important;
-  border-color: #fef08a !important;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.6) !important;
-}
-
-.quiz-hud-live-score {
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
-}
-
-.live-score-correct {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #34d399;
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.live-score-wrong {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  color: #f87171;
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.badge-hard {
-  background: rgba(245, 158, 11, 0.2) !important;
-  border-color: #f59e0b !important;
-  color: #fde68a !important;
-  font-weight: 800 !important;
-}
-
-.quiz-container-hard {
-  border-radius: var(--radius-md);
-}
-
-.question-box-hard {
-  border-color: #f59e0b !important;
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25) !important;
-  background: linear-gradient(135deg, rgba(30, 25, 18, 0.95) 0%, rgba(20, 15, 10, 0.95) 100%) !important;
-}
-
-.btn-next-question, .btn-finish-quiz {
-  background: linear-gradient(135deg, var(--accent-cyan, #00f0ff) 0%, #3b82f6 100%);
-  color: #04101e;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 1.4rem;
-  font-size: 0.98rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.btn-finish-quiz {
-  background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
-  color: #ffffff;
-}
-
-.btn-next-question:hover, .btn-finish-quiz:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.15);
-}
-
-/* Slayt 18: Test Sonuç Karnesi */
-.slide-quiz-results {
-  display: flex;
-  flex-direction: column;
-}
-
-.results-card {
-  background: linear-gradient(135deg, rgba(22, 32, 56, 0.95) 0%, rgba(14, 21, 38, 0.9) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2.5rem;
-  max-width: 920px;
-  margin: 0.5rem auto;
-  text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  width: 100%;
-}
-
-.results-score-circle {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 4px solid var(--accent-cyan, #00f0ff);
-  background: rgba(0, 240, 255, 0.12);
-  margin: 0 auto 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
-}
-
-.score-big {
-  font-size: 2.6rem;
-  font-weight: 900;
-  line-height: 1;
-  color: #ffffff;
-}
-
-.score-total {
-  font-size: 0.92rem;
-  color: #94a3b8;
-  font-weight: 700;
-}
-
-.results-title {
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 0.4rem;
-}
-
-.results-desc {
-  font-size: 1.05rem;
-  color: #94a3b8;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
-}
-
-.results-breakdown-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1.8rem;
-}
-
-.result-breakdown-item {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-sm);
-  padding: 0.55rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  align-items: center;
-  transition: all 0.2s ease;
-}
-
-.result-breakdown-item.correct {
-  border-color: #10b981;
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-}
-
-.result-breakdown-item.wrong {
-  border-color: #ef4444;
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-}
-
-.result-breakdown-item .rb-num {
-  font-weight: 800;
-  font-size: 0.92rem;
-}
-
-.result-breakdown-item .rb-status {
-  font-size: 0.78rem;
-}
-
-.results-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Light Mode Overrides */
-[data-theme="light"] .quiz-nav-pill {
-  background: #ffffff;
-  border-color: #cbd5e1;
-  color: #475569;
-}
-
-[data-theme="light"] .quiz-nav-pill.current {
-  background: var(--primary, #2563eb);
-  border-color: #2563eb;
-  color: #ffffff;
-}
-
-[data-theme="light"] .quiz-nav-pill.answered-correct {
-  background: #ecfdf5 !important;
-  border-color: #10b981 !important;
-  color: #047857 !important;
-}
-
-[data-theme="light"] .quiz-nav-pill.answered-wrong {
-  background: #fef2f2 !important;
-  border-color: #ef4444 !important;
-  color: #b91c1c !important;
-}
-
-[data-theme="light"] .results-card {
-  background: #ffffff;
-  border-color: #e2e8f0;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .results-title {
-  color: #0f172a;
-}
-
-[data-theme="light"] .results-desc {
-  color: #64748b;
-}
-
-[data-theme="light"] .result-breakdown-item {
-  background: #f8fafc;
-  border-color: #e2e8f0;
-  color: #334155;
-}
-
-[data-theme="light"] .results-score-circle {
-  background: rgba(37, 99, 235, 0.08);
-}
-
-[data-theme="light"] .score-big {
-  color: #0f172a;
-}
-
-[data-theme="light"] .question-box-hard {
-  background: #fffbeb !important;
-  color: #92400e !important;
-  border-color: #f59e0b !important;
-}
-
-
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
-/* Slayt 8: Haftalık Özet & Görevler */
-.summary-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 1.8rem;
-  margin: 0.8rem 0;
-  flex: 1;
-}
-
-.summary-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.summary-title {
-  font-size: 1.25rem;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-/* HUD Kontrol Çubuğu (Bottom Navigation) */
-.hud-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 64px;
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  z-index: 100;
-}
-
-.hud-progress-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.hud-progress-track {
-  width: 220px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.hud-progress-bar {
-  height: 100%;
-  width: 12.5%;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-  border-radius: 9999px;
-  transition: width 0.3s ease;
-}
-
-.hud-slide-count {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  font-weight: 700;
-}
-
-.hud-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.hud-btn {
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.55rem 1.1rem;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.2s ease;
-}
-
-.hud-btn:hover:not(:disabled) {
-  border-color: var(--border-accent);
-  background: rgba(139, 92, 246, 0.12);
-  color: #ffffff;
-}
-
-.hud-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.hud-btn-primary {
-  background: var(--accent-blue);
-  color: #ffffff;
-  border-color: var(--accent-blue);
-}
-
-.hud-btn-primary:hover:not(:disabled) {
-  background: #2563eb;
-}
-
-/* Genel Bakış (Overview) Modalı */
-.overview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(7, 11, 20, 0.95);
-  backdrop-filter: blur(15px);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-}
-
-.overview-modal.show {
-  display: flex;
-}
-
-.overview-content {
-  max-width: 1200px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.overview-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.overview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem;
-}
-
-.overview-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.overview-card:hover {
-  border-color: var(--accent-cyan);
-  transform: scale(1.03);
-}
-
-.overview-card.active {
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
-}
-
-.overview-thumb-num {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--accent-cyan);
-}
-
-.overview-thumb-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-/* Tema Bildirim Balonu (Toast) */
-.theme-toast {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: rgba(15, 23, 42, 0.95);
-  color: #ffffff;
-  padding: 0.6rem 1.4rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border-accent);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  font-size: 0.95rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 300;
-}
-
-.theme-toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.toast-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-}
-
-/* Açık Mod Uyumluluğu (Light Mode Overrides - Yüksek Kontrast & Net Okunabilirlik) */
-[data-theme="light"] {
-  --bg-primary: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-elevated: #f1f5f9;
-  --bg-card: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.96);
-  --text-main: #0f172a;
-  --text-muted: #334155;
-  --text-dim: #475569;
-  --border-subtle: #e2e8f0;
-  --border-accent: rgba(139, 92, 246, 0.6);
-  color-scheme: light;
-}
-
-[data-theme="light"] body {
-  background: #f8fafc !important;
+/* 1. Gövde, Kapsayıcılar ve Başlıklar */
+[data-theme="light"] body,
+[data-theme="light"] .deck-container,
+[data-theme="light"] .slide {
   color: #0f172a !important;
 }
 
-[data-theme="light"] .deck-container {
-  background: radial-gradient(circle at 50% 20%, #eff6ff 0%, #f8fafc 100%) !important;
-}
-
-[data-theme="light"] .slide-cover {
-  background: radial-gradient(circle at 50% 30%, #f0f9ff 0%, #ffffff 100%) !important;
-}
-
-[data-theme="light"] .cover-title,
 [data-theme="light"] .slide-title,
-[data-theme="light"] .info-card-highlight h3,
+[data-theme="light"] .cover-title,
+[data-theme="light"] .card-title,
+[data-theme="light"] .step-title,
 [data-theme="light"] .feature-title,
 [data-theme="light"] .roadmap-title,
 [data-theme="light"] .meta-value,
-[data-theme="light"] .step-info h4,
-[data-theme="light"] .tips-title,
-[data-theme="light"] .summary-title,
-[data-theme="light"] .quiz-question-box,
-[data-theme="light"] .next-week-topic {
+[data-theme="light"] .overview-title,
+[data-theme="light"] .overview-thumb-title,
+[data-theme="light"] .overview-modal h3,
+[data-theme="light"] .overview-modal-title,
+[data-theme="light"] .summary-card-title,
+[data-theme="light"] .card-icon-header h3 {
   color: #0f172a !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: initial !important;
   text-shadow: none !important;
 }
 
 [data-theme="light"] .cover-subtitle,
 [data-theme="light"] .slide-subtitle,
-[data-theme="light"] .concept-bullets li,
-[data-theme="light"] .roadmap-desc,
+[data-theme="light"] .card-desc,
+[data-theme="light"] .step-desc,
 [data-theme="light"] .feature-desc,
+[data-theme="light"] .roadmap-desc,
 [data-theme="light"] .step-info p,
-[data-theme="light"] .next-week-homework {
+[data-theme="light"] .concept-bullets li,
+[data-theme="light"] .info-list li,
+[data-theme="light"] .info-list-item,
+[data-theme="light"] .card-list li,
+[data-theme="light"] .criteria-note {
   color: #334155 !important;
+  font-weight: 500 !important;
 }
 
-[data-theme="light"] .concept-bullets li strong {
+[data-theme="light"] .concept-bullets li strong,
+[data-theme="light"] .info-list li strong,
+[data-theme="light"] .card-list li strong,
+[data-theme="light"] .info-list-item strong,
+[data-theme="light"] .feature-card strong,
+[data-theme="light"] .step-card strong,
+[data-theme="light"] .summary-card strong {
   color: #0f172a !important;
+  font-weight: 700 !important;
 }
 
-[data-theme="light"] .badge-unit,
-[data-theme="light"] .cover-tag {
-  background: #ede9fe !important;
-  color: #5b21b6 !important;
-  border: 1.5px solid #c4b5fd !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="light"] .badge-week {
-  background: #f3e8ff !important;
-  color: #6b21a8 !important;
-  border: 1.5px solid #d8b4fe !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="light"] .badge-code {
-  background: #fef3c7 !important;
-  color: #92400e !important;
-  border: 1.5px solid #fde68a !important;
-  font-weight: 800 !important;
-}
-
+/* 2. Kapak Slaytı & Merak Sorusu */
 [data-theme="light"] .cover-curiosity-box {
-  background: #fffbeb !important;
+  background: #fef3c7 !important;
+  border-left: 4px solid #d97706 !important;
   color: #92400e !important;
-  border: 1.5px solid #fcd34d !important;
-  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.1) !important;
+}
+[data-theme="light"] .cover-curiosity-box *,
+[data-theme="light"] .curiosity-question-text {
+  color: #92400e !important;
+}
+[data-theme="light"] .cover-curiosity-box strong {
+  color: #78350f !important;
 }
 
 [data-theme="light"] .cover-meta-item {
@@ -1364,77 +811,140 @@ html, body {
   border: 1.5px solid #e2e8f0 !important;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
-
 [data-theme="light"] .meta-label {
   color: #475569 !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .card-roadmap,
+/* 3. Kartlar ve Paneller */
 [data-theme="light"] .feature-card,
-[data-theme="light"] .info-card-highlight,
-[data-theme="light"] .workshop-step-card,
-[data-theme="light"] .tips-box,
+[data-theme="light"] .step-card,
 [data-theme="light"] .summary-card,
-[data-theme="light"] .visual-panel {
+[data-theme="light"] .visual-panel,
+[data-theme="light"] .card {
   background: #ffffff !important;
   border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+  color: #1e293b !important;
+}
+
+[data-theme="light"] .step-number {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+  border: 1.5px solid #bae6fd !important;
+  font-weight: 800 !important;
+}
+
+/* 4. Atölye ve Başarı Kriterleri */
+[data-theme="light"] .criteria-box,
+[data-theme="light"] .workshop-success-box {
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #1e293b !important;
+}
+[data-theme="light"] .criteria-box *,
+[data-theme="light"] .criteria-list *,
+[data-theme="light"] .workshop-success-box * {
+  color: #334155 !important;
+}
+[data-theme="light"] .criteria-badge {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* 5. Rehber ve Doğru Bilinen Yanlışlar */
+[data-theme="light"] .myth-wrong-item,
+[data-theme="light"] [style*="fecdd3"],
+[data-theme="light"] [style*="color: #fecdd3"] {
+  color: #991b1b !important;
+}
+[data-theme="light"] .myth-correct-item,
+[data-theme="light"] [style*="a7f3d0"],
+[data-theme="light"] [style*="color: #a7f3d0"] {
+  color: #166534 !important;
+}
+
+/* 6. Özet, Ev Görevi ve Gelecek Hafta */
+[data-theme="light"] .homework-box,
+[data-theme="light"] .homework-desc,
+[data-theme="light"] [style*="fde68a"],
+[data-theme="light"] [style*="color: #fde68a"] {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fcd34d !important;
+}
+[data-theme="light"] .homework-box * {
+  color: #92400e !important;
+}
+
+[data-theme="light"] .next-week-preview,
+[data-theme="light"] .preview-desc,
+[data-theme="light"] [style*="e2e8f0"],
+[data-theme="light"] [style*="color: #e2e8f0"] {
+  background: #ecfeff !important;
+  color: #0e7490 !important;
+  border-color: #a5f3fc !important;
+}
+[data-theme="light"] .next-week-preview * {
+  color: #0e7490 !important;
+}
+
+/* 7. 10 Soruluk Konu Değerlendirme Testi (Slayt 8 - 17) */
+[data-theme="light"] .quiz-pills-bar {
+  background: rgba(241, 245, 249, 0.9) !important;
+  border: 1px solid #cbd5e1 !important;
+}
+[data-theme="light"] .quiz-nav-pill {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] .quiz-nav-pill.current {
+  background: #0284c7 !important;
+  border-color: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+}
+[data-theme="light"] .quiz-nav-pill.pill-hard {
+  border-color: #f59e0b !important;
+  color: #b45309 !important;
+}
+[data-theme="light"] .quiz-nav-pill.pill-hard.current {
+  background: #f59e0b !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .quiz-nav-pill.answered-correct {
+  background: #22c55e !important;
+  border-color: #16a34a !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .quiz-nav-pill.answered-wrong {
+  background: #ef4444 !important;
+  border-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .quiz-question-box {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
 }
-
-[data-theme="light"] .roadmap-step {
-  background: #ede9fe !important;
-  color: #4338ca !important;
-  border: 1px solid #c7d2fe !important;
-  font-weight: 800 !important;
+[data-theme="light"] .quiz-question-box div {
+  color: #0284c7 !important;
 }
 
-[data-theme="light"] .workshop-success-box {
-  background: #ecfdf5 !important;
-  border: 1.5px solid #a7f3d0 !important;
+[data-theme="light"] .question-box-hard {
+  background: #fffbeb !important;
+  border: 2px solid #f59e0b !important;
+  color: #92400e !important;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15) !important;
 }
-
-[data-theme="light"] .workshop-success-box h3 {
-  color: #065f46 !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="light"] .workshop-success-box p,
-[data-theme="light"] .workshop-success-box li {
-  color: #047857 !important;
-  font-weight: 500 !important;
-}
-
-[data-theme="light"] .tips-box.rules {
-  background: #f0fdf4 !important;
-  border: 1.5px solid #bbf7d0 !important;
-  border-left: 5px solid #10b981 !important;
-}
-
-[data-theme="light"] .tips-box.rules h3 {
-  color: #065f46 !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="light"] .tips-box.rules li {
-  color: #166534 !important;
-  font-weight: 500 !important;
-}
-
-[data-theme="light"] .tips-box.mistakes {
-  background: #fff1f2 !important;
-  border: 1.5px solid #fecdd3 !important;
-  border-left: 5px solid #ef4444 !important;
-}
-
-[data-theme="light"] .tips-box.mistakes h3 {
-  color: #9f1239 !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="light"] .tips-box.mistakes li {
-  color: #881337 !important;
-  font-weight: 500 !important;
+[data-theme="light"] .question-box-hard div {
+  color: #d97706 !important;
 }
 
 [data-theme="light"] .quiz-btn {
@@ -1444,152 +954,578 @@ html, body {
   font-weight: 600 !important;
   box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
 }
-
+[data-theme="light"] .quiz-btn span:first-child {
+  color: #0284c7 !important;
+  font-weight: 800 !important;
+}
 [data-theme="light"] .quiz-btn:hover:not(:disabled) {
   background: #f1f5f9 !important;
-  border-color: #4f46e5 !important;
-  color: #4338ca !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
 }
-
 [data-theme="light"] .quiz-btn.correct {
   background: #dcfce7 !important;
   border-color: #22c55e !important;
   color: #14532d !important;
-  font-weight: 700 !important;
 }
-
+[data-theme="light"] .quiz-btn.correct span:first-child {
+  color: #15803d !important;
+}
 [data-theme="light"] .quiz-btn.wrong {
   background: #fee2e2 !important;
   border-color: #ef4444 !important;
   color: #7f1d1d !important;
+}
+[data-theme="light"] .quiz-btn.wrong span:first-child {
+  color: #b91c1c !important;
+}
+
+[data-theme="light"] .quiz-answer-box,
+[data-theme="light"] .quiz-explanation {
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+}
+[data-theme="light"] .quiz-explanation strong,
+[data-theme="light"] .quiz-answer-box strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .btn-next-question,
+[data-theme="light"] .btn-finish-quiz {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+}
+[data-theme="light"] .btn-next-question:hover,
+[data-theme="light"] .btn-finish-quiz:hover {
+  background: #0369a1 !important;
+}
+
+[data-theme="light"] .quiz-hud-live-score {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+[data-theme="light"] .live-score-correct {
+  color: #15803d !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] .live-score-wrong {
+  color: #b91c1c !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .quiz-explanation {
-  background: #eff6ff !important;
-  border: 1.5px solid #bfdbfe !important;
-  color: #1e40af !important;
-}
-
-[data-theme="light"] .quiz-question-box {
-  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
+/* 8. Test Sonuç Karnesi (Slayt 18) */
+[data-theme="light"] .results-card {
+  background: #ffffff !important;
   border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+}
+[data-theme="light"] .results-title {
+  color: #0f172a !important;
+}
+[data-theme="light"] .results-desc {
+  color: #475569 !important;
+}
+[data-theme="light"] .results-score-circle {
+  background: #f0fdf4 !important;
+  border: 2px solid #86efac !important;
+}
+[data-theme="light"] .score-big {
+  color: #15803d !important;
+}
+[data-theme="light"] .score-total {
+  color: #64748b !important;
+}
+[data-theme="light"] .result-breakdown-item {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #1e293b !important;
+}
+[data-theme="light"] .result-breakdown-item .rb-num {
+  color: #0f172a !important;
+}
+[data-theme="light"] .result-breakdown-item.correct {
+  background: #dcfce7 !important;
+  border-color: #86efac !important;
+  color: #14532d !important;
+}
+[data-theme="light"] .result-breakdown-item.wrong {
+  background: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+  color: #7f1d1d !important;
 }
 
-[data-theme="light"] .hud-bar {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border-top: 1.5px solid #e2e8f0 !important;
-  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+/* 9. Genel Bakış Modalı */
+[data-theme="light"] .overview-modal {
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+}
+[data-theme="light"] .overview-modal .overview-content,
+[data-theme="light"] .overview-modal > div {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+[data-theme="light"] .overview-modal h3,
+[data-theme="light"] .overview-modal-title {
+  color: #0f172a !important;
 }
 
-[data-theme="light"] .hud-slide-count {
+/* 10. Portal & index.html Öğeleri */
+[data-theme="light"] .guide-box,
+[data-theme="light"] .guide-card {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+[data-theme="light"] .guide-title,
+[data-theme="light"] .guide-box h4,
+[data-theme="light"] .guide-card h3,
+[data-theme="light"] .guide-card h4 {
+  color: #0f172a !important;
+}
+[data-theme="light"] .guide-desc,
+[data-theme="light"] .guide-box p,
+[data-theme="light"] .guide-card p {
+  color: #334155 !important;
+}
+[data-theme="light"] .empty-title {
+  color: #0f172a !important;
+}
+[data-theme="light"] .empty-desc {
+  color: #475569 !important;
+}
+
+
+
+/* ==============================================================================
+   PROJE GENELİ AÇIK MOD (LIGHT MODE) METİN KONTRAST & GÖRÜNÜRLÜK ENHANCEMENT
+   ============================================================================== */
+[data-theme="light"],
+html[data-theme="light"],
+body[data-theme="light"],
+:root[data-theme="light"] {
+  --bg-deep: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-glass: rgba(15, 23, 42, 0.04);
+  --border-glass: rgba(15, 23, 42, 0.12);
+  --border-glass-hover: rgba(2, 132, 199, 0.5);
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-dim: #64748b;
+  --text-accent: #0284c7;
+  color-scheme: light;
+}
+
+/* 1. Gövde, Kapsayıcılar ve Başlıklar */
+[data-theme="light"] body,
+[data-theme="light"] .deck-container,
+[data-theme="light"] .slide {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .slide-title,
+[data-theme="light"] .cover-title,
+[data-theme="light"] .card-title,
+[data-theme="light"] .step-title,
+[data-theme="light"] .feature-title,
+[data-theme="light"] .roadmap-title,
+[data-theme="light"] .meta-value,
+[data-theme="light"] .overview-title,
+[data-theme="light"] .overview-thumb-title,
+[data-theme="light"] .overview-modal h3,
+[data-theme="light"] .overview-modal-title,
+[data-theme="light"] .summary-card-title,
+[data-theme="light"] .card-icon-header h3 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: initial !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .cover-subtitle,
+[data-theme="light"] .slide-subtitle,
+[data-theme="light"] .card-desc,
+[data-theme="light"] .step-desc,
+[data-theme="light"] .feature-desc,
+[data-theme="light"] .roadmap-desc,
+[data-theme="light"] .step-info p,
+[data-theme="light"] .concept-bullets li,
+[data-theme="light"] .info-list li,
+[data-theme="light"] .info-list-item,
+[data-theme="light"] .card-list li,
+[data-theme="light"] .criteria-note {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="light"] .concept-bullets li strong,
+[data-theme="light"] .info-list li strong,
+[data-theme="light"] .card-list li strong,
+[data-theme="light"] .info-list-item strong,
+[data-theme="light"] .feature-card strong,
+[data-theme="light"] .step-card strong,
+[data-theme="light"] .summary-card strong,
+[data-theme="light"] .card-list strong,
+[data-theme="light"] .safety-rule-bold,
+[data-theme="light"] .summary-rule-bold {
   color: #0f172a !important;
   font-weight: 800 !important;
 }
 
-[data-theme="light"] .hud-btn {
-  background: #f8fafc !important;
-  border: 1.5px solid #cbd5e1 !important;
-  color: #0f172a !important;
+[data-theme="light"] .safety-rule-text {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="light"] .card-list li::before {
+  color: #059669 !important;
+}
+
+/* 2. Kapak Slaytı & Merak Sorusu */
+[data-theme="light"] .cover-curiosity-box {
+  background: #fef3c7 !important;
+  border-left: 4px solid #d97706 !important;
+  color: #92400e !important;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.1) !important;
+}
+[data-theme="light"] .cover-curiosity-box *,
+[data-theme="light"] .curiosity-question-text {
+  color: #92400e !important;
+}
+[data-theme="light"] .cover-curiosity-box strong {
+  color: #78350f !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .cover-meta-item {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+[data-theme="light"] .meta-label {
+  color: #475569 !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .hud-btn:hover {
-  background: #e2e8f0 !important;
-  border-color: #94a3b8 !important;
-  color: #0f172a !important;
+/* 3. Kartlar ve Paneller */
+[data-theme="light"] .feature-card,
+[data-theme="light"] .step-card,
+[data-theme="light"] .summary-card,
+[data-theme="light"] .visual-panel,
+[data-theme="light"] .card {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+  color: #1e293b !important;
 }
 
-[data-theme="light"] .hud-btn-primary {
-  background: #4f46e5 !important;
-  border-color: #4338ca !important;
+[data-theme="light"] .step-number {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+  border: 1.5px solid #bae6fd !important;
+  font-weight: 800 !important;
+}
+
+/* 4. Atölye ve Başarı Kriterleri */
+[data-theme="light"] .criteria-box,
+[data-theme="light"] .workshop-success-box {
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #1e293b !important;
+}
+[data-theme="light"] .criteria-box *,
+[data-theme="light"] .criteria-list *,
+[data-theme="light"] .workshop-success-box * {
+  color: #1e293b !important;
+}
+[data-theme="light"] .criteria-badge {
+  background: #0284c7 !important;
   color: #ffffff !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .hud-btn-primary:hover {
-  background: #4338ca !important;
+/* 5. Rehber ve Doğru Bilinen Yanlışlar */
+[data-theme="light"] .myth-wrong-item,
+[data-theme="light"] [class*="myth-wrong"],
+[data-theme="light"] div[style*="fecdd3"],
+[data-theme="light"] [style*="color: #fecdd3"] {
+  color: #991b1b !important;
+  background: #fee2e2 !important;
+  padding: 0.6rem 0.9rem !important;
+  border-radius: 6px !important;
+  border: 1px solid #fca5a5 !important;
+  margin-bottom: 0.4rem !important;
 }
-
-[data-theme="light"] .overview-modal {
-  background: rgba(248, 250, 252, 0.96) !important;
-}
-
-[data-theme="light"] .overview-header h3 {
-  color: #0f172a !important;
+[data-theme="light"] .myth-wrong-item strong,
+[data-theme="light"] div[style*="fecdd3"] strong {
+  color: #7f1d1d !important;
   font-weight: 800 !important;
 }
 
-[data-theme="light"] .overview-thumb {
+[data-theme="light"] .myth-correct-item,
+[data-theme="light"] [class*="myth-correct"],
+[data-theme="light"] div[style*="a7f3d0"],
+[data-theme="light"] [style*="color: #a7f3d0"] {
+  color: #166534 !important;
+  background: #dcfce7 !important;
+  padding: 0.6rem 0.9rem !important;
+  border-radius: 6px !important;
+  border: 1px solid #86efac !important;
+}
+[data-theme="light"] .myth-correct-item strong,
+[data-theme="light"] div[style*="a7f3d0"] strong {
+  color: #14532d !important;
+  font-weight: 800 !important;
+}
+
+/* 6. Özet, Ev Görevi ve Gelecek Hafta */
+[data-theme="light"] .homework-box,
+[data-theme="light"] .homework-desc,
+[data-theme="light"] [style*="fde68a"],
+[data-theme="light"] [style*="color: #fde68a"] {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1px solid #fcd34d !important;
+  border-radius: 6px !important;
+  padding: 0.8rem 1rem !important;
+}
+[data-theme="light"] .homework-box * {
+  color: #92400e !important;
+}
+
+[data-theme="light"] .next-week-preview,
+[data-theme="light"] .preview-desc,
+[data-theme="light"] [style*="e2e8f0"],
+[data-theme="light"] [style*="color: #e2e8f0"] {
+  background: #ecfeff !important;
+  color: #0e7490 !important;
+  border: 1px solid #a5f3fc !important;
+  border-radius: 6px !important;
+  padding: 0.8rem 1rem !important;
+}
+[data-theme="light"] .next-week-preview *,
+[data-theme="light"] .preview-desc * {
+  color: #0e7490 !important;
+}
+[data-theme="light"] .next-week-preview strong,
+[data-theme="light"] .preview-desc strong {
+  color: #155e75 !important;
+  font-weight: 800 !important;
+}
+
+/* 7. 10 Soruluk Konu Değerlendirme Testi (Slayt 8 - 17) */
+[data-theme="light"] .quiz-pills-bar {
+  background: rgba(241, 245, 249, 0.9) !important;
+  border: 1px solid #cbd5e1 !important;
+}
+[data-theme="light"] .quiz-nav-pill {
   background: #ffffff !important;
   border: 1.5px solid #cbd5e1 !important;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] .quiz-nav-pill.current {
+  background: #0284c7 !important;
+  border-color: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+}
+[data-theme="light"] .quiz-nav-pill.pill-hard {
+  border-color: #f59e0b !important;
+  color: #b45309 !important;
+}
+[data-theme="light"] .quiz-nav-pill.pill-hard.current {
+  background: #f59e0b !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .quiz-nav-pill.answered-correct {
+  background: #22c55e !important;
+  border-color: #16a34a !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .quiz-nav-pill.answered-wrong {
+  background: #ef4444 !important;
+  border-color: #dc2626 !important;
+  color: #ffffff !important;
 }
 
-[data-theme="light"] .overview-thumb:hover {
-  border-color: #4f46e5 !important;
-  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15) !important;
-}
-
-[data-theme="light"] .overview-thumb.active {
-  border-color: #4f46e5 !important;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3) !important;
-}
-
-[data-theme="light"] .thumb-title {
+[data-theme="light"] .quiz-question-box {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
   color: #0f172a !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+[data-theme="light"] .quiz-question-box div {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .question-box-hard {
+  background: #fffbeb !important;
+  border: 2px solid #f59e0b !important;
+  color: #92400e !important;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15) !important;
+}
+[data-theme="light"] .question-box-hard div {
+  color: #d97706 !important;
+}
+
+[data-theme="light"] .quiz-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04) !important;
+}
+[data-theme="light"] .quiz-btn span:first-child {
+  color: #0284c7 !important;
+  font-weight: 800 !important;
+}
+[data-theme="light"] .quiz-btn:hover:not(:disabled) {
+  background: #f1f5f9 !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+}
+[data-theme="light"] .quiz-btn.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+}
+[data-theme="light"] .quiz-btn.correct span:first-child {
+  color: #15803d !important;
+}
+[data-theme="light"] .quiz-btn.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+}
+[data-theme="light"] .quiz-btn.wrong span:first-child {
+  color: #b91c1c !important;
+}
+
+[data-theme="light"] .quiz-answer-box,
+[data-theme="light"] .quiz-explanation {
+  background: #f8fafc !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+}
+[data-theme="light"] .quiz-explanation strong,
+[data-theme="light"] .quiz-answer-box strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .btn-next-question,
+[data-theme="light"] .btn-finish-quiz {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+}
+[data-theme="light"] .btn-next-question:hover,
+[data-theme="light"] .btn-finish-quiz:hover {
+  background: #0369a1 !important;
+}
+
+[data-theme="light"] .quiz-hud-live-score {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+[data-theme="light"] .live-score-correct {
+  color: #15803d !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] .live-score-wrong {
+  color: #b91c1c !important;
   font-weight: 700 !important;
 }
 
-[data-theme="light"] .thumb-num {
-  color: #4338ca !important;
-  font-weight: 800 !important;
+/* 8. Test Sonuç Karnesi (Slayt 18) */
+[data-theme="light"] .results-card {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+}
+[data-theme="light"] .results-title {
+  color: #0f172a !important;
+}
+[data-theme="light"] .results-desc {
+  color: #475569 !important;
+}
+[data-theme="light"] .results-score-circle {
+  background: #f0fdf4 !important;
+  border: 2px solid #86efac !important;
+}
+[data-theme="light"] .score-big {
+  color: #15803d !important;
+}
+[data-theme="light"] .score-total {
+  color: #64748b !important;
+}
+[data-theme="light"] .result-breakdown-item {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #1e293b !important;
+}
+[data-theme="light"] .result-breakdown-item .rb-num {
+  color: #0f172a !important;
+}
+[data-theme="light"] .result-breakdown-item.correct {
+  background: #dcfce7 !important;
+  border-color: #86efac !important;
+  color: #14532d !important;
+}
+[data-theme="light"] .result-breakdown-item.wrong {
+  background: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+  color: #7f1d1d !important;
 }
 
-[data-theme="light"] .btn-close-overview {
+/* 9. Genel Bakış Modalı */
+[data-theme="light"] .overview-modal {
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+}
+[data-theme="light"] .overview-modal .overview-content,
+[data-theme="light"] .overview-modal > div {
   background: #ffffff !important;
   border: 1.5px solid #cbd5e1 !important;
   color: #0f172a !important;
 }
-
-[data-theme="light"] .theme-toast {
-  background: #ffffff !important;
+[data-theme="light"] .overview-modal h3,
+[data-theme="light"] .overview-modal-title {
   color: #0f172a !important;
-  border: 1.5px solid #cbd5e1 !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12) !important;
 }
 
-/* Yazdırma Modu */
-@media print {
-  html, body {
-    overflow: visible !important;
-    height: auto !important;
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-  .hud-bar, .overview-modal, .theme-toast {
-    display: none !important;
-  }
-  .deck-container {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-  .slide {
-    position: relative !important;
-    opacity: 1 !important;
-    transform: none !important;
-    page-break-after: always;
-    break-after: page;
-    height: 100vh !important;
-    width: 100vw !important;
-    padding: 2rem !important;
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
+/* 10. Portal & index.html Öğeleri */
+[data-theme="light"] .guide-box,
+[data-theme="light"] .guide-card {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+[data-theme="light"] .guide-title,
+[data-theme="light"] .guide-box h4,
+[data-theme="light"] .guide-card h3,
+[data-theme="light"] .guide-card h4 {
+  color: #0f172a !important;
+}
+[data-theme="light"] .guide-desc,
+[data-theme="light"] .guide-box p,
+[data-theme="light"] .guide-card p {
+  color: #334155 !important;
+}
+[data-theme="light"] .empty-title {
+  color: #0f172a !important;
+}
+[data-theme="light"] .empty-desc {
+  color: #475569 !important;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}

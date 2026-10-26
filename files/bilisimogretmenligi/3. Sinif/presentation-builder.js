@@ -217,7 +217,7 @@ function buildPresentation(weekData) {
         <div class="slide-title-box">
           <div class="header-badges">
             <span class="badge badge-unit">${weekData.unitBadge || weekData.unit}</span>
-            <span class="badge badge-week" style="background: rgba(245, 158, 11, 0.2); color: #fde68a; border-color: rgba(245, 158, 11, 0.4);">Bilinçli Bilişimci</span>
+            <span class="badge badge-week">Bilinçli Bilişimci</span>
           </div>
           <h2 class="slide-title">Bilinçli Teknoloji & Mit Avcısı</h2>
           <p class="slide-subtitle">Sağlıklı, güvenli ve doğru teknoloji kullanımı için ipuçları.</p>

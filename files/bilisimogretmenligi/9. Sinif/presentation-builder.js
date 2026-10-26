@@ -236,7 +236,7 @@ function buildPresentation(weekNum) {
 
         <div class="workshop-success-box">
           <h3><span>🎯</span> Başarı Ölçütleri (Rubrik)</h3>
-          <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5;">Görevi tamamlarken öğretmeniniz ve zümrenizin değerlendireceği temel standartlar:</p>
+          <p class="criteria-note" style="font-size: 0.95rem; line-height: 1.5;">Görevi tamamlarken öğretmeniniz ve zümrenizin değerlendireceği temel standartlar:</p>
           <ul class="concept-bullets">
             ${weekData.workshop.criteria.map(crit => `
               <li>
@@ -456,7 +456,7 @@ function buildPresentation(weekNum) {
     <div class="overview-modal">
       <div class="overview-content">
         <div class="overview-header">
-          <h3 style="font-size: 1.4rem; color: #ffffff;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
+          <h3 class="overview-modal-title" style="font-size: 1.4rem;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
           <button class="hud-btn btn-close-overview">✕ Kapat</button>
         </div>
         <div class="overview-grid"></div>

@@ -233,8 +233,7 @@ function buildPresentation(weekData) {
 
       <div class="criteria-box">
         <span class="criteria-badge">BAŞARI KRİTERLERİ</span>
-        <div style="font-size: 0.92rem; color: #cbd5e1; display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          ${weekData.workshop.criteria.map(c => `<span>✓ ${c}</span>`).join('')}
+        <div class="criteria-list" style="font-size: 0.92rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">${weekData.workshop.criteria.map(c => `<span>✓ ${c}</span>`).join('')}
         </div>
       </div>
     </section>
@@ -275,8 +274,8 @@ function buildPresentation(weekData) {
           <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.3rem;">
             ${weekData.tips.myths.map(m => `
               <div style="background: rgba(255, 255, 255, 0.03); padding: 0.8rem 1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.06);">
-                <div style="color: #fecdd3; font-size: 0.88rem; margin-bottom: 0.25rem;"><strong>✕ Yanlış:</strong> "${m.wrong}"</div>
-                <div style="color: #a7f3d0; font-size: 0.88rem;"><strong>✓ Doğru:</strong> ${m.correct}</div>
+                <div class="myth-wrong-item" style="font-size: 0.88rem; margin-bottom: 0.25rem;"><strong>✕ Yanlış:</strong> "${m.wrong}"</div>
+                <div class="myth-correct-item" style="font-size: 0.88rem;"><strong>✓ Doğru:</strong> ${m.correct}</div>
               </div>
             `).join('')}
           </div>
@@ -315,7 +314,7 @@ function buildPresentation(weekData) {
             <div class="card-icon-badge" style="background: rgba(245, 158, 11, 0.2); color: var(--amber-400);">📝</div>
             <h3 class="card-title">Haftanın Keşif Görevi</h3>
           </div>
-          <p class="card-desc" style="font-size: 0.98rem; color: #fde68a; line-height: 1.6;">
+          <p class="card-desc homework-desc" style="font-size: 0.98rem; line-height: 1.6;">
             ${weekData.homework}
           </p>
           <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: auto;">
@@ -328,7 +327,7 @@ function buildPresentation(weekData) {
             <div class="card-icon-badge" style="background: rgba(56, 189, 248, 0.2); color: var(--sky-400);">🚀</div>
             <h3 class="card-title">Gelecek Hafta Fragmanı</h3>
           </div>
-          <p class="card-desc" style="font-size: 1rem; color: #e2e8f0; line-height: 1.6;">
+          <p class="card-desc preview-desc" style="font-size: 1rem; line-height: 1.6;">
             <strong>${weekData.week + 1}. Hafta:</strong><br>
             ${weekData.nextWeekPreview}
           </p>

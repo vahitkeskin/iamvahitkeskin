@@ -38,7 +38,7 @@ function buildPresentation(weekData) {
           <span style="font-size: 2.2rem;">🌟</span>
           <div>
             <strong>Günün Merak ve Keşif Sorusu:</strong>
-            <span style="font-size: 1.15rem; color: #ffffff;">${weekData.curiosityQuestion}</span>
+            <span class="curiosity-question-text" style="font-size: 1.15rem; ">${weekData.curiosityQuestion}</span>
           </div>
         </div>
 
@@ -108,7 +108,7 @@ function buildPresentation(weekData) {
           <div class="info-card-container">
             <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
               <span style="font-size: 2rem;">${weekData.section1.card.icon || '🎨'}</span>
-              <h3 style="font-size: 1.4rem; color: #ffffff;">${weekData.section1.card.title}</h3>
+              <h3 class="overview-modal-title" style="font-size: 1.4rem; ">${weekData.section1.card.title}</h3>
             </div>
             <p style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.2rem;">
               ${weekData.section1.card.desc}
@@ -117,7 +117,7 @@ function buildPresentation(weekData) {
               ${weekData.section1.card.items.map(item => `
                 <div style="background: rgba(255,255,255,0.04); border-left: 3px solid var(--primary); padding: 0.6rem 0.9rem; border-radius: 4px;">
                   <strong style="color: var(--primary); font-size: 0.95rem;">${item.bold}:</strong>
-                  <span style="color: #cbd5e1; font-size: 0.92rem;"> ${item.text}</span>
+                  <span class="card-desc" style="font-size: 0.92rem;"> ${item.text}</span>
                 </div>
               `).join('')}
             </div>
@@ -172,12 +172,12 @@ function buildPresentation(weekData) {
       <div class="slide-body">
         <div class="workshop-container">
           <div class="workshop-steps">
-            <h3 style="font-size: 1.3rem; color: #ffffff; margin-bottom: 0.4rem;">🎯 Oyun ve Etkinlik Adımları:</h3>
+            <h3 class="overview-modal-title" style="font-size: 1.3rem; margin-bottom: 0.4rem;">🎯 Oyun ve Etkinlik Adımları:</h3>
             ${weekData.workshop.steps.map((st, i) => `
               <div class="workshop-step-item">
                 <div class="step-num">${i + 1}</div>
                 <div>
-                  <strong style="color: #ffffff; font-size: 1.05rem; display: block; margin-bottom: 0.2rem;">${st.title}</strong>
+                  <strong class="step-title" style="font-size: 1.05rem; display: block; margin-bottom: 0.2rem;">${st.title}</strong>
                   <span style="color: var(--text-muted); font-size: 0.95rem;">${st.desc}</span>
                 </div>
               </div>
@@ -191,7 +191,7 @@ function buildPresentation(weekData) {
             </div>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.4rem;">
               ${weekData.workshop.criteria.map(crit => `
-                <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.92rem; color: #e2e8f0;">
+                <li class="criteria-item" style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.92rem;">
                   <span style="color: var(--success); font-weight: bold;">✔</span>
                   <span>${crit}</span>
                 </li>
@@ -225,8 +225,8 @@ function buildPresentation(weekData) {
             <div style="display: flex; flex-direction: column; gap: 1rem;">
               ${weekData.tips.safetyRules.map(r => `
                 <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--success); padding: 0.75rem 1rem; border-radius: 4px;">
-                  <strong style="color: #34d399; font-size: 1rem; display: block; margin-bottom: 0.2rem;">${r.bold}</strong>
-                  <span style="color: #cbd5e1; font-size: 0.95rem;">${r.text}</span>
+                  <strong class="safety-rule-bold" style="font-size: 1rem; display: block; margin-bottom: 0.2rem;">${r.bold}</strong>
+                  <span class="safety-rule-text" style="font-size: 0.95rem;">${r.text}</span>
                 </div>
               `).join('')}
             </div>
@@ -240,8 +240,8 @@ function buildPresentation(weekData) {
             <div style="display: flex; flex-direction: column; gap: 1rem;">
               ${weekData.tips.myths.map(m => `
                 <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem 1rem; border-radius: 4px;">
-                  <div style="color: #fca5a5; font-size: 0.95rem; margin-bottom: 0.4rem;"><strong>❌ Yanlış Düşünce:</strong> ${m.wrong}</div>
-                  <div style="color: #34d399; font-size: 0.95rem;"><strong>✅ Doğrusu:</strong> ${m.correct}</div>
+                  <div class="myth-wrong-item" style="font-size: 0.95rem; margin-bottom: 0.4rem;"><strong>❌ Yanlış Düşünce:</strong> ${m.wrong}</div>
+                  <div class="myth-correct-item" style="font-size: 0.95rem;"><strong>✅ Doğrusu:</strong> ${m.correct}</div>
                 </div>
               `).join('')}
             </div>
@@ -268,13 +268,13 @@ function buildPresentation(weekData) {
           <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-card); display: flex; flex-direction: column; justify-content: space-around;">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <span style="font-size: 1.8rem;">🎉</span>
-              <h3 style="font-size: 1.35rem; color: #ffffff;">Haftanın 3 Altın Kuralı</h3>
+              <h3 class="overview-modal-title" style="font-size: 1.35rem; ">Haftanın 3 Altın Kuralı</h3>
             </div>
             ${weekData.summaryRules.map(r => `
               <div style="display: flex; align-items: flex-start; gap: 0.8rem; background: rgba(255,255,255,0.03); padding: 0.8rem 1.1rem; border-radius: var(--radius-md);">
                 <span style="color: var(--primary); font-size: 1.2rem;">⭐</span>
                 <div>
-                  <strong style="color: #ffffff; font-size: 1.05rem;">${r.bold}:</strong>
+                  <strong class="summary-rule-bold" style="font-size: 1.05rem;">${r.bold}:</strong>
                   <span style="color: var(--text-muted); font-size: 0.98rem;"> ${r.text}</span>
                 </div>
               </div>
@@ -287,7 +287,7 @@ function buildPresentation(weekData) {
                 <span style="font-size: 1.8rem;">🏡</span>
                 <h4 style="font-size: 1.25rem; color: var(--primary); font-weight: 800;">Evde Sevgi ve Oyun Görevi</h4>
               </div>
-              <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.6;">
+              <p class="homework-desc" style="font-size: 1.1rem; line-height: 1.6;">
                 ${weekData.homework}
               </p>
             </div>
@@ -442,7 +442,7 @@ function buildPresentation(weekData) {
     <div class="overview-modal">
       <div style="max-width: 1400px; margin: 0 auto;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-          <h3 style="color: #ffffff; font-size: 1.4rem;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
+          <h3 class="overview-modal-title" style="font-size: 1.4rem;">Slayt Genel Görünümü - ${weekData.week}. Hafta</h3>
           <button class="hud-btn btn-close-overview">✕ Kapat</button>
         </div>
         <div class="overview-grid"></div>
