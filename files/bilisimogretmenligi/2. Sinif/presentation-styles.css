@@ -1954,3 +1954,356 @@ body[data-theme="light"],
 [data-theme="light"] .empty-desc {
   color: #475569 !important;
 }
+
+/* Ekranda Kayma ve Duzen Bozulmasini Onleyen Temel HUD ve Modal Kurallari */
+/* ==========================================================================
+   Ekranda Kayma ve Duzen Bozulmasini Onleyen Temel HUD ve Modal Kurallari
+   ========================================================================== */
+
+/* 1. ALT GEZINME CUBUGU (HUD Bar & Deck Hud) - Sayfanin En Altina Sabitli */
+.hud-bar,
+.deck-hud {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 64px !important;
+  background: rgba(14, 21, 38, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 2rem !important;
+  z-index: 1000 !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+
+[data-theme="light"] .hud-bar,
+[data-theme="light"] .deck-hud {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-top: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+}
+
+.hud-progress-wrapper,
+.hud-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+.hud-progress-track,
+.hud-progress-container {
+  width: 220px !important;
+  height: 6px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+}
+
+[data-theme="light"] .hud-progress-track,
+[data-theme="light"] .hud-progress-container {
+  background: #e2e8f0 !important;
+}
+
+.hud-progress-bar {
+  height: 100% !important;
+  background: linear-gradient(90deg, var(--accent-cyan, #00f0ff), var(--accent-blue, #3b82f6)) !important;
+  border-radius: 9999px !important;
+  transition: width 0.3s ease !important;
+}
+
+.hud-slide-count {
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.95rem !important;
+  color: var(--text-muted, #94a3b8) !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .hud-slide-count {
+  color: #475569 !important;
+}
+
+.hud-controls,
+.hud-controls-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+.hud-btn {
+  background: var(--bg-surface-elevated, rgba(22, 32, 56, 0.8)) !important;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.15)) !important;
+  color: var(--text-main, #f8fafc) !important;
+  padding: 0.55rem 1.1rem !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  font-family: var(--font-sans, inherit) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.hud-btn:hover:not(:disabled) {
+  border-color: var(--border-accent, #3b82f6) !important;
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.hud-btn:disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+}
+
+.hud-btn-primary {
+  background: var(--accent-blue, #3b82f6) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-blue, #3b82f6) !important;
+}
+
+.hud-btn-primary:hover:not(:disabled) {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .hud-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .hud-btn:hover:not(:disabled) {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .hud-btn-primary {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .hud-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8 !important;
+  color: #ffffff !important;
+}
+
+/* 2. GENEL BAKIS (OVERVIEW) MODALI - Varsayilan Kapali (display: none), Acildiginda Sabit Katman (Fixed Overlay) */
+.overview-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(7, 11, 20, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  z-index: 9999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2.5rem !important;
+  box-sizing: border-box !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Tum siniflardaki acilis tetikleyicileri (.show, .open, .active) */
+.overview-modal.show,
+.overview-modal.open,
+.overview-modal.active {
+  display: flex !important;
+}
+
+.overview-content {
+  max-width: 1200px !important;
+  width: 100% !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  background: var(--bg-surface, #0e1526) !important;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.15)) !important;
+  border-radius: var(--radius-lg, 20px) !important;
+  padding: 2rem !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="light"] .overview-modal {
+  background: rgba(15, 23, 42, 0.75) !important;
+}
+
+[data-theme="light"] .overview-content {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.overview-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
+  padding-bottom: 1rem !important;
+}
+
+[data-theme="light"] .overview-header {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.overview-modal-title {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: var(--text-main, #ffffff) !important;
+  margin: 0 !important;
+}
+
+[data-theme="light"] .overview-modal-title {
+  color: #0f172a !important;
+}
+
+.overview-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.2rem !important;
+  overflow-y: auto !important;
+  padding: 0.5rem 0.5rem 1rem 0.5rem !important;
+  max-height: calc(90vh - 120px) !important;
+}
+
+@media (max-width: 1200px) {
+  .overview-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 768px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.overview-card,
+.overview-thumb {
+  background: var(--bg-surface-elevated, #162038) !important;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: var(--radius-md, 14px) !important;
+  padding: 1.1rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+}
+
+.overview-card:hover,
+.overview-thumb:hover {
+  border-color: var(--accent-cyan, #00f0ff) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  background: rgba(30, 41, 59, 0.9) !important;
+}
+
+.overview-card.active,
+.overview-thumb.active {
+  border-color: var(--accent-cyan, #00f0ff) !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
+}
+
+[data-theme="light"] .overview-card,
+[data-theme="light"] .overview-thumb {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .overview-card:hover,
+[data-theme="light"] .overview-thumb:hover {
+  background: #f1f5f9 !important;
+  border-color: #3b82f6 !important;
+}
+
+[data-theme="light"] .overview-card.active,
+[data-theme="light"] .overview-thumb.active {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.25) !important;
+  background: #eff6ff !important;
+}
+
+.overview-thumb-num {
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  color: var(--accent-cyan, #00f0ff) !important;
+}
+
+[data-theme="light"] .overview-thumb-num {
+  color: #2563eb !important;
+}
+
+.overview-thumb-title {
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: var(--text-main, #ffffff) !important;
+  line-height: 1.4 !important;
+}
+
+[data-theme="light"] .overview-thumb-title {
+  color: #0f172a !important;
+}
+
+/* 3. DECK KONTEYNERI & SLAYTLAR - Tam Ekran ve Oran Garantisi */
+.deck-container {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.slide {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  box-sizing: border-box !important;
+  padding: 2.2rem 3.5rem 5.5rem 3.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: scale(0.98) translateY(10px) !important;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow-y: auto !important;
+}
+
+.slide.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) translateY(0) !important;
+  z-index: 5 !important;
+}
+
+/* Yazdirma (Print) Modunda HUD ve Modali Gizle */
+@media print {
+  .hud-bar,
+  .deck-hud,
+  .overview-modal,
+  .theme-toast {
+    display: none !important;
+  }
+}
