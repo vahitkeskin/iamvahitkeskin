@@ -145,7 +145,7 @@
 
   window.addEventListener('storage', (e) => {
     if (e.key === STORAGE_KEY) {
-      applyTheme(e.newValue || 'system', false);
+      applyTheme(e.newValue || 'light', false);
     }
   });
 
