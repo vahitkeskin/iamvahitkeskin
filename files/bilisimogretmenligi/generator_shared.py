@@ -329,7 +329,56 @@ class PresentationDeck {
       });
     });
 
-    // İnteraktif Sınav Seçenekleri
+    // -------------------------------------------------------------
+    // İNTERAKTİF 10 SORULUK TEST & SINAV MOTORU
+    // -------------------------------------------------------------
+    const quizState = {
+      answers: {},
+      correctCount: 0,
+      wrongCount: 0
+    };
+
+    function updateScoreHUD() {
+      document.querySelectorAll('.score-c-count').forEach(el => el.textContent = quizState.correctCount);
+      document.querySelectorAll('.score-w-count').forEach(el => el.textContent = quizState.wrongCount);
+
+      Object.keys(quizState.answers).forEach(qIdx => {
+        const isCorr = quizState.answers[qIdx];
+        document.querySelectorAll(`.quiz-nav-pill[data-target-q="${qIdx}"]`).forEach(pill => {
+          pill.classList.remove('answered-correct', 'answered-wrong');
+          pill.classList.add(isCorr ? 'answered-correct' : 'answered-wrong');
+        });
+        document.querySelectorAll(`.result-breakdown-item[data-q-idx="${qIdx}"]`).forEach(item => {
+          item.classList.remove('correct', 'wrong');
+          item.classList.add(isCorr ? 'correct' : 'wrong');
+          const statusEl = item.querySelector('.rb-status');
+          if (statusEl) statusEl.textContent = isCorr ? 'Doğru' : 'Yanlış';
+        });
+      });
+
+      const finalScoreEl = document.getElementById('finalScoreVal');
+      if (finalScoreEl) finalScoreEl.textContent = quizState.correctCount;
+      const titleEl = document.getElementById('resultsTitle');
+      const descEl = document.getElementById('resultsDesc');
+      if (titleEl && descEl) {
+        const c = quizState.correctCount;
+        if (c === 10) {
+          titleEl.textContent = "🌟 Kusursuz Başarı! 10'da 10 Tam Puan!";
+          descEl.textContent = "Tebrikler! Hem tüm temel soruları hem de 10. zor analiz sorusunu hatasız çözerek konunun gerçek bir ustası olduğunu kanıtladın.";
+        } else if (c >= 8) {
+          titleEl.textContent = "🎉 Harika Performans! Konuya Çok İyi Hakimsin!";
+          descEl.textContent = `10 sorudan ${c} tanesini doğru cevapladın. Ufak birkaç detayı da gözden geçirerek 10'da 10 yapabilirsin.`;
+        } else if (c >= 6) {
+          titleEl.textContent = "👍 İyi Bir Başlangıç! Öğrenmeye Devam!";
+          descEl.textContent = `10 sorudan ${c} tanesini doğru cevapladın. Konu slaytlarını bir kez daha inceleyip testi tekrar denemelisin.`;
+        } else {
+          titleEl.textContent = "💪 Geliştirilebilir! Pes Etmek Yok!";
+          descEl.textContent = `10 sorudan ${c} tanesini doğru cevapladın. Konu özetini ve slaytları baştan sona dikkatlice oku, tekrar dene!`;
+        }
+      }
+    }
+
+    // Seçenek Tıklaması
     document.querySelectorAll('.quiz-btn, .quiz-opt').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const parent = btn.closest('.quiz-container, .quiz-card');
@@ -353,6 +402,101 @@ class PresentationDeck {
         if (answerBox) {
           answerBox.classList.add('show');
         }
+
+        const parentSlide = btn.closest('.slide-quiz-question');
+        if (parentSlide && typeof parentSlide.dataset.qIdx !== 'undefined') {
+          const qIdx = parseInt(parentSlide.dataset.qIdx, 10);
+          if (typeof quizState.answers[qIdx] === 'undefined') {
+            quizState.answers[qIdx] = isCorrect;
+            if (isCorrect) quizState.correctCount++;
+            else quizState.wrongCount++;
+            updateScoreHUD();
+          }
+        }
+      });
+    });
+
+    // Soru Hapı Tıklaması
+    document.querySelectorAll('.quiz-nav-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const targetQ = parseInt(pill.dataset.targetQ, 10);
+        const targetSlide = document.querySelector(`.slide-quiz-question[data-q-idx="${targetQ}"]`);
+        if (targetSlide) {
+          const allSlides = Array.from(document.querySelectorAll('.slide'));
+          const sIdx = allSlides.indexOf(targetSlide);
+          if (sIdx !== -1) deck.goToSlide(sIdx);
+        }
+      });
+    });
+
+    // Sonraki Soru Butonu
+    document.querySelectorAll('.btn-next-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        deck.nextSlide();
+      });
+    });
+
+    // Testi Bitir Butonu
+    document.querySelectorAll('.btn-finish-quiz').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const resSlide = document.querySelector('.slide-quiz-results');
+        if (resSlide) {
+          const allSlides = Array.from(document.querySelectorAll('.slide'));
+          const sIdx = allSlides.indexOf(resSlide);
+          if (sIdx !== -1) deck.goToSlide(sIdx);
+        }
+      });
+    });
+
+    // Testi Baştan Çöz
+    document.querySelectorAll('.btn-restart-quiz').forEach(btn => {
+      btn.addEventListener('click', () => {
+        quizState.answers = {};
+        quizState.correctCount = 0;
+        quizState.wrongCount = 0;
+        updateScoreHUD();
+
+        document.querySelectorAll('.quiz-btn, .quiz-opt').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        document.querySelectorAll('.quiz-answer-box, .quiz-answer').forEach(b => {
+          b.classList.remove('show');
+        });
+        document.querySelectorAll('.quiz-nav-pill').forEach(p => {
+          p.classList.remove('answered-correct', 'answered-wrong');
+        });
+        document.querySelectorAll('.result-breakdown-item').forEach(item => {
+          item.classList.remove('correct', 'wrong');
+          const st = item.querySelector('.rb-status');
+          if (st) st.textContent = 'Bekliyor';
+        });
+
+        const q1Slide = document.querySelector('.slide-quiz-question[data-q-idx="0"]');
+        if (q1Slide) {
+          const allSlides = Array.from(document.querySelectorAll('.slide'));
+          const sIdx = allSlides.indexOf(q1Slide);
+          if (sIdx !== -1) deck.goToSlide(sIdx);
+        }
+      });
+    });
+
+    // 10. Zor Soruyu İncele
+    document.querySelectorAll('.btn-review-hard').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q10Slide = document.querySelector('.slide-quiz-question[data-q-idx="9"]');
+        if (q10Slide) {
+          const allSlides = Array.from(document.querySelectorAll('.slide'));
+          const sIdx = allSlides.indexOf(q10Slide);
+          if (sIdx !== -1) deck.goToSlide(sIdx);
+        }
+      });
+    });
+
+    // Konu Anlatımına Dön
+    document.querySelectorAll('.btn-go-cover').forEach(btn => {
+      btn.addEventListener('click', () => {
+        deck.goToSlide(0);
       });
     });
   }
@@ -1200,6 +1344,316 @@ html, body {{
 }}
 
 .quiz-answer-box.show {{
+
+/* ==========================================================================
+   10 SORULUK HAFTALIK KONU DEĞERLENDİRME TESTİ & SONUÇ KARNESİ
+   ========================================================================== */
+.slide-quiz-question {{
+  display: flex;
+  flex-direction: column;
+}}
+
+.quiz-pills-bar {{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0.9rem;
+  flex-wrap: wrap;
+}}
+
+.quiz-nav-pill {{
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.65rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}}
+
+.quiz-nav-pill:hover {{
+  border-color: var(--accent-cyan, #00f0ff);
+  color: #ffffff;
+  transform: translateY(-2px);
+}}
+
+.quiz-nav-pill.current {{
+  background: var(--primary, #3b82f6);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.6);
+  transform: scale(1.08);
+}}
+
+.quiz-nav-pill.answered-correct {{
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+}}
+
+.quiz-nav-pill.answered-wrong {{
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+}}
+
+.quiz-nav-pill.pill-hard {{
+  border-color: #f59e0b;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
+  font-weight: 800;
+}}
+
+.quiz-nav-pill.pill-hard.current {{
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !important;
+  color: #ffffff !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.6) !important;
+}}
+
+.quiz-hud-live-score {{
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}}
+
+.live-score-correct {{
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}}
+
+.live-score-wrong {{
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}}
+
+.badge-hard {{
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: #f59e0b !important;
+  color: #fde68a !important;
+  font-weight: 800 !important;
+}}
+
+.quiz-container-hard {{
+  border-radius: var(--radius-md);
+}}
+
+.question-box-hard {{
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25) !important;
+  background: linear-gradient(135deg, rgba(30, 25, 18, 0.95) 0%, rgba(20, 15, 10, 0.95) 100%) !important;
+}}
+
+.btn-next-question, .btn-finish-quiz {{
+  background: linear-gradient(135deg, var(--accent-cyan, #00f0ff) 0%, #3b82f6 100%);
+  color: #04101e;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  user-select: none;
+}}
+
+.btn-finish-quiz {{
+  background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
+  color: #ffffff;
+}}
+
+.btn-next-question:hover, .btn-finish-quiz:hover {{
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}}
+
+/* Slayt 18: Test Sonuç Karnesi */
+.slide-quiz-results {{
+  display: flex;
+  flex-direction: column;
+}}
+
+.results-card {{
+  background: linear-gradient(135deg, rgba(22, 32, 56, 0.95) 0%, rgba(14, 21, 38, 0.9) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  max-width: 920px;
+  margin: 0.5rem auto;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}}
+
+.results-score-circle {{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px solid var(--accent-cyan, #00f0ff);
+  background: rgba(0, 240, 255, 0.12);
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+}}
+
+.score-big {{
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+}}
+
+.score-total {{
+  font-size: 0.92rem;
+  color: #94a3b8;
+  font-weight: 700;
+}}
+
+.results-title {{
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}}
+
+.results-desc {{
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}}
+
+.results-breakdown-grid {{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+}}
+
+.result-breakdown-item {{
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: center;
+  transition: all 0.2s ease;
+}}
+
+.result-breakdown-item.correct {{
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}}
+
+.result-breakdown-item.wrong {{
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}}
+
+.result-breakdown-item .rb-num {{
+  font-weight: 800;
+  font-size: 0.92rem;
+}}
+
+.result-breakdown-item .rb-status {{
+  font-size: 0.78rem;
+}}
+
+.results-actions {{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}}
+
+/* Light Mode Overrides */
+[data-theme="light"] .quiz-nav-pill {{
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #475569;
+}}
+
+[data-theme="light"] .quiz-nav-pill.current {{
+  background: var(--primary, #2563eb);
+  border-color: #2563eb;
+  color: #ffffff;
+}}
+
+[data-theme="light"] .quiz-nav-pill.answered-correct {{
+  background: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  color: #047857 !important;
+}}
+
+[data-theme="light"] .quiz-nav-pill.answered-wrong {{
+  background: #fef2f2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}}
+
+[data-theme="light"] .results-card {{
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}}
+
+[data-theme="light"] .results-title {{
+  color: #0f172a;
+}}
+
+[data-theme="light"] .results-desc {{
+  color: #64748b;
+}}
+
+[data-theme="light"] .result-breakdown-item {{
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}}
+
+[data-theme="light"] .results-score-circle {{
+  background: rgba(37, 99, 235, 0.08);
+}}
+
+[data-theme="light"] .score-big {{
+  color: #0f172a;
+}}
+
+[data-theme="light"] .question-box-hard {{
+  background: #fffbeb !important;
+  color: #92400e !important;
+  border-color: #f59e0b !important;
+}}
+
+
   display: block;
   animation: fadeIn 0.3s ease;
 }}
@@ -1785,6 +2239,22 @@ function buildPresentation(weekNum) {{
     ? weekData.summary.homework
     : (weekData.homework || 'Konuyu pekiştirici mini araştırma ve uygulama görevi.');
 
+  const weeklyTest = (typeof WEEKLY_TESTS !== 'undefined' && WEEKLY_TESTS[weekData.week])
+    ? WEEKLY_TESTS[weekData.week]
+    : (weekData.test && weekData.test.length > 0 ? weekData.test : null);
+
+  const testQuestions = (weeklyTest && weeklyTest.length > 0)
+    ? weeklyTest
+    : (weekData.quiz ? [
+        {{
+          question: weekData.quiz.question,
+          options: weekData.quiz.options,
+          explanation: weekData.quiz.explanation,
+          difficulty: "Kolay",
+          isHard: false
+        }}
+      ] : []);
+
   container.innerHTML = `
     <!-- SLAYT 1: KAPAK -->
     <section class="slide slide-cover active">
@@ -2028,38 +2498,7 @@ function buildPresentation(weekNum) {{
       </div>
     </section>
 
-    <!-- SLAYT 7: İNTERAKTİF AKILLI TAHTA MİNİ SINAVI -->
-    <section class="slide">
-      <div class="slide-header">
-        <div class="slide-title-box">
-          <div class="header-badges">
-            <span class="badge badge-unit">Sıra Sende!</span>
-            <span class="badge badge-week">${{weekData.week}}. Hafta Değerlendirme</span>
-          </div>
-          <h2 class="slide-title">Akıllı Tahta İnteraktif Mini Sınavı</h2>
-          <p class="slide-subtitle">Hadi öğrendiklerimizi test edelim! Doğru olduğunu düşündüğünüz şıkka tıklayın.</p>
-        </div>
-        <div style="font-size: 0.9rem; color: var(--accent-emerald); font-weight: 700;">Hızlı Pekiştirme</div>
-      </div>
-
-      <div class="quiz-container">
-        <div class="quiz-question-box">
-          ❓ ${{weekData.quiz.question}}
-        </div>
-        <div class="quiz-options-grid">
-          ${{weekData.quiz.options.map(opt => `
-            <button class="quiz-btn" data-correct="${{opt.isCorrect}}">
-              <span>${{opt.text}}</span>
-            </button>
-          `).join('')}}
-        </div>
-        <div class="quiz-answer-box">
-          <strong>Çözüm & Açıklama:</strong> ${{weekData.quiz.explanation}}
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 8: HAFTALIK ÖZET VE GELECEK HAFTA BAKIŞI -->
+    <!-- SLAYT 7: HAFTALIK ÖZET VE GELECEK HAFTA BAKIŞI (DERS SONU KAPANIŞI) -->
     <section class="slide">
       <div class="slide-header">
         <div class="slide-title-box">
@@ -2097,6 +2536,111 @@ function buildPresentation(weekNum) {{
               <p class="next-week-homework" style="font-size: 0.95rem; margin-top: 0.3rem;">${{summaryHomework}}</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAYT 8 - 17: 10 SORULUK KONU DEĞERLENDİRME TESTİ -->
+    ${{testQuestions.map((q, qIdx) => `
+      <section class="slide slide-quiz-question" data-q-idx="${{qIdx}}" data-is-hard="${{q.isHard || qIdx === 9}}">
+        <div class="slide-header">
+          <div class="slide-title-box">
+            <div class="header-badges">
+              <span class="badge badge-unit">Konu Tarama Testi</span>
+              <span class="badge badge-week">${{weekData.week}}. Hafta</span>
+              <span class="badge ${{ (q.isHard || qIdx === 9) ? 'badge-hard' : 'badge-code' }}">
+                ${{ (q.isHard || qIdx === 9) ? '🔥 10. SORU (ZOR DÜZEY)' : 'Soru ' + (qIdx + 1) + ' / 10' }}
+              </span>
+            </div>
+            <h2 class="slide-title">${{ (q.isHard || qIdx === 9) ? '🔥 Analiz & Derin Muhakeme Sorusu' : 'Haftalık Bilgi Kontrol Noktası' }}</h2>
+            <p class="slide-subtitle">${{ (q.isHard || qIdx === 9) ? '⚠️ Bu soru üst düzey düşünme, dikkat ve çok adımlı analiz gerektirir!' : 'Öğrendiklerinizi pekiştirin; doğru seçeneğe dokunun.' }}</p>
+          </div>
+          <div class="quiz-hud-live-score">
+            <span class="live-score-correct">✓ <span class="score-c-count">0</span> Doğru</span>
+            <span class="live-score-wrong">✕ <span class="score-w-count">0</span> Yanlış</span>
+          </div>
+        </div>
+
+        <div class="quiz-pills-bar">
+          ${{testQuestions.map((item, pIdx) => `
+            <button class="quiz-nav-pill ${{pIdx === qIdx ? 'current' : ''}} ${{ (item.isHard || pIdx === 9) ? 'pill-hard' : '' }}" 
+                    data-target-q="${{pIdx}}" title="${{ (item.isHard || pIdx === 9) ? '10. Soru (Zor)' : 'Soru ' + (pIdx + 1) }}">
+              ${{ (item.isHard || pIdx === 9) ? '🔥 10' : (pIdx + 1) }}
+            </button>
+          `).join('')}}
+        </div>
+
+        <div class="quiz-container ${{ (q.isHard || qIdx === 9) ? 'quiz-container-hard' : '' }}">
+          <div class="quiz-question-box ${{ (q.isHard || qIdx === 9) ? 'question-box-hard' : '' }}">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: ${{ (q.isHard || qIdx === 9) ? '#fbbf24' : 'var(--accent-cyan)' }}; margin-bottom: 0.4rem; font-weight: 800;">
+              ${{ (q.isHard || qIdx === 9) ? '🔥 YILDIZLI ZOR SORU' : 'SORU ' + (qIdx + 1) }}
+            </div>
+            ${{q.question}}
+          </div>
+
+          <div class="quiz-options-grid">
+            ${{q.options.map(opt => `
+              <button class="quiz-btn" data-correct="${{opt.isCorrect}}">
+                <span>${{opt.text}}</span>
+              </button>
+            `).join('')}}
+          </div>
+
+          <div class="quiz-answer-box">
+            <div style="margin-bottom: 0.8rem;">
+              <strong>Çözüm & Açıklama:</strong> ${{q.explanation}}
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              ${{qIdx < testQuestions.length - 1 ? `
+                <button class="btn-next-question" data-next-q="${{qIdx + 1}}">
+                  Sonraki Soru (${{qIdx + 2}} / 10) →
+                </button>
+              ` : `
+                <button class="btn-finish-quiz">
+                  🏆 Testi Tamamla & Karneni Gör →
+                </button>
+              `}}
+            </div>
+          </div>
+        </div>
+      </section>
+    `).join('')}}
+
+    <!-- SLAYT 18: TEST SONUÇ KARNESİ VE BAŞARI ÖZETİ -->
+    <section class="slide slide-quiz-results">
+      <div class="slide-header">
+        <div class="slide-title-box">
+          <div class="header-badges">
+            <span class="badge badge-unit">Test Karnesi</span>
+            <span class="badge badge-week">${{weekData.week}}. Hafta Başarı Raporu</span>
+          </div>
+          <h2 class="slide-title">🏆 Haftalık Konu Tarama Testi Tamamlandı!</h2>
+          <p class="slide-subtitle">İşte 10 soruluk değerlendirme sınavı performansınız:</p>
+        </div>
+      </div>
+
+      <div class="results-card">
+        <div class="results-score-circle">
+          <span class="score-big" id="finalScoreVal">0</span>
+          <span class="score-total">/ 10</span>
+        </div>
+
+        <h3 class="results-title" id="resultsTitle">Test Değerlendirmesi</h3>
+        <p class="results-desc" id="resultsDesc">Soruları çözdükçe başarı durumunuz ve karne analizi burada görüntülenecektir.</p>
+
+        <div class="results-breakdown-grid" id="resultsBreakdownGrid">
+          ${{testQuestions.map((q, idx) => `
+            <div class="result-breakdown-item" data-q-idx="${{idx}}">
+              <span class="rb-num">${{idx === 9 ? '🔥 10' : (idx + 1)}}</span>
+              <span class="rb-status">Bekliyor</span>
+            </div>
+          `).join('')}}
+        </div>
+
+        <div class="results-actions">
+          <button class="hud-btn btn-restart-quiz">🔄 Testi Baştan Çöz</button>
+          <button class="hud-btn btn-review-hard">🔥 10. Zor Soruyu İncele</button>
+          <button class="hud-btn btn-go-cover">🏠 Konu Anlatımına Dön</button>
         </div>
       </div>
     </section>
@@ -2172,6 +2716,7 @@ def create_single_week_html(grade_name, week_num, topic_title, course_name="Bili
   <script src="curriculum-term1-part2.js"></script>
   <script src="curriculum-term2-part1.js"></script>
   <script src="curriculum-term2-part2.js"></script>
+  <script src="weekly-tests.js"></script>
   <script src="curriculum-data.js"></script>
   <script src="theme-manager.js"></script>
   <script src="presentation-builder.js"></script>
@@ -2981,6 +3526,7 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
   <script src="curriculum-term1-part2.js"></script>
   <script src="curriculum-term2-part1.js"></script>
   <script src="curriculum-term2-part2.js"></script>
+  <script src="weekly-tests.js"></script>
   <script src="curriculum-data.js"></script>
 
   <script>
@@ -3097,6 +3643,14 @@ const CURRICULUM_DATA = [
   ...CURRICULUM_TERM_2_PART1,
   ...CURRICULUM_TERM_2_PART2
 ];
+
+if (typeof WEEKLY_TESTS !== 'undefined') {{
+  CURRICULUM_DATA.forEach(w => {{
+    if (WEEKLY_TESTS[w.week]) {{
+      w.test = WEEKLY_TESTS[w.week];
+    }}
+  }});
+}}
 
 console.log("{grade_name} {course_name} Müfredat Verisi Başarıyla Yüklendi. Toplam Hafta Sayısı:", CURRICULUM_DATA.length);
 """

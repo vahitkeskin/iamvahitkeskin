@@ -17,6 +17,15 @@
 
   // Sıralamayı garanti et
   allWeeks.sort((a, b) => a.week - b.week);
+  // Haftalık 10 soruluk testleri bağla
+  if (typeof WEEKLY_TESTS !== 'undefined') {
+    allWeeks.forEach(w => {
+      if (WEEKLY_TESTS[w.week]) {
+        w.test = WEEKLY_TESTS[w.week];
+      }
+    });
+  }
+
 
   // Global erişim
   if (typeof window !== 'undefined') {

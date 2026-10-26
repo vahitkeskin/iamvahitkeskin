@@ -1367,3 +1367,312 @@ html[data-theme="light"] {
     border: 1px solid #d1d5db !important;
   }
 }
+
+
+/* ==========================================================================
+   10 SORULUK HAFTALIK KONU DEĞERLENDİRME TESTİ & SONUÇ KARNESİ
+   ========================================================================== */
+.slide-quiz-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-pills-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0.9rem;
+  flex-wrap: wrap;
+}
+
+.quiz-nav-pill {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.65rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.quiz-nav-pill:hover {
+  border-color: var(--accent-cyan, #00f0ff);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.quiz-nav-pill.current {
+  background: var(--primary, #3b82f6);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.6);
+  transform: scale(1.08);
+}
+
+.quiz-nav-pill.answered-correct {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+}
+
+.quiz-nav-pill.answered-wrong {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+}
+
+.quiz-nav-pill.pill-hard {
+  border-color: #f59e0b;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
+  font-weight: 800;
+}
+
+.quiz-nav-pill.pill-hard.current {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !important;
+  color: #ffffff !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.6) !important;
+}
+
+.quiz-hud-live-score {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.live-score-correct {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.live-score-wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.badge-hard {
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: #f59e0b !important;
+  color: #fde68a !important;
+  font-weight: 800 !important;
+}
+
+.quiz-container-hard {
+  border-radius: var(--radius-md);
+}
+
+.question-box-hard {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25) !important;
+  background: linear-gradient(135deg, rgba(30, 25, 18, 0.95) 0%, rgba(20, 15, 10, 0.95) 100%) !important;
+}
+
+.btn-next-question, .btn-finish-quiz {
+  background: linear-gradient(135deg, var(--accent-cyan, #00f0ff) 0%, #3b82f6 100%);
+  color: #04101e;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-finish-quiz {
+  background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
+  color: #ffffff;
+}
+
+.btn-next-question:hover, .btn-finish-quiz:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+/* Slayt 18: Test Sonuç Karnesi */
+.slide-quiz-results {
+  display: flex;
+  flex-direction: column;
+}
+
+.results-card {
+  background: linear-gradient(135deg, rgba(22, 32, 56, 0.95) 0%, rgba(14, 21, 38, 0.9) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  max-width: 920px;
+  margin: 0.5rem auto;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.results-score-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px solid var(--accent-cyan, #00f0ff);
+  background: rgba(0, 240, 255, 0.12);
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+}
+
+.score-big {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.score-total {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.results-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.results-desc {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.results-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+}
+
+.result-breakdown-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.result-breakdown-item.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.result-breakdown-item.wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.result-breakdown-item .rb-num {
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
+.result-breakdown-item .rb-status {
+  font-size: 0.78rem;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .quiz-nav-pill {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .quiz-nav-pill.current {
+  background: var(--primary, #2563eb);
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+[data-theme="light"] .quiz-nav-pill.answered-correct {
+  background: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  color: #047857 !important;
+}
+
+[data-theme="light"] .quiz-nav-pill.answered-wrong {
+  background: #fef2f2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}
+
+[data-theme="light"] .results-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .results-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .results-desc {
+  color: #64748b;
+}
+
+[data-theme="light"] .result-breakdown-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+[data-theme="light"] .results-score-circle {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="light"] .score-big {
+  color: #0f172a;
+}
+
+[data-theme="light"] .question-box-hard {
+  background: #fffbeb !important;
+  color: #92400e !important;
+  border-color: #f59e0b !important;
+}

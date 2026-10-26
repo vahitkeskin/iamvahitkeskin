@@ -30,6 +30,22 @@ function buildPresentation(weekNum) {
     ? weekData.summary.homework
     : (weekData.homework || 'Konuyu pekiştirici mini araştırma ve uygulama görevi.');
 
+  const weeklyTest = (typeof WEEKLY_TESTS !== 'undefined' && WEEKLY_TESTS[weekData.week])
+    ? WEEKLY_TESTS[weekData.week]
+    : (weekData.test && weekData.test.length > 0 ? weekData.test : null);
+
+  const testQuestions = (weeklyTest && weeklyTest.length > 0)
+    ? weeklyTest
+    : (weekData.quiz ? [
+        {
+          question: weekData.quiz.question,
+          options: weekData.quiz.options,
+          explanation: weekData.quiz.explanation,
+          difficulty: "Kolay",
+          isHard: false
+        }
+      ] : []);
+
   container.innerHTML = `
     <!-- SLAYT 1: KAPAK -->
     <section class="slide slide-cover active">
@@ -273,38 +289,7 @@ function buildPresentation(weekNum) {
       </div>
     </section>
 
-    <!-- SLAYT 7: İNTERAKTİF AKILLI TAHTA MİNİ SINAVI -->
-    <section class="slide">
-      <div class="slide-header">
-        <div class="slide-title-box">
-          <div class="header-badges">
-            <span class="badge badge-unit">Sıra Sende!</span>
-            <span class="badge badge-week">${weekData.week}. Hafta Değerlendirme</span>
-          </div>
-          <h2 class="slide-title">Akıllı Tahta İnteraktif Mini Sınavı</h2>
-          <p class="slide-subtitle">Hadi öğrendiklerimizi test edelim! Doğru olduğunu düşündüğünüz şıkka tıklayın.</p>
-        </div>
-        <div style="font-size: 0.9rem; color: var(--accent-emerald); font-weight: 700;">Hızlı Pekiştirme</div>
-      </div>
-
-      <div class="quiz-container">
-        <div class="quiz-question-box">
-          ❓ ${weekData.quiz.question}
-        </div>
-        <div class="quiz-options-grid">
-          ${weekData.quiz.options.map(opt => `
-            <button class="quiz-btn" data-correct="${opt.isCorrect}">
-              <span>${opt.text}</span>
-            </button>
-          `).join('')}
-        </div>
-        <div class="quiz-answer-box">
-          <strong>Çözüm & Açıklama:</strong> ${weekData.quiz.explanation}
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 8: HAFTALIK ÖZET VE GELECEK HAFTA BAKIŞI -->
+    <!-- SLAYT 7: HAFTALIK ÖZET VE GELECEK HAFTA BAKIŞI (DERS SONU KAPANIŞI) -->
     <section class="slide">
       <div class="slide-header">
         <div class="slide-title-box">
@@ -342,6 +327,111 @@ function buildPresentation(weekNum) {
               <p class="next-week-homework" style="font-size: 0.95rem; margin-top: 0.3rem;">${summaryHomework}</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAYT 8 - 17: 10 SORULUK KONU DEĞERLENDİRME TESTİ -->
+    ${testQuestions.map((q, qIdx) => `
+      <section class="slide slide-quiz-question" data-q-idx="${qIdx}" data-is-hard="${q.isHard || qIdx === 9}">
+        <div class="slide-header">
+          <div class="slide-title-box">
+            <div class="header-badges">
+              <span class="badge badge-unit">Konu Tarama Testi</span>
+              <span class="badge badge-week">${weekData.week}. Hafta</span>
+              <span class="badge ${ (q.isHard || qIdx === 9) ? 'badge-hard' : 'badge-code' }">
+                ${ (q.isHard || qIdx === 9) ? '🔥 10. SORU (ZOR DÜZEY)' : 'Soru ' + (qIdx + 1) + ' / 10' }
+              </span>
+            </div>
+            <h2 class="slide-title">${ (q.isHard || qIdx === 9) ? '🔥 Analiz & Derin Muhakeme Sorusu' : 'Haftalık Bilgi Kontrol Noktası' }</h2>
+            <p class="slide-subtitle">${ (q.isHard || qIdx === 9) ? '⚠️ Bu soru üst düzey düşünme, dikkat ve çok adımlı analiz gerektirir!' : 'Öğrendiklerinizi pekiştirin; doğru seçeneğe dokunun.' }</p>
+          </div>
+          <div class="quiz-hud-live-score">
+            <span class="live-score-correct">✓ <span class="score-c-count">0</span> Doğru</span>
+            <span class="live-score-wrong">✕ <span class="score-w-count">0</span> Yanlış</span>
+          </div>
+        </div>
+
+        <div class="quiz-pills-bar">
+          ${testQuestions.map((item, pIdx) => `
+            <button class="quiz-nav-pill ${pIdx === qIdx ? 'current' : ''} ${ (item.isHard || pIdx === 9) ? 'pill-hard' : '' }" 
+                    data-target-q="${pIdx}" title="${ (item.isHard || pIdx === 9) ? '10. Soru (Zor)' : 'Soru ' + (pIdx + 1) }">
+              ${ (item.isHard || pIdx === 9) ? '🔥 10' : (pIdx + 1) }
+            </button>
+          `).join('')}
+        </div>
+
+        <div class="quiz-container ${ (q.isHard || qIdx === 9) ? 'quiz-container-hard' : '' }">
+          <div class="quiz-question-box ${ (q.isHard || qIdx === 9) ? 'question-box-hard' : '' }">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: ${ (q.isHard || qIdx === 9) ? '#fbbf24' : 'var(--accent-cyan)' }; margin-bottom: 0.4rem; font-weight: 800;">
+              ${ (q.isHard || qIdx === 9) ? '🔥 YILDIZLI ZOR SORU' : 'SORU ' + (qIdx + 1) }
+            </div>
+            ${q.question}
+          </div>
+
+          <div class="quiz-options-grid">
+            ${q.options.map(opt => `
+              <button class="quiz-btn" data-correct="${opt.isCorrect}">
+                <span>${opt.text}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="quiz-answer-box">
+            <div style="margin-bottom: 0.8rem;">
+              <strong>Çözüm & Açıklama:</strong> ${q.explanation}
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              ${qIdx < testQuestions.length - 1 ? `
+                <button class="btn-next-question" data-next-q="${qIdx + 1}">
+                  Sonraki Soru (${qIdx + 2} / 10) →
+                </button>
+              ` : `
+                <button class="btn-finish-quiz">
+                  🏆 Testi Tamamla & Karneni Gör →
+                </button>
+              `}
+            </div>
+          </div>
+        </div>
+      </section>
+    `).join('')}
+
+    <!-- SLAYT 18: TEST SONUÇ KARNESİ VE BAŞARI ÖZETİ -->
+    <section class="slide slide-quiz-results">
+      <div class="slide-header">
+        <div class="slide-title-box">
+          <div class="header-badges">
+            <span class="badge badge-unit">Test Karnesi</span>
+            <span class="badge badge-week">${weekData.week}. Hafta Başarı Raporu</span>
+          </div>
+          <h2 class="slide-title">🏆 Haftalık Konu Tarama Testi Tamamlandı!</h2>
+          <p class="slide-subtitle">İşte 10 soruluk değerlendirme sınavı performansınız:</p>
+        </div>
+      </div>
+
+      <div class="results-card">
+        <div class="results-score-circle">
+          <span class="score-big" id="finalScoreVal">0</span>
+          <span class="score-total">/ 10</span>
+        </div>
+
+        <h3 class="results-title" id="resultsTitle">Test Değerlendirmesi</h3>
+        <p class="results-desc" id="resultsDesc">Soruları çözdükçe başarı durumunuz ve karne analizi burada görüntülenecektir.</p>
+
+        <div class="results-breakdown-grid" id="resultsBreakdownGrid">
+          ${testQuestions.map((q, idx) => `
+            <div class="result-breakdown-item" data-q-idx="${idx}">
+              <span class="rb-num">${idx === 9 ? '🔥 10' : (idx + 1)}</span>
+              <span class="rb-status">Bekliyor</span>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="results-actions">
+          <button class="hud-btn btn-restart-quiz">🔄 Testi Baştan Çöz</button>
+          <button class="hud-btn btn-review-hard">🔥 10. Zor Soruyu İncele</button>
+          <button class="hud-btn btn-go-cover">🏠 Konu Anlatımına Dön</button>
         </div>
       </div>
     </section>

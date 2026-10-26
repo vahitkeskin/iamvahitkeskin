@@ -11,4 +11,12 @@ const CURRICULUM_DATA = [
   ...CURRICULUM_TERM_2_PART2
 ];
 
+if (typeof WEEKLY_TESTS !== 'undefined') {
+  CURRICULUM_DATA.forEach(w => {
+    if (WEEKLY_TESTS[w.week]) {
+      w.test = WEEKLY_TESTS[w.week];
+    }
+  });
+}
+
 console.log("9. Sınıf Bilgisayar Bilimi (Kur 1) Müfredat Verisi Başarıyla Yüklendi. Toplam Hafta Sayısı:", CURRICULUM_DATA.length);

@@ -11,13 +11,12 @@ const CURRICULUM_DATA = [
   ...CURRICULUM_TERM_2_PART2
 ];
 
-if (typeof window !== 'undefined') {
-  window.CURRICULUM_DATA = CURRICULUM_DATA;
-  window.CURRICULUM_DATA_6 = CURRICULUM_DATA;
-}
-if (typeof globalThis !== 'undefined') {
-  globalThis.CURRICULUM_DATA = CURRICULUM_DATA;
-  globalThis.CURRICULUM_DATA_6 = CURRICULUM_DATA;
+if (typeof WEEKLY_TESTS !== 'undefined') {
+  CURRICULUM_DATA.forEach(w => {
+    if (WEEKLY_TESTS[w.week]) {
+      w.test = WEEKLY_TESTS[w.week];
+    }
+  });
 }
 
 console.log("6. Sınıf Bilişim Teknolojileri Müfredat Verisi Yüklendi. Toplam Hafta Sayısı:", CURRICULUM_DATA.length);
