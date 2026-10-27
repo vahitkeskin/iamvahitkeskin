@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>🧩 3. Sınıf Bilişim Teknolojileri ve Yazılım - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('meb_theme_mode') || 'light';
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const resolved = saved === 'system' ? (prefersDark ? 'dark' : 'light') : saved;
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.setAttribute('data-theme-setting', saved);
+      } catch(e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="presentation-styles.css">
+  <style>
+    html {
+      font-size: 17.5px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (min-width: 1400px) {
+      html {
+        font-size: 18.5px;
+      }
+    }
+    @media (min-width: 1800px) {
+      html {
+        font-size: 19.5px;
+      }
+    }
+    body {
+      background: #090d16;
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-y: auto;
+      padding: 2.5rem 1.5rem;
+      user-select: auto;
+      display: block;
+      font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .portal-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Portal Üst Başlık (Hero Header) */
+    .portal-header {
+      background: linear-gradient(135deg, #111827 0%, #090d16 100%);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 2.8rem 3.2rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-header::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(244, 63, 94, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      padding: 0.35rem 0.95rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-badge-grade {
+      background: rgba(244, 63, 94, 0.18);
+      color: #fda4af;
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+
+    .hero-badge-teacher {
+      background: rgba(6, 182, 212, 0.15);
+      color: #67e8f9;
+      border-color: rgba(6, 182, 212, 0.35);
+    }
+
+    .hero-badge-fatih {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .portal-title {
+      font-size: 2.7rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.18;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.6px;
+    }
+
+    .portal-desc {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 980px;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    /* İstatistik Kartları */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Kontrol Paneli */
+    .controls-wrapper {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem 1rem 3.2rem;
+      font-size: 1rem;
+      color: #f8fafc;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      border-color: #6366f1;
+      background: rgba(15, 23, 42, 1);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 0.6rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-tab:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .filter-tab.active {
+      background: #6366f1;
+      color: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Hafta Kartları Izgarası */
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .week-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .week-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .card-top {
+      margin-bottom: 1.4rem;
+    }
+
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .week-badge {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-date {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .card-unit {
+      font-size: 0.78rem;
+      color: #38bdf8;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .card-tag {
+      background: rgba(255, 255, 255, 0.04);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      font-weight: 500;
+    }
+
+    .card-tag-code {
+      background: rgba(244, 63, 94, 0.12);
+      color: #fda4af;
+      border-color: rgba(244, 63, 94, 0.25);
+      font-weight: 600;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.1rem;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-launch {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-launch:hover {
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn-print-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 0.65rem 0.85rem;
+    }
+
+    .btn-print-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    /* Kılavuz Kartı */
+    .guide-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-info h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .guide-info p {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    .shortcuts-pills {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .shortcut-pill {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .shortcut-pill kbd {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+    }
+
+    .no-results h3 {
+      font-size: 1.4rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .no-results p {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .portal-header {
+        padding: 2.2rem 2rem;
+      }
+      .portal-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+      .weeks-grid {
+        grid-template-columns: 1fr;
+      }
+      .guide-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Hero Üst Çubuk ve Tema Kontrolü */
+    .hero-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-top-bar .hero-badge-row {
+      margin-bottom: 0;
+    }
+
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-segmented-control {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 3px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .theme-pill-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 0.42rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      outline: none;
+      user-select: none;
+    }
+
+    .theme-pill-btn:hover {
+      color: #f8fafc;
+    }
+
+    .theme-pill-btn.active {
+      background: #6366f1;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Açık Mod (Light Mode) Portal Stilleri */
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) body {
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .portal-header {
+        background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+      }
+      :root:not([data-theme="dark"]) .portal-title {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .portal-desc {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .stat-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      }
+      :root:not([data-theme="dark"]) .stat-label {
+        color: #64748b;
+      }
+      :root:not([data-theme="dark"]) .search-input {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        color: #0f172a;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      :root:not([data-theme="dark"]) .search-input:focus {
+        border-color: #6366f1;
+        background: #ffffff;
+      }
+      :root:not([data-theme="dark"]) .filter-tab {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .filter-tab:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .week-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      }
+      :root:not([data-theme="dark"]) .week-card:hover {
+        border-color: rgba(99, 102, 241, 0.4);
+        box-shadow: 0 20px 35px -10px rgba(99, 102, 241, 0.18), 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+      }
+      :root:not([data-theme="dark"]) .card-title {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .card-subtitle {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .card-date {
+        color: #64748b;
+      }
+      :root:not([data-theme="dark"]) .card-tag {
+        background: #f1f5f9;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+      }
+      :root:not([data-theme="dark"]) .guide-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      }
+      :root:not([data-theme="dark"]) .guide-info h3 {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .guide-info p {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .shortcut-pill {
+        background: #f1f5f9;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+      }
+      :root:not([data-theme="dark"]) .shortcut-pill kbd {
+        background: #e2e8f0;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+      }
+      :root:not([data-theme="dark"]) .btn-print-card {
+        background: #f1f5f9;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+      }
+      :root:not([data-theme="dark"]) .theme-segmented-control {
+        background: rgba(241, 245, 249, 0.95);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      :root:not([data-theme="dark"]) .theme-pill-btn {
+        color: #64748b;
+      }
+      :root:not([data-theme="dark"]) .theme-pill-btn:hover {
+        color: #0f172a;
+      }
+    }
+
+    [data-theme="light"] body {
+      background: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .portal-header {
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05) !important;
+    }
+    [data-theme="light"] .hero-badge {
+      background: #ede9fe !important;
+      color: #5b21b6 !important;
+      border: 1.5px solid #c4b5fd !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .hero-badge-teacher {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border: 1.5px solid #fde68a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .hero-badge-fatih {
+      background: #e0e7ff !important;
+      color: #3730a3 !important;
+      border: 1.5px solid #c7d2fe !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .portal-title {
+      color: #0f172a !important;
+      font-weight: 900 !important;
+    }
+    [data-theme="light"] .portal-desc {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .stat-card {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }
+    [data-theme="light"] .stat-value {
+      color: #4f46e5 !important;
+      font-weight: 900 !important;
+    }
+    [data-theme="light"] .stat-label {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    [data-theme="light"] .search-input {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .search-input::placeholder {
+      color: #64748b !important;
+    }
+    [data-theme="light"] .search-input:focus {
+      border-color: #4f46e5 !important;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+    }
+    [data-theme="light"] .filter-tab {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .filter-tab:hover {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }
+    [data-theme="light"] .filter-tab.active {
+      background: #4f46e5 !important;
+      border-color: #4338ca !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25) !important;
+    }
+    [data-theme="light"] .week-card {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+    }
+    [data-theme="light"] .week-card:hover {
+      border-color: #6366f1 !important;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.15) !important;
+    }
+    [data-theme="light"] .week-badge {
+      background: #ede9fe !important;
+      color: #5b21b6 !important;
+      border: 1px solid #ddd6fe !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .card-title {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .card-subtitle {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .card-date {
+      color: #475569 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .card-tag {
+      background: #f1f5f9 !important;
+      color: #1e293b !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .btn-action {
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25) !important;
+    }
+    [data-theme="light"] .btn-action:hover {
+      background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%) !important;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35) !important;
+    }
+    [data-theme="light"] .guide-card {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }
+    [data-theme="light"] .guide-info h3 {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .guide-info p {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .shortcut-pill {
+      background: #f1f5f9 !important;
+      color: #334155 !important;
+      border: 1.5px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .shortcut-pill kbd {
+      background: #e2e8f0 !important;
+      color: #4f46e5 !important;
+      border: 1.5px solid #cbd5e1 !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .btn-print-card {
+      background: #f8fafc !important;
+      color: #1e293b !important;
+      border: 1.5px solid #cbd5e1 !important;
+      font-weight: 700 !important;
+    }
+    [data-theme="light"] .btn-print-card:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }
+    [data-theme="light"] .theme-segmented-control {
+      background: #e2e8f0 !important;
+      border: 1.5px solid #cbd5e1 !important;
+    }
+    [data-theme="light"] .theme-pill-btn {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    [data-theme="light"] .theme-pill-btn:hover {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .theme-pill-btn.active {
+      background: #ffffff !important;
+      color: #4f46e5 !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
+    }
+  
+    /* Açık Mod Rehber ve Arama Görünürlüğü */
+    [data-theme="light"] .guide-title,
+    [data-theme="light"] .guide-box h4,
+    [data-theme="light"] .guide-card h4,
+    [data-theme="light"] .empty-title {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .guide-desc,
+    [data-theme="light"] .guide-box p,
+    [data-theme="light"] .guide-card p,
+    [data-theme="light"] .empty-desc {
+      color: #334155 !important;
+    }
+    [data-theme="light"] .shortcut-pill,
+    [data-theme="light"] .guide-keys div {
+      color: #1e293b !important;
+    }
+
+  
+    /* ══════════════════════════════════════════════════════════════════
+       CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON)
+       ══════════════════════════════════════════════════════════════════ */
+    .class-nav-header-tabs {
+      margin-bottom: 1.5rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 0.5rem 0.75rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+    .class-nav-tabs-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .class-nav-tabs-wrapper::-webkit-scrollbar { display: none; }
+    .class-nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 0.25rem;
+      flex-shrink: 0;
+    }
+    .class-nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+    .class-nav-pill .nav-emoji {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .class-nav-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+    .class-nav-pill.home-link {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .class-nav-pill.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #38bdf8;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+    }
+    [data-theme="light"] .class-nav-header-tabs {
+      background: rgba(255, 255, 255, 0.94);
+      border-color: #cbd5e1;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }
+    [data-theme="light"] .class-nav-divider {
+      background: #cbd5e1;
+    }
+    [data-theme="light"] .class-nav-pill {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #475569;
+    }
+    [data-theme="light"] .class-nav-pill:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    [data-theme="light"] .class-nav-pill.home-link {
+      background: #e0f2fe;
+      color: #0284c7;
+      border-color: #bae6fd;
+    }
+    [data-theme="light"] .class-nav-pill.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="portal-container">
+    <!-- Üst Başlık (Hero Header) -->
+        <!-- CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON) -->
+    <nav class="class-nav-header-tabs" aria-label="Sınıf Sekmeleri ve Hızlı Geçiş">
+      <div class="class-nav-tabs-wrapper">
+        <a href="../index.html" class="class-nav-pill home-link" title="Ana Portala Dön"><span class="nav-emoji">🏠</span><span class="nav-text">Ana Portal</span></a>
+        <div class="class-nav-divider"></div>
+        <a href="../1-sinif/index.html" class="class-nav-pill" title="1. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🎒</span><span class="nav-text">1. Sınıf</span></a>
+        <a href="../2-sinif/index.html" class="class-nav-pill" title="2. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">💻</span><span class="nav-text">2. Sınıf</span></a>
+        <a href="../3-sinif/index.html" class="class-nav-pill active" title="3. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🧩</span><span class="nav-text">3. Sınıf</span></a>
+        <a href="../4-sinif/index.html" class="class-nav-pill" title="4. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🚀</span><span class="nav-text">4. Sınıf</span></a>
+        <a href="../5-sinif/index.html" class="class-nav-pill" title="5. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🛡️</span><span class="nav-text">5. Sınıf</span></a>
+        <a href="../6-sinif/index.html" class="class-nav-pill" title="6. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">⚙️</span><span class="nav-text">6. Sınıf</span></a>
+        <a href="../7-sinif/index.html" class="class-nav-pill" title="7. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">📐</span><span class="nav-text">7. Sınıf</span></a>
+        <a href="../8-sinif/index.html" class="class-nav-pill" title="8. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🤖</span><span class="nav-text">8. Sınıf</span></a>
+        <a href="../9-sinif/index.html" class="class-nav-pill" title="9. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🐍</span><span class="nav-text">9. Sınıf</span></a>
+        <a href="../10-sinif/index.html" class="class-nav-pill" title="10. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🧠</span><span class="nav-text">10. Sınıf</span></a>
+      </div>
+    </nav>
+
+    <header class="portal-header">
+      <div class="hero-top-bar">
+        <div class="hero-badge-row">
+          <span class="hero-badge hero-badge-grade">3. Sınıf</span>
+          <span class="hero-badge">MEB Türkiye Yüzyılı Maarif Modeli</span>
+          <span class="hero-badge hero-badge-teacher">Öğretmen: Vahit Keskin</span>
+          <span class="hero-badge hero-badge-fatih">📺 Fatih Akıllı Tahta Uyumlu</span>
+        </div>
+
+        <div class="theme-switch-wrapper">
+          <div class="theme-segmented-control" role="radiogroup" aria-label="Görünüm Teması">
+            <button type="button" class="theme-pill-btn active" data-theme-val="light" title="Açık Mod (Varsayılan)" aria-checked="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <span>Açık</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="dark" title="Kapalı Mod" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span>Kapalı</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="system" title="Sistem Modu" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Sistem</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="portal-title">3. Sınıf Bilişim Teknolojileri ve Yazılım Yıllık Sunum Portalı</h1>
+      <p class="portal-desc">
+        2026-2027 Eğitim Öğretim Yılı 3. Sınıf Bilişim ve Kodlama Dersi 41 Haftalık İnteraktif Ders Sunumları Portalı.
+        Donanım giriş/çıkış birimlerinden kelime işlemciye, siber etikten algoritma akış şemalarına, Scratch 3.0 blok kodlamadan robotik sensörler ve yapay zekâya kadar tüm kazanımlar eksiksiz modellenmiştir.
+      </p>
+
+      <!-- İstatistikler -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-number">41</span>
+          <span class="stat-label">Haftalık Tam Sunum Destesi</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">6</span>
+          <span class="stat-label">Bilişim ve Kodlama Teması</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">328</span>
+          <span class="stat-label">İnteraktif Slayt & SVG Şeması</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">82+</span>
+          <span class="stat-label">Uygulama Atölyesi ve Sınav Sorusu</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Kontrol ve Arama Paneli -->
+    <div class="controls-wrapper">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Hafta numarası, konu başlığı, donanım parçası, kodlama kavramı arayın... (Örn: Klavye, Word, Algoritma, Scratch, Robot, Yapay Zekâ)">
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">Tüm Haftalar (41)</button>
+        <button class="filter-tab" data-filter="term1">1. Dönem (1 - 19)</button>
+        <button class="filter-tab" data-filter="term2">2. Dönem (20 - 41)</button>
+        <button class="filter-tab" data-filter="tema-1">Tema 1: Donanım & Sistemler</button>
+        <button class="filter-tab" data-filter="tema-2">Tema 2: Kelime İşlemci & Görseller</button>
+        <button class="filter-tab" data-filter="tema-3">Tema 3: Güvenli İnternet & Etik</button>
+        <button class="filter-tab" data-filter="tema-4">Tema 4: Algoritma & Akış Şeması</button>
+        <button class="filter-tab" data-filter="tema-5">Tema 5: Scratch Kodlama & Animasyon</button>
+        <button class="filter-tab" data-filter="tema-6">Tema 6: Robotik, Yapay Zekâ & Mezuniyet</button>
+      </div>
+    </div>
+
+    <!-- Hafta Kartları Listesi -->
+    <div class="weeks-grid" id="weeksGrid"></div>
+
+    <!-- Akıllı Tahta Kullanım Kılavuzu -->
+    <div class="guide-card">
+      <div class="guide-info">
+        <h3>📺 Akıllı Tahta ve Klavye Kısayolları</h3>
+        <p>Sunumları Fatih akıllı tahtada veya bilgisayarınızda açtığınızda tam ekran moduna geçebilir, dokunarak kaydırabilir veya klavye kısayollarını kullanabilirsiniz.</p>
+      </div>
+      <div class="shortcuts-pills">
+        <div class="shortcut-pill"><kbd>Space</kbd> / <kbd>→</kbd> İleri</div>
+        <div class="shortcut-pill"><kbd>←</kbd> Geri</div>
+        <div class="shortcut-pill"><kbd>F</kbd> Tam Ekran</div>
+        <div class="shortcut-pill"><kbd>O</kbd> Genel Bakış (Matrix)</div>
+        <div class="shortcut-pill"><kbd>P</kbd> PDF Yazdır</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Müfredat Verileri ve Mantık -->
+  <script src="curriculum-term1.js"></script>
+  <script src="curriculum-term1-part2.js"></script>
+  <script src="curriculum-term2-part1.js"></script>
+  <script src="curriculum-term2-part2.js"></script>
+  <script src="weekly-tests.js"></script>
+  <script src="curriculum-data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('weeksGrid');
+      const searchInput = document.getElementById('searchInput');
+      const filterTabs = document.querySelectorAll('.filter-tab');
+
+      let currentFilter = 'all';
+      let searchQuery = '';
+
+      function getWeekFilename(w) {
+        const padded = String(w.week).padStart(2, '0');
+        const slug = w.title
+          .toLowerCase()
+          .replace(/[ğĞ]/g, 'g')
+          .replace(/[üÜ]/g, 'u')
+          .replace(/[şŞ]/g, 's')
+          .replace(/[ıİ]/g, 'i')
+          .replace(/[öÖ]/g, 'o')
+          .replace(/[çÇ]/g, 'c')
+          .replace(/[^a-zA-Z0-9]/g, '_')
+          .replace(/_+/g, '_')
+          .replace(/^_|_$/g, '');
+        return `Hafta_${padded}_${slug}.html`;
+      }
+
+      function renderWeeks() {
+        grid.innerHTML = '';
+
+        const dataset = typeof CURRICULUM_DATA_3 !== 'undefined' ? CURRICULUM_DATA_3 : (typeof CURRICULUM_DATA !== 'undefined' ? CURRICULUM_DATA : []);
+        if (!dataset.length) {
+          grid.innerHTML = '<div class="no-results"><h3>Müfredat verisi yükleniyor...</h3></div>';
+          return;
+        }
+
+        const filtered = dataset.filter(w => {
+          // Dönem filtreleri
+          if (currentFilter === 'term1' && w.week > 19) return false;
+          if (currentFilter === 'term2' && w.week <= 19) return false;
+
+          // Tema filtreleri
+          if (currentFilter.startsWith('tema-')) {
+            if (w.unitTheme !== currentFilter) return false;
+          }
+
+          // Arama filtresi
+          if (searchQuery.trim() !== '') {
+            const query = searchQuery.toLowerCase();
+            const textToSearch = `${w.week} ${w.title} ${w.subtitle} ${w.unit} ${w.outcomeCode} ${w.targetSkill} ${(w.roadmap || []).map(r=>r.title+' '+r.desc).join(' ')}`.toLowerCase();
+            if (!textToSearch.includes(query)) return false;
+          }
+
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="no-results">
+              <h3>Aramanızla Eşleşen Hafta Bulunamadı</h3>
+              <p>"${searchQuery}" için farklı bir arama yapın veya filtreleri sıfırlayın.</p>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(w => {
+          const card = document.createElement('div');
+          card.className = 'week-card';
+          
+          const filename = getWeekFilename(w);
+          const termBadge = w.week <= 19 ? '1. Dönem' : '2. Dönem';
+
+          card.innerHTML = `
+            <div class="card-top">
+              <div class="card-meta-row">
+                <span class="week-badge">${w.week}. Hafta • ${termBadge}</span>
+                <span class="card-date">${w.date}</span>
+              </div>
+              <span class="card-unit">${w.unitBadge || w.unit}</span>
+              <h3 class="card-title">${w.title}</h3>
+              <p class="card-subtitle">${w.subtitle}</p>
+              <div class="card-tags">
+                <span class="card-tag card-tag-code">${w.outcomeCode}</span>
+                <span class="card-tag">${w.targetSkill}</span>
+                <span class="card-tag">${w.hours || '2 Ders Saati'}</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a href="${filename}" class="btn-action btn-launch">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Sunumu Başlat
+              </a>
+              <a href="${filename}?print=true" class="btn-action btn-print-card" target="_blank" title="Yazdır veya PDF Kaydet">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                PDF
+              </a>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+      }
+
+      // Dinleyiciler
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderWeeks();
+      });
+
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.dataset.filter;
+          renderWeeks();
+        });
+      });
+
+      renderWeeks();
+    });
+  </script>
+  <script src="theme-manager.js"></script>
+</body>
+</html>

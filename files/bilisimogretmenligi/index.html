@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <title>MEB Maarif Modeli Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf) | Vahit Keskin</title>
+  <title>🎓 MEB Maarif Modeli Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf) | Vahit Keskin</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   <meta name="description" content="T.C. Millî Eğitim Bakanlığı Türkiye Yüzyılı Maarif Modeli 1-10. Sınıf Bilişim Teknolojileri, Serbest Etkinlikler, Kodlama, Robotik ve Bilgisayar Bilimi yıllık interaktif ders sunumları ve haftalık programlar kütüphanesi.">
   <meta name="keywords" content="MEB, Maarif Modeli, Bilişim Teknolojileri, Serbest Etkinlikler, Bilgisayar Bilimi, Fatih Akıllı Tahta, Vahit Keskin, Kodlama, Robotik, Python, Scratch">
   <meta name="author" content="Vahit Keskin">
@@ -620,6 +621,106 @@
       background: var(--bg-surface-elevated);
       color: var(--brand-primary);
       box-shadow: var(--shadow-sm);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME & İKON)
+       ══════════════════════════════════════════════════════════════════ */
+    .grade-tabs-bar {
+      margin-bottom: 2.25rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .grade-tabs-scroll {
+      display: flex;
+      gap: 0.55rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(56, 189, 248, 0.3) transparent;
+      padding-bottom: 3px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .grade-tabs-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .grade-tabs-scroll::-webkit-scrollbar-thumb {
+      background: var(--brand-primary);
+      border-radius: var(--radius-pill);
+    }
+
+    .grade-tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .grade-tab-btn .tab-btn-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-fast);
+    }
+
+    .grade-tab-btn .tab-btn-count {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-sub);
+    }
+
+    .grade-tab-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-medium);
+      transform: translateY(-2px);
+    }
+
+    .grade-tab-btn:hover .tab-btn-icon {
+      transform: scale(1.2);
+    }
+
+    .grade-tab-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22) 0%, rgba(14, 165, 233, 0.3) 100%);
+      color: var(--brand-primary);
+      border-color: var(--brand-primary);
+      box-shadow: 0 4px 16px var(--brand-primary-glow);
+    }
+
+    [data-theme="light"] .grade-tab-btn.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+    }
+
+    [data-theme="light"] .grade-tab-btn.active .tab-btn-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
     }
 
     /* ══════════════════════════════════════════════════════════════════
@@ -1498,6 +1599,57 @@
       </div>
     </section>
 
+    <!-- CLASS QUICK NAVIGATION TABS WITH DISTINCTIVE ICONS (1 - 10. SINIF SEKME MENÜSÜ) -->
+    <nav class="grade-tabs-bar" role="tablist" aria-label="Sınıf Sekmeleri ve Hızlı Seçim">
+      <div class="grade-tabs-scroll">
+        <button type="button" class="grade-tab-btn active" data-grade="all" role="tab" aria-selected="true" title="Tüm Sınıfları Göster">
+          <span class="tab-btn-icon">✨</span>
+          <span class="tab-btn-text">Tüm Sınıflar</span>
+          <span class="tab-btn-count">10</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="1" role="tab" aria-selected="false" title="1. Sınıf Serbest Etkinlikler">
+          <span class="tab-btn-icon">🎒</span>
+          <span class="tab-btn-text">1. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="2" role="tab" aria-selected="false" title="2. Sınıf Bilişim Teknolojileri ve Yazılım">
+          <span class="tab-btn-icon">💻</span>
+          <span class="tab-btn-text">2. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="3" role="tab" aria-selected="false" title="3. Sınıf Bilişim ve Kodlama">
+          <span class="tab-btn-icon">🧩</span>
+          <span class="tab-btn-text">3. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="4" role="tab" aria-selected="false" title="4. Sınıf Bilişim Teknolojileri ve Yazılım">
+          <span class="tab-btn-icon">🚀</span>
+          <span class="tab-btn-text">4. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="5" role="tab" aria-selected="false" title="5. Sınıf Bilişim Teknolojileri ve Yazılım">
+          <span class="tab-btn-icon">🛡️</span>
+          <span class="tab-btn-text">5. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="6" role="tab" aria-selected="false" title="6. Sınıf Bilişim Teknolojileri">
+          <span class="tab-btn-icon">⚙️</span>
+          <span class="tab-btn-text">6. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="7" role="tab" aria-selected="false" title="7. Sınıf Teknoloji ve Tasarım">
+          <span class="tab-btn-icon">📐</span>
+          <span class="tab-btn-text">7. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="8" role="tab" aria-selected="false" title="8. Sınıf Robotik ve Yapay Zekâ">
+          <span class="tab-btn-icon">🤖</span>
+          <span class="tab-btn-text">8. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="9" role="tab" aria-selected="false" title="9. Sınıf Bilgisayar Bilimi (Kur 1)">
+          <span class="tab-btn-icon">🐍</span>
+          <span class="tab-btn-text">9. Sınıf</span>
+        </button>
+        <button type="button" class="grade-tab-btn" data-grade="10" role="tab" aria-selected="false" title="10. Sınıf Bilgisayar Bilimi (Kur 2)">
+          <span class="tab-btn-icon">🧠</span>
+          <span class="tab-btn-text">10. Sınıf</span>
+        </button>
+      </div>
+    </nav>
+
     <!-- CLASSES GRID / LIST CONTAINER -->
     <main class="classes-container mode-grid" id="classesContainer" aria-label="Tüm Sınıflar">
       <!-- Cards rendered via JavaScript -->
@@ -1616,8 +1768,8 @@
         stage: "ilkokul",
         stageLabel: "🎒 İlkokul (1. Sınıf)",
         subject: "Serbest Etkinlikler & Değerler Eğitimi",
-        folder: "1. Sinif",
-        path: "1.%20Sinif/index.html",
+        folder: "1-sinif",
+        path: "1-sinif/index.html",
         weeks: "41 Hafta (164 Saat)",
         slides: "328+ İnteraktif Slayt",
         themeClass: "card-grade-1",
@@ -1631,8 +1783,8 @@
         stage: "ilkokul",
         stageLabel: "💻 İlkokul (2. Sınıf)",
         subject: "Bilişim Teknolojileri & ScratchJr",
-        folder: "2. Sinif",
-        path: "2.%20Sinif/index.html",
+        folder: "2-sinif",
+        path: "2-sinif/index.html",
         weeks: "41 Hafta (82 Sunum)",
         slides: "160+ İnteraktif Slayt",
         themeClass: "card-grade-2",
@@ -1646,8 +1798,8 @@
         stage: "ilkokul",
         stageLabel: "🧩 İlkokul (3. Sınıf)",
         subject: "Bilişim ve Kodlama Dersi",
-        folder: "3. Sinif",
-        path: "3.%20Sinif/index.html",
+        folder: "3-sinif",
+        path: "3-sinif/index.html",
         weeks: "41 Hafta (82 Sunum)",
         slides: "180+ İnteraktif Slayt",
         themeClass: "card-grade-3",
@@ -1661,8 +1813,8 @@
         stage: "ilkokul",
         stageLabel: "🚀 İlkokul (4. Sınıf)",
         subject: "Bilişim Teknolojileri ve Yazılım",
-        folder: "4. Sinif",
-        path: "4.%20Sinif/index.html",
+        folder: "4-sinif",
+        path: "4-sinif/index.html",
         weeks: "41 Hafta (82 Saat)",
         slides: "160+ İnteraktif Slayt",
         themeClass: "card-grade-4",
@@ -1676,8 +1828,8 @@
         stage: "ortaokul",
         stageLabel: "🛡️ Ortaokul (5. Sınıf)",
         subject: "Bilişim Teknolojileri ve Yazılım",
-        folder: "5. Sinif",
-        path: "5.%20Sinif/index.html",
+        folder: "5-sinif",
+        path: "5-sinif/index.html",
         weeks: "41 Hafta (82 Sunum)",
         slides: "200+ İnteraktif Slayt",
         themeClass: "card-grade-5",
@@ -1691,8 +1843,8 @@
         stage: "ortaokul",
         stageLabel: "⚙️ Ortaokul (6. Sınıf)",
         subject: "Bilişim Teknolojileri",
-        folder: "6. Sinif",
-        path: "6.%20Sinif/index.html",
+        folder: "6-sinif",
+        path: "6-sinif/index.html",
         weeks: "41 Hafta (82 Sunum)",
         slides: "210+ İnteraktif Slayt",
         themeClass: "card-grade-6",
@@ -1706,8 +1858,8 @@
         stage: "ortaokul",
         stageLabel: "📐 Ortaokul (7. Sınıf)",
         subject: "Teknoloji ve Tasarım & İnovasyon",
-        folder: "7. Sinif",
-        path: "7.%20Sinif/index.html",
+        folder: "7-sinif",
+        path: "7-sinif/index.html",
         weeks: "41 Hafta (82 Saat)",
         slides: "170+ İnteraktif Slayt",
         themeClass: "card-grade-7",
@@ -1721,8 +1873,8 @@
         stage: "ortaokul",
         stageLabel: "🤖 Ortaokul (8. Sınıf)",
         subject: "Robotik & Yapay Zekâ & Algoritma",
-        folder: "8. Sinif",
-        path: "8.%20Sinif/index.html",
+        folder: "8-sinif",
+        path: "8-sinif/index.html",
         weeks: "41 Hafta (82 Saat)",
         slides: "180+ İnteraktif Slayt",
         themeClass: "card-grade-8",
@@ -1736,8 +1888,8 @@
         stage: "lise",
         stageLabel: "🐍 Lise (9. Sınıf)",
         subject: "Bilgisayar Bilimi & Python Programlama",
-        folder: "9. Sinif",
-        path: "9.%20Sinif/index.html",
+        folder: "9-sinif",
+        path: "9-sinif/index.html",
         weeks: "41 Hafta (82 Saat)",
         slides: "190+ İnteraktif Slayt",
         themeClass: "card-grade-9",
@@ -1751,8 +1903,8 @@
         stage: "lise",
         stageLabel: "🧠 Lise (10. Sınıf)",
         subject: "İleri Python & Makine Öğrenmesi & OOP",
-        folder: "10. Sinif",
-        path: "10.%20Sinif/index.html",
+        folder: "10-sinif",
+        path: "10-sinif/index.html",
         weeks: "41 Hafta (82 Saat)",
         slides: "200+ İnteraktif Slayt",
         themeClass: "card-grade-10",
@@ -2002,13 +2154,16 @@
 
       let currentStageFilter = 'all';
 
+      let selectedGrade = 'all';
+      const gradeTabBtns = document.querySelectorAll('.grade-tab-btn');
+
       // Initial Render
       renderClasses(CLASSES_DATA);
 
       // Search Filter
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase().trim();
-        filterAndRender(query, currentStageFilter);
+        filterAndRender(query, currentStageFilter, selectedGrade);
       });
 
       // Stage Tabs Filter
@@ -2022,14 +2177,72 @@
           pill.setAttribute('aria-selected', 'true');
 
           currentStageFilter = pill.dataset.filter;
-          filterAndRender(searchInput.value.toLowerCase().trim(), currentStageFilter);
+
+          // If stage filter is changed, reset specific grade selection unless it belongs to that stage
+          if (selectedGrade !== 'all') {
+            const gNum = parseInt(selectedGrade, 10);
+            let itemStage = 'ilkokul';
+            if (gNum >= 5 && gNum <= 8) itemStage = 'ortaokul';
+            else if (gNum >= 9) itemStage = 'lise';
+
+            if (currentStageFilter !== 'all' && currentStageFilter !== itemStage) {
+              selectedGrade = 'all';
+              gradeTabBtns.forEach(b => {
+                const isAll = b.dataset.grade === 'all';
+                b.classList.toggle('active', isAll);
+                b.setAttribute('aria-selected', isAll ? 'true' : 'false');
+              });
+            }
+          }
+
+          filterAndRender(searchInput.value.toLowerCase().trim(), currentStageFilter, selectedGrade);
         });
       });
 
-      function filterAndRender(query, stage) {
+      // Grade Tabs Filter (with Icons)
+      gradeTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          gradeTabBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          selectedGrade = btn.dataset.grade;
+
+          // Synchronize Stage Filter Buttons
+          if (selectedGrade !== 'all') {
+            const gNum = parseInt(selectedGrade, 10);
+            let targetStage = 'ilkokul';
+            if (gNum >= 5 && gNum <= 8) targetStage = 'ortaokul';
+            else if (gNum >= 9) targetStage = 'lise';
+
+            filterPills.forEach(p => {
+              const matches = p.dataset.filter === targetStage;
+              p.classList.toggle('active', matches);
+              p.setAttribute('aria-selected', matches ? 'true' : 'false');
+            });
+            currentStageFilter = targetStage;
+          } else {
+            filterPills.forEach(p => {
+              const matches = p.dataset.filter === 'all';
+              p.classList.toggle('active', matches);
+              p.setAttribute('aria-selected', matches ? 'true' : 'false');
+            });
+            currentStageFilter = 'all';
+          }
+
+          filterAndRender(searchInput.value.toLowerCase().trim(), currentStageFilter, selectedGrade);
+        });
+      });
+
+      function filterAndRender(query, stage, grade = selectedGrade) {
         let filtered = CLASSES_DATA;
 
-        if (stage !== 'all') {
+        if (grade && grade !== 'all') {
+          filtered = filtered.filter(item => String(item.grade) === String(grade));
+        } else if (stage !== 'all') {
           filtered = filtered.filter(item => item.stage === stage);
         }
 

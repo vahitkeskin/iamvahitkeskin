@@ -189,3 +189,69 @@
     update: () => updateUI(getSavedTheme(), resolveTheme(getSavedTheme()))
   };
 })();
+
+
+// ══════════════════════════════════════════════════════════════════
+// BROWSER TAB ICON & TITLE ENHANCER (SEKME İKONU & BAŞLIK GARANTİSİ)
+// ══════════════════════════════════════════════════════════════════
+(function initTabIconAndTitle() {
+  const GRADE_ICONS = {
+    1: '🎒', 2: '💻', 3: '🧩', 4: '🚀', 5: '🛡️',
+    6: '⚙️', 7: '📐', 8: '🤖', 9: '🐍', 10: '🧠'
+  };
+
+  function detectGradeIcon() {
+    const path = (window.location && window.location.pathname) ? window.location.pathname : '';
+    const href = (window.location && window.location.href) ? window.location.href : '';
+    const text = (document && document.title) ? document.title : '';
+
+    const match = (path + ' ' + href).match(/(\d+)-sinif/i);
+    if (match && GRADE_ICONS[match[1]]) {
+      return GRADE_ICONS[match[1]];
+    }
+
+    const titleMatch = text.match(/(\d+)\.\s*Sınıf/i);
+    if (titleMatch && GRADE_ICONS[titleMatch[1]]) {
+      return GRADE_ICONS[titleMatch[1]];
+    }
+
+    if (href.endsWith('bilisimogretmenligi/') || href.endsWith('bilisimogretmenligi/index.html') || href.endsWith('/index.html') || text.includes('Portalı')) {
+      return '🎓';
+    }
+
+    return null;
+  }
+
+  function applyTabIcon() {
+    if (typeof document === 'undefined') return;
+    const icon = detectGradeIcon();
+    if (!icon) return;
+
+    if (document.title && !document.title.startsWith(icon)) {
+      const clean = document.title.replace(/^[^\w\s\d]+/, '').trim();
+      document.title = `${icon} ${clean}`;
+    }
+
+    if (document.head) {
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.type = 'image/svg+xml';
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      const svgDataUri = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">${icon}</text></svg>`;
+      if (link.getAttribute('href') !== svgDataUri) {
+        link.setAttribute('href', svgDataUri);
+      }
+    }
+  }
+
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyTabIcon);
+    } else {
+      applyTabIcon();
+    }
+  }
+})();

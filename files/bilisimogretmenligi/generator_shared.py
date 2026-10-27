@@ -4739,14 +4739,29 @@ document.addEventListener('DOMContentLoaded', () => {{
 }});
 """
 
+GRADE_ICONS_MAP = {
+    "1. Sınıf": "🎒",
+    "2. Sınıf": "💻",
+    "3. Sınıf": "🧩",
+    "4. Sınıf": "🚀",
+    "5. Sınıf": "🛡️",
+    "6. Sınıf": "⚙️",
+    "7. Sınıf": "📐",
+    "8. Sınıf": "🤖",
+    "9. Sınıf": "🐍",
+    "10. Sınıf": "🧠",
+}
+
 def create_single_week_html(grade_name, week_num, topic_title, course_name="Bilişim Teknolojileri ve Yazılım"):
     padded = f"{week_num:02d}"
+    icon = GRADE_ICONS_MAP.get(grade_name, "💻")
     return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{padded}. Hafta: {topic_title} - {grade_name} {course_name}</title>
+  <title>{icon} {padded}. Hafta: {topic_title} - {grade_name} {course_name}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{icon}</text></svg>">
   <link rel="stylesheet" href="presentation-styles.css">
 </head>
 <body data-unit="unite-1" data-week="{week_num}">
@@ -4767,6 +4782,7 @@ def create_single_week_html(grade_name, week_num, topic_title, course_name="Bili
 
 def create_portal_index_html(grade_name, course_name, units_list, accent_color=None, accent_rgb=None, is_grade_10=False):
     unit_tabs = "".join([f'<button class="filter-tab" data-filter="{u["id"]}">{u["title"]}</button>\n' for u in units_list])
+    icon = GRADE_ICONS_MAP.get(grade_name, "💻")
     
     if accent_color and accent_rgb:
         hero_accent = f"radial-gradient(circle, rgba({accent_rgb}, 0.22) 0%, rgba({accent_rgb}, 0.08) 50%, transparent 70%)"
@@ -4794,7 +4810,8 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <title>{grade_name} {course_name} - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <title>{icon} {grade_name} {course_name} - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{icon}</text></svg>">
   <script>
     (function() {{
       try {{

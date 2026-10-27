@@ -2,7 +2,7 @@ const fs = require('fs');
 const vm = require('vm');
 
 function testGradeDeck(gradeNum) {
-  const gDir = `./${gradeNum}. Sinif`;
+  const gDir = `./${gradeNum}-sinif`;
   
   // Create mock DOM environment
   const mockElements = {};

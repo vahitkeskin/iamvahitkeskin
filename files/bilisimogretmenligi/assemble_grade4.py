@@ -3,7 +3,7 @@
 """
 Assembler and Builder for 4. Sınıf Bilişim Teknolojileri ve Yazılım
 Türkiye Yüzyılı Maarif Modeli (2026-2027)
-Writes all 51 files to '4. Sinif/'
+Writes all 51 files to '4-sinif/'
 Öğretmen: Vahit Keskin
 """
 
@@ -15,7 +15,7 @@ from data_grade4_part2 import WEEKS_11_19_GRADE4, get_svg_for_week_4_part2
 from data_grade4_part3 import WEEKS_20_31_GRADE4, get_svg_for_week_4_part3
 from data_grade4_part4 import WEEKS_32_41_GRADE4, get_svg_for_week_4_part4
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/4. Sinif"
+OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/4-sinif"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "4. Sınıf"

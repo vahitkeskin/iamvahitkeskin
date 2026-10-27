@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>🎒 1. Sınıf Serbest Etkinlikler - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎒</text></svg>">
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('meb_theme_mode') || 'light';
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const resolved = saved === 'system' ? (prefersDark ? 'dark' : 'light') : saved;
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.setAttribute('data-theme-setting', saved);
+      } catch(e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="presentation-styles.css">
+  <style>
+    html {
+      font-size: 17.5px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (min-width: 1400px) {
+      html {
+        font-size: 18.5px;
+      }
+    }
+    @media (min-width: 1800px) {
+      html {
+        font-size: 19.5px;
+      }
+    }
+    body {
+      background: #090d16;
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-y: auto;
+      padding: 2.5rem 1.5rem;
+      user-select: auto;
+      display: block;
+      font-family: 'Comfortaa', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .portal-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Portal Hero Header */
+    .portal-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 2px solid rgba(244, 114, 182, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-header::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      background: rgba(244, 114, 182, 0.15);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-badge-teacher {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .hero-badge-fatih {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .portal-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.5px;
+    }
+
+    .portal-desc {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 950px;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    /* Stats Grid */
+    .portal-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .stat-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .stat-val {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #f472b6;
+      line-height: 1;
+    }
+
+    .stat-val.gold { color: #f59e0b; }
+    .stat-val.cyan { color: #38bdf8; }
+    .stat-val.green { color: #10b981; }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    /* Controls Bar */
+    .portal-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      color: #ffffff;
+      outline: none;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      border-color: #f472b6;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.3);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 0.65rem 1.1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .filter-tab:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .filter-tab.active {
+      background: #f472b6;
+      color: #0f172a;
+      border-color: #f472b6;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Week Cards Grid */
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .week-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .week-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(244, 114, 182, 0.5);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(244, 114, 182, 0.15);
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .week-badge {
+      background: rgba(244, 114, 182, 0.15);
+      color: #f472b6;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid rgba(244, 114, 182, 0.35);
+    }
+
+    .week-date {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    .card-subtitle {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-unit {
+      font-size: 0.8rem;
+      color: #fbbf24;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-btn {
+      margin-top: auto;
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(244, 114, 182, 0.05));
+      border: 1px solid rgba(244, 114, 182, 0.3);
+      color: #f472b6;
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .week-card:hover .card-btn {
+      background: #f472b6;
+      color: #0f172a;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Board Keyboard Guide */
+    .fatih-guide {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .guide-keys {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-key-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+
+    .fatih-badge-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    /* Hero Top Bar & Theme Switcher */
+    .hero-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-top-bar .hero-badge-row {
+      margin-bottom: 0;
+    }
+
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-segmented-control {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 3px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .theme-pill-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 0.42rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      outline: none;
+      user-select: none;
+    }
+
+    .theme-pill-btn:hover {
+      color: #f8fafc;
+    }
+
+    .theme-pill-btn.active {
+      background: #f472b6;
+      color: #0f172a;
+      box-shadow: 0 3px 10px rgba(244, 114, 182, 0.4);
+      font-weight: 800;
+    }
+
+    /* Light Theme Styling for 1. Sinif Portal */
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) body {
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .portal-header {
+        background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+        border: 2px solid rgba(244, 114, 182, 0.3);
+        box-shadow: 0 20px 40px -15px rgba(244, 114, 182, 0.12);
+      }
+      :root:not([data-theme="dark"]) .portal-title {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .portal-desc {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .stat-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      }
+      :root:not([data-theme="dark"]) .stat-label {
+        color: #64748b;
+      }
+      :root:not([data-theme="dark"]) .search-input {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        color: #0f172a;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      :root:not([data-theme="dark"]) .search-input:focus {
+        border-color: #f472b6;
+        background: #ffffff;
+      }
+      :root:not([data-theme="dark"]) .filter-tab {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .filter-tab:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .week-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      }
+      :root:not([data-theme="dark"]) .week-card:hover {
+        border-color: rgba(244, 114, 182, 0.5);
+        box-shadow: 0 20px 35px -10px rgba(244, 114, 182, 0.2);
+      }
+      :root:not([data-theme="dark"]) .card-title {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .card-subtitle {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .fatih-guide {
+        background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      }
+      :root:not([data-theme="dark"]) .guide-title {
+        color: #0f172a;
+      }
+      :root:not([data-theme="dark"]) .guide-key-item {
+        color: #475569;
+      }
+      :root:not([data-theme="dark"]) .theme-segmented-control {
+        background: rgba(241, 245, 249, 0.95);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      :root:not([data-theme="dark"]) .theme-pill-btn {
+        color: #64748b;
+      }
+      :root:not([data-theme="dark"]) .theme-pill-btn:hover {
+        color: #0f172a;
+      }
+    }
+
+    [data-theme="light"] body {
+      background: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .portal-header {
+      background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%) !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05) !important;
+    }
+    [data-theme="light"] .hero-badge {
+      background: #fce7f3 !important;
+      color: #be185d !important;
+      border: 1.5px solid #fbcfe8 !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .hero-badge-teacher {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border: 1.5px solid #fde68a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .hero-badge-fatih {
+      background: #e0e7ff !important;
+      color: #3730a3 !important;
+      border: 1.5px solid #c7d2fe !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .portal-title {
+      color: #0f172a !important;
+      font-weight: 900 !important;
+    }
+    [data-theme="light"] .portal-desc {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .stat-card {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }
+    [data-theme="light"] .stat-value {
+      color: #db2777 !important;
+      font-weight: 900 !important;
+    }
+    [data-theme="light"] .stat-label {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    [data-theme="light"] .search-input {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .search-input::placeholder {
+      color: #64748b !important;
+    }
+    [data-theme="light"] .search-input:focus {
+      border-color: #db2777 !important;
+      box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.15) !important;
+    }
+    [data-theme="light"] .filter-tab {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .filter-tab:hover {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }
+    [data-theme="light"] .filter-tab.active {
+      background: #db2777 !important;
+      border-color: #be185d !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.25) !important;
+    }
+    [data-theme="light"] .week-card {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+    }
+    [data-theme="light"] .week-card:hover {
+      border-color: #db2777 !important;
+      box-shadow: 0 12px 28px rgba(219, 39, 119, 0.15) !important;
+    }
+    [data-theme="light"] .week-number {
+      background: #fce7f3 !important;
+      color: #be185d !important;
+      border: 1px solid #fbcfe8 !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .card-title {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .card-subtitle {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .card-tag {
+      background: #f1f5f9 !important;
+      color: #1e293b !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }
+    [data-theme="light"] .btn-action {
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.25) !important;
+    }
+    [data-theme="light"] .btn-action:hover {
+      background: linear-gradient(135deg, #be185d 0%, #9d174d 100%) !important;
+      box-shadow: 0 4px 12px rgba(219, 39, 119, 0.35) !important;
+    }
+    [data-theme="light"] .fatih-guide {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+    }
+    [data-theme="light"] .guide-title {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .guide-key-item {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    [data-theme="light"] .guide-key-item kbd {
+      background: #f1f5f9 !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #db2777 !important;
+      font-weight: 800 !important;
+    }
+    [data-theme="light"] .theme-segmented-control {
+      background: #e2e8f0 !important;
+      border: 1.5px solid #cbd5e1 !important;
+    }
+    [data-theme="light"] .theme-pill-btn {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    [data-theme="light"] .theme-pill-btn:hover {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .theme-pill-btn.active {
+      background: #ffffff !important;
+      color: #db2777 !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
+    }
+  
+    /* ══════════════════════════════════════════════════════════════════
+       CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON)
+       ══════════════════════════════════════════════════════════════════ */
+    .class-nav-header-tabs {
+      margin-bottom: 1.5rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 0.5rem 0.75rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+    .class-nav-tabs-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .class-nav-tabs-wrapper::-webkit-scrollbar { display: none; }
+    .class-nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 0.25rem;
+      flex-shrink: 0;
+    }
+    .class-nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+    .class-nav-pill .nav-emoji {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .class-nav-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+    .class-nav-pill.home-link {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .class-nav-pill.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #38bdf8;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+    }
+    [data-theme="light"] .class-nav-header-tabs {
+      background: rgba(255, 255, 255, 0.94);
+      border-color: #cbd5e1;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }
+    [data-theme="light"] .class-nav-divider {
+      background: #cbd5e1;
+    }
+    [data-theme="light"] .class-nav-pill {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #475569;
+    }
+    [data-theme="light"] .class-nav-pill:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    [data-theme="light"] .class-nav-pill.home-link {
+      background: #e0f2fe;
+      color: #0284c7;
+      border-color: #bae6fd;
+    }
+    [data-theme="light"] .class-nav-pill.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="portal-container">
+    <!-- Header -->
+        <!-- CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON) -->
+    <nav class="class-nav-header-tabs" aria-label="Sınıf Sekmeleri ve Hızlı Geçiş">
+      <div class="class-nav-tabs-wrapper">
+        <a href="../index.html" class="class-nav-pill home-link" title="Ana Portala Dön"><span class="nav-emoji">🏠</span><span class="nav-text">Ana Portal</span></a>
+        <div class="class-nav-divider"></div>
+        <a href="../1-sinif/index.html" class="class-nav-pill active" title="1. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🎒</span><span class="nav-text">1. Sınıf</span></a>
+        <a href="../2-sinif/index.html" class="class-nav-pill" title="2. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">💻</span><span class="nav-text">2. Sınıf</span></a>
+        <a href="../3-sinif/index.html" class="class-nav-pill" title="3. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🧩</span><span class="nav-text">3. Sınıf</span></a>
+        <a href="../4-sinif/index.html" class="class-nav-pill" title="4. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🚀</span><span class="nav-text">4. Sınıf</span></a>
+        <a href="../5-sinif/index.html" class="class-nav-pill" title="5. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🛡️</span><span class="nav-text">5. Sınıf</span></a>
+        <a href="../6-sinif/index.html" class="class-nav-pill" title="6. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">⚙️</span><span class="nav-text">6. Sınıf</span></a>
+        <a href="../7-sinif/index.html" class="class-nav-pill" title="7. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">📐</span><span class="nav-text">7. Sınıf</span></a>
+        <a href="../8-sinif/index.html" class="class-nav-pill" title="8. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🤖</span><span class="nav-text">8. Sınıf</span></a>
+        <a href="../9-sinif/index.html" class="class-nav-pill" title="9. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🐍</span><span class="nav-text">9. Sınıf</span></a>
+        <a href="../10-sinif/index.html" class="class-nav-pill" title="10. Sınıf Yıllık Ders Sunumları"><span class="nav-emoji">🧠</span><span class="nav-text">10. Sınıf</span></a>
+      </div>
+    </nav>
+
+    <header class="portal-header">
+      <div class="hero-top-bar">
+        <div class="hero-badge-row">
+          <span class="hero-badge">⭐ 1. SINIF SERBEST ETKİNLİKLER</span>
+          <span class="hero-badge hero-badge-teacher">👨‍🏫 VAHİT KESKİN</span>
+          <span class="hero-badge hero-badge-fatih">📺 FATİH AKILLI TAHTA UYUMLU</span>
+        </div>
+
+        <div class="theme-switch-wrapper">
+          <div class="theme-segmented-control" role="radiogroup" aria-label="Görünüm Teması">
+            <button type="button" class="theme-pill-btn active" data-theme-val="light" title="Açık Mod (Varsayılan)" aria-checked="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <span>Açık</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="dark" title="Kapalı Mod" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              <span>Kapalı</span>
+            </button>
+            <button type="button" class="theme-pill-btn" data-theme-val="system" title="Sistem Modu" aria-checked="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Sistem</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="portal-title">1. Sınıf Serbest Etkinlikler Yıllık İnteraktif Ders Sunumları</h1>
+      <p class="portal-desc">
+        T.C. Millî Eğitim Bakanlığı Türkiye Yüzyılı Maarif Modeli (2026-2027) 1. Sınıf Serbest Etkinlikler dersi yıllık planının 41 haftalık eksiksiz, çocuk dostu görsel illüstrasyonlu, oyunlu ve interaktif slayt kütüphanesi.
+      </p>
+
+      <div class="portal-stats">
+        <div class="stat-card">
+          <span class="stat-val">41</span>
+          <span class="stat-label">Eğitim Haftası</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val gold">164</span>
+          <span class="stat-label">Toplam Ders Saati (4 Saat/Hafta)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val cyan">328</span>
+          <span class="stat-label">İnteraktif Slayt & Atölye</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val green">%100</span>
+          <span class="stat-label">MEB Maarif Modeli Uyumu</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="portal-controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Hafta, etkinlik, oyun veya konu ara (örn: Nasreddin Hoca, Fış Fış Kayıkçı, 23 Nisan)...">
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">Tümü (41 Hafta)</button>
+        <button class="filter-tab" data-filter="term1">1. Dönem (1-19)</button>
+        <button class="filter-tab" data-filter="term2">2. Dönem (20-41)</button>
+        <button class="filter-tab" data-filter="tema-1">Uyum & Oyun</button>
+        <button class="filter-tab" data-filter="tema-2">Estetik & Değerler</button>
+        <button class="filter-tab" data-filter="tema-3">İletişim & Nezaket</button>
+        <button class="filter-tab" data-filter="tema-4">Masal & Mantık</button>
+        <button class="filter-tab" data-filter="tema-5">Milli Bayramlar & Şenlik</button>
+      </div>
+    </div>
+
+    <!-- Weeks Grid -->
+    <div class="weeks-grid" id="weeksGrid"></div>
+
+    <!-- Fatih Guide Footer -->
+    <div class="fatih-guide">
+      <div class="guide-title">
+        <span>💡 Fatih Akıllı Tahta Kısayol Tuşları:</span>
+      </div>
+      <div class="guide-keys">
+        <div class="guide-key-item"><kbd>→</kbd> / <kbd>Space</kbd> Sonraki Slayt</div>
+        <div class="guide-key-item"><kbd>←</kbd> Önceki Slayt</div>
+        <div class="guide-key-item"><kbd>F</kbd> Tam Ekran Modu</div>
+        <div class="guide-key-item"><kbd>O</kbd> Slayt Haritası / Genel Bakış</div>
+        <div class="guide-key-item"><kbd>P</kbd> Yazdır / PDF İndir</div>
+      </div>
+      <div class="fatih-badge-row">
+        <span class="badge badge-accent">📱 Dokunmatik & Kaydırma (Swipe) Destekli</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="curriculum-term1.js"></script>
+  <script src="curriculum-term1-part2.js"></script>
+  <script src="curriculum-term2-part1.js"></script>
+  <script src="curriculum-term2-part2.js"></script>
+  <script src="weekly-tests.js"></script>
+  <script src="curriculum-data.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const weeksGrid = document.getElementById('weeksGrid');
+      const searchInput = document.getElementById('searchInput');
+      const filterTabs = document.querySelectorAll('.filter-tab');
+
+      const weeks = window.CURRICULUM_DATA_1 || window.CURRICULUM_DATA || [];
+
+      function renderWeeks(list) {
+        if (!list || list.length === 0) {
+          weeksGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: var(--text-muted);">
+              <h3>Aradığınız kriterlere uygun hafta bulunamadı.</h3>
+              <p>Lütfen arama terimini değiştirin veya filtreyi sıfırlayın.</p>
+            </div>
+          `;
+          return;
+        }
+
+        weeksGrid.innerHTML = list.map(w => {
+          const weekPadded = String(w.week).padStart(2, '0');
+          const fileName = `Hafta_${weekPadded}.html`;
+          return `
+            <a href="${fileName}" class="week-card" data-week="${w.week}" data-theme="${w.unitTheme}">
+              <div class="card-top-row">
+                <span class="week-badge">${w.week}. Hafta</span>
+                <span class="week-date">${w.date} (${w.hours})</span>
+              </div>
+              <div class="card-unit">🏷️ ${w.unitBadge}</div>
+              <h3 class="card-title">${w.title}</h3>
+              <p class="card-subtitle">${w.subtitle}</p>
+              <div class="card-btn">
+                <span>Sunumu Başlat</span>
+                <span>➔</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+      }
+
+      renderWeeks(weeks);
+
+      // Search Handler
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filterTabs.forEach(t => t.classList.remove('active'));
+        filterTabs[0].classList.add('active');
+
+        if (!query) {
+          renderWeeks(weeks);
+          return;
+        }
+
+        const filtered = weeks.filter(w => {
+          const matchTitle = (w.title || '').toLowerCase().includes(query);
+          const matchSub = (w.subtitle || '').toLowerCase().includes(query);
+          const matchUnit = (w.unit || '').toLowerCase().includes(query);
+          const matchSkills = (w.targetSkill || '').toLowerCase().includes(query);
+          const matchWeek = String(w.week) === query || `${w.week}. hafta`.includes(query);
+          return matchTitle || matchSub || matchUnit || matchSkills || matchWeek;
+        });
+
+        renderWeeks(filtered);
+      });
+
+      // Filter Handler
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          searchInput.value = '';
+
+          const filter = tab.dataset.filter;
+          if (filter === 'all') {
+            renderWeeks(weeks);
+          } else if (filter === 'term1') {
+            renderWeeks(weeks.filter(w => w.week >= 1 && w.week <= 19));
+          } else if (filter === 'term2') {
+            renderWeeks(weeks.filter(w => w.week >= 20 && w.week <= 41));
+          } else {
+            renderWeeks(weeks.filter(w => w.unitTheme === filter));
+          }
+        });
+      });
+    });
+  </script>
+  <script src="theme-manager.js"></script>
+</body>
+</html>

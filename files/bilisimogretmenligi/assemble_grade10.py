@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Assembler and Builder for 10. Sınıf Bilgisayar Bilimi (Kur 2)
-Writes all files to 10. Sinif/
+Writes all files to 10-sinif/
 """
 
 import os
@@ -13,7 +13,7 @@ from data_grade10_part2 import WEEKS_11_19
 from data_grade10_part3 import WEEKS_20_31
 from data_grade10_part4 import WEEKS_32_41
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/10. Sinif"
+OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/10-sinif"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "10. Sınıf"

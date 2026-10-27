@@ -4,7 +4,7 @@ const vm = require('vm');
 let allPassed = true;
 
 for (let g = 1; g <= 10; g++) {
-  const gDir = `./${g}. Sinif`;
+  const gDir = `./${g}-sinif`;
   const testsPath = `${gDir}/weekly-tests.js`;
 
   if (!fs.existsSync(testsPath)) {

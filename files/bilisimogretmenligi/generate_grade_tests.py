@@ -620,8 +620,8 @@ def generate_all_tests():
             test_questions = build_test_for_week(grade, w)
             grade_tests[w_num] = test_questions
 
-        # Write to {grade}. Sinif/weekly-tests.js
-        out_path = f"{grade}. Sinif/weekly-tests.js"
+        # Write to {grade}-sinif/weekly-tests.js
+        out_path = f"{grade}-sinif/weekly-tests.js"
         course_name = "Bilgisayar Bilimi" if grade in [9, 10] else ("Teknoloji ve Tasarım" if grade == 7 else "Bilişim Teknolojileri ve Yazılım")
         
         js_content = f"""/**

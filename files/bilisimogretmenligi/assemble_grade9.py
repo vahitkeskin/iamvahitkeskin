@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Assembler and Builder for 9. Sınıf Bilgisayar Bilimi (Kur 1)
-Writes all files to 9. Sinif/
+Writes all files to 9-sinif/
 """
 
 import os
@@ -14,7 +14,7 @@ from build_grade9_term2 import WEEKS_20_31 as WEEKS_20_25
 from data_grade9_term2 import WEEKS_26_41 as WEEKS_26_31
 from data_grade9_part4 import WEEKS_32_41
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/9. Sinif"
+OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/9-sinif"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "9. Sınıf"
