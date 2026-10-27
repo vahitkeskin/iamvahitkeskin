@@ -10,7 +10,8 @@ import os
 import json
 import generator_shared as shared
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/9-sinif"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(BASE_DIR, "9-sinif")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "9. Sınıf"

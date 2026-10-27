@@ -15,7 +15,8 @@ from data_grade4_part2 import WEEKS_11_19_GRADE4, get_svg_for_week_4_part2
 from data_grade4_part3 import WEEKS_20_31_GRADE4, get_svg_for_week_4_part3
 from data_grade4_part4 import WEEKS_32_41_GRADE4, get_svg_for_week_4_part4
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/4-sinif"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(BASE_DIR, "4-sinif")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "4. Sınıf"

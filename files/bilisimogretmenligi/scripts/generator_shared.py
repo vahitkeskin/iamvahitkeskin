@@ -166,6 +166,71 @@ def create_theme_manager(grade_title):
     update: () => updateUI(getSavedTheme(), resolveTheme(getSavedTheme()))
   }};
 }})();
+
+// ══════════════════════════════════════════════════════════════════
+// BROWSER TAB ICON & TITLE ENHANCER (SEKME İKONU & BAŞLIK GARANTİSİ)
+// ══════════════════════════════════════════════════════════════════
+(function initTabIconAndTitle() {{
+  const GRADE_ICONS = {{
+    1: '🎒', 2: '💻', 3: '🧩', 4: '🚀', 5: '🛡️',
+    6: '⚙️', 7: '📐', 8: '🤖', 9: '🐍', 10: '🧠'
+  }};
+
+  function detectGradeIcon() {{
+    const path = (window.location && window.location.pathname) ? window.location.pathname : '';
+    const href = (window.location && window.location.href) ? window.location.href : '';
+    const text = (document && document.title) ? document.title : '';
+
+    const match = (path + ' ' + href).match(/(\\d+)-sinif/i);
+    if (match && GRADE_ICONS[match[1]]) {{
+      return GRADE_ICONS[match[1]];
+    }}
+
+    const titleMatch = text.match(/(\\d+)\\.\\s*Sınıf/i);
+    if (titleMatch && GRADE_ICONS[titleMatch[1]]) {{
+      return GRADE_ICONS[titleMatch[1]];
+    }}
+
+    if (href.endsWith('bilisimogretmenligi/') || href.endsWith('bilisimogretmenligi/index.html') || href.endsWith('/index.html') || text.includes('Portalı')) {{
+      return '🎓';
+    }}
+
+    return null;
+  }}
+
+  function applyTabIcon() {{
+    if (typeof document === 'undefined') return;
+    const icon = detectGradeIcon();
+    if (!icon) return;
+
+    if (document.title && !document.title.startsWith(icon)) {{
+      const clean = document.title.replace(/^[^\\w\\s\\d]+/, '').trim();
+      document.title = `${{icon}} ${{clean}}`;
+    }}
+
+    if (document.head) {{
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {{
+        link = document.createElement('link');
+        link.type = 'image/svg+xml';
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }}
+      const svgDataUri = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">${{icon}}</text></svg>`;
+      if (link.getAttribute('href') !== svgDataUri) {{
+        link.setAttribute('href', svgDataUri);
+      }}
+    }}
+  }}
+
+  if (typeof document !== 'undefined') {{
+    if (document.readyState === 'loading') {{
+      document.addEventListener('DOMContentLoaded', applyTabIcon);
+    }} else {{
+      applyTabIcon();
+    }}
+  }}
+}})();
 """
 
 def create_presentation_engine():
@@ -3899,7 +3964,7 @@ body[data-theme="light"],
 
 /* 1. ALT GEZINME CUBUGU (HUD Bar & Deck Hud) - Sayfanin En Altina Sabitli */
 .hud-bar,
-.deck-hud {
+.deck-hud {{
   position: fixed !important;
   bottom: 0 !important;
   left: 0 !important;
@@ -3916,62 +3981,62 @@ body[data-theme="light"],
   z-index: 1000 !important;
   box-sizing: border-box !important;
   pointer-events: auto !important;
-}
+}}
 
 [data-theme="light"] .hud-bar,
-[data-theme="light"] .deck-hud {
+[data-theme="light"] .deck-hud {{
   background: rgba(255, 255, 255, 0.96) !important;
   border-top: 1.5px solid #e2e8f0 !important;
   box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
-}
+}}
 
 .hud-progress-wrapper,
-.hud-left {
+.hud-left {{
   display: flex !important;
   align-items: center !important;
   gap: 1rem !important;
-}
+}}
 
 .hud-progress-track,
-.hud-progress-container {
+.hud-progress-container {{
   width: 220px !important;
   height: 6px !important;
   background: rgba(255, 255, 255, 0.12) !important;
   border-radius: 9999px !important;
   overflow: hidden !important;
-}
+}}
 
 [data-theme="light"] .hud-progress-track,
-[data-theme="light"] .hud-progress-container {
+[data-theme="light"] .hud-progress-container {{
   background: #e2e8f0 !important;
-}
+}}
 
-.hud-progress-bar {
+.hud-progress-bar {{
   height: 100% !important;
   background: linear-gradient(90deg, var(--accent-cyan, #00f0ff), var(--accent-blue, #3b82f6)) !important;
   border-radius: 9999px !important;
   transition: width 0.3s ease !important;
-}
+}}
 
-.hud-slide-count {
+.hud-slide-count {{
   font-family: var(--font-mono, monospace) !important;
   font-size: 0.95rem !important;
   color: var(--text-muted, #94a3b8) !important;
   font-weight: 700 !important;
-}
+}}
 
-[data-theme="light"] .hud-slide-count {
+[data-theme="light"] .hud-slide-count {{
   color: #475569 !important;
-}
+}}
 
 .hud-controls,
-.hud-controls-group {
+.hud-controls-group {{
   display: flex !important;
   align-items: center !important;
   gap: 0.6rem !important;
-}
+}}
 
-.hud-btn {
+.hud-btn {{
   background: var(--bg-surface-elevated, rgba(22, 32, 56, 0.8)) !important;
   border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.15)) !important;
   color: var(--text-main, #f8fafc) !important;
@@ -3985,57 +4050,57 @@ body[data-theme="light"],
   align-items: center !important;
   gap: 0.4rem !important;
   transition: all 0.2s ease !important;
-}
+}}
 
-.hud-btn:hover:not(:disabled) {
+.hud-btn:hover:not(:disabled) {{
   border-color: var(--border-accent, #3b82f6) !important;
   background: rgba(59, 130, 246, 0.2) !important;
   color: #ffffff !important;
   transform: translateY(-1px) !important;
-}
+}}
 
-.hud-btn:disabled {
+.hud-btn:disabled {{
   opacity: 0.35 !important;
   cursor: not-allowed !important;
-}
+}}
 
-.hud-btn-primary {
+.hud-btn-primary {{
   background: var(--accent-blue, #3b82f6) !important;
   color: #ffffff !important;
   border-color: var(--accent-blue, #3b82f6) !important;
-}
+}}
 
-.hud-btn-primary:hover:not(:disabled) {
+.hud-btn-primary:hover:not(:disabled) {{
   background: #2563eb !important;
   color: #ffffff !important;
-}
+}}
 
-[data-theme="light"] .hud-btn {
+[data-theme="light"] .hud-btn {{
   background: #ffffff !important;
   border: 1px solid #cbd5e1 !important;
   color: #0f172a !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-}
+}}
 
-[data-theme="light"] .hud-btn:hover:not(:disabled) {
+[data-theme="light"] .hud-btn:hover:not(:disabled) {{
   background: #f1f5f9 !important;
   border-color: #94a3b8 !important;
   color: #0f172a !important;
-}
+}}
 
-[data-theme="light"] .hud-btn-primary {
+[data-theme="light"] .hud-btn-primary {{
   background: #2563eb !important;
   border-color: #2563eb !important;
   color: #ffffff !important;
-}
+}}
 
-[data-theme="light"] .hud-btn-primary:hover:not(:disabled) {
+[data-theme="light"] .hud-btn-primary:hover:not(:disabled) {{
   background: #1d4ed8 !important;
   color: #ffffff !important;
-}
+}}
 
 /* 2. GENEL BAKIS (OVERVIEW) MODALI - Varsayilan Kapali (display: none), Acildiginda Sabit Katman (Fixed Overlay) */
-.overview-modal {
+.overview-modal {{
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -4052,16 +4117,16 @@ body[data-theme="light"],
   box-sizing: border-box !important;
   opacity: 1 !important;
   visibility: visible !important;
-}
+}}
 
 /* Tum siniflardaki acilis tetikleyicileri (.show, .open, .active) */
 .overview-modal.show,
 .overview-modal.open,
-.overview-modal.active {
+.overview-modal.active {{
   display: flex !important;
-}
+}}
 
-.overview-content {
+.overview-content {{
   max-width: 1200px !important;
   width: 100% !important;
   max-height: 90vh !important;
@@ -4075,63 +4140,63 @@ body[data-theme="light"],
   box-sizing: border-box !important;
   overflow: hidden !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
-}
+}}
 
-[data-theme="light"] .overview-modal {
+[data-theme="light"] .overview-modal {{
   background: rgba(15, 23, 42, 0.75) !important;
-}
+}}
 
-[data-theme="light"] .overview-content {
+[data-theme="light"] .overview-content {{
   background: #ffffff !important;
   border: 1px solid #cbd5e1 !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-}
+}}
 
-.overview-header {
+.overview-header {{
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
   padding-bottom: 1rem !important;
-}
+}}
 
-[data-theme="light"] .overview-header {
+[data-theme="light"] .overview-header {{
   border-bottom: 1px solid #e2e8f0 !important;
-}
+}}
 
-.overview-modal-title {
+.overview-modal-title {{
   font-size: 1.35rem !important;
   font-weight: 800 !important;
   color: var(--text-main, #ffffff) !important;
   margin: 0 !important;
-}
+}}
 
-[data-theme="light"] .overview-modal-title {
+[data-theme="light"] .overview-modal-title {{
   color: #0f172a !important;
-}
+}}
 
-.overview-grid {
+.overview-grid {{
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 1.2rem !important;
   overflow-y: auto !important;
   padding: 0.5rem 0.5rem 1rem 0.5rem !important;
   max-height: calc(90vh - 120px) !important;
-}
+}}
 
-@media (max-width: 1200px) {
-  .overview-grid {
+@media (max-width: 1200px) {{
+  .overview-grid {{
     grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-@media (max-width: 768px) {
-  .overview-grid {
+  }}
+}}
+@media (max-width: 768px) {{
+  .overview-grid {{
     grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
+  }}
+}}
 
 .overview-card,
-.overview-thumb {
+.overview-thumb {{
   background: var(--bg-surface-elevated, #162038) !important;
   border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
   border-radius: var(--radius-md, 14px) !important;
@@ -4143,64 +4208,64 @@ body[data-theme="light"],
   gap: 0.6rem !important;
   text-align: left !important;
   box-sizing: border-box !important;
-}
+}}
 
 .overview-card:hover,
-.overview-thumb:hover {
+.overview-thumb:hover {{
   border-color: var(--accent-cyan, #00f0ff) !important;
   transform: translateY(-2px) scale(1.02) !important;
   background: rgba(30, 41, 59, 0.9) !important;
-}
+}}
 
 .overview-card.active,
-.overview-thumb.active {
+.overview-thumb.active {{
   border-color: var(--accent-cyan, #00f0ff) !important;
   box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
-}
+}}
 
 [data-theme="light"] .overview-card,
-[data-theme="light"] .overview-thumb {
+[data-theme="light"] .overview-thumb {{
   background: #f8fafc !important;
   border: 1px solid #e2e8f0 !important;
-}
+}}
 
 [data-theme="light"] .overview-card:hover,
-[data-theme="light"] .overview-thumb:hover {
+[data-theme="light"] .overview-thumb:hover {{
   background: #f1f5f9 !important;
   border-color: #3b82f6 !important;
-}
+}}
 
 [data-theme="light"] .overview-card.active,
-[data-theme="light"] .overview-thumb.active {
+[data-theme="light"] .overview-thumb.active {{
   border-color: #2563eb !important;
   box-shadow: 0 0 15px rgba(37, 99, 235, 0.25) !important;
   background: #eff6ff !important;
-}
+}}
 
-.overview-thumb-num {
+.overview-thumb-num {{
   font-family: var(--font-mono, monospace) !important;
   font-size: 0.85rem !important;
   font-weight: 800 !important;
   color: var(--accent-cyan, #00f0ff) !important;
-}
+}}
 
-[data-theme="light"] .overview-thumb-num {
+[data-theme="light"] .overview-thumb-num {{
   color: #2563eb !important;
-}
+}}
 
-.overview-thumb-title {
+.overview-thumb-title {{
   font-size: 0.92rem !important;
   font-weight: 700 !important;
   color: var(--text-main, #ffffff) !important;
   line-height: 1.4 !important;
-}
+}}
 
-[data-theme="light"] .overview-thumb-title {
+[data-theme="light"] .overview-thumb-title {{
   color: #0f172a !important;
-}
+}}
 
 /* 3. DECK KONTEYNERI & SLAYTLAR - Tam Ekran ve Oran Garantisi */
-.deck-container {
+.deck-container {{
   position: relative !important;
   width: 100vw !important;
   height: 100vh !important;
@@ -4208,9 +4273,9 @@ body[data-theme="light"],
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-}
+}}
 
-.slide {
+.slide {{
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -4226,24 +4291,24 @@ body[data-theme="light"],
   transform: scale(0.98) translateY(10px) !important;
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   overflow-y: auto !important;
-}
+}}
 
-.slide.active {
+.slide.active {{
   opacity: 1 !important;
   pointer-events: auto !important;
   transform: scale(1) translateY(0) !important;
   z-index: 5 !important;
-}
+}}
 
 /* Yazdirma (Print) Modunda HUD ve Modali Gizle */
-@media print {
+@media print {{
   .hud-bar,
   .deck-hud,
   .overview-modal,
-  .theme-toast {
+  .theme-toast {{
     display: none !important;
-  }
-}
+  }}
+}}
 """
 
 def create_presentation_builder(grade_name, course_name):
@@ -4803,6 +4868,33 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
         card_stripe = "linear-gradient(90deg, #00f0ff, #6366f1)"
         btn_launch_bg = "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)"
         btn_launch_hover = "linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%)"
+    grade_num = grade_name.replace(". Sınıf", "").strip() if ". Sınıf" in grade_name else ""
+    all_grades_list = [
+        ("1", "🎒", "1. Sınıf"),
+        ("2", "💻", "2. Sınıf"),
+        ("3", "🧩", "3. Sınıf"),
+        ("4", "🚀", "4. Sınıf"),
+        ("5", "🛡️", "5. Sınıf"),
+        ("6", "⚙️", "6. Sınıf"),
+        ("7", "📐", "7. Sınıf"),
+        ("8", "🤖", "8. Sınıf"),
+        ("9", "🐍", "9. Sınıf"),
+        ("10", "🧠", "10. Sınıf"),
+    ]
+    tabs_items = [
+        '<a href="../index.html" class="class-nav-pill home-link" title="Ana Portala Dön"><span class="nav-emoji">🏠</span><span class="nav-text">Ana Portal</span></a>',
+        '<div class="class-nav-divider"></div>'
+    ]
+    for gnum, gemoji, gtitle in all_grades_list:
+        is_active = " active" if gnum == grade_num else ""
+        tabs_items.append(f'<a href="../{gnum}-sinif/index.html" class="class-nav-pill{is_active}" title="{gtitle} Yıllık Ders Sunumları"><span class="nav-emoji">{gemoji}</span><span class="nav-text">{gtitle}</span></a>')
+    
+    nav_tabs_markup = '''<!-- CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON) -->
+    <nav class="class-nav-header-tabs" aria-label="Sınıf Sekmeleri ve Hızlı Geçiş">
+      <div class="class-nav-tabs-wrapper">
+        ''' + "\n        ".join(tabs_items) + '''
+      </div>
+    </nav>'''
     
     return f"""<!DOCTYPE html>
 <html lang="tr">
@@ -5483,11 +5575,123 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
       color: #4338ca !important;
       box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
     }}
+
+    /* Açık Mod Rehber ve Arama Görünürlüğü */
+    [data-theme="light"] .guide-title,
+    [data-theme="light"] .guide-box h4,
+    [data-theme="light"] .guide-card h4,
+    [data-theme="light"] .empty-title {{
+      color: #0f172a !important;
+    }}
+    [data-theme="light"] .guide-desc,
+    [data-theme="light"] .guide-box p,
+    [data-theme="light"] .guide-card p,
+    [data-theme="light"] .empty-desc {{
+      color: #334155 !important;
+    }}
+    [data-theme="light"] .shortcut-pill,
+    [data-theme="light"] .guide-keys div {{
+      color: #1e293b !important;
+    }}
+
+    /* ══════════════════════════════════════════════════════════════════
+       CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME VE İKON)
+       ══════════════════════════════════════════════════════════════════ */
+    .class-nav-header-tabs {{
+      margin-bottom: 1.5rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 0.5rem 0.75rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }}
+    .class-nav-tabs-wrapper {{
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }}
+    .class-nav-tabs-wrapper::-webkit-scrollbar {{ display: none; }}
+    .class-nav-divider {{
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 0.25rem;
+      flex-shrink: 0;
+    }}
+    .class-nav-pill {{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }}
+    .class-nav-pill .nav-emoji {{
+      font-size: 1.15rem;
+      line-height: 1;
+    }}
+    .class-nav-pill:hover {{
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }}
+    .class-nav-pill.home-link {{
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }}
+    .class-nav-pill.active {{
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #38bdf8;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+    }}
+    [data-theme="light"] .class-nav-header-tabs {{
+      background: rgba(255, 255, 255, 0.94);
+      border-color: #cbd5e1;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }}
+    [data-theme="light"] .class-nav-divider {{
+      background: #cbd5e1;
+    }}
+    [data-theme="light"] .class-nav-pill {{
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #475569;
+    }}
+    [data-theme="light"] .class-nav-pill:hover {{
+      background: #e2e8f0;
+      color: #0f172a;
+    }}
+    [data-theme="light"] .class-nav-pill.home-link {{
+      background: #e0f2fe;
+      color: #0284c7;
+      border-color: #bae6fd;
+    }}
+    [data-theme="light"] .class-nav-pill.active {{
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    }}
   </style>
 </head>
 <body>
   <div class="portal-container">
-    
+    {nav_tabs_markup}
     <!-- HERO HEADER -->
     <header class="portal-header">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">

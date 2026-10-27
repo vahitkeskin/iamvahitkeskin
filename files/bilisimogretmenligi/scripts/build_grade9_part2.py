@@ -11,7 +11,8 @@ import json
 import generator_shared as shared
 from build_grade9_curriculum import WEEKS_DATA_9, get_svg_for_week
 
-OUTPUT_DIR = "/Users/vahitkeskin/Documents/GitHub/iamvahitkeskin/files/bilisimogretmenligi/9-sinif"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(BASE_DIR, "9-sinif")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 GRADE_NAME = "9. Sınıf"

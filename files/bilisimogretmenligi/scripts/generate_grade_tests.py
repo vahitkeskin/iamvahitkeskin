@@ -10,9 +10,12 @@ import os
 import json
 import re
 
-# Load curriculum
-with open("all_curriculum.json", "r", encoding="utf-8") as f:
-    ALL_CURRICULUM = json.load(f)
+CURRICULUM_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "all_curriculum.json")
+if os.path.exists(CURRICULUM_FILE):
+    with open(CURRICULUM_FILE, "r", encoding="utf-8") as f:
+        ALL_CURRICULUM = json.load(f)
+else:
+    ALL_CURRICULUM = {}
 
 def clean_text(text):
     if not text:
@@ -621,7 +624,8 @@ def generate_all_tests():
             grade_tests[w_num] = test_questions
 
         # Write to {grade}-sinif/weekly-tests.js
-        out_path = f"{grade}-sinif/weekly-tests.js"
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        out_path = os.path.join(BASE_DIR, f"{grade}-sinif", "weekly-tests.js")
         course_name = "Bilgisayar Bilimi" if grade in [9, 10] else ("Teknoloji ve Tasarım" if grade == 7 else "Bilişim Teknolojileri ve Yazılım")
         
         js_content = f"""/**
