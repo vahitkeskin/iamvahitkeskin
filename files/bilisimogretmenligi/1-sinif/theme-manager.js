@@ -227,9 +227,8 @@
     const icon = detectGradeIcon();
     if (!icon) return;
 
-    if (document.title && !document.title.startsWith(icon)) {
-      const clean = document.title.replace(/^[^\w\s\d]+/, '').trim();
-      document.title = `${icon} ${clean}`;
+    if (document.title) {
+      document.title = document.title.replace(/^[^a-zA-Z0-9çÇğĞıİöÖşŞüÜ\s]+/, "").trim();
     }
 
     if (document.head) {

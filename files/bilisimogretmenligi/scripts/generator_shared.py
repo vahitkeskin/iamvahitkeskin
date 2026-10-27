@@ -203,9 +203,8 @@ def create_theme_manager(grade_title):
     const icon = detectGradeIcon();
     if (!icon) return;
 
-    if (document.title && !document.title.startsWith(icon)) {{
-      const clean = document.title.replace(/^[^\\w\\s\\d]+/, '').trim();
-      document.title = `${{icon}} ${{clean}}`;
+    if (document.title) {{
+      document.title = document.title.replace(/^[^a-zA-Z0-9çÇğĞıİöÖşŞüÜ\s]+/, '').trim();
     }}
 
     if (document.head) {{
@@ -4825,7 +4824,7 @@ def create_single_week_html(grade_name, week_num, topic_title, course_name="Bili
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{icon} {padded}. Hafta: {topic_title} - {grade_name} {course_name}</title>
+  <title>{padded}. Hafta: {topic_title} - {grade_name} {course_name}</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{icon}</text></svg>">
   <link rel="stylesheet" href="presentation-styles.css">
 </head>
@@ -4902,7 +4901,7 @@ def create_portal_index_html(grade_name, course_name, units_list, accent_color=N
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <title>{icon} {grade_name} {course_name} - Yıllık Ders Sunumları Portalı (2026-2027)</title>
+  <title>{grade_name} {course_name} - Yıllık Ders Sunumları Portalı (2026-2027)</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{icon}</text></svg>">
   <script>
     (function() {{
