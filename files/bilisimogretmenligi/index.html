@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>MEB Maarif Modeli Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf) | Vahit Keskin</title>
+  <meta name="description" content="T.C. Millî Eğitim Bakanlığı Türkiye Yüzyılı Maarif Modeli 1-10. Sınıf Bilişim Teknolojileri, Serbest Etkinlikler, Kodlama, Robotik ve Bilgisayar Bilimi yıllık interaktif ders sunumları ve haftalık programlar kütüphanesi.">
+  <meta name="keywords" content="MEB, Maarif Modeli, Bilişim Teknolojileri, Serbest Etkinlikler, Bilgisayar Bilimi, Fatih Akıllı Tahta, Vahit Keskin, Kodlama, Robotik, Python, Scratch">
+  <meta name="author" content="Vahit Keskin">
+  <link rel="canonical" href="https://vahitkeskin.github.io/iamvahitkeskin/files/bilisimogretmenligi/">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vahitkeskin.github.io/iamvahitkeskin/files/bilisimogretmenligi/">
+  <meta property="og:title" content="MEB Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf)">
+  <meta property="og:description" content="1. Sınıftan 10. Sınıfa kadar 410+ haftalık MEB müfredatı, interaktif sunumlar, kod blokları ve Fatih Akıllı Tahta uyumlu ders içerikleri.">
+  <meta property="og:image" content="https://vahitkeskin.github.io/iamvahitkeskin/images/image.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MEB Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf)">
+  <meta name="twitter:description" content="1. Sınıftan 10. Sınıfa kadar 410+ haftalık MEB müfredatı, interaktif sunumlar ve ders programları.">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Pre-hydration Theme Script -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('meb_theme_mode') || 'dark';
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const resolved = saved === 'system' ? (prefersDark ? 'dark' : 'light') : saved;
+        document.documentElement.setAttribute('data-theme', resolved);
+        document.documentElement.setAttribute('data-theme-setting', saved);
+      } catch(e) {}
+    })();
+  </script>
+
+  <style>
+    /* ══════════════════════════════════════════════════════════════════
+       CSS DESIGN TOKENS & RESET
+       ══════════════════════════════════════════════════════════════════ */
+    :root {
+      --font-display: 'Comfortaa', 'Outfit', cursive, sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Dark Theme (Default) */
+      --bg-base: #060913;
+      --bg-surface: #0c1222;
+      --bg-surface-elevated: #131c35;
+      --bg-glass: rgba(18, 28, 54, 0.72);
+      --bg-glass-hover: rgba(28, 43, 82, 0.85);
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-highlight: rgba(56, 189, 248, 0.35);
+
+      --text-main: #ffffff;
+      --text-muted: #cbd5e1;
+      --text-sub: #94a3b8;
+      --text-dim: #64748b;
+
+      --brand-primary: #38bdf8;
+      --brand-primary-glow: rgba(56, 189, 248, 0.35);
+      --brand-accent: #f59e0b;
+      --brand-accent-glow: rgba(245, 158, 11, 0.3);
+      --brand-success: #10b981;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 9999px;
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 12px 30px -5px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 20px 45px -10px rgba(0, 0, 0, 0.65);
+      --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.2);
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: 0.2s var(--ease);
+      --transition-normal: 0.35s var(--ease);
+    }
+
+    /* Light Theme Overrides */
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --bg-glass-hover: rgba(255, 255, 255, 0.98);
+
+      --border-subtle: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --border-highlight: rgba(14, 165, 233, 0.4);
+
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-sub: #475569;
+      --text-dim: #64748b;
+
+      --brand-primary: #0284c7;
+      --brand-primary-glow: rgba(2, 132, 199, 0.2);
+      --brand-accent: #d97706;
+      --brand-accent-glow: rgba(217, 119, 6, 0.2);
+      --brand-success: #059669;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 25px rgba(2, 132, 199, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 8%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(245, 158, 11, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    [data-theme="light"] body {
+      background-image: 
+        radial-gradient(circle at 10% 8%, rgba(2, 132, 199, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(245, 158, 11, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.03) 0%, transparent 60%);
+    }
+
+    /* Container */
+    .portal-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       NAVIGATION / TOP BAR
+       ══════════════════════════════════════════════════════════════════ */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.75rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 1rem;
+      z-index: 100;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #f59e0b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.35rem;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Theme Segmented Control */
+    .theme-segmented-control {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .theme-pill-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition-fast);
+    }
+
+    .theme-pill-btn:hover {
+      color: var(--text-main);
+    }
+
+    .theme-pill-btn.active {
+      background: var(--brand-primary);
+      color: #070e1e;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+    }
+
+    [data-theme="light"] .theme-pill-btn.active {
+      background: var(--brand-primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    /* Global Share Button */
+    .btn-nav-share {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff;
+      border: none;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .btn-nav-share:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-nav-portfolio {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-nav-portfolio:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--brand-primary);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       HERO SECTION
+       ══════════════════════════════════════════════════════════════════ */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(12, 18, 34, 0.95) 100%);
+      border: 1.5px solid var(--border-highlight);
+      border-radius: var(--radius-xl);
+      padding: 3rem 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    [data-theme="light"] .hero-section {
+      background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(245, 158, 11, 0.12) 50%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 0.65rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-badge-meb {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .hero-badge-teacher {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .hero-badge-fatih {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .hero-badge-live {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    [data-theme="light"] .hero-badge-meb {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
+    }
+
+    [data-theme="light"] .hero-badge-teacher {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+    }
+
+    [data-theme="light"] .hero-badge-fatih {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #bae6fd;
+    }
+
+    [data-theme="light"] .hero-badge-live {
+      background: #d1fae5;
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 900;
+      font-family: var(--font-heading);
+      line-height: 1.15;
+      margin-bottom: 1.1rem;
+      letter-spacing: -1px;
+      color: var(--text-main);
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 45%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    [data-theme="light"] .hero-title .gradient-text {
+      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #db2777 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 980px;
+      line-height: 1.65;
+      margin-bottom: 2.2rem;
+      font-weight: 500;
+    }
+
+    /* Stats Grid */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: rgba(12, 18, 34, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-highlight);
+    }
+
+    [data-theme="light"] .stat-card {
+      background: #ffffff;
+      border-color: var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-val {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      font-family: var(--font-heading);
+      letter-spacing: -0.5px;
+    }
+
+    .stat-val.blue { color: #38bdf8; }
+    .stat-val.amber { color: #f59e0b; }
+    .stat-val.pink { color: #f472b6; }
+    .stat-val.green { color: #10b981; }
+
+    [data-theme="light"] .stat-val.blue { color: #0284c7; }
+    [data-theme="light"] .stat-val.amber { color: #d97706; }
+    [data-theme="light"] .stat-val.pink { color: #db2777; }
+    [data-theme="light"] .stat-val.green { color: #059669; }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      font-weight: 700;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       FILTER & SEARCH TOOLBAR
+       ══════════════════════════════════════════════════════════════════ */
+    .portal-toolbar {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-wrapper {
+      flex: 1;
+      min-width: 290px;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.15rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 0.85rem 1.25rem 0.85rem 2.85rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      outline: none;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+      font-weight: 500;
+    }
+
+    .search-input:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px var(--brand-primary-glow);
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .filter-pill:hover {
+      color: var(--text-main);
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-medium);
+    }
+
+    .filter-pill.active {
+      background: var(--brand-primary);
+      color: #050c1b;
+      border-color: var(--brand-primary);
+      box-shadow: 0 4px 14px var(--brand-primary-glow);
+    }
+
+    [data-theme="light"] .filter-pill.active {
+      background: var(--brand-primary);
+      color: #ffffff;
+    }
+
+    .view-toggle-group {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .view-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all var(--transition-fast);
+      font-family: inherit;
+      font-weight: 600;
+    }
+
+    .view-toggle-btn.active {
+      background: var(--bg-surface-elevated);
+      color: var(--brand-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       CLASSES GRID / LIST CONTAINER
+       ══════════════════════════════════════════════════════════════════ */
+    .classes-container {
+      display: grid;
+      gap: 1.65rem;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Grid View (Default) */
+    .classes-container.mode-grid {
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+
+    /* List View */
+    .classes-container.mode-list {
+      grid-template-columns: 1fr;
+    }
+
+    /* Class Card Base */
+    .class-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      cursor: pointer;
+    }
+
+    .class-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--card-accent, #38bdf8);
+      opacity: 0.85;
+      transition: height var(--transition-fast);
+    }
+
+    .class-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg), 0 0 30px var(--card-glow, rgba(56, 189, 248, 0.25));
+      border-color: var(--card-accent, #38bdf8);
+    }
+
+    .class-card:hover::before {
+      height: 6px;
+    }
+
+    /* Card Top Header */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .grade-badge-block {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .grade-number-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--card-accent, #38bdf8);
+      color: #060b18;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      box-shadow: 0 6px 16px var(--card-glow, rgba(56, 189, 248, 0.4));
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .grade-num {
+      font-size: 1.55rem;
+    }
+
+    .grade-txt {
+      font-size: 0.55rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .grade-meta-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      width: fit-content;
+    }
+
+    [data-theme="light"] .stage-badge {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .duration-tag {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .card-quick-icon {
+      font-size: 1.6rem;
+      opacity: 0.9;
+    }
+
+    /* Card Titles */
+    .card-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      line-height: 1.3;
+      color: var(--text-main);
+      transition: color var(--transition-fast);
+    }
+
+    .class-card:hover .card-title {
+      color: var(--card-accent, #38bdf8);
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-weight: 400;
+    }
+
+    /* Card Highlights / Tags */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .topic-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .topic-tag {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      color: #475569;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       CARD BOTTOM ACTION ROW & COPY BUTTON (KEY REQUIREMENT)
+       ══════════════════════════════════════════════════════════════════ */
+    .card-action-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .btn-open-program {
+      flex: 1;
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.15rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .class-card:hover .btn-open-program {
+      background: var(--card-accent, #38bdf8);
+      color: #060b18;
+      border-color: var(--card-accent, #38bdf8);
+      box-shadow: 0 4px 14px var(--card-glow, rgba(56, 189, 248, 0.35));
+    }
+
+    /* Dedicated Copy Button at the end of each item */
+    .btn-copy-item {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+      z-index: 2;
+    }
+
+    .btn-copy-item:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--brand-primary-glow);
+    }
+
+    /* Copied state */
+    .btn-copy-item.copied {
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
+      transform: scale(1.03);
+    }
+
+    /* Web Share API button */
+    .btn-share-icon {
+      background: var(--bg-surface-elevated);
+      color: var(--text-sub);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .btn-share-icon:hover {
+      color: var(--text-main);
+      border-color: var(--border-medium);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       LIST VIEW SPECIAL STYLING
+       ══════════════════════════════════════════════════════════════════ */
+    .classes-container.mode-list .class-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.75rem;
+      padding: 1.25rem 2rem;
+    }
+
+    .classes-container.mode-list .card-top {
+      align-items: center;
+    }
+
+    .classes-container.mode-list .card-action-row {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+      min-width: 320px;
+      justify-content: flex-end;
+    }
+
+    .classes-container.mode-list .card-desc {
+      -webkit-line-clamp: 1;
+    }
+
+    @media (max-width: 900px) {
+      .classes-container.mode-list .class-card {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .classes-container.mode-list .card-action-row {
+        min-width: 100%;
+        border-top: 1px solid var(--border-subtle);
+        padding-top: 1rem;
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       COLOR ACCENTS FOR EACH GRADE (INDIVIDUAL VIBRANT BRANDING)
+       ══════════════════════════════════════════════════════════════════ */
+    /* 1. Sınıf - Pembe & Güneş */
+    .card-grade-1 {
+      --card-accent: #f472b6;
+      --card-glow: rgba(244, 114, 182, 0.35);
+    }
+    /* 2. Sınıf - Turkuaz */
+    .card-grade-2 {
+      --card-accent: #06b6d4;
+      --card-glow: rgba(6, 182, 212, 0.35);
+    }
+    /* 3. Sınıf - Mor */
+    .card-grade-3 {
+      --card-accent: #a855f7;
+      --card-glow: rgba(168, 85, 247, 0.35);
+    }
+    /* 4. Sınıf - Zümrüt Yeşili */
+    .card-grade-4 {
+      --card-accent: #10b981;
+      --card-glow: rgba(16, 185, 129, 0.35);
+    }
+    /* 5. Sınıf - Kehribar Sarı */
+    .card-grade-5 {
+      --card-accent: #f59e0b;
+      --card-glow: rgba(245, 158, 11, 0.35);
+    }
+    /* 6. Sınıf - Kraliyet Mavisi */
+    .card-grade-6 {
+      --card-accent: #3b82f6;
+      --card-glow: rgba(59, 130, 246, 0.35);
+    }
+    /* 7. Sınıf - Mercan / Gül Kırmızı */
+    .card-grade-7 {
+      --card-accent: #f43f5e;
+      --card-glow: rgba(244, 63, 94, 0.35);
+    }
+    /* 8. Sınıf - İndigo Gece */
+    .card-grade-8 {
+      --card-accent: #6366f1;
+      --card-glow: rgba(99, 102, 241, 0.35);
+    }
+    /* 9. Sınıf - Fuşya Python */
+    .card-grade-9 {
+      --card-accent: #d946ef;
+      --card-glow: rgba(217, 70, 239, 0.35);
+    }
+    /* 10. Sınıf - Siber Teal / Matrix */
+    .card-grade-10 {
+      --card-accent: #14b8a6;
+      --card-glow: rgba(20, 184, 166, 0.35);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       FATIH SMARTBOARD & TOUCH GUIDE FOOTER
+       ══════════════════════════════════════════════════════════════════ */
+    .fatih-footer {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2.5rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .fatih-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .fatih-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .keys-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .key-guide-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .key-guide-card kbd {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      color: var(--brand-primary);
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.82rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      font-family: monospace;
+      flex-shrink: 0;
+    }
+
+    /* Copyright & Credits */
+    .portal-credits {
+      text-align: center;
+      padding-top: 2rem;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .portal-credits a {
+      color: var(--brand-primary);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .portal-credits a:hover {
+      text-decoration: underline;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       TOAST NOTIFICATION COMPONENT
+       ══════════════════════════════════════════════════════════════════ */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .toast-card {
+      background: rgba(15, 23, 42, 0.96);
+      border: 1.5px solid #10b981;
+      color: #ffffff;
+      padding: 1rem 1.4rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      max-width: 440px;
+      pointer-events: auto;
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+    }
+
+    [data-theme="light"] .toast-card {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15), 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .toast-card.show {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #10b981;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .toast-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .toast-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .toast-desc {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      word-break: break-all;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       SHARE & QR MODAL
+       ══════════════════════════════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 18, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-fast);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .share-modal {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .modal-overlay.open .share-modal {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+
+    .modal-close-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-header h3 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      font-family: var(--font-heading);
+      margin-bottom: 0.35rem;
+    }
+
+    .modal-header p {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+    }
+
+    .qr-preview-box {
+      background: #ffffff;
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      margin: 0 auto;
+      max-width: 220px;
+    }
+
+    .qr-preview-box img {
+      width: 190px;
+      height: 190px;
+      display: block;
+    }
+
+    .share-link-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .share-link-input {
+      flex: 1;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      font-family: monospace;
+      outline: none;
+    }
+
+    .btn-modal-copy {
+      background: var(--brand-primary);
+      color: #070e1e;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: inherit;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-modal-copy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--brand-primary-glow);
+    }
+
+    .share-channels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .channel-btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all var(--transition-fast);
+    }
+
+    .channel-btn i {
+      font-size: 1.35rem;
+    }
+
+    .channel-btn.whatsapp i { color: #25d366; }
+    .channel-btn.telegram i { color: #229ed9; }
+    .channel-btn.email i { color: #f59e0b; }
+
+    .channel-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-medium);
+      transform: translateY(-2px);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+       ══════════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .portal-container {
+        padding: 1rem 1rem 4rem;
+      }
+      .hero-section {
+        padding: 2rem 1.5rem;
+      }
+      .top-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1.15rem;
+      }
+      .nav-actions {
+        justify-content: space-between;
+      }
+      .portal-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-pills {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        flex-wrap: nowrap;
+      }
+      .classes-container.mode-grid {
+        grid-template-columns: 1fr;
+      }
+      .toast-container {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .toast-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-container">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <nav class="top-nav" aria-label="Portal Gezintisi">
+      <a href="./" class="nav-brand" title="Portal Ana Sayfası">
+        <div class="brand-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+          <h1>MEB Bilişim Portalı</h1>
+          <span>1 - 10. Sınıf Müfredat ve Sunum Kütüphanesi</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Main Portfolio Link -->
+        <a href="../../index.html" class="btn-nav-portfolio" title="Vahit Keskin Kişisel Web Sitesi">
+          <i class="fas fa-arrow-left"></i>
+          <span>Vahit Keskin</span>
+        </a>
+
+        <!-- Global Share Button -->
+        <button type="button" class="btn-nav-share" id="btnGlobalShare" title="Portalı Paylaş / QR Kod Aç">
+          <i class="fas fa-share-nodes"></i>
+          <span>Portalı Paylaş</span>
+        </button>
+
+        <!-- Theme Segmented Control -->
+        <div class="theme-segmented-control" role="radiogroup" aria-label="Görünüm Teması">
+          <button type="button" class="theme-pill-btn" data-theme-val="light" title="Açık Mod" aria-checked="false">
+            <i class="fas fa-sun"></i>
+            <span>Açık</span>
+          </button>
+          <button type="button" class="theme-pill-btn active" data-theme-val="dark" title="Kapalı Mod (Varsayılan)" aria-checked="true">
+            <i class="fas fa-moon"></i>
+            <span>Kapalı</span>
+          </button>
+          <button type="button" class="theme-pill-btn" data-theme-val="system" title="Sistem Modu" aria-checked="false">
+            <i class="fas fa-desktop"></i>
+            <span>Sistem</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO HEADER SECTION -->
+    <header class="hero-section">
+      <div class="hero-badge-row">
+        <span class="hero-badge hero-badge-meb">
+          <i class="fas fa-certificate"></i> MEB TÜRKİYE YÜZYILI MAARİF MODELİ (2026-2027)
+        </span>
+        <span class="hero-badge hero-badge-teacher">
+          <i class="fas fa-chalkboard-user"></i> ÖĞRETMEN: VAHİT KESKİN
+        </span>
+        <span class="hero-badge hero-badge-fatih">
+          <i class="fas fa-tv"></i> FATİH AKILLI TAHTA UYUMLU (16:9)
+        </span>
+        <span class="hero-badge hero-badge-live">
+          <i class="fas fa-circle-check"></i> 10 SINIF AKTİF
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        MEB Bilişim & Teknoloji <br>
+        <span class="gradient-text">Yıllık İnteraktif Ders Portalı</span>
+      </h1>
+
+      <p class="hero-desc">
+        1. sınıftan 10. sınıfa kadar tüm ilkokul, ortaokul ve lise düzeylerinde 410+ haftalık MEB müfredatı, Fatih Akıllı Tahta dokunmatik ekranları için optimize edilmiş 600+ interaktif ders sunumu, Scratch & Python kod blokları, 3B modelleme atölyeleri ve mini testler. İstediğiniz sınıfın haftalık programına tek tıkla ulaşın veya paylaşım linkini anında kopyalayın.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-val blue">10</span>
+          <span class="stat-label">Sınıf Kademesi (1-10. Sınıf)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val amber">410+</span>
+          <span class="stat-label">Haftalık Eğitim Planı</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val pink">600+</span>
+          <span class="stat-label">İnteraktif Slayt & Atölye</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val green">%100</span>
+          <span class="stat-label">MEB Maarif Modeli Uyumu</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SEARCH & FILTER TOOLBAR -->
+    <section class="portal-toolbar" aria-label="Sınıf Filtreleme ve Arama">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="classSearchInput" class="search-input" placeholder="Sınıf adı, konu, ünite veya kazanım ara (örn: Python, Scratch, 1. Sınıf, Robotik, 3B Tasarım)..." aria-label="Sınıf ara">
+      </div>
+
+      <div class="filter-pills" role="tablist">
+        <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">
+          <i class="fas fa-layer-group"></i> Tümü (10 Sınıf)
+        </button>
+        <button class="filter-pill" data-filter="ilkokul" role="tab" aria-selected="false">
+          <i class="fas fa-shapes"></i> İlkokul (1 - 4)
+        </button>
+        <button class="filter-pill" data-filter="ortaokul" role="tab" aria-selected="false">
+          <i class="fas fa-code-branch"></i> Ortaokul (5 - 8)
+        </button>
+        <button class="filter-pill" data-filter="lise" role="tab" aria-selected="false">
+          <i class="fas fa-laptop-code"></i> Lise (9 - 10)
+        </button>
+      </div>
+
+      <div class="view-toggle-group" aria-label="Görünüm Değiştir">
+        <button type="button" class="view-toggle-btn active" id="btnViewGrid" title="Kart Görünümü">
+          <i class="fas fa-table-cells-large"></i> Kart
+        </button>
+        <button type="button" class="view-toggle-btn" id="btnViewList" title="Liste Görünümü">
+          <i class="fas fa-list-ul"></i> Liste
+        </button>
+      </div>
+    </section>
+
+    <!-- CLASSES GRID / LIST CONTAINER -->
+    <main class="classes-container mode-grid" id="classesContainer" aria-label="Tüm Sınıflar">
+      <!-- Cards rendered via JavaScript -->
+    </main>
+
+    <!-- FATIH AKILLI TAHTA FOOTER GUIDE -->
+    <footer class="fatih-footer">
+      <div class="fatih-title-row">
+        <div class="fatih-title">
+          <i class="fas fa-tv" style="color: var(--brand-primary);"></i>
+          <span>Fatih Akıllı Tahta & Dokunmatik Ekran Kullanım Kılavuzu</span>
+        </div>
+        <span class="stage-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">
+          ⚡ Sınıfta Kolay Erişim & Tam Ekran
+        </span>
+      </div>
+
+      <div class="keys-grid">
+        <div class="key-guide-card">
+          <kbd>→</kbd> veya <kbd>Boşluk</kbd>
+          <span>Sonraki Slayta Geç</span>
+        </div>
+        <div class="key-guide-card">
+          <kbd>←</kbd> Tuşu
+          <span>Önceki Slayta Dön</span>
+        </div>
+        <div class="key-guide-card">
+          <kbd>F</kbd> Tuşu
+          <span>Tam Ekran Modunu Aç/Kapat</span>
+        </div>
+        <div class="key-guide-card">
+          <kbd>O</kbd> Tuşu
+          <span>Slayt Haritası / Genel Bakış</span>
+        </div>
+        <div class="key-guide-card">
+          <kbd>T</kbd> Tuşu
+          <span>Açık / Kapalı Tema Geçişi</span>
+        </div>
+        <div class="key-guide-card">
+          <kbd>📱 Kaydırma</kbd>
+          <span>Sağa / Sola Dokunmatik Geçiş</span>
+        </div>
+      </div>
+
+      <div class="portal-credits">
+        T.C. Millî Eğitim Bakanlığı Türkiye Yüzyılı Maarif Modeli Müfredatı Esas Alınarak Hazırlanmıştır. <br>
+        İçerik & Portal Geliştirici: <strong>Öğretmen Vahit Keskin</strong> &bull; <a href="../../index.html" target="_blank" rel="noopener">vahitkeskin.github.io</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- SHARE & QR CODE MODAL -->
+  <div class="modal-overlay" id="shareModalOverlay" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+    <div class="share-modal">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Kapat">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-header">
+        <h3 id="shareModalTitle">Sınıfı / Portalı Paylaş</h3>
+        <p id="shareModalSubtitle">Bağlantıyı kopyalayabilir, WhatsApp'ta gönderebilir veya akıllı tahtada QR kod açabilirsiniz.</p>
+      </div>
+
+      <div class="qr-preview-box">
+        <img id="qrCodeImage" src="" alt="Ders Portalı QR Kodu" loading="lazy">
+      </div>
+
+      <div class="share-link-input-group">
+        <input type="text" id="shareLinkInput" class="share-link-input" readonly>
+        <button type="button" class="btn-modal-copy" id="btnModalCopy">
+          <i class="fas fa-copy"></i>
+          <span>Kopyala</span>
+        </button>
+      </div>
+
+      <div class="share-channels">
+        <a href="#" target="_blank" rel="noopener" class="channel-btn whatsapp" id="channelWhatsapp">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="channel-btn telegram" id="channelTelegram">
+          <i class="fab fa-telegram-plane"></i>
+          <span>Telegram</span>
+        </a>
+        <a href="#" class="channel-btn email" id="channelEmail">
+          <i class="fas fa-envelope"></i>
+          <span>E-posta</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- THEME MANAGER SCRIPT -->
+  <script src="theme-manager.js"></script>
+
+  <!-- PORTAL APPLICATION LOGIC -->
+  <script>
+    /**
+     * MEB Maarif Modeli - Bilişim & Teknoloji Ders Portalı
+     * 1 - 10. Sınıf Master Hub & Link Paylaşım Merkezi
+     * Öğretmen: Vahit Keskin
+     */
+
+    // Canonical Public Production URL Base:
+    const CANONICAL_PUBLIC_BASE = 'https://vahitkeskin.github.io/iamvahitkeskin/files/bilisimogretmenligi/';
+
+    // All Classes Data Array (1. Sınıf - 10. Sınıf):
+    const CLASSES_DATA = [
+      {
+        grade: 1,
+        title: "1. Sınıf Serbest Etkinlikler",
+        stage: "ilkokul",
+        stageLabel: "🎒 İlkokul (1. Sınıf)",
+        subject: "Serbest Etkinlikler & Değerler Eğitimi",
+        folder: "1. Sinif",
+        path: "1.%20Sinif/index.html",
+        weeks: "41 Hafta (164 Saat)",
+        slides: "328+ İnteraktif Slayt",
+        themeClass: "card-grade-1",
+        icon: "🎒",
+        desc: "T.C. MEB Türkiye Yüzyılı Maarif Modeli 1. Sınıf Serbest Etkinlikler dersi yıllık planı: 41 haftalık çocuk dostu görsel illüstrasyonlu masallar, oyunlar, ritim, siber nezaket ve el becerisi atölyeleri.",
+        tags: ["Uyum & Oyun", "Nezaket & Değerler", "Masal & Mantık", "Görsel Sanatlar", "Boyama"]
+      },
+      {
+        grade: 2,
+        title: "2. Sınıf Bilişim Teknolojileri ve Yazılım",
+        stage: "ilkokul",
+        stageLabel: "💻 İlkokul (2. Sınıf)",
+        subject: "Bilişim Teknolojileri & ScratchJr",
+        folder: "2. Sinif",
+        path: "2.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Sunum)",
+        slides: "160+ İnteraktif Slayt",
+        themeClass: "card-grade-2",
+        icon: "💻",
+        desc: "Masaüstü bilgisayar donanımından dijital sanata, güvenli şifre kalesinden ScratchJr blok tabanlı kodlamaya, robotlardan yapay zekâya kadar 41 haftalık eksiksiz, interaktif ve çocuk dostu eğitim portalı.",
+        tags: ["Donanım", "ScratchJr", "Dijital Sanat", "Güvenli İnternet", "Robotik"]
+      },
+      {
+        grade: 3,
+        title: "3. Sınıf Bilişim Teknolojileri ve Yazılım",
+        stage: "ilkokul",
+        stageLabel: "🧩 İlkokul (3. Sınıf)",
+        subject: "Bilişim ve Kodlama Dersi",
+        folder: "3. Sinif",
+        path: "3.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Sunum)",
+        slides: "180+ İnteraktif Slayt",
+        themeClass: "card-grade-3",
+        icon: "🧩",
+        desc: "Giriş/çıkış birimlerinden kelime işlemcilere, siber etikten algoritma akış şemalarına, Scratch 3.0 blok kodlamadan robotik sensörler ve yapay zekâya kadar tüm kazanımlar eksiksiz modellenmiştir.",
+        tags: ["Algoritma", "Scratch 3.0", "Kelime İşlemci", "Siber Etik", "Sensörler"]
+      },
+      {
+        grade: 4,
+        title: "4. Sınıf Bilişim Teknolojileri ve Yazılım",
+        stage: "ilkokul",
+        stageLabel: "🚀 İlkokul (4. Sınıf)",
+        subject: "Bilişim Teknolojileri ve Yazılım",
+        folder: "4. Sinif",
+        path: "4.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Saat)",
+        slides: "160+ İnteraktif Slayt",
+        themeClass: "card-grade-4",
+        icon: "🚀",
+        desc: "Bilgisayar ağları, internet okuryazarlığı, dijital ayak izi, problem çözme stratejileri, ileri blok kodlama projeleri, interaktif oyun tasarımı ve temel yapay zekâ uygulamaları.",
+        tags: ["Ağlar", "İnternet Güvenliği", "Oyun Tasarımı", "Problem Çözme", "Blok Kodlama"]
+      },
+      {
+        grade: 5,
+        title: "5. Sınıf Bilişim Teknolojileri ve Yazılım",
+        stage: "ortaokul",
+        stageLabel: "🛡️ Ortaokul (5. Sınıf)",
+        subject: "Bilişim Teknolojileri ve Yazılım",
+        folder: "5. Sinif",
+        path: "5.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Sunum)",
+        slides: "200+ İnteraktif Slayt",
+        themeClass: "card-grade-5",
+        icon: "🛡️",
+        desc: "Bilişim teknolojilerinin günlük yaşamdaki rolü, dosya yönetimi, e-Devlet, telif hakları, siber güvenlik, algoritma mantığı ve blok tabanlı programlamaya giriş.",
+        tags: ["Bilişim Etiği", "Dosya Yönetimi", "Siber Güvenlik", "Algoritma", "Blok Programlama"]
+      },
+      {
+        grade: 6,
+        title: "6. Sınıf Bilişim Teknolojileri",
+        stage: "ortaokul",
+        stageLabel: "⚙️ Ortaokul (6. Sınıf)",
+        subject: "Bilişim Teknolojileri",
+        folder: "6. Sinif",
+        path: "6.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Sunum)",
+        slides: "210+ İnteraktif Slayt",
+        themeClass: "card-grade-6",
+        icon: "⚙️",
+        desc: "Elektronik tablolar, veri analizi, dijital ürün tasarımı, akış şemaları, değişkenler ve döngülerle kapsamlı algoritma geliştirme ve problem çözme.",
+        tags: ["Tablolama", "Veri Analizi", "Akış Şemaları", "Değişkenler", "Döngüler"]
+      },
+      {
+        grade: 7,
+        title: "7. Sınıf Teknoloji ve Tasarım",
+        stage: "ortaokul",
+        stageLabel: "📐 Ortaokul (7. Sınıf)",
+        subject: "Teknoloji ve Tasarım & İnovasyon",
+        folder: "7. Sinif",
+        path: "7.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Saat)",
+        slides: "170+ İnteraktif Slayt",
+        themeClass: "card-grade-7",
+        icon: "📐",
+        desc: "Mühendislik ve inovasyon sunum arşivi: CAD / Tinkercad 3B modelleme, ergonomi, biyotaklit atölyeleri, STEAM entegrasyonu, tasarım odaklı düşünme ve patent bilinci.",
+        tags: ["3B Modelleme", "Tinkercad", "STEAM", "Ergonomi", "İnovasyon", "Biyotaklit"]
+      },
+      {
+        grade: 8,
+        title: "8. Sınıf Bilişim Teknolojileri ve Yazılım",
+        stage: "ortaokul",
+        stageLabel: "🤖 Ortaokul (8. Sınıf)",
+        subject: "Robotik & Yapay Zekâ & Algoritma",
+        folder: "8. Sinif",
+        path: "8.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Saat)",
+        slides: "180+ İnteraktif Slayt",
+        themeClass: "card-grade-8",
+        icon: "🤖",
+        desc: "Robotik kodlama, Arduino/mikrodenetleyiciler, nesnelerin interneti (IoT), yapay zekâ etiği, mobil uygulama fikirleri ve LGS döneminde üst düzey algoritmik düşünme becerileri.",
+        tags: ["Robotik", "Arduino", "IoT", "Yapay Zekâ", "Akıllı Sistemler"]
+      },
+      {
+        grade: 9,
+        title: "9. Sınıf Bilgisayar Bilimi (Kur 1)",
+        stage: "lise",
+        stageLabel: "🐍 Lise (9. Sınıf)",
+        subject: "Bilgisayar Bilimi & Python Programlama",
+        folder: "9. Sinif",
+        path: "9.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Saat)",
+        slides: "190+ İnteraktif Slayt",
+        themeClass: "card-grade-9",
+        icon: "🐍",
+        desc: "Algoritmik düşünme, akış diyagramları, Python programlama temelleri: değişkenler, mantıksal operatörler, if-elif-else karar yapıları, for/while döngüleri, fonksiyonlar ve hata ayıklama.",
+        tags: ["Python", "Algoritma", "Veri Tipleri", "Fonksiyonlar", "Kodlama"]
+      },
+      {
+        grade: 10,
+        title: "10. Sınıf Bilgisayar Bilimi (Kur 2)",
+        stage: "lise",
+        stageLabel: "🧠 Lise (10. Sınıf)",
+        subject: "İleri Python & Makine Öğrenmesi & OOP",
+        folder: "10. Sinif",
+        path: "10.%20Sinif/index.html",
+        weeks: "41 Hafta (82 Saat)",
+        slides: "200+ İnteraktif Slayt",
+        themeClass: "card-grade-10",
+        icon: "🧠",
+        desc: "İleri Python programlama: nesne yönelimli programlama (OOP), veri yapıları, web teknolojileri temelleri, yapay zekâ & makine öğrenmesi modelleri ve siber güvenlik savunma teknikleri.",
+        tags: ["İleri Python", "OOP", "Veri Yapıları", "Makine Öğrenmesi", "Siber Güvenlik"]
+      }
+    ];
+
+    /**
+     * Resolves the best shareable public URL for a given relative path.
+     * Always ensures links copied are immediately shareable with anyone in the world!
+     */
+    function resolveShareableUrl(relativePath = '') {
+      const isHttp = window.location.protocol.startsWith('http');
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+      if (isHttp && !isLocalhost) {
+        try {
+          return new URL(relativePath, window.location.href).href;
+        } catch (e) {
+          return CANONICAL_PUBLIC_BASE + relativePath;
+        }
+      } else {
+        // When running locally from file:// or local server, copy the canonical GitHub Pages public URL
+        // so that when the user shares it, everyone can open it!
+        return CANONICAL_PUBLIC_BASE + relativePath;
+      }
+    }
+
+    /**
+     * Cross-platform Clipboard Copy with robust fallback
+     */
+    async function copyTextToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (err) {
+          console.warn('Clipboard API failed, trying fallback', err);
+        }
+      }
+
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      let success = false;
+      try {
+        success = document.execCommand('copy');
+      } catch (err) {
+        console.error('execCommand copy failed', err);
+      }
+      document.body.removeChild(textArea);
+      return success;
+    }
+
+    /**
+     * Floating Toast Notification
+     */
+    function showToast(title, desc) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast-card';
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="toast-content">
+          <div class="toast-title">${title}</div>
+          <div class="toast-desc">${desc}</div>
+        </div>
+      `;
+
+      container.appendChild(toast);
+      // Trigger animation
+      requestAnimationFrame(() => toast.classList.add('show'));
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 350);
+      }, 3500);
+    }
+
+    /**
+     * Render Class Cards
+     */
+    function renderClasses(list) {
+      const container = document.getElementById('classesContainer');
+
+      if (!list || list.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-surface); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">Aradığınız kriterlere uygun sınıf bulunamadı</h3>
+            <p style="color: var(--text-sub); font-size: 0.95rem;">Lütfen arama terimini değiştirin veya kategori filtresini sıfırlayın.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(item => {
+        const publicUrl = resolveShareableUrl(item.path);
+
+        return `
+          <div class="class-card ${item.themeClass}" data-grade="${item.grade}" data-stage="${item.stage}" onclick="handleCardClick(event, '${item.path}')">
+            <!-- Card Top Header -->
+            <div class="card-top">
+              <div class="grade-badge-block">
+                <div class="grade-number-box">
+                  <span class="grade-num">${item.grade}</span>
+                  <span class="grade-txt">Sınıf</span>
+                </div>
+                <div class="grade-meta-tags">
+                  <span class="stage-badge">${item.stageLabel}</span>
+                  <span class="duration-tag">📅 ${item.weeks} &bull; 📺 16:9</span>
+                </div>
+              </div>
+              <div class="card-quick-icon">${item.icon}</div>
+            </div>
+
+            <!-- Card Titles & Description -->
+            <div class="card-title-group">
+              <h2 class="card-title">${item.title}</h2>
+              <p class="card-desc">${item.desc}</p>
+            </div>
+
+            <!-- Topic Tags -->
+            <div class="card-tags">
+              ${item.tags.map(t => `<span class="topic-tag">#${t}</span>`).join('')}
+            </div>
+
+            <!-- Card Action Row & Copy Button -->
+            <div class="card-action-row">
+              <a href="${item.path}" class="btn-open-program" title="${item.title} Yıllık Ders Sunumlarını Aç" onclick="event.stopPropagation()">
+                <span>Haftalık Programı Aç</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+
+              <!-- Copy Button (Copies the open page URL of this item) -->
+              <button type="button" class="btn-copy-item" title="${item.title} bağlantısını kopyala" onclick="handleCopyItem(event, '${item.title}', '${item.path}')">
+                <i class="fas fa-copy"></i>
+                <span>Kopyala</span>
+              </button>
+
+              <!-- Share Dialog Button -->
+              <button type="button" class="btn-share-icon" title="Paylaş veya QR Kod Aç" onclick="handleOpenShareModal(event, '${item.title}', '${item.path}')">
+                <i class="fas fa-share-nodes"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Card Click Handler:
+     * When user clicks on the card itself, navigate directly to that grade's weekly portal page!
+     */
+    function handleCardClick(event, path) {
+      // If clicked on an interactive element inside card, don't trigger card navigation
+      if (event.target.closest('button, a, input')) return;
+      window.location.href = path;
+    }
+
+    /**
+     * Copy Item Button Handler:
+     * Copies the full link of this class's weekly program page!
+     */
+    async function handleCopyItem(event, title, path) {
+      if (event) event.stopPropagation();
+      const btn = event.currentTarget;
+      const fullUrl = resolveShareableUrl(path);
+
+      const ok = await copyTextToClipboard(fullUrl);
+      if (ok) {
+        // Visual button feedback
+        const originalHtml = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = `<i class="fas fa-check"></i> <span>Kopyalandı!</span>`;
+
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = originalHtml;
+        }, 2000);
+
+        // Toast feedback
+        showToast(
+          `📋 ${title} Bağlantısı Kopyalandı!`,
+          `Paylaşılabilir URL: ${fullUrl}`
+        );
+      }
+    }
+
+    /**
+     * Share Modal & QR Code Handler
+     */
+    function handleOpenShareModal(event, title, path) {
+      if (event) event.stopPropagation();
+
+      const modal = document.getElementById('shareModalOverlay');
+      const titleEl = document.getElementById('shareModalTitle');
+      const subtitleEl = document.getElementById('shareModalSubtitle');
+      const inputEl = document.getElementById('shareLinkInput');
+      const qrEl = document.getElementById('qrCodeImage');
+      const waBtn = document.getElementById('channelWhatsapp');
+      const tgBtn = document.getElementById('channelTelegram');
+      const mailBtn = document.getElementById('channelEmail');
+
+      const fullUrl = resolveShareableUrl(path);
+
+      titleEl.textContent = title;
+      subtitleEl.textContent = `${title} haftalık ders sunumları ve interaktif müfredat bağlantısı`;
+      inputEl.value = fullUrl;
+
+      // QR Code Generator API
+      qrEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&data=${encodeURIComponent(fullUrl)}`;
+
+      // Social Share Links
+      const shareMessage = `Merhaba, ${title} MEB Maarif Modeli haftalık interaktif ders sunumları portalı: ${fullUrl}`;
+      waBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
+      tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(shareMessage)}`;
+      mailBtn.href = `mailto:?subject=${encodeURIComponent(title + " Ders Sunumları")}&body=${encodeURIComponent(shareMessage)}`;
+
+      modal.classList.add('open');
+    }
+
+    /**
+     * Setup Event Listeners
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('classSearchInput');
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const btnViewGrid = document.getElementById('btnViewGrid');
+      const btnViewList = document.getElementById('btnViewList');
+      const classesContainer = document.getElementById('classesContainer');
+
+      const btnGlobalShare = document.getElementById('btnGlobalShare');
+      const shareModalOverlay = document.getElementById('shareModalOverlay');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const btnModalCopy = document.getElementById('btnModalCopy');
+      const shareLinkInput = document.getElementById('shareLinkInput');
+
+      let currentStageFilter = 'all';
+
+      // Initial Render
+      renderClasses(CLASSES_DATA);
+
+      // Search Filter
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filterAndRender(query, currentStageFilter);
+      });
+
+      // Stage Tabs Filter
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => {
+            p.classList.remove('active');
+            p.setAttribute('aria-selected', 'false');
+          });
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+
+          currentStageFilter = pill.dataset.filter;
+          filterAndRender(searchInput.value.toLowerCase().trim(), currentStageFilter);
+        });
+      });
+
+      function filterAndRender(query, stage) {
+        let filtered = CLASSES_DATA;
+
+        if (stage !== 'all') {
+          filtered = filtered.filter(item => item.stage === stage);
+        }
+
+        if (query) {
+          filtered = filtered.filter(item => {
+            const matchGrade = String(item.grade) === query || `${item.grade}. sınıf`.toLowerCase().includes(query);
+            const matchTitle = item.title.toLowerCase().includes(query);
+            const matchDesc = item.desc.toLowerCase().includes(query);
+            const matchSubject = item.subject.toLowerCase().includes(query);
+            const matchTags = item.tags.some(t => t.toLowerCase().includes(query));
+            return matchGrade || matchTitle || matchDesc || matchSubject || matchTags;
+          });
+        }
+
+        renderClasses(filtered);
+      }
+
+      // View Toggle: Grid vs List
+      btnViewGrid.addEventListener('click', () => {
+        btnViewGrid.classList.add('active');
+        btnViewList.classList.remove('active');
+        classesContainer.classList.remove('mode-list');
+        classesContainer.classList.add('mode-grid');
+      });
+
+      btnViewList.addEventListener('click', () => {
+        btnViewList.classList.add('active');
+        btnViewGrid.classList.remove('active');
+        classesContainer.classList.remove('mode-grid');
+        classesContainer.classList.add('mode-list');
+      });
+
+      // Global Share Button (Shares the whole portal hub)
+      btnGlobalShare.addEventListener('click', (e) => {
+        handleOpenShareModal(
+          e,
+          'MEB Bilişim & Teknoloji Ders Portalı (1 - 10. Sınıf)',
+          ''
+        );
+      });
+
+      // Modal Copy Button
+      btnModalCopy.addEventListener('click', async () => {
+        const url = shareLinkInput.value;
+        const ok = await copyTextToClipboard(url);
+        if (ok) {
+          const origText = btnModalCopy.innerHTML;
+          btnModalCopy.innerHTML = `<i class="fas fa-check"></i> <span>Kopyalandı!</span>`;
+          btnModalCopy.style.background = '#10b981';
+          btnModalCopy.style.color = '#ffffff';
+
+          setTimeout(() => {
+            btnModalCopy.innerHTML = origText;
+            btnModalCopy.style.background = '';
+            btnModalCopy.style.color = '';
+          }, 2000);
+
+          showToast('📋 Bağlantı Kopyalandı!', `Paylaşım URL'i panoya kopyalandı.`);
+        }
+      });
+
+      // Close Modal
+      modalCloseBtn.addEventListener('click', () => {
+        shareModalOverlay.classList.remove('open');
+      });
+
+      shareModalOverlay.addEventListener('click', (e) => {
+        if (e.target === shareModalOverlay) {
+          shareModalOverlay.classList.remove('open');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && shareModalOverlay.classList.contains('open')) {
+          shareModalOverlay.classList.remove('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
