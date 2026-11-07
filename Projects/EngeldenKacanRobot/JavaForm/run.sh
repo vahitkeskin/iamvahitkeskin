@@ -3,10 +3,9 @@ set -e
 
 cd "$(dirname "$0")"
 
-if [ ! -d "bin" ]; then
+if [ ! -f "EngeldenKacanRobot.jar" ]; then
     ./build.sh
 fi
 
 echo "Java Form Telemetri Uygulaması Başlatılıyor..."
-java -cp bin com.engeldenkacan.Main "$@"
-
+java -jar EngeldenKacanRobot.jar "$@"

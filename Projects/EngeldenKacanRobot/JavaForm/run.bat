@@ -2,10 +2,10 @@
 setlocal
 cd /d "%~dp0"
 
-if not exist bin (
+if not exist EngeldenKacanRobot.jar (
     call build.bat
 )
 
 echo [Java Form] Telemetri Uygulamasi Baslatiliyor...
-java -cp bin com.engeldenkacan.Main %*
+java -jar EngeldenKacanRobot.jar %*
 pause
