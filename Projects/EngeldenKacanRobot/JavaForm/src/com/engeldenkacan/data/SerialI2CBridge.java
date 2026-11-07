@@ -6,6 +6,7 @@ import com.engeldenkacan.domain.repository.ITelemetryRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,34 +22,56 @@ public class SerialI2CBridge implements ITelemetryRepository {
         "\"front\":\\s*(\\d+).*?\"angle\":\\s*(\\d+).*?\"state\":\\s*(\\d+).*?\"left\":\\s*(\\d+).*?\"right\":\\s*(\\d+)"
     );
 
+    public static String detectDefaultPort() {
+        String os = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH);
+        if (os.contains("win")) {
+            return "COM3";
+        } else if (os.contains("mac")) {
+            return "/dev/cu.usbserial-1240";
+        } else {
+            return "/dev/ttyUSB0";
+        }
+    }
+
     @Override
     public void connect(String targetPort) throws Exception {
         if (connected) disconnect();
 
         log("[Donanım Bağlantısı] " + targetPort + " açılıyor (115200 baud)...");
 
-        // python3 tabanlı kararlı seri akış köprüsü başlat
+        // Windows, macOS ve Linux uyumlu evrensel Python köprüsü
         ProcessBuilder pb = new ProcessBuilder(
             "python3", "-u", "-c",
-            "import os, termios, select, sys\n" +
+            "import os, sys, platform, time\n" +
             "port = sys.argv[1]\n" +
+            "sys_name = platform.system()\n" +
             "try:\n" +
-            "    fd = os.open(port, os.O_RDONLY | os.O_NOCTTY)\n" +
-            "    attrs = termios.tcgetattr(fd)\n" +
-            "    attrs[0] = 0; attrs[1] = 0; attrs[2] = termios.CS8 | termios.CREAD | termios.CLOCAL; attrs[3] = 0\n" +
-            "    attrs[4] = termios.B115200; attrs[5] = termios.B115200\n" +
-            "    termios.tcsetattr(fd, termios.TCSANOW, attrs)\n" +
-            "    buf = b''\n" +
-            "    while True:\n" +
-            "        r, _, _ = select.select([fd], [], [], 0.2)\n" +
-            "        if r:\n" +
-            "            data = os.read(fd, 256)\n" +
-            "            if data:\n" +
-            "                buf += data\n" +
-            "                while b'\\n' in buf:\n" +
-            "                    line, buf = buf.split(b'\\n', 1)\n" +
-            "                    sys.stdout.write(line.decode('utf-8', errors='ignore') + '\\n')\n" +
-            "                    sys.stdout.flush()\n" +
+            "    if sys_name == 'Windows':\n" +
+            "        import serial\n" +
+            "        s = serial.Serial(port, 115200, timeout=1)\n" +
+            "        while True:\n" +
+            "            line = s.readline().decode('utf-8', errors='ignore').strip()\n" +
+            "            if line:\n" +
+            "                sys.stdout.write(line + '\\n')\n" +
+            "                sys.stdout.flush()\n" +
+            "    else:\n" +
+            "        import termios, select\n" +
+            "        fd = os.open(port, os.O_RDONLY | os.O_NOCTTY)\n" +
+            "        attrs = termios.tcgetattr(fd)\n" +
+            "        attrs[0] = 0; attrs[1] = 0; attrs[2] = termios.CS8 | termios.CREAD | termios.CLOCAL; attrs[3] = 0\n" +
+            "        attrs[4] = termios.B115200; attrs[5] = termios.B115200\n" +
+            "        termios.tcsetattr(fd, termios.TCSANOW, attrs)\n" +
+            "        buf = b''\n" +
+            "        while True:\n" +
+            "            r, _, _ = select.select([fd], [], [], 0.2)\n" +
+            "            if r:\n" +
+            "                data = os.read(fd, 256)\n" +
+            "                if data:\n" +
+            "                    buf += data\n" +
+            "                    while b'\\n' in buf:\n" +
+            "                        line, buf = buf.split(b'\\n', 1)\n" +
+            "                        sys.stdout.write(line.decode('utf-8', errors='ignore') + '\\n')\n" +
+            "                        sys.stdout.flush()\n" +
             "except Exception as e:\n" +
             "    sys.stderr.write(str(e) + '\\n')\n",
             targetPort
@@ -72,13 +95,13 @@ public class SerialI2CBridge implements ITelemetryRepository {
                     }
                 }
             } catch (Exception e) {
-                if (connected) log("[Hata] Veri okuma akışı sonlandı: " + e.getMessage());
+                if (connected) log("[Hata] Veri akışı sonlandı: " + e.getMessage());
             }
         });
         readerThread.setDaemon(true);
         readerThread.start();
 
-        log("[Donanım Bağlantısı] Bağlantı başarılı! I2C/Seri telemetri dinleniyor.");
+        log("[Donanım Bağlantısı] Port açıldı, gerçek sensör verileri bekleniyor.");
     }
 
     private void parseJsonTelemetry(String raw) {
@@ -92,7 +115,7 @@ public class SerialI2CBridge implements ITelemetryRepository {
                 int right = Integer.parseInt(m.group(5));
 
                 RobotTelemetry telemetry = new RobotTelemetry(
-                    front, angle, RobotState.fromCode(stateCode), left, right
+                    front, angle, RobotState.fromCode(stateCode), left, right, true
                 );
 
                 if (telemetryListener != null) {
@@ -116,6 +139,9 @@ public class SerialI2CBridge implements ITelemetryRepository {
             process = null;
         }
         log("[Donanım Bağlantısı] Bağlantı kesildi.");
+        if (telemetryListener != null) {
+            telemetryListener.accept(RobotTelemetry.noSignal());
+        }
     }
 
     @Override
@@ -133,4 +159,3 @@ public class SerialI2CBridge implements ITelemetryRepository {
         this.logListener = logListener;
     }
 }
-

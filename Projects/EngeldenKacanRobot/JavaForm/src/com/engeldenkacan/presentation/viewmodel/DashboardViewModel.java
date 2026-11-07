@@ -1,10 +1,11 @@
 package com.engeldenkacan.presentation.viewmodel;
 
-import com.engeldenkacan.data.MockTelemetryProvider;
 import com.engeldenkacan.data.SerialI2CBridge;
-import com.engeldenkacan.domain.model.RobotState;
 import com.engeldenkacan.domain.model.RobotTelemetry;
 import com.engeldenkacan.domain.repository.ITelemetryRepository;
+import com.engeldenkacan.i18n.Strings;
+import com.engeldenkacan.theme.ThemeColors;
+import com.engeldenkacan.theme.ThemeDetector;
 
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
@@ -12,15 +13,17 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class DashboardViewModel {
-    private ITelemetryRepository repository;
+    private final ITelemetryRepository repository;
     private final List<Consumer<RobotTelemetry>> telemetryObservers = new ArrayList<>();
     private final List<Consumer<String>> logObservers = new ArrayList<>();
     private final List<Consumer<Boolean>> connectionObservers = new ArrayList<>();
+    private final List<Runnable> uiThemeObservers = new ArrayList<>();
 
-    private RobotTelemetry lastTelemetry = new RobotTelemetry(400, 90, RobotState.DISCONNECTED, 400, 400);
+    private ThemeDetector.ThemeMode currentTheme = ThemeDetector.ThemeMode.SYSTEM;
+    private Strings.LanguageMode currentLanguage = Strings.LanguageMode.SYSTEM;
+    private RobotTelemetry lastTelemetry = RobotTelemetry.noSignal();
 
     public DashboardViewModel() {
-        // Varsayılan olarak donanım köprüsü atanır
         this.repository = new SerialI2CBridge();
         setupRepoListeners();
     }
@@ -45,9 +48,6 @@ public class DashboardViewModel {
     }
 
     public void connectHardware(String port) {
-        disconnect();
-        this.repository = new SerialI2CBridge();
-        setupRepoListeners();
         try {
             repository.connect(port);
             notifyConnection(true);
@@ -57,29 +57,31 @@ public class DashboardViewModel {
         }
     }
 
-    public void connectSimulation() {
-        disconnect();
-        this.repository = new MockTelemetryProvider();
-        setupRepoListeners();
-        try {
-            repository.connect("I2C_ADDR:0x08 (SIM)");
-            notifyConnection(true);
-        } catch (Exception e) {
-            notifyLog("[Simülasyon Hatası] " + e.getMessage());
-            notifyConnection(false);
-        }
-    }
-
     public void disconnect() {
         if (repository != null && repository.isConnected()) {
             repository.disconnect();
         }
         notifyConnection(false);
-        lastTelemetry = new RobotTelemetry(400, 90, RobotState.DISCONNECTED, 400, 400);
+        lastTelemetry = RobotTelemetry.noSignal();
         for (Consumer<RobotTelemetry> observer : telemetryObservers) {
             observer.accept(lastTelemetry);
         }
     }
+
+    public void setTheme(ThemeDetector.ThemeMode theme) {
+        this.currentTheme = theme;
+        notifyUiRebuild();
+    }
+
+    public void setLanguage(Strings.LanguageMode lang) {
+        this.currentLanguage = lang;
+        Strings.setLanguage(lang);
+        notifyUiRebuild();
+    }
+
+    public ThemeDetector.ThemeMode getCurrentTheme() { return currentTheme; }
+    public Strings.LanguageMode getCurrentLanguage() { return currentLanguage; }
+    public ThemeColors getColors() { return ThemeColors.get(currentTheme); }
 
     public boolean isConnected() {
         return repository != null && repository.isConnected();
@@ -92,6 +94,7 @@ public class DashboardViewModel {
     public void addTelemetryObserver(Consumer<RobotTelemetry> obs) { telemetryObservers.add(obs); }
     public void addLogObserver(Consumer<String> obs) { logObservers.add(obs); }
     public void addConnectionObserver(Consumer<Boolean> obs) { connectionObservers.add(obs); }
+    public void addUiThemeObserver(Runnable obs) { uiThemeObservers.add(obs); }
 
     private void notifyConnection(boolean status) {
         SwingUtilities.invokeLater(() -> {
@@ -104,5 +107,10 @@ public class DashboardViewModel {
             for (Consumer<String> obs : logObservers) obs.accept(msg);
         });
     }
-}
 
+    private void notifyUiRebuild() {
+        SwingUtilities.invokeLater(() -> {
+            for (Runnable obs : uiThemeObservers) obs.run();
+        });
+    }
+}

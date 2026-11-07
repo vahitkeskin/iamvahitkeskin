@@ -6,15 +6,21 @@ public class RobotTelemetry {
     private final RobotState state;
     private final int leftDistance;
     private final int rightDistance;
+    private final boolean hasSignal;
     private final long timestamp;
 
-    public RobotTelemetry(int frontDistance, int servoAngle, RobotState state, int leftDistance, int rightDistance) {
+    public RobotTelemetry(int frontDistance, int servoAngle, RobotState state, int leftDistance, int rightDistance, boolean hasSignal) {
         this.frontDistance = frontDistance;
         this.servoAngle = servoAngle;
         this.state = state;
         this.leftDistance = leftDistance;
         this.rightDistance = rightDistance;
+        this.hasSignal = hasSignal;
         this.timestamp = System.currentTimeMillis();
+    }
+
+    public static RobotTelemetry noSignal() {
+        return new RobotTelemetry(-1, -1, RobotState.DISCONNECTED, -1, -1, false);
     }
 
     public int getFrontDistance() { return frontDistance; }
@@ -22,24 +28,18 @@ public class RobotTelemetry {
     public RobotState getState() { return state; }
     public int getLeftDistance() { return leftDistance; }
     public int getRightDistance() { return rightDistance; }
+    public boolean hasSignal() { return hasSignal; }
     public long getTimestamp() { return timestamp; }
 
     public boolean isDanger() {
-        return frontDistance <= 15;
+        return hasSignal && frontDistance > 0 && frontDistance <= 15;
     }
 
     public boolean isWarning() {
-        return frontDistance > 15 && frontDistance <= 30;
+        return hasSignal && frontDistance > 15 && frontDistance <= 30;
     }
 
     public boolean isSafe() {
-        return frontDistance > 30;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Telemetry[Ön=%dcm, Açı=%d°, Durum=%s, Sol=%dcm, Sağ=%dcm]",
-                frontDistance, servoAngle, state.getDisplayName(), leftDistance, rightDistance);
+        return hasSignal && frontDistance > 30;
     }
 }
-

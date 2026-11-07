@@ -72,3 +72,4 @@ jobs:
         run: |
           cd Projects/EngeldenKacanRobot/EngeldenKacanRobotMobile
           ./gradlew :shared:compileCommonMainKotlinMetadata :desktopApp:compileKotlin --no-daemon
+
