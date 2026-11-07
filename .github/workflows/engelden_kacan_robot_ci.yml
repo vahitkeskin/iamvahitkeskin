@@ -1,0 +1,74 @@
+name: Engelden Kaçan Robot - CI/CD Pipeline
+
+on:
+  push:
+    paths:
+      - 'Projects/EngeldenKacanRobot/**'
+      - '.github/workflows/engelden_kacan_robot_ci.yml'
+  pull_request:
+    paths:
+      - 'Projects/EngeldenKacanRobot/**'
+
+jobs:
+  build-arduino:
+    name: Build Arduino Firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Arduino CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          sudo mv bin/arduino-cli /usr/local/bin/
+
+      - name: Install AVR Core & Libraries
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+          arduino-cli lib install "Servo"
+
+      - name: Compile Arduino Sketch
+        run: |
+          arduino-cli compile --fqbn arduino:avr:uno Projects/EngeldenKacanRobot/Arduino
+
+  build-java-form:
+    name: Build Java Form Desktop App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Compile Java Form
+        run: |
+          cd Projects/EngeldenKacanRobot/JavaForm
+          chmod +x build.sh
+          ./build.sh
+
+  build-mobile-kmp:
+    name: Build Android & Compose Multiplatform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Grant Execute Permission to Gradlew
+        run: |
+          chmod +x Projects/EngeldenKacanRobot/EngeldenKacanRobotMobile/gradlew
+
+      - name: Compile Shared KMP & Desktop Code
+        run: |
+          cd Projects/EngeldenKacanRobot/EngeldenKacanRobotMobile
+          ./gradlew :shared:compileCommonMainKotlinMetadata :desktopApp:compileKotlin --no-daemon
