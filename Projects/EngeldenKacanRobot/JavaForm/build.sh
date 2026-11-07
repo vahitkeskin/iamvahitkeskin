@@ -10,3 +10,4 @@ javac -encoding UTF-8 -d bin @sources.txt
 rm sources.txt
 
 echo "[2/2] Derleme başarılı! Çıktılar 'JavaForm/bin' dizininde."
+

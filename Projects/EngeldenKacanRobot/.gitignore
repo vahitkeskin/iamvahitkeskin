@@ -2,12 +2,15 @@
 .DS_Store
 Thumbs.db
 
-# Arduino / PlatformIO / Derleme çıktıları
+# Derleme ara dosyaları ve ikili çıktılar
+bin/
+**/bin/
+build/
+**/build/
 *.hex
 *.elf
 *.bin
-build/
+*.class
 .pio/
-.vscode/
 .idea/
-
+*.iml

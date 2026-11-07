@@ -10,3 +10,4 @@ public interface ITelemetryRepository {
     void setTelemetryListener(Consumer<RobotTelemetry> listener);
     void setLogListener(Consumer<String> logListener);
 }
+

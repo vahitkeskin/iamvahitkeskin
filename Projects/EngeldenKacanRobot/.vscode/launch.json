@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Java Form - Engelden Kaçan Robot",
+            "request": "launch",
+            "mainClass": "com.engeldenkacan.Main",
+            "projectName": "JavaForm",
+            "classPaths": [
+                "${workspaceFolder}/JavaForm/bin"
+            ]
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Java Form (Shell Script)",
+            "request": "launch",
+            "command": "${workspaceFolder}/JavaForm/run.sh"
+        }
+    ]
+}
+

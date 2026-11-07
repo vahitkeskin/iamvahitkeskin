@@ -36,3 +36,4 @@ private:
 };
 
 #endif // I2C_COMM_H
+

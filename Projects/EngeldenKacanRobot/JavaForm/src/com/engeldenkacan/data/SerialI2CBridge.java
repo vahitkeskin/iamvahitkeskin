@@ -133,3 +133,4 @@ public class SerialI2CBridge implements ITelemetryRepository {
         this.logListener = logListener;
     }
 }
+

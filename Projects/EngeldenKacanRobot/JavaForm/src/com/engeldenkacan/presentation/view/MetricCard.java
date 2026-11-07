@@ -97,3 +97,4 @@ public class MetricCard extends JPanel {
         lblRightVal.setText("Sağ Koridor: " + telemetry.getRightDistance() + " cm");
     }
 }
+

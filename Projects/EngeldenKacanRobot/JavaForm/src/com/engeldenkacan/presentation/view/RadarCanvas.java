@@ -124,3 +124,4 @@ public class RadarCanvas extends JPanel {
         g2.dispose();
     }
 }
+

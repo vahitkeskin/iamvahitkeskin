@@ -164,3 +164,4 @@ public class MainForm extends JFrame {
         txtPort.setEnabled(!connected);
     }
 }
+

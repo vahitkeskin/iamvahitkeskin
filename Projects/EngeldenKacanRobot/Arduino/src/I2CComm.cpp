@@ -72,3 +72,4 @@ void I2CComm::handleRequest() {
         }
     }
 }
+

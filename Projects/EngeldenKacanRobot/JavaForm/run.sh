@@ -9,3 +9,4 @@ fi
 
 echo "Java Form Telemetri Uygulaması Başlatılıyor..."
 java -cp bin com.engeldenkacan.Main "$@"
+

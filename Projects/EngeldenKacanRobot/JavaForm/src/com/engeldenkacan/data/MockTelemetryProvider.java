@@ -103,3 +103,4 @@ public class MockTelemetryProvider implements ITelemetryRepository {
         this.logListener = logListener;
     }
 }
+
