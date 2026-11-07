@@ -83,6 +83,34 @@ public class DashboardViewModel {
     public Strings.LanguageMode getCurrentLanguage() { return currentLanguage; }
     public ThemeColors getColors() { return ThemeColors.get(currentTheme); }
 
+    public void sendCommand(String cmd) {
+        if (repository != null) {
+            repository.sendCommand(cmd);
+        }
+    }
+
+    public void emergencyStop() {
+        sendCommand("STOP");
+    }
+
+    public void startAutonomous() {
+        sendCommand("MODE:AUTO");
+    }
+
+    public void setManualMode(boolean manual) {
+        sendCommand(manual ? "MODE:MANUAL" : "MODE:AUTO");
+    }
+
+    public void triggerHorn() {
+        sendCommand("BUZZER:1");
+    }
+
+    public void toggleChargingSimulation() {
+        if (repository != null) {
+            repository.toggleChargingSimulation();
+        }
+    }
+
     public boolean isConnected() {
         return repository != null && repository.isConnected();
     }

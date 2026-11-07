@@ -46,16 +46,12 @@ EngeldenKacanRobot/
 │   ├── build.bat & run.bat         # Windows çalıştırma betikleri
 │   └── bin/                        # Derlenmiş sınıf çıktıları
 │
-├── 📁 EngeldenKacanRobotMobile/    # KMP Çoklu Platform (Android, iOS, Desktop)
-│   ├── androidApp/                 # Android APK çıktısı
-│   ├── desktopApp/                 # KMP Desktop JVM çıktısı
-│   ├── iosApp/                     # iOS Xcode projesi
-│   └── shared/src/commonMain/kotlin/com/vahitkeskin/engeldenkacanrobotmobile/
-│       ├── domain/model/           # RobotTelemetry.kt, RobotState.kt
-│       ├── data/                   # MockTelemetryRepository.kt (Sıfır sahte veri)
-│       ├── theme/                  # ThemeColors.kt (Dark, Light, System)
-│       ├── i18n/                   # Strings.kt (TR, EN, System)
-│       └── presentation/ui/        # RadarView, ServoGaugeView, MetricCards, DashboardScreen
+├── 📱 EngeldenKacanRobotMobile/    # KMP Çoklu Platform (Android, iOS, Desktop)
+│   └── 🔗 Bağımsız Depo: https://github.com/vahitkeskin/EngeldenKacanRobotMobile
+│       ├── androidApp/                 # Android APK çıktısı
+│       ├── desktopApp/                 # KMP Desktop JVM çıktısı
+│       ├── iosApp/                     # iOS Xcode projesi
+│       └── shared/                     # KMP Compose Ortak Katmanı (3D, Kokpit, Telemetri)
 │
 ├── 📁 .vscode/                     # VS Code Görev ve Çalıştırma Yapılandırması
 │   ├── launch.json                 # F5 ile Java Form uygulamasını başlatma

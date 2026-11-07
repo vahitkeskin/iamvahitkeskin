@@ -25,8 +25,8 @@ public class Strings {
     }
 
     public static String appTitle() {
-        return isTurkish() ? "Engelden Kaçan Robot - Canlı Telemetri & Kontrol"
-                           : "Obstacle Avoiding Robot - Live Telemetry & Control";
+        return isTurkish() ? "Engelden Kaçan Robot - Canlı Telemetri & Doğrudan Müdahale Kumandası"
+                           : "Obstacle Avoiding Robot - Live Telemetry & Direct Remote Cockpit";
     }
 
     public static String portLabel() {
@@ -55,6 +55,10 @@ public class Strings {
 
     public static String statusStopped() {
         return isTurkish() ? "DURDURULDU (STOPPED)" : "STOPPED";
+    }
+
+    public static String statusManualOverride() {
+        return isTurkish() ? "MANUEL MÜDAHALE (MANUAL)" : "MANUAL OVERRIDE";
     }
 
     public static String radarTitle() {
@@ -131,5 +135,57 @@ public class Strings {
     public static String optLight() {
         return isTurkish() ? "Açık" : "Light";
     }
-}
 
+    // Doğrudan Müdahale ve Batarya
+    public static String directControlTitle() {
+        return isTurkish() ? "ROBOTA DOĞRUDAN MÜDAHALE (KUMANDA)" : "DIRECT ROBOT OVERRIDE (COCKPIT)";
+    }
+
+    public static String batteryTitle() {
+        return isTurkish() ? "BATARYA DURUMU (2S Li-Ion)" : "BATTERY STATUS (2S Li-Ion)";
+    }
+
+    public static String batteryCharging() {
+        return isTurkish() ? "⚡ Şarj Oluyor" : "⚡ Charging";
+    }
+
+    public static String batteryDischarging() {
+        return isTurkish() ? "🔋 Kullanımda (Deşarj)" : "🔋 In Use (Discharge)";
+    }
+
+    public static String batteryCritical() {
+        return isTurkish() ? "🪫 Kritik Pil!" : "🪫 Low Battery!";
+    }
+
+    public static String btnEmergencyStop() {
+        return isTurkish() ? "🛑 ACİL FREN" : "🛑 E-BRAKE";
+    }
+
+    public static String btnStart() {
+        return isTurkish() ? "▶ BAŞLAT" : "▶ START";
+    }
+
+    public static String btnStop() {
+        return isTurkish() ? "⏹ DURDUR" : "⏹ STOP";
+    }
+
+    public static String btnHorn() {
+        return isTurkish() ? "📢 KORNA" : "📢 HORN";
+    }
+
+    public static String btnSimulateCharge() {
+        return isTurkish() ? "⚡ Şarjı Simüle Et" : "⚡ Sim Charge";
+    }
+
+    public static String speedLabel() {
+        return isTurkish() ? "Motor Hızı (PWM):" : "Motor Speed (PWM):";
+    }
+
+    public static String modeAuto() {
+        return isTurkish() ? "🤖 Otonom" : "🤖 Auto";
+    }
+
+    public static String modeManual() {
+        return isTurkish() ? "🎮 Manuel" : "🎮 Manual";
+    }
+}

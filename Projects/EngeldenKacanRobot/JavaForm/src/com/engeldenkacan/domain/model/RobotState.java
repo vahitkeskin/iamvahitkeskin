@@ -6,6 +6,7 @@ public enum RobotState {
     CRUISING("SEYİR MODU (CRUISING)", new Color(16, 185, 129), 0),
     AVOIDING("ENGEL KAÇIŞI (AVOIDING)", new Color(239, 68, 68), 1),
     STOPPED("DURDURULDU (STOPPED)", new Color(245, 158, 11), 2),
+    MANUAL_OVERRIDE("MANUEL MÜDAHALE (MANUAL)", new Color(59, 130, 246), 3),
     DISCONNECTED("BAĞLANTI YOK", new Color(107, 114, 128), -1);
 
     private final String displayName;
@@ -37,4 +38,3 @@ public enum RobotState {
         return CRUISING;
     }
 }
-

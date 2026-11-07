@@ -15,19 +15,25 @@ public class MetricCard extends JPanel {
     private final JLabel lblLeftVal = new JLabel();
     private final JLabel lblRightVal = new JLabel();
 
+    // Batarya Gösterge Elemanları
+    private final JPanel batteryPanel = new JPanel(new BorderLayout(8, 4));
+    private final JLabel lblBatteryTitle = new JLabel();
+    private final JLabel lblBatteryStatus = new JLabel("", SwingConstants.RIGHT);
+    private final JProgressBar batteryBar = new JProgressBar(0, 100);
+
     private ThemeColors colors;
     private RobotTelemetry lastTelemetry = RobotTelemetry.noSignal();
 
     public MetricCard(ThemeColors initialColors) {
         this.colors = initialColors;
-        setLayout(new BorderLayout(10, 10));
+        setLayout(new BorderLayout(10, 8));
         applyTheme(initialColors);
 
-        lblTitle.setFont(new Font("SansSerif", Font.BOLD, 13));
-        lblFrontVal.setFont(new Font("SansSerif", Font.BOLD, 42));
-        lblSafetyStatus.setFont(new Font("SansSerif", Font.BOLD, 12));
+        lblTitle.setFont(new Font("SansSerif", Font.BOLD, 12));
+        lblFrontVal.setFont(new Font("SansSerif", Font.BOLD, 38));
+        lblSafetyStatus.setFont(new Font("SansSerif", Font.BOLD, 11));
 
-        safetyBar.setPreferredSize(new Dimension(100, 10));
+        safetyBar.setPreferredSize(new Dimension(100, 8));
         safetyBar.setValue(0);
         safetyBar.setBorderPainted(false);
 
@@ -39,23 +45,45 @@ public class MetricCard extends JPanel {
         safetyBar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         centerPanel.add(lblFrontVal);
-        centerPanel.add(Box.createVerticalStrut(4));
+        centerPanel.add(Box.createVerticalStrut(2));
         centerPanel.add(lblSafetyStatus);
-        centerPanel.add(Box.createVerticalStrut(8));
+        centerPanel.add(Box.createVerticalStrut(6));
         centerPanel.add(safetyBar);
 
-        JPanel bottomPanel = new JPanel(new GridLayout(1, 2, 10, 0));
-        bottomPanel.setOpaque(false);
-        lblLeftVal.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        lblRightVal.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        // Mesafe Koridorları (Sol & Sağ)
+        JPanel corridorPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+        corridorPanel.setOpaque(false);
+        lblLeftVal.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        lblRightVal.setFont(new Font("Monospaced", Font.PLAIN, 11));
         lblRightVal.setHorizontalAlignment(SwingConstants.RIGHT);
+        corridorPanel.add(lblLeftVal);
+        corridorPanel.add(lblRightVal);
 
-        bottomPanel.add(lblLeftVal);
-        bottomPanel.add(lblRightVal);
+        // Batarya & Güç Yönetimi
+        batteryPanel.setOpaque(false);
+        lblBatteryTitle.setFont(new Font("SansSerif", Font.BOLD, 11));
+        lblBatteryStatus.setFont(new Font("Monospaced", Font.BOLD, 11));
+        batteryBar.setPreferredSize(new Dimension(100, 8));
+        batteryBar.setValue(85);
+        batteryBar.setBorderPainted(false);
+
+        JPanel batHeader = new JPanel(new BorderLayout());
+        batHeader.setOpaque(false);
+        batHeader.add(lblBatteryTitle, BorderLayout.WEST);
+        batHeader.add(lblBatteryStatus, BorderLayout.EAST);
+
+        batteryPanel.add(batHeader, BorderLayout.NORTH);
+        batteryPanel.add(batteryBar, BorderLayout.CENTER);
+
+        // Alt Kısım: Koridorlar + Batarya
+        JPanel bottomContainer = new JPanel(new BorderLayout(0, 6));
+        bottomContainer.setOpaque(false);
+        bottomContainer.add(corridorPanel, BorderLayout.NORTH);
+        bottomContainer.add(batteryPanel, BorderLayout.SOUTH);
 
         add(lblTitle, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(bottomPanel, BorderLayout.SOUTH);
+        add(bottomContainer, BorderLayout.SOUTH);
 
         applyLanguage();
     }
@@ -65,17 +93,23 @@ public class MetricCard extends JPanel {
         setBackground(colors.bgCard);
         setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(colors.border, 1),
-            BorderFactory.createEmptyBorder(14, 16, 14, 16)
+            BorderFactory.createEmptyBorder(10, 14, 10, 14)
         ));
         lblTitle.setForeground(colors.textMuted);
         lblLeftVal.setForeground(colors.textSecondary);
         lblRightVal.setForeground(colors.textSecondary);
         safetyBar.setBackground(colors.bgPrimary);
+
+        lblBatteryTitle.setForeground(colors.textMuted);
+        lblBatteryStatus.setForeground(colors.textPrimary);
+        batteryBar.setBackground(colors.bgPrimary);
+
         updateTelemetry(lastTelemetry);
     }
 
     public void applyLanguage() {
         lblTitle.setText(Strings.sensorTitle());
+        lblBatteryTitle.setText(Strings.batteryTitle());
         updateTelemetry(lastTelemetry);
     }
 
@@ -90,6 +124,10 @@ public class MetricCard extends JPanel {
             safetyBar.setValue(0);
             lblLeftVal.setText(Strings.leftCorridor(-1));
             lblRightVal.setText(Strings.rightCorridor(-1));
+
+            lblBatteryStatus.setText("-- V (0%)");
+            lblBatteryStatus.setForeground(colors.textMuted);
+            batteryBar.setValue(0);
             return;
         }
 
@@ -118,5 +156,28 @@ public class MetricCard extends JPanel {
 
         lblLeftVal.setText(Strings.leftCorridor(telemetry.getLeftDistance()));
         lblRightVal.setText(Strings.rightCorridor(telemetry.getRightDistance()));
+
+        // Batarya Durumu Güncellemesi
+        int batPct = telemetry.getBatteryPercentage();
+        float batVolt = telemetry.getBatteryVoltage();
+        boolean isChg = telemetry.isCharging();
+
+        batteryBar.setValue(batPct);
+        String chgText = isChg ? Strings.batteryCharging() : (batPct <= 15 ? Strings.batteryCritical() : Strings.batteryDischarging());
+        lblBatteryStatus.setText(chgText + " | " + String.format("%.2fV", batVolt) + " (%" + batPct + ")");
+
+        if (isChg) {
+            batteryBar.setForeground(new Color(16, 185, 129));
+            lblBatteryStatus.setForeground(new Color(16, 185, 129));
+        } else if (batPct <= 15) {
+            batteryBar.setForeground(new Color(239, 68, 68));
+            lblBatteryStatus.setForeground(new Color(239, 68, 68));
+        } else if (batPct <= 35) {
+            batteryBar.setForeground(new Color(245, 158, 11));
+            lblBatteryStatus.setForeground(new Color(245, 158, 11));
+        } else {
+            batteryBar.setForeground(new Color(16, 185, 129));
+            lblBatteryStatus.setForeground(new Color(16, 185, 129));
+        }
     }
 }

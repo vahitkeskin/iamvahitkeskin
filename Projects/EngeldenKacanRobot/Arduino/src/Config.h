@@ -28,6 +28,15 @@
 #define PIN_ENB 10  // Sağ motor PWM hız kontrolü
 
 // ==========================================
+// Batarya ve Güç Yönetimi Pinleri (2S Li-Ion)
+// ==========================================
+#define PIN_BATTERY         A0   // Direnç bölücü üzerinden analog voltaj okuma (R1=10k, R2=10k)
+#define PIN_BUZZER          4    // Korna / Sesli İkaz Buzzer Pini
+#define BATTERY_VOLT_DIV    2.0f // Gerilim bölücü çarpanı (R1+R2)/R2
+#define BATTERY_MIN_VOLT    6.4f // 2S Li-ion minimum deşarj kesme gerilimi (0%)
+#define BATTERY_MAX_VOLT    8.4f // 2S Li-ion tam dolu şarj gerilimi (100%)
+
+// ==========================================
 // Eşik ve Hız Parametreleri
 // ==========================================
 #define OBSTACLE_LIMIT_CM   25  // Bu mesafenin altında engel algılanır (cm)
@@ -46,4 +55,3 @@
 #define SERVO_SETTLE_DELAY  250 // Servonun konumlanma bekleme süresi (ms)
 
 #endif // CONFIG_H
-
