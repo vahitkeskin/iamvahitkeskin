@@ -1,0 +1,13 @@
+# İşletim sistemi dosyaları
+.DS_Store
+Thumbs.db
+
+# Arduino / PlatformIO / Derleme çıktıları
+*.hex
+*.elf
+*.bin
+build/
+.pio/
+.vscode/
+.idea/
+

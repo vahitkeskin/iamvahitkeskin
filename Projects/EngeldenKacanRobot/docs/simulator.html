@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Engelden Kaçan Robot - 2D Simülatör</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #111827;
+      color: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 { margin-bottom: 8px; font-size: 24px; color: #60a5fa; }
+    p.subtitle { color: #9ca3af; margin-bottom: 16px; font-size: 14px; }
+    #container {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+    }
+    canvas {
+      background: #1f2937;
+      border: 2px solid #374151;
+      border-radius: 12px;
+      cursor: crosshair;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    #sidebar {
+      flex: 1;
+      background: #1f2937;
+      border: 2px solid #374151;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-block {
+      background: #111827;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+    .panel-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    .stat-val {
+      font-size: 20px;
+      font-weight: bold;
+      color: #10b981;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-cruising { background: #065f46; color: #34d399; }
+    .badge-avoiding { background: #7f1d1d; color: #f87171; }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #1d4ed8; }
+    button.btn-secondary { background: #4b5563; }
+    button.btn-secondary:hover { background: #374151; }
+    #log-box {
+      flex: 1;
+      min-height: 180px;
+      background: #030712;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #a7f3d0;
+      overflow-y: auto;
+      max-height: 250px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🤖 Engelden Kaçan Robot - Canlı Simülatör</h1>
+  <p class="subtitle">Arduino robotunun ultrasonik mesafe algılama, servo tarama ve kaçış karar mantığı simülasyonu. Tuvale tıklayarak yeni engel ekleyebilirsiniz.</p>
+
+  <div id="container">
+    <canvas id="simCanvas" width="760" height="540"></canvas>
+    
+    <div id="sidebar">
+      <div class="panel-block">
+        <div class="panel-title">Robot Durumu (FSM)</div>
+        <div id="stateBadge" class="badge badge-cruising">CRUISING (Seyir Modu)</div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-title">Mesafe Ölçümleri (HC-SR04)</div>
+        <div>Ön: <span id="distFront" class="stat-val">--</span> cm</div>
+        <div>Sağ: <span id="distRight">--</span> cm | Sol: <span id="distLeft">--</span> cm</div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-title">Motor Durumu (L298N)</div>
+        <div id="motorStatus" style="font-size: 14px; color: #93c5fd;">İleri (PWM: 180)</div>
+      </div>
+
+      <div class="btn-group">
+        <button id="btnResetRobot">Robotu Sıfırla</button>
+        <button id="btnClearObstacles" class="btn-secondary">Engelleri Temizle</button>
+        <button id="btnPause" class="btn-secondary">Duraklat / Devam</button>
+      </div>
+
+      <div class="panel-title">Telemetri & Karar Günlüğü</div>
+      <div id="logBox"></div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("simCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // UI Elemanları
+    const stateBadge = document.getElementById("stateBadge");
+    const distFrontEl = document.getElementById("distFront");
+    const distRightEl = document.getElementById("distRight");
+    const distLeftEl = document.getElementById("distLeft");
+    const motorStatusEl = document.getElementById("motorStatus");
+    const logBox = document.getElementById("logBox");
+
+    function log(msg) {
+      const line = document.createElement("div");
+      const time = new Date().toTimeString().split(" ")[0];
+      line.textContent = `[${time}] ${msg}`;
+      logBox.appendChild(line);
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    // Sabitler (Arduino Config.h eşdeğerleri)
+    const OBSTACLE_LIMIT_CM = 35;
+    const CM_TO_PX = 3.5; // 1 cm = 3.5 px
+    const MAX_RAY_DIST = 200 * CM_TO_PX;
+
+    // Robot Modeli
+    let robot = {
+      x: 380,
+      y: 400,
+      angle: -Math.PI / 2, // Yukarı bakıyor
+      width: 44,
+      height: 60,
+      speed: 1.6,
+      state: "CRUISING", // CRUISING, AVOIDING
+      servoAngle: 0, // 0 = merkez, -PI/3 = sağ, +PI/3 = sol
+      scanPhase: 0,
+      scanTimer: 0,
+      measuredRight: 0,
+      measuredLeft: 0,
+      targetTurnAngle: 0
+    };
+
+    // Engeller (Varsayılan kutular ve daireler)
+    let obstacles = [
+      { x: 380, y: 150, radius: 35 },
+      { x: 180, y: 250, radius: 45 },
+      { x: 580, y: 280, radius: 40 },
+      { x: 300, y: 320, radius: 25 },
+      { x: 500, y: 120, radius: 30 }
+    ];
+
+    let isPaused = false;
+
+    // Tuvale tıklayarak yeni engel ekleme
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      obstacles.push({ x, y, radius: Math.floor(Math.random() * 20 + 25) });
+      log(`Yeni engel eklendi: (${Math.round(x)}, ${Math.round(y)})`);
+    });
+
+    document.getElementById("btnResetRobot").addEventListener("click", () => {
+      robot.x = 380;
+      robot.y = 400;
+      robot.angle = -Math.PI / 2;
+      robot.state = "CRUISING";
+      robot.servoAngle = 0;
+      log("Robot başlangıç konumuna sıfırlandı.");
+    });
+
+    document.getElementById("btnClearObstacles").addEventListener("click", () => {
+      obstacles = [];
+      log("Tüm engeller temizlendi.");
+    });
+
+    document.getElementById("btnPause").addEventListener("click", () => {
+      isPaused = !isPaused;
+      log(isPaused ? "Simülasyon duraklatıldı." : "Simülasyon devam ediyor.");
+    });
+
+    // Raycast: Belirli bir açıda engelle kesişim mesafesi bulma
+    function castRay(startX, startY, rayAngle) {
+      const step = 2;
+      let dist = 0;
+      while (dist < MAX_RAY_DIST) {
+        dist += step;
+        const px = startX + Math.cos(rayAngle) * dist;
+        const py = startY + Math.sin(rayAngle) * dist;
+
+        // Duvar sınırları kontrolü
+        if (px <= 0 || px >= canvas.width || py <= 0 || py >= canvas.height) {
+          return { distCm: dist / CM_TO_PX, hitX: px, hitY: py };
+        }
+
+        // Engel daireleri kontrolü
+        for (const obs of obstacles) {
+          const dx = px - obs.x;
+          const dy = py - obs.y;
+          if (dx * dx + dy * dy <= obs.radius * obs.radius) {
+            return { distCm: dist / CM_TO_PX, hitX: px, hitY: py };
+          }
+        }
+      }
+      return {
+        distCm: MAX_RAY_DIST / CM_TO_PX,
+        hitX: startX + Math.cos(rayAngle) * MAX_RAY_DIST,
+        hitY: startY + Math.sin(rayAngle) * MAX_RAY_DIST
+      };
+    }
+
+    function update() {
+      if (isPaused) return;
+
+      const sensorX = robot.x + Math.cos(robot.angle) * (robot.height / 2);
+      const sensorY = robot.y + Math.sin(robot.angle) * (robot.height / 2);
+      const activeRayAngle = robot.angle + robot.servoAngle;
+      const measurement = castRay(sensorX, sensorY, activeRayAngle);
+
+      if (robot.state === "CRUISING") {
+        robot.servoAngle = 0;
+        distFrontEl.textContent = Math.round(measurement.distCm);
+        stateBadge.className = "badge badge-cruising";
+        stateBadge.textContent = "CRUISING (Seyir Modu)";
+        motorStatusEl.textContent = "İleri (PWM: 180)";
+
+        if (measurement.distCm <= OBSTACLE_LIMIT_CM) {
+          robot.state = "AVOIDING";
+          robot.scanPhase = 0;
+          robot.scanTimer = 0;
+          log(`[ENGEL ALGILANDI] Mesafe: ${Math.round(measurement.distCm)} cm. Acil Durduruldu.`);
+        } else {
+          robot.x += Math.cos(robot.angle) * robot.speed;
+          robot.y += Math.sin(robot.angle) * robot.speed;
+        }
+      } else if (robot.state === "AVOIDING") {
+        stateBadge.className = "badge badge-avoiding";
+        stateBadge.textContent = "AVOIDING (Engel Kaçış Modu)";
+        robot.scanTimer++;
+
+        // Faz 0: Sağa Bak
+        if (robot.scanPhase === 0) {
+          motorStatusEl.textContent = "Durduruldu / Sağa Bakılıyor";
+          robot.servoAngle = -Math.PI / 3;
+          if (robot.scanTimer > 25) {
+            const rightRay = castRay(sensorX, sensorY, robot.angle - Math.PI / 3);
+            robot.measuredRight = rightRay.distCm;
+            distRightEl.textContent = Math.round(rightRay.distCm);
+            log(`Sağ Yön Taraması: ${Math.round(rightRay.distCm)} cm`);
+            robot.scanPhase = 1;
+            robot.scanTimer = 0;
+          }
+        }
+        // Faz 1: Sola Bak
+        else if (robot.scanPhase === 1) {
+          motorStatusEl.textContent = "Durduruldu / Sola Bakılıyor";
+          robot.servoAngle = Math.PI / 3;
+          if (robot.scanTimer > 25) {
+            const leftRay = castRay(sensorX, sensorY, robot.angle + Math.PI / 3);
+            robot.measuredLeft = leftRay.distCm;
+            distLeftEl.textContent = Math.round(leftRay.distCm);
+            log(`Sol Yön Taraması: ${Math.round(leftRay.distCm)} cm`);
+            robot.scanPhase = 2;
+            robot.scanTimer = 0;
+          }
+        }
+        // Faz 2: Karar Ver ve Dönüşe Başla
+        else if (robot.scanPhase === 2) {
+          robot.servoAngle = 0;
+          let turnDelta = 0;
+
+          if (robot.measuredRight < OBSTACLE_LIMIT_CM && robot.measuredLeft < OBSTACLE_LIMIT_CM) {
+            log("İki yön de kapalı! 180° tam geri dönüş yapılıyor.");
+            turnDelta = Math.PI;
+          } else if (robot.measuredRight >= robot.measuredLeft) {
+            log("Sağ yön açık. Sağa dönülüyor...");
+            turnDelta = -Math.PI / 2.3;
+          } else {
+            log("Sol yön açık. Sola dönülüyor...");
+            turnDelta = Math.PI / 2.3;
+          }
+
+          robot.targetTurnAngle = robot.angle + turnDelta;
+          robot.scanPhase = 3;
+        }
+        // Faz 3: Açıyı Tamamla
+        else if (robot.scanPhase === 3) {
+          const diff = robot.targetTurnAngle - robot.angle;
+          const turnSpeed = 0.08;
+          motorStatusEl.textContent = diff > 0 ? "Sola Dönüş (PWM: 200)" : "Sağa Dönüş (PWM: 200)";
+
+          if (Math.abs(diff) < turnSpeed) {
+            robot.angle = robot.targetTurnAngle;
+            robot.state = "CRUISING";
+            log("Manevra tamamlandı. Seyre devam ediliyor.");
+          } else {
+            robot.angle += Math.sign(diff) * turnSpeed;
+          }
+        }
+      }
+
+      // Robotu tuval sınırlarında tut
+      robot.x = Math.max(30, Math.min(canvas.width - 30, robot.x));
+      robot.y = Math.max(30, Math.min(canvas.height - 30, robot.y));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Zemin Izgarası
+      ctx.strokeStyle = "#374151";
+      ctx.lineWidth = 0.5;
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+
+      // Engeller
+      for (const obs of obstacles) {
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath();
+        ctx.arc(obs.x, obs.y, obs.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#b91c1c";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      // Ultrasonik Sensör Işını (Ray)
+      const sensorX = robot.x + Math.cos(robot.angle) * (robot.height / 2);
+      const sensorY = robot.y + Math.sin(robot.angle) * (robot.height / 2);
+      const activeRayAngle = robot.angle + robot.servoAngle;
+      const hit = castRay(sensorX, sensorY, activeRayAngle);
+
+      ctx.strokeStyle = hit.distCm <= OBSTACLE_LIMIT_CM ? "rgba(239, 68, 68, 0.8)" : "rgba(52, 211, 153, 0.6)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(sensorX, sensorY);
+      ctx.lineTo(hit.hitX, hit.hitY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Çarpışma noktası halkası
+      ctx.fillStyle = hit.distCm <= OBSTACLE_LIMIT_CM ? "#ef4444" : "#10b981";
+      ctx.beginPath();
+      ctx.arc(hit.hitX, hit.hitY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Robot Çizimi
+      ctx.save();
+      ctx.translate(robot.x, robot.y);
+      ctx.rotate(robot.angle);
+
+      // Tekerlekler (Sol & Sağ)
+      ctx.fillStyle = "#111827";
+      ctx.fillRect(-robot.width / 2 - 5, -robot.height / 2 + 5, 8, 20); // Sol ön
+      ctx.fillRect(-robot.width / 2 - 5, robot.height / 2 - 25, 8, 20); // Sol arka
+      ctx.fillRect(robot.width / 2 - 3, -robot.height / 2 + 5, 8, 20);  // Sağ ön
+      ctx.fillRect(robot.width / 2 - 3, robot.height / 2 - 25, 8, 20);  // Sağ arka
+
+      // Gövde (Şasi)
+      ctx.fillStyle = "#3b82f6";
+      ctx.strokeStyle = "#1d4ed8";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(-robot.width / 2, -robot.height / 2, robot.width, robot.height, 8);
+      ctx.fill();
+      ctx.stroke();
+
+      // Arduino Kartı Sembolü
+      ctx.fillStyle = "#0284c7";
+      ctx.fillRect(-robot.width / 2 + 6, -10, robot.width - 12, 24);
+
+      // Servo Motor ve HC-SR04 Sensör Kafası
+      ctx.save();
+      ctx.translate(0, robot.height / 2 - 4);
+      ctx.rotate(robot.servoAngle);
+
+      // Servo kafası
+      ctx.fillStyle = "#1e3a8a";
+      ctx.fillRect(-6, -6, 12, 12);
+
+      // HC-SR04 İki Gözü (Trig & Echo)
+      ctx.fillStyle = "#e2e8f0";
+      ctx.beginPath();
+      ctx.arc(-8, 8, 5, 0, Math.PI * 2);
+      ctx.arc(8, 8, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#475569";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function loop() {
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    log("Simülatör ilklendirildi.");
+    loop();
+  </script>
+</body>
+</html>
