@@ -1,6 +1,22 @@
 # 🤖 Engelden Kaçan Robot - Çoklu Platform ve I2C Telemetri Sistemi
 
-Bu proje, otonom engelden kaçan robotun gömülü yazılımını, masaüstü Java Form kontrol arayüzünü ve Android Studio Kotlin Multiplatform (KMP) mobil uygulamasını **Clean Architecture** prensiplerine uygun olarak bir araya getiren kurumsal bir mimaridir.
+Bu proje, otonom engelden kaçan robotun gömülü yazılımını, Windows, macOS ve Linux uyumlu masaüstü Java Form kontrol arayüzünü ve Android Studio Kotlin Multiplatform (KMP) mobil uygulamasını **Clean Architecture** prensiplerine uygun olarak bir araya getiren kurumsal bir mimaridir.
+
+---
+
+## 🎨 Dinamik Tema ve Çoklu Dil Desteği
+
+Uygulama çalışma anında tek tıkla anlık olarak arayüz temasını ve dilini değiştirir:
+- **Tema Seçenekleri**: 
+  - `Sistem / System` *(Varsayılan)*: İşletim sisteminin (Windows, macOS, Linux) aktif temasını algılar.
+  - `Koyu / Dark`: Slate 900 tabanlı karanlık mod.
+  - `Açık / Light`: Slate 100 tabanlı aydınlık mod.
+- **Dil Seçenekleri**: 
+  - `Sistem / System` *(Varsayılan)*: Cihazın yerel dil ayarını (Locale) kullanır.
+  - `Türkçe (TR)`: Türkçe etiketler, durum mesajları ve uyarılar.
+  - `English (EN)`: Uluslararası standart İngilizce terminoloji.
+
+> **Gerçek Telemetri Prensibi**: Arayüzde sanal veya uydurma hareketler üretilmez. HC-SR04 veya Servo donanımı veri üretmediğinde ibreler ve ışınlar sabit kalır (`[SİNYAL YOK / NO SIGNAL]`), yalnızca gerçek fiziksel veriler geldiğinde hareket eder.
 
 ---
 
@@ -8,60 +24,49 @@ Bu proje, otonom engelden kaçan robotun gömülü yazılımını, masaüstü Ja
 
 ```
 EngeldenKacanRobot/
-├── Arduino/                    # Mikrodenetleyici Gömülü Yazılımı (C++/Wire.h)
-│   ├── Arduino.ino             # Ana döngü ve durum makinesi (FSM)
+├── 📁 Arduino/                     # Mikrodenetleyici Gömülü Yazılımı (C++/Wire.h)
+│   ├── Arduino.ino                 # Ana döngü, FSM ve telemetri yayını
 │   └── src/
-│       ├── Config.h            # Pin, hız ve eşik tanımlamaları
-│       ├── I2CComm.h/cpp       # I2C Slave (0x08) haberleşme protokolü
-│       ├── DistanceSensor.h/cpp# HC-SR04 medyan filtreli mesafe ölçümü
-│       ├── MotorDriver.h/cpp   # L298N H-Köprüsü motor hız/yön sürücüsü
-│       └── ServoScanner.h/cpp  # SG90 servo motor açı ve tarama sürücüsü
+│       ├── Config.h                # Pin, hız ve eşik tanımlamaları
+│       ├── I2CComm.h/cpp           # I2C Slave (0x08) & Register Protokolü
+│       ├── DistanceSensor.h/cpp    # HC-SR04 medyan filtreli mesafe ölçümü
+│       ├── MotorDriver.h/cpp       # L298N H-Köprüsü motor hız/yön sürücüsü
+│       └── ServoScanner.h/cpp      # SG90 servo motor açı ve tarama sürücüsü
 │
-├── JavaForm/                   # Masaüstü Kontrol Arayüzü (Java 17 / Swing)
+├── 📁 JavaForm/                    # Çapraz Platform Masaüstü (Win, Mac, Linux)
 │   ├── src/com/engeldenkacan/
-│   │   ├── domain/             # İş Kuralları ve Modeller
-│   │   │   ├── model/          # RobotTelemetry, RobotState
-│   │   │   └── repository/     # ITelemetryRepository
-│   │   ├── data/               # Veri Katmanı
-│   │   │   ├── SerialI2CBridge.java # Gerçek Seri/I2C donanım köprüsü
-│   │   │   └── MockTelemetryProvider.java # Sanal telemetri simülatörü
-│   │   └── presentation/       # Sunum Katmanı
-│   │       ├── view/           # MainForm, RadarCanvas, ServoGaugeCanvas, MetricCard
-│   │       └── viewmodel/      # DashboardViewModel
-│   ├── build.sh                # javac derleme betiği
-│   └── run.sh                  # java çalıştırma betiği
+│   │   ├── domain/model/           # RobotTelemetry.java, RobotState.java
+│   │   ├── domain/repository/      # ITelemetryRepository.java
+│   │   ├── data/                   # SerialI2CBridge.java (Win/Mac/Linux donanım köprüsü)
+│   │   ├── theme/                  # ThemeDetector, ThemeColors (Dark/Light/System)
+│   │   ├── i18n/                   # Strings.java (TR/EN/System)
+│   │   ├── presentation/view/      # MainForm, RadarCanvas, ServoGaugeCanvas, MetricCard
+│   │   └── presentation/viewmodel/ # DashboardViewModel
+│   ├── build.sh & run.sh           # macOS & Linux çalıştırma betikleri
+│   ├── build.bat & run.bat         # Windows çalıştırma betikleri
+│   └── bin/                        # Derlenmiş sınıf çıktıları
 │
-├── EngeldenKacanRobotMobile/   # Mobil & Masaüstü Uygulaması (Android Studio / KMP)
-│   ├── androidApp/             # Android APK çıktısı
-│   ├── desktopApp/             # Masaüstü JVM çıktısı
-│   ├── iosApp/                 # iOS Xcode projesi
+├── 📁 EngeldenKacanRobotMobile/    # KMP Çoklu Platform (Android, iOS, Desktop)
+│   ├── androidApp/                 # Android APK çıktısı
+│   ├── desktopApp/                 # KMP Desktop JVM çıktısı
+│   ├── iosApp/                     # iOS Xcode projesi
 │   └── shared/src/commonMain/kotlin/com/vahitkeskin/engeldenkacanrobotmobile/
-│       ├── domain/             # KMP Domain Katmanı (RobotState, RobotTelemetry)
-│       ├── data/               # KMP Data Katmanı (MockTelemetryRepository)
-│       └── presentation/ui/    # Jetpack Compose UI (RadarView, ServoGaugeView, MetricCards)
+│       ├── domain/model/           # RobotTelemetry.kt, RobotState.kt
+│       ├── data/                   # MockTelemetryRepository.kt (Sıfır sahte veri)
+│       ├── theme/                  # ThemeColors.kt (Dark, Light, System)
+│       ├── i18n/                   # Strings.kt (TR, EN, System)
+│       └── presentation/ui/        # RadarView, ServoGaugeView, MetricCards, DashboardScreen
 │
-├── .vscode/                    # VS Code Görev ve Çalıştırma Yapılandırması
-│   ├── launch.json             # F5 ile Java Form uygulamasını başlatma
-│   └── tasks.json              # Build ve Run görevleri
+├── 📁 .vscode/                     # VS Code Görev ve Çalıştırma Yapılandırması
+│   ├── launch.json                 # F5 ile Java Form uygulamasını başlatma
+│   └── tasks.json                  # Build ve Run görevleri
 │
-├── docs/                       # 2D Web Tabanlı Simülatör (simulator.html)
-└── tools/                      # Hızlı donanım test ve telemetri izleme betikleri
+├── 📁 .github/workflows/           # Otomatik CI/CD Test Hattı
+│   └── engelden_kacan_robot_ci.yml # Arduino, Java ve KMP otomatik derleme kontrolü
+│
+├── 📁 docs/                        # 2D Web Tabanlı Simülatör (simulator.html)
+└── 📁 tools/                       # I2C Master tanı ve seri port izleme araçları
 ```
-
----
-
-## 📡 I2C Haberleşme ve Kayıt (Register) Haritası
-
-Arduino, I2C veri yolunda varsayılan olarak **`0x08`** slave adresinde dinler:
-
-| Kayıt (Register) | Adı | Veri Tipi | Açıklama |
-|---|---|---|---|
-| **0x01** | `REG_FRONT_DISTANCE` | `uint16_t` (2 Byte) | HC-SR04 ön mesafe ölçümü (cm) |
-| **0x02** | `REG_SERVO_ANGLE` | `uint8_t` (1 Byte) | SG90 servo motorun anlık açısı (0° - 180°) |
-| **0x03** | `REG_ROBOT_STATE` | `uint8_t` (1 Byte) | `0: CRUISING`, `1: AVOIDING`, `2: STOPPED` |
-| **0x04** | `REG_LEFT_DISTANCE` | `uint16_t` (2 Byte) | Sol yön tarama mesafesi (cm) |
-| **0x05** | `REG_RIGHT_DISTANCE` | `uint16_t` (2 Byte) | Sağ yön tarama mesafesi (cm) |
-| **0xFF** | `REG_FULL_TELEMETRY` | `8 Byte Paket` | `[0xAA, FrontH, FrontL, Angle, State, Left, Right, Checksum]` |
 
 ---
 
@@ -73,17 +78,24 @@ arduino-cli compile --fqbn arduino:avr:uno Arduino
 arduino-cli upload -p /dev/cu.usbserial-1240 --fqbn arduino:avr:uno Arduino
 ```
 
-### 2. Java Form Uygulamasını VS Code'da Çalıştırma:
-- **Yöntem A**: VS Code içerisinde **F5** tuşuna basarak veya `Run and Debug` sekmesinden *"Java Form - Engelden Kaçan Robot"* profilini seçerek.
-- **Yöntem B**: Terminalden doğrudan:
+### 2. Java Form Uygulamasını Başlatma:
+- **macOS / Linux**:
   ```bash
   ./JavaForm/run.sh
   ```
+- **Windows**:
+  `JavaForm\run.bat` dosyasına çift tıklayın veya komut satırından çalıştırın:
+  ```cmd
+  cd JavaForm && run.bat
+  ```
+- **VS Code**: **F5** tuşuna basarak başlatabilirsiniz.
 
-### 3. Android Studio / KMP Mobil Uygulamasını Çalıştırma:
-- Android Studio ile `EngeldenKacanRobotMobile` klasörünü açın.
-- Terminalden derlemek için:
+### 3. KMP Masaüstü ve Android Uygulamasını Başlatma:
+- **KMP Desktop (Compose)**:
   ```bash
-  cd EngeldenKacanRobotMobile
-  ./gradlew :androidApp:assembleDebug
+  cd EngeldenKacanRobotMobile && ./gradlew :desktopApp:run
+  ```
+- **Android APK Paketleme**:
+  ```bash
+  cd EngeldenKacanRobotMobile && ./gradlew :androidApp:assembleDebug
   ```
