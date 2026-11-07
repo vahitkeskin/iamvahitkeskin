@@ -31,11 +31,17 @@ public class MainForm extends JFrame {
     private final JButton btnDisconnect = new JButton();
     private final JLabel lblStatusBadge = new JLabel("", SwingConstants.CENTER);
 
+    // Segmentli Tema Butonları
     private final JLabel lblTheme = new JLabel();
-    private final JComboBox<String> comboTheme = new JComboBox<>(new String[]{"Sistem / System", "Koyu / Dark", "Açık / Light"});
+    private final JButton btnThemeSys = new JButton("💻 Sys");
+    private final JButton btnThemeDark = new JButton("🌙 Dark");
+    private final JButton btnThemeLight = new JButton("☀️ Light");
 
+    // Segmentli Dil Butonları
     private final JLabel lblLang = new JLabel();
-    private final JComboBox<String> comboLang = new JComboBox<>(new String[]{"Sistem / System", "Türkçe (TR)", "English (EN)"});
+    private final JButton btnLangSys = new JButton("🌐 Sys");
+    private final JButton btnLangTR = new JButton("🇹🇷 TR");
+    private final JButton btnLangEN = new JButton("🇬🇧 EN");
 
     private final JTextArea logArea = new JTextArea(5, 60);
     private final JScrollPane scrollPane = new JScrollPane(logArea);
@@ -62,7 +68,7 @@ public class MainForm extends JFrame {
     private void initUI() {
         setLayout(new BorderLayout(10, 10));
 
-        // 1. ÜST ARAÇ ÇUBUĞU
+        // 1. ÜST KONTROL ÇUBUĞU
         JPanel leftControls = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         leftControls.setOpaque(false);
 
@@ -75,21 +81,34 @@ public class MainForm extends JFrame {
         leftControls.add(btnConnect);
         leftControls.add(btnDisconnect);
 
-        // Sağ Kontroller: Tema, Dil ve Durum Rozeti
-        JPanel rightControls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        // Sağ Kontroller: Tek tıkla çalışan butonlar ve Durum Rozeti
+        JPanel rightControls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
         rightControls.setOpaque(false);
 
-        comboTheme.setSelectedIndex(0); // Varsayılan: Sistem
-        comboLang.setSelectedIndex(0);  // Varsayılan: Sistem
+        // Tema Grubu
+        JPanel themeGroup = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+        themeGroup.setOpaque(false);
+        themeGroup.add(lblTheme);
+        themeGroup.add(btnThemeSys);
+        themeGroup.add(btnThemeDark);
+        themeGroup.add(btnThemeLight);
 
-        rightControls.add(lblTheme);
-        rightControls.add(comboTheme);
-        rightControls.add(lblLang);
-        rightControls.add(comboLang);
+        // Dil Grubu
+        JPanel langGroup = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+        langGroup.setOpaque(false);
+        langGroup.add(lblLang);
+        langGroup.add(btnLangSys);
+        langGroup.add(btnLangTR);
+        langGroup.add(btnLangEN);
 
         lblStatusBadge.setOpaque(true);
         lblStatusBadge.setFont(new Font("SansSerif", Font.BOLD, 11));
         lblStatusBadge.setBorder(new EmptyBorder(6, 12, 6, 12));
+
+        rightControls.add(themeGroup);
+        rightControls.add(Box.createHorizontalStrut(6));
+        rightControls.add(langGroup);
+        rightControls.add(Box.createHorizontalStrut(8));
         rightControls.add(lblStatusBadge);
 
         topBar.add(leftControls, BorderLayout.WEST);
@@ -97,14 +116,14 @@ public class MainForm extends JFrame {
         topBar.setBorder(new EmptyBorder(10, 14, 10, 14));
         add(topBar, BorderLayout.NORTH);
 
-        // 2. ORTA PANEL (Radar & Servo)
+        // 2. ORTA PANEL (Radar ve Servo Kadranı)
         visualPanel.setOpaque(false);
         visualPanel.setBorder(new EmptyBorder(0, 14, 0, 14));
         visualPanel.add(radarCanvas);
         visualPanel.add(servoGaugeCanvas);
         add(visualPanel, BorderLayout.CENTER);
 
-        // 3. ALT PANEL (Mesafe Kartı ve Log)
+        // 3. ALT PANEL (Metrik Kartı ve Canlı Telemetri Logu)
         bottomPanel.setOpaque(false);
         bottomPanel.setBorder(new EmptyBorder(8, 14, 14, 14));
         bottomPanel.add(metricCard, BorderLayout.NORTH);
@@ -115,23 +134,17 @@ public class MainForm extends JFrame {
         bottomPanel.add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
 
-        // Olay Dinleyicileri
+        // Olay Dinleyicileri (Anlık Değişim)
         btnConnect.addActionListener(e -> viewModel.connectHardware(txtPort.getText().trim()));
         btnDisconnect.addActionListener(e -> viewModel.disconnect());
 
-        comboTheme.addActionListener(e -> {
-            int idx = comboTheme.getSelectedIndex();
-            if (idx == 1) viewModel.setTheme(ThemeDetector.ThemeMode.DARK);
-            else if (idx == 2) viewModel.setTheme(ThemeDetector.ThemeMode.LIGHT);
-            else viewModel.setTheme(ThemeDetector.ThemeMode.SYSTEM);
-        });
+        btnThemeSys.addActionListener(e -> viewModel.setTheme(ThemeDetector.ThemeMode.SYSTEM));
+        btnThemeDark.addActionListener(e -> viewModel.setTheme(ThemeDetector.ThemeMode.DARK));
+        btnThemeLight.addActionListener(e -> viewModel.setTheme(ThemeDetector.ThemeMode.LIGHT));
 
-        comboLang.addActionListener(e -> {
-            int idx = comboLang.getSelectedIndex();
-            if (idx == 1) viewModel.setLanguage(Strings.LanguageMode.TR);
-            else if (idx == 2) viewModel.setLanguage(Strings.LanguageMode.EN);
-            else viewModel.setLanguage(Strings.LanguageMode.SYSTEM);
-        });
+        btnLangSys.addActionListener(e -> viewModel.setLanguage(Strings.LanguageMode.SYSTEM));
+        btnLangTR.addActionListener(e -> viewModel.setLanguage(Strings.LanguageMode.TR));
+        btnLangEN.addActionListener(e -> viewModel.setLanguage(Strings.LanguageMode.EN));
     }
 
     private void styleButton(JButton btn, Color bg, Color fg) {
@@ -141,6 +154,21 @@ public class MainForm extends JFrame {
         btn.setFont(new Font("SansSerif", Font.BOLD, 12));
         btn.setBorder(new EmptyBorder(6, 12, 6, 12));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    private void stylePill(JButton btn, boolean isSelected, ThemeColors colors) {
+        btn.setFocusPainted(false);
+        btn.setFont(new Font("SansSerif", Font.BOLD, 10));
+        btn.setBorder(new EmptyBorder(4, 8, 4, 8));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        if (isSelected) {
+            btn.setBackground(new Color(37, 99, 235));
+            btn.setForeground(Color.WHITE);
+        } else {
+            btn.setBackground(colors.bgCard);
+            btn.setForeground(colors.textMuted);
+        }
     }
 
     private void bindViewModel() {
@@ -166,6 +194,18 @@ public class MainForm extends JFrame {
         lblTheme.setForeground(colors.textMuted);
         lblLang.setText(Strings.langLabel());
         lblLang.setForeground(colors.textMuted);
+
+        // Tema Butonlarının Aktiflik Durumu
+        ThemeDetector.ThemeMode currentTheme = viewModel.getCurrentTheme();
+        stylePill(btnThemeSys, currentTheme == ThemeDetector.ThemeMode.SYSTEM, colors);
+        stylePill(btnThemeDark, currentTheme == ThemeDetector.ThemeMode.DARK, colors);
+        stylePill(btnThemeLight, currentTheme == ThemeDetector.ThemeMode.LIGHT, colors);
+
+        // Dil Butonlarının Aktiflik Durumu
+        Strings.LanguageMode currentLang = viewModel.getCurrentLanguage();
+        stylePill(btnLangSys, currentLang == Strings.LanguageMode.SYSTEM, colors);
+        stylePill(btnLangTR, currentLang == Strings.LanguageMode.TR, colors);
+        stylePill(btnLangEN, currentLang == Strings.LanguageMode.EN, colors);
 
         txtPort.setBackground(colors.bgPrimary);
         txtPort.setForeground(colors.textPrimary);
