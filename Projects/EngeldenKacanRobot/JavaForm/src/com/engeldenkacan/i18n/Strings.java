@@ -132,3 +132,4 @@ public class Strings {
         return isTurkish() ? "Açık" : "Light";
     }
 }
+
