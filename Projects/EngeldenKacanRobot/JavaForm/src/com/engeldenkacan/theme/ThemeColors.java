@@ -14,8 +14,10 @@ public class ThemeColors {
     public final Color radarGrid;
     public final Color logBg;
     public final Color logText;
+    public final Color accent;
 
     private ThemeColors(boolean dark) {
+        accent = new Color(37, 99, 235); // Blue Primary (0xFF2563EB)
         if (dark) {
             bgPrimary = new Color(15, 23, 42);      // Slate 900
             bgSecondary = new Color(30, 41, 59);    // Slate 800

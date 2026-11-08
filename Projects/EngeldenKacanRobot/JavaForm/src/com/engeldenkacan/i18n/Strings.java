@@ -135,6 +135,105 @@ public class Strings {
         return isTurkish() ? "Açık" : "Light";
     }
 
+    // Navigasyon Sekmeleri (Tabs)
+    public static String navTelemetry() {
+        return isTurkish() ? "Telemetri" : "Telemetry";
+    }
+
+    public static String navController() {
+        return isTurkish() ? "Kumanda" : "Remote";
+    }
+
+    public static String navRobotTwin() {
+        return "Robot 3D";
+    }
+
+    public static String navSettings() {
+        return isTurkish() ? "Ayarlar" : "Settings";
+    }
+
+    // Kamera Perspektifleri (Camera Presets)
+    public static String viewStandard() {
+        return isTurkish() ? "Standart" : "Standard";
+    }
+
+    public static String viewTop() {
+        return isTurkish() ? "Kuşbakışı" : "Top-Down";
+    }
+
+    public static String viewBottom() {
+        return isTurkish() ? "Alttan" : "Bottom";
+    }
+
+    public static String viewFront() {
+        return isTurkish() ? "Ön" : "Front";
+    }
+
+    public static String viewRear() {
+        return isTurkish() ? "Arka" : "Rear";
+    }
+
+    public static String viewRight() {
+        return isTurkish() ? "Sağ" : "Right";
+    }
+
+    public static String viewLeft() {
+        return isTurkish() ? "Sol" : "Left";
+    }
+
+    // Ayarlar Ekranı (Settings)
+    public static String settingsTitle() {
+        return isTurkish() ? "AYARLAR" : "SETTINGS";
+    }
+
+    public static String settingsSubtitle() {
+        return isTurkish() ? "Tema, Dil & Sistem Tercihleri" : "Theme, Language & System Preferences";
+    }
+
+    public static String sectionAppearance() {
+        return isTurkish() ? "GÖRÜNÜM & TEMA" : "APPEARANCE & THEME";
+    }
+
+    public static String appearanceDesc() {
+        return isTurkish() ? "Arayüz rengini cihazınıza veya kişisel zevkinize göre ayarlayın" : "Customize interface colors to match preference";
+    }
+
+    public static String sectionLanguage() {
+        return isTurkish() ? "DİL SEÇİMİ" : "LANGUAGE PREFERENCE";
+    }
+
+    public static String languageDesc() {
+        return isTurkish() ? "Tüm etiket ve telemetri metinleri anında seçilen dile geçer" : "All labels and telemetry texts instantly update";
+    }
+
+    public static String sectionHardwareInfo() {
+        return isTurkish() ? "DONANIM & VERİYOLU" : "HARDWARE & BUS";
+    }
+
+    public static String sectionAppInfo() {
+        return isTurkish() ? "UYGULAMA HAKKINDA" : "ABOUT APPLICATION";
+    }
+
+    public static String optSystemDesc() {
+        return isTurkish() ? "Cihazınızın sistem ayarlarıyla otomatik senkronize olur" : "Automatically synchronizes with your device settings";
+    }
+
+    public static String optDarkDesc() {
+        return isTurkish() ? "Göz yormayan, OLED dostu derin lacivert/siyah renkler" : "Eye-friendly, OLED-optimized deep navy/black tones";
+    }
+
+    public static String optLightDesc() {
+        return isTurkish() ? "Güneş altında yüksek okunabilirlik sunan aydınlık arayüz" : "Bright high-contrast interface for daylight reading";
+    }
+
+    public static String optTrDesc() {
+        return "Türkçe (Varsayılan)";
+    }
+
+    public static String optEnDesc() {
+        return "English (International)";
+    }
+
     // Doğrudan Müdahale ve Batarya
     public static String directControlTitle() {
         return isTurkish() ? "ROBOTA DOĞRUDAN MÜDAHALE (KUMANDA)" : "DIRECT ROBOT OVERRIDE (COCKPIT)";
@@ -231,5 +330,9 @@ public class Strings {
 
     public static String splashDevelopedBy() {
         return isTurkish() ? "vahitkeskin tarafından geliştirildi" : "Developed by vahitkeskin";
+    }
+
+    public static String hint3dMouse() {
+        return isTurkish() ? "🖱️ Fare ile 360° Döndür • Tekerlek ile Yakınlaş • Çift Tık: Sıfırla" : "🖱️ Mouse 360° Orbit • Scroll Wheel Zoom • Double Click: Reset";
     }
 }
