@@ -160,131 +160,92 @@ public class SplashScreenWindow extends JWindow {
             int w = getWidth();
             int h = getHeight();
 
-            // 1. ANA KART ARKA PLANI & ÇERÇEVESİ
-            RoundRectangle2D card = new RoundRectangle2D.Float(10, 10, w - 20, h - 20, 24, 24);
-            g2.setColor(isDark ? new Color(15, 23, 42) : new Color(248, 250, 252));
+            // 1. ANA KART ARKA PLANI & ÇERÇEVESİ (#060914 koyu tema / #F8FAFC açık tema)
+            RoundRectangle2D card = new RoundRectangle2D.Float(10, 10, w - 20, h - 20, 28, 28);
+            g2.setColor(isDark ? new Color(6, 9, 20) : new Color(248, 250, 252));
             g2.fill(card);
 
-            g2.setColor(isDark ? new Color(51, 65, 85) : new Color(203, 213, 225));
+            g2.setColor(isDark ? new Color(30, 41, 59) : new Color(226, 232, 240));
             g2.setStroke(new BasicStroke(1.2f));
             g2.draw(card);
 
-            // 2. ÜST ALAN: DİL & TEMA KONTROL ÇİPLERİ
-            drawTopControls(g2, w);
-
-            // 3. EMBLEM: ALTIGEN KALKAN + HC-SR04 SONAR + RADAR
-            int emblemSize = 125;
             int cx = w / 2;
-            int cy = 105;
-            drawEmblem(g2, cx, cy, emblemSize / 2f);
+            int cy = h / 2 - 20;
 
-            // 4. BAŞLIK VE ETİKET
-            g2.setColor(isDark ? new Color(248, 250, 252) : new Color(15, 23, 42));
-            g2.setFont(new Font("SansSerif", Font.BOLD, 17));
-            FontMetrics fmTitle = g2.getFontMetrics();
-            String title = Strings.splashTitle();
-            g2.drawString(title, cx - fmTitle.stringWidth(title) / 2, 200);
+            // 2. DIŞA DOĞRU YAYILAN ZARİF SONAR RADAR DALGALARI
+            for (int i = 0; i < 3; i++) {
+                float phase = (wavePulse + i * 0.33f) % 1.0f;
+                float waveR = 75f + phase * 65f;
+                int waveAlpha = (int) ((1.0f - phase) * (isDark ? 90 : 70));
+                if (waveAlpha > 0) {
+                    g2.setColor(new Color(0, 229, 255, waveAlpha));
+                    g2.setStroke(new BasicStroke(Math.max(1.0f, 1.8f - phase * 1.0f)));
+                    g2.draw(new Ellipse2D.Float(cx - waveR, cy - waveR, waveR * 2, waveR * 2));
+                }
+            }
 
-            g2.setColor(isDark ? new Color(56, 189, 248) : new Color(2, 132, 199));
-            g2.setFont(new Font("SansSerif", Font.BOLD, 10));
-            FontMetrics fmSub = g2.getFontMetrics();
-            String sub = Strings.splashSubtitle();
-            g2.drawString(sub, cx - fmSub.stringWidth(sub) / 2, 220);
-
-            // 5. DONANIM TEŞHİS ADIMI (STEPPER PILL)
-            int pillW = 360;
-            int pillH = 32;
-            int pillX = cx - pillW / 2;
-            int pillY = 240;
-
-            RoundRectangle2D pill = new RoundRectangle2D.Float(pillX, pillY, pillW, pillH, 16, 16);
-            g2.setColor(isDark ? new Color(30, 41, 59) : Color.WHITE);
-            g2.fill(pill);
-            g2.setColor(isDark ? new Color(51, 65, 85) : new Color(203, 213, 225));
-            g2.setStroke(new BasicStroke(0.9f));
-            g2.draw(pill);
-
-            // Durum Noktası
-            Color dotColor = (stepIndex == 4) ? new Color(16, 185, 129) : (isDark ? new Color(56, 189, 248) : new Color(2, 132, 199));
-            g2.setColor(dotColor);
-            g2.fillOval(pillX + 14, pillY + 12, 8, 8);
-
-            // Adım Metni
-            String[] steps = new String[]{
-                    Strings.splashStep1(),
-                    Strings.splashStep2(),
-                    Strings.splashStep3(),
-                    Strings.splashStep4(),
-                    Strings.splashStep5()
-            };
-            g2.setColor(stepIndex == 4 ? (isDark ? new Color(110, 231, 183) : new Color(5, 150, 105)) : (isDark ? new Color(226, 232, 240) : new Color(30, 41, 59)));
-            g2.setFont(new Font("Monospaced", Font.BOLD, 10));
-            String stepText = "[" + (stepIndex + 1) + "/5] " + steps[stepIndex];
-            g2.drawString(stepText, pillX + 28, pillY + 20);
-
-            // 6. HASSAS İLERLEME ÇUBUĞU (PROGRESS BAR)
-            int barW = 320;
-            int barH = 5;
-            int barX = cx - barW / 2;
-            int barY = 290;
-
-            RoundRectangle2D barBg = new RoundRectangle2D.Float(barX, barY, barW, barH, 3, 3);
-            g2.setColor(isDark ? new Color(30, 41, 59) : new Color(226, 232, 240));
-            g2.fill(barBg);
-            g2.setColor(isDark ? new Color(51, 65, 85) : new Color(203, 213, 225));
-            g2.setStroke(new BasicStroke(0.6f));
-            g2.draw(barBg);
-
-            int fillW = (int) (barW * Math.max(0.02f, progress));
-            RoundRectangle2D barFill = new RoundRectangle2D.Float(barX, barY, fillW, barH, 3, 3);
-            GradientPaint barGradient = new GradientPaint(
-                    barX, barY, new Color(37, 99, 235),
-                    barX + barW, barY, new Color(16, 185, 129)
+            // Ortada yumuşak bir parıltı halesi
+            RadialGradientPaint glow = new RadialGradientPaint(
+                    cx, cy, 100,
+                    new float[]{0.0f, 1.0f},
+                    new Color[]{new Color(0, 229, 255, isDark ? 35 : 20), new Color(0, 0, 0, 0)}
             );
-            g2.setPaint(barGradient);
-            g2.fill(barFill);
+            g2.setPaint(glow);
+            g2.fill(new Ellipse2D.Float(cx - 100, cy - 100, 200, 200));
 
-            // Yüzde ve Teşhis Durumu
-            g2.setFont(new Font("Monospaced", Font.BOLD, 11));
-            g2.setColor(isDark ? new Color(56, 189, 248) : new Color(2, 132, 199));
-            g2.drawString("%" + (int) (progress * 100), barX, barY + 18);
+            // 3. APP ICON'IN BİREBİR AYNISI (Hafif dikey süzülme ile)
+            int iconSize = 145;
+            int floatY = (int) (Math.sin(sweepAngle * Math.PI / 180.0) * 4);
+            int iconX = cx - iconSize / 2;
+            int iconY = cy - iconSize / 2 + floatY;
 
-            g2.setFont(new Font("SansSerif", Font.PLAIN, 9));
-            g2.setColor(progress >= 0.99f ? new Color(16, 185, 129) : (isDark ? new Color(148, 163, 184) : new Color(100, 116, 139)));
-            String statusStr = progress >= 0.99f ? (Strings.isTurkish() ? "SİSTEM ÇEVRİMİÇİ" : "SYSTEM ONLINE") : (Strings.isTurkish() ? "ÖNYÜKLEME..." : "BOOTING...");
-            FontMetrics fmStat = g2.getFontMetrics();
-            g2.drawString(statusStr, barX + barW - fmStat.stringWidth(statusStr), barY + 18);
+            RoundRectangle2D iconClip = new RoundRectangle2D.Float(iconX, iconY, iconSize, iconSize, 34, 34);
 
-            // 7. DONANIM KİMLİĞİ VE VERSİYON
-            g2.setFont(new Font("SansSerif", Font.PLAIN, 9));
-            g2.setColor(isDark ? new Color(100, 116, 139) : new Color(100, 116, 139));
-            String hwText = Strings.splashHardwareBadge();
-            FontMetrics fmHw = g2.getFontMetrics();
-            g2.drawString(hwText, cx - fmHw.stringWidth(hwText) / 2, 350);
+            // İkon gölgesi ve arka planı
+            g2.setColor(isDark ? new Color(15, 23, 42) : Color.WHITE);
+            g2.fill(iconClip);
 
-            String verText = Strings.splashVersion() + " • " + Strings.splashSkipHint();
-            FontMetrics fmVer = g2.getFontMetrics();
-            g2.setColor(isDark ? new Color(71, 85, 105) : new Color(148, 163, 184));
-            g2.drawString(verText, cx - fmVer.stringWidth(verText) / 2, 368);
+            // İkonu çiz
+            java.net.URL iconUrl = AppIconHelper.class.getResource("/resources/icons/app_icon_256.png");
+            if (iconUrl == null) {
+                iconUrl = AppIconHelper.class.getResource("/resources/icons/app_icon.png");
+            }
+            if (iconUrl != null) {
+                Image appImg = new ImageIcon(iconUrl).getImage();
+                Graphics2D gImg = (Graphics2D) g2.create();
+                gImg.setClip(iconClip);
+                gImg.drawImage(appImg, iconX, iconY, iconSize, iconSize, null);
+                gImg.dispose();
+            }
 
-            // 8. "vahitkeskin tarafından geliştirildi" GELİŞTİRİCİ ROZETİ (EN ALT)
-            String devText = "⚡ " + Strings.splashDevelopedBy();
-            g2.setFont(new Font("SansSerif", Font.BOLD, 10));
+            // İkon Çerçevesi (Cyan degrade hissi)
+            g2.setColor(isDark ? new Color(0, 229, 255, 120) : new Color(37, 99, 235, 100));
+            g2.setStroke(new BasicStroke(1.2f));
+            g2.draw(iconClip);
+
+            // 4. SADECE EN ALTTAN "vahitkeskin tarafından geliştirildi" KİBAR UI İMZASI
+            String devText = Strings.splashDevelopedBy();
+            g2.setFont(new Font("SansSerif", Font.PLAIN, 11));
             FontMetrics fmDev = g2.getFontMetrics();
-            int devW = fmDev.stringWidth(devText) + 22;
-            int devH = 22;
-            int devX = cx - devW / 2;
-            int devY = 388;
+            int textW = fmDev.stringWidth(devText);
+            int badgeW = textW + 36;
+            int badgeH = 28;
+            int badgeX = cx - badgeW / 2;
+            int badgeY = h - 50;
 
-            RoundRectangle2D devBadge = new RoundRectangle2D.Float(devX, devY, devW, devH, 11, 11);
-            g2.setColor(isDark ? new Color(30, 41, 59, 200) : Color.WHITE);
+            RoundRectangle2D devBadge = new RoundRectangle2D.Float(badgeX, badgeY, badgeW, badgeH, 14, 14);
+            g2.setColor(isDark ? new Color(30, 41, 59, 130) : new Color(255, 255, 255, 200));
             g2.fill(devBadge);
-            g2.setColor(isDark ? new Color(51, 65, 85) : new Color(203, 213, 225));
+            g2.setColor(isDark ? new Color(51, 65, 85, 140) : new Color(226, 232, 240));
             g2.setStroke(new BasicStroke(0.8f));
             g2.draw(devBadge);
 
-            g2.setColor(isDark ? new Color(148, 163, 184) : new Color(71, 85, 105));
-            g2.drawString(devText, devX + 11, devY + 15);
+            // Parlayan mavi/cyan aksan noktası
+            g2.setColor(isDark ? new Color(56, 189, 248) : new Color(2, 132, 199));
+            g2.fillOval(badgeX + 13, badgeY + 11, 6, 6);
+
+            g2.setColor(isDark ? new Color(148, 163, 184) : new Color(100, 116, 139));
+            g2.drawString(devText, badgeX + 25, badgeY + 18);
 
             g2.dispose();
         }
