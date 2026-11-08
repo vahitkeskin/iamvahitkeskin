@@ -9,6 +9,10 @@ find src -name "*.java" > sources.txt
 javac -encoding UTF-8 -d bin @sources.txt
 rm sources.txt
 
+if [ -d "src/resources" ]; then
+    cp -r src/resources bin/
+fi
+
 echo "[2/3] Çalıştırılabilir JAR paketi oluşturuluyor (EngeldenKacanRobot.jar)..."
 jar cfe EngeldenKacanRobot.jar com.engeldenkacan.Main -C bin .
 

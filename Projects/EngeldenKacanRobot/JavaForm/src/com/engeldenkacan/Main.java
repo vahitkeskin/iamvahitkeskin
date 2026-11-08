@@ -2,6 +2,7 @@ package com.engeldenkacan;
 
 import com.engeldenkacan.data.SerialI2CBridge;
 import com.engeldenkacan.presentation.view.MainForm;
+import com.engeldenkacan.presentation.view.SplashScreenWindow;
 import com.engeldenkacan.presentation.viewmodel.DashboardViewModel;
 
 import javax.swing.*;
@@ -14,14 +15,17 @@ public class Main {
         } catch (Exception ignored) {}
 
         SwingUtilities.invokeLater(() -> {
-            DashboardViewModel viewModel = new DashboardViewModel();
-            MainForm form = new MainForm(viewModel);
-            form.setVisible(true);
+            SplashScreenWindow splash = new SplashScreenWindow(() -> {
+                DashboardViewModel viewModel = new DashboardViewModel();
+                MainForm form = new MainForm(viewModel);
+                form.setVisible(true);
 
-            String defaultPort = SerialI2CBridge.detectDefaultPort();
-            if (new File(defaultPort).exists()) {
-                viewModel.connectHardware(defaultPort);
-            }
+                String defaultPort = SerialI2CBridge.detectDefaultPort();
+                if (new File(defaultPort).exists()) {
+                    viewModel.connectHardware(defaultPort);
+                }
+            });
+            splash.setVisible(true);
         });
     }
 }

@@ -25,8 +25,7 @@ public class Strings {
     }
 
     public static String appTitle() {
-        return isTurkish() ? "Engelden Kaçan Robot - Canlı Telemetri & Doğrudan Müdahale Kumandası"
-                           : "Obstacle Avoiding Robot - Live Telemetry & Direct Remote Cockpit";
+        return "EK Robot";
     }
 
     public static String portLabel() {
@@ -187,5 +186,50 @@ public class Strings {
 
     public static String modeManual() {
         return isTurkish() ? "🎮 Manuel" : "🎮 Manual";
+    }
+
+    // Splash Screen (Önyükleme Teşhisi)
+    public static String splashTitle() {
+        return "EK ROBOT";
+    }
+
+    public static String splashSubtitle() {
+        return isTurkish() ? "OTONOM ENGEL TESPİT & TELEMETRİ SİSTEMİ" : "AUTONOMOUS OBSTACLE DETECTION & TELEMETRY";
+    }
+
+    public static String splashStep1() {
+        return isTurkish() ? "I2C Veri Yolu (0x08) Başlatılıyor..." : "Initializing I2C Bus (0x08)...";
+    }
+
+    public static String splashStep2() {
+        return isTurkish() ? "HC-SR04 Ultrasonik Sonar Testi..." : "Testing HC-SR04 Ultrasonic Sonar...";
+    }
+
+    public static String splashStep3() {
+        return isTurkish() ? "SG90 Mikro Servo Sıfırlanıyor (90°)..." : "Centering SG90 Micro Servo (90°)...";
+    }
+
+    public static String splashStep4() {
+        return isTurkish() ? "L298N Çift Motor Sürücü Hazır..." : "L298N Dual Motor Driver Ready...";
+    }
+
+    public static String splashStep5() {
+        return isTurkish() ? "Telemetri & Dijital İkiz Hazır!" : "Telemetry & Digital Twin Ready!";
+    }
+
+    public static String splashHardwareBadge() {
+        return "ARDUINO UNO R3 • ATMEGA328P • I2C: 0x08";
+    }
+
+    public static String splashVersion() {
+        return "v1.0.0 Production";
+    }
+
+    public static String splashSkipHint() {
+        return isTurkish() ? "Devam etmek için tıklayın" : "Click to continue";
+    }
+
+    public static String splashDevelopedBy() {
+        return isTurkish() ? "vahitkeskin tarafından geliştirildi" : "Developed by vahitkeskin";
     }
 }

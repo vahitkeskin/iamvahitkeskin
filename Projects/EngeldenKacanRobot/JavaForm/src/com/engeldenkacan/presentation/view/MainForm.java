@@ -7,6 +7,7 @@ import com.engeldenkacan.i18n.Strings;
 import com.engeldenkacan.presentation.viewmodel.DashboardViewModel;
 import com.engeldenkacan.theme.ThemeColors;
 import com.engeldenkacan.theme.ThemeDetector;
+import com.engeldenkacan.util.AppIconHelper;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -83,6 +84,7 @@ public class MainForm extends JFrame {
         setSize(1040, 880);
         setMinimumSize(new Dimension(920, 760));
         setLocationRelativeTo(null);
+        AppIconHelper.apply(this);
 
         initUI();
         bindViewModel();

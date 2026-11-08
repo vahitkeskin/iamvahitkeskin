@@ -9,6 +9,8 @@ dir /s /b src\*.java > sources.txt
 javac -encoding UTF-8 -d bin @sources.txt
 del sources.txt
 
+if exist src\resources xcopy /s /e /y src\resources bin\resources
+
 echo [2/3] Calistirilabilir JAR paketi olusturuluyor (EngeldenKacanRobot.jar)...
 jar cfe EngeldenKacanRobot.jar com.engeldenkacan.Main -C bin .
 
