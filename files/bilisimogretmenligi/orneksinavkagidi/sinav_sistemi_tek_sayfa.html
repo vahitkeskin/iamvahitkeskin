@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilişim Sınav Kağıdı Hazırlama & Yönetim Sistemi</title>
+  <style>
+/* ==========================================================================
+   Bilişim Sınav Kağıdı Hazırlama Sistemi - Ana Stil Dosyası
+   ========================================================================== */
+
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --accent: #d32f2f;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --bg-app: #f1f5f9;
+  --card-bg: #ffffff;
+  --border-color: #cbd5e1;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-paper: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Üst Navigasyon & Başlık
+   -------------------------------------------------------------------------- */
+.app-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.brand-title h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.brand-title p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Ana Düzen (Grid Layout)
+   -------------------------------------------------------------------------- */
+.app-container {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  flex: 1;
+  max-width: 1750px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Sol Panel: Ayarlar, Bilişim Soru Üretici & Kontroller
+   -------------------------------------------------------------------------- */
+.sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.sidebar-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar-panel::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-header h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.badge-fixed {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.form-group {
+  margin-bottom: 0.85rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.35rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #1e293b;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background-color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.info-banner {
+  background: #f8fafc;
+  border-left: 3px solid var(--primary);
+  padding: 0.6rem 0.85rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.75rem;
+  color: #475569;
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Butonlar */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: #f1f5f9;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-success {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+.btn-success:hover {
+  background-color: #15803d;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Soru Listesi Kartları */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.question-item-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem;
+  transition: border-color 0.15s;
+}
+
+.question-item-card:hover {
+  border-color: #94a3b8;
+}
+
+.question-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.question-num-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.question-item-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Sağ Panel: A4 Canlı Önizleme Alanı
+   -------------------------------------------------------------------------- */
+.preview-panel {
+  background: #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+}
+
+.preview-toolbar {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mode-toggle {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 0.2rem;
+  border: 1px solid #cbd5e1;
+}
+
+.mode-toggle button {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mode-toggle button.active {
+  background: #ffffff;
+  color: var(--primary);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.color-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.color-picker-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+.color-picker-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.color-picker-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+.preset-colors {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.preset-color-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  transition: transform 0.1s;
+}
+.preset-color-dot:hover {
+  transform: scale(1.15);
+}
+
+/* Önizleme Kağıdı Sarmalayıcısı */
+.paper-scroll-viewport {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.paper-scaler {
+  transition: transform 0.2s ease;
+  transform-origin: top center;
+}
+
+/* ==========================================================================
+   A4 KAĞIT BİREBİR ŞABLON (orneksinavkagidi.jpg REPLİKASI)
+   ========================================================================== */
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #ffffff;
+  box-shadow: var(--shadow-paper);
+  border: 1px solid #d1d5db;
+  padding: 22mm 20mm 20mm 20mm;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #000000;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Üst Bilgi 3 Sütunlu Tablosu */
+.exam-header-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #000000;
+  margin-bottom: 28px;
+  table-layout: fixed;
+}
+
+.exam-header-table td {
+  border: 1px solid #000000;
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
+.header-col-left {
+  width: 26%;
+  font-size: 11pt;
+  line-height: 1.7;
+}
+
+.header-col-left div {
+  white-space: nowrap;
+}
+
+.header-col-middle {
+  width: 58%;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.exam-year {
+  font-size: 11pt;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.exam-school {
+  font-size: 10.5pt;
+  margin-top: 2px;
+}
+
+.exam-lesson {
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.exam-term {
+  font-size: 10.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.header-col-right {
+  width: 16%;
+  vertical-align: top !important;
+  font-size: 11pt;
+  font-weight: 500;
+  padding-top: 8px;
+}
+
+/* S O R U L A R Başlığı */
+.exam-section-title {
+  text-align: center;
+  font-size: 13pt;
+  font-weight: 600;
+  letter-spacing: 7px;
+  margin-bottom: 24px;
+  color: #000000;
+}
+
+/* Soru & Cevap Maddeleri */
+.exam-questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exam-question-block {
+  page-break-inside: avoid;
+}
+
+.exam-question-text {
+  font-size: 11pt;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: #000000;
+}
+
+.exam-question-text .q-num {
+  font-weight: 600;
+}
+
+.exam-question-text .q-pts {
+  font-weight: 400;
+}
+
+/* Soru Kağıdı Modu: Noktalı Çizgiler */
+.dotted-answer-lines {
+  font-size: 9.5pt;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  color: #222222;
+  word-break: break-all;
+  user-select: none;
+}
+
+.dotted-line-row {
+  margin-top: 1px;
+}
+
+/* Cevap Anahtarlı Mod */
+.model-answer-block {
+  font-size: 10.5pt;
+  line-height: 1.5;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.model-answer-block .ans-label {
+  font-weight: 700;
+}
+
+/* Canlı Tıklayıp Düzenlenebilir Alanlar (ContentEditable) */
+[contenteditable="true"] {
+  outline: none;
+  transition: background-color 0.15s;
+  border-radius: 2px;
+}
+[contenteditable="true"]:hover {
+  background-color: rgba(37, 99, 235, 0.05);
+}
+[contenteditable="true"]:focus {
+  background-color: rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* --------------------------------------------------------------------------
+   Yazıcı Modalı / Bildirimler
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 520px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+.modal-close:hover {
+  color: #0f172a;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.85rem 1.25rem;
+  background: #1e293b;
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.85rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .app-header,
+  .sidebar-panel,
+  .preview-toolbar,
+  .modal-overlay,
+  .toast,
+  .btn,
+  .header-actions {
+    display: none !important;
+  }
+
+  .app-container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .preview-panel {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .paper-scroll-viewport {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .paper-scaler {
+    transform: none !important;
+  }
+
+  .a4-page {
+    width: 100% !important;
+    min-height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .exam-header-table {
+    border: 1px solid #000000 !important;
+  }
+
+  .exam-header-table td {
+    border: 1px solid #000000 !important;
+  }
+
+  .exam-question-block {
+    page-break-inside: avoid !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- =======================================================================
+       Üst Navigasyon & Aksiyon Barı
+       ======================================================================= -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-icon">💻</div>
+      <div class="brand-title">
+        <h1>Bilişim Sınav Kağıdı Hazırlama Sistemi</h1>
+        <p>MEB Müfredatına Tam Uyumlu • DOCX & PDF • Yazıcı Entegrasyonu</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button id="btn-reset-original" class="btn btn-secondary btn-sm" title="orneksinavkagidi.jpg Orijinal Şablonu Yükle">
+        ↺ Orijinal Şablon
+      </button>
+      <button id="btn-export-docx-both" class="btn btn-primary btn-sm" title="Hem Soru Hem Cevaplı Kağıdı ZIP Olarak İndir">
+        📦 Soru + Cevap (DOCX ZIP)
+      </button>
+      <button id="btn-quick-print" class="btn btn-success btn-sm" title="A4 Sayfa Olarak Önizle ve Yazdır / PDF Kaydet">
+        🖨️ Yazdır / PDF Kaydet
+      </button>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       Ana Çalışma Alanı
+       ======================================================================= -->
+  <main class="app-container">
+
+    <!-- SOL PANEL: Kontroller, Müfredat Seçimi, Soru Asistanı -->
+    <aside class="sidebar-panel">
+
+      <!-- Kart 1: Sınav Başlık Bilgileri -->
+      <section class="card">
+        <div class="card-header">
+          <h2>📄 Sınav Başlık Bilgileri</h2>
+          <span class="badge badge-fixed">Ad, Sınıf, Puan Sabit</span>
+        </div>
+
+        <div class="info-banner">
+          <strong>Not:</strong> "ADI SOYADI", "SINIFI", "No." ve "PUAN" alanları sınav kağıdı üzerinde standart şablon olarak sabit tutulur. Okul, yıl, ders ve sınav dönemini dilediğiniz gibi değiştirebilirsiniz.
+        </div>
+
+        <div class="form-group">
+          <label for="input-school">Okul Adı:</label>
+          <input type="text" id="input-school" placeholder="Örn: Özel Viranşehir Uğur Anadolu Lisesi">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-year">Eğitim Öğretim Yılı:</label>
+            <input type="text" id="input-year" placeholder="Örn: 2026-2027 EĞİTİM ÖĞRETİM YILI">
+          </div>
+          <div class="form-group">
+            <label for="input-term">Sınav Dönemi:</label>
+            <input type="text" id="input-term" placeholder="Örn: 1.DÖNEM 1. YAZILI">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-lesson">Ders Adı:</label>
+          <input type="text" id="input-lesson" placeholder="Örn: BİLİŞİM TEKNOLOJİLERİ VE YAZILIM">
+        </div>
+
+        <!-- İsteğe Bağlı Sabit Alan Doldurma -->
+        <details style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">
+          <summary style="cursor: pointer; font-weight: 600; color: #2563eb;">Öğrenci Bilgilerini Önceden Yaz (Opsiyonel)</summary>
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <div class="form-group">
+              <label for="input-student-name">Öğrenci Adı Soyadı:</label>
+              <input type="text" id="input-student-name" placeholder="Boş bırakılabilir">
+            </div>
+            <div class="form-group">
+              <label for="input-student-class">Sınıfı:</label>
+              <input type="text" id="input-student-class" placeholder="Örn: 6/B">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-student-no">Numarası:</label>
+              <input type="text" id="input-student-no" placeholder="Örn: 412">
+            </div>
+            <div class="form-group">
+              <label for="input-student-score">Puanı:</label>
+              <input type="text" id="input-student-score" placeholder="Boş bırakılabilir">
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- Kart 2: Bilişim Öğretmenliği Sınavı Oluşturucu (5, 6, 7, 8, 9, 10. Sınıflar) -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🎯 Bilişim Sınavı Oluşturucu</h2>
+          <span class="badge">MEB Uyumlu</span>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="select-grade">Sınıf Seviyesi:</label>
+            <select id="select-grade">
+              <option value="5">5. Sınıf</option>
+              <option value="6">6. Sınıf</option>
+              <option value="7">7. Sınıf</option>
+              <option value="8">8. Sınıf</option>
+              <option value="9">9. Sınıf</option>
+              <option value="10">10. Sınıf</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-difficulty">Zorluk Derecesi:</label>
+            <select id="select-difficulty">
+              <option value="orta">Orta</option>
+              <option value="kolay">Kolay</option>
+              <option value="zor">Zor</option>
+              <option value="karma">Karma (Dengeli)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="input-question-count">Soru Sayısı:</label>
+            <input type="number" id="input-question-count" min="1" max="25" value="5">
+          </div>
+        </div>
+
+        <button id="btn-generate-bilisim" class="btn btn-primary btn-block">
+          ✨ Otomatik Bilişim Sınavı Oluştur
+        </button>
+      </section>
+
+      <!-- Kart 3: Akıllı Soru İsteme Asistanı (AI Prompt) -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🤖 Özel Soru & Konu İsteme</h2>
+          <span class="badge">Akıllı Asistan</span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-custom-prompt">İstediğiniz Konu veya Soruyu Yazınız:</label>
+          <input type="text" id="input-custom-prompt" placeholder="Örn: Python for ve while döngüleri, Scratch değişkenler, Siber zorbalık...">
+        </div>
+
+        <button id="btn-generate-custom" class="btn btn-secondary btn-block">
+          🔍 Bu Konudan Soru & Model Cevap Üret
+        </button>
+      </section>
+
+      <!-- Kart 4: Soru Listesi & Düzenleme -->
+      <section class="card">
+        <div class="card-header">
+          <h2>📝 Soru ve Cevap Yönetimi</h2>
+          <span id="badge-question-count" class="badge">5 Soru</span>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <button id="btn-add-question" class="btn btn-secondary btn-sm" style="flex:1;">+ Yeni Soru Ekle</button>
+          <button id="btn-balance-points" class="btn btn-secondary btn-sm" style="flex:1;">⚖️ 100 Puana Dengele</button>
+        </div>
+
+        <div id="sidebar-questions-list" class="questions-list">
+          <!-- Dinamik Sorular Buraya Eklenir -->
+        </div>
+      </section>
+
+      <!-- Kart 5: Yazıcı & Baskı Seçenekleri -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🖨️ Yazıcı & Baskı Ayarları</h2>
+          <span class="badge">CUPS / AirPrint</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-print-copies-side">Kopya Sayısı:</label>
+            <input type="number" id="input-print-copies-side" min="1" max="200" value="1">
+          </div>
+          <div class="form-group" style="display: flex; align-items: flex-end;">
+            <button id="btn-open-printer-modal" class="btn btn-secondary btn-block" style="height: 38px;">
+              🔍 Yazıcı Seç...
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- SAĞ PANEL: Canlı A4 Önizleme (%100 WYSIWYG) -->
+    <section class="preview-panel">
+
+      <!-- Önizleme Araç Çubuğu -->
+      <div class="preview-toolbar">
+        <!-- Kağıt Modu: Soru Kağıdı vs Cevap Anahtarı -->
+        <div class="toolbar-group">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Görünüm:</label>
+          <div class="mode-toggle">
+            <button id="btn-mode-questions" class="active">Soru Kağıdı</button>
+            <button id="btn-mode-answers">Cevap Anahtarı</button>
+          </div>
+        </div>
+
+        <!-- Cevap Rengi Seçenekleri (Sadece Cevap Anahtarı Modunda) -->
+        <div id="color-controls-section" class="toolbar-group" style="display: none;">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Cevap Rengi:</label>
+          <select id="select-color-mode" style="padding: 0.3rem 0.5rem; font-size: 0.8rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+            <option value="bw">Siyah / Beyaz (Varsayılan)</option>
+            <option value="color">Renkli</option>
+          </select>
+
+          <div id="color-picker-wrapper" class="color-picker-wrapper" style="display: none;">
+            <input type="color" id="input-answer-color" class="color-picker-input" value="#d32f2f" title="Renk Seç">
+            <span id="color-hex-text" style="font-size: 0.75rem; font-weight: 600; font-family: monospace;">#D32F2F</span>
+            
+            <div class="preset-colors">
+              <span class="preset-color-dot" data-color="#d32f2f" style="background:#d32f2f;" title="Varsayılan Kırmızı"></span>
+              <span class="preset-color-dot" data-color="#1e40af" style="background:#1e40af;" title="Lacivert"></span>
+              <span class="preset-color-dot" data-color="#047857" style="background:#047857;" title="Zümrüt Yeşili"></span>
+              <span class="preset-color-dot" data-color="#7c3aed" style="background:#7c3aed;" title="Mor"></span>
+              <span class="preset-color-dot" data-color="#c2410c" style="background:#c2410c;" title="Turuncu"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yakınlaştırma (Zoom) Kontrolleri -->
+        <div class="toolbar-group">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Ölçek:</label>
+          <button id="btn-zoom-50" class="btn btn-secondary btn-sm zoom-btn">%50</button>
+          <button id="btn-zoom-75" class="btn btn-secondary btn-sm zoom-btn">%75</button>
+          <button id="btn-zoom-100" class="btn btn-secondary btn-sm zoom-btn active">%100</button>
+          <button id="btn-zoom-fit" class="btn btn-secondary btn-sm">Sığdır</button>
+        </div>
+
+        <!-- İndirme Seçenekleri -->
+        <div class="toolbar-group">
+          <button id="btn-export-docx-questions" class="btn btn-secondary btn-sm" title="Soru Kağıdını DOCX Olarak İndir">
+            📄 Soru (DOCX)
+          </button>
+          <button id="btn-export-docx-answers" class="btn btn-secondary btn-sm" title="Cevap Anahtarını DOCX Olarak İndir">
+            🔑 Cevap (DOCX)
+          </button>
+        </div>
+      </div>
+
+      <!-- A4 Sayfası Görünümü (%100 Birebir orneksinavkagidi.jpg Replikası) -->
+      <div class="paper-scroll-viewport">
+        <div id="paper-scaler" class="paper-scaler">
+
+          <article class="a4-page" id="exam-paper">
+
+            <!-- ÜST BİLGİ TABLOSU (3 Sütunlu) -->
+            <table class="exam-header-table">
+              <tr>
+                <!-- Sol Sütun (Sabit Alanlar) -->
+                <td class="header-col-left">
+                  <div>ADI SOYADI:<span id="sheet-student-name"></span></div>
+                  <div>SINIFI:<span id="sheet-student-class"></span></div>
+                  <div>No.:<span id="sheet-student-no"></span></div>
+                </td>
+
+                <!-- Orta Sütun (Okul, Yıl, Ders, Dönem) -->
+                <td class="header-col-middle">
+                  <div class="exam-year" id="sheet-year" contenteditable="true">2026-2027 EĞİTİM ÖĞRETİM YILI</div>
+                  <div class="exam-school" id="sheet-school" contenteditable="true">Özel Viranşehir uğur Anadolu lisesi</div>
+                  <div class="exam-lesson" id="sheet-lesson" contenteditable="true">SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE</div>
+                  <div class="exam-term" id="sheet-term" contenteditable="true">1.DÖNEM 1. YAZILI</div>
+                </td>
+
+                <!-- Sağ Sütun (Puan) -->
+                <td class="header-col-right">
+                  <div>PUAN:<span id="sheet-student-score"></span></div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- BÖLÜM BAŞLIĞI: S O R U L A R -->
+            <div class="exam-section-title">S O R U L A R</div>
+
+            <!-- SORULAR LİSTESİ (Soru Kağıdında Noktalı, Cevap Anahtarında Renkli/Siyah) -->
+            <div id="sheet-questions-container" class="exam-questions-container">
+              <!-- JavaScript tarafından doldurulur -->
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       YAZICI SEÇİMİ & KOPYA SAYISI MODALI
+       ======================================================================= -->
+  <div id="printer-modal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>🖨️ Yazıcı Seçimi ve Yazdırma</h3>
+        <button id="btn-modal-close" class="modal-close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <label for="select-printer" style="margin: 0;">Yakındaki / Sistem Yazıcısı:</label>
+            <button id="btn-refresh-printers" class="btn btn-secondary btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;">
+              🔄 Yenile
+            </button>
+          </div>
+          <select id="select-printer">
+            <option>Yazıcılar taranıyor...</option>
+          </select>
+          <div id="printer-status-message" style="font-size: 0.75rem; margin-top: 0.35rem;"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-print-copies">Kopya Sayısı:</label>
+            <input type="number" id="input-print-copies" min="1" max="500" value="1">
+          </div>
+          <div class="form-group">
+            <label>Yazdırılacak Belge:</label>
+            <div style="padding-top: 0.4rem; font-size: 0.85rem; font-weight: 600; color: #2563eb;">
+              Önizlemedeki Aktif Kağıt
+            </div>
+          </div>
+        </div>
+
+        <div class="info-banner" style="margin-top: 0.5rem;">
+          💡 <strong>İpucu:</strong> Ağdaki AirPrint veya kablosuz yazıcınız için tarayıcının yerel yazdırma penceresini açarak da doğrudan çıktı alabilir veya "PDF Olarak Kaydet" seçeneğini kullanabilirsiniz.
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closePrinterModal()">İptal</button>
+        <button id="btn-submit-print" class="btn btn-success">
+          🖨️ Yazdır
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Bildirimi -->
+  <div id="app-toast" class="toast"></div>
+
+  <!-- Scriptler -->
+  <script>
+// ==========================================================================
+// Bilişim Sınav Kağıdı Hazırlama & Yönetim Sistemi - Frontend Uygulaması
+// ==========================================================================
+
+const AppState = {
+  header: {
+    year: "2026-2027 EĞİTİM ÖĞRETİM YILI",
+    school: "Özel Viranşehir Uğur Anadolu Lisesi",
+    lesson: "SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE",
+    term: "1.DÖNEM 1. YAZILI",
+    student_name: "",
+    student_class: "",
+    student_no: "",
+    student_score: ""
+  },
+  questions: [],
+  viewMode: "questions", // 'questions' (Soru Kağıdı) veya 'answers' (Cevap Anahtarı)
+  colorMode: "bw",       // 'bw' (Siyah/Beyaz) veya 'color' (Renkli)
+  answerColor: "#d32f2f",// Varsayılan renk: Kırmızı
+  zoomLevel: 1.0,
+  printers: []
+};
+
+// Sayfa yüklendiğinde başlat
+document.addEventListener("DOMContentLoaded", () => {
+  initEventListeners();
+  loadInitialExam();
+});
+
+// --------------------------------------------------------------------------
+// Başlangıç Sınav Kağıdını Yükleme (orneksinavkagidi.jpg Replikası)
+// --------------------------------------------------------------------------
+async function loadInitialExam() {
+  try {
+    const res = await fetch("/api/initial-exam");
+    if (res.ok) {
+      const data = await res.json();
+      AppState.header = Object.assign({}, AppState.header, data.header);
+      AppState.questions = data.questions || [];
+      populateForm();
+      renderExamSheet();
+      renderQuestionsList();
+    }
+  } catch (err) {
+    console.error("Başlangıç sınavı yüklenirken hata:", err);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Form Alanlarını State ile Doldurma
+// --------------------------------------------------------------------------
+function populateForm() {
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val || "";
+  };
+
+  setVal("input-year", AppState.header.year);
+  setVal("input-school", AppState.header.school);
+  setVal("input-lesson", AppState.header.lesson);
+  setVal("input-term", AppState.header.term);
+  setVal("input-student-name", AppState.header.student_name);
+  setVal("input-student-class", AppState.header.student_class);
+  setVal("input-student-no", AppState.header.student_no);
+  setVal("input-student-score", AppState.header.student_score);
+}
+
+// --------------------------------------------------------------------------
+// A4 Kağıdı Canlı Render (orneksinavkagidi.jpg Şablonunun Birebir Aynısı)
+// --------------------------------------------------------------------------
+function renderExamSheet() {
+  const h = AppState.header;
+
+  // Başlık Bilgileri
+  const elYear = document.getElementById("sheet-year");
+  const elSchool = document.getElementById("sheet-school");
+  const elLesson = document.getElementById("sheet-lesson");
+  const elTerm = document.getElementById("sheet-term");
+
+  if (elYear) elYear.textContent = h.year;
+  if (elSchool) elSchool.textContent = h.school;
+  if (elLesson) elLesson.textContent = h.lesson;
+  if (elTerm) elTerm.textContent = h.term;
+
+  // Sabit Alanlar (Öğrenci Bilgileri)
+  const elStudentName = document.getElementById("sheet-student-name");
+  const elStudentClass = document.getElementById("sheet-student-class");
+  const elStudentNo = document.getElementById("sheet-student-no");
+  const elStudentScore = document.getElementById("sheet-student-score");
+
+  if (elStudentName) elStudentName.textContent = h.student_name ? " " + h.student_name : "";
+  if (elStudentClass) elStudentClass.textContent = h.student_class ? " " + h.student_class : "";
+  if (elStudentNo) elStudentNo.textContent = h.student_no ? " " + h.student_no : "";
+  if (elStudentScore) elStudentScore.textContent = h.student_score ? " " + h.student_score : "";
+
+  // Soruların Çizimi
+  const container = document.getElementById("sheet-questions-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const isAnswerMode = (AppState.viewMode === "answers");
+  const isColor = (AppState.colorMode === "color");
+  const activeColor = isColor ? AppState.answerColor : "#000000";
+
+  // Dotted lines pattern identical to orneksinavkagidi.jpg
+  const dotsLine1 = "...................................................................................................................................";
+  const dotsLine2 = "........................................................................................................................................";
+  const dotsLine3 = "........................................................................................................................................";
+  const dotsLine4 = ".........................................................................................";
+
+  AppState.questions.forEach((q, idx) => {
+    const qNum = idx + 1;
+    const block = document.createElement("div");
+    block.className = "exam-question-block";
+
+    // Soru Metni Satırı
+    const qTextDiv = document.createElement("div");
+    qTextDiv.className = "exam-question-text";
+    qTextDiv.innerHTML = `<span class="q-num">${qNum}. Soru:</span> <span class="q-content" contenteditable="true" data-qid="${q.id}" data-field="question">${escapeHtml(q.question)}</span> <span class="q-pts">(${q.points} Puan)</span>`;
+    block.appendChild(qTextDiv);
+
+    if (!isAnswerMode) {
+      // Soru Kağıdı Modu: 4 sıra noktalı cevap alanı
+      const dottedDiv = document.createElement("div");
+      dottedDiv.className = "dotted-answer-lines";
+      dottedDiv.innerHTML = `
+        <div class="dotted-line-row"><strong>Cevap:</strong>${dotsLine1}</div>
+        <div class="dotted-line-row">${dotsLine2}</div>
+        <div class="dotted-line-row">${dotsLine3}</div>
+        <div class="dotted-line-row">${dotsLine4}</div>
+      `;
+      block.appendChild(dottedDiv);
+    } else {
+      // Cevap Anahtarlı Mod: Soru altında model cevap (seçilen renkte)
+      const ansDiv = document.createElement("div");
+      ansDiv.className = "model-answer-block";
+      ansDiv.style.color = activeColor;
+      ansDiv.innerHTML = `
+        <span class="ans-label">Cevap: </span>
+        <span class="ans-content" contenteditable="true" data-qid="${q.id}" data-field="answer">${escapeHtml(q.answer)}</span>
+      `;
+      block.appendChild(ansDiv);
+    }
+
+    container.appendChild(block);
+  });
+
+  // Kağıt üzerindeki contenteditable düzenlemeleri dinle
+  attachSheetEditableListeners();
+}
+
+// --------------------------------------------------------------------------
+// Kağıt Üzerinden Canlı Düzenleme (ContentEditable -> State Senkronizasyonu)
+// --------------------------------------------------------------------------
+function attachSheetEditableListeners() {
+  document.querySelectorAll("[contenteditable='true']").forEach(el => {
+    el.addEventListener("blur", (e) => {
+      const qid = e.target.getAttribute("data-qid");
+      const field = e.target.getAttribute("data-field");
+      if (qid && field) {
+        const item = AppState.questions.find(q => q.id == qid);
+        if (item) {
+          item[field] = e.target.innerText.trim();
+          renderQuestionsList();
+        }
+      }
+    });
+  });
+}
+
+// --------------------------------------------------------------------------
+// Sol Panel: Soru Listesini Çizme & Yönetim
+// --------------------------------------------------------------------------
+function renderQuestionsList() {
+  const container = document.getElementById("sidebar-questions-list");
+  const countBadge = document.getElementById("badge-question-count");
+  if (countBadge) countBadge.textContent = `${AppState.questions.length} Soru (Toplam: ${getTotalPoints()} Puan)`;
+
+  if (!container) return;
+  container.innerHTML = "";
+
+  AppState.questions.forEach((q, idx) => {
+    const card = document.createElement("div");
+    card.className = "question-item-card";
+
+    card.innerHTML = `
+      <div class="question-item-header">
+        <span class="question-num-tag">${idx + 1}. Soru</span>
+        <div class="question-item-actions">
+          <button class="btn btn-secondary btn-sm" onclick="moveQuestion(${idx}, -1)" title="Yukarı Taşı" ${idx === 0 ? "disabled" : ""}>↑</button>
+          <button class="btn btn-secondary btn-sm" onclick="moveQuestion(${idx}, 1)" title="Aşağı Taşı" ${idx === AppState.questions.length - 1 ? "disabled" : ""}>↓</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteQuestion(${idx})" title="Sil">✕</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 0.4rem;">
+        <input type="text" value="${escapeHtml(q.question)}" onchange="updateQuestionText(${idx}, this.value)" placeholder="Soru metni...">
+      </div>
+      <div class="form-row" style="margin-bottom: 0.4rem;">
+        <div>
+          <label style="font-size: 0.7rem;">Puan:</label>
+          <input type="number" min="1" max="100" value="${q.points}" onchange="updateQuestionPoints(${idx}, this.value)">
+        </div>
+        <div>
+          <label style="font-size: 0.7rem;">Cevap Önizleme:</label>
+          <input type="text" value="${escapeHtml(q.answer.substring(0, 30))}..." title="${escapeHtml(q.answer)}" readonly style="background: #f1f5f9; cursor: pointer;" onclick="editAnswerModal(${idx})">
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function getTotalPoints() {
+  return AppState.questions.reduce((sum, q) => sum + (parseInt(q.points) || 0), 0);
+}
+
+// Soru Düzenleme İşlemleri
+window.updateQuestionText = (idx, val) => {
+  if (AppState.questions[idx]) {
+    AppState.questions[idx].question = val;
+    renderExamSheet();
+  }
+};
+
+window.updateQuestionPoints = (idx, val) => {
+  if (AppState.questions[idx]) {
+    AppState.questions[idx].points = parseInt(val) || 0;
+    renderExamSheet();
+    renderQuestionsList();
+  }
+};
+
+window.moveQuestion = (idx, direction) => {
+  const newIdx = idx + direction;
+  if (newIdx < 0 || newIdx >= AppState.questions.length) return;
+  const temp = AppState.questions[idx];
+  AppState.questions[idx] = AppState.questions[newIdx];
+  AppState.questions[newIdx] = temp;
+  renderExamSheet();
+  renderQuestionsList();
+};
+
+window.deleteQuestion = (idx) => {
+  AppState.questions.splice(idx, 1);
+  renderExamSheet();
+  renderQuestionsList();
+  showToast("Soru silindi.");
+};
+
+window.addNewQuestion = () => {
+  const newId = Date.now();
+  const defaultPts = Math.max(5, Math.round(100 / (AppState.questions.length + 1)));
+  AppState.questions.push({
+    id: newId,
+    question: "Yeni soru metnini buraya yazınız...",
+    points: defaultPts,
+    answer: "Bu sorunun doğru model cevabını buraya yazınız."
+  });
+  renderExamSheet();
+  renderQuestionsList();
+  showToast("Yeni soru eklendi.");
+};
+
+window.balancePoints = () => {
+  const n = AppState.questions.length;
+  if (n === 0) return;
+  const each = Math.floor(100 / n);
+  const rem = 100 - (each * n);
+  AppState.questions.forEach((q, i) => {
+    q.points = each + (i === n - 1 ? rem : 0);
+  });
+  renderExamSheet();
+  renderQuestionsList();
+  showToast("Puanlar 100 puana eşit şekilde dengelendi.");
+};
+
+window.editAnswerModal = (idx) => {
+  const q = AppState.questions[idx];
+  if (!q) return;
+  const newAns = prompt(`${idx + 1}. Soru için model cevabı düzenleyiniz:`, q.answer);
+  if (newAns !== null) {
+    q.answer = newAns.trim();
+    renderExamSheet();
+    renderQuestionsList();
+  }
+};
+
+// --------------------------------------------------------------------------
+// Bilişim Öğretmenliği Sınavı Oluşturucu (5, 6, 7, 8, 9, 10. Sınıflar)
+// --------------------------------------------------------------------------
+async function generateBilisimExam() {
+  const grade = document.getElementById("select-grade").value;
+  const difficulty = document.getElementById("select-difficulty").value;
+  const count = document.getElementById("input-question-count").value || 5;
+
+  showToast(`${grade}. Sınıf Bilişim sınavı hazırlanıyor...`);
+
+  try {
+    const res = await fetch(`/api/questions?grade=${grade}&difficulty=${difficulty}&count=${count}`);
+    if (res.ok) {
+      const data = await res.json();
+      AppState.questions = data.questions || [];
+
+      // Ders adını ve başlığı sınıf düzeyine uygun güncelle
+      if (parseInt(grade) >= 9) {
+        AppState.header.lesson = "BİLGİSAYAR BİLİMİ";
+        AppState.header.school = "Anadolu Lisesi";
+      } else {
+        AppState.header.lesson = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
+        AppState.header.school = "Ortaokulu";
+      }
+      populateForm();
+      renderExamSheet();
+      renderQuestionsList();
+      showToast(`${grade}. Sınıf Bilişim sınavı (${data.questions.length} soru) başarıyla oluşturuldu!`);
+    }
+  } catch (err) {
+    console.error("Soru oluşturma hatası:", err);
+    showToast("Soru oluşturulurken bir hata oluştu.");
+  }
+}
+
+// --------------------------------------------------------------------------
+// Özel Soru İsteme Asistanı (AI / Konu Bazlı)
+// --------------------------------------------------------------------------
+async function generateCustomPrompt() {
+  const promptInput = document.getElementById("input-custom-prompt");
+  const promptText = promptInput.value.trim();
+  const grade = document.getElementById("select-grade").value;
+  const count = document.getElementById("input-question-count").value || 5;
+
+  if (!promptText) {
+    alert("Lütfen hazırlamak istediğiniz konuyu yazınız (Örn: Python döngüler, Scratch değişkenler, Siber güvenlik)");
+    return;
+  }
+
+  showToast("Özel sorular üretiliyor...");
+  try {
+    const res = await fetch("/api/generate-custom", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: promptText, grade: grade, count: parseInt(count) })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      AppState.questions = data.questions || [];
+      AppState.header.lesson = "BİLİŞİM: " + data.topic.toUpperCase();
+      populateForm();
+      renderExamSheet();
+      renderQuestionsList();
+      promptInput.value = "";
+      showToast(`'${data.topic}' konulu sorular kağıda yerleştirildi!`);
+    } else {
+      showToast("Özel soru üretilemedi.");
+    }
+  } catch (err) {
+    console.error("Özel soru üretme hatası:", err);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Event Listener'lar ve Kontroller
+// --------------------------------------------------------------------------
+function initEventListeners() {
+  // Üst Bilgi Değişiklikleri
+  const bindHeaderInput = (id, key) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("input", (e) => {
+        AppState.header[key] = e.target.value;
+        renderExamSheet();
+      });
+    }
+  };
+
+  bindHeaderInput("input-year", "year");
+  bindHeaderInput("input-school", "school");
+  bindHeaderInput("input-lesson", "lesson");
+  bindHeaderInput("input-term", "term");
+  bindHeaderInput("input-student-name", "student_name");
+  bindHeaderInput("input-student-class", "student_class");
+  bindHeaderInput("input-student-no", "student_no");
+  bindHeaderInput("input-student-score", "student_score");
+
+  // Bilişim Soru Üret Butonları
+  document.getElementById("btn-generate-bilisim")?.addEventListener("click", generateBilisimExam);
+  document.getElementById("btn-generate-custom")?.addEventListener("click", generateCustomPrompt);
+  document.getElementById("btn-add-question")?.addEventListener("click", addNewQuestion);
+  document.getElementById("btn-balance-points")?.addEventListener("click", balancePoints);
+
+  // Görünüm Modu Değiştirme: [ Soru Kağıdı ] | [ Cevap Anahtarı ]
+  const btnModeQuestions = document.getElementById("btn-mode-questions");
+  const btnModeAnswers = document.getElementById("btn-mode-answers");
+
+  btnModeQuestions?.addEventListener("click", () => {
+    AppState.viewMode = "questions";
+    btnModeQuestions.classList.add("active");
+    btnModeAnswers.classList.remove("active");
+    document.getElementById("color-controls-section").style.display = "none";
+    renderExamSheet();
+  });
+
+  btnModeAnswers?.addEventListener("click", () => {
+    AppState.viewMode = "answers";
+    btnModeAnswers.classList.add("active");
+    btnModeQuestions.classList.remove("active");
+    document.getElementById("color-controls-section").style.display = "flex";
+    renderExamSheet();
+  });
+
+  // Renkli / Siyah-Beyaz Seçeneği
+  const selectColorMode = document.getElementById("select-color-mode");
+  const colorPickerWrapper = document.getElementById("color-picker-wrapper");
+  const colorPicker = document.getElementById("input-answer-color");
+  const colorHexText = document.getElementById("color-hex-text");
+
+  selectColorMode?.addEventListener("change", (e) => {
+    AppState.colorMode = e.target.value; // 'bw' veya 'color'
+    if (AppState.colorMode === "color") {
+      colorPickerWrapper.style.display = "flex";
+    } else {
+      colorPickerWrapper.style.display = "none";
+    }
+    renderExamSheet();
+  });
+
+  colorPicker?.addEventListener("input", (e) => {
+    AppState.answerColor = e.target.value;
+    if (colorHexText) colorHexText.textContent = e.target.value.toUpperCase();
+    renderExamSheet();
+  });
+
+  // Hazır Renk Butonları (Kırmızı, Lacivert, Yeşil, Mor, Turuncu)
+  document.querySelectorAll(".preset-color-dot").forEach(dot => {
+    dot.addEventListener("click", (e) => {
+      const color = e.target.getAttribute("data-color");
+      if (color) {
+        AppState.answerColor = color;
+        if (colorPicker) colorPicker.value = color;
+        if (colorHexText) colorHexText.textContent = color.toUpperCase();
+        renderExamSheet();
+      }
+    });
+  });
+
+  // Yakınlaştırma (Zoom) Kontrolleri
+  document.getElementById("btn-zoom-50")?.addEventListener("click", () => setZoom(0.5));
+  document.getElementById("btn-zoom-75")?.addEventListener("click", () => setZoom(0.75));
+  document.getElementById("btn-zoom-100")?.addEventListener("click", () => setZoom(1.0));
+  document.getElementById("btn-zoom-fit")?.addEventListener("click", setZoomFit);
+
+  // Sıfırla (Orijinal orneksinavkagidi.jpg'ye dön)
+  document.getElementById("btn-reset-original")?.addEventListener("click", () => {
+    if (confirm("Sınav kağıdını görseldeki orijinal 'orneksinavkagidi.jpg' haline döndürmek istiyor musunuz?")) {
+      loadInitialExam();
+      showToast("Orijinal şablon geri yüklendi.");
+    }
+  });
+
+  // İndirme ve Yazdırma
+  document.getElementById("btn-export-docx-questions")?.addEventListener("click", () => downloadDocx("questions"));
+  document.getElementById("btn-export-docx-answers")?.addEventListener("click", () => downloadDocx("answers"));
+  document.getElementById("btn-export-docx-both")?.addEventListener("click", downloadBothDocx);
+
+  // Hızlı Yazdır / PDF Kaydet (window.print)
+  document.getElementById("btn-quick-print")?.addEventListener("click", () => {
+    window.print();
+  });
+
+  // Donanım Yazıcısı Seçme Modalı
+  document.getElementById("btn-open-printer-modal")?.addEventListener("click", openPrinterModal);
+  document.getElementById("btn-modal-close")?.addEventListener("click", closePrinterModal);
+  document.getElementById("btn-refresh-printers")?.addEventListener("click", fetchPrinters);
+  document.getElementById("btn-submit-print")?.addEventListener("click", executePrint);
+
+  // Modal dışına tıklandığında kapat
+  document.getElementById("printer-modal")?.addEventListener("click", (e) => {
+    if (e.target.id === "printer-modal") closePrinterModal();
+  });
+}
+
+// --------------------------------------------------------------------------
+// Yakınlaştırma (Zoom) İşlevi
+// --------------------------------------------------------------------------
+function setZoom(val) {
+  AppState.zoomLevel = val;
+  const scaler = document.getElementById("paper-scaler");
+  if (scaler) {
+    scaler.style.transform = `scale(${val})`;
+  }
+  document.querySelectorAll(".zoom-btn").forEach(b => b.classList.remove("active"));
+  const btn = document.getElementById(`btn-zoom-${Math.round(val * 100)}`);
+  if (btn) btn.classList.add("active");
+}
+
+function setZoomFit() {
+  const container = document.querySelector(".preview-panel");
+  if (!container) return;
+  const containerWidth = container.clientWidth - 40;
+  const a4WidthPx = 794; // approx 210mm in px at 96 dpi
+  const scale = Math.min(1.0, Math.max(0.4, (containerWidth / a4WidthPx)));
+  AppState.zoomLevel = scale;
+  const scaler = document.getElementById("paper-scaler");
+  if (scaler) {
+    scaler.style.transform = `scale(${scale})`;
+  }
+}
+
+// --------------------------------------------------------------------------
+// DOCX İndirme İşlemleri (Sunucu OpenXML Motoru)
+// --------------------------------------------------------------------------
+async function downloadDocx(mode) {
+  showToast(mode === "questions" ? "Soru Kağıdı DOCX oluşturuluyor..." : "Cevap Anahtarı DOCX oluşturuluyor...");
+
+  const payload = {
+    header: AppState.header,
+    questions: AppState.questions,
+    mode: mode,
+    color: (AppState.colorMode === "color" && mode === "answers") ? AppState.answerColor : "000000"
+  };
+
+  try {
+    const res = await fetch("/api/export-docx", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
+      a.href = url;
+      a.download = mode === "questions" ? `${lessonName}_Soru_Kagidi.docx` : `${lessonName}_Cevap_Anahtari.docx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      showToast("DOCX belgesi indirildi!");
+    } else {
+      showToast("DOCX indirme hatası oluştu.");
+    }
+  } catch (err) {
+    console.error("DOCX indirme hatası:", err);
+  }
+}
+
+async function downloadBothDocx() {
+  showToast("Hem soru hem cevaplı sınav paketi hazırlanıyor...");
+
+  const payload = {
+    header: AppState.header,
+    questions: AppState.questions,
+    color: AppState.colorMode === "color" ? AppState.answerColor : "000000"
+  };
+
+  try {
+    const res = await fetch("/api/export-both-docx", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
+      a.href = url;
+      a.download = `${lessonName}_Sinav_Paketi.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      showToast("Soru ve Cevap Kağıtları ZIP olarak indirildi!");
+    }
+  } catch (err) {
+    console.error("ZIP paketi indirme hatası:", err);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Yazıcı Servisi & CUPS Modal İşlemleri
+// --------------------------------------------------------------------------
+function openPrinterModal() {
+  const modal = document.getElementById("printer-modal");
+  if (modal) modal.classList.add("active");
+  fetchPrinters();
+}
+
+function closePrinterModal() {
+  const modal = document.getElementById("printer-modal");
+  if (modal) modal.classList.remove("active");
+}
+
+async function fetchPrinters() {
+  const select = document.getElementById("select-printer");
+  const statusMsg = document.getElementById("printer-status-message");
+  if (select) select.innerHTML = "<option>Yazıcılar taranıyor...</option>";
+
+  try {
+    const res = await fetch("/api/printers");
+    if (res.ok) {
+      const data = await res.json();
+      AppState.printers = data.printers || [];
+
+      if (select) select.innerHTML = "";
+
+      if (AppState.printers.length === 0) {
+        if (select) {
+          select.innerHTML = "<option value=''>Sistemde kayıtlı fiziksel CUPS yazıcısı yok</option>";
+        }
+        if (statusMsg) {
+          statusMsg.innerHTML = `<span style="color:#b45309;">⚠️ ${data.message}</span>`;
+        }
+      } else {
+        AppState.printers.forEach(p => {
+          const opt = document.createElement("option");
+          opt.value = p.name;
+          opt.textContent = `${p.name} ${p.is_default ? "(Varsayılan)" : ""} - ${p.description}`;
+          if (p.is_default) opt.selected = true;
+          select.appendChild(opt);
+        });
+        if (statusMsg) {
+          statusMsg.innerHTML = `<span style="color:#16a34a;">✓ ${AppState.printers.length} yazıcı tespit edildi.</span>`;
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Yazıcı listesi hatası:", err);
+  }
+}
+
+async function executePrint() {
+  const select = document.getElementById("select-printer");
+  const copiesInput = document.getElementById("input-print-copies");
+  const copies = parseInt(copiesInput?.value || 1);
+  const selectedPrinter = select?.value;
+
+  if (!selectedPrinter) {
+    // CUPS yazıcısı yoksa tarayıcının yerel yazdırma penceresini başlat
+    closePrinterModal();
+    showToast("Doğrudan sistem yazdırma penceresi açılıyor...");
+    window.print();
+    return;
+  }
+
+  showToast(`${copies} adet kopya '${selectedPrinter}' yazıcısına gönderiliyor...`);
+
+  const payload = {
+    printer: selectedPrinter,
+    copies: copies,
+    header: AppState.header,
+    questions: AppState.questions,
+    mode: AppState.viewMode,
+    color: AppState.colorMode === "color" ? AppState.answerColor : "000000"
+  };
+
+  try {
+    const res = await fetch("/api/print", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      showToast(data.message);
+      closePrinterModal();
+    } else {
+      showToast(data.message || "Yazdırma başarısız oldu.");
+    }
+  } catch (err) {
+    console.error("Yazdırma gönderim hatası:", err);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Yardımcılar: Toast Bildirimi & HTML Escape
+// --------------------------------------------------------------------------
+function showToast(msg) {
+  let toast = document.getElementById("app-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "app-toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span>ℹ️</span> <span>${escapeHtml(msg)}</span>`;
+  toast.classList.add("active");
+  setTimeout(() => {
+    toast.classList.remove("active");
+  }, 3500);
+}
+
+function escapeHtml(text) {
+  if (!text) return "";
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  };
+  return text.toString().replace(/[&<>"']/g, m => map[m]);
+}
+
+</script>
+</body>
+</html>

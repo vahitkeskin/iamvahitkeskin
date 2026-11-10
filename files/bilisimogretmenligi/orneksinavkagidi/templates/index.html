@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilişim Sınav Kağıdı Hazırlama & Yönetim Sistemi</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- =======================================================================
+       Üst Navigasyon & Aksiyon Barı
+       ======================================================================= -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-icon">💻</div>
+      <div class="brand-title">
+        <h1>Bilişim Sınav Kağıdı Hazırlama Sistemi</h1>
+        <p>MEB Müfredatına Tam Uyumlu • DOCX & PDF • Yazıcı Entegrasyonu</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button id="btn-reset-original" class="btn btn-secondary btn-sm" title="orneksinavkagidi.jpg Orijinal Şablonu Yükle">
+        ↺ Orijinal Şablon
+      </button>
+      <button id="btn-export-docx-both" class="btn btn-primary btn-sm" title="Hem Soru Hem Cevaplı Kağıdı ZIP Olarak İndir">
+        📦 Soru + Cevap (DOCX ZIP)
+      </button>
+      <button id="btn-quick-print" class="btn btn-success btn-sm" title="A4 Sayfa Olarak Önizle ve Yazdır / PDF Kaydet">
+        🖨️ Yazdır / PDF Kaydet
+      </button>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       Ana Çalışma Alanı
+       ======================================================================= -->
+  <main class="app-container">
+
+    <!-- SOL PANEL: Kontroller, Müfredat Seçimi, Soru Asistanı -->
+    <aside class="sidebar-panel">
+
+      <!-- Kart 1: Sınav Başlık Bilgileri -->
+      <section class="card">
+        <div class="card-header">
+          <h2>📄 Sınav Başlık Bilgileri</h2>
+          <span class="badge badge-fixed">Ad, Sınıf, Puan Sabit</span>
+        </div>
+
+        <div class="info-banner">
+          <strong>Not:</strong> "ADI SOYADI", "SINIFI", "No." ve "PUAN" alanları sınav kağıdı üzerinde standart şablon olarak sabit tutulur. Okul, yıl, ders ve sınav dönemini dilediğiniz gibi değiştirebilirsiniz.
+        </div>
+
+        <div class="form-group">
+          <label for="input-school">Okul Adı:</label>
+          <input type="text" id="input-school" placeholder="Örn: Özel Viranşehir Uğur Anadolu Lisesi">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-year">Eğitim Öğretim Yılı:</label>
+            <input type="text" id="input-year" placeholder="Örn: 2026-2027 EĞİTİM ÖĞRETİM YILI">
+          </div>
+          <div class="form-group">
+            <label for="input-term">Sınav Dönemi:</label>
+            <input type="text" id="input-term" placeholder="Örn: 1.DÖNEM 1. YAZILI">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-lesson">Ders Adı:</label>
+          <input type="text" id="input-lesson" placeholder="Örn: BİLİŞİM TEKNOLOJİLERİ VE YAZILIM">
+        </div>
+
+        <!-- İsteğe Bağlı Sabit Alan Doldurma -->
+        <details style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">
+          <summary style="cursor: pointer; font-weight: 600; color: #2563eb;">Öğrenci Bilgilerini Önceden Yaz (Opsiyonel)</summary>
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <div class="form-group">
+              <label for="input-student-name">Öğrenci Adı Soyadı:</label>
+              <input type="text" id="input-student-name" placeholder="Boş bırakılabilir">
+            </div>
+            <div class="form-group">
+              <label for="input-student-class">Sınıfı:</label>
+              <input type="text" id="input-student-class" placeholder="Örn: 6/B">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-student-no">Numarası:</label>
+              <input type="text" id="input-student-no" placeholder="Örn: 412">
+            </div>
+            <div class="form-group">
+              <label for="input-student-score">Puanı:</label>
+              <input type="text" id="input-student-score" placeholder="Boş bırakılabilir">
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- Kart 2: Bilişim Öğretmenliği Sınavı Oluşturucu (5, 6, 7, 8, 9, 10. Sınıflar) -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🎯 Bilişim Sınavı Oluşturucu</h2>
+          <span class="badge">MEB Uyumlu</span>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="select-grade">Sınıf Seviyesi:</label>
+            <select id="select-grade">
+              <option value="5">5. Sınıf</option>
+              <option value="6">6. Sınıf</option>
+              <option value="7">7. Sınıf</option>
+              <option value="8">8. Sınıf</option>
+              <option value="9">9. Sınıf</option>
+              <option value="10">10. Sınıf</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-difficulty">Zorluk Derecesi:</label>
+            <select id="select-difficulty">
+              <option value="orta">Orta</option>
+              <option value="kolay">Kolay</option>
+              <option value="zor">Zor</option>
+              <option value="karma">Karma (Dengeli)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="input-question-count">Soru Sayısı:</label>
+            <input type="number" id="input-question-count" min="1" max="25" value="5">
+          </div>
+        </div>
+
+        <button id="btn-generate-bilisim" class="btn btn-primary btn-block">
+          ✨ Otomatik Bilişim Sınavı Oluştur
+        </button>
+      </section>
+
+      <!-- Kart 3: Akıllı Soru İsteme Asistanı (AI Prompt) -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🤖 Özel Soru & Konu İsteme</h2>
+          <span class="badge">Akıllı Asistan</span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-custom-prompt">İstediğiniz Konu veya Soruyu Yazınız:</label>
+          <input type="text" id="input-custom-prompt" placeholder="Örn: Python for ve while döngüleri, Scratch değişkenler, Siber zorbalık...">
+        </div>
+
+        <button id="btn-generate-custom" class="btn btn-secondary btn-block">
+          🔍 Bu Konudan Soru & Model Cevap Üret
+        </button>
+      </section>
+
+      <!-- Kart 4: Soru Listesi & Düzenleme -->
+      <section class="card">
+        <div class="card-header">
+          <h2>📝 Soru ve Cevap Yönetimi</h2>
+          <span id="badge-question-count" class="badge">5 Soru</span>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <button id="btn-add-question" class="btn btn-secondary btn-sm" style="flex:1;">+ Yeni Soru Ekle</button>
+          <button id="btn-balance-points" class="btn btn-secondary btn-sm" style="flex:1;">⚖️ 100 Puana Dengele</button>
+        </div>
+
+        <div id="sidebar-questions-list" class="questions-list">
+          <!-- Dinamik Sorular Buraya Eklenir -->
+        </div>
+      </section>
+
+      <!-- Kart 5: Yazıcı & Baskı Seçenekleri -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🖨️ Yazıcı & Baskı Ayarları</h2>
+          <span class="badge">CUPS / AirPrint</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-print-copies-side">Kopya Sayısı:</label>
+            <input type="number" id="input-print-copies-side" min="1" max="200" value="1">
+          </div>
+          <div class="form-group" style="display: flex; align-items: flex-end;">
+            <button id="btn-open-printer-modal" class="btn btn-secondary btn-block" style="height: 38px;">
+              🔍 Yazıcı Seç...
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- SAĞ PANEL: Canlı A4 Önizleme (%100 WYSIWYG) -->
+    <section class="preview-panel">
+
+      <!-- Önizleme Araç Çubuğu -->
+      <div class="preview-toolbar">
+        <!-- Kağıt Modu: Soru Kağıdı vs Cevap Anahtarı -->
+        <div class="toolbar-group">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Görünüm:</label>
+          <div class="mode-toggle">
+            <button id="btn-mode-questions" class="active">Soru Kağıdı</button>
+            <button id="btn-mode-answers">Cevap Anahtarı</button>
+          </div>
+        </div>
+
+        <!-- Cevap Rengi Seçenekleri (Sadece Cevap Anahtarı Modunda) -->
+        <div id="color-controls-section" class="toolbar-group" style="display: none;">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Cevap Rengi:</label>
+          <select id="select-color-mode" style="padding: 0.3rem 0.5rem; font-size: 0.8rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+            <option value="bw">Siyah / Beyaz (Varsayılan)</option>
+            <option value="color">Renkli</option>
+          </select>
+
+          <div id="color-picker-wrapper" class="color-picker-wrapper" style="display: none;">
+            <input type="color" id="input-answer-color" class="color-picker-input" value="#d32f2f" title="Renk Seç">
+            <span id="color-hex-text" style="font-size: 0.75rem; font-weight: 600; font-family: monospace;">#D32F2F</span>
+            
+            <div class="preset-colors">
+              <span class="preset-color-dot" data-color="#d32f2f" style="background:#d32f2f;" title="Varsayılan Kırmızı"></span>
+              <span class="preset-color-dot" data-color="#1e40af" style="background:#1e40af;" title="Lacivert"></span>
+              <span class="preset-color-dot" data-color="#047857" style="background:#047857;" title="Zümrüt Yeşili"></span>
+              <span class="preset-color-dot" data-color="#7c3aed" style="background:#7c3aed;" title="Mor"></span>
+              <span class="preset-color-dot" data-color="#c2410c" style="background:#c2410c;" title="Turuncu"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yakınlaştırma (Zoom) Kontrolleri -->
+        <div class="toolbar-group">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Ölçek:</label>
+          <button id="btn-zoom-50" class="btn btn-secondary btn-sm zoom-btn">%50</button>
+          <button id="btn-zoom-75" class="btn btn-secondary btn-sm zoom-btn">%75</button>
+          <button id="btn-zoom-100" class="btn btn-secondary btn-sm zoom-btn active">%100</button>
+          <button id="btn-zoom-fit" class="btn btn-secondary btn-sm">Sığdır</button>
+        </div>
+
+        <!-- İndirme Seçenekleri -->
+        <div class="toolbar-group">
+          <button id="btn-export-docx-questions" class="btn btn-secondary btn-sm" title="Soru Kağıdını DOCX Olarak İndir">
+            📄 Soru (DOCX)
+          </button>
+          <button id="btn-export-docx-answers" class="btn btn-secondary btn-sm" title="Cevap Anahtarını DOCX Olarak İndir">
+            🔑 Cevap (DOCX)
+          </button>
+        </div>
+      </div>
+
+      <!-- A4 Sayfası Görünümü (%100 Birebir orneksinavkagidi.jpg Replikası) -->
+      <div class="paper-scroll-viewport">
+        <div id="paper-scaler" class="paper-scaler">
+
+          <article class="a4-page" id="exam-paper">
+
+            <!-- ÜST BİLGİ TABLOSU (3 Sütunlu) -->
+            <table class="exam-header-table">
+              <tr>
+                <!-- Sol Sütun (Sabit Alanlar) -->
+                <td class="header-col-left">
+                  <div>ADI SOYADI:<span id="sheet-student-name"></span></div>
+                  <div>SINIFI:<span id="sheet-student-class"></span></div>
+                  <div>No.:<span id="sheet-student-no"></span></div>
+                </td>
+
+                <!-- Orta Sütun (Okul, Yıl, Ders, Dönem) -->
+                <td class="header-col-middle">
+                  <div class="exam-year" id="sheet-year" contenteditable="true">2026-2027 EĞİTİM ÖĞRETİM YILI</div>
+                  <div class="exam-school" id="sheet-school" contenteditable="true">Özel Viranşehir uğur Anadolu lisesi</div>
+                  <div class="exam-lesson" id="sheet-lesson" contenteditable="true">SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE</div>
+                  <div class="exam-term" id="sheet-term" contenteditable="true">1.DÖNEM 1. YAZILI</div>
+                </td>
+
+                <!-- Sağ Sütun (Puan) -->
+                <td class="header-col-right">
+                  <div>PUAN:<span id="sheet-student-score"></span></div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- BÖLÜM BAŞLIĞI: S O R U L A R -->
+            <div class="exam-section-title">S O R U L A R</div>
+
+            <!-- SORULAR LİSTESİ (Soru Kağıdında Noktalı, Cevap Anahtarında Renkli/Siyah) -->
+            <div id="sheet-questions-container" class="exam-questions-container">
+              <!-- JavaScript tarafından doldurulur -->
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       YAZICI SEÇİMİ & KOPYA SAYISI MODALI
+       ======================================================================= -->
+  <div id="printer-modal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>🖨️ Yazıcı Seçimi ve Yazdırma</h3>
+        <button id="btn-modal-close" class="modal-close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <label for="select-printer" style="margin: 0;">Yakındaki / Sistem Yazıcısı:</label>
+            <button id="btn-refresh-printers" class="btn btn-secondary btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;">
+              🔄 Yenile
+            </button>
+          </div>
+          <select id="select-printer">
+            <option>Yazıcılar taranıyor...</option>
+          </select>
+          <div id="printer-status-message" style="font-size: 0.75rem; margin-top: 0.35rem;"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-print-copies">Kopya Sayısı:</label>
+            <input type="number" id="input-print-copies" min="1" max="500" value="1">
+          </div>
+          <div class="form-group">
+            <label>Yazdırılacak Belge:</label>
+            <div style="padding-top: 0.4rem; font-size: 0.85rem; font-weight: 600; color: #2563eb;">
+              Önizlemedeki Aktif Kağıt
+            </div>
+          </div>
+        </div>
+
+        <div class="info-banner" style="margin-top: 0.5rem;">
+          💡 <strong>İpucu:</strong> Ağdaki AirPrint veya kablosuz yazıcınız için tarayıcının yerel yazdırma penceresini açarak da doğrudan çıktı alabilir veya "PDF Olarak Kaydet" seçeneğini kullanabilirsiniz.
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closePrinterModal()">İptal</button>
+        <button id="btn-submit-print" class="btn btn-success">
+          🖨️ Yazdır
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Bildirimi -->
+  <div id="app-toast" class="toast"></div>
+
+  <!-- Scriptler -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+
