@@ -11,11 +11,18 @@ import random
 import tempfile
 import zipfile
 from flask import Flask, request, jsonify, render_template, send_file, Response
-from question_bank import INITIAL_EXAM, QUESTION_BANK
+from question_bank import INITIAL_EXAM, QUESTION_BANK, GRADE_TOPICS
 from docx_generator import generate_docx
 from printer_service import list_system_printers, print_file
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+    return response
 
 @app.route("/")
 def index():
@@ -26,14 +33,22 @@ def get_initial_exam():
     """Görseldeki (orneksinavkagidi.jpg) orijinal sınav kağıdını döner."""
     return jsonify(INITIAL_EXAM)
 
+@app.route("/api/topics", methods=["GET"])
+def get_topics():
+    """Seçili sınıf düzeyine ait ünite/konu başlıklarını döner."""
+    grade = request.args.get("grade", "5")
+    topics = GRADE_TOPICS.get(grade, ["Tüm Konular"])
+    return jsonify({"grade": grade, "topics": topics})
+
 @app.route("/api/questions", methods=["GET"])
 def get_questions():
     """
-    Sınıf, zorluk ve soru sayısına göre Bilişim Teknolojileri sorularını ve cevaplarını döner.
-    Parametreler: grade (5, 6, 7, 8, 9, 10), difficulty (kolay, orta, zor, karma), count (int)
+    Sınıf, zorluk, konu ve soru sayısına göre Bilişim Teknolojileri sorularını ve cevaplarını döner.
+    Parametreler: grade, difficulty, count, topic
     """
     grade = request.args.get("grade", "5")
     difficulty = request.args.get("difficulty", "orta").lower()
+    topic = request.args.get("topic", "Tüm Konular").strip()
     try:
         count = int(request.args.get("count", 5))
     except ValueError:
@@ -52,9 +67,19 @@ def get_questions():
     else:  # karma
         pool = list(grade_data.get("kolay", [])) + list(grade_data.get("orta", [])) + list(grade_data.get("zor", []))
 
+    # Konu filtresi varsa uygula
+    if topic and topic != "Tüm Konular":
+        filtered = [item for item in pool if item.get("topic") == topic]
+        if filtered:
+            pool = filtered
+
     # Yeterli soru yoksa havuzu diğer zorluklardan genişlet
     if len(pool) < count:
         all_pool = list(grade_data.get("kolay", [])) + list(grade_data.get("orta", [])) + list(grade_data.get("zor", []))
+        if topic and topic != "Tüm Konular":
+            all_filtered = [item for item in all_pool if item.get("topic") == topic]
+            if all_filtered:
+                all_pool = all_filtered
         pool = all_pool
 
     # Rastgele veya sırayla seç
@@ -69,6 +94,7 @@ def get_questions():
     for idx, item in enumerate(selected, 1):
         formatted_questions.append({
             "id": idx,
+            "topic": item.get("topic", ""),
             "question": item.get("question", ""),
             "points": pts_per_q,
             "answer": item.get("answer", "")
