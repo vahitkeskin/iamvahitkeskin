@@ -476,6 +476,8 @@ body {
   border: 1px solid #000000;
   margin-bottom: 28px;
   table-layout: fixed;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #000000;
 }
 
 .exam-header-table td {
@@ -488,16 +490,22 @@ body {
   width: 26%;
   font-size: 11pt;
   line-height: 1.7;
+  font-weight: 400;
+  color: #000000;
 }
 
 .header-col-left div {
   white-space: nowrap;
+  font-weight: 400;
 }
 
+/* Sadece bu alan (Orta Sütun) KOYU (BOLD) */
 .header-col-middle {
   width: 58%;
   text-align: center;
   line-height: 1.45;
+  font-weight: 700;
+  color: #000000;
 }
 
 .exam-year {
@@ -508,6 +516,7 @@ body {
 
 .exam-school {
   font-size: 10.5pt;
+  font-weight: 700;
   margin-top: 2px;
 }
 
@@ -520,7 +529,7 @@ body {
 
 .exam-term {
   font-size: 10.5pt;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   margin-top: 2px;
 }
@@ -529,18 +538,24 @@ body {
   width: 16%;
   vertical-align: top !important;
   font-size: 11pt;
-  font-weight: 500;
+  font-weight: 400;
+  color: #000000;
   padding-top: 8px;
 }
 
-/* S O R U L A R Başlığı */
+.header-col-right div {
+  font-weight: 400;
+}
+
+/* S O R U L A R Başlığı - Geri kalan her yer aynı font ve normal kalınlıkta */
 .exam-section-title {
   text-align: center;
   font-size: 13pt;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 7px;
   margin-bottom: 24px;
   color: #000000;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 /* Soru & Cevap Maddeleri */
@@ -548,6 +563,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #000000;
 }
 
 .exam-question-block {
@@ -559,10 +576,11 @@ body {
   line-height: 1.4;
   margin-bottom: 4px;
   color: #000000;
+  font-weight: 400;
 }
 
 .exam-question-text .q-num {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .exam-question-text .q-pts {
@@ -574,13 +592,19 @@ body {
   font-size: 9.5pt;
   line-height: 1.6;
   letter-spacing: 0.5px;
-  color: #222222;
+  color: #000000;
   word-break: break-all;
   user-select: none;
+  font-weight: 400;
 }
 
 .dotted-line-row {
   margin-top: 1px;
+}
+
+.dotted-line-row .ans-label {
+  font-weight: 400;
+  color: #000000;
 }
 
 /* Cevap Anahtarlı Mod */
@@ -589,10 +613,11 @@ body {
   line-height: 1.5;
   margin-top: 4px;
   margin-bottom: 6px;
+  font-weight: 400;
 }
 
 .model-answer-block .ans-label {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 /* Canlı Tıklayıp Düzenlenebilir Alanlar (ContentEditable) */
@@ -853,9 +878,34 @@ body {
     padding: 4px 8px !important;
   }
 
+  /* Sadece orta sütun KOYU */
+  .header-col-middle,
+  .exam-year,
+  .exam-school,
+  .exam-lesson,
+  .exam-term {
+    font-weight: 700 !important;
+  }
+
+  /* Geri kalan her şey normal kalınlıkta ve aynı fontta */
+  .header-col-left,
+  .header-col-left div,
+  .header-col-right,
+  .header-col-right div,
+  .exam-section-title,
+  .exam-question-block,
+  .exam-question-text,
+  .q-num,
+  .q-pts,
+  .ans-label,
+  .model-answer-block .ans-label {
+    font-weight: 400 !important;
+  }
+
   .exam-section-title {
     margin-bottom: 12px !important;
     font-size: 11.5pt !important;
+    font-weight: 400 !important;
   }
 
   .exam-questions-container {
@@ -1550,7 +1600,7 @@ function createExamPageHtml(isAnswerKey) {
     if (!isAnswerKey) {
       answerPart = `
         <div class="dotted-answer-lines">
-          <div class="dotted-line-row"><strong>Cevap:</strong>${dotsLine1}</div>
+          <div class="dotted-line-row"><span class="ans-label">Cevap:</span>${dotsLine1}</div>
           <div class="dotted-line-row">${dotsLine2}</div>
           <div class="dotted-line-row">${dotsLine3}</div>
           <div class="dotted-line-row">${dotsLine4}</div>

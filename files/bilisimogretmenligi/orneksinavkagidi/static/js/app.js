@@ -270,7 +270,7 @@ function createExamPageHtml(isAnswerKey) {
     if (!isAnswerKey) {
       answerPart = `
         <div class="dotted-answer-lines">
-          <div class="dotted-line-row"><strong>Cevap:</strong>${dotsLine1}</div>
+          <div class="dotted-line-row"><span class="ans-label">Cevap:</span>${dotsLine1}</div>
           <div class="dotted-line-row">${dotsLine2}</div>
           <div class="dotted-line-row">${dotsLine3}</div>
           <div class="dotted-line-row">${dotsLine4}</div>

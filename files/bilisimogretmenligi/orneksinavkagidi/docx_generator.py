@@ -62,20 +62,20 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
             <w:trPr><w:cantSplit/></w:trPr>
             <w:tc>
                 <w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
                 <w:tcPr><w:tcW w:w="5800" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
                 <w:tcPr><w:tcW w:w="1400" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
             </w:tc>
         </w:tr>
     </w:tbl>
@@ -94,6 +94,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
                 <w:sz w:val="22"/>
                 <w:spacing w:val="120"/>
             </w:rPr>
@@ -114,17 +115,17 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         elements.append(f'''
         <w:p>
             <w:pPr><w:spacing w:before="120" w:after="30"/></w:pPr>
-            <w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: {q_text} ({p_val} Puan)</w:t></w:r>
+            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: {q_text} ({p_val} Puan)</w:t></w:r>
         </w:p>
         ''')
 
         if not is_answer_key:
             # Soru Kağıdı: 4 sıra noktalı cevap alanı
             elements.append(f'''
-            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
             ''')
         else:
             # Cevap Kağıdı (Cevap Anahtarı)
@@ -132,8 +133,8 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
             elements.append(f'''
             <w:p>
                 <w:pPr><w:spacing w:before="40" w:after="80" w:line="260" w:lineRule="auto"/></w:pPr>
-                <w:r><w:rPr><w:b/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
-                <w:r><w:rPr>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>{ans_text}</w:t></w:r>
+                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
+                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>{ans_text}</w:t></w:r>
             </w:p>
             ''')
 
