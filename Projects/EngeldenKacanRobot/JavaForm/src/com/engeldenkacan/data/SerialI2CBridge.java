@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class SerialI2CBridge implements ITelemetryRepository {
     private Process process;
     private OutputStream processOut;
+    private java.net.Socket tcpSocket;
     private Thread readerThread;
     private Thread simThread;
     private volatile boolean connected = false;
@@ -53,6 +54,12 @@ public class SerialI2CBridge implements ITelemetryRepository {
     public void connect(String targetPort) throws Exception {
         if (connected) disconnect();
 
+        // Eğer hedef IP adresi veya hostname içeriyorsa Wi-Fi TCP Soket moduna geç
+        if (targetPort != null && (targetPort.contains(".") || targetPort.contains(":") || targetPort.equalsIgnoreCase("localhost"))) {
+            connectTcpSocket(targetPort);
+            return;
+        }
+
         log("[Donanım Bağlantısı] " + targetPort + " açılıyor (115200 baud)...");
 
         try {
@@ -80,15 +87,20 @@ public class SerialI2CBridge implements ITelemetryRepository {
                 "        termios.tcsetattr(fd, termios.TCSANOW, attrs)\n" +
                 "        buf = b''\n" +
                 "        while True:\n" +
-                "            r, _, _ = select.select([fd], [], [], 0.2)\n" +
-                "            if r:\n" +
-                "                data = os.read(fd, 256)\n" +
-                "                if data:\n" +
-                "                    buf += data\n" +
-                "                    while b'\\n' in buf:\n" +
-                "                        line, buf = buf.split(b'\\n', 1)\n" +
-                "                        sys.stdout.write(line.decode('utf-8', errors='ignore') + '\\n')\n" +
-                "                        sys.stdout.flush()\n" +
+                "            r, _, _ = select.select([fd, sys.stdin], [], [], 0.05)\n" +
+                "            for s in r:\n" +
+                "                if s == fd:\n" +
+                "                    data = os.read(fd, 256)\n" +
+                "                    if data:\n" +
+                "                        buf += data\n" +
+                "                        while b'\\n' in buf:\n" +
+                "                            line, buf = buf.split(b'\\n', 1)\n" +
+                "                            sys.stdout.write(line.decode('utf-8', errors='ignore') + '\\n')\n" +
+                "                            sys.stdout.flush()\n" +
+                "                elif s == sys.stdin:\n" +
+                "                    cmd = sys.stdin.readline()\n" +
+                "                    if cmd:\n" +
+                "                        os.write(fd, cmd.encode('utf-8'))\n" +
                 "except Exception as e:\n" +
                 "    sys.stderr.write(str(e) + '\\n')\n",
                 targetPort
@@ -318,9 +330,68 @@ public class SerialI2CBridge implements ITelemetryRepository {
         if (logListener != null) logListener.accept(msg);
     }
 
+    private void connectTcpSocket(String target) {
+        String host = target;
+        int port = 8080;
+        if (target.contains(":")) {
+            String[] parts = target.split(":");
+            host = parts[0].trim();
+            try {
+                port = Integer.parseInt(parts[1].trim());
+            } catch (Exception ignored) {}
+        }
+
+        log("[Wi-Fi I2C Köprüsü] " + host + ":" + port + " adresine bağlanılıyor...");
+        try {
+            java.net.Socket s = new java.net.Socket();
+            s.connect(new java.net.InetSocketAddress(host, port), 4000);
+            this.tcpSocket = s;
+            this.processOut = s.getOutputStream();
+            this.connected = true;
+
+            readerThread = new Thread(() -> {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(s.getInputStream(), StandardCharsets.UTF_8))) {
+                    String line;
+                    boolean receivedHardwareData = false;
+                    while (connected && (line = reader.readLine()) != null) {
+                        final String raw = line.trim();
+                        if (raw.isEmpty()) continue;
+                        if (raw.contains("\"front\"") && raw.contains("\"angle\"")) {
+                            receivedHardwareData = true;
+                            parseJsonTelemetry(raw);
+                        } else {
+                            log("[Wi-Fi Robot] " + raw);
+                        }
+                    }
+                    if (!receivedHardwareData && connected) {
+                        startSimulationLoop();
+                    }
+                } catch (Exception e) {
+                    if (connected) {
+                        log("[Wi-Fi Bilgisi] Soket koptu veya veri kesildi: " + e.getMessage());
+                        startSimulationLoop();
+                    }
+                }
+            });
+            readerThread.setDaemon(true);
+            readerThread.start();
+            log("[Wi-Fi I2C Köprüsü] TCP bağlantısı kuruldu. Canlı telemetri ve kumanda hattı aktif!");
+        } catch (Exception ex) {
+            log("[Wi-Fi Uyarısı] " + host + ":" + port + " açılamadı (" + ex.getMessage() + "). Canlı simülatör devreye giriyor.");
+            connected = true;
+            startSimulationLoop();
+        }
+    }
+
     @Override
     public void disconnect() {
         connected = false;
+        if (tcpSocket != null) {
+            try {
+                tcpSocket.close();
+            } catch (Exception ignored) {}
+            tcpSocket = null;
+        }
         if (process != null) {
             process.destroyForcibly();
             process = null;

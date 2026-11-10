@@ -506,7 +506,82 @@ public class MainForm extends JFrame {
 
         settingsPanel.add(Box.createVerticalStrut(14));
 
-        // 3. SİSTEM & DONANIM BİLGİSİ
+        // 3. WİFİ & AĞ YAPILANDIRMASI KARTI
+        JPanel wifiCard = new JPanel(new BorderLayout(10, 10));
+        wifiCard.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(16, 185, 129, 140), 1),
+            BorderFactory.createEmptyBorder(14, 16, 14, 16)
+        ));
+        wifiCard.setOpaque(false);
+
+        JLabel lblWifiHeader = new JLabel("📶 " + Strings.sectionWifiNetwork());
+        lblWifiHeader.setFont(new Font("SansSerif", Font.BOLD, 13));
+        wifiCard.add(lblWifiHeader, BorderLayout.NORTH);
+
+        JPanel wifiBody = new JPanel();
+        wifiBody.setLayout(new BoxLayout(wifiBody, BoxLayout.Y_AXIS));
+        wifiBody.setOpaque(false);
+
+        JPanel rowRobotIp = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 4));
+        rowRobotIp.setOpaque(false);
+        rowRobotIp.add(new JLabel("Robot Adresi:"));
+        JTextField txtWifiTarget = new JTextField("192.168.1.103:8080", 14);
+        JButton btnConnectWifi = new JButton("Bağlan");
+        styleButton(btnConnectWifi, new Color(37, 99, 235), Color.WHITE);
+        btnConnectWifi.addActionListener(e -> {
+            txtPort.setText(txtWifiTarget.getText().trim());
+            viewModel.connectHardware(txtWifiTarget.getText().trim());
+        });
+        rowRobotIp.add(txtWifiTarget);
+        rowRobotIp.add(btnConnectWifi);
+        wifiBody.add(rowRobotIp);
+
+        wifiBody.add(Box.createVerticalStrut(8));
+
+        JLabel lblShareTitle = new JLabel("📲 " + Strings.shareWifiTitle() + " (" + Strings.shareWifiDesc() + "):");
+        lblShareTitle.setFont(new Font("SansSerif", Font.BOLD, 11));
+        wifiBody.add(lblShareTitle);
+
+        JPanel rowSsidPass = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 4));
+        rowSsidPass.setOpaque(false);
+        rowSsidPass.add(new JLabel("Ağ (SSID):"));
+        JTextField txtSsid = new JTextField("FiberHGW_TP2BA8", 12);
+        rowSsidPass.add(txtSsid);
+        rowSsidPass.add(new JLabel("Şifre:"));
+        JPasswordField txtPass = new JPasswordField("qdXuk7jfzgP4", 10);
+        rowSsidPass.add(txtPass);
+
+        JButton btnSendWifi = new JButton(Strings.btnSendWifiConfig());
+        styleButton(btnSendWifi, new Color(5, 150, 105), Color.WHITE);
+        btnSendWifi.addActionListener(e -> {
+            String ssid = txtSsid.getText().trim();
+            String pass = new String(txtPass.getPassword()).trim();
+            viewModel.sendCommand("WIFI:SET:" + ssid + ":" + pass);
+            JOptionPane.showMessageDialog(this, "Wi-Fi bilgileri robota iletildi!\nSSID: " + ssid, "Wi-Fi Yapılandırma", JOptionPane.INFORMATION_MESSAGE);
+        });
+        rowSsidPass.add(btnSendWifi);
+
+        JButton btnCopyWifi = new JButton(Strings.btnCopyWifi());
+        styleButton(btnCopyWifi, new Color(71, 85, 105), Color.WHITE);
+        btnCopyWifi.addActionListener(e -> {
+            String text = "SSID: " + txtSsid.getText().trim() + " | Şifre: " + new String(txtPass.getPassword()).trim();
+            java.awt.datatransfer.StringSelection sel = new java.awt.datatransfer.StringSelection(text);
+            java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, sel);
+            JOptionPane.showMessageDialog(this, "Wi-Fi bilgileri panoya kopyalandı!", "Pano", JOptionPane.INFORMATION_MESSAGE);
+        });
+        rowSsidPass.add(btnCopyWifi);
+
+        wifiBody.add(rowSsidPass);
+
+        JLabel lblApNote = new JLabel("<html><small style='color:gray;'>💡 Doğrudan Erişim (AP Hotspot): SSID: 'EKRobot_WiFi' • Şifre: '12345678' • IP: 192.168.4.1:8080</small></html>");
+        wifiBody.add(lblApNote);
+
+        wifiCard.add(wifiBody, BorderLayout.CENTER);
+        settingsPanel.add(wifiCard);
+
+        settingsPanel.add(Box.createVerticalStrut(14));
+
+        // 4. SİSTEM & DONANIM BİLGİSİ
         JPanel infoCard = new JPanel(new BorderLayout(8, 8));
         infoCard.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(71, 85, 105, 120), 1),

@@ -78,16 +78,60 @@ void publishTelemetry() {
     Serial.print(currentBatteryPercent);
     Serial.print(F(",\"chg\":"));
     Serial.print((int)isCharging);
+    long i2cAge = (I2CComm::getLastActiveTime() > 0) ? (long)(millis() - I2CComm::getLastActiveTime()) : -1;
+    Serial.print(F(",\"i2c\":"));
+    Serial.print(i2cAge);
+    Serial.print(F(",\"i2c_pkts\":"));
+    Serial.print(I2CComm::getPacketCount());
     Serial.println(F("}"));
 }
 
-void processSerialCommands() {
-    if (!Serial.available()) return;
+void scanI2CBus() {
+    Serial.println(F("[I2C SCANNER] A4 (SDA) & A5 (SCL) I2C veriyolu taranıyor..."));
+    
+    // Hat Fiziksel Elektrik Testi
+    pinMode(A4, INPUT);
+    pinMode(A5, INPUT);
+    delay(10);
+    int rawA4 = analogRead(A4);
+    int rawA5 = analogRead(A5);
+    float vA4 = (rawA4 / 1023.0f) * 5.0f;
+    float vA5 = (rawA5 / 1023.0f) * 5.0f;
+    Serial.print(F("-> [HATTIN GERİLİMİ] SDA (A4): "));
+    Serial.print(vA4, 2);
+    Serial.print(F("V | SCL (A5): "));
+    Serial.print(vA5, 2);
+    Serial.println(F("V"));
 
-    String cmd = Serial.readStringUntil('\n');
+    Wire.begin(); // Master modunda tara
+    int count = 0;
+    for (uint8_t addr = 1; addr < 127; addr++) {
+        Wire.beginTransmission(addr);
+        uint8_t err = Wire.endTransmission();
+        if (err == 0) {
+            Serial.print(F("-> I2C Cihazı Bulundu: 0x"));
+            if (addr < 16) Serial.print('0');
+            Serial.println(addr, HEX);
+            count++;
+        }
+    }
+    if (count == 0) {
+        Serial.println(F("-> Uyarı: I2C veriyolunda yanıt veren cihaz bulunamadı."));
+        Serial.println(F("   (Kontrol: ESP32 enerjisi açık mı? 21->A4, 22->A5, GND->GND bağlı mı?)"));
+    } else {
+        Serial.print(F("-> Toplam "));
+        Serial.print(count);
+        Serial.println(F(" I2C cihazı yanıt verdi."));
+    }
+    // Slave moduna geri dön
+    Wire.end();
+    I2CComm::begin(I2C_DEFAULT_SLAVE_ADDR);
+    I2CComm::setCommandHandler(executeCommand);
+}
+
+void executeCommand(String cmd) {
     cmd.trim();
     if (cmd.length() == 0) return;
-
     cmd.toUpperCase();
 
     if (cmd == "STOP" || cmd == "EMERGENCY") {
@@ -135,7 +179,35 @@ void processSerialCommands() {
         digitalWrite(PIN_BUZZER, HIGH);
         delay(150);
         digitalWrite(PIN_BUZZER, LOW);
+    } else if (cmd == "TEST:PINS" || cmd == "PINS") {
+        Wire.end();
+        Serial.println(F("[PIN TEST] A4=LOW, A5=HIGH..."));
+        pinMode(A4, OUTPUT);
+        pinMode(A5, OUTPUT);
+        digitalWrite(A4, LOW);
+        digitalWrite(A5, HIGH);
+        delay(2000);
+        Serial.println(F("[PIN TEST] A4=HIGH, A5=LOW..."));
+        digitalWrite(A4, HIGH);
+        digitalWrite(A5, LOW);
+        delay(2000);
+        Serial.println(F("[PIN TEST] A4=HIGH, A5=HIGH..."));
+        digitalWrite(A4, HIGH);
+        digitalWrite(A5, HIGH);
+        delay(1000);
+        // Slave moduna geri dön
+        I2CComm::begin(I2C_DEFAULT_SLAVE_ADDR);
+        I2CComm::setCommandHandler(executeCommand);
+        Serial.println(F("[PIN TEST] Tamamlandı, I2C Slave aktif."));
+    } else if (cmd == "I2C:SCAN" || cmd == "SCAN") {
+        scanI2CBus();
     }
+}
+
+void processSerialCommands() {
+    if (!Serial.available()) return;
+    String cmd = Serial.readStringUntil('\n');
+    executeCommand(cmd);
 }
 
 void setup() {
@@ -145,8 +217,10 @@ void setup() {
     pinMode(PIN_BUZZER, OUTPUT);
     digitalWrite(PIN_BUZZER, LOW);
 
-    // I2C Slave Başlat (Varsayılan adres: 0x08)
+    // I2C Slave Başlat (0x08) - A4=SDA, A5=SCL
     I2CComm::begin(I2C_DEFAULT_SLAVE_ADDR);
+    I2CComm::setCommandHandler(executeCommand);
+    Serial.println(F("[I2C Slave] Arduino Uno 0x08 adresinde I2C dinlemede (A4=SDA, A5=SCL)."));
     
     // Sensör ve Sürücüleri Başlat
     sensor.begin();

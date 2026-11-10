@@ -2,11 +2,18 @@
 
 uint8_t I2CComm::currentRegister = REG_FRONT_DISTANCE;
 TelemetryData I2CComm::currentTelemetry = {0, 90, 0, 0, 0, 7840, 85, 0};
+void (*I2CComm::commandHandler)(const String& cmd) = nullptr;
+volatile unsigned long I2CComm::lastI2CActiveTime = 0;
+volatile uint32_t I2CComm::i2cPacketCount = 0;
 
 void I2CComm::begin(uint8_t address) {
     Wire.begin(address);
     Wire.onReceive(handleReceive);
     Wire.onRequest(handleRequest);
+}
+
+void I2CComm::setCommandHandler(void (*handler)(const String& cmd)) {
+    commandHandler = handler;
 }
 
 void I2CComm::updateTelemetry(uint16_t frontDist, uint8_t servoAngle, uint8_t state,
@@ -22,13 +29,39 @@ void I2CComm::updateTelemetry(uint16_t frontDist, uint8_t servoAngle, uint8_t st
     currentTelemetry.isCharging = charging;
 }
 
+unsigned long I2CComm::getLastActiveTime() {
+    return lastI2CActiveTime;
+}
+
+uint32_t I2CComm::getPacketCount() {
+    return i2cPacketCount;
+}
+
 void I2CComm::handleReceive(int numBytes) {
-    if (Wire.available()) {
-        currentRegister = Wire.read();
+    lastI2CActiveTime = millis();
+    i2cPacketCount++;
+    if (!Wire.available()) return;
+    currentRegister = Wire.read();
+
+    // Eğer Master, REG_COMMAND (0x10) kaydına komut baytları yazdıysa:
+    if (currentRegister == REG_COMMAND && Wire.available()) {
+        String cmd = "";
+        while (Wire.available()) {
+            char c = (char)Wire.read();
+            if (c != '\n' && c != '\r') {
+                cmd += c;
+            }
+        }
+        cmd.trim();
+        if (cmd.length() > 0 && commandHandler != nullptr) {
+            commandHandler(cmd);
+        }
     }
 }
 
 void I2CComm::handleRequest() {
+    lastI2CActiveTime = millis();
+    i2cPacketCount++;
     switch (currentRegister) {
         case REG_FRONT_DISTANCE: {
             uint8_t buf[2];

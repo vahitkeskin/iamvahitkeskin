@@ -335,4 +335,24 @@ public class Strings {
     public static String hint3dMouse() {
         return isTurkish() ? "🖱️ Fare ile 360° Döndür • Tekerlek ile Yakınlaş • Çift Tık: Sıfırla" : "🖱️ Mouse 360° Orbit • Scroll Wheel Zoom • Double Click: Reset";
     }
+
+    public static String sectionWifiNetwork() {
+        return isTurkish() ? "WIFI & AĞ YAPILANDIRMASI" : "WIFI & NETWORK CONFIGURATION";
+    }
+
+    public static String shareWifiTitle() {
+        return isTurkish() ? "Bağlı Olduğum Wi-Fi'yi Paylaş" : "Share Connected Wi-Fi";
+    }
+
+    public static String shareWifiDesc() {
+        return isTurkish() ? "Robotu bilgisayarınızın bağlı olduğu Wi-Fi ağına bağlayın" : "Connect the robot to your active Wi-Fi network";
+    }
+
+    public static String btnSendWifiConfig() {
+        return isTurkish() ? "Robota Gönder & Yapılandır" : "Send & Configure on Robot";
+    }
+
+    public static String btnCopyWifi() {
+        return isTurkish() ? "Wi-Fi Bilgisini Kopyala" : "Copy Wi-Fi Info";
+    }
 }

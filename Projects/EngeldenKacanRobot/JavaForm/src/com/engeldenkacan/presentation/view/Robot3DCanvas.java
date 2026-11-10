@@ -333,8 +333,39 @@ public class Robot3DCanvas extends JPanel {
         // Arduino Uno R3 (Şasi arkası)
         addBox(list, 0f, -8f, 30f, 53f, 8f, 68f, teal, layer);
 
-        // 18650 Batarya Paketi
-        addBox(list, 0f, -12f, -15f, 40f, 16f, 40f, green, layer);
+        // 18650 Çiftli Batarya Yuvası & Çapraz (Zıt Kutuplu) Li-Ion Piller
+        Color darkBox = new Color(20, 24, 30);
+        float batZ = 75f;
+        // Siyah ABS Pil Yuvası
+        addBox(list, 0f, -8f, batZ, 62f, 8f, 32f, darkBox, layer);
+        addBox(list, 0f, -12f, batZ, 60f, 6f, 2f, darkBox, layer); // Orta ayırıcı
+        addBox(list, -30f, -12f, batZ, 2f, 8f, 32f, darkBox, layer); // Sol duvar
+        addBox(list, 30f, -12f, batZ, 2f, 8f, 32f, darkBox, layer);  // Sağ duvar
+
+        // Pil 1 (Ön Pil): Pozitif (+) SOLDA (-25f), Negatif (-) SAĞDA (+25f)
+        addBox(list, 0f, -14f, batZ - 8f, 48f, 12f, 12f, green, layer);
+        addBox(list, -26f, -14f, batZ - 8f, 3f, 5f, 5f, silver, layer); // (+) Pozitif Button Top
+        addBox(list, 26f, -14f, batZ - 8f, 3f, 8f, 8f, silver, layer);  // (-) Negatif Yay
+        // Pil 1 Polarite Göstergeleri: Sol (+) Kırmızı, Sağ (-) Siyah
+        addBox(list, -15f, -20.5f, batZ - 8f, 4f, 1f, 1.5f, red, layer);
+        addBox(list, -15f, -20.5f, batZ - 8f, 1.5f, 1f, 4f, red, layer); // [+]
+        addBox(list, 15f, -20.5f, batZ - 8f, 4f, 1f, 1.5f, Color.BLACK, layer); // [-]
+
+        // Pil 2 (Arka Pil) - ÇAPRAZ: Negatif (-) SOLDA (-25f), Pozitif (+) SAĞDA (+25f)
+        addBox(list, 0f, -14f, batZ + 8f, 48f, 12f, 12f, green, layer);
+        addBox(list, -26f, -14f, batZ + 8f, 3f, 8f, 8f, silver, layer); // (-) Negatif Yay
+        addBox(list, 26f, -14f, batZ + 8f, 3f, 5f, 5f, silver, layer);  // (+) Pozitif Button Top
+        // Pil 2 Polarite Göstergeleri: Sol (-) Siyah, Sağ (+) Kırmızı
+        addBox(list, -15f, -20.5f, batZ + 8f, 4f, 1f, 1.5f, Color.BLACK, layer); // [-]
+        addBox(list, 15f, -20.5f, batZ + 8f, 4f, 1f, 1.5f, red, layer);
+        addBox(list, 15f, -20.5f, batZ + 8f, 1.5f, 1f, 4f, red, layer); // [+]
+
+        // Sağ Nikel Seri Bağlantı Köprüsü
+        addBox(list, 29.5f, -14f, batZ, 1.5f, 6f, 18f, silver, layer);
+
+        // Kırmızı (+) ve Siyah (-) Besleme Kabloları
+        addBox(list, -28f, -10f, batZ - 20f, 2f, 2f, 24f, red, layer);
+        addBox(list, -28f, -7f, batZ - 10f, 2f, 2f, 36f, Color.BLACK, layer);
 
         // L298N Çift Motor Sürücüsü
         addBox(list, -25f, -9f, 15f, 30f, 10f, 30f, red, layer);

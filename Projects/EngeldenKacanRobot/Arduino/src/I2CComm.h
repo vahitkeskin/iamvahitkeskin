@@ -32,6 +32,7 @@ struct TelemetryData {
 class I2CComm {
 public:
     static void begin(uint8_t address = I2C_DEFAULT_SLAVE_ADDR);
+    static void setCommandHandler(void (*handler)(const String& cmd));
     static void updateTelemetry(uint16_t frontDist, uint8_t servoAngle, uint8_t state,
                                 uint16_t leftDist, uint16_t rightDist,
                                 uint16_t batMilliVolt = 7840, uint8_t batPct = 85, uint8_t charging = 0);
@@ -39,9 +40,15 @@ public:
     static void handleReceive(int numBytes);
     static void handleRequest();
 
+    static unsigned long getLastActiveTime();
+    static uint32_t getPacketCount();
+
 private:
     static uint8_t currentRegister;
     static TelemetryData currentTelemetry;
+    static void (*commandHandler)(const String& cmd);
+    static volatile unsigned long lastI2CActiveTime;
+    static volatile uint32_t i2cPacketCount;
 };
 
 #endif // I2C_COMM_H
