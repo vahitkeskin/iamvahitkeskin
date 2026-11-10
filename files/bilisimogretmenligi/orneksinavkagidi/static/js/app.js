@@ -23,23 +23,29 @@ function updateTopicsDropdown(grade) {
 function openFullscreenPreview() {
   const modal = document.getElementById("fullscreen-preview-modal");
   const container = document.getElementById("modal-paper-container");
-  const paper = document.getElementById("exam-paper");
+  const scaler = document.getElementById("paper-scaler");
   const badge = document.getElementById("preview-modal-mode-badge");
   const toggleBtn = document.getElementById("btn-modal-toggle-mode");
-  if (!modal || !container || !paper) return;
+  if (!modal || !container || !scaler) return;
 
-  container.innerHTML = "";
-  const clone = paper.cloneNode(true);
-  clone.removeAttribute("id");
-  container.appendChild(clone);
+  container.innerHTML = scaler.innerHTML;
 
   const isAns = (AppState.viewMode === "answers");
   if (badge) {
-    badge.textContent = isAns ? "Cevap Anahtarı" : "Soru Kağıdı";
+    if (AppState.viewMode === "both") {
+      badge.textContent = "Soru + Cevap Kağıdı";
+    } else {
+      badge.textContent = isAns ? "Cevap Anahtarı" : "Soru Kağıdı";
+    }
     badge.className = isAns ? "badge badge-fixed" : "badge";
   }
   if (toggleBtn) {
-    toggleBtn.textContent = isAns ? "Soru Kağıdına Geç" : "Cevap Anahtarına Geç";
+    if (AppState.viewMode === "both") {
+      toggleBtn.style.display = "none";
+    } else {
+      toggleBtn.style.display = "inline-flex";
+      toggleBtn.textContent = isAns ? "Soru Kağıdına Geç" : "Cevap Anahtarına Geç";
+    }
   }
 
   modal.classList.add("active");

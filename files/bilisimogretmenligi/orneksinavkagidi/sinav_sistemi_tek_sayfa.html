@@ -749,19 +749,25 @@ body {
 }
 
 /* ==========================================================================
-   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI
+   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI (BOŞ SAYFA ÖNLEYİCİ)
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 15mm 15mm 15mm 15mm;
+    margin: 10mm 15mm 10mm 15mm;
   }
 
+  html,
   body {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
     background: #ffffff !important;
     color: #000000 !important;
-    padding: 0 !important;
-    margin: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -770,10 +776,18 @@ body {
   .sidebar-panel,
   .preview-toolbar,
   .modal-overlay,
+  #printer-modal,
+  #fullscreen-preview-modal,
   .toast,
+  #app-toast,
+  .page-separator,
   .btn,
   .header-actions {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .app-container {
@@ -781,46 +795,94 @@ body {
     padding: 0 !important;
     margin: 0 !important;
     max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
-  .preview-panel {
+  .preview-panel,
+  .paper-scroll-viewport,
+  .paper-scaler {
+    display: block !important;
     background: transparent !important;
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
     box-shadow: none !important;
-  }
-
-  .paper-scroll-viewport {
-    padding: 0 !important;
-    margin: 0 !important;
     overflow: visible !important;
-    display: block !important;
-  }
-
-  .paper-scaler {
     transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .a4-page {
     width: 100% !important;
-    min-height: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    overflow: visible !important;
+    page-break-after: auto !important;
+  }
+
+  /* Son sayfanın ardından asla boş sayfa atma */
+  .a4-page:last-child,
+  .a4-page:last-of-type {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .a4-page-break {
+    page-break-before: always !important;
+    break-before: page !important;
   }
 
   .exam-header-table {
     border: 1px solid #000000 !important;
+    margin-bottom: 12px !important;
   }
 
   .exam-header-table td {
     border: 1px solid #000000 !important;
+    padding: 4px 8px !important;
+  }
+
+  .exam-section-title {
+    margin-bottom: 12px !important;
+    font-size: 11.5pt !important;
+  }
+
+  .exam-questions-container {
+    display: block !important;
+    gap: 0 !important;
   }
 
   .exam-question-block {
+    display: block !important;
+    margin-bottom: 8px !important;
     page-break-inside: avoid !important;
+  }
+
+  .exam-question-block:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .dotted-answer-lines {
+    line-height: 1.35 !important;
+    font-size: 9pt !important;
+  }
+
+  .model-answer-block {
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.35 !important;
   }
 }
 
@@ -1241,23 +1303,29 @@ function updateTopicsDropdown(grade) {
 function openFullscreenPreview() {
   const modal = document.getElementById("fullscreen-preview-modal");
   const container = document.getElementById("modal-paper-container");
-  const paper = document.getElementById("exam-paper");
+  const scaler = document.getElementById("paper-scaler");
   const badge = document.getElementById("preview-modal-mode-badge");
   const toggleBtn = document.getElementById("btn-modal-toggle-mode");
-  if (!modal || !container || !paper) return;
+  if (!modal || !container || !scaler) return;
 
-  container.innerHTML = "";
-  const clone = paper.cloneNode(true);
-  clone.removeAttribute("id");
-  container.appendChild(clone);
+  container.innerHTML = scaler.innerHTML;
 
   const isAns = (AppState.viewMode === "answers");
   if (badge) {
-    badge.textContent = isAns ? "Cevap Anahtarı" : "Soru Kağıdı";
+    if (AppState.viewMode === "both") {
+      badge.textContent = "Soru + Cevap Kağıdı";
+    } else {
+      badge.textContent = isAns ? "Cevap Anahtarı" : "Soru Kağıdı";
+    }
     badge.className = isAns ? "badge badge-fixed" : "badge";
   }
   if (toggleBtn) {
-    toggleBtn.textContent = isAns ? "Soru Kağıdına Geç" : "Cevap Anahtarına Geç";
+    if (AppState.viewMode === "both") {
+      toggleBtn.style.display = "none";
+    } else {
+      toggleBtn.style.display = "inline-flex";
+      toggleBtn.textContent = isAns ? "Soru Kağıdına Geç" : "Cevap Anahtarına Geç";
+    }
   }
 
   modal.classList.add("active");

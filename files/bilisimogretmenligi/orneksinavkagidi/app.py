@@ -252,7 +252,12 @@ def export_docx():
     docx_bytes = generate_docx(header, questions, mode=mode, color=color)
 
     lesson_name = header.get("lesson", "Sinav").replace(" ", "_")
-    filename = f"{lesson_name}_Soru_Kagidi.docx" if mode == "questions" else f"{lesson_name}_Cevap_Anahtari.docx"
+    if mode == "questions":
+        filename = f"{lesson_name}_Soru_Kagidi.docx"
+    elif mode == "both":
+        filename = f"{lesson_name}_Soru_ve_Cevap_Kagidi.docx"
+    else:
+        filename = f"{lesson_name}_Cevap_Anahtari.docx"
 
     return send_file(
         io.BytesIO(docx_bytes),

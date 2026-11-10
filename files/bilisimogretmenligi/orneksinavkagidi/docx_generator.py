@@ -3,7 +3,7 @@
 DOCX Generator for Exam Papers and Answer Keys
 Recreates the exact visual layout of 'orneksinavkagidi.jpg' using standard OpenXML.
 Outputs valid, fully formatted .docx files compatible with Word, LibreOffice, Pages, Google Docs.
-Supports: 'questions' (Soru Kağıdı), 'answers' (Cevap Kağıdı), 'both' (Sayfa 1 Soru, Sayfa 2 Cevap).
+Strictly avoids generating empty trailing pages!
 """
 
 import io
@@ -47,10 +47,10 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
                 <w:insideV w:val="single" w:sz="6" w:space="0" w:color="000000"/>
             </w:tblBorders>
             <w:tblCellMar>
-                <w:top w:w="120" w:type="dxa"/>
-                <w:left w:w="140" w:type="dxa"/>
-                <w:bottom w:w="120" w:type="dxa"/>
-                <w:right w:w="140" w:type="dxa"/>
+                <w:top w:w="80" w:type="dxa"/>
+                <w:left w:w="120" w:type="dxa"/>
+                <w:bottom w:w="80" w:type="dxa"/>
+                <w:right w:w="120" w:type="dxa"/>
             </w:tblCellMar>
         </w:tblPr>
         <w:tblGrid>
@@ -62,20 +62,20 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
             <w:trPr><w:cantSplit/></w:trPr>
             <w:tc>
                 <w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
                 <w:tcPr><w:tcW w:w="5800" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
                 <w:tcPr><w:tcW w:w="1400" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
             </w:tc>
         </w:tr>
     </w:tbl>
@@ -90,12 +90,12 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     <w:p>
         <w:pPr>
             <w:jc w:val="center"/>
-            <w:spacing w:before="360" w:after="280"/>
+            <w:spacing w:before="180" w:after="160"/>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:sz w:val="24"/>
-                <w:spacing w:val="140"/>
+                <w:sz w:val="22"/>
+                <w:spacing w:val="120"/>
             </w:rPr>
             <w:t>{section_title}</w:t>
         </w:r>
@@ -113,27 +113,27 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
 
         elements.append(f'''
         <w:p>
-            <w:pPr><w:spacing w:before="240" w:after="60"/></w:pPr>
-            <w:r><w:rPr><w:sz w:val="22"/></w:rPr><w:t>{idx}. Soru: {q_text} ({p_val} Puan)</w:t></w:r>
+            <w:pPr><w:spacing w:before="120" w:after="30"/></w:pPr>
+            <w:r><w:rPr><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: {q_text} ({p_val} Puan)</w:t></w:r>
         </w:p>
         ''')
 
         if not is_answer_key:
-            # Soru Kağıdı Modu: 4 sıra noktalı cevap alanı
+            # Soru Kağıdı: 4 sıra noktalı cevap alanı
             elements.append(f'''
-            <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="17"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
             ''')
         else:
-            # Cevap Kağıdı (Cevap Anahtarı) Modu
+            # Cevap Kağıdı (Cevap Anahtarı)
             color_attr = f'<w:color w:val="{clean_color}"/>' if clean_color != "000000" else ""
             elements.append(f'''
             <w:p>
-                <w:pPr><w:spacing w:before="60" w:after="160" w:line="280" w:lineRule="auto"/></w:pPr>
-                <w:r><w:rPr><w:b/>{color_attr}<w:sz w:val="21"/></w:rPr><w:t>Cevap: </w:t></w:r>
-                <w:r><w:rPr>{color_attr}<w:sz w:val="21"/></w:rPr><w:t>{ans_text}</w:t></w:r>
+                <w:pPr><w:spacing w:before="40" w:after="80" w:line="260" w:lineRule="auto"/></w:pPr>
+                <w:r><w:rPr><w:b/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
+                <w:r><w:rPr>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>{ans_text}</w:t></w:r>
             </w:p>
             ''')
 
@@ -141,7 +141,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
 
 def generate_docx(header_data, questions, mode="questions", color="000000"):
     """
-    mode: 'questions' (Soru Kağıdı), 'answers' (Cevap Kağıdı), 'both' (Tek belgede Sayfa 1 Soru, Sayfa 2 Cevap)
+    mode: 'questions' (Soru Kağıdı), 'answers' (Cevap Kağıdı), 'both' (Sayfa 1 Soru, Sayfa 2 Cevap)
     """
     content_types = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
@@ -182,12 +182,12 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
     elif mode == "answers":
         body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=True, color=color))
     elif mode == "both":
-        # Sayfa 1: Soru Kağıdı
+        # Soru kağıdı
         body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=False, color="000000"))
-        # Sayfa Sonu (Page Break)
-        body_elements.append('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
-        # Sayfa 2: Cevap Kağıdı (Cevap Anahtarı)
-        body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=True, color=color))
+        # Sadece soru varsa ve cevap kağıdı eklenecekse araya sayfa sonu koy
+        if questions and len(questions) > 0:
+            body_elements.append('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
+            body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=True, color=color))
 
     doc_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
