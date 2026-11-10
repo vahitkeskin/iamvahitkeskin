@@ -3,6 +3,7 @@
 DOCX Generator for Exam Papers and Answer Keys
 Recreates the exact visual layout of 'orneksinavkagidi.jpg' using standard OpenXML.
 Outputs valid, fully formatted .docx files compatible with Word, LibreOffice, Pages, Google Docs.
+Supports: 'questions' (Soru Kağıdı), 'answers' (Cevap Kağıdı), 'both' (Sayfa 1 Soru, Sayfa 2 Cevap).
 """
 
 import io
@@ -14,60 +15,24 @@ def escape_xml(s):
         return ""
     return xml.sax.saxutils.escape(str(s))
 
-def generate_docx(header_data, questions, mode="questions", color="000000"):
-    """
-    header_data: dict with 'year', 'school', 'lesson', 'term', 'student_name', 'student_class', 'student_no', 'student_score'
-    questions: list of dicts with 'question', 'points', 'answer'
-    mode: 'questions' (Soru Kağıdı) or 'answers' (Cevap Anahtarı)
-    color: Hex color string (with or without #) for answers, e.g. 'D32F2F' or '000000'
-    """
+def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="000000"):
     clean_color = color.replace("#", "").strip().upper()
     if len(clean_color) != 6:
         clean_color = "000000"
-
-    content_types = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-    <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-    <Default Extension="xml" ContentType="application/xml"/>
-    <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
-    <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
-</Types>'''
-
-    rels = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-</Relationships>'''
-
-    styles = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-    <w:docDefaults>
-        <w:rPrDefault>
-            <w:rPr>
-                <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>
-                <w:sz w:val="22"/>
-                <w:szCs w:val="22"/>
-                <w:lang w:val="tr-TR"/>
-            </w:rPr>
-        </w:rPrDefault>
-        <w:pPrDefault>
-            <w:pPr>
-                <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-            </w:pPr>
-        </w:pPrDefault>
-    </w:docDefaults>
-</w:styles>'''
 
     year_val = header_data.get("year", "2026-2027 EĞİTİM ÖĞRETİM YILI")
     school_val = header_data.get("school", "Özel Viranşehir Uğur Anadolu Lisesi")
     lesson_val = header_data.get("lesson", "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
     term_val = header_data.get("term", "1.DÖNEM 1. YAZILI")
+    if is_answer_key and "CEVAP ANAHTARI" not in term_val.upper():
+        term_val = f"{term_val} - CEVAP ANAHTARI"
 
     student_name = header_data.get("student_name", "")
     student_class = header_data.get("student_class", "")
     student_no = header_data.get("student_no", "")
     student_score = header_data.get("student_score", "")
 
-    # Header 3-Column Table
+    # Header 3-Column Table (Birebir orneksinavkagidi.jpg şablonu)
     table_xml = f'''
     <w:tbl>
         <w:tblPr>
@@ -116,10 +81,12 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
     </w:tbl>
     '''
 
+    section_title = "S O R U L A R   V E   C E V A P L A R" if is_answer_key else "S O R U L A R"
+
     elements = [table_xml]
 
-    # Spaced-out heading "S O R U L A R"
-    elements.append('''
+    # Başlık
+    elements.append(f'''
     <w:p>
         <w:pPr>
             <w:jc w:val="center"/>
@@ -130,7 +97,7 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
                 <w:sz w:val="24"/>
                 <w:spacing w:val="140"/>
             </w:rPr>
-            <w:t>S O R U L A R</w:t>
+            <w:t>{section_title}</w:t>
         </w:r>
     </w:p>
     ''')
@@ -151,7 +118,8 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
         </w:p>
         ''')
 
-        if mode == "questions":
+        if not is_answer_key:
+            # Soru Kağıdı Modu: 4 sıra noktalı cevap alanı
             elements.append(f'''
             <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
             <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
@@ -159,7 +127,7 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
             <w:p><w:pPr><w:spacing w:before="30" w:after="30" w:line="260" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
             ''')
         else:
-            # Answer key mode
+            # Cevap Kağıdı (Cevap Anahtarı) Modu
             color_attr = f'<w:color w:val="{clean_color}"/>' if clean_color != "000000" else ""
             elements.append(f'''
             <w:p>
@@ -169,10 +137,62 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
             </w:p>
             ''')
 
+    return elements
+
+def generate_docx(header_data, questions, mode="questions", color="000000"):
+    """
+    mode: 'questions' (Soru Kağıdı), 'answers' (Cevap Kağıdı), 'both' (Tek belgede Sayfa 1 Soru, Sayfa 2 Cevap)
+    """
+    content_types = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+    <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+    <Default Extension="xml" ContentType="application/xml"/>
+    <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+    <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+</Types>'''
+
+    rels = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>'''
+
+    styles = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <w:docDefaults>
+        <w:rPrDefault>
+            <w:rPr>
+                <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>
+                <w:sz w:val="22"/>
+                <w:szCs w:val="22"/>
+                <w:lang w:val="tr-TR"/>
+            </w:rPr>
+        </w:rPrDefault>
+        <w:pPrDefault>
+            <w:pPr>
+                <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+            </w:pPr>
+        </w:pPrDefault>
+    </w:docDefaults>
+</w:styles>'''
+
+    body_elements = []
+
+    if mode == "questions":
+        body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=False, color="000000"))
+    elif mode == "answers":
+        body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=True, color=color))
+    elif mode == "both":
+        # Sayfa 1: Soru Kağıdı
+        body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=False, color="000000"))
+        # Sayfa Sonu (Page Break)
+        body_elements.append('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
+        # Sayfa 2: Cevap Kağıdı (Cevap Anahtarı)
+        body_elements.extend(build_exam_xml_elements(header_data, questions, is_answer_key=True, color=color))
+
     doc_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
     <w:body>
-        {''.join(elements)}
+        {''.join(body_elements)}
         <w:sectPr>
             <w:pgSz w:w="11906" w:h="16838"/>
             <w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134"/>
@@ -188,4 +208,3 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
         z.writestr("word/document.xml", doc_xml)
     
     return buf.getvalue()
-

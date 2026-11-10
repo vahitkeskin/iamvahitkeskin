@@ -14,6 +14,7 @@ from flask import Flask, request, jsonify, render_template, send_file, Response
 from question_bank import INITIAL_EXAM, QUESTION_BANK, GRADE_TOPICS
 from docx_generator import generate_docx
 from printer_service import list_system_printers, print_file
+from gemini_service import generate_questions_with_gemini
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
@@ -128,7 +129,17 @@ def generate_custom_questions():
     if not prompt:
         return jsonify({"error": "Lütfen bir konu veya soru açıklaması yazınız."}), 400
 
-    # Akıllı konu analizi ve üretim mantığı
+    # 1. Öncelikli olarak kullanıcının Gemini API anahtarı ile canlı AI soru üretimi
+    ai_questions = generate_questions_with_gemini(prompt, grade=grade, count=count)
+    if ai_questions:
+        return jsonify({
+            "topic": prompt,
+            "count": len(ai_questions),
+            "questions": ai_questions,
+            "source": "gemini-ai"
+        })
+
+    # 2. API erişilemezse kural tabanlı zengin soru motoru devreye girer
     p_lower = prompt.lower()
     pts = round(100 / max(1, count))
     generated = []

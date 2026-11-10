@@ -21,6 +21,9 @@
     </div>
 
     <div class="header-actions">
+      <button id="btn-open-preview-modal" class="btn btn-secondary btn-sm" title="Son Bir Kez %100 Düzgün Önizle">
+        👁️ %100 Düzgün Önizle
+      </button>
       <button id="btn-reset-original" class="btn btn-secondary btn-sm" title="orneksinavkagidi.jpg Orijinal Şablonu Yükle">
         ↺ Orijinal Şablon
       </button>
@@ -135,6 +138,13 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="select-topic">Konu / Ünite Seçimi:</label>
+          <select id="select-topic">
+            <option value="Tüm Konular">Tüm Konular (Genel Sınav)</option>
+          </select>
+        </div>
+
         <button id="btn-generate-bilisim" class="btn btn-primary btn-block">
           ✨ Otomatik Bilişim Sınavı Oluştur
         </button>
@@ -206,7 +216,8 @@
           <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Görünüm:</label>
           <div class="mode-toggle">
             <button id="btn-mode-questions" class="active">Soru Kağıdı</button>
-            <button id="btn-mode-answers">Cevap Anahtarı</button>
+            <button id="btn-mode-answers">Cevap Kağıdı</button>
+            <button id="btn-mode-both">Her İkisi (Soru + Cevap)</button>
           </div>
         </div>
 
@@ -246,8 +257,11 @@
           <button id="btn-export-docx-questions" class="btn btn-secondary btn-sm" title="Soru Kağıdını DOCX Olarak İndir">
             📄 Soru (DOCX)
           </button>
-          <button id="btn-export-docx-answers" class="btn btn-secondary btn-sm" title="Cevap Anahtarını DOCX Olarak İndir">
+          <button id="btn-export-docx-answers" class="btn btn-secondary btn-sm" title="Cevap Kağıdını DOCX Olarak İndir">
             🔑 Cevap (DOCX)
+          </button>
+          <button id="btn-export-docx-single-both" class="btn btn-primary btn-sm" title="Tek Belgede Sayfa 1 Soru, Sayfa 2 Cevap Kağıdı İndir">
+            📑 Soru + Cevap (Tek DOCX)
           </button>
         </div>
       </div>
@@ -347,6 +361,31 @@
         <button id="btn-submit-print" class="btn btn-success">
           🖨️ Yazdır
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       %100 DÜZGÜN BÜYÜK ÖNİZLEME MODALI
+       ======================================================================= -->
+  <div id="fullscreen-preview-modal" class="modal-overlay">
+    <div class="modal-dialog modal-dialog-fullscreen">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <h3 style="margin: 0;">👁️ %100 Düzgün Sayfa Önizlemesi</h3>
+          <span class="badge" id="preview-modal-mode-badge">Soru Kağıdı</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <button id="btn-modal-toggle-mode" class="btn btn-secondary btn-sm">Mod Değiştir (Cevap Anahtarı)</button>
+          <button id="btn-modal-print" class="btn btn-success btn-sm">🖨️ Yazdır / PDF</button>
+          <button id="btn-modal-docx" class="btn btn-primary btn-sm">📄 DOCX İndir</button>
+          <button id="btn-fullscreen-preview-close" class="modal-close">✕</button>
+        </div>
+      </div>
+      <div class="modal-body preview-modal-body">
+        <div id="modal-paper-container">
+          <!-- Aktif A4 kağıdı buraya klonlanır -->
+        </div>
       </div>
     </div>
   </div>

@@ -11,3 +11,8 @@
   - Yaptığın tüm işlemleri, çalıştırdığın terminal komutlarını ve dosya değişikliklerini adım adım TÜRKÇE olarak açıkla.
   - Bir işlemi başlatırken, çalıştırırken ve tamamladığında; neyi neden yaptığını ve sonucunda nelerin değiştiğini Türkçe özetle.
   - IDE veya terminal çıktılarında hata, uyarı ya da sonuç mesajı dönerse bunları da teknik detayını bozmadan Türkçe olarak kullanıcıya aktar.
+
+- **API Anahtarı ve Gizli Bilgi (Secrets) Güvenliği**:
+  - `.env`, `credentials.json` veya API anahtarı içeren hiçbir dosya ASLA git'e eklenmeyecek, commit edilmeyecek veya pushlanmayacaktır.
+  - API anahtarları daima ayrı bir `.env` dosyasında tutulmalı ve `.gitignore` ile korunmalıdır.
+  - Hiçbir koşulda API anahtarları açık metin olarak depoya yüklenemez.

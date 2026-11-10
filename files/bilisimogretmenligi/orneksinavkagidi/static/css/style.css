@@ -635,6 +635,66 @@ body {
   border: 1px solid var(--border-color);
 }
 
+.modal-dialog-fullscreen {
+  max-width: 960px;
+  width: 95%;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-modal-body {
+  overflow-y: auto;
+  border-radius: 8px;
+  background: #cbd5e1;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  max-height: calc(94vh - 90px);
+}
+
+.preview-modal-body .a4-page {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.page-separator {
+  width: 100%;
+  text-align: center;
+  margin: 35px 0 25px 0;
+  position: relative;
+  user-select: none;
+}
+.page-separator::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed #94a3b8;
+  z-index: 1;
+}
+.page-separator span {
+  position: relative;
+  background: #cbd5e1;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  border-radius: 9999px;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+@media print {
+  .page-separator {
+    display: none !important;
+  }
+  .a4-page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+}
+
 .modal-header {
   display: flex;
   align-items: center;
