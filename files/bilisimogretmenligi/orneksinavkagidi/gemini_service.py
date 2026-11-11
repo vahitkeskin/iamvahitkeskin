@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Gemini AI Question Generation Service
-Uses Google Gemini API to generate curriculum-aligned questions and model answers.
-Reads API key securely from local .env file.
+Gemini AI Soru ve Cevap Üretim Servisi (Otomatik Hata Toleransı & Çoklu API Anahtarı Desteği)
+
+Öncelik ve Yedekleme (Failover) Mimarisi:
+1. Varsayılan (Default): vahitkeskin07@gmail.com (vahitkeskin07)
+2. Yedek (Failover): vhtkskn63@gmail.com (vhtkskn63)
+
+İlk anahtarda kota aşımı (HTTP 429), yetki hatası (HTTP 403), sunucu hatası (HTTP 500)
+veya herhangi bir ağ/API hatası oluştuğunda, sistem kesintiye uğramadan
+otomatik olarak sıradaki API anahtarına geçiş yapar.
 """
 
 import os
@@ -10,31 +16,106 @@ import json
 import urllib.request
 import urllib.error
 
-def load_api_key():
-    """Reads GEMINI_API_KEY from .env file or environment variable."""
-    env_key = os.environ.get("GEMINI_API_KEY")
-    if env_key:
-        return env_key.strip()
-    
+def parse_env_file():
+    """Reads key-value pairs from .env file securely."""
+    env_vars = {}
     env_file = os.path.join(os.path.dirname(__file__), ".env")
     if os.path.exists(env_file):
         try:
             with open(env_file, "r", encoding="utf-8") as f:
                 for line in f:
                     line = line.strip()
-                    if line.startswith("GEMINI_API_KEY="):
-                        return line.split("=", 1)[1].strip().strip('"\'')
-        except Exception:
-            pass
+                    if not line or line.startswith("#"):
+                        continue
+                    if "=" in line:
+                        k, v = line.split("=", 1)
+                        env_vars[k.strip()] = v.strip().strip('"\'')
+        except Exception as e:
+            print(f"[Gemini Service] .env okuma hatası: {e}")
+    return env_vars
+
+def load_api_keys():
+    """
+    Kayıtlı Gemini API anahtarlarını öncelik sırasına göre yükler.
+    
+    Öncelik Sırası:
+    1. vahitkeskin07 (vahitkeskin07@gmail.com) - Varsayılan
+    2. vhtkskn63 (vhtkskn63@gmail.com) - Yedek / Failover
+    3. GEMINI_API_KEY (Geriye dönük uyumluluk için ek anahtar)
+    
+    Döner: [{'id': 'vahitkeskin07', 'email': 'vahitkeskin07@gmail.com', 'key': '...'}, ...]
+    """
+    env_vars = parse_env_file()
+    
+    # 1. Varsayılan: vahitkeskin07@gmail.com
+    key_vahit = (
+        os.environ.get("vahitkeskin07") or
+        os.environ.get("GEMINI_API_KEY_VAHITKESKIN07") or
+        env_vars.get("vahitkeskin07") or
+        env_vars.get("GEMINI_API_KEY_VAHITKESKIN07")
+    )
+    
+    # 2. Yedek: vhtkskn63@gmail.com
+    key_vht = (
+        os.environ.get("vhtkskn63") or
+        os.environ.get("GEMINI_API_KEY_VHTKSKN63") or
+        env_vars.get("vhtkskn63") or
+        env_vars.get("GEMINI_API_KEY_VHTKSKN63")
+    )
+    
+    # 3. Genel yedek
+    key_generic = (
+        os.environ.get("GEMINI_API_KEY") or
+        env_vars.get("GEMINI_API_KEY")
+    )
+    
+    keys = []
+    seen = set()
+
+    if key_vahit and key_vahit not in seen:
+        keys.append({
+            "id": "vahitkeskin07",
+            "email": "vahitkeskin07@gmail.com",
+            "key": key_vahit,
+            "role": "Varsayılan (Primary)"
+        })
+        seen.add(key_vahit)
+
+    if key_vht and key_vht not in seen:
+        keys.append({
+            "id": "vhtkskn63",
+            "email": "vhtkskn63@gmail.com",
+            "key": key_vht,
+            "role": "Yedek (Failover)"
+        })
+        seen.add(key_vht)
+
+    if key_generic and key_generic not in seen:
+        keys.append({
+            "id": "gemini_default",
+            "email": "varsayilan",
+            "key": key_generic,
+            "role": "Ek Yedek"
+        })
+        seen.add(key_generic)
+
+    return keys
+
+def load_api_key():
+    """Geriye dönük uyumluluk: İlk kullanılabilir API anahtarını döner."""
+    keys = load_api_keys()
+    if keys:
+        return keys[0]["key"]
     return None
 
 def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="orta", lesson=None):
     """
-    Calls Google Gemini API (gemini-2.5-flash) to generate structured questions and answers.
-    Returns list of question dicts or None if API fails.
+    Google Gemini API ile sınav soruları ve model cevaplar üretir.
+    İlk anahtar hata verirse otomatik olarak sıradaki yedek anahtara geçer (Failover).
     """
-    api_key = load_api_key()
-    if not api_key:
+    api_keys = load_api_keys()
+    if not api_keys:
+        print("[Gemini Service] Hata: Hiçbir API anahtarı bulunamadı (.env kontrol ediniz).")
         return None
 
     if not lesson:
@@ -70,8 +151,6 @@ Kurallar:
 ]
 """
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-    
     payload = {
         "contents": [
             {
@@ -85,32 +164,62 @@ Kurallar:
             "responseMimeType": "application/json"
         }
     }
+    payload_bytes = json.dumps(payload).encode("utf-8")
 
-    try:
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"}
-        )
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            candidates = data.get("candidates", [])
-            if candidates:
-                text_content = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-                text_content = text_content.strip()
-                if text_content.startswith("```json"):
-                    text_content = text_content[7:]
-                if text_content.startswith("```"):
-                    text_content = text_content[3:]
-                if text_content.endswith("```"):
-                    text_content = text_content[:-3]
-                
-                parsed = json.loads(text_content.strip())
-                if isinstance(parsed, list) and len(parsed) > 0:
-                    return parsed
-    except Exception as e:
-        print(f"Gemini API generation error: {e}")
-        return None
+    # Sırayla API anahtarlarını dene (Failover mekanizması)
+    for idx, key_entry in enumerate(api_keys):
+        key_id = key_entry["id"]
+        key_email = key_entry["email"]
+        api_key = key_entry["key"]
+        role = key_entry["role"]
+        
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+        print(f"[Gemini Service] '{key_id}' ({key_email} - {role}) deneniyor... ({idx + 1}/{len(api_keys)})")
 
+        try:
+            req = urllib.request.Request(
+                url,
+                data=payload_bytes,
+                headers={"Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                candidates = data.get("candidates", [])
+                if candidates:
+                    text_content = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+                    text_content = text_content.strip()
+                    if text_content.startswith("```json"):
+                        text_content = text_content[7:]
+                    if text_content.startswith("```"):
+                        text_content = text_content[3:]
+                    if text_content.endswith("```"):
+                        text_content = text_content[:-3]
+                    
+                    parsed = json.loads(text_content.strip())
+                    if isinstance(parsed, list) and len(parsed) > 0:
+                        print(f"[Gemini Service] Başarılı! '{key_id}' ({key_email}) ile {len(parsed)} soru üretildi.")
+                        return parsed
+
+        except urllib.error.HTTPError as e:
+            err_body = ""
+            try:
+                err_body = e.read().decode("utf-8", errors="ignore")[:250]
+            except Exception:
+                pass
+            print(f"[Gemini Service] UYARI: '{key_id}' ({key_email}) API hatası verdi (HTTP {e.code}): {err_body}")
+
+            # Bir sonraki yedek anahtar var mı?
+            if idx + 1 < len(api_keys):
+                next_key = api_keys[idx + 1]
+                print(f"[Gemini Service] Otomatik Geçiş (Failover): '{next_key['id']}' ({next_key['email']}) anahtarına geçiliyor...")
+            continue
+
+        except Exception as e:
+            print(f"[Gemini Service] UYARI: '{key_id}' ({key_email}) çağrısında hata oluştu: {e}")
+            if idx + 1 < len(api_keys):
+                next_key = api_keys[idx + 1]
+                print(f"[Gemini Service] Otomatik Geçiş (Failover): '{next_key['id']}' ({next_key['email']}) anahtarına geçiliyor...")
+            continue
+
+    print("[Gemini Service] Tüm API anahtarları tükendi veya hata verdi. Sistem yerel soru bankasını kullanacak.")
     return None
-
