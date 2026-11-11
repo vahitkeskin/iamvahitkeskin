@@ -536,26 +536,71 @@ select {
 }
 
 .portal-sync-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.portal-field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+}
+
+.portal-label-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.portal-ctrl-grade {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.portal-weeks-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 0.65rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  align-items: flex-start;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .portal-sync-controls {
-    grid-template-columns: 1fr 1fr;
-  }
-  .portal-ctrl-grade {
-    grid-column: span 2;
-  }
+.portal-ctrl-week {
+  margin-bottom: 0;
+  width: 100%;
 }
 
-@media (max-width: 480px) {
-  .portal-sync-controls {
+.portal-select {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  background-color: #ffffff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 0.5rem 2.2rem 0.5rem 0.75rem;
+  font-size: 0.88rem;
+  color: #0f172a;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.portal-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+  outline: none;
+}
+
+@media (max-width: 420px) {
+  .portal-weeks-grid {
     grid-template-columns: 1fr;
-  }
-  .portal-ctrl-grade {
-    grid-column: span 1;
+    gap: 0.65rem;
   }
 }
 
@@ -1743,9 +1788,12 @@ select {
           <!-- Checkbox seçilince açılan seçenekler -->
           <div id="portal-sync-options" class="portal-sync-options" style="display: none;">
             <div class="portal-sync-controls">
+              <!-- Sınıf Seçimi (Tam Genişlik, Düzenli ve Okunaklı) -->
               <div class="form-group portal-ctrl-grade">
-                <label for="portal-grade-select">Eşleşen Portal Sınıfı:</label>
-                <select id="portal-grade-select">
+                <label for="portal-grade-select" class="portal-field-label">
+                  <span class="portal-label-icon">🏫</span> Eşleşen Portal Sınıfı:
+                </label>
+                <select id="portal-grade-select" class="portal-select">
                   <option value="1">1. Sınıf - Serbest Etkinlikler</option>
                   <option value="2">2. Sınıf - Bilişim Teknolojileri ve Yazılım</option>
                   <option value="3">3. Sınıf - Bilişim ve Kodlama</option>
@@ -1759,9 +1807,13 @@ select {
                 </select>
               </div>
 
-              <div class="form-group portal-ctrl-week">
-                <label for="portal-start-week">Başlangıç Haftası (X):</label>
-                <select id="portal-start-week">
+              <!-- Hafta Seçimleri (X ve Y Haftaları - Yan Yana Eşit ve Kusursuz Hizalı) -->
+              <div class="portal-weeks-grid">
+                <div class="form-group portal-ctrl-week">
+                  <label for="portal-start-week" class="portal-field-label">
+                    <span class="portal-label-icon">📅</span> Başlangıç Haftası (X):
+                  </label>
+                  <select id="portal-start-week" class="portal-select">
                     <option value="1" selected>1. Hafta</option>
                     <option value="2">2. Hafta</option>
                     <option value="3">3. Hafta</option>
@@ -1803,12 +1855,14 @@ select {
                     <option value="39">39. Hafta</option>
                     <option value="40">40. Hafta</option>
                     <option value="41">41. Hafta</option>
-                </select>
-              </div>
+                  </select>
+                </div>
 
-              <div class="form-group portal-ctrl-week">
-                <label for="portal-end-week">Bitiş Haftası (Y):</label>
-                <select id="portal-end-week">
+                <div class="form-group portal-ctrl-week">
+                  <label for="portal-end-week" class="portal-field-label">
+                    <span class="portal-label-icon">🏁</span> Bitiş Haftası (Y):
+                  </label>
+                  <select id="portal-end-week" class="portal-select">
                     <option value="1">1. Hafta</option>
                     <option value="2">2. Hafta</option>
                     <option value="3">3. Hafta</option>
@@ -1850,7 +1904,8 @@ select {
                     <option value="39">39. Hafta</option>
                     <option value="40">40. Hafta</option>
                     <option value="41">41. Hafta</option>
-                </select>
+                  </select>
+                </div>
               </div>
             </div>
 

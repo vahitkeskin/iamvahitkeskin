@@ -151,9 +151,12 @@
           <!-- Checkbox seçilince açılan seçenekler -->
           <div id="portal-sync-options" class="portal-sync-options" style="display: none;">
             <div class="portal-sync-controls">
+              <!-- Sınıf Seçimi (Tam Genişlik, Düzenli ve Okunaklı) -->
               <div class="form-group portal-ctrl-grade">
-                <label for="portal-grade-select">Eşleşen Portal Sınıfı:</label>
-                <select id="portal-grade-select">
+                <label for="portal-grade-select" class="portal-field-label">
+                  <span class="portal-label-icon">🏫</span> Eşleşen Portal Sınıfı:
+                </label>
+                <select id="portal-grade-select" class="portal-select">
                   <option value="1">1. Sınıf - Serbest Etkinlikler</option>
                   <option value="2">2. Sınıf - Bilişim Teknolojileri ve Yazılım</option>
                   <option value="3">3. Sınıf - Bilişim ve Kodlama</option>
@@ -167,9 +170,13 @@
                 </select>
               </div>
 
-              <div class="form-group portal-ctrl-week">
-                <label for="portal-start-week">Başlangıç Haftası (X):</label>
-                <select id="portal-start-week">
+              <!-- Hafta Seçimleri (X ve Y Haftaları - Yan Yana Eşit ve Kusursuz Hizalı) -->
+              <div class="portal-weeks-grid">
+                <div class="form-group portal-ctrl-week">
+                  <label for="portal-start-week" class="portal-field-label">
+                    <span class="portal-label-icon">📅</span> Başlangıç Haftası (X):
+                  </label>
+                  <select id="portal-start-week" class="portal-select">
                     <option value="1" selected>1. Hafta</option>
                     <option value="2">2. Hafta</option>
                     <option value="3">3. Hafta</option>
@@ -211,12 +218,14 @@
                     <option value="39">39. Hafta</option>
                     <option value="40">40. Hafta</option>
                     <option value="41">41. Hafta</option>
-                </select>
-              </div>
+                  </select>
+                </div>
 
-              <div class="form-group portal-ctrl-week">
-                <label for="portal-end-week">Bitiş Haftası (Y):</label>
-                <select id="portal-end-week">
+                <div class="form-group portal-ctrl-week">
+                  <label for="portal-end-week" class="portal-field-label">
+                    <span class="portal-label-icon">🏁</span> Bitiş Haftası (Y):
+                  </label>
+                  <select id="portal-end-week" class="portal-select">
                     <option value="1">1. Hafta</option>
                     <option value="2">2. Hafta</option>
                     <option value="3">3. Hafta</option>
@@ -258,7 +267,8 @@
                     <option value="39">39. Hafta</option>
                     <option value="40">40. Hafta</option>
                     <option value="41">41. Hafta</option>
-                </select>
+                  </select>
+                </div>
               </div>
             </div>
 
