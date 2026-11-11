@@ -480,64 +480,72 @@ body {
 }
 
 .header-col-left {
-  width: 26%;
-  font-size: 11pt;
+  width: 28%;
+  font-size: 12.5pt;
   line-height: 1.7;
   font-weight: 400;
   color: #000000;
+  text-align: left;
 }
 
 .header-col-left div {
   white-space: nowrap;
   font-weight: 400;
+  text-align: left;
 }
 
-/* Sadece bu alan (Orta Sütun) KOYU (BOLD) */
+/* Sadece bu alan (Orta Sütun) KOYU (BOLD) ve DAHA KÜÇÜK, ORTALANMIŞ */
 .header-col-middle {
-  width: 58%;
+  width: 54%;
   text-align: center;
-  line-height: 1.45;
+  line-height: 1.4;
   font-weight: 700;
   color: #000000;
 }
 
 .exam-year {
-  font-size: 11pt;
+  font-size: 10pt;
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .exam-school {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
   font-weight: 700;
   margin-top: 2px;
+  text-align: center;
 }
 
 .exam-lesson {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 2px;
+  text-align: center;
 }
 
 .exam-term {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 2px;
+  text-align: center;
 }
 
 .header-col-right {
-  width: 16%;
+  width: 18%;
   vertical-align: top !important;
-  font-size: 11pt;
+  font-size: 12.5pt;
   font-weight: 400;
   color: #000000;
   padding-top: 8px;
+  text-align: left;
 }
 
 .header-col-right div {
   font-weight: 400;
+  text-align: left;
 }
 
 /* S O R U L A R Başlığı - Geri kalan her yer aynı font ve normal kalınlıkta */
@@ -875,13 +883,46 @@ body {
     padding: 4px 8px !important;
   }
 
-  /* Sadece orta sütun KOYU */
-  .header-col-middle,
-  .exam-year,
+  .header-col-left {
+    width: 28% !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+
+  .header-col-left div {
+    text-align: left !important;
+  }
+
+  /* Sadece orta sütun KOYU, DAHA KÜÇÜK ve ORTALANMIŞ */
+  .header-col-middle {
+    width: 54% !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+
+  .exam-year {
+    font-size: 9.5pt !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+
   .exam-school,
   .exam-lesson,
   .exam-term {
+    font-size: 9pt !important;
     font-weight: 700 !important;
+    text-align: center !important;
+  }
+
+  .header-col-right {
+    width: 18% !important;
+    font-size: 12pt !important;
+    text-align: left !important;
+  }
+
+  .header-col-right div {
+    text-align: left !important;
   }
 
   /* Soru ve Cevap etiketleri KOYU ve daima SİYAH */

@@ -54,28 +54,28 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
             </w:tblCellMar>
         </w:tblPr>
         <w:tblGrid>
-            <w:gridCol w:w="2400"/>
-            <w:gridCol w:w="5800"/>
-            <w:gridCol w:w="1400"/>
+            <w:gridCol w:w="2600"/>
+            <w:gridCol w:w="5400"/>
+            <w:gridCol w:w="1600"/>
         </w:tblGrid>
         <w:tr>
             <w:trPr><w:cantSplit/></w:trPr>
             <w:tc>
-                <w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
+                <w:tcPr><w:tcW w:w="2600" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
+                <w:p><w:pPr><w:jc w:val="left"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="24"/></w:rPr><w:t>ADI SOYADI: {escape_xml(student_name)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="left"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="24"/></w:rPr><w:t>SINIFI: {escape_xml(student_class)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="left"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="24"/></w:rPr><w:t>No.: {escape_xml(student_no)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
-                <w:tcPr><w:tcW w:w="5800" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="21"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
+                <w:tcPr><w:tcW w:w="5400" w:type="dxa"/><w:vAlign w:val="center"/></w:tcPr>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="19"/></w:rPr><w:t>{escape_xml(year_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="18"/></w:rPr><w:t>{escape_xml(school_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="18"/></w:rPr><w:t>{escape_xml(lesson_val)}</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="20" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="18"/></w:rPr><w:t>{escape_xml(term_val)}</w:t></w:r></w:p>
             </w:tc>
             <w:tc>
-                <w:tcPr><w:tcW w:w="1400" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>
-                <w:p><w:pPr><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
+                <w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>
+                <w:p><w:pPr><w:jc w:val="left"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="24"/></w:rPr><w:t>PUAN: {escape_xml(student_score)}</w:t></w:r></w:p>
             </w:tc>
         </w:tr>
     </w:tbl>
