@@ -76,11 +76,17 @@
     <nav class="mobile-view-tabs" id="mobile-view-tabs" aria-label="Mobil Sayfa Görünümü">
       <button type="button" class="mobile-tab-btn active" id="tab-btn-editor" data-view="editor">
         <span class="tab-btn-icon">⚙️</span>
-        <span class="tab-btn-label">Sınav Ayarları & Sorular</span>
+        <span class="tab-btn-label">
+          <span class="tab-label-full">Sınav Ayarları & Sorular</span>
+          <span class="tab-label-short">Ayarlar & Soru</span>
+        </span>
       </button>
       <button type="button" class="mobile-tab-btn" id="tab-btn-preview" data-view="preview">
         <span class="tab-btn-icon">📄</span>
-        <span class="tab-btn-label">Canlı A4 Önizleme</span>
+        <span class="tab-btn-label">
+          <span class="tab-label-full">Canlı A4 Önizleme</span>
+          <span class="tab-label-short">A4 Önizleme</span>
+        </span>
       </button>
     </nav>
   </div>
@@ -452,9 +458,18 @@
         <div class="toolbar-group">
           <label style="font-size: 0.8rem; font-weight: 600; color: #475569;">Görünüm:</label>
           <div class="mode-toggle">
-            <button id="btn-mode-questions" class="active">Soru Kağıdı</button>
-            <button id="btn-mode-answers">Cevap Kağıdı</button>
-            <button id="btn-mode-both">Her İkisi (Soru + Cevap)</button>
+            <button id="btn-mode-questions" class="active">
+              <span class="mode-btn-full">Soru Kağıdı</span>
+              <span class="mode-btn-short">Soru</span>
+            </button>
+            <button id="btn-mode-answers">
+              <span class="mode-btn-full">Cevap Kağıdı</span>
+              <span class="mode-btn-short">Cevap</span>
+            </button>
+            <button id="btn-mode-both">
+              <span class="mode-btn-full">Her İkisi (Soru + Cevap)</span>
+              <span class="mode-btn-short">Soru + Cevap</span>
+            </button>
           </div>
         </div>
 
