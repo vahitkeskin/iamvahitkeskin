@@ -117,6 +117,29 @@ function openFullscreenPreview() {
   }
 
   modal.classList.add("active");
+  setTimeout(fitModalPaper, 50);
+}
+
+function fitModalPaper() {
+  const modalBody = document.querySelector(".preview-modal-body");
+  const container = document.getElementById("modal-paper-container");
+  if (!modalBody || !container) return;
+  const availW = Math.max(280, modalBody.clientWidth - 32);
+  const a4WidthPx = 794;
+  if (availW < a4WidthPx) {
+    const scale = Math.max(0.32, availW / a4WidthPx);
+    container.style.transform = `scale(${scale})`;
+    container.style.transformOrigin = "top center";
+    const pages = container.querySelectorAll(".a4-page");
+    let totalH = 0;
+    pages.forEach(p => totalH += (p.offsetHeight || 1123));
+    const seps = container.querySelectorAll(".page-separator");
+    seps.forEach(s => totalH += (s.offsetHeight || 60));
+    container.parentElement.style.minHeight = `${Math.round(totalH * scale + 40)}px`;
+  } else {
+    container.style.transform = "none";
+    container.parentElement.style.minHeight = "auto";
+  }
 }
 
 function closeFullscreenPreview() {
@@ -487,7 +510,11 @@ const AppState = {
 // Sayfa yüklendiğinde başlat
 document.addEventListener("DOMContentLoaded", () => {
   initEventListeners();
+  initMobileViewSwitcher();
   loadInitialExam();
+  if (window.innerWidth < 1024) {
+    setTimeout(autoFitPaperToScreen, 150);
+  }
 });
 
 // --------------------------------------------------------------------------
@@ -635,6 +662,9 @@ function renderExamSheet() {
   }
 
   attachSheetEditableListeners();
+  if (typeof updatePaperScale === "function") {
+    updatePaperScale(AppState.zoomLevel || 1.0);
+  }
 }
 
 
@@ -1164,30 +1194,125 @@ function initEventListeners() {
 }
 
 // --------------------------------------------------------------------------
-// Yakınlaştırma (Zoom) İşlevi
+// Yakınlaştırma (Zoom) & Responsive Kağıt Boyutlandırma İşlevi
 // --------------------------------------------------------------------------
-function setZoom(val) {
+function updatePaperScale(val) {
   AppState.zoomLevel = val;
+  const wrapper = document.getElementById("paper-scaler-wrapper");
   const scaler = document.getElementById("paper-scaler");
-  if (scaler) {
-    scaler.style.transform = `scale(${val})`;
+  if (!scaler) return;
+
+  scaler.style.transform = `translateX(-50%) scale(${val})`;
+  scaler.style.transformOrigin = "top center";
+
+  // Calculate unscaled height of all pages + separators
+  const a4Pages = scaler.querySelectorAll(".a4-page");
+  let totalH = 0;
+  a4Pages.forEach(p => {
+    totalH += (p.offsetHeight || 1123);
+  });
+  const seps = scaler.querySelectorAll(".page-separator");
+  seps.forEach(s => {
+    totalH += (s.offsetHeight || 60);
+  });
+  if (totalH === 0) totalH = 1123;
+
+  if (wrapper) {
+    wrapper.style.width = `${Math.round(794 * val)}px`;
+    wrapper.style.minHeight = `${Math.round(totalH * val + 24)}px`;
+    wrapper.style.height = `${Math.round(totalH * val + 24)}px`;
   }
+
   document.querySelectorAll(".zoom-btn").forEach(b => b.classList.remove("active"));
   const btn = document.getElementById(`btn-zoom-${Math.round(val * 100)}`);
   if (btn) btn.classList.add("active");
 }
 
+function setZoom(val) {
+  updatePaperScale(val);
+}
+
+function autoFitPaperToScreen() {
+  const viewport = document.getElementById("paper-scroll-viewport") || document.querySelector(".preview-panel");
+  if (!viewport) return;
+  const pad = window.innerWidth < 640 ? 16 : 40;
+  const availW = Math.max(280, (viewport.clientWidth || window.innerWidth) - pad);
+  const a4WidthPx = 794;
+  let scale = availW / a4WidthPx;
+  scale = Math.min(1.0, Math.max(0.32, scale));
+  updatePaperScale(scale);
+}
+
 function setZoomFit() {
-  const container = document.querySelector(".preview-panel");
+  autoFitPaperToScreen();
+}
+
+// --------------------------------------------------------------------------
+// Mobil & Tablet Görünüm Değiştirici (Tabs & FAB)
+// --------------------------------------------------------------------------
+function initMobileViewSwitcher() {
+  const container = document.querySelector(".app-container");
+  const tabEditor = document.getElementById("tab-btn-editor");
+  const tabPreview = document.getElementById("tab-btn-preview");
+  const fab = document.getElementById("mobile-floating-switch");
+
   if (!container) return;
-  const containerWidth = container.clientWidth - 40;
-  const a4WidthPx = 794; // approx 210mm in px at 96 dpi
-  const scale = Math.min(1.0, Math.max(0.4, (containerWidth / a4WidthPx)));
-  AppState.zoomLevel = scale;
-  const scaler = document.getElementById("paper-scaler");
-  if (scaler) {
-    scaler.style.transform = `scale(${scale})`;
+
+  function setView(mode) {
+    if (mode === "preview") {
+      container.classList.remove("view-editor");
+      container.classList.add("view-preview");
+      tabEditor?.classList.remove("active");
+      tabPreview?.classList.add("active");
+      if (fab) {
+        fab.innerHTML = `<span class="fab-icon">⚙️</span><span class="fab-label">Düzenlemeye Dön</span>`;
+      }
+      setTimeout(autoFitPaperToScreen, 50);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      container.classList.remove("view-preview");
+      container.classList.add("view-editor");
+      tabPreview?.classList.remove("active");
+      tabEditor?.classList.add("active");
+      if (fab) {
+        fab.innerHTML = `<span class="fab-icon">📄</span><span class="fab-label">Önizlemeye Geç</span>`;
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
+
+  // Başlangıç durumu
+  if (window.innerWidth < 1024) {
+    container.classList.add("view-editor");
+  }
+
+  tabEditor?.addEventListener("click", () => setView("editor"));
+  tabPreview?.addEventListener("click", () => setView("preview"));
+  fab?.addEventListener("click", () => {
+    if (container.classList.contains("view-preview")) {
+      setView("editor");
+    } else {
+      setView("preview");
+    }
+  });
+
+  // Ekran boyutu veya yönü değiştiğinde uyum sağla (Debounced)
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth >= 1024) {
+        container.classList.remove("view-editor", "view-preview");
+        updatePaperScale(AppState.zoomLevel || 1.0);
+      } else {
+        if (!container.classList.contains("view-preview")) {
+          container.classList.add("view-editor");
+        } else {
+          autoFitPaperToScreen();
+        }
+      }
+    }, 150);
+  });
 }
 
 // --------------------------------------------------------------------------

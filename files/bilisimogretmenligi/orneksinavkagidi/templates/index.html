@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Bilişim Sınav Kağıdı Hazırlama & Yönetim Sistemi</title>
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -22,19 +22,43 @@
 
     <div class="header-actions">
       <button id="btn-open-preview-modal" class="btn btn-secondary btn-sm" title="Son Bir Kez %100 Düzgün Önizle">
-        👁️ %100 Düzgün Önizle
+        <span class="btn-icon">👁️</span>
+        <span class="btn-text-full">%100 Düzgün Önizle</span>
+        <span class="btn-text-short">Önizle</span>
       </button>
       <button id="btn-reset-original" class="btn btn-secondary btn-sm" title="orneksinavkagidi.jpg Orijinal Şablonu Yükle">
-        ↺ Orijinal Şablon
+        <span class="btn-icon">↺</span>
+        <span class="btn-text-full">Orijinal Şablon</span>
+        <span class="btn-text-short">Şablon</span>
       </button>
       <button id="btn-export-docx-both" class="btn btn-primary btn-sm" title="Hem Soru Hem Cevaplı Kağıdı ZIP Olarak İndir">
-        📦 Soru + Cevap (DOCX ZIP)
+        <span class="btn-icon">📦</span>
+        <span class="btn-text-full">Soru + Cevap (DOCX ZIP)</span>
+        <span class="btn-text-short">ZIP</span>
       </button>
       <button id="btn-quick-print" class="btn btn-success btn-sm" title="A4 Sayfa Olarak Önizle ve Yazdır / PDF Kaydet">
-        🖨️ Yazdır / PDF Kaydet
+        <span class="btn-icon">🖨️</span>
+        <span class="btn-text-full">Yazdır / PDF Kaydet</span>
+        <span class="btn-text-short">Yazdır / PDF</span>
       </button>
     </div>
   </header>
+
+  <!-- =======================================================================
+       Mobil / Tablet Görünüm Değiştirici Tab Çubuğu
+       ======================================================================= -->
+  <div class="mobile-tabs-container">
+    <nav class="mobile-view-tabs" id="mobile-view-tabs" aria-label="Mobil Sayfa Görünümü">
+      <button type="button" class="mobile-tab-btn active" id="tab-btn-editor" data-view="editor">
+        <span class="tab-btn-icon">⚙️</span>
+        <span class="tab-btn-label">Sınav Ayarları & Sorular</span>
+      </button>
+      <button type="button" class="mobile-tab-btn" id="tab-btn-preview" data-view="preview">
+        <span class="tab-btn-icon">📄</span>
+        <span class="tab-btn-label">Canlı A4 Önizleme</span>
+      </button>
+    </nav>
+  </div>
 
   <!-- =======================================================================
        Ana Çalışma Alanı
@@ -445,8 +469,9 @@
       </div>
 
       <!-- A4 Sayfası Görünümü (%100 Birebir orneksinavkagidi.jpg Replikası) -->
-      <div class="paper-scroll-viewport">
-        <div id="paper-scaler" class="paper-scaler">
+      <div class="paper-scroll-viewport" id="paper-scroll-viewport">
+        <div id="paper-scaler-wrapper" class="paper-scaler-wrapper">
+          <div id="paper-scaler" class="paper-scaler">
 
           <article class="a4-page" id="exam-paper">
 
@@ -486,6 +511,7 @@
           </article>
 
         </div>
+        </div><!-- /.paper-scaler-wrapper -->
       </div>
 
     </section>
@@ -567,6 +593,12 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobil Hızlı Görünüm Değiştirici Buton (Floating Switcher) -->
+  <button type="button" id="mobile-floating-switch" class="mobile-floating-switch" aria-label="Görünüm Değiştir">
+    <span class="fab-icon">📄</span>
+    <span class="fab-label">Önizlemeye Geç</span>
+  </button>
 
   <!-- Toast Bildirimi -->
   <div id="app-toast" class="toast"></div>
