@@ -655,10 +655,10 @@ function createExamPageHtml(isAnswerKey) {
     if (!isAnswerKey) {
       answerPart = `
         <div class="dotted-answer-lines">
-          <div class="dotted-line-row"><span class="ans-label" style="color: #000000 !important;">Cevap: </span>${dotsLine1}</div>
-          <div class="dotted-line-row">${dotsLine2}</div>
-          <div class="dotted-line-row">${dotsLine3}</div>
-          <div class="dotted-line-row">${dotsLine4}</div>
+          <div class="dotted-line-row"><span class="ans-label" style="color: #000000 !important;">Cevap: </span><span class="dots-fill"></span></div>
+          <div class="dotted-line-row"><span class="dots-fill"></span></div>
+          <div class="dotted-line-row"><span class="dots-fill"></span></div>
+          <div class="dotted-line-row"><span class="dots-fill"></span></div>
         </div>
       `;
     } else {
