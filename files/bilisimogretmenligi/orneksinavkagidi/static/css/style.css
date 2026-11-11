@@ -1772,12 +1772,12 @@ select {
 }
 
 /* ==========================================================================
-   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI
+   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI & TEMİZ BAŞLIKSIZ BASKI
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 15mm 10mm 15mm;
+    margin: 0; /* Tarayıcının üstteki tarih/saat ve başlık ile alttaki URL/sayfa numarası yazılarını tamamen kaldırır */
   }
 
   html,
@@ -1845,24 +1845,27 @@ select {
   }
 
   .a4-page {
-    width: 100% !important;
-    min-height: 0 !important;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    min-height: 297mm !important;
     height: auto !important;
-    max-height: none !important;
+    box-sizing: border-box !important;
+    padding: 22mm 20mm 20mm 20mm !important; /* orneksinavkagidi.jpg gibi üstte ve kenarlarda ferah boşluk */
+    margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
     overflow: visible !important;
-    page-break-after: auto !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    background: #ffffff !important;
+    color: #000000 !important;
   }
 
   .a4-page:last-child,
   .a4-page:last-of-type {
-    page-break-after: avoid !important;
-    break-after: avoid !important;
+    page-break-after: auto !important;
+    break-after: auto !important;
     margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
   }
 
   .a4-page-break {
@@ -1872,7 +1875,7 @@ select {
 
   .exam-header-table {
     border: 1px solid #000000 !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 22px !important;
   }
 
   .exam-header-table td {
