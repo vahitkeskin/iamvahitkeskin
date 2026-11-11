@@ -8,13 +8,19 @@ function updateTopicsDropdown(grade) {
   const currentVal = selectTopic.value;
   selectTopic.innerHTML = "";
 
-  // 1. Genel Seçenek
+  // 1. Varsayılan Ders Seçeneği: Bilişim Teknolojileri ve Yazılım
+  const optDefault = document.createElement("option");
+  optDefault.value = "Bilişim Teknolojileri ve Yazılım";
+  optDefault.textContent = "Bilişim Teknolojileri ve Yazılım";
+  selectTopic.appendChild(optDefault);
+
+  // 2. Genel Karma Sınav Seçeneği
   const optAll = document.createElement("option");
   optAll.value = "Tüm Dersler (Karma Sınav)";
   optAll.textContent = "Tüm Dersler (Genel / Karma Sınav)";
   selectTopic.appendChild(optAll);
 
-  // 2. 1'den 12'ye Tüm MEB Dersleri
+  // 3. 1'den 12'ye Tüm MEB Dersleri
   const grpAll = document.createElement("optgroup");
   grpAll.label = "📋 1 - 12. Sınıf Tüm MEB Dersleri";
   const allLessons = [
@@ -53,7 +59,7 @@ function updateTopicsDropdown(grade) {
   });
   selectTopic.appendChild(grpAll);
 
-  // 3. Seçili Sınıfın Müfredat Konuları & Kazanımları
+  // 4. Seçili Sınıfın Müfredat Konuları & Kazanımları
   const topics = (typeof EMBEDDED_GRADE_TOPICS !== "undefined" && EMBEDDED_GRADE_TOPICS[grade])
     ? EMBEDDED_GRADE_TOPICS[grade]
     : [];
@@ -61,7 +67,7 @@ function updateTopicsDropdown(grade) {
     const grpGrade = document.createElement("optgroup");
     grpGrade.label = `📌 ${grade}. Sınıf Müfredat Konuları & Kazanımları`;
     topics.forEach(t => {
-      if (t !== "Tüm Konular" && !t.startsWith("Tüm Dersler")) {
+      if (t !== "Tüm Konular" && !t.startsWith("Tüm Dersler") && t !== "Bilişim Teknolojileri ve Yazılım") {
         const opt = document.createElement("option");
         opt.value = t;
         opt.textContent = t;
@@ -71,9 +77,11 @@ function updateTopicsDropdown(grade) {
     selectTopic.appendChild(grpGrade);
   }
 
-  // Restore selection if exists
+  // Varsayılan olarak Bilişim Teknolojileri ve Yazılım'ı seç
   if (currentVal && Array.from(selectTopic.options).some(o => o.value === currentVal)) {
     selectTopic.value = currentVal;
+  } else {
+    selectTopic.value = "Bilişim Teknolojileri ve Yazılım";
   }
 }
 
