@@ -623,6 +623,44 @@
       box-shadow: var(--shadow-sm);
     }
 
+    .toolbar-exam-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.28));
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      color: var(--brand-primary);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.18);
+      white-space: nowrap;
+    }
+
+    .toolbar-exam-btn:hover {
+      background: var(--brand-primary);
+      color: #050c1b;
+      border-color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--brand-primary-glow);
+    }
+
+    [data-theme="light"] .toolbar-exam-btn {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(14, 165, 233, 0.22));
+      color: #0284c7;
+      border-color: rgba(2, 132, 199, 0.45);
+    }
+
+    [data-theme="light"] .toolbar-exam-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
     /* ══════════════════════════════════════════════════════════════════
        CLASS QUICK NAVIGATION TABS (HER SINIF İÇİN ÖZEL SEKME & İKON)
        ══════════════════════════════════════════════════════════════════ */
@@ -1603,6 +1641,12 @@
           <i class="fas fa-list-ul"></i> Liste
         </button>
       </div>
+
+      <!-- Örnek Sınav Kağıdı Sistemi Linki -->
+      <a href="orneksinavkagidi/" class="toolbar-exam-btn" title="MEB Sınav ve Cevap Kağıdı Hazırlama Sistemi" target="_blank">
+        <i class="fas fa-file-signature"></i>
+        <span>Örnek Sınav Kağıdı</span>
+      </a>
     </section>
 
     <!-- CLASS QUICK NAVIGATION TABS WITH DISTINCTIVE ICONS (1 - 10. SINIF SEKME MENÜSÜ) -->
