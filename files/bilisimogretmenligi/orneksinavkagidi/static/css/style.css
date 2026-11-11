@@ -1,29 +1,224 @@
 /* ==========================================================================
    Bilişim Sınav Kağıdı Hazırlama Sistemi - Ana Stil Dosyası
    Modern UX / UI Tasarım & Tam Cihaz Uyumluluğu (Mobile, Tablet, Desktop, TV)
-   Hiçbir öğenin ezilmediği, taşmadığı ve kesilmediği responsive mimari
+   Dark & Light Mod Desteği (A4 Kağıdı Harici Tüm Alanlar) & Sistem Varsayılanı
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   TEMA DEĞİŞKENLERİ (CSS Custom Properties)
+   Varsayılan: Açık Mod (Light Mode)
+   -------------------------------------------------------------------------- */
 :root {
+  color-scheme: light dark;
+
+  /* Temel Renkler */
   --primary: #2563eb;
   --primary-hover: #1d4ed8;
   --primary-light: #eff6ff;
   --accent: #d32f2f;
+
+  /* Yüzey ve Metin Renkleri (Açık Mod) */
+  --bg-app: #f1f5f9;
+  --card-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.95);
   --text-dark: #0f172a;
   --text-body: #334155;
   --text-muted: #64748b;
-  --bg-app: #f1f5f9;
-  --card-bg: #ffffff;
   --border-color: #cbd5e1;
   --border-light: #e2e8f0;
+
+  /* Form Girdi Alanları */
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-color: #0f172a;
+
+  /* Önizleme Alanı ve Araç Çubuğu */
+  --preview-bg: #e2e8f0;
+  --preview-toolbar-bg: #ffffff;
+
+  /* Modallar */
+  --modal-bg: #ffffff;
+  --modal-preview-bg: #cbd5e1;
+
+  /* İkincil Butonlar */
+  --btn-sec-bg: #f1f5f9;
+  --btn-sec-color: #334155;
+  --btn-sec-border: #cbd5e1;
+  --btn-sec-hover: #e2e8f0;
+
+  /* Portal Müfredat Kutusu */
+  --portal-box-bg: #f0f7ff;
+  --portal-box-border: #93c5fd;
+  --portal-box-hover: #e0f2fe;
+  --portal-summary-bg: #ffffff;
+  --portal-title: #1e3a8a;
+
+  /* Soru Kartları ve Bannerlar */
+  --question-card-bg: #f8fafc;
+  --question-card-border: #e2e8f0;
+  --info-banner-bg: #f8fafc;
+  --info-banner-text: #475569;
+
+  /* Mod Geçiş Çubuğu */
+  --mode-toggle-bg: #f1f5f9;
+  --mode-toggle-border: #cbd5e1;
+  --mode-toggle-active-bg: #ffffff;
+
+  /* Gölgeler */
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-paper: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Yuvarlaklıklar */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   SİSTEM KOYU MODU (OS prefers-color-scheme: dark ve kullanıcı light seçmemişse)
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg-app: #0a0f1d;
+    --card-bg: #111827;
+    --header-bg: rgba(17, 24, 39, 0.95);
+    --text-dark: #f9fafb;
+    --text-body: #d1d5db;
+    --text-muted: #9ca3af;
+    --border-color: #1f2937;
+    --border-light: #1e293b;
+
+    --input-bg: #1f2937;
+    --input-border: #374151;
+    --input-color: #f9fafb;
+
+    --preview-bg: #030712;
+    --preview-toolbar-bg: #111827;
+
+    --modal-bg: #111827;
+    --modal-preview-bg: #030712;
+
+    --btn-sec-bg: #1f2937;
+    --btn-sec-color: #e5e7eb;
+    --btn-sec-border: #374151;
+    --btn-sec-hover: #374151;
+
+    --portal-box-bg: #0f1d38;
+    --portal-box-border: #1e3a8a;
+    --portal-box-hover: #172554;
+    --portal-summary-bg: #0b1329;
+    --portal-title: #93c5fd;
+
+    --question-card-bg: #1a2234;
+    --question-card-border: #27354f;
+    --info-banner-bg: #172033;
+    --info-banner-text: #94a3b8;
+
+    --mode-toggle-bg: #1f2937;
+    --mode-toggle-border: #374151;
+    --mode-toggle-active-bg: #374151;
+
+    --shadow-paper: 0 25px 40px -5px rgba(0, 0, 0, 0.6), 0 10px 15px -6px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   MANUEL SEÇİLMİŞ KOYU MOD ([data-theme="dark"])
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-app: #0a0f1d;
+  --card-bg: #111827;
+  --header-bg: rgba(17, 24, 39, 0.95);
+  --text-dark: #f9fafb;
+  --text-body: #d1d5db;
+  --text-muted: #9ca3af;
+  --border-color: #1f2937;
+  --border-light: #1e293b;
+
+  --input-bg: #1f2937;
+  --input-border: #374151;
+  --input-color: #f9fafb;
+
+  --preview-bg: #030712;
+  --preview-toolbar-bg: #111827;
+
+  --modal-bg: #111827;
+  --modal-preview-bg: #030712;
+
+  --btn-sec-bg: #1f2937;
+  --btn-sec-color: #e5e7eb;
+  --btn-sec-border: #374151;
+  --btn-sec-hover: #374151;
+
+  --portal-box-bg: #0f1d38;
+  --portal-box-border: #1e3a8a;
+  --portal-box-hover: #172554;
+  --portal-summary-bg: #0b1329;
+  --portal-title: #93c5fd;
+
+  --question-card-bg: #1a2234;
+  --question-card-border: #27354f;
+  --info-banner-bg: #172033;
+  --info-banner-text: #94a3b8;
+
+  --mode-toggle-bg: #1f2937;
+  --mode-toggle-border: #374151;
+  --mode-toggle-active-bg: #374151;
+
+  --shadow-paper: 0 25px 40px -5px rgba(0, 0, 0, 0.6), 0 10px 15px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   MANUEL SEÇİLMİŞ AÇIK MOD ([data-theme="light"])
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-app: #f1f5f9;
+  --card-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --border-light: #e2e8f0;
+
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-color: #0f172a;
+
+  --preview-bg: #e2e8f0;
+  --preview-toolbar-bg: #ffffff;
+
+  --modal-bg: #ffffff;
+  --modal-preview-bg: #cbd5e1;
+
+  --btn-sec-bg: #f1f5f9;
+  --btn-sec-color: #334155;
+  --btn-sec-border: #cbd5e1;
+  --btn-sec-hover: #e2e8f0;
+
+  --portal-box-bg: #f0f7ff;
+  --portal-box-border: #93c5fd;
+  --portal-box-hover: #e0f2fe;
+  --portal-summary-bg: #ffffff;
+  --portal-title: #1e3a8a;
+
+  --question-card-bg: #f8fafc;
+  --question-card-border: #e2e8f0;
+  --info-banner-bg: #f8fafc;
+  --info-banner-text: #475569;
+
+  --mode-toggle-bg: #f1f5f9;
+  --mode-toggle-border: #cbd5e1;
+  --mode-toggle-active-bg: #ffffff;
 }
 
 * {
@@ -52,6 +247,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, h4 {
@@ -67,7 +263,7 @@ p, li, .portal-chk-desc, .info-banner {
    Üst Navigasyon & Başlık Çubuğu
    -------------------------------------------------------------------------- */
 .app-header {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
@@ -81,6 +277,7 @@ p, li, .portal-chk-desc, .info-banner {
   top: 0;
   z-index: 50;
   box-shadow: var(--shadow-xs);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .brand-section {
@@ -112,7 +309,7 @@ p, li, .portal-chk-desc, .info-banner {
 .brand-title h1 {
   font-size: clamp(0.95rem, 2vw, 1.15rem);
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-dark);
   line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
@@ -170,13 +367,14 @@ p, li, .portal-chk-desc, .info-banner {
 
 .mobile-view-tabs {
   display: flex;
-  background: #ffffff;
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 4px;
   gap: 4px;
   box-shadow: var(--shadow-xs);
   width: 100%;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .mobile-tab-btn {
@@ -258,7 +456,6 @@ p, li, .portal-chk-desc, .info-banner {
 }
 
 @media (min-width: 1800px) {
-  /* TV / 4K / Geniş Ekranlar */
   .app-container {
     max-width: min(94vw, 2400px);
     grid-template-columns: 500px 1fr;
@@ -271,7 +468,6 @@ p, li, .portal-chk-desc, .info-banner {
 }
 
 @media (min-width: 2500px) {
-  /* 4K Ultra Geniş Ekranlar / Akıllı TV */
   .app-container {
     grid-template-columns: 560px 1fr;
     gap: 2.5rem;
@@ -328,7 +524,7 @@ p, li, .portal-chk-desc, .info-banner {
     max-height: none !important;
     overflow-y: visible !important;
     padding-right: 0 !important;
-    padding-bottom: 6rem !important; /* Floating butonun içeriği ezmesini önler */
+    padding-bottom: 6rem !important;
   }
 }
 
@@ -336,7 +532,7 @@ p, li, .portal-chk-desc, .info-banner {
   width: 6px;
 }
 .sidebar-panel::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border-color);
   border-radius: 3px;
 }
 
@@ -347,6 +543,7 @@ p, li, .portal-chk-desc, .info-banner {
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
   box-sizing: border-box;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .card-header {
@@ -363,7 +560,7 @@ p, li, .portal-chk-desc, .info-banner {
 .card-header h2 {
   font-size: 0.98rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-dark);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -379,9 +576,25 @@ p, li, .portal-chk-desc, .info-banner {
   white-space: nowrap;
 }
 
+[data-theme="dark"] .badge,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .badge {
+    background: rgba(37, 99, 235, 0.25);
+    color: #93c5fd;
+  }
+}
+
 .badge-fixed {
   background: #fef3c7;
   color: #b45309;
+}
+
+[data-theme="dark"] .badge-fixed,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .badge-fixed {
+    background: rgba(217, 119, 6, 0.25);
+    color: #fde68a;
+  }
 }
 
 .form-group {
@@ -392,7 +605,7 @@ p, li, .portal-chk-desc, .info-banner {
   display: block;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #334155;
+  color: var(--text-body);
   margin-bottom: 0.35rem;
 }
 
@@ -401,12 +614,12 @@ p, li, .portal-chk-desc, .info-banner {
 .form-group textarea {
   width: 100%;
   padding: 0.55rem 0.75rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 0.88rem;
-  color: #0f172a;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  background-color: #ffffff;
+  color: var(--input-color);
+  background-color: var(--input-bg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
   box-sizing: border-box;
 }
 
@@ -421,8 +634,14 @@ select {
   padding-right: 2.2rem !important;
 }
 
+[data-theme="dark"] select,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+}
+
 @media (max-width: 768px) {
-  /* iOS Safari otomatik zoom yapmasını engellemek için 16px taban font */
   .form-group input,
   .form-group select,
   .form-group textarea {
@@ -435,7 +654,7 @@ select {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
 }
 
 .form-row {
@@ -471,19 +690,20 @@ select {
   }
 }
 
-/* Portal Müfredatı Eşleştirme Kutusu */
+/* --------------------------------------------------------------------------
+   Portal Müfredatı Eşleştirme Kutusu ve Kontrolleri
+   -------------------------------------------------------------------------- */
 .portal-sync-box {
   margin: 10px 0 14px 0;
-  padding: 12px 14px;
-  background: #f0f7ff;
-  border: 1.5px solid #93c5fd;
+  padding: 14px 16px;
+  background: var(--portal-box-bg);
+  border: 1.5px solid var(--portal-box-border);
   border-radius: var(--radius-md);
   transition: all 0.2s ease;
 }
 
 .portal-sync-box:hover {
-  background: #e0f2fe;
-  border-color: #60a5fa;
+  background: var(--portal-box-hover);
 }
 
 .portal-checkbox-label {
@@ -512,19 +732,19 @@ select {
 .portal-chk-title {
   font-size: 0.94rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--portal-title);
 }
 
 .portal-chk-desc {
   font-size: 0.78rem;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.35;
 }
 
 .portal-sync-options {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px dashed #93c5fd;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--portal-box-border);
   animation: fadeIn 0.25s ease-in-out;
 }
 
@@ -540,7 +760,7 @@ select {
   gap: 6px;
   font-size: 0.84rem;
   font-weight: 700;
-  color: #1e3a8a;
+  color: var(--portal-title);
   margin-bottom: 0.4rem;
   white-space: nowrap;
 }
@@ -572,12 +792,12 @@ select {
   width: 100%;
   height: 42px;
   min-height: 42px;
-  background-color: #ffffff;
-  border: 1.5px solid #bfdbfe;
+  background-color: var(--input-bg);
+  border: 1.5px solid var(--input-border);
   border-radius: 8px;
   padding: 0.5rem 2.2rem 0.5rem 0.75rem;
   font-size: 0.88rem;
-  color: #0f172a;
+  color: var(--input-color);
   font-weight: 500;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -585,8 +805,8 @@ select {
 }
 
 .portal-select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
   outline: none;
 }
 
@@ -608,7 +828,7 @@ select {
 .portal-presets-label {
   font-size: 0.74rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--portal-title);
   white-space: nowrap;
 }
 
@@ -619,9 +839,9 @@ select {
 }
 
 .portal-preset-btn {
-  background: #ffffff;
-  border: 1px solid #93c5fd;
-  color: #1e40af;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-body);
   font-size: 0.74rem;
   font-weight: 600;
   padding: 4px 8px;
@@ -636,28 +856,28 @@ select {
 }
 
 .portal-preset-btn:hover {
-  background: #dbeafe;
-  border-color: #3b82f6;
+  background: var(--btn-sec-hover);
+  border-color: var(--primary);
 }
 
 .portal-preset-btn.active {
-  background: #2563eb;
+  background: var(--primary);
   color: #ffffff;
-  border-color: #1d4ed8;
+  border-color: var(--primary-hover);
   box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
 }
 
 .portal-curriculum-summary {
   margin-top: 10px;
   padding: 8px 10px;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--portal-summary-bg);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   max-height: 140px;
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 0.8rem;
-  color: #334155;
+  color: var(--text-body);
   line-height: 1.5;
 }
 
@@ -671,8 +891,8 @@ select {
 
 .portal-curriculum-summary .pw-badge {
   display: inline-block;
-  background: #eff6ff;
-  color: #1d4ed8;
+  background: var(--primary-light);
+  color: var(--primary);
   font-weight: 700;
   padding: 1px 6px;
   border-radius: 4px;
@@ -682,19 +902,27 @@ select {
   flex-shrink: 0;
 }
 
+[data-theme="dark"] .portal-curriculum-summary .pw-badge,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .portal-curriculum-summary .pw-badge {
+    background: rgba(37, 99, 235, 0.2);
+    color: #93c5fd;
+  }
+}
+
 .portal-curriculum-summary .pw-title {
-  color: #0f172a;
+  color: var(--text-dark);
   font-weight: 500;
   overflow-wrap: anywhere;
 }
 
 .info-banner {
-  background: #f8fafc;
+  background: var(--info-banner-bg);
   border-left: 3px solid var(--primary);
   padding: 0.65rem 0.85rem;
   border-radius: 0 8px 8px 0;
   font-size: 0.76rem;
-  color: #475569;
+  color: var(--info-banner-text);
   margin-bottom: 0.85rem;
   line-height: 1.45;
 }
@@ -730,12 +958,12 @@ select {
 }
 
 .btn-secondary {
-  background-color: #f1f5f9;
-  color: #334155;
-  border-color: #cbd5e1;
+  background-color: var(--btn-sec-bg);
+  color: var(--btn-sec-color);
+  border-color: var(--btn-sec-border);
 }
 .btn-secondary:hover {
-  background-color: #e2e8f0;
+  background-color: var(--btn-sec-hover);
 }
 
 .btn-success {
@@ -777,15 +1005,15 @@ select {
 }
 
 .question-item-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--question-card-bg);
+  border: 1px solid var(--question-card-border);
   border-radius: 8px;
   padding: 0.75rem;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, background-color 0.2s ease;
 }
 
 .question-item-card:hover {
-  border-color: #94a3b8;
+  border-color: var(--primary);
 }
 
 .question-item-header {
@@ -798,7 +1026,7 @@ select {
 .question-num-tag {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-dark);
 }
 
 .question-item-actions {
@@ -810,20 +1038,21 @@ select {
    Sağ Panel: A4 Canlı Önizleme Alanı
    -------------------------------------------------------------------------- */
 .preview-panel {
-  background: #e2e8f0;
+  background: var(--preview-bg);
   border-radius: var(--radius-lg);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
   overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .preview-toolbar {
   width: 100%;
   max-width: 900px;
-  background: #ffffff;
+  background: var(--preview-toolbar-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 0.65rem 1rem;
@@ -834,6 +1063,7 @@ select {
   box-shadow: var(--shadow-xs);
   flex-wrap: wrap;
   gap: 0.75rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .toolbar-group {
@@ -845,10 +1075,10 @@ select {
 
 .mode-toggle {
   display: flex;
-  background: #f1f5f9;
+  background: var(--mode-toggle-bg);
   border-radius: 8px;
   padding: 0.2rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--mode-toggle-border);
 }
 
 .mode-toggle button {
@@ -857,7 +1087,7 @@ select {
   font-weight: 600;
   border: none;
   background: transparent;
-  color: #475569;
+  color: var(--text-muted);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
@@ -865,9 +1095,9 @@ select {
 }
 
 .mode-toggle button.active {
-  background: #ffffff;
+  background: var(--mode-toggle-active-bg);
   color: var(--primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .color-controls {
@@ -888,7 +1118,7 @@ select {
   appearance: none;
   width: 28px;
   height: 28px;
-  border: 1px solid #94a3b8;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   cursor: pointer;
   padding: 0;
@@ -913,7 +1143,7 @@ select {
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid #ffffff;
-  box-shadow: 0 0 0 1px #cbd5e1;
+  box-shadow: 0 0 0 1px var(--border-color);
   transition: transform 0.1s;
 }
 .preset-color-dot:hover {
@@ -953,17 +1183,23 @@ select {
 
 /* ==========================================================================
    A4 KAĞIT ŞABLONU (orneksinavkagidi.jpg BİREBİR REPLİKASI)
-   Hiçbir öğenin ezilmediği, kusursuz hizalı MEB sınav kağıdı standardı
+   A4 Sayfası ve İçeriği: Dark Mode'dan Kesinlikle Hariç Tutulur
+   (Kullanıcı ister Dark ister Light modda olsun, A4 sınav kağıdı daima gerçek beyaz kağıt görünümündedir)
    ========================================================================== */
+.a4-page,
+.a4-page * {
+  color-scheme: only light !important;
+}
+
 .a4-page {
   width: 210mm;
   min-height: 297mm;
-  background: #ffffff;
+  background: #ffffff !important;
+  color: #000000 !important;
   box-shadow: var(--shadow-paper);
-  border: 1px solid #d1d5db;
+  border: 1px solid #d1d5db !important;
   padding: 22mm 20mm 20mm 20mm;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: #000000;
   position: relative;
   box-sizing: border-box;
 }
@@ -972,19 +1208,22 @@ select {
 .exam-header-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #000000;
+  border: 1px solid #000000 !important;
   margin-bottom: 26px;
   table-layout: fixed;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: #000000;
+  color: #000000 !important;
+  background: #ffffff !important;
   box-sizing: border-box;
 }
 
 .exam-header-table td {
-  border: 1px solid #000000;
+  border: 1px solid #000000 !important;
   padding: 8px 12px;
   vertical-align: middle;
   box-sizing: border-box;
+  color: #000000 !important;
+  background: #ffffff !important;
 }
 
 /* Sol Sütun: ADI SOYADI, SINIFI, No. */
@@ -993,7 +1232,7 @@ select {
   font-size: 12pt;
   line-height: 1.7;
   font-weight: 400;
-  color: #000000;
+  color: #000000 !important;
   text-align: left;
 }
 
@@ -1003,6 +1242,7 @@ select {
   line-height: 1.65;
   word-break: break-word;
   overflow-wrap: break-word;
+  color: #000000 !important;
 }
 
 /* Orta Sütun: Yıl, Okul, Ders, Dönem - KOYU (BOLD), ORTALANMIŞ, DAHA KÜÇÜK */
@@ -1011,7 +1251,7 @@ select {
   text-align: center;
   line-height: 1.35;
   font-weight: 700;
-  color: #000000;
+  color: #000000 !important;
   padding: 6px 10px;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -1023,6 +1263,7 @@ select {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 2px;
+  color: #000000 !important;
 }
 
 .exam-school {
@@ -1030,6 +1271,7 @@ select {
   font-weight: 700;
   margin-bottom: 2px;
   text-align: center;
+  color: #000000 !important;
 }
 
 .exam-lesson {
@@ -1038,6 +1280,7 @@ select {
   text-transform: uppercase;
   margin-bottom: 2px;
   text-align: center;
+  color: #000000 !important;
 }
 
 .exam-term {
@@ -1045,6 +1288,7 @@ select {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  color: #000000 !important;
 }
 
 /* Sağ Sütun: PUAN */
@@ -1053,7 +1297,7 @@ select {
   vertical-align: middle !important;
   font-size: 12pt;
   font-weight: 400;
-  color: #000000;
+  color: #000000 !important;
   padding: 8px 12px;
   text-align: left;
 }
@@ -1062,6 +1306,7 @@ select {
   font-weight: 400;
   text-align: left;
   white-space: nowrap;
+  color: #000000 !important;
 }
 
 /* S O R U L A R Başlığı */
@@ -1071,7 +1316,7 @@ select {
   font-weight: 400;
   letter-spacing: 7px;
   margin-bottom: 24px;
-  color: #000000;
+  color: #000000 !important;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -1081,7 +1326,7 @@ select {
   flex-direction: column;
   gap: 16px;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: #000000;
+  color: #000000 !important;
 }
 
 .exam-question-block {
@@ -1092,21 +1337,22 @@ select {
   font-size: 11pt;
   line-height: 1.45;
   margin-bottom: 12px;
-  color: #000000;
+  color: #000000 !important;
   font-weight: 400;
   overflow-wrap: anywhere;
 }
 
 .exam-question-text .q-num {
   font-weight: 700;
-  color: #000000;
+  color: #000000 !important;
 }
 
 .exam-question-text .q-pts {
   font-weight: 400;
+  color: #000000 !important;
 }
 
-/* Soru Kağıdı Modu: Kusursuz Noktalı Çizgiler (Ezilme ve Taşmayı Kesin Önler) */
+/* Soru Kağıdı Modu: Kusursuz Noktalı Çizgiler */
 .dotted-answer-lines {
   display: flex;
   flex-direction: column;
@@ -1134,20 +1380,10 @@ select {
 
 .dotted-line-row .dots-fill {
   flex: 1;
-  border-bottom: 1.5px dotted #000000;
+  border-bottom: 1.5px dotted #000000 !important;
   height: 0;
   margin-bottom: 3px;
   min-width: 50px;
-}
-
-/* Geriye dönük uyumluluk / düz metin noktalar */
-.dotted-line-raw {
-  font-size: 9.5pt;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
-  color: #000000;
-  word-break: break-all;
-  overflow-wrap: anywhere;
 }
 
 /* Cevap Anahtarlı Mod */
@@ -1175,9 +1411,9 @@ select {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1194,7 +1430,7 @@ select {
 }
 
 .modal-dialog {
-  background: #ffffff;
+  background: var(--modal-bg);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 520px;
@@ -1205,6 +1441,8 @@ select {
   position: relative;
   border: 1px solid var(--border-color);
   box-sizing: border-box;
+  color: var(--text-body);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .modal-dialog-fullscreen {
@@ -1219,12 +1457,13 @@ select {
   overflow-y: auto;
   overflow-x: auto;
   border-radius: var(--radius-md);
-  background: #cbd5e1;
+  background: var(--modal-preview-bg);
   padding: clamp(0.75rem, 2vw, 1.5rem);
   display: flex;
   justify-content: center;
   max-height: calc(94dvh - 120px);
   -webkit-overflow-scrolling: touch;
+  transition: background-color 0.2s ease;
 }
 
 .modal-paper-container {
@@ -1236,7 +1475,7 @@ select {
 }
 
 .preview-modal-body .a4-page {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 .page-separator {
@@ -1252,16 +1491,16 @@ select {
   top: 50%;
   left: 0;
   right: 0;
-  border-top: 2px dashed #94a3b8;
+  border-top: 2px dashed var(--border-color);
   z-index: 1;
 }
 .page-separator span {
   position: relative;
-  background: #cbd5e1;
+  background: var(--border-color);
   padding: 5px 14px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #334155;
+  color: var(--text-dark);
   border-radius: 9999px;
   z-index: 2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -1279,14 +1518,14 @@ select {
 .modal-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-dark);
 }
 
 .modal-close {
   background: transparent;
   border: none;
   font-size: 1.25rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   cursor: pointer;
   min-width: 38px;
   min-height: 38px;
@@ -1297,8 +1536,8 @@ select {
   touch-action: manipulation;
 }
 .modal-close:hover {
-  color: #0f172a;
-  background: #f1f5f9;
+  color: var(--text-dark);
+  background: var(--btn-sec-hover);
 }
 
 /* Önizleme Modalı Alt Aksiyon Çubuğu */
@@ -1311,7 +1550,8 @@ select {
   margin-top: 0.85rem;
   padding-top: 0.85rem;
   border-top: 1px solid var(--border-color);
-  background: #ffffff;
+  background: var(--modal-bg);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .preview-modal-footer-info {
@@ -1319,17 +1559,17 @@ select {
   flex-direction: column;
   gap: 0.2rem;
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .preview-modal-footer-info strong {
-  color: #0f172a;
+  color: var(--text-dark);
   font-weight: 700;
 }
 
 .preview-modal-footer-info small {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .preview-modal-footer-actions {
@@ -1355,6 +1595,24 @@ select {
   background: #faf5ff !important;
   color: #7e22ce !important;
   border: 1px solid #e9d5ff !important;
+}
+
+[data-theme="dark"] .badge-docx {
+  background: rgba(37, 99, 235, 0.2) !important;
+  color: #93c5fd !important;
+  border-color: rgba(37, 99, 235, 0.4) !important;
+}
+
+[data-theme="dark"] .badge-pdf {
+  background: rgba(22, 163, 74, 0.2) !important;
+  color: #86efac !important;
+  border-color: rgba(22, 163, 74, 0.4) !important;
+}
+
+[data-theme="dark"] .badge-both {
+  background: rgba(126, 34, 206, 0.2) !important;
+  color: #d8b4fe !important;
+  border-color: rgba(126, 34, 206, 0.4) !important;
 }
 
 @media (max-width: 640px) {
@@ -1384,6 +1642,7 @@ select {
   color: #ffffff;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 0.86rem;
   z-index: 2000;
   display: flex;

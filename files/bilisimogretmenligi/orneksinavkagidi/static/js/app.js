@@ -562,8 +562,98 @@ const AppState = {
   printers: []
 };
 
+// --------------------------------------------------------------------------
+// Tema Yönetimi (Dark / Light / Sistem Modu - A4 Kağıdı Hariç)
+// --------------------------------------------------------------------------
+const THEME_STORAGE_KEY = "orneksinav_theme";
+
+function getSystemTheme() {
+  return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+}
+
+function getStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY) || "system";
+  } catch (e) {
+    return "system";
+  }
+}
+
+function applyTheme(theme, showNotification = false) {
+  const meta = document.querySelector('meta[name="color-scheme"]');
+  const btnIcon = document.getElementById("theme-btn-icon");
+  const btnText = document.getElementById("theme-btn-text");
+  const btnTextShort = document.getElementById("theme-btn-text-short");
+  const btnToggle = document.getElementById("btn-theme-toggle");
+
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    if (meta) meta.content = "dark";
+    if (btnIcon) btnIcon.textContent = "🌙";
+    if (btnText) btnText.textContent = "Tema: Koyu";
+    if (btnTextShort) btnTextShort.textContent = "Koyu";
+    if (btnToggle) btnToggle.title = "Tema: Koyu (Açık moda geçmek için tıklayın)";
+    if (showNotification) showToast("🌙 Koyu Tema aktif edildi");
+  } else if (theme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    if (meta) meta.content = "light";
+    if (btnIcon) btnIcon.textContent = "☀️";
+    if (btnText) btnText.textContent = "Tema: Açık";
+    if (btnTextShort) btnTextShort.textContent = "Açık";
+    if (btnToggle) btnToggle.title = "Tema: Açık (Sistem moduna geçmek için tıklayın)";
+    if (showNotification) showToast("☀️ Açık Tema aktif edildi");
+  } else {
+    // Sistem Modu (Varsayılan)
+    document.documentElement.removeAttribute("data-theme");
+    if (meta) meta.content = "light dark";
+    const currentOS = getSystemTheme();
+    if (btnIcon) btnIcon.textContent = "💻";
+    if (btnText) btnText.textContent = `Tema: Sistem (${currentOS === "dark" ? "Koyu" : "Açık"})`;
+    if (btnTextShort) btnTextShort.textContent = "Sistem";
+    if (btnToggle) btnToggle.title = `Tema: Sistem (${currentOS === "dark" ? "Koyu" : "Açık"} - Koyu moda geçmek için tıklayın)`;
+    if (showNotification) showToast("💻 Sistem Teması aktif edildi (İşletim sistemi tercihini takip eder)");
+  }
+}
+
+function cycleTheme() {
+  const current = getStoredTheme();
+  let next = "system";
+  if (current === "system") {
+    next = "dark";
+  } else if (current === "dark") {
+    next = "light";
+  } else {
+    next = "system";
+  }
+
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, next);
+  } catch (e) {}
+
+  applyTheme(next, true);
+}
+
+function initTheme() {
+  const saved = getStoredTheme();
+  applyTheme(saved, false);
+
+  const btnToggle = document.getElementById("btn-theme-toggle");
+  if (btnToggle) {
+    btnToggle.addEventListener("click", cycleTheme);
+  }
+
+  try {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if (getStoredTheme() === "system") {
+        applyTheme("system", false);
+      }
+    });
+  } catch (e) {}
+}
+
 // Sayfa yüklendiğinde başlat
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   initEventListeners();
   initMobileViewSwitcher();
   loadInitialExam();

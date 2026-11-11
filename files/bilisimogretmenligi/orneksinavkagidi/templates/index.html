@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
   <title>Bilişim Sınav Kağıdı Hazırlama & Yönetim Sistemi</title>
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem("orneksinav_theme") || "system";
+        if (t === "dark" || t === "light") {
+          document.documentElement.setAttribute("data-theme", t);
+          var m = document.querySelector('meta[name="color-scheme"]');
+          if (m) m.content = t;
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -21,6 +34,13 @@
     </div>
 
     <div class="header-actions">
+      <!-- Tema Değiştirici Buton (Sistem / Koyu / Açık) -->
+      <button id="btn-theme-toggle" class="btn btn-secondary btn-sm" title="Tema Değiştir (Sistem / Koyu / Açık)">
+        <span class="theme-icon" id="theme-btn-icon">💻</span>
+        <span class="btn-text-full" id="theme-btn-text">Tema: Sistem</span>
+        <span class="btn-text-short" id="theme-btn-text-short">Sistem</span>
+      </button>
+
       <a href="https://vahitkeskin.github.io/iamvahitkeskin/files/bilisimogretmenligi/index.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Bilişim Öğretmenliği Portalına Git (Yeni Sekmede Aç)">
         <span class="btn-icon">🌐</span>
         <span class="btn-text-full">Bilişim Portalı ↗</span>
