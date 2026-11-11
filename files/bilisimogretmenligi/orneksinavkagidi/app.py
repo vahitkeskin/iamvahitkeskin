@@ -81,18 +81,28 @@ def get_questions():
     portal_curriculum = request.args.get("portal_curriculum", "").lower() == "true"
     portal_grade = str(request.args.get("portal_grade", grade))
     try:
-        portal_weeks = int(request.args.get("portal_weeks", 8))
+        portal_start_week = int(request.args.get("portal_start_week", 1))
     except ValueError:
-        portal_weeks = 8
+        portal_start_week = 1
+    try:
+        portal_end_week = int(request.args.get("portal_end_week", request.args.get("portal_weeks", 8)))
+    except ValueError:
+        portal_end_week = 8
+
+    if portal_start_week > portal_end_week:
+        portal_start_week, portal_end_week = portal_end_week, portal_start_week
+    portal_start_week = max(1, min(portal_start_week, 41))
+    portal_end_week = max(1, min(portal_end_week, 41))
 
     # Portal müfredatı eşleştirmesi seçilmişse
     if portal_curriculum and portal_grade in PORTAL_CURRICULUM_DATA:
         p_info = PORTAL_CURRICULUM_DATA[portal_grade]
         p_pool = []
-        for w in range(1, portal_weeks + 1):
+        for w in range(portal_start_week, portal_end_week + 1):
             w_q = p_info.get("questions", {}).get(str(w), [])
             for item in w_q:
                 p_pool.append({
+                    "week": w,
                     "topic": f"{portal_grade}. Sınıf {w}. Hafta: {p_info.get('weeks', {}).get(str(w), '')}",
                     "question": item.get("q", ""),
                     "answer": item.get("a", ""),
@@ -118,7 +128,9 @@ def get_questions():
             return jsonify({
                 "grade": portal_grade,
                 "grade_name": f"{portal_grade}. Sınıf ({p_info.get('lesson', '')})",
-                "weeks_count": portal_weeks,
+                "start_week": portal_start_week,
+                "end_week": portal_end_week,
+                "weeks_count": portal_end_week - portal_start_week + 1,
                 "count": len(questions),
                 "questions": questions,
                 "source": "portal-curriculum"

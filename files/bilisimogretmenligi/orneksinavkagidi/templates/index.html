@@ -121,8 +121,8 @@
 
           <!-- Checkbox seçilince açılan seçenekler -->
           <div id="portal-sync-options" class="portal-sync-options" style="display: none;">
-            <div class="form-row-2">
-              <div class="form-group">
+            <div class="portal-sync-controls">
+              <div class="form-group portal-ctrl-grade">
                 <label for="portal-grade-select">Eşleşen Portal Sınıfı:</label>
                 <select id="portal-grade-select">
                   <option value="1">1. Sınıf - Serbest Etkinlikler</option>
@@ -138,20 +138,111 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                <label for="portal-weeks-count">Kapsanacak Hafta Sayısı (İlk Kaç Hafta?):</label>
-                <select id="portal-weeks-count">
-                  <option value="4">İlk 4 Hafta (1. Ay Değerlendirme)</option>
-                  <option value="6">İlk 6 Hafta</option>
-                  <option value="8" selected>İlk 8 Hafta (1. Dönem 1. Yazılı Kapsamı - Önerilen)</option>
-                  <option value="10">İlk 10 Hafta</option>
-                  <option value="12">İlk 12 Hafta</option>
-                  <option value="16">İlk 16 Hafta (1. Dönem 2. Yazılı Kapsamı)</option>
-                  <option value="19">İlk 19 Hafta (1. Dönem Sonu - Tüm 1. Dönem)</option>
-                  <option value="28">İlk 28 Hafta (2. Dönem 1. Yazılı Kapsamı)</option>
-                  <option value="36">İlk 36 Hafta (2. Dönem 2. Yazılı Kapsamı)</option>
-                  <option value="41">Tüm 41 Hafta (Yıl Sonu Genel Tekrarı)</option>
+              <div class="form-group portal-ctrl-week">
+                <label for="portal-start-week">Başlangıç Haftası (X):</label>
+                <select id="portal-start-week">
+                    <option value="1" selected>1. Hafta</option>
+                    <option value="2">2. Hafta</option>
+                    <option value="3">3. Hafta</option>
+                    <option value="4">4. Hafta</option>
+                    <option value="5">5. Hafta</option>
+                    <option value="6">6. Hafta</option>
+                    <option value="7">7. Hafta</option>
+                    <option value="8">8. Hafta</option>
+                    <option value="9">9. Hafta</option>
+                    <option value="10">10. Hafta</option>
+                    <option value="11">11. Hafta</option>
+                    <option value="12">12. Hafta</option>
+                    <option value="13">13. Hafta</option>
+                    <option value="14">14. Hafta</option>
+                    <option value="15">15. Hafta</option>
+                    <option value="16">16. Hafta</option>
+                    <option value="17">17. Hafta</option>
+                    <option value="18">18. Hafta</option>
+                    <option value="19">19. Hafta</option>
+                    <option value="20">20. Hafta</option>
+                    <option value="21">21. Hafta</option>
+                    <option value="22">22. Hafta</option>
+                    <option value="23">23. Hafta</option>
+                    <option value="24">24. Hafta</option>
+                    <option value="25">25. Hafta</option>
+                    <option value="26">26. Hafta</option>
+                    <option value="27">27. Hafta</option>
+                    <option value="28">28. Hafta</option>
+                    <option value="29">29. Hafta</option>
+                    <option value="30">30. Hafta</option>
+                    <option value="31">31. Hafta</option>
+                    <option value="32">32. Hafta</option>
+                    <option value="33">33. Hafta</option>
+                    <option value="34">34. Hafta</option>
+                    <option value="35">35. Hafta</option>
+                    <option value="36">36. Hafta</option>
+                    <option value="37">37. Hafta</option>
+                    <option value="38">38. Hafta</option>
+                    <option value="39">39. Hafta</option>
+                    <option value="40">40. Hafta</option>
+                    <option value="41">41. Hafta</option>
                 </select>
+              </div>
+
+              <div class="form-group portal-ctrl-week">
+                <label for="portal-end-week">Bitiş Haftası (Y):</label>
+                <select id="portal-end-week">
+                    <option value="1">1. Hafta</option>
+                    <option value="2">2. Hafta</option>
+                    <option value="3">3. Hafta</option>
+                    <option value="4">4. Hafta</option>
+                    <option value="5">5. Hafta</option>
+                    <option value="6">6. Hafta</option>
+                    <option value="7">7. Hafta</option>
+                    <option value="8" selected>8. Hafta</option>
+                    <option value="9">9. Hafta</option>
+                    <option value="10">10. Hafta</option>
+                    <option value="11">11. Hafta</option>
+                    <option value="12">12. Hafta</option>
+                    <option value="13">13. Hafta</option>
+                    <option value="14">14. Hafta</option>
+                    <option value="15">15. Hafta</option>
+                    <option value="16">16. Hafta</option>
+                    <option value="17">17. Hafta</option>
+                    <option value="18">18. Hafta</option>
+                    <option value="19">19. Hafta</option>
+                    <option value="20">20. Hafta</option>
+                    <option value="21">21. Hafta</option>
+                    <option value="22">22. Hafta</option>
+                    <option value="23">23. Hafta</option>
+                    <option value="24">24. Hafta</option>
+                    <option value="25">25. Hafta</option>
+                    <option value="26">26. Hafta</option>
+                    <option value="27">27. Hafta</option>
+                    <option value="28">28. Hafta</option>
+                    <option value="29">29. Hafta</option>
+                    <option value="30">30. Hafta</option>
+                    <option value="31">31. Hafta</option>
+                    <option value="32">32. Hafta</option>
+                    <option value="33">33. Hafta</option>
+                    <option value="34">34. Hafta</option>
+                    <option value="35">35. Hafta</option>
+                    <option value="36">36. Hafta</option>
+                    <option value="37">37. Hafta</option>
+                    <option value="38">38. Hafta</option>
+                    <option value="39">39. Hafta</option>
+                    <option value="40">40. Hafta</option>
+                    <option value="41">41. Hafta</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Hazır Aralık Butonları / Quick Presets -->
+            <div class="portal-presets-container">
+              <span class="portal-presets-label">⚡ Hazır Aralık:</span>
+              <div class="portal-presets-list">
+                <button type="button" class="portal-preset-btn active" data-start="1" data-end="8">1-8. Hafta (1.D 1.Y)</button>
+                <button type="button" class="portal-preset-btn" data-start="9" data-end="16">9-16. Hafta (1.D 2.Y)</button>
+                <button type="button" class="portal-preset-btn" data-start="1" data-end="19">1-19. Hafta (1. Dönem)</button>
+                <button type="button" class="portal-preset-btn" data-start="20" data-end="28">20-28. Hafta (2.D 1.Y)</button>
+                <button type="button" class="portal-preset-btn" data-start="29" data-end="36">29-36. Hafta (2.D 2.Y)</button>
+                <button type="button" class="portal-preset-btn" data-start="1" data-end="41">1-41. Hafta (Tüm Yıl)</button>
               </div>
             </div>
 

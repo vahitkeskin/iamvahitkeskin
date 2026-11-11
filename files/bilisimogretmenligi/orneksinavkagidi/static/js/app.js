@@ -169,7 +169,8 @@ function updatePortalSyncUI(autoGenerate = false) {
   const chk = document.getElementById("chk-portal-curriculum");
   const optionsPanel = document.getElementById("portal-sync-options");
   const gradeSel = document.getElementById("portal-grade-select");
-  const weeksSel = document.getElementById("portal-weeks-count");
+  const startWeekSel = document.getElementById("portal-start-week");
+  const endWeekSel = document.getElementById("portal-end-week");
   const summaryEl = document.getElementById("portal-curriculum-summary");
   const mainGradeSel = document.getElementById("select-grade");
 
@@ -183,9 +184,36 @@ function updatePortalSyncUI(autoGenerate = false) {
   AppState.usePortalCurriculum = true;
 
   const g = gradeSel ? gradeSel.value : "5";
-  const wCount = weeksSel ? parseInt(weeksSel.value, 10) : 8;
+  let startW = startWeekSel ? parseInt(startWeekSel.value, 10) : 1;
+  let endW = endWeekSel ? parseInt(endWeekSel.value, 10) : 8;
+
+  if (isNaN(startW) || startW < 1) startW = 1;
+  if (isNaN(endW) || endW < 1) endW = 8;
+  if (startW > 41) startW = 41;
+  if (endW > 41) endW = 41;
+
+  // X > Y ise otomatik düzelt
+  if (startW > endW) {
+    endW = startW;
+    if (endWeekSel) endWeekSel.value = String(endW);
+  }
+
   AppState.portalGrade = g;
-  AppState.portalWeeks = wCount;
+  AppState.portalStartWeek = startW;
+  AppState.portalEndWeek = endW;
+  AppState.portalWeeks = endW; // geriye dönük uyumluluk
+
+  // Hazır preset butonlarındaki aktifliği güncelle
+  const presetBtns = document.querySelectorAll(".portal-preset-btn");
+  presetBtns.forEach(btn => {
+    const bStart = parseInt(btn.getAttribute("data-start"), 10);
+    const bEnd = parseInt(btn.getAttribute("data-end"), 10);
+    if (bStart === startW && bEnd === endW) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
 
   // Sınıfı ana formla senkronize et
   if (mainGradeSel && mainGradeSel.value !== g && parseInt(g, 10) <= 10) {
@@ -207,23 +235,28 @@ function updatePortalSyncUI(autoGenerate = false) {
       AppState.header.school = "Anadolu Lisesi";
     }
 
-    // Dönem bilgisi
-    if (wCount <= 10) {
+    // Dönem bilgisi (X ve Y haftalarına göre akıllı tespit)
+    if (endW <= 10) {
       AppState.header.term = "1.DÖNEM 1. YAZILI";
-    } else if (wCount <= 19) {
+    } else if (startW >= 9 && endW <= 19) {
       AppState.header.term = "1.DÖNEM 2. YAZILI";
-    } else if (wCount <= 28) {
+    } else if (endW <= 19) {
+      AppState.header.term = "1.DÖNEM 2. YAZILI";
+    } else if (startW >= 19 && endW <= 28) {
       AppState.header.term = "2.DÖNEM 1. YAZILI";
-    } else {
+    } else if (startW >= 28) {
       AppState.header.term = "2.DÖNEM 2. YAZILI";
+    } else {
+      AppState.header.term = "2.DÖNEM 1. YAZILI";
     }
 
     populateForm();
 
-    // Haftalık konu özetini oluştur
+    // Haftalık konu özetini oluştur (X'ten Y'ye kadar)
     if (summaryEl) {
-      let html = `<div style="font-weight: 700; margin-bottom: 6px; color: #1e40af;">📌 ${pData.icon} ${g}. Sınıf ${pData.lesson} (İlk ${wCount} Hafta Kapsamı):</div>`;
-      for (let i = 1; i <= wCount; i++) {
+      const totalW = endW - startW + 1;
+      let html = `<div style="font-weight: 700; margin-bottom: 6px; color: #1e40af;">📌 ${pData.icon} ${g}. Sınıf ${pData.lesson} (${startW} - ${endW}. Hafta Kapsamı, Toplam ${totalW} Hafta):</div>`;
+      for (let i = startW; i <= endW; i++) {
         const title = pData.weeks[String(i)] || `${i}. Hafta Konusu`;
         html += `
           <div class="pw-row">
@@ -238,24 +271,41 @@ function updatePortalSyncUI(autoGenerate = false) {
     // Soruları müfredattan üret
     if (autoGenerate) {
       const qCount = parseInt(document.getElementById("input-question-count")?.value, 10) || 5;
-      const questions = generatePortalCurriculumQuestions(g, wCount, qCount);
+      const questions = generatePortalCurriculumQuestions(g, startW, endW, qCount);
       if (questions && questions.length > 0) {
         AppState.questions = questions;
         renderExamSheet();
         renderQuestionsList();
-        showToast(`Bilişim Öğretmenliği Portalı ile eşleştirildi (${g}. Sınıf - İlk ${wCount} Hafta)`);
+        showToast(`Bilişim Öğretmenliği Portalı ile eşleştirildi (${g}. Sınıf, ${startW}-${endW}. Haftalar)`);
       }
     }
   }
 }
 
-function generatePortalCurriculumQuestions(grade, weeksCount, count = 5) {
+function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 5) {
+  // Eğer 3 argüman gönderildiyse: (grade, weeksCount, count)
+  if (typeof count === "undefined" && typeof endWeek === "number") {
+    count = endWeek;
+    endWeek = startWeek;
+    startWeek = 1;
+  }
+  startWeek = parseInt(startWeek, 10) || 1;
+  endWeek = parseInt(endWeek, 10) || 8;
+  if (startWeek > endWeek) {
+    const tmp = startWeek;
+    startWeek = endWeek;
+    endWeek = tmp;
+  }
+  startWeek = Math.max(1, Math.min(startWeek, 41));
+  endWeek = Math.max(1, Math.min(endWeek, 41));
+  count = parseInt(count, 10) || 5;
+
   const pData = (typeof PORTAL_CURRICULUM_DATA !== "undefined" && PORTAL_CURRICULUM_DATA[grade]) ? PORTAL_CURRICULUM_DATA[grade] : null;
   if (!pData) return generateClientQuestions(grade, "orta", count, "Bilişim");
 
-  // Belirlenen haftalar arasındaki tüm soruları topla
+  // Belirlenen X - Y haftaları arasındaki tüm soruları topla
   const pool = [];
-  for (let w = 1; w <= weeksCount; w++) {
+  for (let w = startWeek; w <= endWeek; w++) {
     const wStr = String(w);
     const qList = pData.questions ? pData.questions[wStr] : null;
     if (qList && qList.length > 0) {
@@ -269,12 +319,12 @@ function generatePortalCurriculumQuestions(grade, weeksCount, count = 5) {
     }
   }
 
-  // Havuzdan haftalara dengeli dağılacak şekilde count kadar soru seç
+  const totalWeeks = endWeek - startWeek + 1;
   let selected = [];
   if (pool.length > 0) {
-    const weekStep = Math.max(1, Math.floor(weeksCount / count));
+    const weekStep = Math.max(1, Math.floor(totalWeeks / count));
     for (let i = 0; i < count; i++) {
-      const targetWeek = Math.min(weeksCount, 1 + i * weekStep);
+      const targetWeek = Math.min(endWeek, startWeek + i * weekStep);
       const matching = pool.filter(p => Math.abs(p.week - targetWeek) <= 1);
       const chosen = (matching.length > 0) ? matching[Math.floor(Math.random() * matching.length)] : pool[i % pool.length];
       
@@ -294,7 +344,7 @@ function generatePortalCurriculumQuestions(grade, weeksCount, count = 5) {
   // Eğer soru yetmezse haftalık konu başlıklarından açık uçlu sorular türet
   if (selected.length < count) {
     for (let i = selected.length; i < count; i++) {
-      const wNum = (i % weeksCount) + 1;
+      const wNum = startWeek + (i % totalWeeks);
       const wTitle = pData.weeks[String(wNum)] || `${wNum}. Hafta Konusu`;
       selected.push({
         week: wNum,
@@ -427,6 +477,8 @@ const AppState = {
   usePortalCurriculum: false,
   portalGrade: "5",
   portalWeeks: 8,
+  portalStartWeek: 1,
+  portalEndWeek: 8,
   answerColor: "#d32f2f",// Varsayılan renk: Kırmızı
   zoomLevel: 1.0,
   printers: []
@@ -731,14 +783,15 @@ async function generateBilisimExam() {
 
   if (AppState.usePortalCurriculum) {
     const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || "5";
-    const pW = AppState.portalWeeks || parseInt(document.getElementById("portal-weeks-count")?.value, 10) || 8;
-    const questions = generatePortalCurriculumQuestions(pG, pW, count);
+    const startW = AppState.portalStartWeek || parseInt(document.getElementById("portal-start-week")?.value, 10) || 1;
+    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 8;
+    const questions = generatePortalCurriculumQuestions(pG, startW, endW, count);
     if (questions && questions.length > 0) {
       AppState.questions = questions;
       populateForm();
       renderExamSheet();
       renderQuestionsList();
-      showToast(`Bilişim Öğretmenliği Portalı müfredatından ${pG}. Sınıf (İlk ${pW} Hafta) sınavı oluşturuldu!`);
+      showToast(`Bilişim Öğretmenliği Portalı müfredatından ${pG}. Sınıf (${startW}-${endW}. Hafta) sınavı oluşturuldu!`);
       return;
     }
   }
@@ -926,10 +979,11 @@ function initEventListeners() {
   bindHeaderInput("input-student-score", "student_score");
 
   // Bilişim Soru Üret Butonları
-  // Bilişim Öğretmenliği Portalı Müfredat Eşleştirme
+  // Bilişim Öğretmenliği Portalı Müfredat Eşleştirme (X - Y Hafta Aralığı)
   const chkPortal = document.getElementById("chk-portal-curriculum");
   const portalGradeSel = document.getElementById("portal-grade-select");
-  const portalWeeksSel = document.getElementById("portal-weeks-count");
+  const portalStartWeekSel = document.getElementById("portal-start-week");
+  const portalEndWeekSel = document.getElementById("portal-end-week");
 
   if (chkPortal) {
     chkPortal.addEventListener("change", () => {
@@ -945,13 +999,45 @@ function initEventListeners() {
     });
   }
 
-  if (portalWeeksSel) {
-    portalWeeksSel.addEventListener("change", () => {
+  if (portalStartWeekSel) {
+    portalStartWeekSel.addEventListener("change", () => {
+      const sVal = parseInt(portalStartWeekSel.value, 10);
+      const eVal = parseInt(portalEndWeekSel?.value, 10);
+      if (portalEndWeekSel && sVal > eVal) {
+        portalEndWeekSel.value = String(sVal);
+      }
       if (chkPortal && chkPortal.checked) {
         updatePortalSyncUI(true);
       }
     });
   }
+
+  if (portalEndWeekSel) {
+    portalEndWeekSel.addEventListener("change", () => {
+      const sVal = parseInt(portalStartWeekSel?.value, 10);
+      const eVal = parseInt(portalEndWeekSel.value, 10);
+      if (portalStartWeekSel && eVal < sVal) {
+        portalStartWeekSel.value = String(eVal);
+      }
+      if (chkPortal && chkPortal.checked) {
+        updatePortalSyncUI(true);
+      }
+    });
+  }
+
+  // Hazır Aralık Butonları (Presets)
+  document.querySelectorAll(".portal-preset-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const bStart = btn.getAttribute("data-start");
+      const bEnd = btn.getAttribute("data-end");
+      if (portalStartWeekSel) portalStartWeekSel.value = bStart;
+      if (portalEndWeekSel) portalEndWeekSel.value = bEnd;
+      if (chkPortal && !chkPortal.checked) {
+        chkPortal.checked = true;
+      }
+      updatePortalSyncUI(true);
+    });
+  });
 
   document.getElementById("btn-generate-bilisim")?.addEventListener("click", generateBilisimExam);
   document.getElementById("btn-generate-custom")?.addEventListener("click", generateCustomPrompt);
