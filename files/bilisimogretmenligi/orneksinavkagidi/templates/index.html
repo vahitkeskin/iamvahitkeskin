@@ -109,6 +109,59 @@
           <span class="badge">1-12. Sınıf MEB</span>
         </div>
 
+        <!-- Bilişim Öğretmenliği Portalı ile Eşleştirme Checkbox'ı -->
+        <div class="portal-sync-box">
+          <label class="portal-checkbox-label" for="chk-portal-curriculum">
+            <input type="checkbox" id="chk-portal-curriculum">
+            <span class="portal-chk-content">
+              <span class="portal-chk-title">📚 Bilişim Öğretmenliği Portalı ile Eşleştir</span>
+              <span class="portal-chk-desc">Portaldaki (1-10. Sınıf) haftalık müfredatı ve kazanımları baz al</span>
+            </span>
+          </label>
+
+          <!-- Checkbox seçilince açılan seçenekler -->
+          <div id="portal-sync-options" class="portal-sync-options" style="display: none;">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="portal-grade-select">Eşleşen Portal Sınıfı:</label>
+                <select id="portal-grade-select">
+                  <option value="1">1. Sınıf - Serbest Etkinlikler</option>
+                  <option value="2">2. Sınıf - Bilişim Teknolojileri ve Yazılım</option>
+                  <option value="3">3. Sınıf - Bilişim ve Kodlama</option>
+                  <option value="4">4. Sınıf - Bilişim Teknolojileri ve Yazılım</option>
+                  <option value="5" selected>5. Sınıf - Bilişim Teknolojileri ve Yazılım</option>
+                  <option value="6">6. Sınıf - Bilişim Teknolojileri</option>
+                  <option value="7">7. Sınıf - Teknoloji ve Tasarım</option>
+                  <option value="8">8. Sınıf - Robotik ve Yapay Zekâ</option>
+                  <option value="9">9. Sınıf - Bilgisayar Bilimi (Kur 1)</option>
+                  <option value="10">10. Sınıf - Bilgisayar Bilimi (Kur 2)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="portal-weeks-count">Kapsanacak Hafta Sayısı (İlk Kaç Hafta?):</label>
+                <select id="portal-weeks-count">
+                  <option value="4">İlk 4 Hafta (1. Ay Değerlendirme)</option>
+                  <option value="6">İlk 6 Hafta</option>
+                  <option value="8" selected>İlk 8 Hafta (1. Dönem 1. Yazılı Kapsamı - Önerilen)</option>
+                  <option value="10">İlk 10 Hafta</option>
+                  <option value="12">İlk 12 Hafta</option>
+                  <option value="16">İlk 16 Hafta (1. Dönem 2. Yazılı Kapsamı)</option>
+                  <option value="19">İlk 19 Hafta (1. Dönem Sonu - Tüm 1. Dönem)</option>
+                  <option value="28">İlk 28 Hafta (2. Dönem 1. Yazılı Kapsamı)</option>
+                  <option value="36">İlk 36 Hafta (2. Dönem 2. Yazılı Kapsamı)</option>
+                  <option value="41">Tüm 41 Hafta (Yıl Sonu Genel Tekrarı)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Kapsanan Haftalar Listesi Özeti -->
+            <div class="portal-curriculum-summary" id="portal-curriculum-summary">
+              <!-- JS ile dinamik doldurulur -->
+            </div>
+          </div>
+        </div>
+
         <div class="form-row-3">
           <div class="form-group">
             <label for="select-grade">Sınıf Seviyesi:</label>

@@ -18,6 +18,15 @@ from gemini_service import generate_questions_with_gemini
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
+PORTAL_DATA_PATH = os.path.join(os.path.dirname(__file__), "portal_curriculum_data.json")
+PORTAL_CURRICULUM_DATA = {}
+if os.path.exists(PORTAL_DATA_PATH):
+    try:
+        with open(PORTAL_DATA_PATH, "r", encoding="utf-8") as f:
+            PORTAL_CURRICULUM_DATA = json.load(f)
+    except Exception as e:
+        print(f"Error loading portal curriculum: {e}")
+
 @app.after_request
 def add_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
@@ -45,6 +54,14 @@ def get_topics():
         "all_lessons": ALL_LESSONS_1_TO_12
     })
 
+@app.route("/api/portal-curriculum", methods=["GET"])
+def get_portal_curriculum():
+    """Bilişim Öğretmenliği Portalı müfredatını ve haftalarını döner."""
+    grade = str(request.args.get("grade", ""))
+    if grade and grade in PORTAL_CURRICULUM_DATA:
+        return jsonify(PORTAL_CURRICULUM_DATA[grade])
+    return jsonify(PORTAL_CURRICULUM_DATA)
+
 @app.route("/api/questions", methods=["GET"])
 def get_questions():
     """
@@ -60,6 +77,52 @@ def get_questions():
     except ValueError:
         count = 5
     count = max(1, min(count, 30))
+
+    portal_curriculum = request.args.get("portal_curriculum", "").lower() == "true"
+    portal_grade = str(request.args.get("portal_grade", grade))
+    try:
+        portal_weeks = int(request.args.get("portal_weeks", 8))
+    except ValueError:
+        portal_weeks = 8
+
+    # Portal müfredatı eşleştirmesi seçilmişse
+    if portal_curriculum and portal_grade in PORTAL_CURRICULUM_DATA:
+        p_info = PORTAL_CURRICULUM_DATA[portal_grade]
+        p_pool = []
+        for w in range(1, portal_weeks + 1):
+            w_q = p_info.get("questions", {}).get(str(w), [])
+            for item in w_q:
+                p_pool.append({
+                    "topic": f"{portal_grade}. Sınıf {w}. Hafta: {p_info.get('weeks', {}).get(str(w), '')}",
+                    "question": item.get("q", ""),
+                    "answer": item.get("a", ""),
+                    "points": 20
+                })
+        if p_pool:
+            if len(p_pool) >= count:
+                selected = random.sample(p_pool, count)
+            else:
+                selected = p_pool
+            
+            pts = 100 // count
+            questions = []
+            for idx, item in enumerate(selected):
+                q_pts = (100 - pts * (count - 1)) if idx == count - 1 else pts
+                questions.append({
+                    "id": str(idx + 1),
+                    "topic": item.get("topic", "Bilişim"),
+                    "question": item["question"],
+                    "points": q_pts,
+                    "answer": item.get("answer", "")
+                })
+            return jsonify({
+                "grade": portal_grade,
+                "grade_name": f"{portal_grade}. Sınıf ({p_info.get('lesson', '')})",
+                "weeks_count": portal_weeks,
+                "count": len(questions),
+                "questions": questions,
+                "source": "portal-curriculum"
+            })
 
     # 1. Özel bir konu/ders seçildiyse ve API anahtarı mevcutsa öncelikle Gemini AI ile taze üret
     if topic and not topic.startswith("Tüm Dersler") and not topic.startswith("Tüm Konular"):
