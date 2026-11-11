@@ -31,15 +31,15 @@
         <span class="btn-text-full">Orijinal Şablon</span>
         <span class="btn-text-short">Şablon</span>
       </button>
-      <button id="btn-export-docx-both" class="btn btn-primary btn-sm" title="Hem Soru Hem Cevaplı Kağıdı ZIP Olarak İndir">
-        <span class="btn-icon">📦</span>
-        <span class="btn-text-full">Soru + Cevap (DOCX ZIP)</span>
-        <span class="btn-text-short">ZIP</span>
+      <button id="btn-header-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+        <span class="btn-icon">📄</span>
+        <span class="btn-text-full">DOCX İndir</span>
+        <span class="btn-text-short">DOCX</span>
       </button>
-      <button id="btn-quick-print" class="btn btn-success btn-sm" title="A4 Sayfa Olarak Önizle ve Yazdır / PDF Kaydet">
-        <span class="btn-icon">🖨️</span>
-        <span class="btn-text-full">Yazdır / PDF Kaydet</span>
-        <span class="btn-text-short">Yazdır / PDF</span>
+      <button id="btn-header-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+        <span class="btn-icon">📑</span>
+        <span class="btn-text-full">PDF İndir</span>
+        <span class="btn-text-short">PDF</span>
       </button>
     </div>
   </header>
@@ -456,14 +456,11 @@
 
         <!-- İndirme Seçenekleri -->
         <div class="toolbar-group">
-          <button id="btn-export-docx-questions" class="btn btn-secondary btn-sm" title="Soru Kağıdını DOCX Olarak İndir">
-            📄 Soru (DOCX)
+          <button id="btn-toolbar-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+            📄 DOCX İndir
           </button>
-          <button id="btn-export-docx-answers" class="btn btn-secondary btn-sm" title="Cevap Kağıdını DOCX Olarak İndir">
-            🔑 Cevap (DOCX)
-          </button>
-          <button id="btn-export-docx-single-both" class="btn btn-primary btn-sm" title="Tek Belgede Sayfa 1 Soru, Sayfa 2 Cevap Kağıdı İndir">
-            📑 Soru + Cevap (Tek DOCX)
+          <button id="btn-toolbar-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+            📑 PDF İndir
           </button>
         </div>
       </div>
@@ -575,20 +572,33 @@
   <div id="fullscreen-preview-modal" class="modal-overlay">
     <div class="modal-dialog modal-dialog-fullscreen">
       <div class="modal-header">
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <h3 style="margin: 0;">👁️ %100 Düzgün Sayfa Önizlemesi</h3>
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <h3 style="margin: 0;">👁️ Önizleme & İndirme</h3>
           <span class="badge" id="preview-modal-mode-badge">Soru Kağıdı</span>
+          <span class="badge badge-docx" id="preview-modal-target-badge" style="display: none;"></span>
         </div>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <button id="btn-modal-toggle-mode" class="btn btn-secondary btn-sm">Mod Değiştir (Cevap Anahtarı)</button>
-          <button id="btn-modal-print" class="btn btn-success btn-sm">🖨️ Yazdır / PDF</button>
-          <button id="btn-modal-docx" class="btn btn-primary btn-sm">📄 DOCX İndir</button>
-          <button id="btn-fullscreen-preview-close" class="modal-close">✕</button>
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <button id="btn-modal-toggle-mode" class="btn btn-secondary btn-sm" title="Soru Kağıdı ve Cevap Anahtarı Arasında Geçiş Yap">Mod Değiştir (Cevap Anahtarı)</button>
+          <button id="btn-modal-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Belgeyi DOCX Olarak İndir">📄 DOCX İndir</button>
+          <button id="btn-modal-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Belgeyi PDF Olarak İndir / Kaydet">📑 PDF İndir</button>
+          <button id="btn-modal-print" class="btn btn-secondary btn-sm" title="Yazdır">🖨️ Yazdır</button>
+          <button id="btn-fullscreen-preview-close" class="modal-close" title="Önizlemeyi Kapat">✕</button>
         </div>
       </div>
       <div class="modal-body preview-modal-body">
         <div id="modal-paper-container">
           <!-- Aktif A4 kağıdı buraya klonlanır -->
+        </div>
+      </div>
+      <div class="preview-modal-footer">
+        <div class="preview-modal-footer-info">
+          <span>İndirilecek Belge: <strong id="preview-modal-doc-title">Soru Kağıdı</strong></span>
+          <small id="preview-modal-doc-subtitle">(Ekranda hangi görünüm açıksa o indirilir)</small>
+        </div>
+        <div class="preview-modal-footer-actions">
+          <button id="btn-modal-footer-docx" class="btn btn-primary">📄 DOCX İndir</button>
+          <button id="btn-modal-footer-pdf" class="btn btn-success">📑 PDF İndir / Kaydet</button>
+          <button class="btn btn-secondary" onclick="closeFullscreenPreview()">✕ Kapat</button>
         </div>
       </div>
     </div>
