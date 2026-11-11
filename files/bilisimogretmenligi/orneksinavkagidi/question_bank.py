@@ -5,7 +5,19 @@ MEB 1-12. Sınıflar Tüm Dersler ve Bilişim Soru Bankası
 Kazanım odaklı, Kolay - Orta - Zor seviyelerde açık uçlu klasik sınav soruları.
 """
 
-INITIAL_EXAM = {'header': {'year': '2026-2027 EĞİTİM ÖĞRETİM YILI', 'school': 'Özel Viranşehir Uğur Anadolu Lisesi', 'lesson': 'SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE', 'term': '1.DÖNEM 1. YAZILI', 'student_name': '', 'student_class': '', 'student_no': '', 'student_score': ''}, 'questions': [{'id': 1, 'type': 'classic', 'question': 'Aile nedir? Kısaca tanımlayınız.', 'points': 20, 'answer': 'Aile; evlilik, kan bağı ya da evlat edinme yoluyla birbirine bağlanan, aynı çatı altında yaşayan ve ortak değerleri paylaşan en küçük toplumsal kurumdur.'}, {'id': 2, 'type': 'classic', 'question': 'Ailenin temel fonksiyonları nelerdir?', 'points': 20, 'answer': 'Ailenin temel fonksiyonları: Biyolojik (neslin devamı), ekonomik (ihtiyaçların karşılanması), koruyucu, eğitici/sosyalleştirici, psikolojik (sevgi ve güven sağlama) ve dinî/ahlaki değerleri aktarma fonksiyonlarıdır.'}, {'id': 3, 'type': 'classic', 'question': 'Aile üyelerinin rolleri nedir?', 'points': 20, 'answer': 'Aile üyelerinin rolleri; anne, baba ve çocukların aile içi huzur ve düzeni sağlamak adına üstlendikleri hak, ödev ve sorumluluklardır. Anne-baba rehberlik ve geçim, çocuklar ise sorumluluk alma ve saygı gösterme rollerine sahiptir.'}, {'id': 4, 'type': 'classic', 'question': 'Ailede iletişim neden önemlidir?', 'points': 20, 'answer': 'Sağlıklı iletişim; aile bireylerinin birbirini anlamasını, empati kurmasını, sorunların çatışmasız çözülmesini sağlar. Bireylerin aidiyet duygusunu güçlendirir ve güven ortamı oluşturur.'}, {'id': 5, 'type': 'classic', 'question': 'Aile içindeki sorumlulukların eşit dağıtılması niçin önemlidir?', 'points': 20, 'answer': 'Sorumlulukların adil paylaşımı; bireyler arasında tükenmişliği ve adaletsizlik hissini önler, iş birliğini pekiştirir, çocuklara sorumluluk bilinci kazandırır ve aile içi dayanışmayı güçlendirir.'}]}
+INITIAL_EXAM = {
+    'header': {
+        'year': '2026-2027 EĞİTİM ÖĞRETİM YILI',
+        'school': 'Ortaokulu',
+        'lesson': 'BİLİŞİM TEKNOLOJİLERİ VE YAZILIM',
+        'term': '1.DÖNEM 1. YAZILI',
+        'student_name': '',
+        'student_class': '',
+        'student_no': '',
+        'student_score': ''
+    },
+    'questions': []
+}
 
 GRADE_TOPICS = {
     "1": [
