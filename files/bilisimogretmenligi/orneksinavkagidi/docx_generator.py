@@ -103,7 +103,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     </w:p>
     ''')
 
-    dots_first = "Cevap:...................................................................................................................................................................."
+    dots_first = "...................................................................................................................................................................."
     dots_full = "............................................................................................................................................................................"
     dots_short = ".........................................................................................................................."
 
@@ -112,28 +112,30 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         p_val = escape_xml(q.get("points", 20))
         ans_text = escape_xml(q.get("answer", ""))
 
+        # Soru ve cevap arasında bir satır kadar boşluk (w:after="160") ve "Soru:" koyu
         elements.append(f'''
         <w:p>
-            <w:pPr><w:spacing w:before="120" w:after="30"/></w:pPr>
-            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: {q_text} ({p_val} Puan)</w:t></w:r>
+            <w:pPr><w:spacing w:before="120" w:after="160"/></w:pPr>
+            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: </w:t></w:r>
+            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="21"/></w:rPr><w:t>{q_text} ({p_val} Puan)</w:t></w:r>
         </w:p>
         ''')
 
         if not is_answer_key:
-            # Soru Kağıdı: 4 sıra noktalı cevap alanı
+            # Soru Kağıdı: "Cevap:" kısmı koyu ve rengi siyah kalarak 4 sıra noktalı cevap alanı
             elements.append(f'''
-            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="17"/></w:rPr><w:t>Cevap: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
             <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
             <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
             <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
             ''')
         else:
-            # Cevap Kağıdı (Cevap Anahtarı)
+            # Cevap Kağıdı: "Cevap: " kısmı koyu ve siyah, model cevap metni renkli/siyah
             color_attr = f'<w:color w:val="{clean_color}"/>' if clean_color != "000000" else ""
             elements.append(f'''
             <w:p>
                 <w:pPr><w:spacing w:before="40" w:after="80" w:line="260" w:lineRule="auto"/></w:pPr>
-                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
+                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
                 <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>{ans_text}</w:t></w:r>
             </w:p>
             ''')

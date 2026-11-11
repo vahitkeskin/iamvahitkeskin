@@ -353,7 +353,7 @@ function createExamPageHtml(isAnswerKey) {
     if (!isAnswerKey) {
       answerPart = `
         <div class="dotted-answer-lines">
-          <div class="dotted-line-row"><span class="ans-label">Cevap:</span>${dotsLine1}</div>
+          <div class="dotted-line-row"><span class="ans-label" style="color: #000000 !important;">Cevap: </span>${dotsLine1}</div>
           <div class="dotted-line-row">${dotsLine2}</div>
           <div class="dotted-line-row">${dotsLine3}</div>
           <div class="dotted-line-row">${dotsLine4}</div>
@@ -361,9 +361,9 @@ function createExamPageHtml(isAnswerKey) {
       `;
     } else {
       answerPart = `
-        <div class="model-answer-block" style="color: ${activeColor};">
-          <span class="ans-label">Cevap: </span>
-          <span class="ans-content" contenteditable="true" data-qid="${q.id}" data-field="answer">${escapeHtml(q.answer)}</span>
+        <div class="model-answer-block">
+          <span class="ans-label" style="color: #000000 !important;">Cevap: </span>
+          <span class="ans-content" style="color: ${activeColor};" contenteditable="true" data-qid="${q.id}" data-field="answer">${escapeHtml(q.answer)}</span>
         </div>
       `;
     }

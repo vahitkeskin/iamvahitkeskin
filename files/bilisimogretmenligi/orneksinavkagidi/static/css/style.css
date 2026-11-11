@@ -567,13 +567,14 @@ body {
 .exam-question-text {
   font-size: 11pt;
   line-height: 1.4;
-  margin-bottom: 4px;
+  margin-bottom: 14px;
   color: #000000;
   font-weight: 400;
 }
 
 .exam-question-text .q-num {
-  font-weight: 400;
+  font-weight: 700;
+  color: #000000;
 }
 
 .exam-question-text .q-pts {
@@ -589,6 +590,7 @@ body {
   word-break: break-all;
   user-select: none;
   font-weight: 400;
+  margin-top: 2px;
 }
 
 .dotted-line-row {
@@ -596,21 +598,23 @@ body {
 }
 
 .dotted-line-row .ans-label {
-  font-weight: 400;
-  color: #000000;
+  font-weight: 700;
+  color: #000000 !important;
+  margin-right: 2px;
 }
 
 /* Cevap Anahtarlı Mod */
 .model-answer-block {
   font-size: 10.5pt;
   line-height: 1.5;
-  margin-top: 4px;
+  margin-top: 2px;
   margin-bottom: 6px;
   font-weight: 400;
 }
 
 .model-answer-block .ans-label {
-  font-weight: 400;
+  font-weight: 700;
+  color: #000000 !important;
 }
 
 /* Canlı Tıklayıp Düzenlenebilir Alanlar (ContentEditable) */
@@ -880,6 +884,15 @@ body {
     font-weight: 700 !important;
   }
 
+  /* Soru ve Cevap etiketleri KOYU ve daima SİYAH */
+  .q-num,
+  .ans-label,
+  .dotted-line-row .ans-label,
+  .model-answer-block .ans-label {
+    font-weight: 700 !important;
+    color: #000000 !important;
+  }
+
   /* Geri kalan her şey normal kalınlıkta ve aynı fontta */
   .header-col-left,
   .header-col-left div,
@@ -888,10 +901,9 @@ body {
   .exam-section-title,
   .exam-question-block,
   .exam-question-text,
-  .q-num,
+  .q-content,
   .q-pts,
-  .ans-label,
-  .model-answer-block .ans-label {
+  .ans-content {
     font-weight: 400 !important;
   }
 
@@ -908,7 +920,7 @@ body {
 
   .exam-question-block {
     display: block !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     page-break-inside: avoid !important;
   }
 
@@ -917,9 +929,16 @@ body {
     padding-bottom: 0 !important;
   }
 
+  .exam-question-text {
+    margin-bottom: 12px !important;
+    font-size: 11pt !important;
+    line-height: 1.35 !important;
+  }
+
   .dotted-answer-lines {
     line-height: 1.35 !important;
     font-size: 9pt !important;
+    margin-top: 2px !important;
   }
 
   .model-answer-block {
