@@ -1,106 +1,581 @@
 # -*- coding: utf-8 -*-
 """
-Bilişim Teknolojileri ve Yazılım / Bilgisayar Bilimi Dersi Soru Bankası
-5, 6, 7, 8, 9 ve 10. sınıflar için MEB müfredatına tam uyumlu,
-Kazanım odaklı, Kolay - Orta - Zor seviyelerde açık uçlu klasik ve test soruları.
+MEB 1-12. Sınıflar Tüm Dersler ve Bilişim Soru Bankası
+1'den 12'ye kadar tüm sınıf seviyeleri ve tüm MEB dersleri için müfredata tam uyumlu,
+Kazanım odaklı, Kolay - Orta - Zor seviyelerde açık uçlu klasik sınav soruları.
 """
 
-INITIAL_EXAM = {
-    "header": {
-        "year": "2026-2027 EĞİTİM ÖĞRETİM YILI",
-        "school": "Özel Viranşehir Uğur Anadolu Lisesi",
-        "lesson": "SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE",
-        "term": "1.DÖNEM 1. YAZILI",
-        "student_name": "",
-        "student_class": "",
-        "student_no": "",
-        "student_score": ""
-    },
-    "questions": [
-        {
-            "id": 1,
-            "type": "classic",
-            "question": "Aile nedir? Kısaca tanımlayınız.",
-            "points": 20,
-            "answer": "Aile; evlilik, kan bağı ya da evlat edinme yoluyla birbirine bağlanan, aynı çatı altında yaşayan ve ortak değerleri paylaşan en küçük toplumsal kurumdur."
-        },
-        {
-            "id": 2,
-            "type": "classic",
-            "question": "Ailenin temel fonksiyonları nelerdir?",
-            "points": 20,
-            "answer": "Ailenin temel fonksiyonları: Biyolojik (neslin devamı), ekonomik (ihtiyaçların karşılanması), koruyucu, eğitici/sosyalleştirici, psikolojik (sevgi ve güven sağlama) ve dinî/ahlaki değerleri aktarma fonksiyonlarıdır."
-        },
-        {
-            "id": 3,
-            "type": "classic",
-            "question": "Aile üyelerinin rolleri nedir?",
-            "points": 20,
-            "answer": "Aile üyelerinin rolleri; anne, baba ve çocukların aile içi huzur ve düzeni sağlamak adına üstlendikleri hak, ödev ve sorumluluklardır. Anne-baba rehberlik ve geçim, çocuklar ise sorumluluk alma ve saygı gösterme rollerine sahiptir."
-        },
-        {
-            "id": 4,
-            "type": "classic",
-            "question": "Ailede iletişim neden önemlidir?",
-            "points": 20,
-            "answer": "Sağlıklı iletişim; aile bireylerinin birbirini anlamasını, empati kurmasını, sorunların çatışmasız çözülmesini sağlar. Bireylerin aidiyet duygusunu güçlendirir ve güven ortamı oluşturur."
-        },
-        {
-            "id": 5,
-            "type": "classic",
-            "question": "Aile içindeki sorumlulukların eşit dağıtılması niçin önemlidir?",
-            "points": 20,
-            "answer": "Sorumlulukların adil paylaşımı; bireyler arasında tükenmişliği ve adaletsizlik hissini önler, iş birliğini pekiştirir, çocuklara sorumluluk bilinci kazandırır ve aile içi dayanışmayı güçlendirir."
-        }
-    ]
-}
+INITIAL_EXAM = {'header': {'year': '2026-2027 EĞİTİM ÖĞRETİM YILI', 'school': 'Özel Viranşehir Uğur Anadolu Lisesi', 'lesson': 'SEÇMELİ TÜRK SOSYAL HAYATINDA AİLE', 'term': '1.DÖNEM 1. YAZILI', 'student_name': '', 'student_class': '', 'student_no': '', 'student_score': ''}, 'questions': [{'id': 1, 'type': 'classic', 'question': 'Aile nedir? Kısaca tanımlayınız.', 'points': 20, 'answer': 'Aile; evlilik, kan bağı ya da evlat edinme yoluyla birbirine bağlanan, aynı çatı altında yaşayan ve ortak değerleri paylaşan en küçük toplumsal kurumdur.'}, {'id': 2, 'type': 'classic', 'question': 'Ailenin temel fonksiyonları nelerdir?', 'points': 20, 'answer': 'Ailenin temel fonksiyonları: Biyolojik (neslin devamı), ekonomik (ihtiyaçların karşılanması), koruyucu, eğitici/sosyalleştirici, psikolojik (sevgi ve güven sağlama) ve dinî/ahlaki değerleri aktarma fonksiyonlarıdır.'}, {'id': 3, 'type': 'classic', 'question': 'Aile üyelerinin rolleri nedir?', 'points': 20, 'answer': 'Aile üyelerinin rolleri; anne, baba ve çocukların aile içi huzur ve düzeni sağlamak adına üstlendikleri hak, ödev ve sorumluluklardır. Anne-baba rehberlik ve geçim, çocuklar ise sorumluluk alma ve saygı gösterme rollerine sahiptir.'}, {'id': 4, 'type': 'classic', 'question': 'Ailede iletişim neden önemlidir?', 'points': 20, 'answer': 'Sağlıklı iletişim; aile bireylerinin birbirini anlamasını, empati kurmasını, sorunların çatışmasız çözülmesini sağlar. Bireylerin aidiyet duygusunu güçlendirir ve güven ortamı oluşturur.'}, {'id': 5, 'type': 'classic', 'question': 'Aile içindeki sorumlulukların eşit dağıtılması niçin önemlidir?', 'points': 20, 'answer': 'Sorumlulukların adil paylaşımı; bireyler arasında tükenmişliği ve adaletsizlik hissini önler, iş birliğini pekiştirir, çocuklara sorumluluk bilinci kazandırır ve aile içi dayanışmayı güçlendirir.'}]}
 
 GRADE_TOPICS = {
+    "1": [
+        "Tüm Dersler (Karma Sınav)",
+        "Türkçe: Harfler, Heceler ve Okuma-Yazma",
+        "Matematik: Doğal Sayılar ve Ritmik Sayma",
+        "Hayat Bilgisi: Okulumuzda ve Evimizde Hayat",
+        "Bilişim ve Kodlama: Algoritmik Sıralama ve Yönergeler",
+        "Görsel Sanatlar ve Müzik"
+    ],
+    "2": [
+        "Tüm Dersler (Karma Sınav)",
+        "Türkçe: Okuduğunu Anlama ve Noktalama",
+        "Matematik: Dört İşlem, Geometri ve Paralarımız",
+        "Hayat Bilgisi: Sağlıklı Yaşam ve Doğada Hayat",
+        "İngilizce: Words, Numbers, Colors and Friends",
+        "Bilişim ve Kodlama: Mantıksal Yönler ve Döngüler"
+    ],
+    "3": [
+        "Tüm Dersler (Karma Sınav)",
+        "Türkçe: 5N1K, Deyimler ve Metin Bilgisi",
+        "Matematik: Üç Basamaklı Sayılar, Çarpma, Bölme ve Kesirler",
+        "Fen Bilimleri: Gezegenimiz, Beş Duyumuz ve Kuvvet",
+        "Hayat Bilgisi: Okul Heyecanımız ve Ülkemizde Hayat",
+        "İngilizce: Greetings, Feelings and Family",
+        "Bilişim ve Kodlama: Problem Çözme ve Basit Blok Kodlama"
+    ],
+    "4": [
+        "Tüm Dersler (Karma Sınav)",
+        "Türkçe: Metin Türleri, Atasözleri ve Cümle Bilgisi",
+        "Matematik: Dört Basamaklı Sayılar, Kesirler ve Açılar",
+        "Fen Bilimleri: Yer Kabuğu, Besinlerimiz ve Maddenin Halleri",
+        "Sosyal Bilgiler: Birey ve Toplum, Kültür ve Miras",
+        "Din Kültürü ve Ahlak Bilgisi: Dini İfadeler ve Güzel Ahlak",
+        "İngilizce: Classroom Rules and My Day",
+        "Bilişim ve Kodlama: Algoritmalar ve Scratch ile Animasyon"
+    ],
     "5": [
-        "Tüm Konular",
+        "Tüm Dersler (Karma Sınav)",
         "Bilişim Teknolojileri ve Donanım",
         "Dosya Yönetimi ve Bulut Depolama",
         "Bilişim Etiği ve Güvenlik",
-        "Algoritma ve Blok Tabanlı Kodlama (Scratch)"
+        "Algoritma ve Blok Tabanlı Kodlama (Scratch)",
+        "Türkçe: Sözcükte/Cümlede Anlam, Paragraf ve Noktalama",
+        "Matematik: Doğal Sayılar, Kesirler, Yüzdeler ve Geometri",
+        "Fen Bilimleri: Güneş, Dünya, Ay, Canlılar ve Madde",
+        "Sosyal Bilgiler: Birlikte Yaşamak ve Kültürümüz",
+        "İngilizce: Hello, Games and Hobbies, Daily Routine",
+        "Din Kültürü ve Ahlak Bilgisi: Allah İnancı ve Adap-Nezaket"
     ],
     "6": [
-        "Tüm Konular",
+        "Tüm Dersler (Karma Sınav)",
         "İşletim Sistemleri ve Ağlar",
         "Siber Zorbalık, Telif Hakları ve Dijital Ayak İzi",
         "Algoritmalar ve Akış Şemaları",
-        "Blok Tabanlı Programlama (Değişkenler ve Şartlar)"
+        "Blok Tabanlı Programlama (Değişkenler ve Şartlar)",
+        "Türkçe: İsimler, Sıfatlar, Zamirler ve Paragraf",
+        "Matematik: Çarpanlar, Kümeler, Tam Sayılar ve Oran",
+        "Fen Bilimleri: Güneş Sistemi, Vücudumuzdaki Sistemler ve Kuvvet",
+        "Sosyal Bilgiler: Biz ve Değerlerimiz, Tarihe Yolculuk",
+        "İngilizce: Life, Breakfast, Weather and Emotions",
+        "Din Kültürü ve Ahlak Bilgisi: Peygamber İnancı ve Namaz"
     ],
     "7": [
-        "Tüm Konular",
+        "Tüm Dersler (Karma Sınav)",
         "Bilişimsel Düşünme Becerileri",
         "Elektronik Tablolar (Excel Formülleri)",
         "Web Tasarımı (HTML ve CSS Temelleri)",
-        "Metin Tabanlı Kodlamaya Giriş (Python)"
+        "Metin Tabanlı Kodlamaya Giriş (Python)",
+        "Türkçe: Fiiller, Ek Fiil, Zarflar ve Anlatım Bozuklukları",
+        "Matematik: Rasyonel Sayılar, Denklemler, Oran ve Çember",
+        "Fen Bilimleri: Güneş Sistemi, Hücre, Kuvvet ve Karışımlar",
+        "Sosyal Bilgiler: İletişim, Türk Tarihi ve Nüfus",
+        "İngilizce: Biographies, Wild Animals, Television",
+        "Din Kültürü ve Ahlak Bilgisi: Melek ve Ahiret İnancı, Hac"
     ],
     "8": [
-        "Tüm Konular",
+        "Tüm Dersler (LGS / Karma Sınav)",
         "İleri Algoritmalar ve Python ile Problem Çözme",
         "Veri Güvenliği, Kriptoloji ve Blokzincir",
         "Yapay Zeka ve Makine Öğrenmesi",
-        "Geleceğin Bilişim Teknolojileri (IoT, Büyük Veri)"
+        "Geleceğin Bilişim Teknolojileri (IoT, Büyük Veri)",
+        "Türkçe: Fiilimsiler, Cümlenin Ögeleri ve Paragraf Analizi",
+        "Matematik: Çarpanlar, Üslü-Köklü İfadeler ve Olasılık",
+        "Fen Bilimleri: Mevsimler, DNA ve Genetik Kod, Basınç",
+        "T.C. İnkılap Tarihi: Bir Kahraman Doğuyor ve Milli Mücadele",
+        "İngilizce: Friendship, Teen Life and The Internet",
+        "Din Kültürü ve Ahlak Bilgisi: Kader İnancı, Zekat ve Sadaka"
     ],
     "9": [
-        "Tüm Konular",
+        "Tüm Dersler (Karma Sınav)",
         "Bilgisayar Mimarisi ve Sayı Sistemleri (Binary/Hex)",
         "Mantıksal Kapılar ve Boole Cebri",
         "Python ile Programlama (Veri Tipleri, Operatörler)",
-        "Python Karar Yapıları (if-elif-else) ve Döngüler"
+        "Python Karar Yapıları (if-elif-else) ve Döngüler",
+        "Türk Dili ve Edebiyatı: Edebiyata Giriş, Hikaye ve Şiir",
+        "Matematik: Mantık, Kümeler, Denklemler ve Üçgenler",
+        "Fizik: Fizik Bilimine Giriş, Madde, Hareket ve Enerji",
+        "Kimya: Kimya Bilimi, Atom ve Periyodik Sistem",
+        "Biyoloji: Yaşam Bilimi Biyoloji ve Hücre",
+        "Tarih: İlk ve Orta Çağlarda Türk Dünyası",
+        "Coğrafya: Doğa ve İnsan, Coğrafi Koordinatlar",
+        "İngilizce: Studying Abroad and My Environment",
+        "Din Kültürü ve Ahlak Bilgisi: Bilgi, İnanç ve İslam ve İbadet"
     ],
     "10": [
-        "Tüm Konular",
+        "Tüm Dersler (Karma Sınav)",
         "Python Fonksiyonlar (def, return, parametreler)",
         "Dosya İşlemleri ve Hata Yakalama (try-except)",
         "Veritabanı Temelleri ve SQL Sorguları",
-        "Bilgisayar Ağları Protokolleri (TCP/IP) ve Siber Güvenlik"
+        "Bilgisayar Ağları Protokolleri (TCP/IP) ve Siber Güvenlik",
+        "Türk Dili ve Edebiyatı: Destan, Roman, Tiyatro ve Anlatım Türleri",
+        "Matematik: Sayma, Olasılık, Fonksiyonlar ve Polinomlar",
+        "Fizik: Elektrik, Manyetizma, Dalgalar ve Optik",
+        "Kimya: Kimyanın Temel Kanunları, Karışımlar ve Asit-Baz",
+        "Biyoloji: Hücre Bölünmeleri, Kalıtım ve Ekosistem",
+        "Tarih: Beylikten Devlete Osmanlı ve Dünya Gücü Osmanlı",
+        "Coğrafya: Yer Şekilleri, İç ve Dış Kuvvetler, Nüfus",
+        "Felsefe: Felsefeyi Tanıma ve Felsefi Düşünce",
+        "İngilizce: School Life, Plans and Legend People",
+        "Din Kültürü ve Ahlak Bilgisi: Allah İnsan İlişkisi ve Hz. Muhammed"
+    ],
+    "11": [
+        "Tüm Dersler (Karma Sınav)",
+        "Bilgisayar Bilimi: Nesne Yönelimli Programlama (OOP) ve Web",
+        "Türk Dili ve Edebiyatı: Tanzimat, Servetifünun ve Milli Edebiyat",
+        "Matematik: Trigonometri, Analitik Geometri ve Eşitsizlikler",
+        "Fizik: Vektörler, Bağıl Hareket, Newton Yasaları ve Momentum",
+        "Kimya: Modern Atom Teorisi, Gazlar ve Sıvı Çözeltiler",
+        "Biyoloji: İnsan Fizyolojisi, Sinir Sistemi ve Dolaşım",
+        "Tarih: Değişen Dünya Dengeleri ve Osmanlı",
+        "Coğrafya: Biyoçeşitlilik, Türkiye Ekonomisi ve Bölgeler",
+        "Felsefe: İlk Çağdan 20. Yüzyıla Felsefe Tarihi",
+        "İngilizce: Future Jobs and Hobbies and Skills",
+        "Din Kültürü ve Ahlak Bilgisi: Dünya ve Ahiret, İslam Düşüncesi"
+    ],
+    "12": [
+        "Tüm Dersler (YKS / Karma Sınav)",
+        "Bilgisayar Bilimi: Yapay Zeka Uygulamaları ve Büyük Veri",
+        "Türk Dili ve Edebiyatı: Cumhuriyet Dönemi Türk Edebiyatı",
+        "Matematik: Logaritma, Diziler, Limit, Türev ve İntegral",
+        "Fizik: Çembersel Hareket, Basit Harmonik Hareket ve Modern Fizik",
+        "Kimya: Kimya ve Elektrik, Organik Kimyaya Giriş",
+        "Biyoloji: Genden Proteine, Fotosentez ve Hücresel Solunum",
+        "T.C. İnkılap Tarihi: 20. Yüzyıl Başlarında Osmanlı ve Atatürkçülük",
+        "Coğrafya: Ekstrem Doğa Olayları ve Küresel Ticaret",
+        "İngilizce: Friendship, Human Rights and Energy",
+        "Din Kültürü ve Ahlak Bilgisi: İslam ve Bilim, Güncel Dini Meseleler"
     ]
 }
 
+ALL_LESSONS_1_TO_12 = [
+    "Türkçe",
+    "Matematik",
+    "Fen Bilimleri",
+    "Hayat Bilgisi",
+    "Sosyal Bilgiler",
+    "Bilişim Teknolojileri ve Yazılım",
+    "Bilgisayar Bilimi",
+    "Türk Dili ve Edebiyatı",
+    "Fizik",
+    "Kimya",
+    "Biyoloji",
+    "Tarih",
+    "T.C. İnkılap Tarihi ve Atatürkçülük",
+    "Coğrafya",
+    "Felsefe",
+    "İngilizce",
+    "Din Kültürü ve Ahlak Bilgisi",
+    "Seçmeli Türk Sosyal Hayatında Aile",
+    "Yapay Zeka ve Yazılım Uygulamaları"
+]
+
 QUESTION_BANK = {
+    "1": {
+        "grade_name": "1. Sınıf",
+        "kolay": [
+            {
+                "topic": "Türkçe: Harfler, Heceler ve Okuma-Yazma",
+                "question": "Alfabemizin ilk ve son harfi hangileridir? Yazınız.",
+                "points": 20,
+                "answer": "İlk harfi 'A', son harfi 'Z' harfidir."
+            },
+            {
+                "topic": "Matematik: Doğal Sayılar ve Ritmik Sayma",
+                "question": "1'den 10'a kadar birer ritmik sayarak sayıları sırayla yazınız.",
+                "points": 20,
+                "answer": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10."
+            },
+            {
+                "topic": "Hayat Bilgisi: Okulumuzda ve Evimizde Hayat",
+                "question": "Okulda sınıfımızda uymamız gereken iki temel kural yazınız.",
+                "points": 20,
+                "answer": "1. Derse zamanında girmek. 2. Parmak kaldırarak söz istemek."
+            },
+            {
+                "topic": "Matematik: Doğal Sayılar ve Ritmik Sayma",
+                "question": "5 elmanız vardı, 3 elma daha aldınız. Toplam kaç elmanız olur?",
+                "points": 20,
+                "answer": "5 + 3 = 8 elma olur."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmik Sıralama ve Yönergeler",
+                "question": "Bir robotun ileri 2 adım gitmesi için gereken basit yönergeyi yazınız.",
+                "points": 20,
+                "answer": "Robot 'İleri git', 'İleri git' şeklinde 2 adım yönergesi alır."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Türkçe: Harfler, Heceler ve Okuma-Yazma",
+                "question": "Görsel okuma nedir? Bir resme bakarak neler anlayabiliriz?",
+                "points": 20,
+                "answer": "Resim ve işaretleri anlamlandırmaya görsel okuma denir. Resimdeki olayları, duyguları ve çevreyi anlarız."
+            },
+            {
+                "topic": "Matematik: Doğal Sayılar ve Ritmik Sayma",
+                "question": "Bir basamaklı en büyük doğal sayı ile en küçük doğal sayıyı yazınız.",
+                "points": 20,
+                "answer": "En büyük bir basamaklı sayı 9, en küçük doğal sayı ise 0'dır."
+            },
+            {
+                "topic": "Hayat Bilgisi: Okulumuzda ve Evimizde Hayat",
+                "question": "Kişisel temizliğimiz için her gün yapmamız gereken iki alışkanlık yazınız.",
+                "points": 20,
+                "answer": "1. Sabah ve akşam dişleri fırçalamak. 2. Yemeklerden önce elleri sabunla yıkamak."
+            },
+            {
+                "topic": "Türkçe: Harfler, Heceler ve Okuma-Yazma",
+                "question": "'Kedi süt içti.' cümlesinde kaç tane kelime (sözcük) vardır?",
+                "points": 20,
+                "answer": "Bu cümlede toplam 3 kelime vardır: Kedi, süt, içti."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmik Sıralama ve Yönergeler",
+                "question": "Ayakkabı giyme adımlarını doğru sırayla listeleyiniz.",
+                "points": 20,
+                "answer": "1. Çorabı giy. 2. Ayakkabıyı ayağına geçir. 3. Bağcıklarını bağla."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Matematik: Doğal Sayılar ve Ritmik Sayma",
+                "question": "Ali'nin 12 cevizi vardı. 4 tanesini kardeşine verdi. Ali'nin kaç cevizi kaldı?",
+                "points": 20,
+                "answer": "12 - 4 = 8 cevizi kalmıştır."
+            },
+            {
+                "topic": "Türkçe: Harfler, Heceler ve Okuma-Yazma",
+                "question": "'Okul' kelimesini hecelerine ayırınız ve kaç heceli olduğunu yazınız.",
+                "points": 20,
+                "answer": "'O - kul' şeklinde 2 heceye ayrılır."
+            },
+            {
+                "topic": "Hayat Bilgisi: Okulumuzda ve Evimizde Hayat",
+                "question": "Trafikte karşıdan karşıya geçerken güvenli geçiş yerlerine iki örnek veriniz.",
+                "points": 20,
+                "answer": "1. Yaya geçitleri. 2. Üst ve alt geçitler."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmik Sıralama ve Yönergeler",
+                "question": "Bir labirentteki tavşanın havuca ulaşması için gereken 3 adımlı yön algoritmasını yazınız.",
+                "points": 20,
+                "answer": "1. 2 adım İleri Git. 2. Sağa Dön. 3. 1 adım İleri Git."
+            },
+            {
+                "topic": "Matematik: Doğal Sayılar ve Ritmik Sayma",
+                "question": "Bir düzine kaç tanedir ve bir deste kaç tanedir? Arasındaki farkı bulunuz.",
+                "points": 20,
+                "answer": "Bir düzine 12, bir deste 10 tanedir. Fark: 12 - 10 = 2 tanedir."
+            }
+        ]
+    },
+    "2": {
+        "grade_name": "2. Sınıf",
+        "kolay": [
+            {
+                "topic": "Türkçe: Okuduğunu Anlama ve Noktalama",
+                "question": "Nokta (.) işareti nerelerde kullanılır? İki örnek veriniz.",
+                "points": 20,
+                "answer": "1. Tamamlanmış cümlenin sonunda. 2. Sayılardan sonra sıra bildirmek için (1., 2.)."
+            },
+            {
+                "topic": "Matematik: Dört İşlem, Geometri ve Paralarımız",
+                "question": "25 + 14 işleminin sonucunu bulunuz.",
+                "points": 20,
+                "answer": "25 + 14 = 39."
+            },
+            {
+                "topic": "Hayat Bilgisi: Sağlıklı Yaşam ve Doğada Hayat",
+                "question": "Sağlıklı büyümek için tüketmemiz gereken besin gruplarından üç tanesini yazınız.",
+                "points": 20,
+                "answer": "Süt ve süt ürünleri, et ve yumurta, taze sebze ve meyveler."
+            },
+            {
+                "topic": "İngilizce: Words, Numbers, Colors and Friends",
+                "question": "İngilizce 'Kırmızı' ve 'Mavi' renklerinin karşılıklarını yazınız.",
+                "points": 20,
+                "answer": "Kırmızı: Red, Mavi: Blue."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Mantıksal Yönler ve Döngüler",
+                "question": "Kodlamada 'Döngü' (Tekrar) ne anlama gelir? Kısaca açıklayınız.",
+                "points": 20,
+                "answer": "Aynı işlemi tekrar tekrar yazmak yerine belirli sayıda otomatik tekrarlatılmasıdır."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Türkçe: Okuduğunu Anlama ve Noktalama",
+                "question": "'Siyah' ve 'Büyük' sözcüklerinin zıt (karşıt) anlamlılarını yazınız.",
+                "points": 20,
+                "answer": "Siyah zıttı: Beyaz. Büyük zıttı: Küçük."
+            },
+            {
+                "topic": "Matematik: Dört İşlem, Geometri ve Paralarımız",
+                "question": "40 sayısından başlayarak geriye doğru beşer ritmik sayınız.",
+                "points": 20,
+                "answer": "40, 35, 30, 25, 20, 15, 10, 5, 0."
+            },
+            {
+                "topic": "Hayat Bilgisi: Sağlıklı Yaşam ve Doğada Hayat",
+                "question": "Milli bayramlarımızdan iki tanesini yazınız.",
+                "points": 20,
+                "answer": "1. 29 Ekim Cumhuriyet Bayramı, 2. 23 Nisan Ulusal Egemenlik ve Çocuk Bayramı."
+            },
+            {
+                "topic": "İngilizce: Words, Numbers, Colors and Friends",
+                "question": "'One, two, three, four, five' sayılarını Türkçe karşılıklarıyla eşleştiriniz.",
+                "points": 20,
+                "answer": "One: 1, Two: 2, Three: 3, Four: 4, Five: 5."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Mantıksal Yönler ve Döngüler",
+                "question": "Bilgisayarda ekranı görmemizi ve yazı yazmamızı sağlayan donanımların adlarını yazınız.",
+                "points": 20,
+                "answer": "Ekranı görmemizi Monitör (Ekran), yazı yazmamızı Klavye sağlar."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Matematik: Dört İşlem, Geometri ve Paralarımız",
+                "question": "Tanesi 4 TL olan kalemlerden 5 tane alan Zeynep kırtasiyeye kaç TL öder?",
+                "points": 20,
+                "answer": "5 x 4 = 20 TL öder."
+            },
+            {
+                "topic": "Türkçe: Okuduğunu Anlama ve Noktalama",
+                "question": "'güneş açınca çiçekler açtı' cümlesindeki yazım ve noktalama hatasını düzeltiniz.",
+                "points": 20,
+                "answer": "Cümle büyük harfle 'Güneş' diye başlamalı ve sonuna nokta (.) konmalıdır: 'Güneş açınca çiçekler açtı.'"
+            },
+            {
+                "topic": "Hayat Bilgisi: Sağlıklı Yaşam ve Doğada Hayat",
+                "question": "Geri dönüşüm nedir? Geri dönüştürülebilen iki atık türü yazınız.",
+                "points": 20,
+                "answer": "Kullanılmış atıkların yeniden işlenerek üretime kazandırılmasıdır. Örnek: Kağıt ve Cam/Plastik."
+            },
+            {
+                "topic": "İngilizce: Words, Numbers, Colors and Friends",
+                "question": "'How are you?' sorusuna verilebilecek iki kibar cevap yazınız.",
+                "points": 20,
+                "answer": "'I am fine, thank you.' ve 'I am great.'"
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Mantıksal Yönler ve Döngüler",
+                "question": "Bir robotun kare çizmesi için gereken adımları döngü mantığıyla yazınız.",
+                "points": 20,
+                "answer": "4 kez tekrarla: [10 adım İleri Git, 90 derece Sağa Dön]."
+            }
+        ]
+    },
+    "3": {
+        "grade_name": "3. Sınıf",
+        "kolay": [
+            {
+                "topic": "Türkçe: 5N1K, Deyimler ve Metin Bilgisi",
+                "question": "5N1K kuralındaki 5N harfi hangi soruları temsil eder? Yazınız.",
+                "points": 20,
+                "answer": "Ne, Nerede, Ne zaman, Nasıl, Neden."
+            },
+            {
+                "topic": "Matematik: Üç Basamaklı Sayılar, Çarpma, Bölme ve Kesirler",
+                "question": "3 basamaklı en küçük çift doğal sayı kaçtır?",
+                "points": 20,
+                "answer": "100'dür."
+            },
+            {
+                "topic": "Fen Bilimleri: Gezegenimiz, Beş Duyumuz ve Kuvvet",
+                "question": "Dünyamızın dıştan içe doğru katmanlarını yazınız.",
+                "points": 20,
+                "answer": "Hava katmanı (Atmosfer), Su katmanı, Yer kabuğu, Manto ve Çekirdek."
+            },
+            {
+                "topic": "Hayat Bilgisi: Okul Heyecanımız ve Ülkemizde Hayat",
+                "question": "Tasarruf yapmak ne demektir? Evde yapabileceğimiz bir örnek veriniz.",
+                "points": 20,
+                "answer": "Kaynakları israf etmeden ihtiyacımız kadar kullanmaktır. Örnek: Diş fırçalarken musluğu kapatmak."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Problem Çözme ve Basit Blok Kodlama",
+                "question": "İnternette tanımadığımız kişilerle neden kişisel bilgilerimizi (şifre, adres vb.) paylaşmamalıyız?",
+                "points": 20,
+                "answer": "Güvenliğimiz tehlikeye girebilir ve kötü niyetli kişiler hesaplarımızı veya bizi tehdit edebilir."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Türkçe: 5N1K, Deyimler ve Metin Bilgisi",
+                "question": "'Gözden düşmek' deyiminin anlamını açıklayınız.",
+                "points": 20,
+                "answer": "Bir kişinin başkalarının yanındaki değerini ve sevgisini yitirmesi anlamına gelir."
+            },
+            {
+                "topic": "Matematik: Üç Basamaklı Sayılar, Çarpma, Bölme ve Kesirler",
+                "question": "248 sayısının basamak değerlerini (yüzler, onlar, birler) ayrı ayrı yazınız.",
+                "points": 20,
+                "answer": "Yüzler basamağı: 200, Onlar basamağı: 40, Birler basamağı: 8."
+            },
+            {
+                "topic": "Fen Bilimleri: Gezegenimiz, Beş Duyumuz ve Kuvvet",
+                "question": "Kuvvetin cisimler üzerindeki 3 temel etkisini yazınız.",
+                "points": 20,
+                "answer": "1. Hızlandırıcı etki, 2. Yavaşlatıcı/Durdurucu etki, 3. Şekil değiştirici etki."
+            },
+            {
+                "topic": "İngilizce: Greetings, Feelings and Family",
+                "question": "'Mother, Father, Sister, Brother' kelimelerinin Türkçe anlamlarını yazınız.",
+                "points": 20,
+                "answer": "Mother: Anne, Father: Baba, Sister: Kız kardeş, Brother: Erkek kardeş."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Problem Çözme ve Basit Blok Kodlama",
+                "question": "Algoritmada 'Şart' (Eğer / İse) kavramını günlük hayattan yağmur örneğiyle açıklayınız.",
+                "points": 20,
+                "answer": "Eğer hava yağmurlu ise şemsiye al, değilse şemsiye alma."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Matematik: Üç Basamaklı Sayılar, Çarpma, Bölme ve Kesirler",
+                "question": "Bir bölme işleminde bölen 6, bölüm 14 ve kalan 3 ise bölünen sayı kaçtır?",
+                "points": 20,
+                "answer": "Bölünen = (Bölen x Bölüm) + Kalan -> (6 x 14) + 3 = 84 + 3 = 87'dir."
+            },
+            {
+                "topic": "Türkçe: 5N1K, Deyimler ve Metin Bilgisi",
+                "question": "'Çay kenarında oturup sıcak bir çay içtik.' cümlesindeki eş sesli sözcüğü ve iki farklı anlamını yazınız.",
+                "points": 20,
+                "answer": "'Çay' sözcüğüdür. 1. Akarsu/dere anlamında. 2. İçilen sıcak içecek anlamında."
+            },
+            {
+                "topic": "Fen Bilimleri: Gezegenimiz, Beş Duyumuz ve Kuvvet",
+                "question": "Maddenin halleri kaça ayrılır? Her birine günlük hayattan birer örnek veriniz.",
+                "points": 20,
+                "answer": "Üçe ayrılır: 1. Katı (Buz, taş), 2. Sıvı (Su, süt), 3. Gaz (Su buharı, hava)."
+            },
+            {
+                "topic": "İngilizce: Greetings, Feelings and Family",
+                "question": "'What is your favourite toy and why?' sorusuna İngilizce bir cevap cümlesi yazınız.",
+                "points": 20,
+                "answer": "'My favourite toy is a blue car because I love racing.'"
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Problem Çözme ve Basit Blok Kodlama",
+                "question": "Scratch programında yeşil bayrağa tıklandığında karakterin ekranda sürekli yürümesi için hangi bloklar kullanılır?",
+                "points": 20,
+                "answer": "'Yeşil bayrağa tıklandığında' -> 'Sürekli tekrarla' -> '10 adım git' ve 'Kenara geldiyse sek'."
+            }
+        ]
+    },
+    "4": {
+        "grade_name": "4. Sınıf",
+        "kolay": [
+            {
+                "topic": "Türkçe: Metin Türleri, Atasözleri ve Cümle Bilgisi",
+                "question": "Öznel yargı ile nesnel yargı arasındaki farkı birer örnekle açıklayınız.",
+                "points": 20,
+                "answer": "Nesnel: Kanıtlanabilir gerçekler ('Türkiye\\'nin başkenti Ankara\\'dır'). Öznel: Kişisel duygu ve görüşler ('En güzel renk mavidir')."
+            },
+            {
+                "topic": "Matematik: Dört Basamaklı Sayılar, Kesirler ve Açılar",
+                "question": "4500 sayısının 100'e ve 10'a zihinden bölümünü yazınız.",
+                "points": 20,
+                "answer": "4500 / 100 = 45, 4500 / 10 = 450."
+            },
+            {
+                "topic": "Fen Bilimleri: Yer Kabuğu, Besinlerimiz ve Maddenin Halleri",
+                "question": "Fosil nedir? Kısaca açıklayınız.",
+                "points": 20,
+                "answer": "Milyonlarca yıl önce yaşamış canlıların kayaçlar içinde taşlaşmış kalıntı ve izleridir."
+            },
+            {
+                "topic": "Sosyal Bilgiler: Birey ve Toplum, Kültür ve Miras",
+                "question": "Mustafa Kemal Atatürk'ün Samsun'a çıkarak Milli Mücadeleyi başlattığı tarihi yazınız.",
+                "points": 20,
+                "answer": "19 Mayıs 1919."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmalar ve Scratch ile Animasyon",
+                "question": "Bilgisayarda güçlü bir şifre oluştururken nelere dikkat edilmelidir? İki kural yazınız.",
+                "points": 20,
+                "answer": "1. En az 8 karakter olmalı, harf, rakam ve sembol içermeli. 2. Doğum tarihi gibi kolay tahmin edilen bilgiler kullanılmamalıdır."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Türkçe: Metin Türleri, Atasözleri ve Cümle Bilgisi",
+                "question": "'Damlaya damlaya göl olur' atasözünün anlamını açıklayınız.",
+                "points": 20,
+                "answer": "Küçük ve önemsiz görünen birikimler zamanla büyük bir değere dönüşür."
+            },
+            {
+                "topic": "Matematik: Dört Basamaklı Sayılar, Kesirler ve Açılar",
+                "question": "Bir dikdörtgenin uzun kenarı 12 cm, kısa kenarı 8 cm'dir. Bu dikdörtgenin çevresi ve alanı kaçtır?",
+                "points": 20,
+                "answer": "Çevre = 2 x (12 + 8) = 40 cm. Alan = 12 x 8 = 96 cm²."
+            },
+            {
+                "topic": "Fen Bilimleri: Yer Kabuğu, Besinlerimiz ve Maddenin Halleri",
+                "question": "Karbonhidratların ve proteinlerin vücuttaki temel görevlerini yazınız.",
+                "points": 20,
+                "answer": "Karbonhidratlar: Vücuda öncelikli enerji sağlar. Proteinler: Yapıcı ve onarıcı olarak büyüme ve doku onarımını sağlar."
+            },
+            {
+                "topic": "Din Kültürü ve Ahlak Bilgisi: Dini İfadeler ve Güzel Ahlak",
+                "question": "İslam'ın beş şartını sırasıyla yazınız.",
+                "points": 20,
+                "answer": "1. Kelime-i Şehadet getirmek, 2. Namaz kılmak, 3. Oruç tutmak, 4. Zekat vermek, 5. Hacca gitmek."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmalar ve Scratch ile Animasyon",
+                "question": "Scratch'ta 'Değişken' (Variable) nedir? Skor tablosundaki rolünü yazınız.",
+                "points": 20,
+                "answer": "Değişken, oyun süresince değişebilen sayı veya verileri saklayan hafıza kutusudur. Örn: Her elma toplandığında skor 1 artırılır."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Matematik: Dört Basamaklı Sayılar, Kesirler ve Açılar",
+                "question": "Bir çıkarma işleminde eksilen, çıkan ve farkın toplamı 240'tır. Eksilen sayı kaçtır?",
+                "points": 20,
+                "answer": "Eksilen = Çıkan + Fark olduğundan, toplam = 2 x Eksilen = 240. Buradan Eksilen = 120'dir."
+            },
+            {
+                "topic": "Türkçe: Metin Türleri, Atasözleri ve Cümle Bilgisi",
+                "question": "Cümlede abartma (mübalağa) ve benzetme sanatlarına birer örnek cümle yazınız.",
+                "points": 20,
+                "answer": "Abartma: 'Ağlamaktan gözlerimin yaşı sel oldu.' Benzetme: 'Aslan gibi kuvvetli bir çocuktu.'"
+            },
+            {
+                "topic": "Fen Bilimleri: Yer Kabuğu, Besinlerimiz ve Maddenin Halleri",
+                "question": "Maddenin ısı alarak katıdan sıvıya ve sıvıdan gaza geçmesine ne ad verilir?",
+                "points": 20,
+                "answer": "Katıdan sıvıya geçişe 'Erime', sıvıdan gaza geçişe 'Buharlaşma' denir."
+            },
+            {
+                "topic": "Sosyal Bilgiler: Birey ve Toplum, Kültür ve Miras",
+                "question": "Bilinçli bir tüketicinin alışveriş yaparken dikkat etmesi gereken üç önemli özelliği yazınız.",
+                "points": 20,
+                "answer": "1. TSE damgasına bakmak. 2. Son kullanma tarihini kontrol etmek. 3. Fiş veya fatura almak."
+            },
+            {
+                "topic": "Bilişim ve Kodlama: Algoritmalar ve Scratch ile Animasyon",
+                "question": "İnternet etiği (Netiquette) nedir? İki kural yazınız.",
+                "points": 20,
+                "answer": "İnternet kullanırken uyulması gereken ahlaki kurallardır. 1. Siber zorbalık yapmamak. 2. Başkalarının emeğini izinsiz kopyalamamak."
+            }
+        ]
+    },
     "5": {
         "grade_name": "5. Sınıf - Bilişim Teknolojileri ve Yazılım",
         "lesson_name": "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
@@ -698,6 +1173,204 @@ QUESTION_BANK = {
                 "question": "Simetrik şifreleme (AES) ile Asimetrik şifreleme (RSA / Açık-Gizli Anahtar) arasındaki çalışma mantığı farkını açıklayınız.",
                 "points": 20,
                 "answer": "Simetrik şifrelemede hem şifreleme hem şifre çözme için aynı tek gizli anahtar kullanılır. Asimetrik şifrelemede iki anahtar vardır: Herkesin bildiği 'Genel Anahtar' (Public Key) ile şifrelenen veri, yalnızca alıcıdaki 'Gizli Anahtar' (Private Key) ile açılabilir."
+            }
+        ]
+    },
+    "11": {
+        "grade_name": "11. Sınıf",
+        "kolay": [
+            {
+                "topic": "Bilgisayar Bilimi: Nesne Yönelimli Programlama (OOP) ve Web",
+                "question": "Nesne Yönelimli Programlamada (OOP) Sınıf (Class) ve Nesne (Object) arasındaki farkı belirtiniz.",
+                "points": 20,
+                "answer": "Sınıf bir şablondur; nesne ise o sınıftan üretilmiş somut bellek örneğidir."
+            },
+            {
+                "topic": "Matematik: Trigonometri, Analitik Geometri ve Eşitsizlikler",
+                "question": "Trigonometride sin²(x) + cos²(x) ifadesinin eşitini yazınız.",
+                "points": 20,
+                "answer": "Her x reel sayısı için sin²(x) + cos²(x) = 1'dir."
+            },
+            {
+                "topic": "Fizik: Vektörler, Bağıl Hareket, Newton Yasaları ve Momentum",
+                "question": "Vektörlerin skaler büyüklüklerden temel farkı nedir? İki vektörel büyüklük örneği veriniz.",
+                "points": 20,
+                "answer": "Vektörel büyüklüklerin sayı ve birimin yanında yön ve doğrultuları da vardır. Örn: Kuvvet, Hız, İvme."
+            },
+            {
+                "topic": "Kimya: Modern Atom Teorisi, Gazlar ve Sıvı Çözeltiler",
+                "question": "İdeal gaz denkleminde (P.V = n.R.T) her bir harfin temsil ettiği niceliği yazınız.",
+                "points": 20,
+                "answer": "P: Basınç (atm), V: Hacim (L), n: Mol sayısı, R: Gaz sabiti, T: Mutlak sıcaklık (Kelvin)."
+            },
+            {
+                "topic": "Türk Dili ve Edebiyatı: Tanzimat, Servetifünun ve Milli Edebiyat",
+                "question": "Tanzimat I. Dönem edebiyatının genel özelliklerinden iki tanesini yazınız.",
+                "points": 20,
+                "answer": "'Sanat toplum içindir' anlayışı hakimdir. Hak, adalet, vatan, hürriyet gibi temalar ilk kez işlenmiştir."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Bilgisayar Bilimi: Nesne Yönelimli Programlama (OOP) ve Web",
+                "question": "Python'da kalıtım (inheritance) mekanizmasını basit bir 'Hayvan' ve 'Kopek' sınıfı üzerinden kodlayınız.",
+                "points": 20,
+                "answer": "class Hayvan:\n    def ses_cikar(self): pass\nclass Kopek(Hayvan):\n    def ses_cikar(self): return 'Hav hav'"
+            },
+            {
+                "topic": "Matematik: Trigonometri, Analitik Geometri ve Eşitsizlikler",
+                "question": "Analitik düzlemde A(2, 3) ve B(6, 6) noktaları arasındaki uzaklığı formülle hesaplayınız.",
+                "points": 20,
+                "answer": "d = √[(6 - 2)² + (6 - 3)²] = √[16 + 9] = √25 = 5 birimdir."
+            },
+            {
+                "topic": "Fizik: Vektörler, Bağıl Hareket, Newton Yasaları ve Momentum",
+                "question": "Newton'ın II. Yasasını formülüyle açıklayınız. 4 kg kütleli cisme 20 N net kuvvet uygulanırsa ivmesi ne olur?",
+                "points": 20,
+                "answer": "F_net = m . a -> 20 = 4 . a -> a = 5 m/s² olur."
+            },
+            {
+                "topic": "Kimya: Modern Atom Teorisi, Gazlar ve Sıvı Çözeltiler",
+                "question": "Le Chatelier İlkesini açıklayınız. Ekzotermik dengede sıcaklık artarsa denge ne yöne kayar?",
+                "points": 20,
+                "answer": "Dengedeki sisteme dış müdahale yapıldığında sistem bu etkiyi azaltacak yöne kayar. Sıcaklık artarsa ekzotermik tepkimede girenler (sol) yönüne kayar."
+            },
+            {
+                "topic": "Biyoloji: İnsan Fizyolojisi, Sinir Sistemi ve Dolaşım",
+                "question": "İnsanda merkezi sinir sistemini oluşturan iki bölümü ve beyinciğin temel görevini yazınız.",
+                "points": 20,
+                "answer": "Beyin ve Omuriliktir. Beyincik: Kas koordinasyonu, denge ve hareket uyumunu sağlar."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Bilgisayar Bilimi: Nesne Yönelimli Programlama (OOP) ve Web",
+                "question": "Big-O gösteriminde O(1), O(n) ve O(n²) karmaşıklıklarını birer örnek işlemle açıklayınız.",
+                "points": 20,
+                "answer": "O(1): Dizi indeksinden doğrudan eleman okuma. O(n): Diziyi tek döngüyle tarama (Linear Search). O(n²): İç içe iki döngü (Bubble Sort)."
+            },
+            {
+                "topic": "Matematik: Trigonometri, Analitik Geometri ve Eşitsizlikler",
+                "question": "f(x) = 2x² - 8x + 5 parabolünün tepe noktasının koordinatlarını (r, k) bulunuz.",
+                "points": 20,
+                "answer": "r = -b / (2a) = -(-8) / 4 = 2. k = f(2) = 2(4) - 8(2) + 5 = -3. Tepe noktası: T(2, -3)."
+            },
+            {
+                "topic": "Fizik: Vektörler, Bağıl Hareket, Newton Yasaları ve Momentum",
+                "question": "2 kg kütleli cisim 10 m/s hızla duvara dik çarpıp aynı hızla dönüyor. İtmenin (impuls) büyüklüğü nedir?",
+                "points": 20,
+                "answer": "I = ΔP = m(v_son - v_ilk) = 2(-10 - 10) = -40 N.s (Büyüklük: 40 N.s)."
+            },
+            {
+                "topic": "Kimya: Modern Atom Teorisi, Gazlar ve Sıvı Çözeltiler",
+                "question": "0.1 M 500 mL HCl çözeltisi hazırlamak için kaç mol saf HCl gereklidir?",
+                "points": 20,
+                "answer": "M = n / V -> 0.1 = n / 0.5 -> n = 0.05 mol HCl gereklidir."
+            },
+            {
+                "topic": "Biyoloji: İnsan Fizyolojisi, Sinir Sistemi ve Dolaşım",
+                "question": "Nöronlarda elektriksel ve kimyasal iletim bölgelerini yazınız. Sinapslarda iletim nasıl sağlanır?",
+                "points": 20,
+                "answer": "Akson boyunca elektriksel, sinapslarda kimyasaldır. Sinapslarda iletim nörotransmitter maddeler (asetilkolin vb.) ile difüzyonla sağlanır."
+            }
+        ]
+    },
+    "12": {
+        "grade_name": "12. Sınıf",
+        "kolay": [
+            {
+                "topic": "Bilgisayar Bilimi: Yapay Zeka Uygulamaları ve Büyük Veri",
+                "question": "Yapay zekada 'Makine Öğrenmesi' ile 'Derin Öğrenme' arasındaki ilişkiyi açıklayınız.",
+                "points": 20,
+                "answer": "Makine öğrenmesi yapay zekanın veriden öğrenen alt dalıdır; Derin öğrenme ise çok katmanlı yapay sinir ağlarını kullanan makine öğrenmesinin özelleşmiş alt dalıdır."
+            },
+            {
+                "topic": "Matematik: Logaritma, Diziler, Limit, Türev ve İntegral",
+                "question": "f(x) = 3x⁴ - 5x² + 7 fonksiyonunun türevini [f'(x)] alınız.",
+                "points": 20,
+                "answer": "f'(x) = 12x³ - 10x."
+            },
+            {
+                "topic": "Fizik: Çembersel Hareket, Basit Harmonik Hareket ve Modern Fizik",
+                "question": "Düzgün çembersel hareket yapan cismin çizgisel hızı (v) ile açısal hızı (ω) bağıntısını yazınız.",
+                "points": 20,
+                "answer": "v = ω . r (r: yörünge yarıçapıdır)."
+            },
+            {
+                "topic": "Kimya: Kimya ve Elektrik, Organik Kimyaya Giriş",
+                "question": "Galvanik piller ile Elektrolitik piller arasındaki temel farkı enerji dönüşümü açısından yazınız.",
+                "points": 20,
+                "answer": "Galvanik piller kimyasal enerjiyi elektrik enerjisine çevirir (istemli). Elektrolitik piller elektrik enerjisi harcayarak kimyasal tepkime gerçekleştirir (istemsiz)."
+            },
+            {
+                "topic": "T.C. İnkılap Tarihi: 20. Yüzyıl Başlarında Osmanlı ve Atatürkçülük",
+                "question": "Kurtuluş Savaşı'nı askeri safhasını sona erdiren ve bağımsızlığımızı tescilleyen iki antlaşmayı yazınız.",
+                "points": 20,
+                "answer": "1. Mudanya Ateşkes Antlaşması, 2. Lozan Barış Antlaşması."
+            }
+        ],
+        "orta": [
+            {
+                "topic": "Bilgisayar Bilimi: Yapay Zeka Uygulamaları ve Büyük Veri",
+                "question": "Denetimli Öğrenme ile Denetimsiz Öğrenme arasındaki farkı etiketli veri bağlamında açıklayınız.",
+                "points": 20,
+                "answer": "Denetimli öğrenmede eğitim verisi etiketlidir (girdi-çıktı çiftleri). Denetimsiz öğrenmede veri etiketsizdir, model verideki gizli örüntüleri kendi keşfeder (kümeleme)."
+            },
+            {
+                "topic": "Matematik: Logaritma, Diziler, Limit, Türev ve İntegral",
+                "question": "∫ (6x² + 4x - 3) dx belirsiz integralini hesaplayınız.",
+                "points": 20,
+                "answer": "∫ (6x² + 4x - 3) dx = 2x³ + 2x² - 3x + C."
+            },
+            {
+                "topic": "Fizik: Çembersel Hareket, Basit Harmonik Hareket ve Modern Fizik",
+                "question": "Fotoelektrik olayda Einstein'ın fotoelektrik denklemini ve eşik enerjisi kavramını açıklayınız.",
+                "points": 20,
+                "answer": "E_foton = E_bağlanma + E_kinetik. Eşik enerjisi, metalden elektron koparabilmek için gereken minimum foton enerjisidir."
+            },
+            {
+                "topic": "Kimya: Kimya ve Elektrik, Organik Kimyaya Giriş",
+                "question": "Alkan, Alken ve Alkinlerin genel formüllerini ve karbon bağ türlerini yazınız.",
+                "points": 20,
+                "answer": "Alkan: CnH2n+2 (Tekli bağlar). Alken: CnH2n (İkili bağ). Alkin: CnH2n-2 (Üçlü bağ)."
+            },
+            {
+                "topic": "Biyoloji: Genden Proteine, Fotosentez ve Hücresel Solunum",
+                "question": "DNA replikasyonunda görev alan helikaz, DNA polimeraz ve DNA ligaz enzimlerinin görevlerini yazınız.",
+                "points": 20,
+                "answer": "Helikaz sarmalı açar. DNA polimeraz yeni zinciri sentezler. DNA ligaz parçacıkları birleştirir."
+            }
+        ],
+        "zor": [
+            {
+                "topic": "Bilgisayar Bilimi: Yapay Zeka Uygulamaları ve Büyük Veri",
+                "question": "Büyük Verinin (Big Data) 5V bileşenini Türkçe karşılıklarıyla yazınız.",
+                "points": 20,
+                "answer": "1. Volume (Hacim), 2. Velocity (Hız), 3. Variety (Çeşitlilik), 4. Veracity (Doğruluk), 5. Value (Değer)."
+            },
+            {
+                "topic": "Matematik: Logaritma, Diziler, Limit, Türev ve İntegral",
+                "question": "lim (x -> 0) [sin(5x) / (2x)] limitinin değerini hesaplayınız.",
+                "points": 20,
+                "answer": "lim (x->0) sin(5x)/(2x) = 5/2'dir."
+            },
+            {
+                "topic": "Fizik: Çembersel Hareket, Basit Harmonik Hareket ve Modern Fizik",
+                "question": "Compton saçılmasında saçılan fotonun dalga boyu neden gelen fotondan daha büyüktür?",
+                "points": 20,
+                "answer": "Foton enerjisinin bir kısmını elektrona aktarır; enerjisi azalan fotonun dalga boyu (E = hc/λ) artar."
+            },
+            {
+                "topic": "Kimya: Kimya ve Elektrik, Organik Kimyaya Giriş",
+                "question": "Standart hidrojen elektroduna (SHE) göre indirgenme potansiyeli yüksek olan metal anot mu katot mu olur?",
+                "points": 20,
+                "answer": "İndirgenme potansiyeli yüksek olan metal indirgenmeyi tercih eder ve KATOT olur."
+            },
+            {
+                "topic": "Biyoloji: Genden Proteine, Fotosentez ve Hücresel Solunum",
+                "question": "Hücresel solunumda Substrat Düzeyinde Fosforilasyon ile Oksidatif Fosforilasyon mekanizmalarını karşılaştırınız.",
+                "points": 20,
+                "answer": "Glikoliz ve Krebs'te enzimler aracılığıyla doğrudan Substrat Düzeyinde ATP üretilir; ETS'de ise proton gradyanı ve kemiozmozis ile Oksidatif Fosforilasyon ile yüksek miktarda ATP üretilir."
             }
         ]
     }

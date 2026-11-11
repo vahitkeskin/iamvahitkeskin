@@ -11,7 +11,7 @@ import random
 import tempfile
 import zipfile
 from flask import Flask, request, jsonify, render_template, send_file, Response
-from question_bank import INITIAL_EXAM, QUESTION_BANK, GRADE_TOPICS
+from question_bank import INITIAL_EXAM, QUESTION_BANK, GRADE_TOPICS, ALL_LESSONS_1_TO_12
 from docx_generator import generate_docx
 from printer_service import list_system_printers, print_file
 from gemini_service import generate_questions_with_gemini
@@ -36,25 +36,43 @@ def get_initial_exam():
 
 @app.route("/api/topics", methods=["GET"])
 def get_topics():
-    """Seçili sınıf düzeyine ait ünite/konu başlıklarını döner."""
+    """Seçili sınıf düzeyine ait ünite/konu başlıklarını ve 1'den 12'ye tüm dersleri döner."""
     grade = request.args.get("grade", "5")
-    topics = GRADE_TOPICS.get(grade, ["Tüm Konular"])
-    return jsonify({"grade": grade, "topics": topics})
+    topics = GRADE_TOPICS.get(grade, ["Tüm Dersler (Karma Sınav)"])
+    return jsonify({
+        "grade": grade,
+        "topics": topics,
+        "all_lessons": ALL_LESSONS_1_TO_12
+    })
 
 @app.route("/api/questions", methods=["GET"])
 def get_questions():
     """
-    Sınıf, zorluk, konu ve soru sayısına göre Bilişim Teknolojileri sorularını ve cevaplarını döner.
-    Parametreler: grade, difficulty, count, topic
+    1-12. sınıf, tüm dersler, zorluk, konu ve soru sayısına göre soruları döner.
+    Parametreler: grade, difficulty, count, topic, lesson
     """
-    grade = request.args.get("grade", "5")
+    grade = str(request.args.get("grade", "5"))
     difficulty = request.args.get("difficulty", "orta").lower()
-    topic = request.args.get("topic", "Tüm Konular").strip()
+    topic = request.args.get("topic", "").strip()
+    lesson = request.args.get("lesson", "").strip()
     try:
         count = int(request.args.get("count", 5))
     except ValueError:
         count = 5
     count = max(1, min(count, 30))
+
+    # 1. Özel bir konu/ders seçildiyse ve API anahtarı mevcutsa öncelikle Gemini AI ile taze üret
+    if topic and not topic.startswith("Tüm Dersler") and not topic.startswith("Tüm Konular"):
+        ai_questions = generate_questions_with_gemini(topic, grade=grade, count=count, difficulty=difficulty, lesson=lesson)
+        if ai_questions:
+            return jsonify({
+                "grade": grade,
+                "grade_name": f"{grade}. Sınıf",
+                "difficulty": difficulty,
+                "count": len(ai_questions),
+                "questions": ai_questions,
+                "source": "gemini-ai"
+            })
 
     if grade not in QUESTION_BANK:
         grade = "5"
@@ -69,16 +87,16 @@ def get_questions():
         pool = list(grade_data.get("kolay", [])) + list(grade_data.get("orta", [])) + list(grade_data.get("zor", []))
 
     # Konu filtresi varsa uygula
-    if topic and topic != "Tüm Konular":
-        filtered = [item for item in pool if item.get("topic") == topic]
+    if topic and not topic.startswith("Tüm"):
+        filtered = [item for item in pool if topic.lower() in item.get("topic", "").lower()]
         if filtered:
             pool = filtered
 
     # Yeterli soru yoksa havuzu diğer zorluklardan genişlet
     if len(pool) < count:
         all_pool = list(grade_data.get("kolay", [])) + list(grade_data.get("orta", [])) + list(grade_data.get("zor", []))
-        if topic and topic != "Tüm Konular":
-            all_filtered = [item for item in all_pool if item.get("topic") == topic]
+        if topic and not topic.startswith("Tüm"):
+            all_filtered = [item for item in all_pool if topic.lower() in item.get("topic", "").lower()]
             if all_filtered:
                 all_pool = all_filtered
         pool = all_pool
@@ -125,12 +143,13 @@ def generate_custom_questions():
     prompt = data.get("prompt", "").strip()
     grade = str(data.get("grade", "5"))
     count = int(data.get("count", 5))
+    lesson = data.get("lesson", "")
 
     if not prompt:
         return jsonify({"error": "Lütfen bir konu veya soru açıklaması yazınız."}), 400
 
     # 1. Öncelikli olarak kullanıcının Gemini API anahtarı ile canlı AI soru üretimi
-    ai_questions = generate_questions_with_gemini(prompt, grade=grade, count=count)
+    ai_questions = generate_questions_with_gemini(prompt, grade=grade, count=count, lesson=lesson)
     if ai_questions:
         return jsonify({
             "topic": prompt,

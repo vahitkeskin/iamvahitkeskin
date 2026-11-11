@@ -28,7 +28,7 @@ def load_api_key():
             pass
     return None
 
-def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="orta"):
+def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="orta", lesson=None):
     """
     Calls Google Gemini API (gemini-2.5-flash) to generate structured questions and answers.
     Returns list of question dicts or None if API fails.
@@ -37,9 +37,22 @@ def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="
     if not api_key:
         return None
 
-    system_instruction = f"""Sen deneyimli bir Türk Milli Eğitim Bakanlığı (MEB) Bilişim Teknolojileri ve Yazılım / Bilgisayar Bilimi öğretmenisin.
+    if not lesson:
+        try:
+            g = int(grade)
+        except Exception:
+            g = 5
+        if g <= 4:
+            lesson = "İlkokul Temel Dersleri"
+        elif g <= 8:
+            lesson = "Bilişim Teknolojileri ve Yazılım"
+        else:
+            lesson = "Bilgisayar Bilimi"
+
+    system_instruction = f"""Sen deneyimli bir Türk Milli Eğitim Bakanlığı (MEB) {lesson} öğretmenisin.
 Görevin: {grade}. sınıf seviyesinde, {difficulty} zorluk derecesinde tam {count} adet açık uçlu klasik sınav sorusu ve bunların detaylı model cevaplarını hazırlamaktır.
-Konu: "{prompt_text}".
+Ders: {lesson}
+Konu / Ünite: "{prompt_text}".
 
 Kurallar:
 1. Sorular ve cevaplar {grade}. sınıf düzeyine pedagojik olarak tam uygun olmalıdır.
