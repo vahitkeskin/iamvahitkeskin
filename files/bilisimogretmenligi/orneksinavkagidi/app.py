@@ -407,6 +407,8 @@ def submit_print():
     mode = data.get("mode", "questions")
     color = data.get("color", "000000")
 
+    section_title = "C E V A P L A R" if mode == "answers" else "S O R U L A R"
+
     # Geçici metin veya postscript belgesi oluştur
     temp_content = f"""
 ================================================================================
@@ -419,7 +421,7 @@ SINIFI:     {header.get('student_class', '')}
 NUMARASI:   {header.get('student_no', '')}
 PUAN:       {header.get('student_score', '')}
 --------------------------------------------------------------------------------
-                             S O R U L A R
+                             {section_title}
 --------------------------------------------------------------------------------
 """
     for i, q in enumerate(questions, 1):

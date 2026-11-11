@@ -720,7 +720,7 @@ function createExamPageHtml(isAnswerKey) {
   const isColor = (AppState.colorMode === "color");
   const activeColor = isColor ? AppState.answerColor : "#000000";
   const termDisplay = isAnswerKey ? `${h.term} - CEVAP ANAHTARI` : h.term;
-  const sectionTitle = isAnswerKey ? "S O R U L A R   V E   C E V A P L A R" : "S O R U L A R";
+  const sectionTitle = isAnswerKey ? "C E V A P L A R" : "S O R U L A R";
 
   const dotsLine1 = "...................................................................................................................................";
   const dotsLine2 = "........................................................................................................................................";
@@ -1597,7 +1597,7 @@ function exportWordHtmlFallback(mode) {
         div.Section1 { page: Section1; font-family: Arial, sans-serif; }
         table.exam-header-table { width: 100%; border-collapse: collapse; margin-bottom: 12pt; border: 1.5pt solid black; }
         table.exam-header-table td { border: 1pt solid black; padding: 4pt 6pt; font-family: Arial, sans-serif; }
-        .exam-section-title { text-align: center; font-weight: bold; font-size: 13pt; letter-spacing: 4px; margin: 8pt 0; }
+        .exam-section-title { text-align: center; font-weight: bold; font-size: 13pt; letter-spacing: 4px; margin: 16pt 0 16pt 0; }
         .exam-question-item { margin-bottom: 10pt; font-size: 10.5pt; font-family: Arial, sans-serif; }
         .exam-question-text { font-weight: bold; margin-bottom: 3pt; }
         .exam-answer-line { color: #555555; font-size: 9pt; letter-spacing: 1px; }

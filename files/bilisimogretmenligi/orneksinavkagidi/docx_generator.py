@@ -81,7 +81,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     </w:tbl>
     '''
 
-    section_title = "S O R U L A R   V E   C E V A P L A R" if is_answer_key else "S O R U L A R"
+    section_title = "C E V A P L A R" if is_answer_key else "S O R U L A R"
 
     elements = [table_xml]
 
@@ -90,7 +90,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     <w:p>
         <w:pPr>
             <w:jc w:val="center"/>
-            <w:spacing w:before="180" w:after="160"/>
+            <w:spacing w:before="260" w:after="240"/>
         </w:pPr>
         <w:r>
             <w:rPr>
