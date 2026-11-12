@@ -3121,7 +3121,7 @@
   },
   "6": {
     "grade": 6,
-    "lesson": "BİLİŞİM TEKNOLOJİLERİ",
+    "lesson": "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
     "icon": "⚙️",
     "weeks": {
       "1": "Yenilikçi Bilişim Teknolojileri",
@@ -3745,7 +3745,7 @@
   },
   "7": {
     "grade": 7,
-    "lesson": "TEKNOLOJİ VE TASARIM",
+    "lesson": "TEKNOLOJİ TASARIM",
     "icon": "📐",
     "weeks": {
       "1": "Teknoloji ve Tasarım ile İlişkili Kavramlar",
@@ -4369,7 +4369,7 @@
   },
   "8": {
     "grade": 8,
-    "lesson": "ROBOTİK VE YAPAY ZEKÂ",
+    "lesson": "TEKNOLOJİ TASARIM",
     "icon": "🤖",
     "weeks": {
       "1": "8. Sınıfa Hoş Geldiniz: Bilişimsel Düşünme",

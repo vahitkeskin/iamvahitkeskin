@@ -127,8 +127,10 @@ def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="
             g = 5
         if g <= 4:
             lesson = "İlkokul Temel Dersleri"
-        elif g <= 8:
+        elif g in [5, 6]:
             lesson = "Bilişim Teknolojileri ve Yazılım"
+        elif g in [7, 8]:
+            lesson = "Teknoloji Tasarım"
         else:
             lesson = "Bilgisayar Bilimi"
 

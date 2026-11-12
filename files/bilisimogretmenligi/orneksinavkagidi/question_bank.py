@@ -176,6 +176,7 @@ ALL_LESSONS_1_TO_12 = [
     "Hayat Bilgisi",
     "Sosyal Bilgiler",
     "Bilişim Teknolojileri ve Yazılım",
+    "Teknoloji Tasarım",
     "Bilgisayar Bilimi",
     "Türk Dili ve Edebiyatı",
     "Fizik",
@@ -789,8 +790,8 @@ QUESTION_BANK = {
         ]
     },
     "7": {
-        "grade_name": "7. Sınıf - Bilişim Teknolojileri ve Yazılım",
-        "lesson_name": "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
+        "grade_name": "7. Sınıf - Teknoloji Tasarım",
+        "lesson_name": "TEKNOLOJİ TASARIM",
         "kolay": [
             {
                 "topic": "Bilişimsel Düşünme Becerileri",
@@ -889,8 +890,8 @@ QUESTION_BANK = {
         ]
     },
     "8": {
-        "grade_name": "8. Sınıf - Bilişim Teknolojileri ve Yazılım",
-        "lesson_name": "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
+        "grade_name": "8. Sınıf - Teknoloji Tasarım",
+        "lesson_name": "TEKNOLOJİ TASARIM",
         "kolay": [
             {
                 "topic": "İleri Algoritmalar ve Python ile Problem Çözme",
