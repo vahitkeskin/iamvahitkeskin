@@ -9,7 +9,7 @@ INITIAL_EXAM = {
     'header': {
         'year': '2026-2027 EĞİTİM ÖĞRETİM YILI',
         'school': 'Ortaokulu',
-        'lesson': 'BİLİŞİM TEKNOLOJİLERİ VE YAZILIM',
+        'lesson': '5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM',
         'term': '1.DÖNEM 1. YAZILI',
         'student_name': '',
         'student_class': '',

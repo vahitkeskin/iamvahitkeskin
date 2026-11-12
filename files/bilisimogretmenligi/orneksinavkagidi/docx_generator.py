@@ -7,6 +7,7 @@ Strictly avoids generating empty trailing pages!
 """
 
 import io
+import re
 import zipfile
 import xml.sax.saxutils
 
@@ -22,7 +23,16 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
 
     year_val = header_data.get("year", "2026-2027 EĞİTİM ÖĞRETİM YILI")
     school_val = header_data.get("school", "Özel Viranşehir Uğur Anadolu Lisesi")
-    lesson_val = header_data.get("lesson", "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
+    raw_lesson = header_data.get("lesson", "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
+    
+    # Başında sınıf yoksa öğrenci sınıfından veya varsayılan 5'ten sınıf ekle
+    if not re.match(r'^\s*\d+\s*[\.\-]?\s*(SINIF|Sınıf|sinif)', raw_lesson, re.IGNORECASE):
+        grade_match = re.search(r'\d+', str(header_data.get("student_class", "")))
+        grade_num = grade_match.group(0) if grade_match else "5"
+        lesson_val = f"{grade_num}. SINIF {raw_lesson.upper()}"
+    else:
+        lesson_val = raw_lesson
+
     term_val = header_data.get("term", "1.DÖNEM 1. YAZILI")
     if is_answer_key and "CEVAP ANAHTARI" not in term_val.upper():
         term_val = f"{term_val} - CEVAP ANAHTARI"

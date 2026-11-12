@@ -2140,7 +2140,7 @@ select {
 
         <div class="form-group">
           <label for="input-lesson">Ders Adı:</label>
-          <input type="text" id="input-lesson" value="BİLİŞİM TEKNOLOJİLERİ VE YAZILIM" placeholder="Örn: BİLİŞİM TEKNOLOJİLERİ VE YAZILIM">
+          <input type="text" id="input-lesson" value="5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM" placeholder="Örn: 5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM">
         </div>
 
         <!-- İsteğe Bağlı Sabit Alan Doldurma -->
@@ -2548,7 +2548,7 @@ select {
                 <td class="header-col-middle">
                   <div class="exam-year" id="sheet-year" contenteditable="true">2026-2027 EĞİTİM ÖĞRETİM YILI</div>
                   <div class="exam-school" id="sheet-school" contenteditable="true">Ortaokulu</div>
-                  <div class="exam-lesson" id="sheet-lesson" contenteditable="true">BİLİŞİM TEKNOLOJİLERİ VE YAZILIM</div>
+                  <div class="exam-lesson" id="sheet-lesson" contenteditable="true">5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM</div>
                   <div class="exam-term" id="sheet-term" contenteditable="true">1.DÖNEM 1. YAZILI</div>
                 </td>
 
@@ -2885,6 +2885,27 @@ function getDetectedGradeNumber() {
   return "5";
 }
 
+// --------------------------------------------------------------------------
+// Ders Adının Başına Sınıf Bilgisi Ekleme (Örn: "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
+// Bu satıra hangi ders eklenirse başına dinamik olarak o sınıf seviyesini ekler.
+// --------------------------------------------------------------------------
+function formatLessonNameWithGrade(rawLesson, targetGrade = null) {
+  if (!rawLesson) rawLesson = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
+  const gradeNum = targetGrade || getDetectedGradeNumber();
+
+  // Ders adının başındaki olası mevcut sınıf kalıplarını temizle
+  // Örn: "5. SINIF", "5. Sınıf", "5.SINIF", "6-SINIF", "7.sınıf:" vb.
+  let cleaned = String(rawLesson)
+    .replace(/^\s*\d+\s*[\.\-]?\s*(SINIF|Sınıf|sinif)\s*[\:\-]?\s*/i, "")
+    .trim();
+
+  if (!cleaned) {
+    cleaned = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
+  }
+
+  return `${gradeNum}. SINIF ${cleaned.toUpperCase()}`;
+}
+
 function generateDefaultExamFileName(format = "docx", mode = null) {
   const currentMode = mode || AppState.viewMode || "questions";
   const gradeNum = getDetectedGradeNumber();
@@ -3133,7 +3154,7 @@ const EMBEDDED_INITIAL_EXAM = {
   "header": {
     "year": "2026-2027 EĞİTİM ÖĞRETİM YILI",
     "school": "Ortaokulu",
-    "lesson": "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
+    "lesson": "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
     "term": "1.DÖNEM 1. YAZILI",
     "student_name": "",
     "student_class": "",
@@ -3219,8 +3240,10 @@ function updatePortalSyncUI(autoGenerate = false) {
   const pData = (typeof PORTAL_CURRICULUM_DATA !== "undefined" && PORTAL_CURRICULUM_DATA[g]) ? PORTAL_CURRICULUM_DATA[g] : null;
 
   if (pData) {
-    // Başlık tablosunu müfredata göre uyarla
-    AppState.header.lesson = pData.lesson;
+    // Başlık tablosunu müfredata ve sınıf seviyesine göre uyarla
+    AppState.header.lesson = formatLessonNameWithGrade(pData.lesson, g);
+    const inputLessonEl = document.getElementById("input-lesson");
+    if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
     const gNum = parseInt(g, 10);
     if (gNum <= 4) {
       AppState.header.school = "İlkokulu";
@@ -3459,7 +3482,7 @@ const AppState = {
   header: {
     year: "2026-2027 EĞİTİM ÖĞRETİM YILI",
     school: "Ortaokulu",
-    lesson: "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
+    lesson: "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
     term: "1.DÖNEM 1. YAZILI",
     student_name: "",
     student_class: "",
@@ -3617,7 +3640,7 @@ function populateForm() {
 
   setVal("input-year", AppState.header.year);
   setVal("input-school", AppState.header.school);
-  setVal("input-lesson", AppState.header.lesson);
+  setVal("input-lesson", formatLessonNameWithGrade(AppState.header.lesson));
   setVal("input-term", AppState.header.term);
   setVal("input-student-name", AppState.header.student_name);
   setVal("input-student-class", AppState.header.student_class);
@@ -3638,6 +3661,7 @@ function createExamPageHtml(isAnswerKey) {
   const activeColor = isColor ? AppState.answerColor : "#000000";
   const termDisplay = isAnswerKey ? `${h.term} - CEVAP ANAHTARI` : h.term;
   const sectionTitle = isAnswerKey ? "C E V A P L A R" : "S O R U L A R";
+  const displayLesson = formatLessonNameWithGrade(h.lesson);
 
   const dotsLine1 = "...................................................................................................................................";
   const dotsLine2 = "........................................................................................................................................";
@@ -3702,7 +3726,7 @@ function createExamPageHtml(isAnswerKey) {
           <td class="header-col-middle">
             <div class="exam-year">${escapeHtml(h.year)}</div>
             <div class="exam-school">${escapeHtml(h.school)}</div>
-            <div class="exam-lesson">${escapeHtml(h.lesson)}</div>
+            <div class="exam-lesson" contenteditable="true" data-field="lesson">${escapeHtml(displayLesson)}</div>
             <div class="exam-term">${escapeHtml(termDisplay)}</div>
           </td>
           <td class="header-col-right">
@@ -3757,6 +3781,12 @@ function attachSheetEditableListeners() {
           item[field] = e.target.innerText.trim();
           renderQuestionsList();
         }
+      } else if (field === "lesson") {
+        const formatted = formatLessonNameWithGrade(e.target.innerText.trim());
+        AppState.header.lesson = formatted;
+        e.target.innerText = formatted;
+        const inputLessonEl = document.getElementById("input-lesson");
+        if (inputLessonEl) inputLessonEl.value = formatted;
       }
     });
   });
@@ -4017,20 +4047,21 @@ function initEventListeners() {
       const g = parseInt(gVal) || 5;
       if (g <= 4) {
         AppState.header.school = "İlkokulu";
-        if (AppState.header.lesson === "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM" || AppState.header.lesson === "BİLGİSAYAR BİLİMİ") {
+        if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("BİLGİSAYAR")) {
           AppState.header.lesson = "TÜRKÇE";
         }
       } else if (g <= 8) {
         AppState.header.school = "Ortaokulu";
-        if (AppState.header.lesson === "BİLGİSAYAR BİLİMİ") {
+        if (AppState.header.lesson.includes("BİLGİSAYAR")) {
           AppState.header.lesson = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
         }
       } else {
         AppState.header.school = "Anadolu Lisesi";
-        if (AppState.header.lesson === "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM") {
+        if (AppState.header.lesson.includes("BİLİŞİM")) {
           AppState.header.lesson = "BİLGİSAYAR BİLİMİ";
         }
       }
+      AppState.header.lesson = formatLessonNameWithGrade(AppState.header.lesson, String(g));
       populateForm();
       renderExamSheet();
     });
@@ -4045,7 +4076,7 @@ function initEventListeners() {
         if (selected.includes(":")) {
           lessonName = selected.split(":")[0].trim();
         }
-        AppState.header.lesson = lessonName.toUpperCase();
+        AppState.header.lesson = formatLessonNameWithGrade(lessonName);
         
         const g = parseInt(document.getElementById("select-grade")?.value || "5");
         if (lessonName.includes("Edebiyat") || lessonName.includes("Fizik") || lessonName.includes("Kimya") || lessonName.includes("Biyoloji") || lessonName.includes("Felsefe") || lessonName.includes("Bilgisayar Bilimi")) {
@@ -4087,12 +4118,39 @@ function initEventListeners() {
 
   bindHeaderInput("input-year", "year");
   bindHeaderInput("input-school", "school");
-  bindHeaderInput("input-lesson", "lesson");
   bindHeaderInput("input-term", "term");
   bindHeaderInput("input-student-name", "student_name");
-  bindHeaderInput("input-student-class", "student_class");
   bindHeaderInput("input-student-no", "student_no");
   bindHeaderInput("input-student-score", "student_score");
+
+  // Ders Adı Girişi (Hangi ders yazılırsa başına o anki sınıf seviyesini dinamik ekler)
+  const inputLessonEl = document.getElementById("input-lesson");
+  if (inputLessonEl) {
+    inputLessonEl.addEventListener("input", (e) => {
+      AppState.header.lesson = e.target.value;
+      renderExamSheet();
+    });
+    inputLessonEl.addEventListener("blur", (e) => {
+      const formatted = formatLessonNameWithGrade(e.target.value);
+      AppState.header.lesson = formatted;
+      inputLessonEl.value = formatted;
+      renderExamSheet();
+    });
+  }
+
+  // Öğrenci Sınıfı Girişi (Sınıf numarası örn 6/A veya 7 olarak değiştiğinde ders başındaki sınıfı da günceller)
+  const inputClassEl = document.getElementById("input-student-class");
+  if (inputClassEl) {
+    inputClassEl.addEventListener("input", (e) => {
+      AppState.header.student_class = e.target.value;
+      const m = e.target.value.match(/\d+/);
+      if (m) {
+        AppState.header.lesson = formatLessonNameWithGrade(AppState.header.lesson, m[0]);
+        if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
+      }
+      renderExamSheet();
+    });
+  }
 
   // Bilişim Soru Üret Butonları
   // Bilişim Öğretmenliği Portalı Müfredat Eşleştirme (X - Y Hafta Aralığı)
