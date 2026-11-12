@@ -1629,6 +1629,12 @@ function initEventListeners() {
     });
   }
 
+  // Zorluk Derecesi (Varsayılan: Kolay)
+  const selectDifficulty = document.getElementById("select-difficulty");
+  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "orta")) {
+    selectDifficulty.value = "kolay";
+  }
+
   const selectTopic = document.getElementById("select-topic");
   if (selectTopic) {
     selectTopic.addEventListener("change", (e) => {

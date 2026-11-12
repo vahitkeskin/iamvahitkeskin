@@ -133,7 +133,7 @@ def get_questions():
     Parametreler: grade, difficulty, count, topic, lesson, exam_type
     """
     grade = str(request.args.get("grade", "5"))
-    difficulty = request.args.get("difficulty", "orta").lower()
+    difficulty = request.args.get("difficulty", "kolay").lower()
     topic = request.args.get("topic", "").strip()
     lesson = request.args.get("lesson", "").strip()
     exam_type = request.args.get("exam_type", "klasik").lower()

@@ -2518,8 +2518,8 @@ select {
           <div class="form-group">
             <label for="select-difficulty">Zorluk Derecesi:</label>
             <select id="select-difficulty">
+              <option value="kolay" selected>Kolay</option>
               <option value="orta">Orta</option>
-              <option value="kolay">Kolay</option>
               <option value="zor">Zor</option>
               <option value="karma">Karma (Dengeli)</option>
             </select>
@@ -4554,6 +4554,12 @@ function initEventListeners() {
       populateForm();
       renderExamSheet();
     });
+  }
+
+  // Zorluk Derecesi (Varsayılan: Kolay)
+  const selectDifficulty = document.getElementById("select-difficulty");
+  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "orta")) {
+    selectDifficulty.value = "kolay";
   }
 
   const selectTopic = document.getElementById("select-topic");
