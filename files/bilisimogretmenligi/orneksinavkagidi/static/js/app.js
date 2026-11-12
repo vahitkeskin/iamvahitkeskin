@@ -755,7 +755,7 @@ const AppState = {
   questions: [],
   viewMode: "questions", // 'questions' (Soru Kağıdı) veya 'answers' (Cevap Anahtarı)
   colorMode: "bw",       // 'bw' (Siyah/Beyaz) veya 'color' (Renkli)
-  usePortalCurriculum: false,
+  usePortalCurriculum: true,
   portalGrade: "5",
   portalWeeks: 8,
   portalStartWeek: 1,
@@ -860,6 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initEventListeners();
   initMobileViewSwitcher();
   loadInitialExam();
+  updatePortalSyncUI(false);
   if (window.innerWidth < 1024) {
     setTimeout(autoFitPaperToScreen, 150);
   }
@@ -1260,10 +1261,20 @@ async function generateCustomPrompt() {
   let topic = promptText;
 
   try {
+    const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || grade;
+    const startW = AppState.portalStartWeek || parseInt(document.getElementById("portal-start-week")?.value, 10) || 1;
+    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 8;
     const res = await fetch(getApiUrl("/api/generate-custom"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: promptText, grade: grade, count: count })
+      body: JSON.stringify({
+        prompt: promptText,
+        grade: pG,
+        count: count,
+        lesson: AppState.header.lesson || "",
+        start_week: startW,
+        end_week: endW
+      })
     });
     if (res.ok) {
       const data = await res.json();

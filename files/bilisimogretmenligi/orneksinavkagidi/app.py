@@ -139,7 +139,10 @@ def get_questions():
 
     # 1. Özel bir konu/ders seçildiyse ve API anahtarı mevcutsa öncelikle Gemini AI ile taze üret
     if topic and not topic.startswith("Tüm Dersler") and not topic.startswith("Tüm Konular"):
-        ai_questions = generate_questions_with_gemini(topic, grade=grade, count=count, difficulty=difficulty, lesson=lesson)
+        ai_questions = generate_questions_with_gemini(
+            topic, grade=grade, count=count, difficulty=difficulty, lesson=lesson,
+            start_week=portal_start_week, end_week=portal_end_week
+        )
         if ai_questions:
             return jsonify({
                 "grade": grade,
@@ -220,12 +223,17 @@ def generate_custom_questions():
     grade = str(data.get("grade", "5"))
     count = int(data.get("count", 5))
     lesson = data.get("lesson", "")
+    start_week = int(data.get("start_week", 1))
+    end_week = int(data.get("end_week", 8))
 
     if not prompt:
         return jsonify({"error": "Lütfen bir konu veya soru açıklaması yazınız."}), 400
 
-    # 1. Öncelikli olarak kullanıcının Gemini API anahtarı ile canlı AI soru üretimi
-    ai_questions = generate_questions_with_gemini(prompt, grade=grade, count=count, lesson=lesson)
+    # 1. Öncelikli olarak kullanıcının Gemini API anahtarı ile canlı AI soru üretimi (Portal slaytlarını baz alır)
+    ai_questions = generate_questions_with_gemini(
+        prompt, grade=grade, count=count, lesson=lesson,
+        start_week=start_week, end_week=end_week
+    )
     if ai_questions:
         return jsonify({
             "topic": prompt,

@@ -108,10 +108,12 @@ def load_api_key():
         return keys[0]["key"]
     return None
 
-def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="orta", lesson=None):
+def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="orta", lesson=None, start_week=1, end_week=8):
     """
     Google Gemini API ile sınav soruları ve model cevaplar üretir.
     İlk anahtar hata verirse otomatik olarak sıradaki yedek anahtara geçer (Failover).
+    Bilişim Öğretmenliği Portalı'ndaki (https://vahitkeskin.github.io/iamvahitkeskin/files/bilisimogretmenligi/index.html)
+    ilgili sınıfın haftalık slayt ve sunum konularını baz alarak sorular üretir.
     """
     api_keys = load_api_keys()
     if not api_keys:
@@ -130,11 +132,37 @@ def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="
         else:
             lesson = "Bilgisayar Bilimi"
 
+    # Bilişim Öğretmenliği Portalı Slayt ve Sunum Konularını Bağlam Olarak Dahil Et
+    portal_context = ""
+    portal_data_path = os.path.join(os.path.dirname(__file__), "portal_curriculum_data.json")
+    if os.path.exists(portal_data_path):
+        try:
+            with open(portal_data_path, "r", encoding="utf-8") as f:
+                portal_data = json.load(f)
+                g_str = str(grade)
+                if g_str in portal_data:
+                    weeks_map = portal_data[g_str].get("weeks", {})
+                    s_w = max(1, int(start_week))
+                    e_w = min(41, max(s_w, int(end_week)))
+                    selected_weeks = [
+                        f"- {w}. Hafta Slayt Konusu: {weeks_map[str(w)]}"
+                        for w in range(s_w, e_w + 1)
+                        if str(w) in weeks_map
+                    ]
+                    if selected_weeks:
+                        portal_context = (
+                            f"\nÖĞRETMENİN PORTAL SLAYT VE SUNUM MÜFREDATI ({grade}. Sınıf, {s_w}-{e_w}. Haftalar):\n"
+                            + "\n".join(selected_weeks)
+                            + "\nSoruları ve cevapları doğrudan bu slayt ve sunumlarda işlenen kavram ve kazanımlarla tam uyumlu hazırla.\n"
+                        )
+        except Exception as e:
+            print(f"[Gemini Service] Portal verisi okunamadı: {e}")
+
     system_instruction = f"""Sen deneyimli bir Türk Milli Eğitim Bakanlığı (MEB) {lesson} öğretmenisin.
 Görevin: {grade}. sınıf seviyesinde, {difficulty} zorluk derecesinde tam {count} adet açık uçlu klasik sınav sorusu ve bunların detaylı model cevaplarını hazırlamaktır.
 Ders: {lesson}
-Konu / Ünite: "{prompt_text}".
-
+Konu / Ünite / Sınav Kapsamı: "{prompt_text}".
+{portal_context}
 Kurallar:
 1. Sorular ve cevaplar {grade}. sınıf düzeyine pedagojik olarak tam uygun olmalıdır.
 2. Her soru için puan değeri belirle (Tüm soruların puanlarının toplamı tam 100 olmalıdır).
