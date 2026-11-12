@@ -395,12 +395,12 @@
             <span id="exam-type-badge" class="badge" style="font-size: 0.72rem; font-weight: 600; background: #fee2e2; color: #b91c1c;">Lütfen Seçiniz</span>
           </label>
           <div class="exam-type-selector-grid">
-            <button type="button" class="exam-type-card" id="btn-type-klasik" data-type="klasik">
+            <button type="button" class="exam-type-card" id="btn-type-klasik" data-type="klasik" onclick="setExamType('klasik')">
               <span class="type-card-icon">📝</span>
               <span class="type-card-title">Klasik (Yazılı)</span>
               <span class="type-card-sub">Noktalı cevap satırları</span>
             </button>
-            <button type="button" class="exam-type-card" id="btn-type-test" data-type="test">
+            <button type="button" class="exam-type-card" id="btn-type-test" data-type="test" onclick="setExamType('test')">
               <span class="type-card-icon">🔘</span>
               <span class="type-card-title">Test (Çoktan Seçmeli)</span>
               <span class="type-card-sub" id="test-type-options-label">4 Şıklı (A, B, C, D)</span>
