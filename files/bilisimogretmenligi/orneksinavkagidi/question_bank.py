@@ -8,7 +8,7 @@ Kazanım odaklı, Kolay - Orta - Zor seviyelerde açık uçlu klasik sınav soru
 INITIAL_EXAM = {
     'header': {
         'year': '2026-2027 EĞİTİM ÖĞRETİM YILI',
-        'school': 'Ortaokulu',
+        'school': 'Özel Viranşehir Uğur Ortaokulu',
         'lesson': '5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM',
         'term': '1.DÖNEM 1. YAZILI',
         'student_name': '',

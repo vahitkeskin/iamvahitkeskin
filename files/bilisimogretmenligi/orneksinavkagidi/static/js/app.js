@@ -425,7 +425,7 @@ function toggleModeInModal() {
 const EMBEDDED_INITIAL_EXAM = {
   "header": {
     "year": "2026-2027 EĞİTİM ÖĞRETİM YILI",
-    "school": "Ortaokulu",
+    "school": "Özel Viranşehir Uğur Ortaokulu",
     "lesson": "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
     "term": "1.DÖNEM 1. YAZILI",
     "student_name": "",
@@ -518,11 +518,11 @@ function updatePortalSyncUI(autoGenerate = false) {
     if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
     const gNum = parseInt(g, 10);
     if (gNum <= 4) {
-      AppState.header.school = "İlkokulu";
+      AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
     } else if (gNum <= 8) {
-      AppState.header.school = "Ortaokulu";
+      AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
     } else {
-      AppState.header.school = "Anadolu Lisesi";
+      AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
     }
 
     // Dönem bilgisi (X ve Y haftalarına göre akıllı tespit)
@@ -753,7 +753,7 @@ function generateClientCustomQuestions(promptText, count) {
 const AppState = {
   header: {
     year: "2026-2027 EĞİTİM ÖĞRETİM YILI",
-    school: "Ortaokulu",
+    school: "Özel Viranşehir Uğur Ortaokulu",
     lesson: "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM",
     term: "1.DÖNEM 1. YAZILI",
     student_name: "",
@@ -1329,22 +1329,22 @@ function initEventListeners() {
       }
       const g = parseInt(gVal) || 5;
       if (g <= 4) {
-        AppState.header.school = "İlkokulu";
+        AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
         if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TEKNOLOJİ")) {
           AppState.header.lesson = "TÜRKÇE";
         }
       } else if (g === 5 || g === 6) {
-        AppState.header.school = "Ortaokulu";
+        AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
         if (AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TEKNOLOJİ") || AppState.header.lesson.includes("TÜRKÇE")) {
           AppState.header.lesson = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
         }
       } else if (g === 7 || g === 8) {
-        AppState.header.school = "Ortaokulu";
+        AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
         if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TÜRKÇE")) {
           AppState.header.lesson = "TEKNOLOJİ TASARIM";
         }
       } else {
-        AppState.header.school = "Anadolu Lisesi";
+        AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
         if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("TEKNOLOJİ")) {
           AppState.header.lesson = "BİLGİSAYAR BİLİMİ";
         }
@@ -1368,11 +1368,11 @@ function initEventListeners() {
         
         const g = parseInt(document.getElementById("select-grade")?.value || "5");
         if (lessonName.includes("Edebiyat") || lessonName.includes("Fizik") || lessonName.includes("Kimya") || lessonName.includes("Biyoloji") || lessonName.includes("Felsefe") || lessonName.includes("Bilgisayar Bilimi")) {
-          AppState.header.school = "Anadolu Lisesi";
+          AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
         } else if (lessonName.includes("Hayat Bilgisi") || g <= 4) {
-          AppState.header.school = "İlkokulu";
+          AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
         } else {
-          AppState.header.school = "Ortaokulu";
+          AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
         }
         populateForm();
         renderExamSheet();
@@ -1444,6 +1444,16 @@ function initEventListeners() {
             curr = "BİLGİSAYAR BİLİMİ";
           }
         }
+        if (gNum <= 4) {
+          AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
+        } else if (gNum <= 8) {
+          AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
+        } else {
+          AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
+        }
+        const inputSchoolEl = document.getElementById("input-school");
+        if (inputSchoolEl) inputSchoolEl.value = AppState.header.school;
+
         AppState.header.lesson = formatLessonNameWithGrade(curr, m[0]);
         if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
       }

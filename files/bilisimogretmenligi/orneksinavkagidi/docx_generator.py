@@ -22,7 +22,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         clean_color = "000000"
 
     year_val = header_data.get("year", "2026-2027 EĞİTİM ÖĞRETİM YILI")
-    school_val = header_data.get("school", "Özel Viranşehir Uğur Anadolu Lisesi")
+    school_val = header_data.get("school", "Özel Viranşehir Uğur Ortaokulu")
     raw_lesson = header_data.get("lesson", "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
     
     # Başında sınıf yoksa öğrenci sınıfından veya varsayılan 5'ten sınıf ekle
