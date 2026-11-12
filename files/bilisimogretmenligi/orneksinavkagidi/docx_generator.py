@@ -155,9 +155,14 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
 
                 is_correct = (opt_key == correct_key)
                 if is_answer_key and is_correct:
-                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:color w:val="DC2626"/><w:sz w:val="21"/></w:rPr><w:t>[✓] {opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
+                    circled_map = {"A": "Ⓐ", "B": "Ⓑ", "C": "Ⓒ", "D": "Ⓓ", "E": "Ⓔ"}
+                    c_char = circled_map.get(opt_key, opt_key)
+                    opt_runs.append(
+                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="DC2626"/><w:sz w:val="23"/><w:b/></w:rPr><w:t>{c_char}</w:t></w:r>'
+                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="000000"/><w:sz w:val="20"/></w:rPr><w:t xml:space="preserve">) {escape_xml(opt_text)}</w:t></w:r>'
+                    )
                 else:
-                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>{opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
+                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/><w:color w:val="000000"/></w:rPr><w:t>{opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
 
             for i in range(0, len(opt_runs), 2):
                 pair = opt_runs[i:i+2]

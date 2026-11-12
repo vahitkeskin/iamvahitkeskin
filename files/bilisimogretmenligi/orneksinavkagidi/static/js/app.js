@@ -1126,12 +1126,12 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
         const isCorrect = (optKey === correctKey);
 
         if (isAnswerKey) {
-          // Cevap Anahtarı: Doğru şık kırmızı halkaya alınır!
+          // Cevap Anahtarı: SADECE şıkkın harfinin etrafında kırmızı düzgün ve tam ortalanmış çember
           const letterClass = isCorrect ? "option-letter correct-circle" : "option-letter";
           const itemClass = isCorrect ? "test-option-item is-correct" : "test-option-item";
           return `
             <div class="${itemClass}">
-              <span class="${letterClass}">${optKey})</span>
+              <span class="option-marker"><span class="${letterClass}">${optKey}</span><span class="option-paren">)</span></span>
               <span class="option-text" contenteditable="true" data-qid="${q.id}" data-optkey="${optKey}">${escapeHtml(optText)}</span>
             </div>
           `;
@@ -1139,7 +1139,7 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
           // Soru Kağıdı: Temiz ve şık görünüm
           return `
             <div class="test-option-item">
-              <span class="option-letter">${optKey})</span>
+              <span class="option-marker"><span class="option-letter">${optKey}</span><span class="option-paren">)</span></span>
               <span class="option-text" contenteditable="true" data-qid="${q.id}" data-optkey="${optKey}">${escapeHtml(optText)}</span>
             </div>
           `;
