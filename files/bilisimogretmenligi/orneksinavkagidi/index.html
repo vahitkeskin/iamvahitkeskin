@@ -1255,6 +1255,16 @@ select {
   transform-origin: top center;
   transform: translateX(-50%) scale(var(--page-scale, 1));
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 2. ve sonraki devam sayfaları (orneksinavkagidi.jpg gibi üstte ve kenarlarda 22mm boşluk) */
+.a4-continuation-page {
+  padding: 22mm 20mm 20mm 20mm !important;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* ==========================================================================
@@ -1888,13 +1898,14 @@ select {
     min-height: 0 !important;
   }
 
-  .a4-page {
+  .a4-page,
+  .a4-continuation-page {
     width: 210mm !important;
     max-width: 210mm !important;
     min-height: 297mm !important;
     height: auto !important;
     box-sizing: border-box !important;
-    padding: 22mm 20mm 20mm 20mm !important; /* orneksinavkagidi.jpg gibi üstte ve kenarlarda ferah boşluk */
+    padding: 22mm 20mm 20mm 20mm !important; /* 1. ve 2. sayfalarda eşit üst ve kenar boşluğu */
     margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
@@ -1903,6 +1914,8 @@ select {
     break-after: page !important;
     background: #ffffff !important;
     color: #000000 !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
   }
 
   .a4-page:last-child,
@@ -1912,7 +1925,8 @@ select {
     margin-bottom: 0 !important;
   }
 
-  .a4-page-break {
+  .a4-page-break,
+  .a4-continuation-page {
     page-break-before: always !important;
     break-before: page !important;
   }
@@ -3663,9 +3677,11 @@ function populateForm() {
 // --------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------
-// Tek Bir A4 Sayfasının HTML Şablonunu Üretici (Soru Kağıdı veya Cevap Kağıdı)
+// Tek Bir Sınav Sayfası/Sayfalarını Üretici (Soru Kağıdı veya Cevap Kağıdı)
+// Çok sayfalı sınavlarda (5 sorudan fazla) 2. ve sonraki sayfaların üst boşluğu
+// ve başlığı 1. sayfa ile birebir aynı ferahlıkta (22mm) render edilir.
 // --------------------------------------------------------------------------
-function createExamPageHtml(isAnswerKey) {
+function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
   const h = AppState.header;
   const isColor = (AppState.colorMode === "color");
   const activeColor = isColor ? AppState.answerColor : "#000000";
@@ -3673,24 +3689,46 @@ function createExamPageHtml(isAnswerKey) {
   const sectionTitle = isAnswerKey ? "C E V A P L A R" : "S O R U L A R";
   const displayLesson = formatLessonNameWithGrade(h.lesson);
 
-  const dotsLine1 = "...................................................................................................................................";
-  const dotsLine2 = "........................................................................................................................................";
-  const dotsLine3 = "........................................................................................................................................";
-  const dotsLine4 = ".........................................................................................";
+  const headerTableHtml = `
+    <table class="exam-header-table">
+      <tr>
+        <td class="header-col-left">
+          <div>ADI SOYADI:<span>${escapeHtml(h.student_name ? ' ' + h.student_name : '')}</span></div>
+          <div>SINIFI:<span>${escapeHtml(h.student_class ? ' ' + h.student_class : '')}</span></div>
+          <div>No.:<span>${escapeHtml(h.student_no ? ' ' + h.student_no : '')}</span></div>
+        </td>
+        <td class="header-col-middle">
+          <div class="exam-year">${escapeHtml(h.year)}</div>
+          <div class="exam-school">${escapeHtml(h.school)}</div>
+          <div class="exam-lesson" contenteditable="true" data-field="lesson">${escapeHtml(displayLesson)}</div>
+          <div class="exam-term">${escapeHtml(termDisplay)}</div>
+        </td>
+        <td class="header-col-right">
+          <div>PUAN:<span>${escapeHtml(h.student_score ? ' ' + h.student_score : '')}</span></div>
+        </td>
+      </tr>
+    </table>
+  `;
 
-  let questionsHtml = "";
   if (!AppState.questions || AppState.questions.length === 0) {
-    questionsHtml = `
-      <div class="empty-questions-notice" style="text-align: center; padding: 4.5rem 1.5rem; color: #64748b; border: 1.5px dashed #cbd5e1; border-radius: 8px; margin: 2rem 0.5rem; background: #f8fafc;">
-        <div style="font-size: 2.25rem; margin-bottom: 0.5rem;">📝</div>
-        <div style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 0.4rem;">Sınav Soruları Alanı Boş</div>
-        <p style="font-size: 0.85rem; color: #64748b; max-width: 440px; margin: 0 auto; line-height: 1.5;">
-          Sol panelden <strong>"✨ Otomatik Sınav Kağıdı Oluştur"</strong> butonuna tıklayarak seçili haftalara ait soruları ekleyebilir veya <strong>"+ Yeni Soru Ekle"</strong> butonuna basabilirsiniz.
-        </p>
-      </div>
+    return `
+      <article class="a4-page ${isAnswerKey && pageNumberOffset > 0 ? 'a4-page-break' : ''}">
+        ${headerTableHtml}
+        <div class="exam-section-title">${sectionTitle}</div>
+        <div class="exam-questions-container">
+          <div class="empty-questions-notice" style="text-align: center; padding: 4.5rem 1.5rem; color: #64748b; border: 1.5px dashed #cbd5e1; border-radius: 8px; margin: 2rem 0.5rem; background: #f8fafc;">
+            <div style="font-size: 2.25rem; margin-bottom: 0.5rem;">📝</div>
+            <div style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 0.4rem;">Sınav Soruları Alanı Boş</div>
+            <p style="font-size: 0.85rem; color: #64748b; max-width: 440px; margin: 0 auto; line-height: 1.5;">
+              Sol panelden <strong>"✨ Otomatik Sınav Kağıdı Oluştur"</strong> butonuna tıklayarak seçili haftalara ait soruları ekleyebilir veya <strong>"+ Yeni Soru Ekle"</strong> butonuna basabilirsiniz.
+            </p>
+          </div>
+        </div>
+      </article>
     `;
-  } else {
-    AppState.questions.forEach((q, idx) => {
+  }
+
+  function renderQuestionBlock(q, idx) {
     const qNum = idx + 1;
     let answerPart = "";
     if (!isAnswerKey) {
@@ -3711,7 +3749,7 @@ function createExamPageHtml(isAnswerKey) {
       `;
     }
 
-    questionsHtml += `
+    return `
       <div class="exam-question-block">
         <div class="exam-question-text">
           <span class="q-num">${qNum}. Soru:</span>
@@ -3721,33 +3759,41 @@ function createExamPageHtml(isAnswerKey) {
         ${answerPart}
       </div>
     `;
-  });
   }
 
-  return `
-    <article class="a4-page ${isAnswerKey ? 'a4-page-break' : ''}">
-      <table class="exam-header-table">
-        <tr>
-          <td class="header-col-left">
-            <div>ADI SOYADI:<span>${escapeHtml(h.student_name ? ' ' + h.student_name : '')}</span></div>
-            <div>SINIFI:<span>${escapeHtml(h.student_class ? ' ' + h.student_class : '')}</span></div>
-            <div>No.:<span>${escapeHtml(h.student_no ? ' ' + h.student_no : '')}</span></div>
-          </td>
-          <td class="header-col-middle">
-            <div class="exam-year">${escapeHtml(h.year)}</div>
-            <div class="exam-school">${escapeHtml(h.school)}</div>
-            <div class="exam-lesson" contenteditable="true" data-field="lesson">${escapeHtml(displayLesson)}</div>
-            <div class="exam-term">${escapeHtml(termDisplay)}</div>
-          </td>
-          <td class="header-col-right">
-            <div>PUAN:<span>${escapeHtml(h.student_score ? ' ' + h.student_score : '')}</span></div>
-          </td>
-        </tr>
-      </table>
-      <div class="exam-section-title">${sectionTitle}</div>
-      <div class="exam-questions-container">${questionsHtml}</div>
-    </article>
-  `;
+  // A4 sayfa kapasitesi: orneksinavkagidi.jpg gibi 1 sayfaya 5 soru sığar.
+  // 5'ten fazla soru olduğunda 2. sayfa ayrı bir A4 sayfası olarak üretilir.
+  const QUESTIONS_PER_PAGE = 5;
+  const totalPages = Math.ceil(AppState.questions.length / QUESTIONS_PER_PAGE);
+  let resultHtml = "";
+
+  for (let p = 0; p < totalPages; p++) {
+    const pageQuestions = AppState.questions.slice(p * QUESTIONS_PER_PAGE, (p + 1) * QUESTIONS_PER_PAGE);
+    const pageQuestionsHtml = pageQuestions.map((q, i) => renderQuestionBlock(q, p * QUESTIONS_PER_PAGE + i)).join("");
+    const currentPageNum = pageNumberOffset + p + 1;
+
+    if (p === 0) {
+      // 1. Sayfa: Üst bilgi tablosu + Başlık + 1-5 arası Sorular
+      resultHtml += `
+        <article class="a4-page ${isAnswerKey && pageNumberOffset > 0 ? 'a4-page-break' : ''}">
+          ${headerTableHtml}
+          <div class="exam-section-title">${sectionTitle}</div>
+          <div class="exam-questions-container">${pageQuestionsHtml}</div>
+        </article>
+      `;
+    } else {
+      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı 22mm üst boşluk + Başlık + 6-10 arası Sorular
+      resultHtml += `
+        <div class="page-separator"><span>📄 Sayfa ${currentPageNum}: ${isAnswerKey ? 'Cevap Anahtarı (Devam)' : 'Soru Kağıdı (Devam)'}</span></div>
+        <article class="a4-page a4-page-break a4-continuation-page">
+          <div class="exam-section-title">${sectionTitle}</div>
+          <div class="exam-questions-container">${pageQuestionsHtml}</div>
+        </article>
+      `;
+    }
+  }
+
+  return resultHtml;
 }
 
 // --------------------------------------------------------------------------
@@ -3757,15 +3803,21 @@ function renderExamSheet() {
   const scaler = document.getElementById("paper-scaler");
   if (!scaler) return;
 
+  const totalQuestions = AppState.questions ? AppState.questions.length : 0;
+  const qPagesCount = Math.max(1, Math.ceil(totalQuestions / 5));
+
   if (AppState.viewMode === "questions") {
-    scaler.innerHTML = createExamPageHtml(false);
+    scaler.innerHTML = createExamPageHtml(false, 0);
   } else if (AppState.viewMode === "answers") {
-    scaler.innerHTML = createExamPageHtml(true);
+    scaler.innerHTML = createExamPageHtml(true, 0);
   } else if (AppState.viewMode === "both") {
+    const qHtml = createExamPageHtml(false, 0);
+    const answersStartPage = qPagesCount + 1;
+    const aHtml = createExamPageHtml(true, qPagesCount);
     scaler.innerHTML = `
-      ${createExamPageHtml(false)}
-      <div class="page-separator"><span>📄 Sayfa 2: Cevap Kağıdı (Cevap Anahtarı)</span></div>
-      ${createExamPageHtml(true)}
+      ${qHtml}
+      <div class="page-separator"><span>📄 Sayfa ${answersStartPage}: Cevap Kağıdı (Cevap Anahtarı)</span></div>
+      ${aHtml}
     `;
   }
 
@@ -4635,15 +4687,18 @@ function exportWordHtmlFallback(mode, customFilename = null) {
   showToast(`Word belgesi hazırlanıyor: ${finalFilename}...`);
 
   let contentHtml = "";
+  const totalQuestions = AppState.questions ? AppState.questions.length : 0;
+  const qPagesCount = Math.max(1, Math.ceil(totalQuestions / 5));
+
   if (currentMode === "questions") {
-    contentHtml = createExamPageHtml(false);
+    contentHtml = createExamPageHtml(false, 0);
   } else if (currentMode === "answers") {
-    contentHtml = createExamPageHtml(true);
+    contentHtml = createExamPageHtml(true, 0);
   } else {
     contentHtml = `
-      ${createExamPageHtml(false)}
+      ${createExamPageHtml(false, 0)}
       <br clear="all" style="page-break-before:always" />
-      ${createExamPageHtml(true)}
+      ${createExamPageHtml(true, qPagesCount)}
     `;
   }
 

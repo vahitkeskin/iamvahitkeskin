@@ -118,6 +118,28 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     dots_short = ".........................................................................................................................."
 
     for idx, q in enumerate(questions, 1):
+        # 5 sorudan sonra 2. ve sonraki sayfalara geçiş: Sayfa sonu ve başlık ekle (1. sayfa ile eşit ferahlık)
+        if idx > 1 and (idx - 1) % 5 == 0:
+            elements.append(f'''
+            <w:p>
+                <w:r><w:br w:type="page"/></w:r>
+            </w:p>
+            <w:p>
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                    <w:spacing w:before="260" w:after="240"/>
+                </w:pPr>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                        <w:sz w:val="22"/>
+                        <w:spacing w:val="120"/>
+                    </w:rPr>
+                    <w:t>{escape_xml(section_title)}</w:t>
+                </w:r>
+            </w:p>
+            ''')
+
         q_text = escape_xml(q.get("question", ""))
         p_val = escape_xml(q.get("points", 20))
         ans_text = escape_xml(q.get("answer", ""))
