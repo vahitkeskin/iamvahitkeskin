@@ -63,6 +63,40 @@ def get_portal_curriculum():
         return jsonify(PORTAL_CURRICULUM_DATA[grade])
     return jsonify(PORTAL_CURRICULUM_DATA)
 
+def clean_portal_question(q, a=""):
+    if not q:
+        return q
+    m = re.search(r"Bu haftaki ders akışında ['\"](.*?)['\"] adımında", q)
+    if m:
+        t = m.group(1).strip()
+        t = re.sub(r'İlk \d+ (Kodlama Haftasının|Haftanın Bilişim|Haftanın)\s*', '', t, flags=re.I).strip()
+        t = re.sub(r'^\d+\s*Haftalık\s*', '', t, flags=re.I).strip()
+        if re.search(r'\bNedir\??$', t, re.I):
+            clean = re.sub(r'\s*Nedir\??$', '', t, flags=re.I).strip()
+            return f"'{clean}' kavramının en doğru ve temel tanımı aşağıdakilerden hangisidir?"
+        if re.search(r'\bKimdir\??$', t, re.I):
+            clean = re.sub(r'\s*Kimdir\??$', '', t, flags=re.I).strip()
+            return f"'{clean}' kavramının en doğru açıklaması aşağıdakilerden hangisidir?"
+        if re.search(r'\bNasıl (Çalışır|Yapılır)\??$', t, re.I):
+            clean = re.sub(r'\s*Nasıl (Çalışır|Yapılır)\??$', '', t, flags=re.I).strip()
+            return f"'{clean}' sürecinin temel çalışma mantığı ve amacı aşağıdakilerden hangisidir?"
+        if ' vs ' in t or 'Karşılaştırması' in t or 'Farkı' in t or 'Farkları' in t:
+            return f"'{t}' konusunda öne çıkan temel fark ve özellik aşağıdakilerden hangisidir?"
+        if 'Döngüsü' in t or 'Döngü' in t:
+            return f"Programlama ve algoritma yapılarında '{t}' kavramının temel görevi ve amacı aşağıdakilerden hangisidir?"
+        if 'Kuralı' in t or 'Kuralları' in t or 'İlkesi' in t or 'İlkeleri' in t or 'Prensibi' in t:
+            return f"Bilişim ve teknoloji alanında '{t}' olarak ifade edilen temel esas aşağıdakilerden hangisidir?"
+        if 'Etkileri' in t or 'Faydaları' in t or 'Zararları' in t or 'Riskleri' in t or 'Avantajları' in t:
+            return f"Teknoloji ve bilişim dünyasında '{t}' kapsamında değerlendirilen temel unsurlar hangileridir?"
+        if 'Önemi' in t:
+            return f"Bilişim ve günlük yaşamda '{t}' konusunu en doğru açıklayan ifade aşağıdakilerden hangisidir?"
+        if 'Özeti' in t or 'Tekrarı' in t or 'Değerlendirmesi' in t or t == 'Özeti':
+            clean = re.sub(r'^(İlk \d+ Haftanın|\d+ Haftalık|\d+\. Hafta:?)\s*', '', t).strip()
+            if not clean or clean == 'Özeti': clean = 'Bilişim ve Teknoloji Genel Tekrarı'
+            return f"'{clean}' kapsamında öne çıkan temel bilişim ve teknoloji kazanımları aşağıdakilerden hangisidir?"
+        return f"'{t}' konusu ile ilgili ele alınan temel kavram ve bilgi aşağıdakilerden hangisidir?"
+    return q
+
 def make_test_options_py(correct_ans, pool_answers, grade):
     try:
         g = int(grade)
@@ -165,11 +199,15 @@ def get_questions():
         p_pool = []
         for w in range(portal_start_week, portal_end_week + 1):
             w_q = p_info.get("questions", {}).get(str(w), [])
+            w_title_raw = p_info.get('weeks', {}).get(str(w), '')
+            clean_w_title = re.sub(r'^\d+\.\s*Hafta:\s*', '', w_title_raw).strip()
+            topic_name = clean_w_title if clean_w_title else f"{portal_grade}. Sınıf Bilişim"
             for item in w_q:
+                q_text = clean_portal_question(item.get("q", ""), item.get("a", ""))
                 p_pool.append({
                     "week": w,
-                    "topic": f"{portal_grade}. Sınıf {w}. Hafta: {p_info.get('weeks', {}).get(str(w), '')}",
-                    "question": item.get("q", ""),
+                    "topic": topic_name,
+                    "question": q_text,
                     "answer": item.get("a", ""),
                     "points": 20
                 })
