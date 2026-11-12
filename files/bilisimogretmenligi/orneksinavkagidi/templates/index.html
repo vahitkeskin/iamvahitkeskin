@@ -654,6 +654,64 @@
     </div>
   </div>
 
+  <!-- =======================================================================
+       İNDİRME VE KAYIT AYARLARI POPUP MODALI (DOSYA ADI & KLASÖR ÖZELLEŞTİRME)
+       ======================================================================= -->
+  <div id="download-options-modal" class="modal-overlay">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.35rem;" id="download-modal-icon">📥</span>
+          <div>
+            <h3 style="margin: 0; font-size: 1.05rem;" id="download-modal-title">Dosya İndirme & Kayıt Ayarları</h3>
+            <p style="margin: 2px 0 0 0; font-size: 0.75rem; color: var(--text-muted);" id="download-modal-subtitle">Dosya adı ve kayıt klasörünü kontrol ediniz</p>
+          </div>
+        </div>
+        <button id="btn-close-download-modal" class="modal-close" onclick="closeDownloadOptionsModal()" title="Kapat">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding-top: 0.85rem;">
+        <!-- Belge Bilgi Rozetleri -->
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+          <span class="badge" id="download-badge-format" style="font-weight: 700; background: #2563eb; color: #ffffff;">DOCX</span>
+          <span class="badge" id="download-badge-mode" style="background: var(--bg-card); color: var(--text-dark); border: 1px solid var(--border-color);">Soru Kağıdı</span>
+          <span class="badge" id="download-badge-grade" style="background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border-color);">5. Sınıf</span>
+        </div>
+
+        <!-- Dosya Adı Girişi -->
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="input-download-filename" style="font-weight: 600; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <span>📄 Dosya Adı:</span>
+            <small style="color: var(--text-muted); font-weight: 400;">(Uzantı otomatik korunur)</small>
+          </label>
+          <input type="text" id="input-download-filename" style="width: 100%; font-family: monospace; font-size: 0.9rem; padding: 0.55rem 0.75rem; border: 1.5px solid var(--border-color); border-radius: 6px; box-sizing: border-box;" placeholder="5-sinif-soru-kagidi.docx">
+          <small style="font-size: 0.74rem; color: var(--text-muted); display: block; margin-top: 0.35rem;">
+            💡 İsterseniz dosya adını değiştirebilirsiniz. Değiştirmezseniz bu otomatik adla indirilir.
+          </small>
+        </div>
+
+        <!-- Kayıt Klasörü Girişi -->
+        <div class="form-group" style="margin-bottom: 0.5rem;">
+          <label for="input-download-folder" style="font-weight: 600; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <span>📁 Kayıt Klasörü (Sunucu & Arşiv):</span>
+            <small style="color: var(--text-muted); font-weight: 400;">(Varsayılan: kayitlisinavkagitlari)</small>
+          </label>
+          <input type="text" id="input-download-folder" value="kayitlisinavkagitlari" style="width: 100%; font-family: monospace; font-size: 0.9rem; padding: 0.55rem 0.75rem; border: 1.5px solid var(--border-color); border-radius: 6px; box-sizing: border-box;" placeholder="kayitlisinavkagitlari">
+          <small style="font-size: 0.74rem; color: var(--text-muted); display: block; margin-top: 0.35rem;">
+            📁 Dosya sunucuda <strong>kayitlisinavkagitlari</strong> klasörüne kaydedilir. İsterseniz klasör adını değiştirebilirsiniz.
+          </small>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.25rem;">
+        <button type="button" class="btn btn-secondary" onclick="closeDownloadOptionsModal()">İptal</button>
+        <button type="button" id="btn-confirm-download" class="btn btn-success">
+          <span class="btn-icon">📥</span> İndir ve Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Mobil Hızlı Görünüm Değiştirici Buton (Floating Switcher) -->
   <button type="button" id="mobile-floating-switch" class="mobile-floating-switch" aria-label="Görünüm Değiştir">
     <span class="fab-icon">📄</span>

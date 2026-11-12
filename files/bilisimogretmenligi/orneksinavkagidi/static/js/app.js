@@ -122,6 +122,144 @@ function updateDownloadButtonsState() {
 }
 
 // --------------------------------------------------------------------------
+// Sınıf Numarasını Tespit Etme ve Dinamik Dosya Adı Oluşturma
+// Örnek: "5-sinif-soru-kagidi.pdf" veya "7-sinif-cevap-kagidi.docx"
+// --------------------------------------------------------------------------
+function getDetectedGradeNumber() {
+  // 1. Öğrenci sınıfı girdisindeki ilk rakam (örn: "5/A" -> "5", "7. Sınıf" -> "7")
+  const studentClassVal = (AppState.header.student_class || "").trim();
+  const match = studentClassVal.match(/\d+/);
+  if (match) {
+    return match[0];
+  }
+
+  // 2. Portal sınıf seçimi (örn: "5", "7")
+  const portalGradeSel = document.getElementById("portal-grade-select");
+  if (portalGradeSel && portalGradeSel.value) {
+    return portalGradeSel.value;
+  }
+
+  // 3. AI Sınıf Seviyesi seçimi
+  const aiGradeSel = document.getElementById("select-grade");
+  if (aiGradeSel && aiGradeSel.value) {
+    return aiGradeSel.value;
+  }
+
+  return "5";
+}
+
+function generateDefaultExamFileName(format = "docx", mode = null) {
+  const currentMode = mode || AppState.viewMode || "questions";
+  const gradeNum = getDetectedGradeNumber();
+
+  let modeSlug = "soru-kagidi";
+  if (currentMode === "answers") {
+    modeSlug = "cevap-kagidi";
+  } else if (currentMode === "both") {
+    modeSlug = "soru-ve-cevap-kagidi";
+  }
+
+  const cleanFormat = format.replace(/^\./, "").toLowerCase();
+  return `${gradeNum}-sinif-${modeSlug}.${cleanFormat}`;
+}
+
+// --------------------------------------------------------------------------
+// İndirme & Kayıt Özelleştirme Popup Modalı (Dosya Adı & Klasör Seçimi)
+// --------------------------------------------------------------------------
+let pendingDownloadAction = null;
+
+function promptDownloadOptions(format = "docx", mode = null) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
+  const currentMode = mode || AppState.viewMode || "questions";
+  const defaultFileName = generateDefaultExamFileName(format, currentMode);
+  const gradeNum = getDetectedGradeNumber();
+
+  let modeName = "Soru Kağıdı";
+  if (currentMode === "answers") modeName = "Cevap Anahtarı";
+  else if (currentMode === "both") modeName = "Soru + Cevap Kağıdı";
+
+  const modal = document.getElementById("download-options-modal");
+  const inputFilename = document.getElementById("input-download-filename");
+  const inputFolder = document.getElementById("input-download-folder");
+  const badgeFormat = document.getElementById("download-badge-format");
+  const badgeMode = document.getElementById("download-badge-mode");
+  const badgeGrade = document.getElementById("download-badge-grade");
+  const modalIcon = document.getElementById("download-modal-icon");
+
+  if (!modal || !inputFilename) {
+    // Modal elementi bulunamazsa doğrudan varsayılan isimle indir
+    if (format === "docx") downloadDocx(currentMode, defaultFileName, "kayitlisinavkagitlari");
+    else downloadPdf(currentMode, defaultFileName, "kayitlisinavkagitlari");
+    return;
+  }
+
+  inputFilename.value = defaultFileName;
+  if (inputFolder && !inputFolder.value.trim()) {
+    inputFolder.value = "kayitlisinavkagitlari";
+  }
+
+  if (badgeFormat) {
+    badgeFormat.textContent = format.toUpperCase();
+    badgeFormat.style.background = (format === "docx") ? "#2563eb" : "#16a34a";
+  }
+  if (badgeMode) badgeMode.textContent = modeName;
+  if (badgeGrade) badgeGrade.textContent = `${gradeNum}. Sınıf`;
+  if (modalIcon) modalIcon.textContent = (format === "docx") ? "📄" : "📑";
+
+  pendingDownloadAction = { format, mode: currentMode };
+  modal.classList.add("active");
+
+  setTimeout(() => {
+    inputFilename.focus();
+    const dotIdx = inputFilename.value.lastIndexOf(".");
+    if (dotIdx > 0) {
+      inputFilename.setSelectionRange(0, dotIdx);
+    } else {
+      inputFilename.select();
+    }
+  }, 60);
+}
+
+function closeDownloadOptionsModal() {
+  const modal = document.getElementById("download-options-modal");
+  if (modal) modal.classList.remove("active");
+  pendingDownloadAction = null;
+}
+
+function confirmDownloadOptions() {
+  if (!pendingDownloadAction) return;
+
+  const { format, mode } = pendingDownloadAction;
+  const inputFilename = document.getElementById("input-download-filename");
+  const inputFolder = document.getElementById("input-download-folder");
+
+  let customFilename = (inputFilename?.value || "").trim();
+  const customFolder = (inputFolder?.value || "kayitlisinavkagitlari").trim() || "kayitlisinavkagitlari";
+
+  if (!customFilename) {
+    customFilename = generateDefaultExamFileName(format, mode);
+  }
+
+  // Uzantı kontrolü ve otomatik ekleme
+  const ext = `.${format.toLowerCase()}`;
+  if (!customFilename.toLowerCase().endsWith(ext)) {
+    customFilename += ext;
+  }
+
+  closeDownloadOptionsModal();
+
+  if (format === "docx") {
+    downloadDocx(mode, customFilename, customFolder);
+  } else {
+    downloadPdf(mode, customFilename, customFolder);
+  }
+}
+
+// --------------------------------------------------------------------------
 // Tam Ekran %100 Düzgün Önizleme & İndirme Modalı
 // --------------------------------------------------------------------------
 function openFullscreenPreview() {
@@ -1190,11 +1328,11 @@ function initEventListeners() {
   document.getElementById("btn-open-preview-modal")?.addEventListener("click", () => openDownloadPreview(null));
   document.getElementById("btn-fullscreen-preview-close")?.addEventListener("click", closeFullscreenPreview);
   document.getElementById("btn-modal-toggle-mode")?.addEventListener("click", toggleModeInModal);
-  document.getElementById("btn-modal-print")?.addEventListener("click", () => downloadPdf(AppState.viewMode));
-  document.getElementById("btn-modal-docx")?.addEventListener("click", () => downloadDocx(AppState.viewMode));
-  document.getElementById("btn-modal-pdf")?.addEventListener("click", () => downloadPdf(AppState.viewMode));
-  document.getElementById("btn-modal-footer-docx")?.addEventListener("click", () => downloadDocx(AppState.viewMode));
-  document.getElementById("btn-modal-footer-pdf")?.addEventListener("click", () => downloadPdf(AppState.viewMode));
+  document.getElementById("btn-modal-print")?.addEventListener("click", () => promptDownloadOptions("pdf", AppState.viewMode));
+  document.getElementById("btn-modal-docx")?.addEventListener("click", () => promptDownloadOptions("docx", AppState.viewMode));
+  document.getElementById("btn-modal-pdf")?.addEventListener("click", () => promptDownloadOptions("pdf", AppState.viewMode));
+  document.getElementById("btn-modal-footer-docx")?.addEventListener("click", () => promptDownloadOptions("docx", AppState.viewMode));
+  document.getElementById("btn-modal-footer-pdf")?.addEventListener("click", () => promptDownloadOptions("pdf", AppState.viewMode));
   document.getElementById("fullscreen-preview-modal")?.addEventListener("click", (e) => {
     if (e.target.id === "fullscreen-preview-modal") closeFullscreenPreview();
   });
@@ -1370,11 +1508,34 @@ function initEventListeners() {
     }
   });
 
-  // İndirme ve Yazdırma (Önce Önizleme Ekranı Açar)
-  document.getElementById("btn-header-docx")?.addEventListener("click", () => openDownloadPreview("docx"));
-  document.getElementById("btn-header-pdf")?.addEventListener("click", () => openDownloadPreview("pdf"));
-  document.getElementById("btn-toolbar-docx")?.addEventListener("click", () => openDownloadPreview("docx"));
-  document.getElementById("btn-toolbar-pdf")?.addEventListener("click", () => openDownloadPreview("pdf"));
+  // İndirme ve Yazdırma (Önce İsim & Klasör Özelleştirme Popup'ı Açar)
+  document.getElementById("btn-header-docx")?.addEventListener("click", () => promptDownloadOptions("docx", AppState.viewMode));
+  document.getElementById("btn-header-pdf")?.addEventListener("click", () => promptDownloadOptions("pdf", AppState.viewMode));
+  document.getElementById("btn-toolbar-docx")?.addEventListener("click", () => promptDownloadOptions("docx", AppState.viewMode));
+  document.getElementById("btn-toolbar-pdf")?.addEventListener("click", () => promptDownloadOptions("pdf", AppState.viewMode));
+
+  // İndirme Seçenekleri Modalı (Dosya Adı & Klasör Değiştirme)
+  document.getElementById("btn-confirm-download")?.addEventListener("click", confirmDownloadOptions);
+  document.getElementById("btn-close-download-modal")?.addEventListener("click", closeDownloadOptionsModal);
+  document.getElementById("input-download-filename")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      confirmDownloadOptions();
+    } else if (e.key === "Escape") {
+      closeDownloadOptionsModal();
+    }
+  });
+  document.getElementById("input-download-folder")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      confirmDownloadOptions();
+    } else if (e.key === "Escape") {
+      closeDownloadOptionsModal();
+    }
+  });
+  document.getElementById("download-options-modal")?.addEventListener("click", (e) => {
+    if (e.target.id === "download-options-modal") closeDownloadOptionsModal();
+  });
 
   // Donanım Yazıcısı Seçme Modalı
   document.getElementById("btn-open-printer-modal")?.addEventListener("click", openPrinterModal);
@@ -1511,32 +1672,27 @@ function initMobileViewSwitcher() {
 }
 
 // --------------------------------------------------------------------------
-// DOCX & PDF İndirme İşlemleri (Ekranda Hangi Belge Varsa Onu İndirir)
+// DOCX & PDF İndirme İşlemleri (Özelleştirilebilir İsim & Klasör ile)
 // --------------------------------------------------------------------------
-async function downloadDocx(mode) {
+async function downloadDocx(mode, customFilename = null, customFolder = null) {
   if (!AppState.questions || AppState.questions.length === 0) {
     showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
     return;
   }
 
   const currentMode = mode || AppState.viewMode || "questions";
-  let modeName = "Soru Kağıdı";
-  let suffix = "Soru_Kagidi";
-  if (currentMode === "answers") {
-    modeName = "Cevap Anahtarı";
-    suffix = "Cevap_Anahtari";
-  } else if (currentMode === "both") {
-    modeName = "Soru + Cevap Kağıdı";
-    suffix = "Soru_ve_Cevap_Kagidi";
-  }
+  const finalFilename = customFilename || generateDefaultExamFileName("docx", currentMode);
+  const finalFolder = customFolder || "kayitlisinavkagitlari";
 
-  showToast(`${modeName} DOCX oluşturuluyor...`);
+  showToast(`${finalFilename} DOCX hazırlanıyor...`);
 
   const payload = {
     header: AppState.header,
     questions: AppState.questions,
     mode: currentMode,
-    color: (AppState.colorMode === "color" && (currentMode === "answers" || currentMode === "both")) ? AppState.answerColor : "000000"
+    color: (AppState.colorMode === "color" && (currentMode === "answers" || currentMode === "both")) ? AppState.answerColor : "000000",
+    filename: finalFilename,
+    folder: finalFolder
   };
 
   try {
@@ -1550,14 +1706,13 @@ async function downloadDocx(mode) {
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
-      const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
       a.href = url;
-      a.download = `${lessonName}_${suffix}.docx`;
+      a.download = finalFilename;
       document.body.appendChild(a);
       a.click();
       a.remove();
       window.URL.revokeObjectURL(url);
-      showToast(`${modeName} DOCX belgesi başarıyla indirildi!`);
+      showToast(`'${finalFilename}' indirildi ve '${finalFolder}' klasörüne kaydedildi!`);
       return;
     }
   } catch (err) {
@@ -1566,35 +1721,44 @@ async function downloadDocx(mode) {
 
   // Sunucusuz / GitHub Pages / Statik Mod için Word (.doc) Dışa Aktarma Fallback
   try {
-    exportWordHtmlFallback(currentMode);
+    exportWordHtmlFallback(currentMode, finalFilename);
   } catch (fallbackErr) {
     console.error("DOCX fallback hatası:", fallbackErr);
     showToast("DOCX indirme hatası oluştu.");
   }
 }
 
-function downloadPdf(mode) {
+function downloadPdf(mode, customFilename = null, customFolder = null) {
   if (!AppState.questions || AppState.questions.length === 0) {
     showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
     return;
   }
 
   const currentMode = mode || AppState.viewMode || "questions";
-  let modeName = "Soru Kağıdı";
-  let suffix = "Soru_Kagidi";
-  if (currentMode === "answers") {
-    modeName = "Cevap Anahtarı";
-    suffix = "Cevap_Anahtari";
-  } else if (currentMode === "both") {
-    modeName = "Soru + Cevap Kağıdı";
-    suffix = "Soru_ve_Cevap_Kagidi";
-  }
+  const finalFilename = customFilename || generateDefaultExamFileName("pdf", currentMode);
+  const finalFolder = customFolder || "kayitlisinavkagitlari";
 
-  const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
+  const filenameWithoutExt = finalFilename.replace(/\.[^/.]+$/, "");
   const origTitle = document.title;
-  document.title = `${lessonName}_${suffix}`;
+  document.title = filenameWithoutExt;
 
-  showToast(`${modeName} PDF hazırlanıyor... Açılan pencereden 'Hedef: PDF Olarak Kaydet'i seçiniz.`);
+  showToast(`'${finalFilename}' hazırlanıyor... Açılan pencereden 'Hedef: PDF Olarak Kaydet'i seçiniz.`);
+
+  // Sunucuda klasöre arka planda arşiv kopyası oluştur
+  try {
+    fetch(getApiUrl("/api/save-exam-file"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        header: AppState.header,
+        questions: AppState.questions,
+        mode: currentMode,
+        format: "pdf",
+        filename: finalFilename,
+        folder: finalFolder
+      })
+    }).catch(err => console.log("PDF sunucu kayıt log:", err));
+  } catch (e) {}
 
   const modal = document.getElementById("fullscreen-preview-modal");
   const wasModalActive = modal && modal.classList.contains("active");
@@ -1614,25 +1778,20 @@ function downloadPdf(mode) {
   }, 250);
 }
 
-function exportWordHtmlFallback(mode) {
+function exportWordHtmlFallback(mode, customFilename = null) {
   if (!AppState.questions || AppState.questions.length === 0) {
     showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
     return;
   }
 
   const currentMode = mode || AppState.viewMode || "questions";
-  const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
-  let suffix = "Soru_Kagidi";
-  let modeName = "Soru Kağıdı";
-  if (currentMode === "answers") {
-    suffix = "Cevap_Anahtari";
-    modeName = "Cevap Anahtarı";
-  } else if (currentMode === "both") {
-    suffix = "Soru_ve_Cevap_Kagidi";
-    modeName = "Soru ve Cevap Kağıdı";
+  const defaultDocName = generateDefaultExamFileName("doc", currentMode);
+  let finalFilename = customFilename || defaultDocName;
+  if (!finalFilename.endsWith(".doc") && !finalFilename.endsWith(".docx")) {
+    finalFilename += ".doc";
   }
 
-  showToast(`${modeName} Word belgesi hazırlanıyor...`);
+  showToast(`Word belgesi hazırlanıyor: ${finalFilename}...`);
 
   let contentHtml = "";
   if (currentMode === "questions") {
@@ -1676,12 +1835,12 @@ function exportWordHtmlFallback(mode) {
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${lessonName}_${suffix}.doc`;
+  a.download = finalFilename;
   document.body.appendChild(a);
   a.click();
   a.remove();
   window.URL.revokeObjectURL(url);
-  showToast(`${modeName} Word (.doc) belgesi indirildi!`);
+  showToast(`'${finalFilename}' Word belgesi indirildi!`);
 }
 
 // --------------------------------------------------------------------------

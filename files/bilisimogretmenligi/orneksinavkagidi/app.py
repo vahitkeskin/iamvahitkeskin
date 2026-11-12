@@ -6,6 +6,7 @@ Flask Backend Server
 
 import os
 import io
+import re
 import json
 import random
 import tempfile
@@ -334,31 +335,91 @@ def generate_custom_questions():
 @app.route("/api/export-docx", methods=["POST"])
 def export_docx():
     """
-    Soru kağıdı veya cevap anahtarını DOCX formatında üretip indirir.
-    JSON: { header: {...}, questions: [...], mode: 'questions'|'answers', color: '#D32F2F' }
+    Soru kağıdı veya cevap anahtarını DOCX formatında üretip indirir ve hedef klasöre kaydeder.
+    JSON: { header: {...}, questions: [...], mode: 'questions'|'answers', color: '#D32F2F', filename: '...', folder: '...' }
     """
     data = request.get_json() or {}
     header = data.get("header", {})
     questions = data.get("questions", [])
     mode = data.get("mode", "questions")
     color = data.get("color", "000000")
+    custom_filename = (data.get("filename") or "").strip()
+    target_folder = (data.get("folder") or "kayitlisinavkagitlari").strip() or "kayitlisinavkagitlari"
 
     docx_bytes = generate_docx(header, questions, mode=mode, color=color)
 
     lesson_name = header.get("lesson", "Sinav").replace(" ", "_")
-    if mode == "questions":
+    if custom_filename:
+        filename = custom_filename if custom_filename.endswith(".docx") else f"{custom_filename}.docx"
+    elif mode == "questions":
         filename = f"{lesson_name}_Soru_Kagidi.docx"
     elif mode == "both":
         filename = f"{lesson_name}_Soru_ve_Cevap_Kagidi.docx"
     else:
         filename = f"{lesson_name}_Cevap_Anahtari.docx"
 
+    # Güvenli klasör ve dosya adı oluşturma & kaydetme
+    safe_folder = re.sub(r'[^a-zA-Z0-9_\-\u00C0-\u017F]', '_', target_folder)
+    folder_path = os.path.join(os.path.dirname(__file__), safe_folder)
+    os.makedirs(folder_path, exist_ok=True)
+
+    safe_filename = os.path.basename(filename)
+    saved_file_path = os.path.join(folder_path, safe_filename)
+    try:
+        with open(saved_file_path, "wb") as f:
+            f.write(docx_bytes)
+        print(f"DOCX sunucuya kaydedildi: {saved_file_path}")
+    except Exception as e:
+        print(f"Server DOCX save error: {e}")
+
     return send_file(
         io.BytesIO(docx_bytes),
         mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         as_attachment=True,
-        download_name=filename
+        download_name=safe_filename
     )
+
+@app.route("/api/save-exam-file", methods=["POST"])
+def save_exam_file():
+    """
+    Sınav dosyasını (DOCX veya HTML/PDF yedeği) belirtilen klasöre kaydeder.
+    """
+    data = request.get_json() or {}
+    header = data.get("header", {})
+    questions = data.get("questions", [])
+    mode = data.get("mode", "questions")
+    color = data.get("color", "000000")
+    file_format = (data.get("format") or "docx").lower()
+    custom_filename = (data.get("filename") or "").strip()
+    target_folder = (data.get("folder") or "kayitlisinavkagitlari").strip() or "kayitlisinavkagitlari"
+    html_content = data.get("html_content")
+
+    safe_folder = re.sub(r'[^a-zA-Z0-9_\-\u00C0-\u017F]', '_', target_folder)
+    folder_path = os.path.join(os.path.dirname(__file__), safe_folder)
+    os.makedirs(folder_path, exist_ok=True)
+
+    if not custom_filename:
+        custom_filename = f"sinav_kagidi.{file_format}"
+
+    safe_filename = os.path.basename(custom_filename)
+    saved_path = os.path.join(folder_path, safe_filename)
+
+    try:
+        if file_format == "docx":
+            docx_bytes = generate_docx(header, questions, mode=mode, color=color)
+            with open(saved_path, "wb") as f:
+                f.write(docx_bytes)
+        elif html_content:
+            with open(saved_path, "w", encoding="utf-8") as f:
+                f.write(html_content)
+        return jsonify({
+            "success": True,
+            "filename": safe_filename,
+            "folder": safe_folder,
+            "saved_path": saved_path
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route("/api/export-both-docx", methods=["POST"])
 def export_both_docx():
