@@ -1204,10 +1204,11 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
         </article>
       `;
     } else {
-      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı 22mm üst boşluk + 6-10 arası Sorular (2. sayfada başlık tekrar etmez)
+      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı üst boşluk + 6-10 arası Sorular (2. sayfada başlık tekrar etmez)
       resultHtml += `
         <div class="page-separator"><span>📄 Sayfa ${currentPageNum}: ${isAnswerKey ? 'Cevap Anahtarı (Devam)' : 'Soru Kağıdı (Devam)'}</span></div>
         <article class="a4-page a4-page-break a4-continuation-page">
+          <div class="exam-page-top-spacer" aria-hidden="true"></div>
           <div class="exam-questions-container">${pageQuestionsHtml}</div>
         </article>
       `;
@@ -2292,6 +2293,7 @@ function exportWordHtmlFallback(mode, customFilename = null) {
         table.exam-header-table { width: 100%; border-collapse: collapse; margin-bottom: 12pt; border: 1.5pt solid black; }
         table.exam-header-table td { border: 1pt solid black; padding: 4pt 6pt; font-family: Arial, sans-serif; }
         .exam-section-title { text-align: center; font-weight: bold; font-size: 13pt; letter-spacing: 4px; margin: 16pt 0 16pt 0; }
+        .exam-page-top-spacer { height: 48mm; width: 100%; display: block; }
         .exam-question-item { margin-bottom: 10pt; font-size: 10.5pt; font-family: Arial, sans-serif; }
         .exam-question-text { font-weight: bold; margin-bottom: 3pt; }
         .exam-answer-line { color: #555555; font-size: 9pt; letter-spacing: 1px; }

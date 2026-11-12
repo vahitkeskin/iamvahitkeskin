@@ -118,11 +118,16 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     dots_short = ".........................................................................................................................."
 
     for idx, q in enumerate(questions, 1):
-        # 5 sorudan sonra 2. ve sonraki sayfalara geçiş: Sayfa sonu ekle (2. sayfada başlık tekrar etmez)
+        # 5 sorudan sonra 2. ve sonraki sayfalara geçiş: Sayfa sonu ve 1. sayfa başlık alanı kadar boşluk (2. sayfada başlık tekrar etmez)
         if idx > 1 and (idx - 1) % 5 == 0:
             elements.append('''
             <w:p>
                 <w:r><w:br w:type="page"/></w:r>
+            </w:p>
+            <w:p>
+                <w:pPr>
+                    <w:spacing w:before="2100" w:after="0"/>
+                </w:pPr>
             </w:p>
             ''')
 

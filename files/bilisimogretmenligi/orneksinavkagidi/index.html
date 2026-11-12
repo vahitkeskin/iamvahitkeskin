@@ -1267,6 +1267,15 @@ select {
   -webkit-box-decoration-break: clone;
 }
 
+/* 2. ve sonraki sayfalarda 1. sayfanın üst bilgi tablosu ve S O R U L A R başlığına denk gelen boşluk */
+.exam-page-top-spacer {
+  display: block;
+  width: 100%;
+  height: 48mm;
+  min-height: 48mm;
+  box-sizing: border-box;
+}
+
 /* ==========================================================================
    A4 KAĞIT ŞABLONU (orneksinavkagidi.jpg BİREBİR REPLİKASI)
    A4 Sayfası ve İçeriği: Dark Mode'dan Kesinlikle Hariç Tutulur
@@ -2036,14 +2045,13 @@ select {
     min-height: 0 !important;
   }
 
-  .a4-page,
-  .a4-continuation-page {
+  .a4-page {
     width: 210mm !important;
     max-width: 210mm !important;
     min-height: 297mm !important;
     height: auto !important;
     box-sizing: border-box !important;
-    padding: 22mm 20mm 20mm 20mm !important; /* 1. ve 2. sayfalarda eşit üst ve kenar boşluğu */
+    padding: 22mm 20mm 20mm 20mm !important;
     margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
@@ -2054,6 +2062,35 @@ select {
     color: #000000 !important;
     box-decoration-break: clone !important;
     -webkit-box-decoration-break: clone !important;
+  }
+
+  .a4-continuation-page {
+    width: 210mm !important;
+    max-width: 210mm !important;
+    min-height: 297mm !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    padding: 0 20mm 20mm 20mm !important; /* Tarayıcı sayfa sonu padding çökmesini önler; üst boşluk exam-page-top-spacer ile net 70mm olarak sağlanır */
+    margin: 0 auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
+  }
+
+  .exam-page-top-spacer {
+    display: block !important;
+    width: 100% !important;
+    height: 70mm !important; /* 22mm sayfa üst boşluğu + 48mm başlık alanı boşluğu: 1. sayfa ile birebir aynı hizalama */
+    min-height: 70mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .a4-page:last-child,
@@ -2154,7 +2191,7 @@ select {
 
   .exam-question-block {
     display: block !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
     page-break-inside: avoid !important;
   }
 
@@ -2164,7 +2201,7 @@ select {
   }
 
   .exam-question-text {
-    margin-bottom: 10px !important;
+    margin-bottom: 9px !important;
     font-size: 11pt !important;
     line-height: 1.35 !important;
   }
@@ -2172,6 +2209,10 @@ select {
   .dotted-answer-lines {
     gap: 4px !important;
     margin-top: 4px !important;
+  }
+
+  .dotted-line-row {
+    height: 19px !important;
   }
 
   .model-answer-block {
@@ -4175,10 +4216,11 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
         </article>
       `;
     } else {
-      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı 22mm üst boşluk + 6-10 arası Sorular (2. sayfada başlık tekrar etmez)
+      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı üst boşluk + 6-10 arası Sorular (2. sayfada başlık tekrar etmez)
       resultHtml += `
         <div class="page-separator"><span>📄 Sayfa ${currentPageNum}: ${isAnswerKey ? 'Cevap Anahtarı (Devam)' : 'Soru Kağıdı (Devam)'}</span></div>
         <article class="a4-page a4-page-break a4-continuation-page">
+          <div class="exam-page-top-spacer" aria-hidden="true"></div>
           <div class="exam-questions-container">${pageQuestionsHtml}</div>
         </article>
       `;
@@ -5263,6 +5305,7 @@ function exportWordHtmlFallback(mode, customFilename = null) {
         table.exam-header-table { width: 100%; border-collapse: collapse; margin-bottom: 12pt; border: 1.5pt solid black; }
         table.exam-header-table td { border: 1pt solid black; padding: 4pt 6pt; font-family: Arial, sans-serif; }
         .exam-section-title { text-align: center; font-weight: bold; font-size: 13pt; letter-spacing: 4px; margin: 16pt 0 16pt 0; }
+        .exam-page-top-spacer { height: 48mm; width: 100%; display: block; }
         .exam-question-item { margin-bottom: 10pt; font-size: 10.5pt; font-family: Arial, sans-serif; }
         .exam-question-text { font-weight: bold; margin-bottom: 3pt; }
         .exam-answer-line { color: #555555; font-size: 9pt; letter-spacing: 1px; }
