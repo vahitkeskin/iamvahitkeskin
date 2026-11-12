@@ -1002,6 +1002,28 @@ select {
   transform: scale(0.98);
 }
 
+/* Pasif / Disabled Buton Durumları (Örn. Sorular Boş İken İndirme Butonları) */
+.btn:disabled,
+.btn[disabled],
+.btn.btn-disabled-empty {
+  opacity: 0.42 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  filter: grayscale(35%) !important;
+  pointer-events: auto !important;
+}
+
+.btn:disabled:active,
+.btn[disabled]:active,
+.btn.btn-disabled-empty:active,
+.btn:disabled:hover,
+.btn[disabled]:hover,
+.btn.btn-disabled-empty:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.42 !important;
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: #ffffff;
@@ -2046,12 +2068,12 @@ select {
         <span class="btn-text-full">Orijinal Şablon</span>
         <span class="btn-text-short">Şablon</span>
       </button>
-      <button id="btn-header-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+      <button id="btn-header-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
         <span class="btn-icon">📄</span>
         <span class="btn-text-full">DOCX İndir</span>
         <span class="btn-text-short">DOCX</span>
       </button>
-      <button id="btn-header-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+      <button id="btn-header-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
         <span class="btn-icon">📑</span>
         <span class="btn-text-full">PDF İndir</span>
         <span class="btn-text-short">PDF</span>
@@ -2496,10 +2518,10 @@ select {
 
         <!-- İndirme Seçenekleri -->
         <div class="toolbar-group">
-          <button id="btn-toolbar-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+          <button id="btn-toolbar-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
             📄 DOCX İndir
           </button>
-          <button id="btn-toolbar-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+          <button id="btn-toolbar-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
             📑 PDF İndir
           </button>
         </div>
@@ -2619,8 +2641,8 @@ select {
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
           <button id="btn-modal-toggle-mode" class="btn btn-secondary btn-sm" title="Soru Kağıdı ve Cevap Anahtarı Arasında Geçiş Yap">Mod Değiştir (Cevap Anahtarı)</button>
-          <button id="btn-modal-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Belgeyi DOCX Olarak İndir">📄 DOCX İndir</button>
-          <button id="btn-modal-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Belgeyi PDF Olarak İndir / Kaydet">📑 PDF İndir</button>
+          <button id="btn-modal-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📄 DOCX İndir</button>
+          <button id="btn-modal-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📑 PDF İndir</button>
           <button id="btn-modal-print" class="btn btn-secondary btn-sm" title="Yazdır">🖨️ Yazdır</button>
           <button id="btn-fullscreen-preview-close" class="modal-close" title="Önizlemeyi Kapat">✕</button>
         </div>
@@ -2636,8 +2658,8 @@ select {
           <small id="preview-modal-doc-subtitle">(Ekranda hangi görünüm açıksa o indirilir)</small>
         </div>
         <div class="preview-modal-footer-actions">
-          <button id="btn-modal-footer-docx" class="btn btn-primary">📄 DOCX İndir</button>
-          <button id="btn-modal-footer-pdf" class="btn btn-success">📑 PDF İndir / Kaydet</button>
+          <button id="btn-modal-footer-docx" class="btn btn-primary btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📄 DOCX İndir</button>
+          <button id="btn-modal-footer-pdf" class="btn btn-success btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📑 PDF İndir / Kaydet</button>
           <button class="btn btn-secondary" onclick="closeFullscreenPreview()">✕ Kapat</button>
         </div>
       </div>
@@ -2743,6 +2765,42 @@ function updateTopicsDropdown(grade) {
 }
 
 // --------------------------------------------------------------------------
+// Soru Durumuna Göre İndirme Butonlarının Aktif / Pasif Kontrolü
+// (Sorular Boş İse DOCX ve PDF İndirme Butonları Pasif / Disabled Olur)
+// --------------------------------------------------------------------------
+function updateDownloadButtonsState() {
+  const hasQuestions = Array.isArray(AppState.questions) && AppState.questions.length > 0;
+
+  const downloadBtnConfigs = [
+    { id: "btn-header-docx", defaultTitle: "Ekranda Görünen Kağıdı DOCX Olarak İndir" },
+    { id: "btn-header-pdf", defaultTitle: "Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet" },
+    { id: "btn-toolbar-docx", defaultTitle: "Ekranda Görünen Kağıdı DOCX Olarak İndir" },
+    { id: "btn-toolbar-pdf", defaultTitle: "Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet" },
+    { id: "btn-modal-docx", defaultTitle: "Ekranda Görünen Belgeyi DOCX Olarak İndir" },
+    { id: "btn-modal-pdf", defaultTitle: "Ekranda Görünen Belgeyi PDF Olarak İndir / Kaydet" },
+    { id: "btn-modal-footer-docx", defaultTitle: "DOCX İndir" },
+    { id: "btn-modal-footer-pdf", defaultTitle: "PDF İndir / Kaydet" }
+  ];
+
+  downloadBtnConfigs.forEach(cfg => {
+    const btn = document.getElementById(cfg.id);
+    if (!btn) return;
+
+    if (!hasQuestions) {
+      btn.disabled = true;
+      btn.setAttribute("aria-disabled", "true");
+      btn.classList.add("btn-disabled-empty");
+      btn.setAttribute("title", "Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz.");
+    } else {
+      btn.disabled = false;
+      btn.removeAttribute("aria-disabled");
+      btn.classList.remove("btn-disabled-empty");
+      btn.setAttribute("title", cfg.defaultTitle);
+    }
+  });
+}
+
+// --------------------------------------------------------------------------
 // Tam Ekran %100 Düzgün Önizleme & İndirme Modalı
 // --------------------------------------------------------------------------
 function openFullscreenPreview() {
@@ -2769,6 +2827,10 @@ function openFullscreenPreview() {
 }
 
 function openDownloadPreview(targetFormat = null) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
   openFullscreenPreview();
   updateModalLabels(targetFormat);
 }
@@ -2818,6 +2880,8 @@ function updateModalLabels(targetFormat = null) {
   if (btnPdf) btnPdf.textContent = `📑 PDF İndir`;
   if (btnFooterDocx) btnFooterDocx.textContent = `📄 ${modeName} (DOCX İndir)`;
   if (btnFooterPdf) btnFooterPdf.textContent = `📑 ${modeName} (PDF İndir)`;
+
+  updateDownloadButtonsState();
 }
 
 function fitModalPaper() {
@@ -3479,6 +3543,7 @@ function renderExamSheet() {
   if (typeof updatePaperScale === "function") {
     updatePaperScale(AppState.zoomLevel || 1.0);
   }
+  updateDownloadButtonsState();
 }
 
 
@@ -3508,6 +3573,8 @@ function renderQuestionsList() {
   const container = document.getElementById("sidebar-questions-list");
   const countBadge = document.getElementById("badge-question-count");
   if (countBadge) countBadge.textContent = `${AppState.questions.length} Soru (Toplam: ${getTotalPoints()} Puan)`;
+
+  updateDownloadButtonsState();
 
   if (!container) return;
   container.innerHTML = "";
@@ -4126,6 +4193,11 @@ function initMobileViewSwitcher() {
 // DOCX & PDF İndirme İşlemleri (Ekranda Hangi Belge Varsa Onu İndirir)
 // --------------------------------------------------------------------------
 async function downloadDocx(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   let modeName = "Soru Kağıdı";
   let suffix = "Soru_Kagidi";
@@ -4181,6 +4253,11 @@ async function downloadDocx(mode) {
 }
 
 function downloadPdf(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   let modeName = "Soru Kağıdı";
   let suffix = "Soru_Kagidi";
@@ -4217,6 +4294,11 @@ function downloadPdf(mode) {
 }
 
 function exportWordHtmlFallback(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
   let suffix = "Soru_Kagidi";

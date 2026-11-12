@@ -56,12 +56,12 @@
         <span class="btn-text-full">Orijinal Şablon</span>
         <span class="btn-text-short">Şablon</span>
       </button>
-      <button id="btn-header-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+      <button id="btn-header-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
         <span class="btn-icon">📄</span>
         <span class="btn-text-full">DOCX İndir</span>
         <span class="btn-text-short">DOCX</span>
       </button>
-      <button id="btn-header-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+      <button id="btn-header-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
         <span class="btn-icon">📑</span>
         <span class="btn-text-full">PDF İndir</span>
         <span class="btn-text-short">PDF</span>
@@ -506,10 +506,10 @@
 
         <!-- İndirme Seçenekleri -->
         <div class="toolbar-group">
-          <button id="btn-toolbar-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Kağıdı DOCX Olarak İndir">
+          <button id="btn-toolbar-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
             📄 DOCX İndir
           </button>
-          <button id="btn-toolbar-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet">
+          <button id="btn-toolbar-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>
             📑 PDF İndir
           </button>
         </div>
@@ -629,8 +629,8 @@
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
           <button id="btn-modal-toggle-mode" class="btn btn-secondary btn-sm" title="Soru Kağıdı ve Cevap Anahtarı Arasında Geçiş Yap">Mod Değiştir (Cevap Anahtarı)</button>
-          <button id="btn-modal-docx" class="btn btn-primary btn-sm" title="Ekranda Görünen Belgeyi DOCX Olarak İndir">📄 DOCX İndir</button>
-          <button id="btn-modal-pdf" class="btn btn-success btn-sm" title="Ekranda Görünen Belgeyi PDF Olarak İndir / Kaydet">📑 PDF İndir</button>
+          <button id="btn-modal-docx" class="btn btn-primary btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📄 DOCX İndir</button>
+          <button id="btn-modal-pdf" class="btn btn-success btn-sm btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📑 PDF İndir</button>
           <button id="btn-modal-print" class="btn btn-secondary btn-sm" title="Yazdır">🖨️ Yazdır</button>
           <button id="btn-fullscreen-preview-close" class="modal-close" title="Önizlemeyi Kapat">✕</button>
         </div>
@@ -646,8 +646,8 @@
           <small id="preview-modal-doc-subtitle">(Ekranda hangi görünüm açıksa o indirilir)</small>
         </div>
         <div class="preview-modal-footer-actions">
-          <button id="btn-modal-footer-docx" class="btn btn-primary">📄 DOCX İndir</button>
-          <button id="btn-modal-footer-pdf" class="btn btn-success">📑 PDF İndir / Kaydet</button>
+          <button id="btn-modal-footer-docx" class="btn btn-primary btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📄 DOCX İndir</button>
+          <button id="btn-modal-footer-pdf" class="btn btn-success btn-disabled-empty" title="Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz." disabled>📑 PDF İndir / Kaydet</button>
           <button class="btn btn-secondary" onclick="closeFullscreenPreview()">✕ Kapat</button>
         </div>
       </div>

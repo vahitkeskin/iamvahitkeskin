@@ -86,6 +86,42 @@ function updateTopicsDropdown(grade) {
 }
 
 // --------------------------------------------------------------------------
+// Soru Durumuna Göre İndirme Butonlarının Aktif / Pasif Kontrolü
+// (Sorular Boş İse DOCX ve PDF İndirme Butonları Pasif / Disabled Olur)
+// --------------------------------------------------------------------------
+function updateDownloadButtonsState() {
+  const hasQuestions = Array.isArray(AppState.questions) && AppState.questions.length > 0;
+
+  const downloadBtnConfigs = [
+    { id: "btn-header-docx", defaultTitle: "Ekranda Görünen Kağıdı DOCX Olarak İndir" },
+    { id: "btn-header-pdf", defaultTitle: "Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet" },
+    { id: "btn-toolbar-docx", defaultTitle: "Ekranda Görünen Kağıdı DOCX Olarak İndir" },
+    { id: "btn-toolbar-pdf", defaultTitle: "Ekranda Görünen Kağıdı PDF Olarak İndir / Kaydet" },
+    { id: "btn-modal-docx", defaultTitle: "Ekranda Görünen Belgeyi DOCX Olarak İndir" },
+    { id: "btn-modal-pdf", defaultTitle: "Ekranda Görünen Belgeyi PDF Olarak İndir / Kaydet" },
+    { id: "btn-modal-footer-docx", defaultTitle: "DOCX İndir" },
+    { id: "btn-modal-footer-pdf", defaultTitle: "PDF İndir / Kaydet" }
+  ];
+
+  downloadBtnConfigs.forEach(cfg => {
+    const btn = document.getElementById(cfg.id);
+    if (!btn) return;
+
+    if (!hasQuestions) {
+      btn.disabled = true;
+      btn.setAttribute("aria-disabled", "true");
+      btn.classList.add("btn-disabled-empty");
+      btn.setAttribute("title", "Sınav soruları alanı boş! İndirmek için lütfen en az 1 soru ekleyiniz.");
+    } else {
+      btn.disabled = false;
+      btn.removeAttribute("aria-disabled");
+      btn.classList.remove("btn-disabled-empty");
+      btn.setAttribute("title", cfg.defaultTitle);
+    }
+  });
+}
+
+// --------------------------------------------------------------------------
 // Tam Ekran %100 Düzgün Önizleme & İndirme Modalı
 // --------------------------------------------------------------------------
 function openFullscreenPreview() {
@@ -112,6 +148,10 @@ function openFullscreenPreview() {
 }
 
 function openDownloadPreview(targetFormat = null) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
   openFullscreenPreview();
   updateModalLabels(targetFormat);
 }
@@ -161,6 +201,8 @@ function updateModalLabels(targetFormat = null) {
   if (btnPdf) btnPdf.textContent = `📑 PDF İndir`;
   if (btnFooterDocx) btnFooterDocx.textContent = `📄 ${modeName} (DOCX İndir)`;
   if (btnFooterPdf) btnFooterPdf.textContent = `📑 ${modeName} (PDF İndir)`;
+
+  updateDownloadButtonsState();
 }
 
 function fitModalPaper() {
@@ -822,6 +864,7 @@ function renderExamSheet() {
   if (typeof updatePaperScale === "function") {
     updatePaperScale(AppState.zoomLevel || 1.0);
   }
+  updateDownloadButtonsState();
 }
 
 
@@ -851,6 +894,8 @@ function renderQuestionsList() {
   const container = document.getElementById("sidebar-questions-list");
   const countBadge = document.getElementById("badge-question-count");
   if (countBadge) countBadge.textContent = `${AppState.questions.length} Soru (Toplam: ${getTotalPoints()} Puan)`;
+
+  updateDownloadButtonsState();
 
   if (!container) return;
   container.innerHTML = "";
@@ -1469,6 +1514,11 @@ function initMobileViewSwitcher() {
 // DOCX & PDF İndirme İşlemleri (Ekranda Hangi Belge Varsa Onu İndirir)
 // --------------------------------------------------------------------------
 async function downloadDocx(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   let modeName = "Soru Kağıdı";
   let suffix = "Soru_Kagidi";
@@ -1524,6 +1574,11 @@ async function downloadDocx(mode) {
 }
 
 function downloadPdf(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   let modeName = "Soru Kağıdı";
   let suffix = "Soru_Kagidi";
@@ -1560,6 +1615,11 @@ function downloadPdf(mode) {
 }
 
 function exportWordHtmlFallback(mode) {
+  if (!AppState.questions || AppState.questions.length === 0) {
+    showToast("Sınav soruları alanı boş! İndirmek için lütfen önce soru ekleyiniz.", "warning");
+    return;
+  }
+
   const currentMode = mode || AppState.viewMode || "questions";
   const lessonName = (AppState.header.lesson || "Sinav").replace(/\s+/g, "_");
   let suffix = "Soru_Kagidi";

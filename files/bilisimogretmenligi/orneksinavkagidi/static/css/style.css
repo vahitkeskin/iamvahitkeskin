@@ -982,6 +982,28 @@ select {
   transform: scale(0.98);
 }
 
+/* Pasif / Disabled Buton Durumları (Örn. Sorular Boş İken İndirme Butonları) */
+.btn:disabled,
+.btn[disabled],
+.btn.btn-disabled-empty {
+  opacity: 0.42 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  filter: grayscale(35%) !important;
+  pointer-events: auto !important;
+}
+
+.btn:disabled:active,
+.btn[disabled]:active,
+.btn.btn-disabled-empty:active,
+.btn:disabled:hover,
+.btn[disabled]:hover,
+.btn.btn-disabled-empty:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.42 !important;
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: #ffffff;
