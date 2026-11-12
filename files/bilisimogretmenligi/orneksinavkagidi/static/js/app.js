@@ -2292,9 +2292,9 @@ function exportWordHtmlFallback(mode, customFilename = null) {
         div.Section1 { page: Section1; font-family: Arial, sans-serif; }
         table.exam-header-table { width: 100%; border-collapse: collapse; margin-bottom: 12pt; border: 1.5pt solid black; }
         table.exam-header-table td { border: 1pt solid black; padding: 4pt 6pt; font-family: Arial, sans-serif; }
-        .exam-section-title { text-align: center; font-weight: bold; font-size: 13pt; letter-spacing: 4px; margin: 16pt 0 16pt 0; }
-        .exam-page-top-spacer { height: 48mm; width: 100%; display: block; }
-        .exam-question-item { margin-bottom: 10pt; font-size: 10.5pt; font-family: Arial, sans-serif; }
+        .exam-section-title { text-align: center; font-weight: bold; font-size: 11pt; letter-spacing: 4px; margin: 8pt 0 10pt 0; }
+        .exam-page-top-spacer { height: 32mm; width: 100%; display: block; }
+        .exam-question-item { margin-bottom: 14pt; font-size: 10pt; font-family: Arial, sans-serif; }
         .exam-question-text { font-weight: bold; margin-bottom: 3pt; }
         .exam-answer-line { color: #555555; font-size: 9pt; letter-spacing: 1px; }
         .exam-answer-text { font-size: 10pt; margin-top: 3pt; }

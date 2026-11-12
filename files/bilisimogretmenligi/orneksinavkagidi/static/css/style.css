@@ -1240,9 +1240,9 @@ select {
   align-items: center;
 }
 
-/* 2. ve sonraki devam sayfaları (orneksinavkagidi.jpg gibi üstte ve kenarlarda 22mm boşluk) */
+/* 2. ve sonraki devam sayfaları (1. sayfa ile birebir aynı ferah boşluklar) */
 .a4-continuation-page {
-  padding: 22mm 20mm 20mm 20mm !important;
+  padding: 14mm 16mm 14mm 16mm !important;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
@@ -1251,8 +1251,8 @@ select {
 .exam-page-top-spacer {
   display: block;
   width: 100%;
-  height: 48mm;
-  min-height: 48mm;
+  height: 32mm;
+  min-height: 32mm;
   box-sizing: border-box;
 }
 
@@ -1273,7 +1273,7 @@ select {
   color: #000000 !important;
   box-shadow: var(--shadow-paper);
   border: 1px solid #d1d5db !important;
-  padding: 22mm 20mm 20mm 20mm;
+  padding: 14mm 16mm 14mm 16mm;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   position: relative;
   box-sizing: border-box;
@@ -1283,8 +1283,8 @@ select {
 .exam-header-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #000000 !important;
-  margin-bottom: 26px;
+  border: 1.2px solid #000000 !important;
+  margin-bottom: 10px;
   table-layout: fixed;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #000000 !important;
@@ -1294,7 +1294,7 @@ select {
 
 .exam-header-table td {
   border: 1px solid #000000 !important;
-  padding: 8px 12px;
+  padding: 4px 8px;
   vertical-align: middle;
   box-sizing: border-box;
   color: #000000 !important;
@@ -1304,8 +1304,8 @@ select {
 /* Sol Sütun: ADI SOYADI, SINIFI, No. */
 .header-col-left {
   width: 32%;
-  font-size: 12pt;
-  line-height: 1.7;
+  font-size: 10.5pt;
+  line-height: 1.35;
   font-weight: 400;
   color: #000000 !important;
   text-align: left;
@@ -1314,52 +1314,52 @@ select {
 .header-col-left div {
   font-weight: 400;
   text-align: left;
-  line-height: 1.65;
+  line-height: 1.35;
   word-break: break-word;
   overflow-wrap: break-word;
   color: #000000 !important;
 }
 
-/* Orta Sütun: Yıl, Okul, Ders, Dönem - KOYU (BOLD), ORTALANMIŞ, DAHA KÜÇÜK */
+/* Orta Sütun: Yıl, Okul, Ders, Dönem - KOYU (BOLD), ORTALANMIŞ */
 .header-col-middle {
   width: 50%;
   text-align: center;
-  line-height: 1.35;
+  line-height: 1.25;
   font-weight: 700;
   color: #000000 !important;
-  padding: 6px 10px;
+  padding: 4px 6px;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
 .exam-year {
-  font-size: 10pt;
+  font-size: 8.5pt;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: #000000 !important;
 }
 
 .exam-school {
-  font-size: 9.5pt;
+  font-size: 8.5pt;
   font-weight: 700;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   text-align: center;
   color: #000000 !important;
 }
 
 .exam-lesson {
-  font-size: 9.5pt;
+  font-size: 8.5pt;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   text-align: center;
   color: #000000 !important;
 }
 
 .exam-term {
-  font-size: 9.5pt;
+  font-size: 8.5pt;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
@@ -1370,10 +1370,10 @@ select {
 .header-col-right {
   width: 18%;
   vertical-align: middle !important;
-  font-size: 12pt;
+  font-size: 10.5pt;
   font-weight: 400;
   color: #000000 !important;
-  padding: 8px 12px;
+  padding: 4px 8px;
   text-align: left;
 }
 
@@ -1384,36 +1384,37 @@ select {
   color: #000000 !important;
 }
 
-/* S O R U L A R / C E V A P L A R Başlığı - Üstünde ve Altında Dengeli Boşluk */
+/* S O R U L A R / C E V A P L A R Başlığı - Kompakt ve Zarif */
 .exam-section-title {
   text-align: center;
-  font-size: 13pt;
-  font-weight: 400;
-  letter-spacing: 7px;
-  margin-top: 18px;
-  margin-bottom: 24px;
-  padding: 4px 0;
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  padding: 0;
   color: #000000 !important;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-/* Soru & Cevap Maddeleri */
+/* Soru & Cevap Maddeleri: İki soru arasında okunaklı, belirgin boşluk (20px) */
 .exam-questions-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #000000 !important;
 }
 
 .exam-question-block {
   page-break-inside: avoid;
+  padding-bottom: 2px;
 }
 
 .exam-question-text {
-  font-size: 11pt;
-  line-height: 1.45;
-  margin-bottom: 12px;
+  font-size: 10.5pt;
+  line-height: 1.38;
+  margin-bottom: 8px;
   color: #000000 !important;
   font-weight: 400;
   overflow-wrap: anywhere;
@@ -2031,7 +2032,7 @@ select {
     min-height: 297mm !important;
     height: auto !important;
     box-sizing: border-box !important;
-    padding: 22mm 20mm 20mm 20mm !important;
+    padding: 14mm 16mm 14mm 16mm !important;
     margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
@@ -2050,7 +2051,7 @@ select {
     min-height: 297mm !important;
     height: auto !important;
     box-sizing: border-box !important;
-    padding: 0 20mm 20mm 20mm !important; /* Tarayıcı sayfa sonu padding çökmesini önler; üst boşluk exam-page-top-spacer ile net 70mm olarak sağlanır */
+    padding: 0 16mm 14mm 16mm !important; /* Tarayıcı sayfa sonu padding çökmesini önler; üst boşluk exam-page-top-spacer ile net 46mm olarak sağlanır */
     margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
@@ -2066,8 +2067,8 @@ select {
   .exam-page-top-spacer {
     display: block !important;
     width: 100% !important;
-    height: 70mm !important; /* 22mm sayfa üst boşluğu + 48mm başlık alanı boşluğu: 1. sayfa ile birebir aynı hizalama */
-    min-height: 70mm !important;
+    height: 46mm !important; /* 14mm sayfa üst boşluğu + 32mm başlık alanı boşluğu: 1. sayfa ile birebir aynı hizalama */
+    min-height: 46mm !important;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
@@ -2088,18 +2089,18 @@ select {
 
   .exam-header-table {
     border: 1px solid #000000 !important;
-    margin-bottom: 22px !important;
+    margin-bottom: 8px !important;
   }
 
   .exam-header-table td {
     border: 1px solid #000000 !important;
-    padding: 6px 10px !important;
+    padding: 3px 6px !important;
   }
 
   .header-col-left {
     width: 32% !important;
-    font-size: 11.5pt !important;
-    line-height: 1.6 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.3 !important;
     text-align: left !important;
   }
 
@@ -2107,26 +2108,32 @@ select {
     width: 50% !important;
     font-weight: 700 !important;
     text-align: center !important;
+    padding: 2px 4px !important;
   }
 
   .exam-year {
-    font-size: 9.5pt !important;
+    font-size: 8pt !important;
     font-weight: 700 !important;
     text-align: center !important;
+    margin-bottom: 1px !important;
+    line-height: 1.2 !important;
   }
 
   .exam-school,
   .exam-lesson,
   .exam-term {
-    font-size: 9pt !important;
+    font-size: 8pt !important;
     font-weight: 700 !important;
     text-align: center !important;
+    margin-bottom: 1px !important;
+    line-height: 1.2 !important;
   }
 
   .header-col-right {
     width: 18% !important;
-    font-size: 11.5pt !important;
+    font-size: 9.5pt !important;
     text-align: left !important;
+    padding: 3px 6px !important;
   }
 
   .q-num,
@@ -2138,7 +2145,7 @@ select {
   }
 
   .dotted-line-row .dots-fill {
-    border-bottom: 1.5px dotted #000000 !important;
+    border-bottom: 1.2px dotted #000000 !important;
   }
 
   .header-col-left,
@@ -2155,12 +2162,12 @@ select {
   }
 
   .exam-section-title {
-    margin-top: 16px !important;
-    margin-bottom: 22px !important;
-    padding: 4px 0 !important;
-    font-size: 12pt !important;
-    font-weight: 400 !important;
-    letter-spacing: 7px !important;
+    margin-top: 5px !important;
+    margin-bottom: 8px !important;
+    padding: 0 !important;
+    font-size: 10pt !important;
+    font-weight: 700 !important;
+    letter-spacing: 5px !important;
     text-align: center !important;
   }
 
@@ -2171,8 +2178,9 @@ select {
 
   .exam-question-block {
     display: block !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 18px !important; /* İki soru arasında okunaklı, ferah ve belirgin boşluk */
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .exam-question-block:last-child {
@@ -2181,18 +2189,18 @@ select {
   }
 
   .exam-question-text {
-    margin-bottom: 9px !important;
-    font-size: 11pt !important;
-    line-height: 1.35 !important;
+    margin-bottom: 5px !important;
+    font-size: 9.5pt !important;
+    line-height: 1.32 !important;
   }
 
   .dotted-answer-lines {
-    gap: 4px !important;
-    margin-top: 4px !important;
+    gap: 3px !important;
+    margin-top: 3px !important;
   }
 
   .dotted-line-row {
-    height: 19px !important;
+    height: 17px !important;
   }
 
   .model-answer-block {
@@ -2204,15 +2212,15 @@ select {
   .test-options-grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 4px 16px !important;
-    margin-top: 5px !important;
-    margin-bottom: 8px !important;
+    gap: 3px 14px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
     padding-left: 4px !important;
   }
 
   .test-option-item {
-    font-size: 10pt !important;
-    line-height: 1.35 !important;
+    font-size: 9pt !important;
+    line-height: 1.25 !important;
   }
 
   .option-marker {
