@@ -172,9 +172,9 @@ def get_questions():
     lesson = request.args.get("lesson", "").strip()
     exam_type = request.args.get("exam_type", "klasik").lower()
     try:
-        count = int(request.args.get("count", 5))
+        count = int(request.args.get("count", 10))
     except ValueError:
-        count = 5
+        count = 10
     count = max(1, min(count, 30))
 
     portal_curriculum = request.args.get("portal_curriculum", "").lower() == "true"
@@ -339,7 +339,7 @@ def generate_custom_questions():
     data = request.get_json() or {}
     prompt = data.get("prompt", "").strip()
     grade = str(data.get("grade", "5"))
-    count = int(data.get("count", 5))
+    count = int(data.get("count", 10))
     lesson = data.get("lesson", "")
     start_week = int(data.get("start_week", 1))
     end_week = int(data.get("end_week", 8))

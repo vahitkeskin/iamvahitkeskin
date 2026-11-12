@@ -558,7 +558,7 @@ function updatePortalSyncUI(autoGenerate = false) {
 
     // Soruları müfredattan üret
     if (autoGenerate) {
-      const qCount = parseInt(document.getElementById("input-question-count")?.value, 10) || 5;
+      const qCount = parseInt(document.getElementById("input-question-count")?.value, 10) || 10;
       const questions = generatePortalCurriculumQuestions(g, startW, endW, qCount);
       if (questions && questions.length > 0) {
         AppState.questions = questions;
@@ -662,7 +662,7 @@ function buildTestOptions(correctAnswer, candidatePoolAnswers = [], grade = 5) {
   };
 }
 
-function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 5) {
+function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 10) {
   // Eğer 3 argüman gönderildiyse: (grade, weeksCount, count)
   if (typeof count === "undefined" && typeof endWeek === "number") {
     count = endWeek;
@@ -1471,7 +1471,7 @@ async function generateBilisimExam() {
     return;
   }
   const grade = document.getElementById("select-grade").value;
-  const count = parseInt(document.getElementById("input-question-count").value) || 5;
+  const count = parseInt(document.getElementById("input-question-count").value) || 10;
 
   if (AppState.usePortalCurriculum) {
     const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || "5";
@@ -1529,7 +1529,7 @@ async function generateCustomPrompt() {
   const promptInput = document.getElementById("input-custom-prompt");
   const promptText = promptInput.value.trim();
   const grade = document.getElementById("select-grade").value;
-  const count = parseInt(document.getElementById("input-question-count").value) || 5;
+  const count = parseInt(document.getElementById("input-question-count").value) || 10;
 
   if (!promptText) {
     alert("Lütfen hazırlamak istediğiniz konuyu yazınız (Örn: Python döngüler, Scratch değişkenler, Siber güvenlik)");
@@ -1631,6 +1631,12 @@ function initEventListeners() {
   const selectDifficulty = document.getElementById("select-difficulty");
   if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "orta")) {
     selectDifficulty.value = "kolay";
+  }
+
+  // Soru Sayısı (Varsayılan: 10)
+  const inputQCount = document.getElementById("input-question-count");
+  if (inputQCount && (!inputQCount.value || inputQCount.value === "5")) {
+    inputQCount.value = "10";
   }
 
   const selectTopic = document.getElementById("select-topic");
