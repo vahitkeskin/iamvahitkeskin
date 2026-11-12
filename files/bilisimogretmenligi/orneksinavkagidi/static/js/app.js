@@ -1205,11 +1205,10 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
         </article>
       `;
     } else {
-      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı 22mm üst boşluk + Başlık + 6-10 arası Sorular
+      // 2. ve sonraki sayfalar: 1. sayfa ile birebir aynı 22mm üst boşluk + 6-10 arası Sorular (2. sayfada başlık tekrar etmez)
       resultHtml += `
         <div class="page-separator"><span>📄 Sayfa ${currentPageNum}: ${isAnswerKey ? 'Cevap Anahtarı (Devam)' : 'Soru Kağıdı (Devam)'}</span></div>
         <article class="a4-page a4-page-break a4-continuation-page">
-          <div class="exam-section-title">${sectionTitle}</div>
           <div class="exam-questions-container">${pageQuestionsHtml}</div>
         </article>
       `;
