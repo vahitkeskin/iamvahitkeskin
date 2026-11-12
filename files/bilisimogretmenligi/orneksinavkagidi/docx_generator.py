@@ -153,7 +153,36 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         </w:p>
         ''')
 
-        if not is_answer_key:
+        is_test = (q.get("type") == "test") or bool(q.get("options"))
+        if is_test and q.get("options"):
+            opts = q.get("options", [])
+            correct_key = str(q.get("correct_option") or (q.get("answer") or "A")[0]).upper()
+            opt_runs = []
+            for opt in opts:
+                if isinstance(opt, dict):
+                    opt_key = str(opt.get("key", "")).upper()
+                    opt_text = str(opt.get("text", ""))
+                else:
+                    opt_str = str(opt)
+                    opt_key = opt_str[0].upper() if opt_str else "A"
+                    opt_text = re.sub(r'^[A-Ea-e][\)\.\-]\s*', '', opt_str)
+
+                is_correct = (opt_key == correct_key)
+                if is_answer_key and is_correct:
+                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:color w:val="DC2626"/><w:sz w:val="21"/></w:rPr><w:t>[✓] {opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
+                else:
+                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>{opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
+
+            for i in range(0, len(opt_runs), 2):
+                pair = opt_runs[i:i+2]
+                sep = '<w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t xml:space="preserve">        </w:t></w:r>'
+                elements.append(f'''
+                <w:p>
+                    <w:pPr><w:spacing w:before="30" w:after="40"/><w:ind w:left="200"/></w:pPr>
+                    {sep.join(pair)}
+                </w:p>
+                ''')
+        elif not is_answer_key:
             # Soru Kağıdı: "Cevap:" kısmı koyu ve rengi siyah kalarak 4 sıra noktalı cevap alanı
             elements.append(f'''
             <w:p><w:pPr><w:spacing w:before="20" w:after="20" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="17"/></w:rPr><w:t>Cevap: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>

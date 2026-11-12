@@ -63,16 +63,80 @@ def get_portal_curriculum():
         return jsonify(PORTAL_CURRICULUM_DATA[grade])
     return jsonify(PORTAL_CURRICULUM_DATA)
 
+def make_test_options_py(correct_ans, pool_answers, grade):
+    try:
+        g = int(grade)
+    except:
+        g = 5
+    if 1 <= g <= 4:
+        num_opts = 3 # İlkokul: 3 şık (A, B, C)
+    elif 5 <= g <= 8:
+        num_opts = 4 # Ortaokul: 4 şık (A, B, C, D)
+    else:
+        num_opts = 5 # Lise: 5 şık (A, B, C, D, E)
+
+    letters = ["A", "B", "C", "D", "E"][:num_opts]
+    correct_idx = random.randint(0, num_opts - 1)
+    correct_letter = letters[correct_idx]
+
+    level_key = "ilkokul" if g <= 4 else ("ortaokul" if g <= 8 else "lise")
+    domain_distractors = {
+        "ilkokul": [
+            "Sessizce dinlemek ve parmak kaldırarak söz istemek",
+            "Bilgisayarı Başlat menüsünden güvenli şekilde kapatmak",
+            "Ekran ile gözümüz arasında bir kol boyu mesafe bırakmak",
+            "Klavyedeki Space (Boşluk) tuşunu kullanarak kelimeleri ayırmak",
+            "Boya Kovası aracı ile şekillerin içini tek tıkla boyamak",
+            "Şifrelerimizi kimseyle paylaşmamak ve yabancılara söylememek",
+            "Algoritma adımlarını sırasıyla ve dikkatle takip etmek"
+        ],
+        "ortaokul": [
+            "İşlemci (CPU) tüm mantıksal ve aritmetik işlemleri yönetir",
+            "RAM bellek elektrik kesildiğinde üzerindeki geçici verileri siler",
+            "Sabit Disk (HDD/SSD) verilerin kalıcı saklanmasını sağlar",
+            "Güvenlik Duvarı ağdan gelebilecek yetkisiz erişimleri engeller",
+            "Dijital Ayak İzi internetteki tüm hareketlerin kalıcı kaydıdır",
+            "Giriş birimleri bilgisayara dışarıdan veri aktarılmasını sağlar",
+            "Çıkış birimleri işlenen verileri kullanıcıya sunar",
+            "Zararlı yazılımlara karşı güncel antivirüs programı kullanılır"
+        ],
+        "lise": [
+            "Derleyici (Compiler) tüm kaynak kodu tek seferde makine diline çevirir",
+            "Yorumlayıcı (Interpreter) kaynak kodu satır satır yorumlayarak çalıştırır",
+            "Büyük Veri (Big Data) 5V (Hacim, Hız, Çeşitlilik, Doğruluk, Değer) bileşenlerinden oluşur",
+            "Yapay Zeka modelleri denetimli veya denetimsiz öğrenme ile eğitilir",
+            "İlişkisel Veritabanlarında birincil anahtar (Primary Key) tekil kayıt sağlar",
+            "Nesne Yönelimli Programlamada (OOP) kalıtım ve kapsülleme temel prensiptir"
+        ]
+    }
+    pool_candidates = [a for a in pool_answers if a and a.strip() != correct_ans.strip()]
+    combined = list(dict.fromkeys(pool_candidates + domain_distractors.get(level_key, [])))
+    random.shuffle(combined)
+
+    options = []
+    dist_ptr = 0
+    for i in range(num_opts):
+        l = letters[i]
+        if i == correct_idx:
+            options.append({"key": l, "text": correct_ans})
+        else:
+            txt = combined[dist_ptr] if dist_ptr < len(combined) else f"Seçenek {l}"
+            dist_ptr += 1
+            options.append({"key": l, "text": txt})
+
+    return options, correct_letter
+
 @app.route("/api/questions", methods=["GET"])
 def get_questions():
     """
     1-12. sınıf, tüm dersler, zorluk, konu ve soru sayısına göre soruları döner.
-    Parametreler: grade, difficulty, count, topic, lesson
+    Parametreler: grade, difficulty, count, topic, lesson, exam_type
     """
     grade = str(request.args.get("grade", "5"))
     difficulty = request.args.get("difficulty", "orta").lower()
     topic = request.args.get("topic", "").strip()
     lesson = request.args.get("lesson", "").strip()
+    exam_type = request.args.get("exam_type", "klasik").lower()
     try:
         count = int(request.args.get("count", 5))
     except ValueError:
@@ -117,15 +181,23 @@ def get_questions():
             
             pts = 100 // count
             questions = []
+            pool_answers = [p.get("answer", "") for p in p_pool]
             for idx, item in enumerate(selected):
                 q_pts = (100 - pts * (count - 1)) if idx == count - 1 else pts
-                questions.append({
+                q_obj = {
                     "id": str(idx + 1),
                     "topic": item.get("topic", "Bilişim"),
                     "question": item["question"],
                     "points": q_pts,
-                    "answer": item.get("answer", "")
-                })
+                    "answer": item.get("answer", ""),
+                    "type": exam_type
+                }
+                if exam_type == "test":
+                    opts, c_letter = make_test_options_py(item.get("answer", ""), pool_answers, portal_grade)
+                    q_obj["options"] = opts
+                    q_obj["correct_option"] = c_letter
+                    q_obj["answer"] = f"{c_letter}) {item.get('answer', '')}"
+                questions.append(q_obj)
             return jsonify({
                 "grade": portal_grade,
                 "grade_name": f"{portal_grade}. Sınıf ({p_info.get('lesson', '')})",
@@ -189,14 +261,22 @@ def get_questions():
     # Puanı toplam 100 olacak şekilde eşit paylaştır
     pts_per_q = round(100 / max(1, len(selected)))
     formatted_questions = []
+    pool_answers = [item.get("answer", "") for item in pool]
     for idx, item in enumerate(selected, 1):
-        formatted_questions.append({
+        q_obj = {
             "id": idx,
             "topic": item.get("topic", ""),
             "question": item.get("question", ""),
             "points": pts_per_q,
-            "answer": item.get("answer", "")
-        })
+            "answer": item.get("answer", ""),
+            "type": exam_type
+        }
+        if exam_type == "test":
+            opts, c_letter = make_test_options_py(item.get("answer", ""), pool_answers, grade)
+            q_obj["options"] = opts
+            q_obj["correct_option"] = c_letter
+            q_obj["answer"] = f"{c_letter}) {item.get('answer', '')}"
+        formatted_questions.append(q_obj)
 
     # Son sorunun puanını tam 100'e yuvarla
     total_pts = sum(q["points"] for q in formatted_questions)

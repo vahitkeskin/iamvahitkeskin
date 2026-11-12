@@ -1490,6 +1490,119 @@ select {
   margin-right: 4px;
 }
 
+/* Sınav Türü Seçim Kartları (Klasik / Test) */
+.exam-type-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+}
+
+.exam-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  user-select: none;
+}
+
+.exam-type-card:hover {
+  border-color: var(--primary);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.exam-type-card.active {
+  border-color: var(--primary) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+.type-card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.type-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.type-card-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.2;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+/* Test (Çoktan Seçmeli) Soru Şıkları */
+.test-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 18px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  padding-left: 6px;
+}
+
+.test-option-item {
+  display: flex;
+  align-items: flex-start;
+  font-size: 10.5pt;
+  line-height: 1.4;
+  color: #000000 !important;
+}
+
+.option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 10.5pt;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  margin-right: 6px;
+  box-sizing: border-box;
+  color: #000000 !important;
+}
+
+/* Cevap Anahtarı: Doğru Şık Kırmızı Halkaya Alınır */
+.option-letter.correct-circle {
+  border: 2px solid #dc2626 !important; /* kırmızı halka */
+  border-radius: 50% !important;
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+  background-color: rgba(220, 38, 38, 0.08) !important;
+}
+
+.test-option-item.is-correct .option-text {
+  font-weight: 700;
+  color: #dc2626 !important;
+}
+
+.option-text {
+  flex: 1;
+  word-break: break-word;
+  color: #000000 !important;
+}
+
 /* --------------------------------------------------------------------------
    Modal Pencereler
    -------------------------------------------------------------------------- */
@@ -2041,6 +2154,45 @@ select {
     margin-bottom: 6px !important;
     line-height: 1.35 !important;
   }
+
+  .test-options-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px 16px !important;
+    margin-top: 5px !important;
+    margin-bottom: 8px !important;
+    padding-left: 4px !important;
+  }
+
+  .test-option-item {
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .option-letter {
+    font-size: 10pt !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    margin-right: 5px !important;
+  }
+
+  .option-letter.correct-circle {
+    display: inline-flex !important;
+    border: 2px solid #dc2626 !important;
+    border-radius: 50% !important;
+    color: #dc2626 !important;
+    font-weight: 800 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .test-option-item.is-correct .option-text {
+    font-weight: 700 !important;
+    color: #dc2626 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
 
 </style>
@@ -2414,7 +2566,31 @@ select {
           </select>
         </div>
 
-        <button id="btn-generate-bilisim" class="btn btn-primary btn-block">
+        <!-- Sınav Türü Seçimi: Klasik (Yazılı) veya Test (Çoktan Seçmeli) -->
+        <div class="form-group" style="margin-bottom: 1.1rem;">
+          <label style="font-weight: 700; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.45rem;">
+            <span>Sınav Türü Seçimi <span style="color: #ef4444;">*</span>:</span>
+            <span id="exam-type-badge" class="badge" style="font-size: 0.72rem; font-weight: 600; background: #fee2e2; color: #b91c1c;">Lütfen Seçiniz</span>
+          </label>
+          <div class="exam-type-selector-grid">
+            <button type="button" class="exam-type-card" id="btn-type-klasik" data-type="klasik">
+              <span class="type-card-icon">📝</span>
+              <span class="type-card-title">Klasik (Yazılı)</span>
+              <span class="type-card-sub">Noktalı cevap satırları</span>
+            </button>
+            <button type="button" class="exam-type-card" id="btn-type-test" data-type="test">
+              <span class="type-card-icon">🔘</span>
+              <span class="type-card-title">Test (Çoktan Seçmeli)</span>
+              <span class="type-card-sub" id="test-type-options-label">4 Şıklı (A, B, C, D)</span>
+            </button>
+          </div>
+          <input type="hidden" id="selected-exam-type" value="">
+          <div id="exam-type-hint" style="font-size: 0.75rem; color: #ef4444; margin-top: 0.4rem; display: flex; align-items: center; gap: 4px;">
+            <span>⚠️</span> Sınav oluşturmak için lütfen yukarıdan Klasik veya Test seçiniz.
+          </div>
+        </div>
+
+        <button id="btn-generate-bilisim" class="btn btn-primary btn-block" disabled title="Lütfen önce Klasik veya Test sınav türünü seçiniz">
           ✨ Otomatik Sınav Kağıdı Oluştur
         </button>
       </section>
@@ -2795,7 +2971,7 @@ function updateTopicsDropdown(grade) {
     "Görsel Sanatlar (Resim)",
     "Müzik",
     "Beden Eğitimi ve Spor",
-    "Teknoloji Tasarım",
+    "Teknoloji ve Tasarım",
     "Trafik Güvenliği",
     "İnsan Hakları, Yurttaşlık ve Demokrasi",
     "Seçmeli Türk Sosyal Hayatında Aile",
@@ -3323,6 +3499,98 @@ function updatePortalSyncUI(autoGenerate = false) {
   }
 }
 
+// --------------------------------------------------------------------------
+// Sınav Türü Yardımcıları: Test (Çoktan Seçmeli) & Klasik (Yazılı)
+// Kural: Lise (9-12): 5 şık, Ortaokul (5-8): 4 şık, İlkokul (1-4): 3 şık
+// --------------------------------------------------------------------------
+function getOptionCountForGrade(grade) {
+  const g = parseInt(grade, 10) || 5;
+  if (g >= 1 && g <= 4) return 3; // İlkokul (1, 2, 3, 4): 3 şık (A, B, C)
+  if (g >= 5 && g <= 8) return 4; // Ortaokul (5, 6, 7, 8): 4 şık (A, B, C, D)
+  return 5; // Lise (9, 10, 11, 12): 5 şık (A, B, C, D, E)
+}
+
+const DOMAIN_DISTRACTORS = {
+  ilkokul: [
+    "Sessizce dinlemek ve parmak kaldırarak söz istemek",
+    "Bilgisayarı Başlat menüsünden güvenli şekilde kapatmak",
+    "Ekran ile gözümüz arasında bir kol boyu mesafe bırakmak",
+    "Klavyedeki Space (Boşluk) tuşunu kullanarak kelimeleri ayırmak",
+    "Boya Kovası aracı ile şekillerin içini tek tıkla boyamak",
+    "Büyüklere ve arkadaşlarımıza nazik ve saygılı davranmak",
+    "Şifrelerimizi kimseyle paylaşmamak ve yabancılara söylememek",
+    "Geri dönüşüm kutularına uygun atıkları atmak",
+    "Algoritma adımlarını sırasıyla ve dikkatle takip etmek",
+    "Monitör ve ekran parlaklığını gözü yormayacak şekilde ayarlamak",
+    "Fare ile çift tıklayarak klasör ve programları açmak"
+  ],
+  ortaokul: [
+    "İşlemci (CPU) tüm mantıksal ve aritmetik işlemleri yönetir",
+    "RAM bellek elektrik kesildiğinde üzerindeki geçici verileri siler",
+    "Sabit Disk (HDD/SSD) verilerin kalıcı saklanmasını sağlar",
+    "Güvenlik Duvarı ağdan gelebilecek yetkisiz erişimleri engeller",
+    "Dijital Ayak İzi internetteki tüm hareketlerin kalıcı kaydıdır",
+    "Telif Hakkı eser sahibinin emeğini ve haklarını yasal korur",
+    "Giriş birimleri bilgisayara dışarıdan veri aktarılmasını sağlar",
+    "Çıkış birimleri işlenen verileri kullanıcıya sunar",
+    "Zararlı yazılımlara karşı güncel antivirüs programı kullanılır",
+    "Algoritma bir problemin çözümü için adım adım tasarlanan yoldur",
+    "Değişkenler program akışında farklı değerler alabilen hafıza alanlarıdır",
+    "Döngü blokları belirli komutların tekrar tekrar çalışmasını sağlar",
+    "Siber Zorbalık dijital ortamda başkalarını rahatsız edici davranışlardır",
+    "Güçlü şifre en az 8 karakter, büyük-küçük harf, rakam ve sembol içerir"
+  ],
+  lise: [
+    "Derleyici (Compiler) tüm kaynak kodu tek seferde makine diline çevirir",
+    "Yorumlayıcı (Interpreter) kaynak kodu satır satır yorumlayarak çalıştırır",
+    "Büyük Veri (Big Data) 5V (Hacim, Hız, Çeşitlilik, Doğruluk, Değer) bileşenlerinden oluşur",
+    "Yapay Zeka modelleri denetimli veya denetimsiz öğrenme ile eğitilir",
+    "İlişkisel Veritabanlarında birincil anahtar (Primary Key) tekil kayıt sağlar",
+    "Nesne Yönelimli Programlamada (OOP) kalıtım ve kapsülleme temel prensiptir",
+    "Asimetrik şifrelemede açık anahtar (Public Key) ve gizli anahtar (Private Key) kullanılır",
+    "Zaman karmaşıklığı O(1) sabit, O(n) doğrusal, O(n²) karesel büyüme gösterir",
+    "Normalizasyon veritabanında veri tekrarını önleyip veri bütünlüğünü sağlar",
+    "Derin Öğrenme çok katmanlı yapay sinir ağları ile karmaşık örüntüleri öğrenir"
+  ]
+};
+
+function buildTestOptions(correctAnswer, candidatePoolAnswers = [], grade = 5) {
+  const numOptions = getOptionCountForGrade(grade);
+  const allLetters = ["A", "B", "C", "D", "E"].slice(0, numOptions);
+  const correctIdx = Math.floor(Math.random() * numOptions);
+  const correctLetter = allLetters[correctIdx];
+
+  const g = parseInt(grade, 10) || 5;
+  const levelKey = (g <= 4) ? "ilkokul" : (g <= 8 ? "ortaokul" : "lise");
+  const fallbackList = DOMAIN_DISTRACTORS[levelKey] || DOMAIN_DISTRACTORS.ortaokul;
+
+  const poolFiltered = candidatePoolAnswers.filter(a => a && a.trim() !== correctAnswer.trim());
+  const combined = [...new Set([...poolFiltered, ...fallbackList])];
+  
+  for (let i = combined.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [combined[i], combined[j]] = [combined[j], combined[i]];
+  }
+
+  const options = [];
+  let distractorPtr = 0;
+  for (let i = 0; i < numOptions; i++) {
+    const letter = allLetters[i];
+    if (i === correctIdx) {
+      options.push({ key: letter, text: correctAnswer });
+    } else {
+      const distText = combined[distractorPtr++] || `Seçenek ${letter}`;
+      options.push({ key: letter, text: distText });
+    }
+  }
+
+  return {
+    options: options,
+    correct_option: correctLetter,
+    answer: `${correctLetter}) ${correctAnswer}`
+  };
+}
+
 function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 5) {
   // Eğer 3 argüman gönderildiyse: (grade, weeksCount, count)
   if (typeof count === "undefined" && typeof endWeek === "number") {
@@ -3396,12 +3664,32 @@ function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 5)
   }
 
   const pointsPerQ = Math.round(100 / count);
-  return selected.slice(0, count).map((item, idx) => ({
-    id: String(idx + 1),
-    question: item.question,
-    answer: item.answer,
-    points: (idx === count - 1) ? (100 - pointsPerQ * (count - 1)) : pointsPerQ
-  }));
+  const isTest = (AppState.examType === "test");
+  const poolAnswers = pool.map(p => p.answer);
+
+  return selected.slice(0, count).map((item, idx) => {
+    const pts = (idx === count - 1) ? (100 - pointsPerQ * (count - 1)) : pointsPerQ;
+    if (isTest) {
+      const testData = buildTestOptions(item.answer, poolAnswers, grade);
+      return {
+        id: String(idx + 1),
+        type: "test",
+        question: item.question,
+        options: testData.options,
+        correct_option: testData.correct_option,
+        answer: testData.answer,
+        points: pts
+      };
+    } else {
+      return {
+        id: String(idx + 1),
+        type: "klasik",
+        question: item.question,
+        answer: item.answer,
+        points: pts
+      };
+    }
+  });
 }
 
 function generateClientQuestions(grade, difficulty, count, topic) {
@@ -3434,13 +3722,33 @@ function generateClientQuestions(grade, difficulty, count, topic) {
   const selected = shuffled.slice(0, count);
 
   const ptsPerQ = Math.round(100 / Math.max(1, selected.length));
-  const result = selected.map((q, idx) => ({
-    id: idx + 1,
-    topic: q.topic || "",
-    question: q.question,
-    points: ptsPerQ,
-    answer: q.answer
-  }));
+  const isTest = (AppState.examType === "test");
+  const poolAnswers = pool.map(p => p.answer);
+
+  const result = selected.map((q, idx) => {
+    if (isTest) {
+      const testData = buildTestOptions(q.answer, poolAnswers, grade);
+      return {
+        id: idx + 1,
+        type: "test",
+        topic: q.topic || "",
+        question: q.question,
+        points: ptsPerQ,
+        options: testData.options,
+        correct_option: testData.correct_option,
+        answer: testData.answer
+      };
+    } else {
+      return {
+        id: idx + 1,
+        type: "klasik",
+        topic: q.topic || "",
+        question: q.question,
+        points: ptsPerQ,
+        answer: q.answer
+      };
+    }
+  });
 
   const total = result.reduce((s, q) => s + q.points, 0);
   const diff = 100 - total;
@@ -3513,6 +3821,7 @@ const AppState = {
     student_score: ""
   },
   questions: [],
+  examType: "", // 'klasik' veya 'test' - Kullanıcı seçene kadar boş kalır, '✨ Otomatik Sınav Kağıdı Oluştur' aktif olmaz
   viewMode: "questions", // 'questions' (Soru Kağıdı) veya 'answers' (Cevap Anahtarı)
   colorMode: "bw",       // 'bw' (Siyah/Beyaz) veya 'color' (Renkli)
   usePortalCurriculum: true,
@@ -3730,27 +4039,68 @@ function createExamPageHtml(isAnswerKey, pageNumberOffset = 0) {
 
   function renderQuestionBlock(q, idx) {
     const qNum = idx + 1;
+    const isTest = (q.type === "test" || (Array.isArray(q.options) && q.options.length > 0));
+
     let answerPart = "";
-    if (!isAnswerKey) {
+    if (isTest) {
+      // Test (Çoktan Seçmeli): İlkokul 3, Ortaokul 4, Lise 5 şık
+      const correctKey = (q.correct_option || (q.answer ? q.answer.trim().charAt(0) : "A")).toUpperCase();
+      const optionsList = Array.isArray(q.options) ? q.options : [];
+
+      const optionsHtml = optionsList.map(opt => {
+        const optKey = (typeof opt === "string" ? opt.slice(0, 1) : opt.key).toUpperCase();
+        const optText = (typeof opt === "string" ? opt.replace(/^[A-Ea-e][\)\.\-]\s*/, "") : opt.text);
+        const isCorrect = (optKey === correctKey);
+
+        if (isAnswerKey) {
+          // Cevap Anahtarı: Doğru şık kırmızı halkaya alınır!
+          const letterClass = isCorrect ? "option-letter correct-circle" : "option-letter";
+          const itemClass = isCorrect ? "test-option-item is-correct" : "test-option-item";
+          return `
+            <div class="${itemClass}">
+              <span class="${letterClass}">${optKey})</span>
+              <span class="option-text" contenteditable="true" data-qid="${q.id}" data-optkey="${optKey}">${escapeHtml(optText)}</span>
+            </div>
+          `;
+        } else {
+          // Soru Kağıdı: Temiz ve şık görünüm
+          return `
+            <div class="test-option-item">
+              <span class="option-letter">${optKey})</span>
+              <span class="option-text" contenteditable="true" data-qid="${q.id}" data-optkey="${optKey}">${escapeHtml(optText)}</span>
+            </div>
+          `;
+        }
+      }).join("");
+
       answerPart = `
-        <div class="dotted-answer-lines">
-          <div class="dotted-line-row"><span class="ans-label" style="color: #000000 !important;">Cevap: </span><span class="dots-fill"></span></div>
-          <div class="dotted-line-row"><span class="dots-fill"></span></div>
-          <div class="dotted-line-row"><span class="dots-fill"></span></div>
-          <div class="dotted-line-row"><span class="dots-fill"></span></div>
+        <div class="test-options-grid options-count-${optionsList.length}">
+          ${optionsHtml}
         </div>
       `;
     } else {
-      answerPart = `
-        <div class="model-answer-block">
-          <span class="ans-label" style="color: #000000 !important;">Cevap: </span>
-          <span class="ans-content" style="color: ${activeColor};" contenteditable="true" data-qid="${q.id}" data-field="answer">${escapeHtml(q.answer)}</span>
-        </div>
-      `;
+      // Klasik (Yazılı): Noktalı cevap satırları veya model cevap
+      if (!isAnswerKey) {
+        answerPart = `
+          <div class="dotted-answer-lines">
+            <div class="dotted-line-row"><span class="ans-label" style="color: #000000 !important;">Cevap: </span><span class="dots-fill"></span></div>
+            <div class="dotted-line-row"><span class="dots-fill"></span></div>
+            <div class="dotted-line-row"><span class="dots-fill"></span></div>
+            <div class="dotted-line-row"><span class="dots-fill"></span></div>
+          </div>
+        `;
+      } else {
+        answerPart = `
+          <div class="model-answer-block">
+            <span class="ans-label" style="color: #000000 !important;">Cevap: </span>
+            <span class="ans-content" style="color: ${activeColor};" contenteditable="true" data-qid="${q.id}" data-field="answer">${escapeHtml(q.answer)}</span>
+          </div>
+        `;
+      }
     }
 
     return `
-      <div class="exam-question-block">
+      <div class="exam-question-block ${isTest ? 'exam-question-test' : 'exam-question-classic'}">
         <div class="exam-question-text">
           <span class="q-num">${qNum}. Soru:</span>
           <span class="q-content" contenteditable="true" data-qid="${q.id}" data-field="question">${escapeHtml(q.question)}</span>
@@ -3837,7 +4187,20 @@ function attachSheetEditableListeners() {
     el.addEventListener("blur", (e) => {
       const qid = e.target.getAttribute("data-qid");
       const field = e.target.getAttribute("data-field");
-      if (qid && field) {
+      const optkey = e.target.getAttribute("data-optkey");
+      if (qid && optkey) {
+        const item = AppState.questions.find(q => q.id == qid);
+        if (item && Array.isArray(item.options)) {
+          const opt = item.options.find(o => (typeof o === "object" ? o.key : o[0]).toUpperCase() === optkey.toUpperCase());
+          if (opt) {
+            opt.text = e.target.innerText.trim();
+            if (item.correct_option === optkey) {
+              item.answer = `${optkey}) ${opt.text}`;
+            }
+            renderQuestionsList();
+          }
+        }
+      } else if (qid && field) {
         const item = AppState.questions.find(q => q.id == qid);
         if (item) {
           item[field] = e.target.innerText.trim();
@@ -3881,10 +4244,18 @@ function renderQuestionsList() {
   AppState.questions.forEach((q, idx) => {
     const card = document.createElement("div");
     card.className = "question-item-card";
+    const isTest = (q.type === "test" || (Array.isArray(q.options) && q.options.length > 0));
+    const optLen = (q.options && q.options.length) ? q.options.length : getOptionCountForGrade(AppState.portalGrade || "5");
+    const typeBadge = isTest 
+      ? `<span class="badge" style="font-size: 0.65rem; background: #dbeafe; color: #1e40af; margin-left: 6px;">Test (${optLen} Şık)</span>`
+      : `<span class="badge" style="font-size: 0.65rem; background: #f1f5f9; color: #475569; margin-left: 6px;">Klasik</span>`;
 
     card.innerHTML = `
       <div class="question-item-header">
-        <span class="question-num-tag">${idx + 1}. Soru</span>
+        <div>
+          <span class="question-num-tag">${idx + 1}. Soru</span>
+          ${typeBadge}
+        </div>
         <div class="question-item-actions">
           <button class="btn btn-secondary btn-sm" onclick="moveQuestion(${idx}, -1)" title="Yukarı Taşı" ${idx === 0 ? "disabled" : ""}>↑</button>
           <button class="btn btn-secondary btn-sm" onclick="moveQuestion(${idx}, 1)" title="Aşağı Taşı" ${idx === AppState.questions.length - 1 ? "disabled" : ""}>↓</button>
@@ -3900,8 +4271,8 @@ function renderQuestionsList() {
           <input type="number" min="1" max="100" value="${q.points}" onchange="updateQuestionPoints(${idx}, this.value)">
         </div>
         <div>
-          <label style="font-size: 0.7rem;">Cevap Önizleme:</label>
-          <input type="text" value="${escapeHtml(q.answer.substring(0, 30))}..." title="${escapeHtml(q.answer)}" readonly style="background: #f1f5f9; cursor: pointer;" onclick="editAnswerModal(${idx})">
+          <label style="font-size: 0.7rem;">${isTest ? 'Doğru Şık / Cevap:' : 'Cevap Önizleme:'}</label>
+          <input type="text" value="${escapeHtml(q.answer.substring(0, 30))}${q.answer.length > 30 ? '...' : ''}" title="${escapeHtml(q.answer)}" readonly style="background: #f1f5f9; cursor: pointer;" onclick="editAnswerModal(${idx})">
         </div>
       </div>
     `;
@@ -3949,12 +4320,29 @@ window.deleteQuestion = (idx) => {
 window.addNewQuestion = () => {
   const newId = Date.now();
   const defaultPts = Math.max(5, Math.round(100 / (AppState.questions.length + 1)));
-  AppState.questions.push({
-    id: newId,
-    question: "Yeni soru metnini buraya yazınız...",
-    points: defaultPts,
-    answer: "Bu sorunun doğru model cevabını buraya yazınız."
-  });
+  const curGrade = document.getElementById("select-grade")?.value || "5";
+  if (AppState.examType === "test") {
+    const numOpts = getOptionCountForGrade(curGrade);
+    const letters = ["A", "B", "C", "D", "E"].slice(0, numOpts);
+    const opts = letters.map(k => ({ key: k, text: `Seçenek ${k}` }));
+    AppState.questions.push({
+      id: newId,
+      type: "test",
+      question: "Yeni çoktan seçmeli soru metnini buraya yazınız...",
+      points: defaultPts,
+      options: opts,
+      correct_option: "A",
+      answer: "A) Seçenek A"
+    });
+  } else {
+    AppState.questions.push({
+      id: newId,
+      type: "klasik",
+      question: "Yeni soru metnini buraya yazınız...",
+      points: defaultPts,
+      answer: "Bu sorunun doğru model cevabını buraya yazınız."
+    });
+  }
   renderExamSheet();
   renderQuestionsList();
   showToast("Yeni soru eklendi.");
@@ -3976,11 +4364,30 @@ window.balancePoints = () => {
 window.editAnswerModal = (idx) => {
   const q = AppState.questions[idx];
   if (!q) return;
-  const newAns = prompt(`${idx + 1}. Soru için model cevabı düzenleyiniz:`, q.answer);
-  if (newAns !== null) {
-    q.answer = newAns.trim();
-    renderExamSheet();
-    renderQuestionsList();
+  if (q.type === "test" && Array.isArray(q.options) && q.options.length > 0) {
+    const letters = q.options.map(o => o.key).join(", ");
+    const newCorrect = prompt(`${idx + 1}. Test sorusu için doğru şıkkı giriniz (${letters}):`, q.correct_option || "A");
+    if (newCorrect !== null) {
+      const upper = newCorrect.trim().toUpperCase();
+      const matchOpt = q.options.find(o => o.key === upper);
+      if (matchOpt) {
+        q.correct_option = upper;
+        q.answer = `${upper}) ${matchOpt.text}`;
+      } else {
+        q.correct_option = upper;
+        q.answer = `${upper} şıkkı`;
+      }
+      renderExamSheet();
+      renderQuestionsList();
+      showToast(`${idx + 1}. sorunun doğru şıkkı ${upper} olarak güncellendi.`);
+    }
+  } else {
+    const newAns = prompt(`${idx + 1}. Soru için model cevabı düzenleyiniz:`, q.answer);
+    if (newAns !== null) {
+      q.answer = newAns.trim();
+      renderExamSheet();
+      renderQuestionsList();
+    }
   }
 };
 
@@ -3988,6 +4395,10 @@ window.editAnswerModal = (idx) => {
 // Bilişim Öğretmenliği Sınavı Oluşturucu (5, 6, 7, 8, 9, 10. Sınıflar)
 // --------------------------------------------------------------------------
 async function generateBilisimExam() {
+  if (!AppState.examType) {
+    showToast("⚠️ Lütfen önce sınav türünü (Klasik veya Test) seçiniz!", 3000);
+    return;
+  }
   const grade = document.getElementById("select-grade").value;
   const count = parseInt(document.getElementById("input-question-count").value) || 5;
 
@@ -4001,7 +4412,7 @@ async function generateBilisimExam() {
       populateForm();
       renderExamSheet();
       renderQuestionsList();
-      showToast(`Bilişim Öğretmenliği Portalı müfredatından ${pG}. Sınıf (${startW}-${endW}. Hafta) sınavı oluşturuldu!`);
+      showToast(`Bilişim Öğretmenliği Portalı müfredatından ${pG}. Sınıf (${startW}-${endW}. Hafta) ${AppState.examType === 'test' ? 'Test' : 'Klasik'} sınavı oluşturuldu!`);
       return;
     }
   }
@@ -4009,13 +4420,13 @@ async function generateBilisimExam() {
   const topic = document.getElementById("select-topic")?.value || "Tüm Dersler (Karma Sınav)";
   const lesson = AppState.header.lesson || "";
 
-  showToast(`${grade}. Sınıf ${lesson || 'Sınav'} soruları hazırlanıyor...`);
+  showToast(`${grade}. Sınıf ${lesson || 'Sınav'} soruları (${AppState.examType === 'test' ? 'Test' : 'Klasik'}) hazırlanıyor...`);
 
   let questions = [];
 
   // 1. Önce sunucuyu dene
   try {
-    const res = await fetch(getApiUrl(`/api/questions?grade=${grade}&difficulty=${difficulty}&count=${count}&topic=${encodeURIComponent(topic)}&lesson=${encodeURIComponent(lesson)}`));
+    const res = await fetch(getApiUrl(`/api/questions?grade=${grade}&difficulty=${difficulty}&count=${count}&topic=${encodeURIComponent(topic)}&lesson=${encodeURIComponent(lesson)}&exam_type=${encodeURIComponent(AppState.examType)}`));
     if (res.ok) {
       const data = await res.json();
       questions = data.questions || [];
@@ -4034,7 +4445,7 @@ async function generateBilisimExam() {
     populateForm();
     renderExamSheet();
     renderQuestionsList();
-    showToast(`${grade}. Sınıf sınavı (${questions.length} soru) başarıyla oluşturuldu!`);
+    showToast(`${grade}. Sınıf ${AppState.examType === 'test' ? 'test' : 'klasik'} sınavı (${questions.length} soru) başarıyla oluşturuldu!`);
   } else {
     showToast("Soru oluşturulurken bir hata oluştu.");
   }
@@ -4108,6 +4519,7 @@ function initEventListeners() {
     selectGrade.addEventListener("change", (e) => {
       const gVal = e.target.value;
       updateTopicsDropdown(gVal);
+      if (typeof updateExamTypeLabels === "function") updateExamTypeLabels();
       const pGradeSel = document.getElementById("portal-grade-select");
       if (pGradeSel && parseInt(gVal) <= 10) {
         pGradeSel.value = gVal;
@@ -4265,6 +4677,7 @@ function initEventListeners() {
 
   if (portalGradeSel) {
     portalGradeSel.addEventListener("change", () => {
+      if (typeof updateExamTypeLabels === "function") updateExamTypeLabels();
       if (chkPortal && chkPortal.checked) {
         updatePortalSyncUI(true);
       }
@@ -4310,6 +4723,52 @@ function initEventListeners() {
       updatePortalSyncUI(true);
     });
   });
+
+  // Sınav Türü Seçimi (Klasik / Test)
+  // Kural: Lise: 5 şık, Ortaokul: 4 şık, İlkokul: 3 şık
+  // Tür seçilmeden '✨ Otomatik Sınav Kağıdı Oluştur' aktif olmaz
+  const btnTypeKlasik = document.getElementById("btn-type-klasik");
+  const btnTypeTest = document.getElementById("btn-type-test");
+  const btnGenBilisim = document.getElementById("btn-generate-bilisim");
+
+  function updateExamTypeLabels() {
+    const curGrade = document.getElementById("select-grade")?.value || AppState.portalGrade || "5";
+    const numOpts = getOptionCountForGrade(curGrade);
+    const subEl = document.getElementById("test-type-sub");
+    if (subEl) {
+      const gNum = parseInt(curGrade, 10) || 5;
+      const kademe = (gNum <= 4) ? "İlkokul" : (gNum <= 8 ? "Ortaokul" : "Lise");
+      const letters = ["A", "B", "C", "D", "E"].slice(0, numOpts).join(", ");
+      subEl.textContent = `${kademe} (${numOpts} şık: ${letters})`;
+    }
+  }
+
+  function setExamType(type) {
+    AppState.examType = type;
+    if (type === "klasik") {
+      btnTypeKlasik?.classList.add("active");
+      btnTypeTest?.classList.remove("active");
+    } else if (type === "test") {
+      btnTypeTest?.classList.add("active");
+      btnTypeKlasik?.classList.remove("active");
+    }
+    if (btnGenBilisim) {
+      btnGenBilisim.disabled = false;
+      btnGenBilisim.removeAttribute("disabled");
+      btnGenBilisim.title = "Seçilen sınav türüyle sınav kağıdını oluştur";
+    }
+    showToast(`Sınav türü '${type === "test" ? "Test (Çoktan Seçmeli)" : "Klasik (Yazılı)"}' olarak seçildi.`);
+  }
+
+  btnTypeKlasik?.addEventListener("click", () => setExamType("klasik"));
+  btnTypeTest?.addEventListener("click", () => setExamType("test"));
+
+  // Başlangıçta sınav türü seçilmemişse buton kesinlikle pasif kalır
+  if (!AppState.examType && btnGenBilisim) {
+    btnGenBilisim.disabled = true;
+    btnGenBilisim.setAttribute("disabled", "disabled");
+  }
+  updateExamTypeLabels();
 
   document.getElementById("btn-generate-bilisim")?.addEventListener("click", generateBilisimExam);
   document.getElementById("btn-generate-custom")?.addEventListener("click", generateCustomPrompt);
