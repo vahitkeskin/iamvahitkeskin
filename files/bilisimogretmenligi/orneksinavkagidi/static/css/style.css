@@ -1247,13 +1247,13 @@ select {
   -webkit-box-decoration-break: clone;
 }
 
-/* 2. ve sonraki sayfalarda 1. sayfanın üst bilgi tablosu ve S O R U L A R başlığına denk gelen boşluk */
+/* 2. ve sonraki sayfalarda ekstradan yapay boşluk olmaması için spacer sıfırlanır */
 .exam-page-top-spacer {
-  display: block;
-  width: 100%;
-  height: 38mm;
-  min-height: 38mm;
-  box-sizing: border-box;
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* ==========================================================================
@@ -2074,13 +2074,11 @@ select {
   }
 
   .exam-page-top-spacer {
-    display: block !important;
-    width: 100% !important;
-    height: 38mm !important;
-    min-height: 38mm !important;
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
   }
 
   .a4-page:last-child,
