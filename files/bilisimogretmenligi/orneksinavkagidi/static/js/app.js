@@ -670,7 +670,7 @@ function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 10
     startWeek = 1;
   }
   startWeek = parseInt(startWeek, 10) || 1;
-  endWeek = parseInt(endWeek, 10) || 8;
+  endWeek = parseInt(endWeek, 10) || 10;
   if (startWeek > endWeek) {
     const tmp = startWeek;
     startWeek = endWeek;
@@ -678,7 +678,7 @@ function generatePortalCurriculumQuestions(grade, startWeek, endWeek, count = 10
   }
   startWeek = Math.max(1, Math.min(startWeek, 41));
   endWeek = Math.max(1, Math.min(endWeek, 41));
-  count = parseInt(count, 10) || 5;
+  count = parseInt(count, 10) || 10;
 
   const pData = (typeof PORTAL_CURRICULUM_DATA !== "undefined" && PORTAL_CURRICULUM_DATA[grade]) ? PORTAL_CURRICULUM_DATA[grade] : null;
   if (!pData) return generateClientQuestions(grade, "orta", count, "Bilişim");
@@ -769,7 +769,9 @@ function generateClientQuestions(grade, difficulty, count, topic) {
   if (!qBank || !qBank[grade]) return [];
   const gradeData = qBank[grade];
   let pool = [];
-  if (difficulty === "kolay" || difficulty === "orta" || difficulty === "zor") {
+  if (difficulty === "cok-kolay" || difficulty === "cok_kolay") {
+    pool = [...(gradeData.cok_kolay || gradeData.kolay || [])];
+  } else if (difficulty === "kolay" || difficulty === "orta" || difficulty === "zor") {
     pool = [...(gradeData[difficulty] || [])];
   } else {
     pool = [...(gradeData.kolay || []), ...(gradeData.orta || []), ...(gradeData.zor || [])];

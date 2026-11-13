@@ -160,8 +160,18 @@ def generate_questions_with_gemini(prompt_text, grade="5", count=5, difficulty="
         except Exception as e:
             print(f"[Gemini Service] Portal verisi okunamadı: {e}")
 
+    diff_desc = {
+        "cok-kolay": "çok kolay (öğrencinin zorlanmadan yanıtlayabileceği en temel ve basit kavramlar)",
+        "cok_kolay": "çok kolay (öğrencinin zorlanmadan yanıtlayabileceği en temel ve basit kavramlar)",
+        "çok kolay": "çok kolay (öğrencinin zorlanmadan yanıtlayabileceği en temel ve basit kavramlar)",
+        "kolay": "kolay (temel bilgi ve kavrama düzeyinde)",
+        "orta": "orta (uygulama ve kavrama düzeyinde)",
+        "zor": "zor (derinlemesine düşünme, analiz ve problem çözme düzeyinde)",
+        "karma": "karma (kolay, orta ve zor soruların dengeli bir dağılımı)"
+    }.get(str(difficulty).lower(), difficulty)
+
     system_instruction = f"""Sen deneyimli bir Türk Milli Eğitim Bakanlığı (MEB) {lesson} öğretmenisin.
-Görevin: {grade}. sınıf seviyesinde, {difficulty} zorluk derecesinde tam {count} adet açık uçlu klasik sınav sorusu ve bunların detaylı model cevaplarını hazırlamaktır.
+Görevin: {grade}. sınıf seviyesinde, {diff_desc} zorluk derecesinde tam {count} adet açık uçlu klasik sınav sorusu ve bunların detaylı model cevaplarını hazırlamaktır.
 Ders: {lesson}
 Konu / Ünite / Sınav Kapsamı: "{prompt_text}".
 {portal_context}

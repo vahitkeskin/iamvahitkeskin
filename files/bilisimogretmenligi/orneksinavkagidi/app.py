@@ -270,7 +270,9 @@ def get_questions():
     grade_name = grade_data.get("grade_name", f"{grade}. Sınıf")
 
     pool = []
-    if difficulty in ["kolay", "orta", "zor"]:
+    if difficulty in ["cok-kolay", "cok_kolay", "çok kolay", "çok-kolay"]:
+        pool = list(grade_data.get("cok_kolay", [])) or list(grade_data.get("kolay", []))
+    elif difficulty in ["kolay", "orta", "zor"]:
         pool = list(grade_data.get(difficulty, []))
     else:  # karma
         pool = list(grade_data.get("kolay", [])) + list(grade_data.get("orta", [])) + list(grade_data.get("zor", []))
