@@ -2450,8 +2450,8 @@ select {
           <div class="form-group">
             <label for="select-difficulty">Zorluk Derecesi:</label>
             <select id="select-difficulty">
-              <option value="cok-kolay">Çok Kolay</option>
-              <option value="kolay" selected>Kolay</option>
+              <option value="cok-kolay" selected>Çok Kolay</option>
+              <option value="kolay">Kolay</option>
               <option value="orta">Orta</option>
               <option value="zor">Zor</option>
               <option value="karma">Karma (Dengeli)</option>
@@ -4489,10 +4489,10 @@ function initEventListeners() {
     });
   }
 
-  // Zorluk Derecesi (Varsayılan: Kolay)
+  // Zorluk Derecesi (Varsayılan: Çok Kolay)
   const selectDifficulty = document.getElementById("select-difficulty");
-  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "orta")) {
-    selectDifficulty.value = "kolay";
+  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "kolay" || selectDifficulty.value === "orta")) {
+    selectDifficulty.value = "cok-kolay";
   }
 
   // Soru Sayısı (Varsayılan: 10)

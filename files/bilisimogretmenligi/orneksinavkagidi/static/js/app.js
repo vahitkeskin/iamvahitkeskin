@@ -1629,10 +1629,10 @@ function initEventListeners() {
     });
   }
 
-  // Zorluk Derecesi (Varsayılan: Kolay)
+  // Zorluk Derecesi (Varsayılan: Çok Kolay)
   const selectDifficulty = document.getElementById("select-difficulty");
-  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "orta")) {
-    selectDifficulty.value = "kolay";
+  if (selectDifficulty && (!selectDifficulty.value || selectDifficulty.value === "kolay" || selectDifficulty.value === "orta")) {
+    selectDifficulty.value = "cok-kolay";
   }
 
   // Soru Sayısı (Varsayılan: 10)
