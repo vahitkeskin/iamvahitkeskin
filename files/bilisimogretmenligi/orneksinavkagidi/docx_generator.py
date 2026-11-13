@@ -100,13 +100,13 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     <w:p>
         <w:pPr>
             <w:jc w:val="center"/>
-            <w:spacing w:before="220" w:after="200"/>
+            <w:spacing w:before="120" w:after="100"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
-                <w:sz w:val="22"/>
-                <w:spacing w:val="120"/>
+                <w:sz w:val="21"/>
+                <w:spacing w:val="100"/>
             </w:rPr>
             <w:t>{section_title}</w:t>
         </w:r>
@@ -130,12 +130,12 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         p_val = escape_xml(q.get("points", 20))
         ans_text = escape_xml(q.get("answer", ""))
 
-        # İki soru arasında okunaklı belirgin boşluk (w:before="240"), soru metni ve şıklar/cevap arasında yakınlık (w:after="60")
+        # İki soru arasında okunaklı belirgin boşluk (w:before="120"), soru metni ve şıklar/cevap arasında yakınlık (w:after="25")
         elements.append(f'''
         <w:p>
-            <w:pPr><w:spacing w:before="240" w:after="60"/></w:pPr>
-            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="21"/></w:rPr><w:t>{idx}. Soru: </w:t></w:r>
-            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/></w:rPr><w:t>{q_text} ({p_val} Puan)</w:t></w:r>
+            <w:pPr><w:spacing w:before="120" w:after="25"/></w:pPr>
+            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>{idx}. Soru: </w:t></w:r>
+            <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="19"/></w:rPr><w:t>{q_text} ({p_val} Puan)</w:t></w:r>
         </w:p>
         ''')
 
@@ -158,37 +158,37 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
                     circled_map = {"A": "Ⓐ", "B": "Ⓑ", "C": "Ⓒ", "D": "Ⓓ", "E": "Ⓔ"}
                     c_char = circled_map.get(opt_key, opt_key)
                     opt_runs.append(
-                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="DC2626"/><w:sz w:val="23"/><w:b/></w:rPr><w:t>{c_char}</w:t></w:r>'
-                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="000000"/><w:sz w:val="20"/></w:rPr><w:t xml:space="preserve">) {escape_xml(opt_text)}</w:t></w:r>'
+                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="DC2626"/><w:sz w:val="21"/><w:b/></w:rPr><w:t>{c_char}</w:t></w:r>'
+                        f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:color w:val="000000"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">) {escape_xml(opt_text)}</w:t></w:r>'
                     )
                 else:
-                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="20"/><w:color w:val="000000"/></w:rPr><w:t>{opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
+                    opt_runs.append(f'<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="18"/><w:color w:val="000000"/></w:rPr><w:t>{opt_key}) {escape_xml(opt_text)}</w:t></w:r>')
 
             for i in range(0, len(opt_runs), 2):
                 pair = opt_runs[i:i+2]
-                sep = '<w:r><w:rPr><w:sz w:val="20"/></w:rPr><w:t xml:space="preserve">        </w:t></w:r>'
+                sep = '<w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">        </w:t></w:r>'
                 elements.append(f'''
                 <w:p>
-                    <w:pPr><w:spacing w:before="15" w:after="25"/><w:ind w:left="200"/></w:pPr>
+                    <w:pPr><w:spacing w:before="8" w:after="12"/><w:ind w:left="140"/></w:pPr>
                     {sep.join(pair)}
                 </w:p>
                 ''')
         elif not is_answer_key:
             # Soru Kağıdı: "Cevap:" kısmı koyu ve rengi siyah kalarak 4 sıra noktalı cevap alanı
             elements.append(f'''
-            <w:p><w:pPr><w:spacing w:before="12" w:after="12" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="17"/></w:rPr><w:t>Cevap: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="12" w:after="12" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="12" w:after="12" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
-            <w:p><w:pPr><w:spacing w:before="12" w:after="12" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="17"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="8" w:after="8" w:line="190" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="16"/></w:rPr><w:t>Cevap: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="16"/></w:rPr><w:t>{dots_first}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="8" w:after="8" w:line="190" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="16"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="8" w:after="8" w:line="190" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="16"/></w:rPr><w:t>{dots_full}</w:t></w:r></w:p>
+            <w:p><w:pPr><w:spacing w:before="8" w:after="8" w:line="190" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="16"/></w:rPr><w:t>{dots_short}</w:t></w:r></w:p>
             ''')
         else:
             # Cevap Kağıdı: "Cevap: " kısmı koyu ve siyah, model cevap metni renkli/siyah
             color_attr = f'<w:color w:val="{clean_color}"/>' if clean_color != "000000" else ""
             elements.append(f'''
             <w:p>
-                <w:pPr><w:spacing w:before="40" w:after="80" w:line="260" w:lineRule="auto"/></w:pPr>
-                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Cevap: </w:t></w:r>
-                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="20"/></w:rPr><w:t>{ans_text}</w:t></w:r>
+                <w:pPr><w:spacing w:before="20" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr>
+                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:b/><w:sz w:val="18"/></w:rPr><w:t>Cevap: </w:t></w:r>
+                <w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>{color_attr}<w:sz w:val="18"/></w:rPr><w:t>{ans_text}</w:t></w:r>
             </w:p>
             ''')
 
@@ -250,7 +250,7 @@ def generate_docx(header_data, questions, mode="questions", color="000000"):
         {''.join(body_elements)}
         <w:sectPr>
             <w:pgSz w:w="11906" w:h="16838"/>
-            <w:pgMar w:top="720" w:right="850" w:bottom="720" w:left="850"/>
+            <w:pgMar w:top="540" w:right="720" w:bottom="540" w:left="720"/>
         </w:sectPr>
     </w:body>
 </w:document>'''
