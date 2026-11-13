@@ -193,8 +193,12 @@ def get_questions():
     portal_start_week = max(1, min(portal_start_week, 41))
     portal_end_week = max(1, min(portal_end_week, 41))
 
-    # Portal müfredatı eşleştirmesi seçilmişse
-    if portal_curriculum and portal_grade in PORTAL_CURRICULUM_DATA:
+    from subject_question_generator import generate_subject_questions, detect_subject_from_text
+    current_subject = detect_subject_from_text(lesson or topic)
+    is_bilisim = any(k in current_subject.lower() for k in ["bilişim", "bilgisayar", "kodlama", "yazılım"])
+
+    # Portal müfredatı eşleştirmesi seçilmişse (SADECE Bilişim / Bilgisayar Bilimi için)
+    if portal_curriculum and is_bilisim and portal_grade in PORTAL_CURRICULUM_DATA:
         p_info = PORTAL_CURRICULUM_DATA[portal_grade]
         p_pool = []
         for w in range(portal_start_week, portal_end_week + 1):
@@ -247,20 +251,33 @@ def get_questions():
                 "source": "portal-curriculum"
             })
 
-    # 1. Özel bir konu/ders seçildiyse ve API anahtarı mevcutsa öncelikle Gemini AI ile taze üret
-    if topic and not topic.startswith("Tüm Dersler") and not topic.startswith("Tüm Konular"):
+    # 1. Matematik, Fizik, Kimya vb. tüm branş dersleri için soru üretimi
+    if current_subject and not current_subject.startswith("Tüm Dersler") and not current_subject.startswith("Tüm Konular"):
+        # Gemini AI anahtarı varsa taze üretimi dene
         ai_questions = generate_questions_with_gemini(
-            topic, grade=grade, count=count, difficulty=difficulty, lesson=lesson,
+            topic or current_subject, grade=grade, count=count, difficulty=difficulty, lesson=lesson,
             start_week=portal_start_week, end_week=portal_end_week
         )
         if ai_questions:
             return jsonify({
                 "grade": grade,
-                "grade_name": f"{grade}. Sınıf",
+                "grade_name": f"{grade}. Sınıf ({current_subject})",
                 "difficulty": difficulty,
                 "count": len(ai_questions),
                 "questions": ai_questions,
                 "source": "gemini-ai"
+            })
+            
+        # Zengin yerel branş soru motoru (Matematik, Fizik, Kimya, Biyoloji vb.)
+        subject_qs = generate_subject_questions(current_subject, grade, count=count, difficulty=difficulty, exam_type=exam_type)
+        if subject_qs:
+            return jsonify({
+                "grade": grade,
+                "grade_name": f"{grade}. Sınıf ({current_subject})",
+                "difficulty": difficulty,
+                "count": len(subject_qs),
+                "questions": subject_qs,
+                "source": "subject-curriculum"
             })
 
     if grade not in QUESTION_BANK:

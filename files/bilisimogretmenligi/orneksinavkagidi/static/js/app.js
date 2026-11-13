@@ -1,72 +1,130 @@
 // --------------------------------------------------------------------------
-// Dinamik Ünite / Konu Seçici
+// 1-12. Sınıf Tüm MEB Dersleri Tanımları ve Yardımcı Fonksiyonlar
+// --------------------------------------------------------------------------
+const GRADE_DEFAULT_LESSONS = {
+  "1": ["Türkçe", "Matematik", "Hayat Bilgisi", "Bilişim ve Kodlama", "Serbest Etkinlikler"],
+  "2": ["Türkçe", "Matematik", "Hayat Bilgisi", "İngilizce", "Bilişim ve Kodlama"],
+  "3": ["Türkçe", "Matematik", "Fen Bilimleri", "Hayat Bilgisi", "İngilizce", "Bilişim ve Kodlama"],
+  "4": ["Türkçe", "Matematik", "Fen Bilimleri", "Sosyal Bilgiler", "Din Kültürü ve Ahlak Bilgisi", "İngilizce", "Trafik Güvenliği", "İnsan Hakları, Yurttaşlık ve Demokrasi", "Bilişim ve Kodlama"],
+  "5": ["Bilişim Teknolojileri ve Yazılım", "Matematik", "Fen Bilimleri", "Türkçe", "Sosyal Bilgiler", "İngilizce", "Din Kültürü ve Ahlak Bilgisi"],
+  "6": ["Bilişim Teknolojileri ve Yazılım", "Matematik", "Fen Bilimleri", "Türkçe", "Sosyal Bilgiler", "İngilizce", "Din Kültürü ve Ahlak Bilgisi"],
+  "7": ["Bilişim Teknolojileri ve Yazılım", "Teknoloji Tasarım", "Matematik", "Fen Bilimleri", "Türkçe", "Sosyal Bilgiler", "İngilizce", "Din Kültürü ve Ahlak Bilgisi"],
+  "8": ["Bilişim Teknolojileri ve Yazılım", "Teknoloji Tasarım", "Matematik", "Fen Bilimleri", "Türkçe", "T.C. İnkılap Tarihi ve Atatürkçülük", "İngilizce", "Din Kültürü ve Ahlak Bilgisi"],
+  "9": ["Matematik", "Fizik", "Kimya", "Biyoloji", "Türk Dili ve Edebiyatı", "Tarih", "Coğrafya", "İngilizce", "Din Kültürü ve Ahlak Bilgisi", "Bilgisayar Bilimi", "Beden Eğitimi ve Spor", "Sağlık Bilgisi ve Trafik Kültürü"],
+  "10": ["Matematik", "Fizik", "Kimya", "Biyoloji", "Türk Dili ve Edebiyatı", "Tarih", "Coğrafya", "Felsefe", "İngilizce", "Din Kültürü ve Ahlak Bilgisi", "Bilgisayar Bilimi"],
+  "11": ["Matematik", "Fizik", "Kimya", "Biyoloji", "Türk Dili ve Edebiyatı", "Tarih", "Coğrafya", "Felsefe", "İngilizce", "Din Kültürü ve Ahlak Bilgisi", "Bilgisayar Bilimi"],
+  "12": ["Matematik", "Fizik", "Kimya", "Biyoloji", "Türk Dili ve Edebiyatı", "T.C. İnkılap Tarihi ve Atatürkçülük", "Coğrafya", "İngilizce", "Din Kültürü ve Ahlak Bilgisi", "Bilgisayar Bilimi"]
+};
+
+function trNormalize(s) {
+  return (s || "").toString().replace(/İ/g, "i").replace(/I/g, "ı").toLowerCase();
+}
+
+function isBilisimSubject(lessonName, topicName) {
+  const text = trNormalize(lessonName) + " " + trNormalize(topicName);
+  const nonBilisimKeywords = [
+    "matematik", "fizik", "kimya", "biyoloji", "fen bilim", "türkçe", "turkce",
+    "türk dili", "edebiyat", "sosyal bilgi", "tarih", "coğrafya", "cografya",
+    "felsefe", "ingilizce", "din kültür", "hayat bilgi", "resim", "müzik",
+    "muzik", "beden", "trafik", "insan hakları"
+  ];
+  for (const kw of nonBilisimKeywords) {
+    if (text.includes(kw)) return false;
+  }
+  const bilisimKeywords = ["bilişim", "bilisim", "bilgisayar", "yazılım", "yazilim", "kodlama", "teknoloji tasarım", "yapay zeka", "scratch", "python"];
+  for (const kw of bilisimKeywords) {
+    if (text.includes(kw)) return true;
+  }
+  return false;
+}
+
+function getSubjectShortName(lesson, topic) {
+  let text = (lesson || topic || "").trim();
+  text = text.replace(/^\s*\d+\s*[\.\-]?\s*(SINIF|Sınıf|sinif)\s*[\:\-]?\s*/i, "").trim();
+  text = text.replace(/\s*\(?\s*(?:KUR|Kur)\s*[12]\s*\)?/gi, "").trim();
+  if (text.includes(":")) text = text.split(":")[0].trim();
+  
+  const tLower = trNormalize(text);
+  if (tLower.includes("matematik")) return "Matematik";
+  if (tLower.includes("fizik")) return "Fizik";
+  if (tLower.includes("kimya")) return "Kimya";
+  if (tLower.includes("biyoloji")) return "Biyoloji";
+  if (tLower.includes("fen")) return "Fen Bilimleri";
+  if (tLower.includes("edebiyat") || tLower.includes("türk dili") || tLower.includes("turk dili")) return "Türk Dili ve Edebiyatı";
+  if (tLower.includes("türkçe") || tLower.includes("turkce")) return "Türkçe";
+  if (tLower.includes("inkılap") || tLower.includes("inkilap") || tLower.includes("atatürk")) return "T.C. İnkılap Tarihi ve Atatürkçülük";
+  if (tLower.includes("tarih")) return "Tarih";
+  if (tLower.includes("sosyal")) return "Sosyal Bilgiler";
+  if (tLower.includes("coğrafya") || tLower.includes("cografya")) return "Coğrafya";
+  if (tLower.includes("felsefe")) return "Felsefe";
+  if (tLower.includes("ingilizce") || tLower.includes("english")) return "İngilizce";
+  if (tLower.includes("din") || tLower.includes("ahlak")) return "Din Kültürü ve Ahlak Bilgisi";
+  if (tLower.includes("hayat")) return "Hayat Bilgisi";
+  if (tLower.includes("teknoloji tasarım") || tLower.includes("teknoloji ve tasarım")) return "Teknoloji Tasarım";
+  if (tLower.includes("bilgisayar")) return "Bilgisayar Bilimi";
+  if (tLower.includes("bilişim") || tLower.includes("bilisim") || tLower.includes("kodlama") || tLower.includes("yazılım")) return "Bilişim Teknolojileri ve Yazılım";
+  return text || "Genel Sınav";
+}
+
+// --------------------------------------------------------------------------
+// Dinamik Ünite / Konu Seçici (1-12. Sınıf MEB Müfredatına Göre)
 // --------------------------------------------------------------------------
 function updateTopicsDropdown(grade) {
   const selectTopic = document.getElementById("select-topic");
   if (!selectTopic) return;
   const currentVal = selectTopic.value;
   selectTopic.innerHTML = "";
+  const gStr = String(grade || "5");
 
-  // 1. Varsayılan Ders Seçeneği: Bilişim Teknolojileri ve Yazılım
-  const optDefault = document.createElement("option");
-  optDefault.value = "Bilişim Teknolojileri ve Yazılım";
-  optDefault.textContent = "Bilişim Teknolojileri ve Yazılım";
-  selectTopic.appendChild(optDefault);
-
-  // 2. Genel Karma Sınav Seçeneği
+  // 1. Genel Karma Sınav Seçeneği
   const optAll = document.createElement("option");
   optAll.value = "Tüm Dersler (Karma Sınav)";
-  optAll.textContent = "Tüm Dersler (Genel / Karma Sınav)";
+  optAll.textContent = "🌟 Tüm Dersler (Genel / Karma Sınav)";
   selectTopic.appendChild(optAll);
 
-  // 3. 1'den 12'ye Tüm MEB Dersleri
-  const grpAll = document.createElement("optgroup");
-  grpAll.label = "📋 1 - 12. Sınıf Tüm MEB Dersleri";
-  const allLessons = [
-    "Bilişim Teknolojileri ve Yazılım",
-    "Bilgisayar Bilimi",
-    "Türkçe",
-    "Türk Dili ve Edebiyatı",
-    "Matematik",
-    "Fen Bilimleri",
-    "Sosyal Bilgiler",
-    "Fizik",
-    "Kimya",
-    "Biyoloji",
-    "Tarih",
-    "T.C. İnkılap Tarihi ve Atatürkçülük",
-    "Coğrafya",
-    "Felsefe",
-    "Hayat Bilgisi",
-    "Din Kültürü ve Ahlak Bilgisi",
-    "İngilizce",
-    "Görsel Sanatlar (Resim)",
-    "Müzik",
-    "Beden Eğitimi ve Spor",
-    "Teknoloji ve Tasarım",
-    "Trafik Güvenliği",
-    "İnsan Hakları, Yurttaşlık ve Demokrasi",
-    "Seçmeli Türk Sosyal Hayatında Aile",
-    "Yapay Zeka ve Yazılım Uygulamaları"
-  ];
+  // 2. Seçili Sınıfın MEB Dersleri
+  const gradeLessons = GRADE_DEFAULT_LESSONS[gStr] || [];
+  if (gradeLessons.length > 0) {
+    const grpGradeLessons = document.createElement("optgroup");
+    grpGradeLessons.label = `📚 ${gStr}. Sınıf MEB Dersleri`;
+    gradeLessons.forEach(l => {
+      const opt = document.createElement("option");
+      opt.value = l;
+      opt.textContent = l;
+      grpGradeLessons.appendChild(opt);
+    });
+    selectTopic.appendChild(grpGradeLessons);
+  }
 
-  allLessons.forEach(l => {
-    const opt = document.createElement("option");
-    opt.value = l;
-    opt.textContent = l;
-    grpAll.appendChild(opt);
-  });
-  selectTopic.appendChild(grpAll);
+  // 3. Diğer Tüm MEB Dersleri
+  const allMEBLessons = [
+    "Matematik", "Fizik", "Kimya", "Biyoloji", "Fen Bilimleri",
+    "Türk Dili ve Edebiyatı", "Türkçe", "Tarih", "T.C. İnkılap Tarihi ve Atatürkçülük",
+    "Coğrafya", "Felsefe", "Bilişim Teknolojileri ve Yazılım", "Bilgisayar Bilimi",
+    "İngilizce", "Din Kültürü ve Ahlak Bilgisi", "Sosyal Bilgiler", "Hayat Bilgisi", "Teknoloji Tasarım"
+  ];
+  const otherLessons = allMEBLessons.filter(l => !gradeLessons.includes(l));
+  if (otherLessons.length > 0) {
+    const grpOther = document.createElement("optgroup");
+    grpOther.label = "📋 Diğer MEB Dersleri";
+    otherLessons.forEach(l => {
+      const opt = document.createElement("option");
+      opt.value = l;
+      opt.textContent = l;
+      grpOther.appendChild(opt);
+    });
+    selectTopic.appendChild(grpOther);
+  }
 
   // 4. Seçili Sınıfın Müfredat Konuları & Kazanımları
-  const topics = (typeof EMBEDDED_GRADE_TOPICS !== "undefined" && EMBEDDED_GRADE_TOPICS[grade])
-    ? EMBEDDED_GRADE_TOPICS[grade]
+  const topics = (typeof EMBEDDED_GRADE_TOPICS !== "undefined" && EMBEDDED_GRADE_TOPICS[gStr])
+    ? EMBEDDED_GRADE_TOPICS[gStr]
     : [];
   if (topics && topics.length > 0) {
     const grpGrade = document.createElement("optgroup");
-    grpGrade.label = `📌 ${grade}. Sınıf Müfredat Konuları & Kazanımları`;
+    grpGrade.label = `📌 ${gStr}. Sınıf Müfredat Konuları & Kazanımları`;
     topics.forEach(t => {
-      if (t !== "Tüm Konular" && !t.startsWith("Tüm Dersler") && t !== "Bilişim Teknolojileri ve Yazılım") {
+      if (t !== "Tüm Konular" && !t.startsWith("Tüm Dersler") && !gradeLessons.includes(t)) {
         const opt = document.createElement("option");
         opt.value = t;
         opt.textContent = t;
@@ -76,18 +134,992 @@ function updateTopicsDropdown(grade) {
     selectTopic.appendChild(grpGrade);
   }
 
-  // Varsayılan olarak Bilişim Teknolojileri ve Yazılım'ı seç
+  // Seçili değeri koru veya uygun varsayılanı ata
   if (currentVal && Array.from(selectTopic.options).some(o => o.value === currentVal)) {
     selectTopic.value = currentVal;
+  } else if (gradeLessons.length > 0) {
+    selectTopic.value = gradeLessons[0];
   } else {
-    selectTopic.value = "Bilişim Teknolojileri ve Yazılım";
+    selectTopic.value = "Tüm Dersler (Karma Sınav)";
   }
 }
 
 // --------------------------------------------------------------------------
-// Soru Durumuna Göre İndirme Butonlarının Aktif / Pasif Kontrolü
-// (Sorular Boş İse DOCX ve PDF İndirme Butonları Pasif / Disabled Olur)
+// Yerel Branş Soru Bankası ve Çevrimdışı Soru Motoru (1-12. Sınıf)
 // --------------------------------------------------------------------------
+const EMBEDDED_SUBJECT_QUESTION_BANK = {
+  "Matematik": {
+    "1": [
+      {
+        "topic": "Matematik: Doğal Sayılar",
+        "question": "1'den 20'ye kadar ileriye doğru ikişer ritmik sayarken 8'den sonra hangi sayı gelir?",
+        "answer": "10"
+      },
+      {
+        "topic": "Matematik: Toplama İşlemi",
+        "question": "Bir vazoda 6 gül, diğer vazoda 7 gül vardır. İki vazoda toplam kaç gül vardır?",
+        "answer": "13 gül (6 + 7 = 13)"
+      },
+      {
+        "topic": "Matematik: Çıkarma İşlemi",
+        "question": "15 elmanın 6 tanesi yenirse geriye kaç elma kalır?",
+        "answer": "9 elma (15 - 6 = 9)"
+      },
+      {
+        "topic": "Matematik: Geometrik Cisimler",
+        "question": "Küp şekline benzeyen günlük hayattan iki nesne örneği veriniz.",
+        "answer": "Zar ve hediye kutusu"
+      },
+      {
+        "topic": "Matematik: Paralarımız",
+        "question": "1 TL kaç tane 50 kuruştan oluşur?",
+        "answer": "2 tane 50 kuruştan"
+      }
+    ],
+    "2": [
+      {
+        "topic": "Matematik: Basamak Değeri",
+        "question": "74 doğal sayısındaki '7' rakamının basamak değeri kaçtır?",
+        "answer": "70 (Onlar basamağında olduğu için 7 x 10 = 70)"
+      },
+      {
+        "topic": "Matematik: Çarpma İşlemi",
+        "question": "Bir masanın 4 ayağı olduğuna göre 6 masanın toplam kaç ayağı vardır?",
+        "answer": "24 ayak (6 x 4 = 24)"
+      },
+      {
+        "topic": "Matematik: Bölme İşlemi",
+        "question": "18 fındık 3 sincap arasında eşit paylaştırılırsa her sincaba kaç fındık düşer?",
+        "answer": "6 fındık (18 ÷ 3 = 6)"
+      },
+      {
+        "topic": "Matematik: Kesirler",
+        "question": "Bir bütün elma kaç çeyrek elmaya eşittir?",
+        "answer": "4 çeyrek elmaya eşittir"
+      },
+      {
+        "topic": "Matematik: Zaman Ölçüleri",
+        "question": "Bir günde kaç saat ve bir saatte kaç dakika vardır?",
+        "answer": "Bir gün 24 saat, bir saat 60 dakikadır"
+      }
+    ],
+    "3": [
+      {
+        "topic": "Matematik: Basamak Değeri",
+        "question": "583 sayısının yüzler ve birler basamağındaki rakamların basamak değerleri toplamı kaçtır?",
+        "answer": "503 (Yüzler: 500, Birler: 3 -> 500 + 3 = 503)"
+      },
+      {
+        "topic": "Matematik: Çarpma İşlemi",
+        "question": "Bir okul servisinde 16 koltuk vardır. 5 serviste toplam kaç koltuk bulunur?",
+        "answer": "80 koltuk (16 x 5 = 80)"
+      },
+      {
+        "topic": "Matematik: Kalanlı Bölme",
+        "question": "27'yi 4'e böldüğümüzde bölüm ve kalan kaç olur?",
+        "answer": "Bölüm: 6, Kalan: 3 (27 = 4 x 6 + 3)"
+      },
+      {
+        "topic": "Matematik: Kesirler",
+        "question": "Payı 3, paydası 8 olan kesri yazınız ve bu kesrin birim kesrini belirtiniz.",
+        "answer": "Kesir: 3/8, Birim kesir: 1/8"
+      },
+      {
+        "topic": "Matematik: Geometri",
+        "question": "Üçgenin kaç köşesi ve kaç kenarı vardır?",
+        "answer": "3 köşesi ve 3 kenarı vardır"
+      }
+    ],
+    "4": [
+      {
+        "topic": "Matematik: Basamak Analizi",
+        "question": "24.580 sayısının okunuşunu yazınız ve binler basamağındaki rakamı belirtiniz.",
+        "answer": "Okunuşu: Yirmi dört bin beş yüz seksen. Binler basamağı: 4"
+      },
+      {
+        "topic": "Matematik: Açılar",
+        "question": "Ölçüsü 90 dereceden küçük olan açılara ve 90 derece olan açılara ne ad verilir?",
+        "answer": "Dar açı ve Dik açı"
+      },
+      {
+        "topic": "Matematik: Kesirlerle Toplama",
+        "question": "2/7 + 3/7 işleminin sonucunu yazınız.",
+        "answer": "5/7"
+      },
+      {
+        "topic": "Matematik: Çevre ve Alan",
+        "question": "Kısa kenarı 8 cm, uzun kenarı 12 cm olan dikdörtgenin çevresi kaç cm'dir?",
+        "answer": "40 cm (2 x (8 + 12) = 40 cm)"
+      },
+      {
+        "topic": "Matematik: Problem Çözme",
+        "question": "Bir çiftçi 480 kg elmanın yarısını sattı. Kalan elmalar 6 kasaya eşit bölüştürülürse her kasada kaç kg elma olur?",
+        "answer": "40 kg (Kalan: 240 kg, 240 ÷ 6 = 40 kg)"
+      }
+    ],
+    "5": [
+      {
+        "topic": "Matematik: Doğal Sayılarla İşlemler",
+        "question": "5³ - 4² işleminin sonucu kaçtır?",
+        "answer": "109 (125 - 16 = 109)"
+      },
+      {
+        "topic": "Matematik: Kesirlerde Sıralama",
+        "question": "3/5, 7/10 ve 1/2 kesirlerini küçükten büyüğe sıralayınız.",
+        "answer": "1/2 < 3/5 < 7/10 (Paydalar 10'da eşitlenirse: 5/10 < 6/10 < 7/10)"
+      },
+      {
+        "topic": "Matematik: Ondalık Gösterim",
+        "question": "0,75 ondalık gösteriminin en sade kesir karşılığı nedir?",
+        "answer": "3/4 (75/100 sadeleşince 3/4)"
+      },
+      {
+        "topic": "Matematik: Yüzdeler",
+        "question": "240 TL olan bir pantolona %25 indirim yapılırsa yeni satış fiyatı kaç TL olur?",
+        "answer": "180 TL (İndirim: 60 TL, 240 - 60 = 180 TL)"
+      },
+      {
+        "topic": "Matematik: Temel Geometrik Kavramlar",
+        "question": "Bir noktadan başlayıp sonsuza kadar giden düz çizgiye ne ad verilir?",
+        "answer": "Işın"
+      }
+    ],
+    "6": [
+      {
+        "topic": "Matematik: Çarpanlar ve Asal Sayılar",
+        "question": "1'den 20'ye kadar olan asal sayıları sırasıyla yazınız.",
+        "answer": "2, 3, 5, 7, 11, 13, 17, 19"
+      },
+      {
+        "topic": "Matematik: İşlem Önceliği",
+        "question": "24 ÷ 3 + 2 x 5 - 4 işleminin sonucu kaçtır?",
+        "answer": "14 (8 + 10 - 4 = 14)"
+      },
+      {
+        "topic": "Matematik: Tam Sayılar",
+        "question": "|-12| + (-5) işleminin sonucu kaçtır?",
+        "answer": "7 (12 - 5 = 7)"
+      },
+      {
+        "topic": "Matematik: Kümeler",
+        "question": "A = {1, 2, 3, 4, 5} ve B = {3, 4, 5, 6, 7} olduğuna göre A ∩ B kümesini yazınız.",
+        "answer": "A ∩ B = {3, 4, 5}"
+      },
+      {
+        "topic": "Matematik: Cebirsel İfadeler",
+        "question": "3x - 5 ifadesinde x = 4 için elde edilen sayısal değer kaçtır?",
+        "answer": "7 (3 x 4 - 5 = 7)"
+      }
+    ],
+    "7": [
+      {
+        "topic": "Matematik: Tam Sayılarla Çarpma ve Bölme",
+        "question": "(-4) x (+6) ÷ (-2) işleminin sonucu kaçtır?",
+        "answer": "+12 (-24 ÷ -2 = +12)"
+      },
+      {
+        "topic": "Matematik: Rasyonel Sayılar",
+        "question": "Devirli ondalık gösterim olan 0,333... rasyonel olarak nasıl yazılır?",
+        "answer": "1/3"
+      },
+      {
+        "topic": "Matematik: Birinci Dereceden Denklemler",
+        "question": "4x + 8 = 2x + 20 denklemini sağlayan x değeri kaçtır?",
+        "answer": "x = 6 (2x = 12 -> x = 6)"
+      },
+      {
+        "topic": "Matematik: Oran-Orantı",
+        "question": "3 işçi bir işi 12 günde bitirirse aynı güçteki 6 işçi kaç günde bitirir?",
+        "answer": "6 günde (Ters orantı: 3 x 12 = 6 x gün -> gün = 6)"
+      },
+      {
+        "topic": "Matematik: Dairede Çevre ve Alan",
+        "question": "Yarıçapı r = 5 cm olan çemberin çevre uzunluğu kaç cm'dir? (π = 3 alınız)",
+        "answer": "30 cm (2 x π x r = 2 x 3 x 5 = 30 cm)"
+      }
+    ],
+    "8": [
+      {
+        "topic": "Matematik: Çarpanlar ve Katlar (EBOB-EKOK)",
+        "question": "Aralarında asal iki sayının EBOB'u ve EKOK'u hakkında ne söylenebilir?",
+        "answer": "EBOB'ları 1'dir, EKOK'ları ise sayıların çarpımına eşittir."
+      },
+      {
+        "topic": "Matematik: Üslü İfadeler (LGS)",
+        "question": "2⁵ x 5⁵ işleminin sonucu kaç basamaklı bir sayıdır?",
+        "answer": "6 basamaklıdır ((2x5)⁵ = 10⁵ = 100000 -> 6 basamak)"
+      },
+      {
+        "topic": "Matematik: Kareköklü Sayılar",
+        "question": "√48 sayısı hangi iki ardışık tam sayı arasındadır ve hangisine daha yakındır?",
+        "answer": "6 ile 7 arasındadır (√36 < √48 < √49), 7'ye daha yakındır."
+      },
+      {
+        "topic": "Matematik: Olasılık",
+        "question": "Bir zar atıldığında üst yüze asal sayı gelme olasılığı kaçtır?",
+        "answer": "1/2 (Asal sayılar: 2, 3, 5 -> 3/6 = 1/2)"
+      },
+      {
+        "topic": "Matematik: Pisagor Teoremi",
+        "question": "Dik kenarları 6 cm ve 8 cm olan dik üçgenin hipotenüs uzunluğu kaç cm'dir?",
+        "answer": "10 cm (6² + 8² = 36 + 64 = 100 = 10²)"
+      }
+    ],
+    "9": [
+      {
+        "topic": "Matematik: Mantık ve Önermeler",
+        "question": "p ve q önermeleri için p ⇒ q koşullu önermesinin karşıt tersini yazınız.",
+        "answer": "q' ⇒ p' (q'nun değili gerektirir p'nin değili)"
+      },
+      {
+        "topic": "Matematik: Kümeler ve Kartezyen Çarpım",
+        "question": "s(A) = 4 ve s(B) = 3 olduğuna göre s(A x B) kartezyen çarpımının eleman sayısı kaçtır?",
+        "answer": "12 (4 x 3 = 12)"
+      },
+      {
+        "topic": "Matematik: Mutlak Değer",
+        "question": "|x| < 5 eşitsizliğinin çözüm aralığını yazınız.",
+        "answer": "-5 < x < 5"
+      },
+      {
+        "topic": "Matematik: Üslü ve Köklü Denklemler",
+        "question": "2^(x+1) = 32 olduğuna göre x kaçtır?",
+        "answer": "x = 4 (32 = 2⁵ -> x + 1 = 5 -> x = 4)"
+      },
+      {
+        "topic": "Matematik: Üçgende Benzerlik",
+        "question": "Benzerlik oranı 2/3 olan iki benzer üçgenin alanları oranı kaçtır?",
+        "answer": "4/9 (Benzerlik oranının karesi alanlar oranına eşittir: (2/3)² = 4/9)"
+      }
+    ],
+    "10": [
+      {
+        "topic": "Matematik: Permütasyon ve Kombinasyon",
+        "question": "C(7, 2) kombinasyonunun değerini hesaplayınız.",
+        "answer": "21 ((7 x 6) / (2 x 1) = 21)"
+      },
+      {
+        "topic": "Matematik: Olasılık ve Binom",
+        "question": "İki madeni para birlikte atıldığında en az birinin tura gelme olasılığı nedir?",
+        "answer": "3/4 (Tüm durumlar: TT, TY, YT, YY; İstenen: 3/4)"
+      },
+      {
+        "topic": "Matematik: Fonksiyonlar",
+        "question": "f(x) = 2x + 3 ve g(x) = x - 1 olduğuna göre (fog)(x) bileşke fonksiyonunu bulunuz.",
+        "answer": "2x + 1 ((fog)(x) = 2(x - 1) + 3 = 2x - 2 + 3 = 2x + 1)"
+      },
+      {
+        "topic": "Matematik: İkinci Dereceden Denklemler",
+        "question": "x² - 5x + 6 = 0 denkleminin köklerini bulunuz.",
+        "answer": "x₁ = 2, x₂ = 3 ((x - 2)(x - 3) = 0)"
+      },
+      {
+        "topic": "Matematik: Çokgenler ve Dörtgenler",
+        "question": "İç açılarının ölçüleri toplamı 720° olan bir çokgen kaç kenarlıdır?",
+        "answer": "6 kenarlıdır (Altıgen: (n - 2) x 180 = 720 -> n - 2 = 4 -> n = 6)"
+      }
+    ],
+    "11": [
+      {
+        "topic": "Matematik: Trigonometri (Birim Çember)",
+        "question": "sin(90°), cos(0°) ve tan(45°) değerlerini sırasıyla yazınız.",
+        "answer": "1, 1, 1"
+      },
+      {
+        "topic": "Matematik: Analitik Geometri",
+        "question": "A(1, 2) ve B(4, 6) noktaları arasındaki uzaklığı formülle hesaplayınız.",
+        "answer": "5 birim (√[(4-1)² + (6-2)²] = √[9 + 16] = √25 = 5)"
+      },
+      {
+        "topic": "Matematik: Parabol ve Fonksiyonlar",
+        "question": "f(x) = ax² + bx + c parabolünün kollarının yukarı doğru olması için 'a' katsayısının işareti ne olmalıdır?",
+        "answer": "Pozitif (a > 0)"
+      },
+      {
+        "topic": "Matematik: Çember ve Açı",
+        "question": "Bir çemberde aynı yayı gören çevre açı ile merkez açı arasındaki ilişki nedir?",
+        "answer": "Merkez açının ölçüsü, çevre açının ölçüsünün 2 katıdır."
+      },
+      {
+        "topic": "Matematik: Eşitsizlik Sistemleri",
+        "question": "x² - 9 < 0 eşitsizliğini sağlayan x tam sayıları kaç tanedir?",
+        "answer": "5 tanedir (-3 < x < 3 aralığında: -2, -1, 0, 1, 2)"
+      }
+    ],
+    "12": [
+      {
+        "topic": "Matematik: Logaritma (AYT)",
+        "question": "log₂(8) + log₃(27) işleminin sonucu kaçtır?",
+        "answer": "6 (3 + 3 = 6)"
+      },
+      {
+        "topic": "Matematik: Diziler",
+        "question": "İlk terimi 3, ortak farkı 4 olan bir aritmetik dizinin 10. terimi (a₁₀) kaçtır?",
+        "answer": "39 (a₁₀ = a₁ + 9d = 3 + 9x4 = 39)"
+      },
+      {
+        "topic": "Matematik: Limit",
+        "question": "lim (x -> 3) (x² - 9) / (x - 3) limitinin değerini bulunuz.",
+        "answer": "6 (0/0 belirsizliği sadeleşince: lim (x + 3) = 6)"
+      },
+      {
+        "topic": "Matematik: Türev (Teğet Eğimi)",
+        "question": "f(x) = x³ - 2x fonksiyonunun x = 2 noktasındaki teğetinin eğimi kaçtır?",
+        "answer": "10 (f'(x) = 3x² - 2 -> f'(2) = 3(4) - 2 = 10)"
+      },
+      {
+        "topic": "Matematik: Belirli İntegral",
+        "question": "∫ (0'dan 2'ye) 3x² dx integralinin değerini hesaplayınız.",
+        "answer": "8 ([x³] (0'dan 2'ye) = 2³ - 0³ = 8)"
+      }
+    ]
+  },
+  "Fizik": {
+    "9": [
+      {
+        "topic": "Fizik: Fizik Bilimine Giriş",
+        "question": "SI birim sisteminde temel büyüklüklerden üç tanesini ve birimlerini yazınız.",
+        "answer": "Kütle (Kilogram), Uzunluk (Metre), Zaman (Saniye)"
+      },
+      {
+        "topic": "Fizik: Madde ve Dayanıklılık",
+        "question": "Katı bir cismin boyutları aynı oranda artırıldığında dayanıklılığı nasıl değişir?",
+        "answer": "Azalır (Dayanıklılık kesit alanı / hacim oranıyla yani 1/yükseklik ile ters orantılıdır)"
+      },
+      {
+        "topic": "Fizik: Düzgün Doğrusal Hareket",
+        "question": "Hız ile sürat arasındaki en temel fiziksel fark nedir?",
+        "answer": "Hız vektörel bir büyüklüktür (yönü vardır), sürat ise skaler bir büyüklüktür (sadece büyüklüğü vardır)."
+      },
+      {
+        "topic": "Fizik: Mekanik Enerji",
+        "question": "Kinetik enerji ve yer çekimi potansiyel enerjisi formüllerini yazınız.",
+        "answer": "E_k = 1/2 m v² ve E_p = m g h"
+      },
+      {
+        "topic": "Fizik: Isı İletim Yolları",
+        "question": "Isının yayılma yollarını (üç yöntem) yazınız.",
+        "answer": "İletim (katılarda), Konveksiyon (sıvı ve gazlarda), Işıma (radyasyonla boşlukta)"
+      }
+    ],
+    "10": [
+      {
+        "topic": "Fizik: Elektrik Akımı ve Direnç",
+        "question": "Bir iletkenin direnci nelere bağlıdır? Formülüyle açıklayınız.",
+        "answer": "R = ρ . L / A (Özdirenç, uzunluk ile doğru, kesit alanı ile ters orantılıdır)"
+      },
+      {
+        "topic": "Fizik: Basınç (Pascal Prensibi)",
+        "question": "Pascal prensibini açıklayınız ve teknolojideki iki kullanım alanını yazınız.",
+        "answer": "Kapalı kaptaki sıvılar üzerlerine uygulanan basıncı her doğrultuda aynen iletir. Kullanım: Hidrolik frenler, hidrolik liftler."
+      },
+      {
+        "topic": "Fizik: Dalgalar",
+        "question": "Enine ve boyuna dalgalara birer örnek veriniz.",
+        "answer": "Enine: Işık (Elektromanyetik dalgalar) veya Yay. Boyuna: Ses dalgaları."
+      },
+      {
+        "topic": "Fizik: Optik (Işığın Kırılması)",
+        "question": "Işık az yoğun ortamdan çok yoğun ortama geçerken doğrultusu ve hızı nasıl değişir?",
+        "answer": "Normale yaklaşarak kırılır ve yayılma hızı azalır."
+      },
+      {
+        "topic": "Fizik: Küresel Aynalar",
+        "question": "Çukur aynanın merkezindeki bir cismin görüntüsü nerede ve nasıl oluşur?",
+        "answer": "Merkezde, ters, gerçek ve cisimle aynı boyda oluşur."
+      }
+    ],
+    "11": [
+      {
+        "topic": "Fizik: Vektörler ve Bağıl Hareket",
+        "question": "Aralarındaki açı 90° olan 6 N ve 8 N büyüklüğündeki iki kuvvetin bileşkesi kaç N'dir?",
+        "answer": "10 N (R = √(6² + 8²) = 10 N)"
+      },
+      {
+        "topic": "Fizik: Atış Hareketleri (Yatay Atış)",
+        "question": "Yatay atılan bir cismin yatay ve düşey eksendeki hareket türleri nelerdir?",
+        "answer": "Yatayda sabit hızlı hareket, düşeyde serbest düşme (sabit ivmeli hareket) yapar."
+      },
+      {
+        "topic": "Fizik: İtme ve Momentum",
+        "question": "İtme (I) ile momentum değişimi (ΔP) arasındaki bağıntıyı yazınız.",
+        "answer": "I = F . Δt = ΔP = P_son - P_ilk (İtme çizgisel momentum değişimine eşittir)"
+      },
+      {
+        "topic": "Fizik: Tork ve Denge",
+        "question": "Bir cismin dengede kalabilmesi için gerekli olan iki denge şartını yazınız.",
+        "answer": "1. Toplam net kuvvet sıfır olmalıdır (ΣF = 0). 2. Herhangi bir noktaya göre toplam tork sıfır olmalıdır (Στ = 0)."
+      },
+      {
+        "topic": "Fizik: Manyetik İndüksiyon (Lenz Yasası)",
+        "question": "Faraday ve Lenz yasalarına göre indüksiyon akımının yönü nasıl belirlenir?",
+        "answer": "İndüksiyon akımı, kendisini oluşturan manyetik akı değişimine karşı koyacak yönde oluşur."
+      }
+    ],
+    "12": [
+      {
+        "topic": "Fizik: Çembersel Hareket (Merkezcil Kuvvet)",
+        "question": "Düzgün çembersel hareket yapan m kütleli cismin merkezcil kuvvet formülünü yazınız.",
+        "answer": "F_merkezcil = m . v² / r = m . ω² . r"
+      },
+      {
+        "topic": "Fizik: Açısal Momentumun Korunumu",
+        "question": "Dönen bir buz patencisi kollarını kapattığında dönme hızı neden artar?",
+        "answer": "Kollar kapanınca eylemsizlik momenti (I) küçülür; açısal momentum (L = I.ω) korunduğu için açısal hız (ω) artar."
+      },
+      {
+        "topic": "Fizik: Basit Harmonik Hareket",
+        "question": "Basit harmonik hareket yapan bir sarkaçta hızın ve ivmenin maksimum olduğu noktalar nerelerdir?",
+        "answer": "Hız denge konumunda maksimumdur (ivme sıfırdır); ivme ise genlik (uç) noktalarında maksimumdur (hız sıfırdır)."
+      },
+      {
+        "topic": "Fizik: Dalga Mekaniği (Doppler Olayı)",
+        "question": "Yaklaşan bir ambulansın siren sesinin daha tiz (yüksek frekanslı) algılanmasının sebebi nedir?",
+        "answer": "Doppler olayı sebebiyle ses dalgaları sıkışır ve algılanan frekans artar."
+      },
+      {
+        "topic": "Fizik: Özel Görelilik ve Modern Fizik",
+        "question": "Einstein'ın Özel Görelilik Teorisinin iki temel postülatını yazınız.",
+        "answer": "1. Fizik yasaları tüm eylemsiz referans sistemlerinde aynıdır. 2. Işık hızı tüm gözlemciler için sabittir (c = 3x10⁸ m/s) ve aşılamaz."
+      }
+    ]
+  },
+  "Kimya": {
+    "9": [
+      {
+        "topic": "Kimya: Atomun Yapısı",
+        "question": "Bir atomun çekirdeğinde hangi tanecikler bulunur ve nükleon sayısı neye eşittir?",
+        "answer": "Proton ve nötron bulunur. Nükleon sayısı = Proton + Nötron (Kütle Numarası)."
+      },
+      {
+        "topic": "Kimya: Periyodik Tablo",
+        "question": "Aynı grupta yukarıdan aşağıya doğru inildikçe atom yarıçapı ve elektronegatiflik nasıl değişir?",
+        "answer": "Atom yarıçapı artar, elektronegatiflik genellikle azalır."
+      },
+      {
+        "topic": "Kimya: Kimyasal Türler Arası Etkileşimler",
+        "question": "İyonik bağ ve kovalent bağın oluşum mekanizmasını açıklayınız.",
+        "answer": "İyonik bağ elektron alışverişiyle (metal-ametal), kovalent bağ elektron ortaklaşmasıyla (ametal-ametal) oluşur."
+      }
+    ],
+    "10": [
+      {
+        "topic": "Kimya: Mol Kavramı",
+        "question": "1 mol gaz normal şartlar altında (NŞA) kaç litre hacim kaplar ve Avogadro sayısı kaçtır?",
+        "answer": "22,4 litre hacim kaplar. Avogadro sayısı: 6,02 x 10²³."
+      },
+      {
+        "topic": "Kimya: Asitler ve Bazlar",
+        "question": "Asitlerin ve bazların pH aralıklarını ve turnusol kağıdına etkilerini yazınız.",
+        "answer": "Asit: pH < 7 (Turnusolu kırmızıya çevirir). Baz: pH > 7 (Turnusolu maviye çevirir)."
+      }
+    ],
+    "11": [
+      {
+        "topic": "Kimya: Gazlar (İdeal Gaz Yasası)",
+        "question": "İdeal gaz denkleminde (P.V = n.R.T) birimleriyle her harfin anlamını yazınız.",
+        "answer": "P: Basınç (atm), V: Hacim (L), n: Mol sayısı, R: Gaz sabiti, T: Sıcaklık (Kelvin)."
+      },
+      {
+        "topic": "Kimya: Kimyasal Denge (Le Chatelier)",
+        "question": "Ekzotermik dengedeki bir tepkimenin sıcaklığı artırılırsa denge ne yöne kayar?",
+        "answer": "Girenler (sol) yönüne kayar ve denge sabiti (Kc) küçülür."
+      }
+    ],
+    "12": [
+      {
+        "topic": "Kimya: Kimya ve Elektrik (Galvanik Piller)",
+        "question": "Galvanik pillerde Anot ve Katot kutuplarında gerçekleşen temel olaylar nelerdir?",
+        "answer": "Anotta yükseltgenme (aşınma), Katotta indirgenme (kütle artışı) gerçekleşir."
+      },
+      {
+        "topic": "Kimya: Organik Kimya (Hidrokarbonlar)",
+        "question": "Alkan, Alken ve Alkinlerin genel formüllerini yazınız.",
+        "answer": "Alkan: CnH2n+2, Alken: CnH2n, Alkin: CnH2n-2."
+      }
+    ]
+  },
+  "Biyoloji": {
+    "9": [
+      {
+        "topic": "Biyoloji: Canlıların Temel Bileşenleri",
+        "question": "Hücrede enerji verici olarak kullanılan üç temel organik molekülün kullanım sırasını yazınız.",
+        "answer": "1. Karbonhidratlar, 2. Yağlar (Lipitler), 3. Proteinler."
+      },
+      {
+        "topic": "Biyoloji: Hücre Organelleri",
+        "question": "Bitki hücresinde bulunup hayvan hücresinde bulunmayan iki temel yapıyı yazınız.",
+        "answer": "Hücre çeperi (çeper/duvar) ve Kloroplast (Plastitler)."
+      }
+    ],
+    "10": [
+      {
+        "topic": "Biyoloji: Hücre Bölünmeleri",
+        "question": "Mitoz bölünme ile Mayoz bölünme arasındaki iki temel farkı yazınız.",
+        "answer": "1. Mitozda 2 hücre oluşur ve kromozom sayısı değişmez; Mayozda 4 hücre oluşur ve kromozom sayısı yarıya iner. 2. Mayozda krossing-over ile genetik çeşitlilik sağlanır."
+      },
+      {
+        "topic": "Biyoloji: Mendel Genetiği",
+        "question": "Heterozigot kahverengi gözlü iki bireyin (Aa x Aa) mavi gözlü (aa) çocuklarının olma olasılığı nedir?",
+        "answer": "%25 (1/4)"
+      }
+    ],
+    "11": [
+      {
+        "topic": "Biyoloji: İnsan Fizyolojisi (Sinir Sistemi)",
+        "question": "Nöronlarda impuls iletiminin akson boyunca ve sinapstaki iletim mekanizması nasıldır?",
+        "answer": "Akson boyunca elektriksel ve kimyasal (elektrokimyasal); sinapslarda ise nörotransmitter maddelerle kimyasaldır."
+      },
+      {
+        "topic": "Biyoloji: Dolaşım Sistemi",
+        "question": "Küçük kan dolaşımının amacı nedir ve nerede başlayıp nerede biter?",
+        "answer": "Kanı oksijence zenginleştirmek (temizlemek) amacıyla sağ karıncıkta başlar, akciğerde temizlenip sol kulakçıkta biter."
+      }
+    ],
+    "12": [
+      {
+        "topic": "Biyoloji: Genden Proteine",
+        "question": "DNA replikasyonunda görev alan Helikaz ve DNA Polimeraz enzimlerinin işlevleri nelerdir?",
+        "answer": "Helikaz çift sarmal hidrojen bağlarını açar; DNA Polimeraz yeni nükleotit zincirini sentezler."
+      },
+      {
+        "topic": "Biyoloji: Fotosentez ve Solunum",
+        "question": "Fotosentezin ışığa bağımlı ve ışıktan bağımsız (Calvin Döngüsü) evreleri kloroplastın hangi kısımlarında gerçekleşir?",
+        "answer": "Işığa bağımlı evre tilakoit zarda (granum), ışıktan bağımsız evre stromada gerçekleşir."
+      }
+    ]
+  },
+  "Fen Bilimleri": {
+    "5": [
+      {
+        "topic": "Fen Bilimleri: Güneş, Dünya ve Ay",
+        "question": "Ay'ın ana evrelerini oluşum sırasıyla yazınız.",
+        "answer": "Yeni Ay, İlk Dördün, Dolunay, Son Dördün"
+      },
+      {
+        "topic": "Fen Bilimleri: Kuvvet ve Sürtünme",
+        "question": "Sürtünme kuvvetinin olumlu ve olumsuz birer etkisini yazınız.",
+        "answer": "Olumlu: Yürüyebilmemizi ve araçların durmasını sağlar. Olumsuz: Makine parçalarının aşınmasına ve enerji kaybına yol açar."
+      }
+    ],
+    "6": [
+      {
+        "topic": "Fen Bilimleri: Vücudumuzdaki Sistemler",
+        "question": "İnce bağırsakta sindirilen besinlerin emilimini sağlayan mikroskobik parmaksı çıkıntılara ne ad verilir?",
+        "answer": "Villus (Tümür)"
+      },
+      {
+        "topic": "Fen Bilimleri: Madde ve Isı",
+        "question": "Isı iletkeni ve ısı yalıtkanı maddelere ikişer örnek veriniz.",
+        "answer": "İletken: Bakır, Demir. Yalıtkan: Strafor köpük, Ahşap/Plastik."
+      }
+    ],
+    "7": [
+      {
+        "topic": "Fen Bilimleri: Hücre ve Bölünmeler",
+        "question": "Hücrenin yönetim merkezi ve enerji üretim merkezi olan organeller hangileridir?",
+        "answer": "Yönetim: Çekirdek, Enerji: Mitokondri."
+      },
+      {
+        "topic": "Fen Bilimleri: Kuvvet ve Enerji",
+        "question": "Yerden yukarı doğru fırlatılan bir top tepe noktasına çıkarken kinetik ve potansiyel enerjisi nasıl değişir?",
+        "answer": "Kinetik enerjisi azalır, yer çekimi potansiyel enerjisi artar (Mekanik enerji korunur)."
+      }
+    ],
+    "8": [
+      {
+        "topic": "Fen Bilimleri: Mevsimler ve İklim",
+        "question": "Dünya'da mevsimlerin oluşmasının iki temel sebebi nedir?",
+        "answer": "1. Dünya'nın dönme ekseninin eğik olması (23° 27'). 2. Dünya'nın Güneş etrafında dolanması."
+      },
+      {
+        "topic": "Fen Bilimleri: DNA ve Genetik Kod",
+        "question": "DNA'daki 4 organik bazı yazınız ve baz eşleşme kuralını belirtiniz.",
+        "answer": "Adenin (A), Timin (T), Guanin (G), Sitozin (C). Eşleşme: A ile T (ikili bağ), G ile C (üçlü bağ)."
+      }
+    ]
+  },
+  "Türkçe": {
+    "5": [
+      {
+        "topic": "Türkçe: Sözcükte Anlam",
+        "question": "Gerçek anlam ve mecaz anlam kavramlarını birer cümle içinde kullanarak açıklayınız.",
+        "answer": "Gerçek: 'Sobadaki sıcak odun çıtırdıyordu.' Mecaz: 'Bizi çok sıcak karşıladı.'"
+      },
+      {
+        "topic": "Türkçe: Ek ve Kök Bilgisi",
+        "question": "'Gözlükçü' sözcüğünün kökünü ve aldığı eklerin türünü yazınız.",
+        "answer": "Kök: Göz (İsim kökü), -lük ve -çü yapım ekleridir (Türemiş sözcük)."
+      }
+    ],
+    "8": [
+      {
+        "topic": "Türkçe: Fiilimsiler (LGS)",
+        "question": "Fiilimsi türlerini (üç grup) yazınız ve birer ek örneği veriniz.",
+        "answer": "1. İsim-fiil (-ma, -ış, -mak), 2. Sıfat-fiil (-an, -ası, -mez, -ar, -dik, -ecek, -miş), 3. Zarf-fiil (-ken, -alı, -asiye, -erek)."
+      },
+      {
+        "topic": "Türkçe: Cümle Ögeleri",
+        "question": "'Yolcular sabah erkenden istasyona ulaştı.' cümlesinin ögelerini sırasıyla bulunuz.",
+        "answer": "Yolcular (Özne), sabah erkenden (Zarf Tümleci), istasyona (Yer Tamlayıcısı), ulaştı (Yüklem)."
+      }
+    ]
+  },
+  "Türk Dili ve Edebiyatı": {
+    "9": [
+      {
+        "topic": "Türk Dili ve Edebiyatı: Şiir Bilgisi",
+        "question": "Dörtlük sonlarındaki yarım, tam ve zengin kafiyeyi tanımlayınız.",
+        "answer": "Yarım: Tek ses benzerliği. Tam: İki ses benzerliği. Zengin: Üç veya daha fazla ses benzerliği."
+      },
+      {
+        "topic": "Türk Dili ve Edebiyatı: Olay Hikâyesi vs Durum Hikâyesi",
+        "question": "Maupassant tarzı (Olay) ile Çehov tarzı (Durum) hikâye arasındaki temel farkı yazınız.",
+        "answer": "Olay hikâyesinde serim-düğüm-çözüm ve merak unsuru ön plandadır; durum hikâyesinde ise hayatın bir kesiti duygularla aktarılır."
+      }
+    ],
+    "11": [
+      {
+        "topic": "Türk Dili ve Edebiyatı: Tanzimat Edebiyatı",
+        "question": "Tanzimat I. Dönem edebiyatı ile II. Dönem edebiyatının 'sanat anlayışlarını' karşılaştırınız.",
+        "answer": "I. Dönem: 'Sanat toplum içindir' anlayışı hakimdir. II. Dönem: 'Sanat sanat içindir' anlayışı hakimdir."
+      },
+      {
+        "topic": "Türk Dili ve Edebiyatı: Milli Edebiyat",
+        "question": "Genç Kalemler dergisinde Ömer Seyfettin tarafından yayımlanan ve sadeleşmeyi savunan başmakale nedir?",
+        "answer": "'Yeni Lisan' makalesidir."
+      }
+    ]
+  }
+};
+
+function cleanShortAnswerClient(ans) {
+  const str = String(ans || "").trim();
+  if (str.includes("(")) {
+    const prefix = str.split("(")[0].trim();
+    if (prefix) return prefix;
+  }
+  return str;
+}
+
+function buildClientTestOptions(correctAns, poolAnswers, numOpts, letters) {
+  const shortAns = cleanShortAnswerClient(correctAns);
+  const correctIdx = Math.floor(Math.random() * numOpts);
+  const correctLetter = letters[correctIdx];
+
+  const candDistractors = [];
+  const seen = new Set([shortAns.toLowerCase()]);
+
+  for (const a of poolAnswers) {
+    const s = cleanShortAnswerClient(a);
+    if (s && !seen.has(s.toLowerCase())) {
+      seen.add(s.toLowerCase());
+      candDistractors.push(s);
+    }
+  }
+
+  candDistractors.sort(() => 0.5 - Math.random());
+
+  if (candDistractors.length < numOpts - 1) {
+    const numMatch = shortAns.match(/[-+]?\b\d+(?:[\.,]\d+)?\b/);
+    if (numMatch) {
+      const baseStr = numMatch[0].replace(',', '.');
+      const baseVal = parseFloat(baseStr);
+      if (!isNaN(baseVal)) {
+        const deltas = [-2, 2, -1, 1, 3, -3, 5, 4, -4, 6, -5];
+        for (const d of deltas) {
+          if (candDistractors.length >= numOpts - 1) break;
+          let altVal = baseVal + d;
+          if (altVal <= 0 && baseVal > 0) altVal = baseVal + Math.abs(d) + 1;
+          const altText = shortAns.replace(numMatch[0], String(altVal));
+          if (!seen.has(altText.toLowerCase())) {
+            seen.add(altText.toLowerCase());
+            candDistractors.push(altText);
+          }
+        }
+      }
+    }
+  }
+
+  const fallbacks = ["0", "1", "Sabit kalır", "Artar", "Azalır", "Doğru", "Yanlış", "Değişmez"];
+  for (const fb of fallbacks) {
+    if (candDistractors.length >= numOpts - 1) break;
+    if (!seen.has(fb.toLowerCase())) {
+      seen.add(fb.toLowerCase());
+      candDistractors.push(fb);
+    }
+  }
+
+  const options = [];
+  let dPtr = 0;
+  for (let i = 0; i < numOpts; i++) {
+    const l = letters[i];
+    if (i === correctIdx) {
+      options.push({ key: l, text: shortAns });
+    } else {
+      const dTxt = (dPtr < candDistractors.length) ? candDistractors[dPtr++] : (`Seçenek ${l}`);
+      options.push({ key: l, text: dTxt });
+    }
+  }
+
+  return {
+    options,
+    correct_option: correctLetter,
+    answer: `${correctLetter}) ${correctAns}`
+  };
+}
+
+function generateClientMathQuestion(grade, difficulty) {
+  const g = String(grade || "5");
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  if (g === "1") {
+    const a = randInt(2, 9), b = randInt(1, 9);
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Toplama", question: `${a} + ${b} işleminin sonucu kaçtır?`, answer: `${a + b}` };
+    } else {
+      const big = Math.max(a, b) + randInt(1, 5), small = Math.min(a, b);
+      return { topic: "Matematik: Çıkarma", question: `${big} - ${small} işleminin sonucu kaçtır?`, answer: `${big - small}` };
+    }
+  }
+  if (g === "2") {
+    const a = randInt(12, 45), b = randInt(11, 40);
+    if (Math.random() < 0.6) {
+      return { topic: "Matematik: İki Basamaklı Toplama", question: `${a} + ${b} işleminin sonucu kaçtır?`, answer: `${a + b}` };
+    } else {
+      const x = randInt(2, 5), y = randInt(2, 5);
+      return { topic: "Matematik: Basit Çarpma", question: `${x} x ${y} işleminin sonucu kaçtır?`, answer: `${x * y}` };
+    }
+  }
+  if (g === "3") {
+    const a = randInt(3, 9), b = randInt(3, 9);
+    if (Math.random() < 0.6) {
+      return { topic: "Matematik: Çarpım Tablosu", question: `${a} x ${b} işleminin sonucu kaçtır?`, answer: `${a * b}` };
+    } else {
+      const prod = a * b;
+      return { topic: "Matematik: Bölme İşlemi", question: `${prod} ÷ ${a} işleminin sonucu kaçtır?`, answer: `${b}` };
+    }
+  }
+  if (g === "4") {
+    const w = randInt(4, 15), h = randInt(3, 10);
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Geometrik Şekillerde Çevre", question: `Kısa kenarı ${h} cm, uzun kenarı ${w} cm olan bir dikdörtgenin çevresi kaç cm'dir?`, answer: `${2 * (w + h)} cm` };
+    } else {
+      const a = randInt(15, 45), b = randInt(10, 30), c = randInt(5, 20);
+      return { topic: "Matematik: Dört İşlem", question: `(${a} x ${b}) + ${c} işleminin sonucu kaçtır?`, answer: `${a * b + c}` };
+    }
+  }
+  if (g === "5") {
+    const a = randInt(2, 6), b = randInt(2, 6), d = randInt(7, 12);
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Kesirlerle Toplama", question: `${a}/${d} + ${b}/${d} işleminin sonucu kaçtır?`, answer: `${a + b}/${d}` };
+    } else {
+      const price = randInt(50, 300) * 2;
+      return { topic: "Matematik: Yüzdeler", question: `${price} TL olan bir ürünün %25'i kaç TL'dir?`, answer: `${price * 0.25} TL` };
+    }
+  }
+  if (g === "6") {
+    const a = randInt(2, 10), b = randInt(-10, -1);
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Tam Sayılar", question: `${a} + (${b}) işleminin sonucu kaçtır?`, answer: `${a + b}` };
+    } else {
+      const r = randInt(3, 10);
+      return { topic: "Matematik: Çemberde Çevre", question: `Yarıçapı r = ${r} cm olan çemberin çevre uzunluğu kaç cm'dir? (π = 3 alınız)`, answer: `${2 * 3 * r} cm` };
+    }
+  }
+  if (g === "7") {
+    const a = randInt(2, 6), b = randInt(3, 15), x = randInt(2, 9);
+    const c = a * x + b;
+    return { topic: "Matematik: Denklem Çözme", question: `${a}x + ${b} = ${c} denklemini sağlayan x değeri kaçtır?`, answer: `${x}` };
+  }
+  if (g === "8") {
+    const triplets = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15]];
+    const t = triplets[randInt(0, triplets.length - 1)];
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Pisagor Bağıntısı (LGS)", question: `Dik kenar uzunlukları ${t[0]} cm ve ${t[1]} cm olan bir dik üçgenin hipotenüs uzunluğu kaç cm'dir?`, answer: `${t[2]} cm` };
+    } else {
+      const sq = randInt(4, 15);
+      return { topic: "Matematik: Kareköklü Sayılar", question: `√${sq * sq} kareköklü ifadesinin değeri kaçtır?`, answer: `${sq}` };
+    }
+  }
+  if (g === "9") {
+    const a = randInt(2, 7), b = randInt(2, 6);
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Kümeler ve Kartezyen Çarpım", question: `s(A) = ${a} ve s(B) = ${b} olduğuna göre s(A x B) kartezyen çarpımının eleman sayısı kaçtır?`, answer: `${a * b}` };
+    } else {
+      const k = randInt(2, 10);
+      return { topic: "Matematik: Mutlak Değer", question: `|x - ${k}| = ${k} denklemini sağlayan x değerlerinin toplamı kaçtır?`, answer: `${2 * k}` };
+    }
+  }
+  if (g === "10") {
+    const n = randInt(4, 7), r = 2;
+    const comb = (n * (n - 1)) / 2;
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Kombinasyon (10. Sınıf)", question: `C(${n}, ${r}) kombinasyonunun değeri kaçtır?`, answer: `${comb}` };
+    } else {
+      const sides = randInt(5, 8);
+      return { topic: "Matematik: Çokgenlerde İç Açılar", question: `Bir konveks ${sides}genin iç açıları ölçüleri toplamı kaç derecedir?`, answer: `${(sides - 2) * 180}°` };
+    }
+  }
+  if (g === "11") {
+    const x1 = randInt(1, 4), y1 = randInt(1, 4), dx = randInt(2, 6), dy = randInt(2, 6);
+    const m = `${dy}/${dx}`;
+    if (Math.random() < 0.5) {
+      return { topic: "Matematik: Analitik Geometri (Eğim)", question: `A(${x1}, ${y1}) ve B(${x1 + dx}, ${y1 + dy}) noktalarından geçen doğrunun eğimi kaçtır?`, answer: `${m}` };
+    } else {
+      return { topic: "Matematik: Trigonometri", question: `sin²(35°) + cos²(35°) ifadesinin eşiti kaçtır?`, answer: `1` };
+    }
+  }
+  // 12. Sınıf
+  const bases = [2, 3, 5];
+  const b = bases[randInt(0, bases.length - 1)];
+  const p = randInt(2, 4);
+  const val = Math.pow(b, p);
+  if (Math.random() < 0.5) {
+    return { topic: "Matematik: Logaritma (AYT)", question: `log_${b}(${val}) ifadesinin değeri kaçtır?`, answer: `${p}` };
+  } else {
+    const n = randInt(2, 5);
+    return { topic: "Matematik: Türev (Kuvvet Kuralı)", question: `f(x) = x^${n} fonksiyonunun türevi f'(x) nedir?`, answer: `${n}x^${n - 1}` };
+  }
+}
+
+function generateClientPhysicsQuestion(grade, difficulty) {
+  const g = String(grade || "9");
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  if (g === "9") {
+    const m = randInt(2, 8) * 10, v = randInt(2, 5) * 5;
+    const d = (m / v).toFixed(1).replace('.0', '');
+    if (Math.random() < 0.5) {
+      return { topic: "Fizik: Özkütle (d = m / V)", question: `Kütlesi ${m} gram, hacmi ${v} cm³ olan saf bir katının özkütlesi kaç g/cm³'tür?`, answer: `${d} g/cm³` };
+    } else {
+      const mass = randInt(2, 10), acc = randInt(2, 6);
+      return { topic: "Fizik: Newton'un Hareket Yasası (F = m . a)", question: `Kütlesi ${mass} kg olan bir cisme etki eden net kuvvet ${mass * acc} N olduğuna göre cismin ivmesi kaç m/s²'dir?`, answer: `${acc} m/s²` };
+    }
+  }
+  if (g === "10") {
+    const I = randInt(2, 6), R = randInt(2, 10);
+    const V = I * R;
+    if (Math.random() < 0.5) {
+      return { topic: "Fizik: Ohm Yasası (Elektrik)", question: `Direnci ${R} Ω olan bir iletkenden ${I} Amper akım geçmesi için iletkenin uçları arasındaki gerilim (V) kaç Volt olmalıdır?`, answer: `${V} Volt` };
+    } else {
+      const F = randInt(20, 100), S = randInt(2, 5);
+      return { topic: "Fizik: Katı Basıncı (P = F / S)", question: `Taban alanı ${S} m² olan bir cisim zemine ${F} N kuvvet uyguluyorsa zemine yaptığı basınç kaç Pascal'dır?`, answer: `${(F / S).toFixed(1).replace('.0', '')} Pascal` };
+    }
+  }
+  if (g === "11") {
+    const m = randInt(2, 6), v = randInt(3, 10);
+    const P = m * v;
+    if (Math.random() < 0.5) {
+      return { topic: "Fizik: Çizgisel Momentum (P = m . v)", question: `Kütlesi ${m} kg olan bir araç ${v} m/s sabit hızla ilerlerken sahip olduğu çizgisel momentum kaç kg.m/s'dir?`, answer: `${P} kg.m/s` };
+    } else {
+      const F = randInt(10, 50), x = randInt(2, 8);
+      return { topic: "Fizik: Yapılan İş (W = F . x)", question: `Yatay yolda durmakta olan bir kutuya yola paralel ${F} N'luk kuvvet ${x} metre boyunca uygulanırsa yapılan iş kaç Joule olur?`, answer: `${F * x} Joule` };
+    }
+  }
+  // 12. Sınıf Fizik
+  const v = randInt(4, 12), r = randInt(2, 4);
+  const a_c = (v * v / r).toFixed(1).replace('.0', '');
+  if (Math.random() < 0.5) {
+    return { topic: "Fizik: Çembersel Hareket (Merkezcil İvme)", question: `Yarıçapı ${r} m olan dairesel bir pistte ${v} m/s çizgisel hızla dolanan bir cismin merkezcil ivmesi kaç m/s²'dir?`, answer: `${a_c} m/s²` };
+  } else {
+    return { topic: "Fizik: Dalga Mekaniği (Doppler)", question: "Yaklaşan bir ses kaynağının frekansının duran bir gözlemci tarafından daha yüksek algılanması olayına ne ad verilir?", answer: "Doppler Olayı" };
+  }
+}
+
+function generateClientSubjectQuestions(subjectName, grade, count, difficulty, examType) {
+  const gStr = String(grade || "5");
+  const sClean = getSubjectShortName(subjectName, "");
+  const c = parseInt(count, 10) || 10;
+  const isTest = (examType === "test");
+
+  let pool = [];
+  if (typeof EMBEDDED_SUBJECT_QUESTION_BANK !== "undefined") {
+    if (EMBEDDED_SUBJECT_QUESTION_BANK[sClean] && EMBEDDED_SUBJECT_QUESTION_BANK[sClean][gStr]) {
+      pool = [...EMBEDDED_SUBJECT_QUESTION_BANK[sClean][gStr]];
+    } else {
+      for (const [sub, gradesObj] of Object.entries(EMBEDDED_SUBJECT_QUESTION_BANK)) {
+        if (sub.toLowerCase().includes(sClean.toLowerCase()) && gradesObj[gStr]) {
+          pool.push(...gradesObj[gStr]);
+        }
+      }
+    }
+  }
+
+  const sLower = sClean.toLowerCase();
+  if (sLower.includes("matematik")) {
+    for (let i = 0; i < Math.max(10, c * 2); i++) {
+      pool.push(generateClientMathQuestion(gStr, difficulty));
+    }
+  } else if (sLower.includes("fizik")) {
+    for (let i = 0; i < Math.max(10, c * 2); i++) {
+      pool.push(generateClientPhysicsQuestion(gStr, difficulty));
+    }
+  }
+
+  const seen = new Set();
+  const uniquePool = [];
+  for (const item of pool) {
+    const qText = (item.question || "").trim();
+    if (qText && !seen.has(qText)) {
+      seen.add(qText);
+      uniquePool.push(item);
+    }
+  }
+
+  while (uniquePool.length < c) {
+    if (sLower.includes("matematik")) {
+      const dyn = generateClientMathQuestion(gStr, difficulty);
+      if (!seen.has(dyn.question)) {
+        seen.add(dyn.question);
+        uniquePool.push(dyn);
+      }
+    } else if (sLower.includes("fizik")) {
+      const dyn = generateClientPhysicsQuestion(gStr, difficulty);
+      if (!seen.has(dyn.question)) {
+        seen.add(dyn.question);
+        uniquePool.push(dyn);
+      }
+    } else {
+      uniquePool.push({
+        topic: `${sClean}: Temel İlkeler`,
+        question: `${gStr}. Sınıf ${sClean} müfredatında yer alan temel konulardan birini ve önemini açıklayınız.`,
+        answer: "Konuyla ilgili temel kavramlar, formüller ve MEB kazanımları doğrultusunda çözülür."
+      });
+    }
+  }
+
+  const shuffled = [...uniquePool].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, c);
+
+  const pts = Math.floor(100 / c);
+  const gInt = parseInt(gStr, 10) || 5;
+  const numOpts = gInt >= 9 ? 5 : (gInt >= 5 ? 4 : 3);
+  const letters = ["A", "B", "C", "D", "E"].slice(0, numOpts);
+  const poolAnswers = uniquePool.map(p => p.answer).filter(Boolean);
+
+  return selected.map((q, idx) => {
+    const qPts = (idx === c - 1) ? (100 - pts * (c - 1)) : pts;
+    const correctAns = q.answer || "";
+    const qObj = {
+      id: idx + 1,
+      topic: q.topic || sClean,
+      question: q.question,
+      answer: correctAns,
+      points: qPts,
+      type: examType
+    };
+
+    if (isTest) {
+      const testData = buildClientTestOptions(correctAns, poolAnswers, numOpts, letters);
+      qObj.options = testData.options;
+      qObj.correct_option = testData.correct_option;
+      qObj.answer = testData.answer;
+    }
+    return qObj;
+  });
+}
+
 function updateDownloadButtonsState() {
   const hasQuestions = Array.isArray(AppState.questions) && AppState.questions.length > 0;
 
@@ -511,7 +1543,12 @@ function updatePortalSyncUI(autoGenerate = false) {
 
   if (pData) {
     // Başlık tablosunu müfredata ve sınıf seviyesine göre uyarla
-    AppState.header.lesson = formatLessonNameWithGrade(pData.lesson, g);
+    const isCurrentBilisim = isBilisimSubject(AppState.header.lesson, document.getElementById("select-topic")?.value);
+    if (isCurrentBilisim) {
+      AppState.header.lesson = formatLessonNameWithGrade(pData.lesson, g);
+      const inputLessonEl = document.getElementById("input-lesson");
+      if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
+    }
     const inputLessonEl = document.getElementById("input-lesson");
     if (inputLessonEl) inputLessonEl.value = AppState.header.lesson;
     const gNum = parseInt(g, 10);
@@ -1472,11 +2509,15 @@ async function generateBilisimExam() {
     showToast("⚠️ Lütfen önce sınav türünü (Klasik veya Test) seçiniz!", 3000);
     return;
   }
-  const grade = document.getElementById("select-grade").value;
-  const count = parseInt(document.getElementById("input-question-count").value) || 10;
+  const grade = document.getElementById("select-grade")?.value || "5";
+  const count = parseInt(document.getElementById("input-question-count")?.value, 10) || 10;
+  const difficulty = document.getElementById("select-difficulty")?.value || "cok-kolay";
+  const topic = document.getElementById("select-topic")?.value || "Tüm Dersler (Karma Sınav)";
+  const lesson = AppState.header.lesson || "";
+  const isBilisim = isBilisimSubject(lesson, topic);
 
-  if (AppState.usePortalCurriculum) {
-    const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || "5";
+  if (isBilisim && AppState.usePortalCurriculum) {
+    const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || grade;
     const startW = AppState.portalStartWeek || parseInt(document.getElementById("portal-start-week")?.value, 10) || 1;
     const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 10;
     const questions = generatePortalCurriculumQuestions(pG, startW, endW, count);
@@ -1489,11 +2530,9 @@ async function generateBilisimExam() {
       return;
     }
   }
-  const difficulty = document.getElementById("select-difficulty").value;
-  const topic = document.getElementById("select-topic")?.value || "Tüm Dersler (Karma Sınav)";
-  const lesson = AppState.header.lesson || "";
 
-  showToast(`${grade}. Sınıf ${lesson || 'Sınav'} soruları (${AppState.examType === 'test' ? 'Test' : 'Klasik'}) hazırlanıyor...`);
+  const displaySubject = getSubjectShortName(lesson, topic);
+  showToast(`${grade}. Sınıf ${displaySubject} soruları (${AppState.examType === 'test' ? 'Test' : 'Klasik'}) hazırlanıyor...`);
 
   let questions = [];
 
@@ -1508,9 +2547,13 @@ async function generateBilisimExam() {
     console.warn("Sunucu erişim hatası, yerel soru bankası kullanılıyor:", err);
   }
 
-  // 2. Sunucuya ulaşılamazsa yerel soru bankasından anında üret
+  // 2. Sunucuya ulaşılamazsa yerel soru motoru devreye girer
   if (!questions || questions.length === 0) {
-    questions = generateClientQuestions(grade, difficulty, count, topic);
+    if (!isBilisim) {
+      questions = generateClientSubjectQuestions(topic || lesson, grade, count, difficulty, AppState.examType);
+    } else {
+      questions = generateClientQuestions(grade, difficulty, count, topic);
+    }
   }
 
   if (questions && questions.length > 0) {
@@ -1591,39 +2634,45 @@ function initEventListeners() {
     updateTopicsDropdown(selectGrade.value);
     selectGrade.addEventListener("change", (e) => {
       const gVal = e.target.value;
+      const g = parseInt(gVal, 10) || 5;
+      
+      const prevTopic = selectTopic ? selectTopic.value : "";
       updateTopicsDropdown(gVal);
       if (typeof updateExamTypeLabels === "function") updateExamTypeLabels();
       const pGradeSel = document.getElementById("portal-grade-select");
-      if (pGradeSel && parseInt(gVal) <= 12) {
+      if (pGradeSel && g <= 12) {
         pGradeSel.value = gVal;
       }
-      if (AppState.usePortalCurriculum) {
-        updatePortalSyncUI(true);
-        return;
-      }
-      const g = parseInt(gVal) || 5;
-      if (g <= 4) {
+
+      const currentTopic = selectTopic ? selectTopic.value : prevTopic;
+      const isBilisim = isBilisimSubject(AppState.header.lesson, currentTopic);
+
+      if (g >= 9) {
+        AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
+      } else if (g <= 4) {
         AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
-        if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TEKNOLOJİ")) {
-          AppState.header.lesson = "TÜRKÇE";
-        }
-      } else if (g === 5 || g === 6) {
+      } else {
         AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
-        if (AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TEKNOLOJİ") || AppState.header.lesson.includes("TÜRKÇE")) {
-          AppState.header.lesson = "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM";
+      }
+
+      if (isBilisim) {
+        if (AppState.usePortalCurriculum) {
+          updatePortalSyncUI(false);
+          return;
         }
-      } else if (g === 7 || g === 8) {
-        AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
-        if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("BİLGİSAYAR") || AppState.header.lesson.includes("TÜRKÇE")) {
-          AppState.header.lesson = "TEKNOLOJİ TASARIM";
+        if (g <= 4) {
+          AppState.header.lesson = formatLessonNameWithGrade("Bilişim ve Kodlama", String(g));
+        } else if (g === 7 || g === 8) {
+          AppState.header.lesson = formatLessonNameWithGrade("Teknoloji Tasarım", String(g));
+        } else if (g >= 9) {
+          AppState.header.lesson = formatLessonNameWithGrade("Bilgisayar Bilimi", String(g));
+        } else {
+          AppState.header.lesson = formatLessonNameWithGrade("Bilişim Teknolojileri ve Yazılım", String(g));
         }
       } else {
-        AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
-        if (AppState.header.lesson.includes("BİLİŞİM") || AppState.header.lesson.includes("TEKNOLOJİ")) {
-          AppState.header.lesson = "BİLGİSAYAR BİLİMİ";
-        }
+        const branchName = getSubjectShortName(AppState.header.lesson, currentTopic);
+        AppState.header.lesson = formatLessonNameWithGrade(branchName, String(g));
       }
-      AppState.header.lesson = formatLessonNameWithGrade(AppState.header.lesson, String(g));
       populateForm();
       renderExamSheet();
     });
@@ -1650,16 +2699,28 @@ function initEventListeners() {
         if (selected.includes(":")) {
           lessonName = selected.split(":")[0].trim();
         }
-        AppState.header.lesson = formatLessonNameWithGrade(lessonName);
+        const g = parseInt(document.getElementById("select-grade")?.value || "5", 10);
+        AppState.header.lesson = formatLessonNameWithGrade(lessonName, String(g));
         
-        const g = parseInt(document.getElementById("select-grade")?.value || "5");
-        if (lessonName.includes("Edebiyat") || lessonName.includes("Fizik") || lessonName.includes("Kimya") || lessonName.includes("Biyoloji") || lessonName.includes("Felsefe") || lessonName.includes("Bilgisayar Bilimi")) {
+        if (g >= 9) {
           AppState.header.school = "Özel Viranşehir Uğur Anadolu Lisesi";
-        } else if (lessonName.includes("Hayat Bilgisi") || g <= 4) {
+        } else if (g <= 4) {
           AppState.header.school = "Özel Viranşehir Uğur İlkokulu";
         } else {
           AppState.header.school = "Özel Viranşehir Uğur Ortaokulu";
         }
+
+        const isBilisim = isBilisimSubject(lessonName, selected);
+        const portalOptions = document.getElementById("portal-sync-options");
+        if (!isBilisim) {
+          if (portalOptions) portalOptions.style.display = "none";
+        } else {
+          const chkPortal = document.getElementById("chk-portal-curriculum");
+          if (chkPortal && chkPortal.checked && portalOptions) {
+            portalOptions.style.display = "block";
+          }
+        }
+
         populateForm();
         renderExamSheet();
       }
