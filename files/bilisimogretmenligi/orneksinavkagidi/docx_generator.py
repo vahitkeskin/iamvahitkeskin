@@ -24,6 +24,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     year_val = header_data.get("year", "2026-2027 EĞİTİM ÖĞRETİM YILI")
     school_val = header_data.get("school", "Özel Viranşehir Uğur Ortaokulu")
     raw_lesson = header_data.get("lesson", "5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM")
+    raw_lesson = re.sub(r'\s*\(?\s*(?:KUR|Kur)\s*[12]\s*\)?', '', str(raw_lesson), flags=re.IGNORECASE).strip()
     
     # Başında sınıf yoksa öğrenci sınıfından veya varsayılan 5'ten sınıf ekle
     if not re.match(r'^\s*\d+\s*[\.\-]?\s*(SINIF|Sınıf|sinif)', raw_lesson, re.IGNORECASE):
@@ -32,6 +33,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
         lesson_val = f"{grade_num}. SINIF {raw_lesson.upper()}"
     else:
         lesson_val = raw_lesson
+    lesson_val = re.sub(r'\s*\(?\s*(?:KUR|Kur)\s*[12]\s*\)?', '', lesson_val, flags=re.IGNORECASE).strip()
 
     term_val = header_data.get("term", "1.DÖNEM 1. YAZILI")
     if is_answer_key and "CEVAP ANAHTARI" not in term_val.upper():

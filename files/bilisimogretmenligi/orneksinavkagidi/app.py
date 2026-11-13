@@ -599,12 +599,14 @@ def submit_print():
     section_title = "C E V A P L A R" if mode == "answers" else "S O R U L A R"
 
     raw_lesson = header.get('lesson', '5. SINIF BİLİŞİM TEKNOLOJİLERİ VE YAZILIM')
+    raw_lesson = re.sub(r'\s*\(?\s*(?:KUR|Kur)\s*[12]\s*\)?', '', str(raw_lesson), flags=re.IGNORECASE).strip()
     if not re.match(r'^\s*\d+\s*[\.\-]?\s*(SINIF|Sınıf|sinif)', raw_lesson, re.IGNORECASE):
         grade_match = re.search(r'\d+', str(header.get("student_class", "")))
         grade_num = grade_match.group(0) if grade_match else "5"
         lesson_display = f"{grade_num}. SINIF {raw_lesson.upper()}"
     else:
         lesson_display = raw_lesson
+    lesson_display = re.sub(r'\s*\(?\s*(?:KUR|Kur)\s*[12]\s*\)?', '', lesson_display, flags=re.IGNORECASE).strip()
 
     # Geçici metin veya postscript belgesi oluştur
     temp_content = f"""
