@@ -2215,7 +2215,7 @@ function downloadPdf(mode, customFilename = null, customFolder = null) {
   const origTitle = document.title;
   document.title = filenameWithoutExt;
 
-  showToast(`'${finalFilename}' hazırlanıyor... Açılan pencereden 'Hedef: PDF Olarak Kaydet'i seçiniz.`);
+  showToast(`'${finalFilename}' hazırlanıyor... Yazdırma penceresinde 'Hedef: PDF Olarak Kaydet'i seçiniz.`);
 
   // Sunucuda klasöre arka planda arşiv kopyası oluştur
   try {
@@ -2240,12 +2240,25 @@ function downloadPdf(mode, customFilename = null, customFolder = null) {
     modal.classList.remove("active");
   }
 
+  // İstenen mod (currentMode) ekranda görünen moddan farklıysa geçici olarak render et
+  const previousMode = AppState.viewMode;
+  let modeTemporarilyChanged = false;
+  if (currentMode && currentMode !== AppState.viewMode) {
+    AppState.viewMode = currentMode;
+    renderExamSheet();
+    modeTemporarilyChanged = true;
+  }
+
   setTimeout(() => {
     window.print();
     setTimeout(() => {
       document.title = origTitle;
       if (wasModalActive) {
         modal.classList.add("active");
+      }
+      if (modeTemporarilyChanged) {
+        AppState.viewMode = previousMode;
+        renderExamSheet();
       }
     }, 600);
   }, 250);

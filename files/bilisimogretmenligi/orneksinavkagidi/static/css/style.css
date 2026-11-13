@@ -1954,8 +1954,14 @@ select {
 }
 
 /* ==========================================================================
-   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 ÇIKTISI & TEMİZ BAŞLIKSIZ BASKI
+   YAZDIRMA (PRINT) STİLLERİ - %100 GERÇEK A4 WYSIWYG ÇIKTISI
+   Ekranda Ne Görünüyorsa PDF ve Yazıcıda Birebir Aynısı Çıkar
    ========================================================================== */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
 @media print {
   @page {
     size: A4 portrait;
@@ -1977,6 +1983,7 @@ select {
     print-color-adjust: exact !important;
   }
 
+  /* Web Arayüz Elemanlarını Baskıda Gizle */
   .app-header,
   .sidebar-panel,
   .preview-toolbar,
@@ -1998,6 +2005,7 @@ select {
     padding: 0 !important;
   }
 
+  /* Kapsayıcıları Tam Genişlikte Saydam Hale Getir */
   .app-container {
     display: block !important;
     padding: 0 !important;
@@ -2026,6 +2034,7 @@ select {
     min-height: 0 !important;
   }
 
+  /* Her Bir A4 Sayfası: Ekranda Görünenle Birebir Aynı Boyut ve Boşluk */
   .a4-page {
     width: 210mm !important;
     max-width: 210mm !important;
@@ -2051,7 +2060,7 @@ select {
     min-height: 297mm !important;
     height: auto !important;
     box-sizing: border-box !important;
-    padding: 0 16mm 14mm 16mm !important; /* Tarayıcı sayfa sonu padding çökmesini önler; üst boşluk exam-page-top-spacer ile net 46mm olarak sağlanır */
+    padding: 14mm 16mm 14mm 16mm !important;
     margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
@@ -2067,8 +2076,8 @@ select {
   .exam-page-top-spacer {
     display: block !important;
     width: 100% !important;
-    height: 52mm !important; /* 14mm sayfa üst boşluğu + 38mm başlık alanı boşluğu: 1. sayfa ile birebir aynı hizalama */
-    min-height: 52mm !important;
+    height: 38mm !important;
+    min-height: 38mm !important;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
@@ -2087,183 +2096,14 @@ select {
     break-before: page !important;
   }
 
-  .exam-header-table {
-    border: 1px solid #000000 !important;
-    margin-bottom: 8px !important;
-  }
-
-  .exam-header-table td {
-    border: 1px solid #000000 !important;
-    padding: 3px 6px !important;
-  }
-
-  .header-col-left {
-    width: 32% !important;
-    font-size: 9.5pt !important;
-    line-height: 1.3 !important;
-    text-align: left !important;
-  }
-
-  .header-col-middle {
-    width: 50% !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    padding: 2px 4px !important;
-  }
-
-  .exam-year {
-    font-size: 8pt !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    margin-bottom: 1px !important;
-    line-height: 1.2 !important;
-  }
-
-  .exam-school,
-  .exam-lesson,
-  .exam-term {
-    font-size: 8pt !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    margin-bottom: 1px !important;
-    line-height: 1.2 !important;
-  }
-
-  .header-col-right {
-    width: 18% !important;
-    font-size: 9.5pt !important;
-    text-align: left !important;
-    padding: 3px 6px !important;
-  }
-
-  .q-num,
-  .ans-label,
-  .dotted-line-row .ans-label,
-  .model-answer-block .ans-label {
-    font-weight: 700 !important;
-    color: #000000 !important;
-  }
-
-  .dotted-line-row .dots-fill {
-    border-bottom: 1.2px dotted #000000 !important;
-  }
-
-  .header-col-left,
-  .header-col-left div,
-  .header-col-right,
-  .header-col-right div,
-  .exam-section-title,
-  .exam-question-block,
-  .exam-question-text,
-  .q-content,
-  .q-pts,
-  .ans-content {
-    font-weight: 400 !important;
-  }
-
-  .exam-section-title {
-    margin-top: 16px !important;
-    margin-bottom: 20px !important;
-    padding: 3px 0 !important;
-    font-size: 12pt !important;
-    font-weight: 400 !important;
-    letter-spacing: 7px !important;
-    text-align: center !important;
-  }
-
-  .exam-questions-container {
-    display: block !important;
-    gap: 0 !important;
-  }
-
   .exam-question-block {
-    display: block !important;
-    margin-bottom: 18px !important; /* İki soru arasında okunaklı, ferah ve belirgin boşluk */
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
-  .exam-question-block:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  .exam-question-text {
-    margin-bottom: 5px !important;
-    font-size: 9.5pt !important;
-    line-height: 1.32 !important;
-  }
-
-  .dotted-answer-lines {
-    gap: 3px !important;
-    margin-top: 3px !important;
-  }
-
-  .dotted-line-row {
-    height: 17px !important;
-  }
-
-  .model-answer-block {
-    margin-top: 2px !important;
-    margin-bottom: 6px !important;
-    line-height: 1.35 !important;
-  }
-
-  .test-options-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 3px 14px !important;
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
-    padding-left: 4px !important;
-  }
-
-  .test-option-item {
-    font-size: 9pt !important;
-    line-height: 1.25 !important;
-  }
-
-  .option-marker {
-    display: inline-flex !important;
-    align-items: center !important;
-    margin-right: 5px !important;
-    flex-shrink: 0 !important;
-    line-height: 1 !important;
-  }
-
-  .option-letter {
-    font-size: 9.5pt !important;
-    width: 19px !important;
-    height: 19px !important;
-    min-width: 19px !important;
-    min-height: 19px !important;
-    box-sizing: border-box !important;
-    color: #000000 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    line-height: 1 !important;
-  }
-
-  .option-letter.correct-circle {
-    display: inline-flex !important;
-    border: 1.8px solid #dc2626 !important;
-    border-radius: 50% !important;
-    color: #000000 !important;
-    background-color: transparent !important;
+  /* Renklerin ve Çemberlerin (Kırmızı Cevap Çemberi Dahil) Baskıda Kayıpsız Çıkması */
+  * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  .option-paren {
-    font-size: 9.5pt !important;
-    color: #000000 !important;
-    margin-left: 1px !important;
-  }
-
-  .test-option-item.is-correct .option-text {
-    font-weight: 400 !important;
-    color: #000000 !important;
   }
 }
