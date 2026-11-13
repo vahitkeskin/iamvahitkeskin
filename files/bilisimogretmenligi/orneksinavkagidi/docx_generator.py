@@ -100,14 +100,13 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
     <w:p>
         <w:pPr>
             <w:jc w:val="center"/>
-            <w:spacing w:before="80" w:after="100"/>
+            <w:spacing w:before="220" w:after="200"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
-                <w:b/>
-                <w:sz w:val="21"/>
-                <w:spacing w:val="100"/>
+                <w:sz w:val="22"/>
+                <w:spacing w:val="120"/>
             </w:rPr>
             <w:t>{section_title}</w:t>
         </w:r>
@@ -127,7 +126,7 @@ def build_exam_xml_elements(header_data, questions, is_answer_key=False, color="
             </w:p>
             <w:p>
                 <w:pPr>
-                    <w:spacing w:before="1300" w:after="0"/>
+                    <w:spacing w:before="1600" w:after="0"/>
                 </w:pPr>
             </w:p>
             ''')
