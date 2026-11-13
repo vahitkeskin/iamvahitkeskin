@@ -184,9 +184,9 @@ def get_questions():
     except ValueError:
         portal_start_week = 1
     try:
-        portal_end_week = int(request.args.get("portal_end_week", request.args.get("portal_weeks", 8)))
+        portal_end_week = int(request.args.get("portal_end_week", request.args.get("portal_weeks", 10)))
     except ValueError:
-        portal_end_week = 8
+        portal_end_week = 10
 
     if portal_start_week > portal_end_week:
         portal_start_week, portal_end_week = portal_end_week, portal_start_week
@@ -342,7 +342,7 @@ def generate_custom_questions():
     count = int(data.get("count", 10))
     lesson = data.get("lesson", "")
     start_week = int(data.get("start_week", 1))
-    end_week = int(data.get("end_week", 8))
+    end_week = int(data.get("end_week", 10))
 
     if not prompt:
         return jsonify({"error": "Lütfen bir konu veya soru açıklaması yazınız."}), 400

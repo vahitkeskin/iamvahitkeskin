@@ -471,10 +471,10 @@ function updatePortalSyncUI(autoGenerate = false) {
 
   const g = gradeSel ? gradeSel.value : "5";
   let startW = startWeekSel ? parseInt(startWeekSel.value, 10) : 1;
-  let endW = endWeekSel ? parseInt(endWeekSel.value, 10) : 8;
+  let endW = endWeekSel ? parseInt(endWeekSel.value, 10) : 10;
 
   if (isNaN(startW) || startW < 1) startW = 1;
-  if (isNaN(endW) || endW < 1) endW = 8;
+  if (isNaN(endW) || endW < 1) endW = 10;
   if (startW > 41) startW = 41;
   if (endW > 41) endW = 41;
 
@@ -898,9 +898,9 @@ const AppState = {
   colorMode: "bw",       // 'bw' (Siyah/Beyaz) veya 'color' (Renkli)
   usePortalCurriculum: true,
   portalGrade: "5",
-  portalWeeks: 8,
+  portalWeeks: 10,
   portalStartWeek: 1,
-  portalEndWeek: 8,
+  portalEndWeek: 10,
   answerColor: "#d32f2f",// Varsayılan renk: Kırmızı
   zoomLevel: 1.0,
   printers: []
@@ -1477,7 +1477,7 @@ async function generateBilisimExam() {
   if (AppState.usePortalCurriculum) {
     const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || "5";
     const startW = AppState.portalStartWeek || parseInt(document.getElementById("portal-start-week")?.value, 10) || 1;
-    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 8;
+    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 10;
     const questions = generatePortalCurriculumQuestions(pG, startW, endW, count);
     if (questions && questions.length > 0) {
       AppState.questions = questions;
@@ -1544,7 +1544,7 @@ async function generateCustomPrompt() {
   try {
     const pG = AppState.portalGrade || document.getElementById("portal-grade-select")?.value || grade;
     const startW = AppState.portalStartWeek || parseInt(document.getElementById("portal-start-week")?.value, 10) || 1;
-    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 8;
+    const endW = AppState.portalEndWeek || parseInt(document.getElementById("portal-end-week")?.value, 10) || 10;
     const res = await fetch(getApiUrl("/api/generate-custom"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
