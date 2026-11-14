@@ -2825,7 +2825,7 @@ select {
             <span>📄 Dosya Adı:</span>
             <small style="color: var(--text-muted); font-weight: 400;">(Uzantı otomatik korunur)</small>
           </label>
-          <input type="text" id="input-download-filename" style="width: 100%; font-family: monospace; font-size: 0.9rem; padding: 0.55rem 0.75rem; border: 1.5px solid var(--border-color); border-radius: 6px; box-sizing: border-box;" placeholder="5-sinif-soru-kagidi.docx">
+          <input type="text" id="input-download-filename" style="width: 100%; font-family: monospace; font-size: 0.9rem; padding: 0.55rem 0.75rem; border: 1.5px solid var(--border-color); border-radius: 6px; box-sizing: border-box;" placeholder="5-sinif-soru-kagidi-klasik.docx / 5-sinif-soru-kagidi-test.docx">
           <small style="font-size: 0.74rem; color: var(--text-muted); display: block; margin-top: 0.35rem;">
             💡 İsterseniz dosya adını değiştirebilirsiniz. Değiştirmezseniz bu otomatik adla indirilir.
           </small>
@@ -4076,9 +4076,20 @@ function formatLessonNameWithGrade(rawLesson, targetGrade = null) {
   return `${gradeNum}. SINIF ${cleaned.toUpperCase()}`;
 }
 
+function getDetectedExamTypeSlug() {
+  if (AppState.examType === "test") return "test";
+  if (AppState.examType === "klasik") return "klasik";
+  if (Array.isArray(AppState.questions) && AppState.questions.length > 0) {
+    const hasTestQ = AppState.questions.some(q => q.type === "test" || (Array.isArray(q.options) && q.options.length > 0));
+    if (hasTestQ) return "test";
+  }
+  return "klasik";
+}
+
 function generateDefaultExamFileName(format = "docx", mode = null) {
   const currentMode = mode || AppState.viewMode || "questions";
   const gradeNum = getDetectedGradeNumber();
+  const typeSlug = getDetectedExamTypeSlug();
 
   let modeSlug = "soru-kagidi";
   if (currentMode === "answers") {
@@ -4088,7 +4099,7 @@ function generateDefaultExamFileName(format = "docx", mode = null) {
   }
 
   const cleanFormat = format.replace(/^\./, "").toLowerCase();
-  return `${gradeNum}-sinif-${modeSlug}.${cleanFormat}`;
+  return `${gradeNum}-sinif-${modeSlug}-${typeSlug}.${cleanFormat}`;
 }
 
 // --------------------------------------------------------------------------
@@ -4105,10 +4116,13 @@ function promptDownloadOptions(format = "docx", mode = null) {
   const currentMode = mode || AppState.viewMode || "questions";
   const defaultFileName = generateDefaultExamFileName(format, currentMode);
   const gradeNum = getDetectedGradeNumber();
+  const typeSlug = getDetectedExamTypeSlug();
 
   let modeName = "Soru Kağıdı";
   if (currentMode === "answers") modeName = "Cevap Anahtarı";
   else if (currentMode === "both") modeName = "Soru + Cevap Kağıdı";
+  const typeName = (typeSlug === "test") ? "Test" : "Klasik";
+  modeName += ` (${typeName})`;
 
   const modal = document.getElementById("download-options-modal");
   const inputFilename = document.getElementById("input-download-filename");

@@ -493,15 +493,15 @@ def export_docx():
 
     docx_bytes = generate_docx(header, questions, mode=mode, color=color)
 
-    lesson_name = header.get("lesson", "Sinav").replace(" ", "_")
     if custom_filename:
         filename = custom_filename if custom_filename.endswith(".docx") else f"{custom_filename}.docx"
-    elif mode == "questions":
-        filename = f"{lesson_name}_Soru_Kagidi.docx"
-    elif mode == "both":
-        filename = f"{lesson_name}_Soru_ve_Cevap_Kagidi.docx"
     else:
-        filename = f"{lesson_name}_Cevap_Anahtari.docx"
+        is_test = any(q.get("type") == "test" or q.get("options") for q in questions)
+        type_suffix = "test" if is_test else "klasik"
+        match = re.search(r'\d+', str(header.get("lesson", "") or header.get("student_class", "")))
+        grade_str = match.group(0) if match else "5"
+        mode_slug = "soru-kagidi" if mode == "questions" else ("soru-ve-cevap-kagidi" if mode == "both" else "cevap-kagidi")
+        filename = f"{grade_str}-sinif-{mode_slug}-{type_suffix}.docx"
 
     # Güvenli klasör ve dosya adı oluşturma & kaydetme
     safe_folder = re.sub(r'[^a-zA-Z0-9_\-\u00C0-\u017F]', '_', target_folder)
@@ -544,7 +544,12 @@ def save_exam_file():
     os.makedirs(folder_path, exist_ok=True)
 
     if not custom_filename:
-        custom_filename = f"sinav_kagidi.{file_format}"
+        is_test = any(q.get("type") == "test" or q.get("options") for q in questions)
+        type_suffix = "test" if is_test else "klasik"
+        mode_slug = "soru-kagidi" if mode == "questions" else ("soru-ve-cevap-kagidi" if mode == "both" else "cevap-kagidi")
+        match = re.search(r'\d+', str(header.get("lesson", "") or header.get("student_class", "")))
+        grade_str = match.group(0) if match else "5"
+        custom_filename = f"{grade_str}-sinif-{mode_slug}-{type_suffix}.{file_format}"
 
     safe_filename = os.path.basename(custom_filename)
     saved_path = os.path.join(folder_path, safe_filename)
